@@ -2,7 +2,7 @@ import Link from "next/link";
 import fysioKlikker from "../data/clinicsData";
 import ClinicCard from "../components/ClinicCard";
 import { slugify } from "../utils/slugify";
-import Breadcrumbs from "../components/Breadcrumbs";
+import { Breadcrumbs } from "@/app/components/Breadcrumbs";
 
 export default function SuburbPage({ params }: { params: { suburb: string } }) {
   const { suburb } = params;

@@ -1,32 +1,39 @@
 import Link from "next/link";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 
-interface BreadcrumbItem {
+interface BreadcrumbItemType {
   text: string;
   link?: string;
 }
 
-const Breadcrumbs: React.FC<{ items: BreadcrumbItem[] }> = ({ items }) => {
-  return (
-    <nav className="text-sm mb-4">
-      <ol className="list-none p-0 inline-flex">
-        {items.map((item, index) => (
-          <li key={index} className="flex items-center">
-            {index > 0 && <span className="mx-2 text-gray-500">/</span>}
-            {item.link ? (
-              <Link
-                href={item.link}
-                className="text-primary-blue hover:underline"
-              >
-                {item.text}
-              </Link>
-            ) : (
-              <span className="text-gray-700">{item.text}</span>
-            )}
-          </li>
-        ))}
-      </ol>
-    </nav>
-  );
-};
+interface BreadcrumbsProps {
+  items: BreadcrumbItemType[];
+}
 
-export default Breadcrumbs;
+export function Breadcrumbs({ items }: BreadcrumbsProps) {
+  return (
+    <Breadcrumb>
+      <BreadcrumbList>
+        {items.map((item, index) => (
+          <BreadcrumbItem key={index}>
+            {item.link ? (
+              <BreadcrumbLink asChild>
+                <Link href={item.link}>{item.text}</Link>
+              </BreadcrumbLink>
+            ) : (
+              <BreadcrumbPage>{item.text}</BreadcrumbPage>
+            )}
+            {index < items.length - 1 && <BreadcrumbSeparator />}
+          </BreadcrumbItem>
+        ))}
+      </BreadcrumbList>
+    </Breadcrumb>
+  );
+}

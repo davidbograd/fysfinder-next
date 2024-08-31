@@ -3,9 +3,10 @@ import fysioKlikker from "../../data/clinicsData";
 import IconEmail from "../../components/Icons/IconEmail";
 import IconPhone from "../../components/Icons/IconPhone";
 import { slugify } from "../../utils/slugify";
-import Breadcrumbs from "../../components/Breadcrumbs";
+import { Breadcrumbs } from "@/app/components/Breadcrumbs";
 import joachimImage from "src/app/images/joachimbograd-fysiopuls.png";
 import GoogleMap from "../../components/GoogleMap";
+import { Button } from "@/components/ui/button";
 
 // Define Clinic type inline
 type Clinic = (typeof fysioKlikker)[number];
@@ -155,9 +156,7 @@ export default function ClinicDetailsPage({
             </div>
           </div>
         ))}
-        <button className="bg-blue-500 text-white px-4 py-2 rounded">
-          Jeg er behandler her, tilføj
-        </button>
+        <Button variant="default">Jeg er behandler her, tilføj</Button>
       </div>
 
       <div className="mb-16">
