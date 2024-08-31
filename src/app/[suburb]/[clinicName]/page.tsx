@@ -7,6 +7,14 @@ import { Breadcrumbs } from "@/app/components/Breadcrumbs";
 import joachimImage from "src/app/images/joachimbograd-fysiopuls.png";
 import GoogleMap from "../../components/GoogleMap";
 import { Button } from "@/components/ui/button";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { Card, CardContent } from "@/components/ui/card";
 
 // Define Clinic type inline
 type Clinic = (typeof fysioKlikker)[number];
@@ -79,57 +87,73 @@ export default function ClinicDetailsPage({
         </div>
       </div>
 
-      <div className="mb-16 grid grid-cols-3 gap-4">
-        {[1, 2, 3].map((i) => (
-          <div key={i} className="bg-gray-200 h-40 rounded-lg"></div>
-        ))}
+      <div className="mb-16">
+        <Carousel className="w-full max-w-5xl mx-auto">
+          <CarouselContent className="-ml-2 md:-ml-4">
+            {[1, 2, 3, 4, 5, 6].map((index) => (
+              <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/3">
+                <Card>
+                  <CardContent className="flex aspect-square items-center justify-center p-2">
+                    <Image
+                      src={`/placeholder-image-${index}.jpg`}
+                      alt={`Clinic image ${index}`}
+                      width={300}
+                      height={300}
+                      className="rounded-lg object-cover w-full h-full"
+                    />
+                  </CardContent>
+                </Card>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
       </div>
 
-      <div className="mb-16 grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div>
-          <h2 className="text-2xl font-semibold mb-6">Priser</h2>
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="flex-grow pr-4 max-w-[calc(100%-120px)]">
-                Første konsult (60 min)
-              </span>
-              <span className="font-semibold">{clinic.førsteKons} kr</span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="flex-grow pr-4 max-w-[calc(100%-120px)]">
-                Standard konsult (60 min)
-              </span>
-              <span className="font-semibold">{clinic.opfølgning} kr</span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="flex-grow pr-4 max-w-[calc(100%-120px)]">
-                Andet (30 min)
-              </span>
-              <span className="font-semibold">300 kr</span>
-            </div>
+      <div className="mb-16">
+        <h2 className="text-2xl font-semibold mb-6">Priser</h2>
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="flex-grow pr-4 max-w-[calc(100%-120px)]">
+              Første konsult (60 min)
+            </span>
+            <span className="font-semibold">{clinic.førsteKons} kr</span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="flex-grow pr-4 max-w-[calc(100%-120px)]">
+              Standard konsult (60 min)
+            </span>
+            <span className="font-semibold">{clinic.opfølgning} kr</span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="flex-grow pr-4 max-w-[calc(100%-120px)]">
+              Andet (30 min)
+            </span>
+            <span className="font-semibold">300 kr</span>
           </div>
         </div>
+      </div>
 
-        <div>
-          <h2 className="text-2xl font-semibold mb-6">Åbningstider</h2>
-          <div className="space-y-2">
-            {[
-              "Mandag",
-              "Tirsdag",
-              "Onsdag",
-              "Torsdag",
-              "Fredag",
-              "Lørdag",
-              "Søndag",
-            ].map((day) => (
-              <div key={day} className="flex items-center justify-between">
-                <span>{day}</span>
-                <span className="font-semibold">
-                  {clinic[day.toLowerCase() as keyof typeof clinic]}
-                </span>
-              </div>
-            ))}
-          </div>
+      <div className="mb-16">
+        <h2 className="text-2xl font-semibold mb-6">Åbningstider</h2>
+        <div className="space-y-2">
+          {[
+            "Mandag",
+            "Tirsdag",
+            "Onsdag",
+            "Torsdag",
+            "Fredag",
+            "Lørdag",
+            "Søndag",
+          ].map((day) => (
+            <div key={day} className="flex items-center justify-between">
+              <span>{day}</span>
+              <span className="font-semibold">
+                {clinic[day.toLowerCase() as keyof typeof clinic]}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
 

@@ -1,14 +1,12 @@
 import SiteLogo from "./Icons/SiteLogo";
 
-const Footer: React.FC = () => {
+export default function Footer() {
   return (
-    <footer className="bg-white py-4 mt-auto border-t border-gray-200">
-      <div className="max-w-6xl mx-auto px-4 flex justify-between items-center">
+    <footer className="bg-white py-4 mt-8 border-t">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
         <SiteLogo />
-        <p className="text-sm text-gray-600">Made in Copenhagen</p>
+        <p className="text-gray-600 text-sm">Made in Copenhagen</p>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}
