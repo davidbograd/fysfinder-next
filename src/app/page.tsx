@@ -18,14 +18,14 @@ const HomePage: React.FC = () => {
 
   return (
     <div>
-      <div className="bg-primary-blue text-white py-20 px-0 mb-12">
+      <div className="bg-logo-blue text-white py-20 px-4 mb-12 rounded-lg">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl font-bold mb-6">
+          <h1 className="text-4xl sm:text-5xl font-bold mb-6">
             Find den bedste fysioterapeut
           </h1>
           <p className="text-xl">
             Vi har information fra {totalClinics} danske klinikker. Hvor leder
-            du efter een fys?
+            du efter en fys?
           </p>
         </div>
       </div>
@@ -36,10 +36,10 @@ const HomePage: React.FC = () => {
             <li key={suburb}>
               <Link
                 href={`/${slugify(suburb)}`}
-                className="block border p-6 rounded-md hover:shadow-lg transition-shadow duration-200"
+                className="block bg-white border p-6 rounded-md hover:shadow-lg transition-shadow duration-200"
               >
                 <div className="flex justify-between items-center">
-                  <span className="text-2xl font-bold text-slate-800">
+                  <span className="text-xl sm:text-2xl font-bold text-slate-800">
                     {suburb}
                   </span>
                   <span className="text-slate-600">{count} klinikker</span>

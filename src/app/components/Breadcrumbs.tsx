@@ -1,3 +1,4 @@
+import React from "react";
 import Link from "next/link";
 import {
   Breadcrumb,
@@ -19,21 +20,23 @@ interface BreadcrumbsProps {
 
 export function Breadcrumbs({ items }: BreadcrumbsProps) {
   return (
-    <Breadcrumb>
-      <BreadcrumbList>
-        {items.map((item, index) => (
-          <BreadcrumbItem key={index}>
-            {item.link ? (
-              <BreadcrumbLink asChild>
-                <Link href={item.link}>{item.text}</Link>
-              </BreadcrumbLink>
-            ) : (
-              <BreadcrumbPage>{item.text}</BreadcrumbPage>
-            )}
-            {index < items.length - 1 && <BreadcrumbSeparator />}
-          </BreadcrumbItem>
-        ))}
-      </BreadcrumbList>
-    </Breadcrumb>
+    <nav className="mb-4">
+      <Breadcrumb>
+        <BreadcrumbList>
+          {items.map((item, index) => (
+            <BreadcrumbItem key={index}>
+              {item.link ? (
+                <BreadcrumbLink asChild>
+                  <Link href={item.link}>{item.text}</Link>
+                </BreadcrumbLink>
+              ) : (
+                <BreadcrumbPage>{item.text}</BreadcrumbPage>
+              )}
+              {index < items.length - 1 && <BreadcrumbSeparator />}
+            </BreadcrumbItem>
+          ))}
+        </BreadcrumbList>
+      </Breadcrumb>
+    </nav>
   );
 }

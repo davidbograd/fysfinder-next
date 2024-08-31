@@ -60,6 +60,7 @@ const config: Config = {
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
         },
+        "logo-blue": "#1894E0", // Replace this with the exact hex code of your logo blue
       },
     },
   },
