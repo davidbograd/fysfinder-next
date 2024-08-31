@@ -1,7 +1,7 @@
 import React from "react";
-import fysioKlikker from "./data/clinicsData";
-import { slugify } from "./utils/slugify";
 import Link from "next/link";
+import fysioKlikker from "../data/clinicsData";
+import { slugify } from "../utils/slugify";
 
 const HomePage: React.FC = () => {
   const suburbCounts = fysioKlikker.reduce((acc, clinic) => {
