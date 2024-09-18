@@ -13,9 +13,6 @@ export default function Header() {
           <Link href="/om-os" className="text-gray-600 hover:text-gray-900">
             Om os
           </Link>
-          <Link href="/bydel" className="text-gray-600 hover:text-gray-900">
-            Bydel
-          </Link>
           <Button variant="default" asChild>
             <Link href="/tilfoej-klinik">Tilføj din klinik</Link>
           </Button>

@@ -11,13 +11,13 @@ interface BreadcrumbsProps {
 
 export function Breadcrumbs({ items }: BreadcrumbsProps) {
   return (
-    <nav aria-label="Breadcrumb">
-      <ol className="flex items-center space-x-2 text-sm text-gray-500">
+    <nav aria-label="Breadcrumb" className="mb-6">
+      <ol className="flex items-center space-x-2 text-sm">
         {items.map((item, index) => (
           <li key={index} className="flex items-center">
-            {index > 0 && <span className="mx-2">/</span>}
+            {index > 0 && <span className="mx-2 text-gray-500">/</span>}
             {item.link ? (
-              <Link href={item.link} className="hover:text-gray-700">
+              <Link href={item.link} className="text-logo-blue hover:underline">
                 {item.text}
               </Link>
             ) : (

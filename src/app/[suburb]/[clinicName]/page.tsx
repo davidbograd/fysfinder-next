@@ -4,8 +4,9 @@ import { useState } from "react";
 import fysioKlikker from "../../data/clinicsData";
 import { slugify } from "../../utils/slugify";
 import Image from "next/image";
-import IconEmail from "../../components/Icons/IconEmail";
-import IconPhone from "../../components/Icons/IconPhone";
+import { StarIcon } from "@heroicons/react/24/solid";
+import { PhoneIcon } from "@heroicons/react/24/outline";
+import { EnvelopeIcon } from "@heroicons/react/24/outline";
 import { Breadcrumbs } from "@/app/components/Breadcrumbs";
 import GoogleMap from "../../components/GoogleMap";
 import { Button } from "@/components/ui/button";
@@ -17,6 +18,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
+import { MapPinIcon, GlobeAltIcon } from "@heroicons/react/24/outline";
 
 export default function ClinicDetailsPage({
   params,
@@ -59,7 +61,10 @@ export default function ClinicDetailsPage({
 
       <h1 className="text-3xl font-bold mb-2">{clinic.klinikNavn}</h1>
       <div className="flex items-center mb-6">
-        <span className="font-bold mr-2">{clinic.avgRating.toFixed(1)}</span>
+        <StarIcon className="h-6 w-6 text-amber-500 mr-1" />
+        <span className="font-semibold mr-2">
+          {clinic.avgRating.toFixed(1)}
+        </span>
         <span className="text-gray-500">
           ({clinic.ratingCount} anmeldelser)
         </span>
@@ -68,26 +73,28 @@ export default function ClinicDetailsPage({
       <div className="mb-6">
         <div className="flex flex-col space-y-2">
           <div className="flex items-center">
+            <MapPinIcon className="h-6 w-6 text-gray-400 mr-2" />
             <p>
               {clinic.adresse}, {clinic.lokation}
             </p>
           </div>
           <div className="flex items-center">
+            <GlobeAltIcon className="h-6 w-6 text-gray-400 mr-2" />
             <a
               href={clinic.website}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-500 hover:underline"
+              className="text-logo-blue hover:underline"
             >
               {clinic.website}
             </a>
           </div>
           <div className="flex items-center">
-            <IconPhone />
+            <PhoneIcon className="h-6 w-6 text-gray-400 mr-2" />
             <span>{clinic.tlf}</span>
           </div>
           <div className="flex items-center">
-            <IconEmail />
+            <EnvelopeIcon className="h-6 w-6 text-gray-400 mr-2" />
             <span>{clinic.email}</span>
           </div>
         </div>
