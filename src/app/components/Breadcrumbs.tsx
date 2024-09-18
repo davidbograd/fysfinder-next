@@ -1,42 +1,31 @@
-import React from "react";
 import Link from "next/link";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 
-interface BreadcrumbItemType {
+interface BreadcrumbItem {
   text: string;
   link?: string;
 }
 
 interface BreadcrumbsProps {
-  items: BreadcrumbItemType[];
+  items: BreadcrumbItem[];
 }
 
 export function Breadcrumbs({ items }: BreadcrumbsProps) {
   return (
-    <nav className="mb-4">
-      <Breadcrumb>
-        <BreadcrumbList>
-          {items.map((item, index) => (
-            <BreadcrumbItem key={index}>
-              {item.link ? (
-                <BreadcrumbLink asChild>
-                  <Link href={item.link}>{item.text}</Link>
-                </BreadcrumbLink>
-              ) : (
-                <BreadcrumbPage>{item.text}</BreadcrumbPage>
-              )}
-              {index < items.length - 1 && <BreadcrumbSeparator />}
-            </BreadcrumbItem>
-          ))}
-        </BreadcrumbList>
-      </Breadcrumb>
+    <nav aria-label="Breadcrumb">
+      <ol className="flex items-center space-x-2 text-sm text-gray-500">
+        {items.map((item, index) => (
+          <li key={index} className="flex items-center">
+            {index > 0 && <span className="mx-2">/</span>}
+            {item.link ? (
+              <Link href={item.link} className="hover:text-gray-700">
+                {item.text}
+              </Link>
+            ) : (
+              <span className="text-gray-900">{item.text}</span>
+            )}
+          </li>
+        ))}
+      </ol>
     </nav>
   );
 }

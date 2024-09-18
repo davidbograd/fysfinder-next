@@ -6,9 +6,10 @@ import { Breadcrumbs } from "@/app/components/Breadcrumbs";
 
 export default function SuburbPage({ params }: { params: { suburb: string } }) {
   const { suburb } = params;
-  const clinics = fysioKlikker
-    .filter((clinic) => slugify(clinic.lokation) === suburb)
-    .sort((a, b) => b.avgRating - a.avgRating); // Sort clinics by avgRating in descending order
+
+  const clinics = fysioKlikker.filter(
+    (clinic) => slugify(clinic.lokation) === suburb
+  );
 
   const suburbName = clinics[0]?.lokation || suburb;
 

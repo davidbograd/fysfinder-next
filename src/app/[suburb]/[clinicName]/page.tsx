@@ -1,10 +1,12 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from "react";
 import fysioKlikker from "../../data/clinicsData";
+import { slugify } from "../../utils/slugify";
+import Image from "next/image";
 import IconEmail from "../../components/Icons/IconEmail";
 import IconPhone from "../../components/Icons/IconPhone";
-import { slugify } from "../../utils/slugify";
 import { Breadcrumbs } from "@/app/components/Breadcrumbs";
-import joachimImage from "src/app/images/joachimbograd-fysiopuls.png";
 import GoogleMap from "../../components/GoogleMap";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,18 +18,16 @@ import {
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
 
-// Define Clinic type inline
-type Clinic = (typeof fysioKlikker)[number];
-
 export default function ClinicDetailsPage({
   params,
 }: {
   params: { suburb: string; clinicName: string };
 }) {
   const { suburb, clinicName } = params;
+  const [showAllTherapists, setShowAllTherapists] = useState(false);
 
   const clinic = fysioKlikker.find(
-    (c): c is Clinic =>
+    (c) =>
       slugify(c.lokation) === suburb && slugify(c.klinikNavn) === clinicName
   );
 
@@ -41,11 +41,17 @@ export default function ClinicDetailsPage({
     { text: clinic.klinikNavn },
   ];
 
-  const therapists = [
-    { name: "Joachim Bograd", specialty: "Speciale: Skulder, ryg, lilletå" },
-    { name: "Therapist Name 2", specialty: "Speciality 2" },
-    { name: "Therapist Name 3", specialty: "Speciality 3" },
-  ];
+  const numberOfTherapists = parseInt(clinic.antalBehandlere) || 0;
+
+  // Generate mock therapists based on the number of behandlere
+  const therapists = Array.from({ length: numberOfTherapists }, (_, index) => ({
+    name: `Therapist ${index + 1}`,
+    specialty: `Specialty ${index + 1}`,
+  }));
+
+  const displayedTherapists = showAllTherapists
+    ? therapists
+    : therapists.slice(0, 8);
 
   return (
     <div>
@@ -93,13 +99,10 @@ export default function ClinicDetailsPage({
             {[1, 2, 3, 4, 5, 6].map((index) => (
               <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/3">
                 <Card>
-                  <CardContent className="flex aspect-square items-center justify-center p-2">
-                    <Image
-                      src={`/placeholder-image-${index}.jpg`}
-                      alt={`Clinic image ${index}`}
-                      width={300}
-                      height={300}
-                      className="rounded-lg object-cover w-full h-full"
+                  <CardContent className="flex items-center justify-center p-2">
+                    <div
+                      className="bg-gray-300 w-full h-[200px] rounded-lg"
+                      aria-label={`Placeholder for clinic image ${index}`}
                     />
                   </CardContent>
                 </Card>
@@ -111,105 +114,101 @@ export default function ClinicDetailsPage({
         </Carousel>
       </div>
 
-      <div className="mb-16">
-        <h2 className="text-2xl font-semibold mb-6">Priser</h2>
-        <div className="space-y-2">
-          <div className="flex items-center justify-between">
-            <span className="flex-grow pr-4 max-w-[calc(100%-120px)]">
-              Første konsult (60 min)
-            </span>
-            <span className="font-semibold">{clinic.førsteKons} kr</span>
-          </div>
-          <div className="flex items-center justify-between">
-            <span className="flex-grow pr-4 max-w-[calc(100%-120px)]">
-              Standard konsult (60 min)
-            </span>
-            <span className="font-semibold">{clinic.opfølgning} kr</span>
-          </div>
-          <div className="flex items-center justify-between">
-            <span className="flex-grow pr-4 max-w-[calc(100%-120px)]">
-              Andet (30 min)
-            </span>
-            <span className="font-semibold">300 kr</span>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        <div>
+          <h2 className="text-2xl font-semibold mb-6">Priser</h2>
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="flex-grow pr-4 max-w-[calc(100%-120px)]">
+                Første konsult (60 min)
+              </span>
+              <span className="font-semibold">{clinic.førsteKons} kr</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="flex-grow pr-4 max-w-[calc(100%-120px)]">
+                Standard konsult (60 min)
+              </span>
+              <span className="font-semibold">{clinic.opfølgning} kr</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="flex-grow pr-4 max-w-[calc(100%-120px)]">
+                Andet (30 min)
+              </span>
+              <span className="font-semibold">300 kr</span>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="mb-16">
-        <h2 className="text-2xl font-semibold mb-6">Åbningstider</h2>
-        <div className="space-y-2">
-          {[
-            "Mandag",
-            "Tirsdag",
-            "Onsdag",
-            "Torsdag",
-            "Fredag",
-            "Lørdag",
-            "Søndag",
-          ].map((day) => (
-            <div key={day} className="flex items-center justify-between">
-              <span>{day}</span>
-              <span className="font-semibold">
-                {clinic[day.toLowerCase() as keyof typeof clinic]}
+        <div>
+          <h2 className="text-2xl font-semibold mb-6">Åbningstider</h2>
+          <div className="space-y-2">
+            {[
+              "Mandag",
+              "Tirsdag",
+              "Onsdag",
+              "Torsdag",
+              "Fredag",
+              "Lørdag",
+              "Søndag",
+            ].map((day) => (
+              <div key={day} className="flex items-center justify-between">
+                <span>{day}</span>
+                <span className="font-semibold">
+                  {clinic[day.toLowerCase() as keyof typeof clinic]}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h2 className="text-2xl font-semibold mb-6">Andet</h2>
+          <div className="space-y-2">
+            <div className="flex items-center">
+              <span className="w-3/5">Parkering</span>
+              <span className="w-2/5 text-right font-semibold">
+                {clinic.parkering}
               </span>
             </div>
-          ))}
+            <div className="flex items-center">
+              <span className="w-3/5">Handicap adgang</span>
+              <span className="w-2/5 text-right font-semibold">
+                {clinic.handicapadgang}
+              </span>
+            </div>
+            <div className="flex items-center">
+              <span className="w-3/5">Holdtræning</span>
+              <span className="w-2/5 text-right font-semibold">
+                {clinic.holdtræning}
+              </span>
+            </div>
+            <div className="flex items-center">
+              <span className="w-3/5">Hjemmetræning</span>
+              <span className="w-2/5 text-right font-semibold">
+                {clinic.hjemmetræning}
+              </span>
+            </div>
+          </div>
         </div>
       </div>
 
       <div className="mb-16">
-        <h2 className="text-2xl font-semibold mb-6">
-          Behandlere ({clinic.antalBehandlere})
-        </h2>
-        {therapists.map((therapist, index) => (
-          <div key={index} className="flex items-center mb-4">
-            {therapist.name === "Joachim Bograd" ? (
-              <Image
-                src={joachimImage}
-                alt="Joachim Bograd"
-                width={120}
-                height={120}
-                className="rounded-lg mr-4 object-cover"
-              />
-            ) : (
-              <div className="bg-gray-200 w-[120px] h-[120px] rounded-lg mr-4 flex items-center justify-center"></div>
-            )}
-            <div>
-              <p className="font-semibold">{therapist.name}</p>
-              <p className="text-gray-600">{therapist.specialty}</p>
+        <h2 className="text-2xl font-semibold mb-6">Behandlere</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {displayedTherapists.map((therapist, index) => (
+            <div key={index} className="bg-white p-4 rounded-lg shadow h-full">
+              <h3 className="font-semibold">{therapist.name}</h3>
+              <p className="text-sm text-gray-600">{therapist.specialty}</p>
             </div>
-          </div>
-        ))}
-        <Button variant="default">Jeg er behandler her, tilføj</Button>
-      </div>
-
-      <div className="mb-16">
-        <h2 className="text-2xl font-semibold mb-6">Andet</h2>
-        <div className="space-y-2">
-          <div className="flex items-center">
-            <span className="w-3/5">Parkering</span>
-            <span className="w-2/5 text-right font-semibold">
-              {clinic.parkering}
-            </span>
-          </div>
-          <div className="flex items-center">
-            <span className="w-3/5">Handicap adgang</span>
-            <span className="w-2/5 text-right font-semibold">
-              {clinic.handicapadgang}
-            </span>
-          </div>
-          <div className="flex items-center">
-            <span className="w-3/5">Holdtræning</span>
-            <span className="w-2/5 text-right font-semibold">
-              {clinic.holdtræning}
-            </span>
-          </div>
-          <div className="flex items-center">
-            <span className="w-3/5">Hjemmetræning</span>
-            <span className="w-2/5 text-right font-semibold">
-              {clinic.hjemmetræning}
-            </span>
-          </div>
+          ))}
+          {!showAllTherapists && therapists.length > 8 && (
+            <Button
+              onClick={() => setShowAllTherapists(true)}
+              className="bg-black text-white p-4 rounded-lg shadow flex items-center justify-center h-full"
+            >
+              Vis flere
+            </Button>
+          )}
         </div>
       </div>
 

@@ -1,17 +1,18 @@
 import React from "react";
-import fysioKlikker from "./data/clinicsData";
-import { slugify } from "./utils/slugify";
 import Link from "next/link";
+import { slugify } from "./utils/slugify";
+import fysioKlikker from "./data/clinicsData";
 
 const HomePage: React.FC = () => {
-  const suburbCounts = fysioKlikker.reduce((acc, clinic) => {
+  const clinics = fysioKlikker;
+
+  const suburbCounts = clinics.reduce((acc, clinic) => {
     acc[clinic.lokation] = (acc[clinic.lokation] || 0) + 1;
     return acc;
   }, {} as Record<string, number>);
 
-  const totalClinics = fysioKlikker.length;
+  const totalClinics = clinics.length;
 
-  // Sort suburbs alphabetically
   const sortedSuburbs = Object.entries(suburbCounts).sort((a, b) =>
     a[0].localeCompare(b[0], "da")
   );
