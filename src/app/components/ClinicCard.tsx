@@ -4,9 +4,8 @@ import { XMarkIcon } from "@heroicons/react/24/solid";
 
 interface Props {
   klinikNavn: string;
-  antalBehandlere: string;
+  antalBehandlere: number;
   ydernummer: string;
-  førsteKons: string;
   avgRating: number;
   ratingCount: number;
 }
@@ -34,7 +33,7 @@ const ClinicCard: React.FC<Props> = ({
       <div className="flex items-center mb-2">
         <StarIcon className="size-5 text-amber-500 mr-1" />
         <span className="text-gray-700 mr-2 flex items-center">
-          {avgRating.toFixed(1)}
+          {avgRating !== null ? avgRating.toFixed(1) : "-"}
         </span>
         <span className="text-gray-500 flex items-center">
           ({ratingCount} anmeldelser)
@@ -43,10 +42,10 @@ const ClinicCard: React.FC<Props> = ({
       <div className="flex justify-between items-center mt-2">
         <p
           className={`text-slate-700 ${
-            antalBehandlere === "-" ? "text-gray-300" : ""
+            antalBehandlere === null ? "text-gray-300" : ""
           }`}
         >
-          {antalBehandlere === "-" ? "?" : antalBehandlere} behandlere
+          {antalBehandlere === null ? "?" : antalBehandlere} behandlere
         </p>
         <div className="flex items-center">
           <span className="mr-1 text-sm">Ydernummer</span>

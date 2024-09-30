@@ -10,12 +10,12 @@ export default function Header() {
           <SiteLogo />
         </Link>
         <nav className="flex items-center space-x-6">
-          <Link href="/om-os" className="text-gray-600 hover:text-gray-900">
+          {/* <Link href="/om-os" className="text-gray-600 hover:text-gray-900">
             Om os
           </Link>
           <Button variant="default" asChild>
             <Link href="/tilfoej-klinik">Tilføj din klinik</Link>
-          </Button>
+          </Button> */}
         </nav>
       </div>
     </header>
