@@ -109,7 +109,7 @@ export default async function ClinicPage({
         <div className="flex items-center mb-6">
           <StarIcon className="h-6 w-6 text-amber-500 mr-1" />
           <span className="font-semibold mr-2">
-            {clinic.avgRating.toFixed(1)}
+            {clinic.avgRating != null ? clinic.avgRating.toFixed(1) : "N/A"}
           </span>
           <span className="text-gray-500">
             ({clinic.ratingCount} anmeldelser)
