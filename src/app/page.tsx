@@ -28,13 +28,15 @@ async function fetchClinics() {
 
 function processSuburbs(clinics: Clinic[]): SuburbCount[] {
   const suburbCounts = clinics.reduce((acc, { lokation }) => {
-    acc[lokation] = (acc[lokation] || 0) + 1;
+    if (lokation && lokation.toLowerCase() !== "null") {
+      acc[lokation] = (acc[lokation] || 0) + 1;
+    }
     return acc;
   }, {} as Record<string, number>);
 
   return Object.entries(suburbCounts)
     .map(([suburb, count]) => ({ suburb, count }))
-    .sort((a, b) => a.suburb.localeCompare(b.suburb, "da"));
+    .sort((a, b) => b.count - a.count); // Sort by count in descending order
 }
 
 function Header({ totalClinics }: { totalClinics: number }) {
