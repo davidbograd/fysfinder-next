@@ -3,6 +3,7 @@ import Link from "next/link";
 import { slugify } from "./utils/slugify";
 import { createClient } from "@/app/utils/supabase/server";
 import { Metadata } from "next";
+import { Button } from "@/components/ui/button";
 
 interface Clinic {
   id: number;
@@ -13,7 +14,6 @@ interface Clinic {
 interface SuburbCount {
   suburb: string;
   count: number;
-  postnummer: string;
 }
 
 interface RegionData {
@@ -45,17 +45,19 @@ async function fetchClinics() {
 
 function processSuburbs(clinics: Clinic[]): RegionData[] {
   const suburbCounts = clinics.reduce((acc, { lokation, postnummer }) => {
-    if (lokation && lokation.toLowerCase() !== "null" && postnummer) {
-      const key = `${lokation}-${postnummer}`;
-      acc[key] = (acc[key] || {
-        suburb: lokation,
-        count: 0,
-        postnummer,
-      }) as SuburbCount;
+    if (lokation && lokation.toLowerCase() !== "null") {
+      const key = lokation.toLowerCase();
+      if (!acc[key]) {
+        acc[key] = {
+          suburb: lokation,
+          count: 0,
+          postnummer: postnummer, // Keep one postnummer for region determination
+        };
+      }
       acc[key].count++;
     }
     return acc;
-  }, {} as Record<string, SuburbCount>);
+  }, {} as Record<string, SuburbCount & { postnummer: string }>);
 
   const sortedSuburbs = Object.values(suburbCounts).sort(
     (a, b) => b.count - a.count
@@ -63,10 +65,12 @@ function processSuburbs(clinics: Clinic[]): RegionData[] {
 
   return Object.entries(regions).map(([key, { name, range }]) => ({
     name,
-    suburbs: sortedSuburbs.filter(({ postnummer }) => {
-      const postNum = parseInt(postnummer);
-      return postNum >= range[0] && postNum <= range[1];
-    }),
+    suburbs: sortedSuburbs
+      .filter(({ postnummer }) => {
+        const postNum = parseInt(postnummer);
+        return postNum >= range[0] && postNum <= range[1];
+      })
+      .map(({ suburb, count }) => ({ suburb, count })), // Remove postnummer from final output
   }));
 }
 
@@ -77,31 +81,17 @@ function Header({ totalClinics }: { totalClinics: number }) {
         <h1 className="text-4xl sm:text-5xl font-bold mb-6">
           Find den bedste fysioterapeut
         </h1>
-        <p className="text-xl">
+        <p className="text-xl mb-8">
           Vi har information fra {totalClinics} danske klinikker. Hvor leder du
-          efter en fys?
+          efter fysioterapeut?
         </p>
-      </div>
-    </div>
-  );
-}
-
-function RegionNavigation() {
-  return (
-    <div className="mb-12">
-      <h2 className="text-2xl font-bold mb-4 text-center">
-        Hvor leder du efter fysioterapeut?
-      </h2>
-      <div className="flex flex-wrap justify-center gap-4">
-        {Object.entries(regions).map(([key, { name }]) => (
-          <a
-            key={key}
-            href={`#${key}`}
-            className="bg-logo-blue text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors duration-200"
-          >
-            {name}
-          </a>
-        ))}
+        <div className="flex flex-wrap justify-center gap-4">
+          {Object.entries(regions).map(([key, { name }]) => (
+            <Button key={key} variant="secondary" asChild>
+              <a href={`#${key}`}>{name}</a>
+            </Button>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -150,7 +140,6 @@ export default async function HomePage() {
       <div>
         <Header totalClinics={clinics.length} />
         <div className="max-w-6xl mx-auto px-4">
-          <RegionNavigation />
           {regionData.map((region) => (
             <RegionSection key={region.name} region={region} />
           ))}
