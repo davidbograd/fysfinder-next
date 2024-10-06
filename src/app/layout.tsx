@@ -24,6 +24,21 @@ export default function RootLayout({
           </div>
         </main>
         <Footer />
+        {/* Google tag (gtag.js) */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-BH38ZB6HYH"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-BH38ZB6HYH');
+            `,
+          }}
+        />
       </body>
     </html>
   );
