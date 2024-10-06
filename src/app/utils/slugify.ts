@@ -1,8 +1,11 @@
 export function slugify(text: string): string {
   return text
     .toLowerCase()
+    .replace(/æ/g, "ae")
+    .replace(/ø/g, "oe")
+    .replace(/å/g, "aa")
     .replace(/\s+/g, "-")
-    .replace(/[^\w\-æøå]+/g, "")
+    .replace(/[^\w\-]+/g, "")
     .replace(/\-\-+/g, "-")
     .trim();
 }
@@ -10,6 +13,9 @@ export function slugify(text: string): string {
 export function deslugify(slug: string): string {
   return slug
     .split("-")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .map((word) => {
+      word = word.replace(/ae/g, "æ").replace(/oe/g, "ø").replace(/aa/g, "å");
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
     .join(" ");
 }

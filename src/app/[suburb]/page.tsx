@@ -51,7 +51,7 @@ export async function generateMetadata({
 }: {
   params: { suburb: string };
 }): Promise<Metadata> {
-  const decodedSuburb = deslugify(decodeURIComponent(params.suburb));
+  const decodedSuburb = deslugify(params.suburb);
   const clinicCount = await getClinicCount(decodedSuburb);
 
   return {
