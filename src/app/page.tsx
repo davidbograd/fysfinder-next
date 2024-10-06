@@ -76,16 +76,16 @@ function processSuburbs(clinics: Clinic[]): RegionData[] {
 
 function Header({ totalClinics }: { totalClinics: number }) {
   return (
-    <div className="bg-logo-blue text-white py-20 px-4 mb-12 rounded-lg">
+    <div className="bg-logo-blue text-white py-10 sm:py-20 px-4 mb-8 sm:mb-12 rounded-lg">
       <div className="max-w-4xl mx-auto text-center">
-        <h1 className="text-4xl sm:text-5xl font-bold mb-6">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
           Find den bedste fysioterapeut
         </h1>
-        <p className="text-xl mb-8">
+        <p className="text-lg sm:text-xl mb-6 sm:mb-8">
           Vi har information fra {totalClinics} danske klinikker. Hvor leder du
           efter fysioterapeut?
         </p>
-        <div className="flex flex-wrap justify-center gap-4">
+        <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
           {Object.entries(regions).map(([key, { name }]) => (
             <Button key={key} variant="secondary" asChild>
               <a href={`#${key}`}>{name}</a>
