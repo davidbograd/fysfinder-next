@@ -37,23 +37,26 @@ interface Clinic {
   handicapadgang: string;
   holdtræning: string;
   hjemmetræning: string;
+  klinikNavnSlug: string; // Add this new property
 }
 
-async function fetchClinicByName(
+async function fetchClinicBySlug(
   suburb: string,
-  clinicName: string
+  clinicSlug: string
 ): Promise<Clinic | null> {
   const supabase = createClient();
   const { data, error } = await supabase
     .from("clinics")
     .select("*")
     .eq("lokation", suburb)
-    .ilike("klinikNavn", clinicName.replace(/-/g, " "))
+    .eq("klinikNavnSlug", clinicSlug)
     .single();
 
   if (error) {
     console.error("Supabase error:", error);
-    throw new Error(`Failed to fetch clinic: ${error.message}`);
+    throw new Error(
+      `Failed to fetch clinic: ${error.message}. Slug was ${clinicSlug}`
+    );
   }
 
   return data;
@@ -65,8 +68,7 @@ export async function generateMetadata({
   params: { suburb: string; clinicName: string };
 }): Promise<Metadata> {
   const decodedSuburb = deslugify(decodeURIComponent(params.suburb));
-  const decodedClinicName = deslugify(decodeURIComponent(params.clinicName));
-  const clinic = await fetchClinicByName(decodedSuburb, decodedClinicName);
+  const clinic = await fetchClinicBySlug(decodedSuburb, params.clinicName);
 
   if (!clinic) {
     return {
@@ -88,8 +90,7 @@ export default async function ClinicPage({
 }) {
   try {
     const decodedSuburb = deslugify(decodeURIComponent(params.suburb));
-    const decodedClinicName = deslugify(decodeURIComponent(params.clinicName));
-    const clinic = await fetchClinicByName(decodedSuburb, decodedClinicName);
+    const clinic = await fetchClinicBySlug(decodedSuburb, params.clinicName);
 
     if (!clinic) {
       return <div className="text-center mt-10">Clinic not found</div>;

@@ -4,8 +4,9 @@ export function slugify(text: string): string {
     .replace(/æ/g, "ae")
     .replace(/ø/g, "oe")
     .replace(/å/g, "aa")
+    .replace(/ü/g, "u")
     .replace(/\s+/g, "-")
-    .replace(/[^\w\-]+/g, "")
+    .replace(/[^\w\-]+/g, "-")
     .replace(/\-\-+/g, "-")
     .trim();
 }
