@@ -1,7 +1,7 @@
 import React from "react";
 import { createClient } from "@/app/utils/supabase/server";
 import { Breadcrumbs } from "@/app/components/Breadcrumbs";
-import { deslugify, slugify } from "../../utils/slugify";
+import { deslugify } from "../../utils/slugify";
 import {
   StarIcon,
   PhoneIcon,
@@ -20,6 +20,7 @@ interface Clinic {
   avgRating: number;
   ratingCount: number;
   lokation: string;
+  lokationSlug: string;
   adresse: string;
   website: string;
   tlf: string;
@@ -37,18 +38,18 @@ interface Clinic {
   handicapadgang: string;
   holdtræning: string;
   hjemmetræning: string;
-  klinikNavnSlug: string; // Add this new property
+  klinikNavnSlug: string;
 }
 
 async function fetchClinicBySlug(
-  suburb: string,
+  suburbSlug: string,
   clinicSlug: string
 ): Promise<Clinic | null> {
   const supabase = createClient();
   const { data, error } = await supabase
     .from("clinics")
     .select("*")
-    .eq("lokation", suburb)
+    .eq("lokationSlug", suburbSlug)
     .eq("klinikNavnSlug", clinicSlug)
     .single();
 
@@ -67,8 +68,7 @@ export async function generateMetadata({
 }: {
   params: { suburb: string; clinicName: string };
 }): Promise<Metadata> {
-  const decodedSuburb = deslugify(decodeURIComponent(params.suburb));
-  const clinic = await fetchClinicBySlug(decodedSuburb, params.clinicName);
+  const clinic = await fetchClinicBySlug(params.suburb, params.clinicName);
 
   if (!clinic) {
     return {
@@ -89,8 +89,7 @@ export default async function ClinicPage({
   params: { suburb: string; clinicName: string };
 }) {
   try {
-    const decodedSuburb = deslugify(decodeURIComponent(params.suburb));
-    const clinic = await fetchClinicBySlug(decodedSuburb, params.clinicName);
+    const clinic = await fetchClinicBySlug(params.suburb, params.clinicName);
 
     if (!clinic) {
       return <div className="text-center mt-10">Clinic not found</div>;
@@ -98,7 +97,7 @@ export default async function ClinicPage({
 
     const breadcrumbItems = [
       { text: "Forside", link: "/" },
-      { text: clinic.lokation, link: `/${params.suburb}` },
+      { text: clinic.lokation, link: `/${clinic.lokationSlug}` },
       { text: clinic.klinikNavn },
     ];
 

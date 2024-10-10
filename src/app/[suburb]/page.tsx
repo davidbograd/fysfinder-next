@@ -14,14 +14,15 @@ interface Clinic {
   avgRating: number;
   ratingCount: number;
   lokation: string;
+  lokationSlug: string;
 }
 
-async function fetchClinicsBySuburb(suburb: string): Promise<Clinic[]> {
+async function fetchClinicsBySuburb(suburbSlug: string): Promise<Clinic[]> {
   const supabase = createClient();
   const { data, error } = await supabase
     .from("clinics")
     .select("*")
-    .eq("lokation", suburb);
+    .eq("lokationSlug", suburbSlug);
 
   if (error) {
     console.error("Supabase error:", error);
@@ -31,12 +32,12 @@ async function fetchClinicsBySuburb(suburb: string): Promise<Clinic[]> {
   return data as Clinic[];
 }
 
-async function getClinicCount(suburb: string): Promise<number> {
+async function getClinicCount(suburbSlug: string): Promise<number> {
   const supabase = createClient();
   const { count, error } = await supabase
     .from("clinics")
     .select("*", { count: "exact", head: true })
-    .eq("lokation", suburb);
+    .eq("lokationSlug", suburbSlug);
 
   if (error) {
     console.error("Error fetching clinic count:", error);
@@ -51,12 +52,14 @@ export async function generateMetadata({
 }: {
   params: { suburb: string };
 }): Promise<Metadata> {
-  const decodedSuburb = deslugify(params.suburb);
-  const clinicCount = await getClinicCount(decodedSuburb);
+  const clinics = await fetchClinicsBySuburb(params.suburb);
+  const suburbName =
+    clinics.length > 0 ? clinics[0].lokation : deslugify(params.suburb);
+  const clinicCount = clinics.length;
 
   return {
-    title: `Find Fysioterapeut i ${decodedSuburb} - FysFinder`,
-    description: `Find ${decodedSuburb}s bedste fysioterapeut. FysFinder giver dig overblik over ${clinicCount} fysioterapiklinikker i ${decodedSuburb}.`,
+    title: `Find Fysioterapeut i ${suburbName} - FysFinder`,
+    description: `Find ${suburbName}s bedste fysioterapeut. FysFinder giver dig overblik over ${clinicCount} fysioterapiklinikker i ${suburbName}.`,
   };
 }
 
@@ -66,12 +69,13 @@ export default async function SuburbPage({
   params: { suburb: string };
 }) {
   try {
-    const decodedSuburb = deslugify(decodeURIComponent(params.suburb));
-    const clinics = await fetchClinicsBySuburb(decodedSuburb);
+    const clinics = await fetchClinicsBySuburb(params.suburb);
+    const suburbName =
+      clinics.length > 0 ? clinics[0].lokation : deslugify(params.suburb);
 
     const breadcrumbItems = [
       { text: "Forside", link: "/" },
-      { text: decodedSuburb },
+      { text: suburbName },
     ];
 
     return (
@@ -81,7 +85,7 @@ export default async function SuburbPage({
           <div className="text-center py-10">
             <h1 className="text-3xl font-bold mb-4">Ingen klinikker fundet</h1>
             <p className="text-xl">
-              Der er desværre ingen klinikker registreret i {decodedSuburb}.
+              Der er desværre ingen klinikker registreret i {suburbName}.
             </p>
             <Link
               href="/"
@@ -93,7 +97,7 @@ export default async function SuburbPage({
         ) : (
           <>
             <h1 className="text-3xl font-bold mb-6">
-              {clinics.length} bedste fysioterapeuter i {decodedSuburb}
+              {clinics.length} bedste fysioterapeuter i {suburbName}
             </h1>
             <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
               {clinics.map((clinic) => (
