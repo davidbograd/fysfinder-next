@@ -7,6 +7,9 @@ import Footer from "./components/Footer";
 export const metadata: Metadata = {
   title: "FysFinder",
   description: "Find den bedste fysioterapeut",
+  icons: {
+    icon: "/favicon.ico", // /public/favicon.ico
+  },
 };
 
 export default function RootLayout({
