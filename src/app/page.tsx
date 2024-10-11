@@ -81,9 +81,10 @@ function Header({ totalClinics }: { totalClinics: number }) {
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
           Find den bedste fysioterapeut
         </h1>
-        <p className="text-lg sm:text-xl mb-6 sm:mb-8">
-          Vi har information fra {totalClinics} danske klinikker. Hvor leder du
-          efter fysioterapeut?
+        <p className="text-base sm:text-lg mb-6 sm:mb-8 text-white/80">
+          Leder du efter fysioterapeut? Vi har information fra {totalClinics}{" "}
+          danske klinikker. FysFinder har anmeldelser, specialer, priser og
+          meget mere. Find den perfekte fysioterapeut til dit behov.
         </p>
         <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
           {Object.entries(regions).map(([key, { name }]) => (

@@ -96,9 +96,14 @@ export default async function SuburbPage({
           </div>
         ) : (
           <>
-            <h1 className="text-3xl font-bold mb-6">
+            <h1 className="text-3xl font-bold mb-4">
               {clinics.length} bedste fysioterapeuter i {suburbName}
             </h1>
+            <p className=" text-gray-600 mb-8 max-w-[800px]">
+              Fysfinder hjælper dig med at finde den bedste fysioterapeut i{" "}
+              {suburbName}. Se anmeldelser, specialer, priser og meget mere så
+              du kan finde den perfekte fysioterapeut.
+            </p>
             <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
               {clinics.map((clinic) => (
                 <Link
