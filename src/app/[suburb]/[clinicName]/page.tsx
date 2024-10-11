@@ -13,7 +13,7 @@ import GoogleMap from "../../components/GoogleMap";
 import { Metadata } from "next";
 
 interface Clinic {
-  id: number;
+  uuid: string;
   klinikNavn: string;
   antalBehandlere: number;
   ydernummer: string;

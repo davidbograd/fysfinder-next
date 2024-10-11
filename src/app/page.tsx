@@ -6,7 +6,7 @@ import { Metadata } from "next";
 import { Button } from "@/components/ui/button";
 
 interface Clinic {
-  id: number;
+  uuid: string;
   lokation: string;
   postnummer: string;
 }
@@ -33,7 +33,7 @@ async function fetchClinics() {
   const supabase = createClient();
   const { data, error } = await supabase
     .from("clinics")
-    .select("id, lokation, postnummer");
+    .select("uuid, lokation, postnummer");
 
   if (error) {
     console.error("Supabase error:", error);

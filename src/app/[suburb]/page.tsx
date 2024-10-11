@@ -7,7 +7,7 @@ import { deslugify, slugify } from "../utils/slugify";
 import { Metadata } from "next";
 
 interface Clinic {
-  id: number;
+  uuid: string;
   klinikNavn: string;
   antalBehandlere: number;
   ydernummer: string;
@@ -101,13 +101,13 @@ export default async function SuburbPage({
             </h1>
             <p className=" text-gray-600 mb-8 max-w-[800px]">
               Fysfinder hjælper dig med at finde den bedste fysioterapeut i{" "}
-              {suburbName}. Se anmeldelser, specialer, priser og meget mere så
-              du kan finde den perfekte fysioterapeut.
+              {suburbName}. Se anmeldelser, specialer, priser og find den
+              perfekte fysioterapeut.
             </p>
             <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
               {clinics.map((clinic) => (
                 <Link
-                  key={clinic.id}
+                  key={clinic.uuid}
                   href={`/${params.suburb}/${slugify(clinic.klinikNavn)}`}
                 >
                   <ClinicCard
