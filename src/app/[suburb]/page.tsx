@@ -7,7 +7,7 @@ import { deslugify, slugify } from "../utils/slugify";
 import { Metadata } from "next";
 
 interface Clinic {
-  uuid: string;
+  clinics_id: string;
   klinikNavn: string;
   antalBehandlere: number;
   ydernummer: string;
@@ -107,7 +107,7 @@ export default async function SuburbPage({
             <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
               {clinics.map((clinic) => (
                 <Link
-                  key={clinic.uuid}
+                  key={clinic.clinics_id}
                   href={`/${params.suburb}/${slugify(clinic.klinikNavn)}`}
                 >
                   <ClinicCard
