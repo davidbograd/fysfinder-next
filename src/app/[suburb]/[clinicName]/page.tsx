@@ -1,16 +1,14 @@
 import React from "react";
+import { MeetTheTeam } from "@/app/components/MeetTheTeam";
 import { createClient } from "@/app/utils/supabase/server";
 import { Breadcrumbs } from "@/app/components/Breadcrumbs";
-import { deslugify } from "../../utils/slugify";
-import {
-  StarIcon,
-  PhoneIcon,
-  EnvelopeIcon,
-  MapPinIcon,
-  GlobeAltIcon,
-} from "@heroicons/react/24/solid";
+import { StarIcon, CheckIcon } from "@heroicons/react/24/solid";
 import GoogleMap from "../../components/GoogleMap";
 import { Metadata } from "next";
+import Image from "next/image";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Check, Phone, Globe, Mail } from "lucide-react";
 
 interface Clinic {
   clinics_id: string; // Changed from uuid: string
@@ -39,6 +37,8 @@ interface Clinic {
   holdtræning: string;
   hjemmetræning: string;
   klinikNavnSlug: string;
+  postnummer: number;
+  northstar: boolean;
 }
 
 async function fetchClinicBySlug(
@@ -101,114 +101,299 @@ export default async function ClinicPage({
       { text: clinic.klinikNavn },
     ];
 
+    const specialer = [
+      "Ryg",
+      "Nakke",
+      "Skulder",
+      "Idrætsskader",
+      "Længerevarende smerter",
+      "Træning",
+    ];
+    const ekstraYdelser = [
+      "Akupunktur",
+      "Ultralyd",
+      "Shockwave",
+      "Indlægssåler",
+      "Personlig træning",
+      "Online coaching",
+    ];
+
+    const insuranceCompanies = [
+      "PFA",
+      "Skandia",
+      "Mølhom",
+      "Dansk Sundhedssikring",
+      "Top Danmark",
+      "PrivatSikring",
+      "Tryg",
+      "PensionDanmark",
+      "Danica",
+      "Falck Healthcare",
+      "Nordic Netcare",
+      "Codan",
+    ];
+
     return (
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 py-8">
         <Breadcrumbs items={breadcrumbItems} />
 
-        <h1 className="text-3xl font-bold mb-2">{clinic.klinikNavn}</h1>
-        <div className="flex items-center mb-6">
-          <StarIcon className="h-6 w-6 text-amber-500 mr-1" />
-          <span className="font-semibold mr-2">
-            {clinic.avgRating != null ? clinic.avgRating.toFixed(1) : "N/A"}
-          </span>
-          <span className="text-gray-500">
-            ({clinic.ratingCount} anmeldelser)
-          </span>
-        </div>
+        <div className="flex flex-col lg:flex-row gap-16">
+          {/* Main content (3/5 width on large screens) */}
+          <div className="lg:w-3/5">
+            <h1 className="text-3xl font-bold mb-2">{clinic.klinikNavn}</h1>
+            <p className="text-gray-500 mb-2">
+              {clinic.adresse}, {clinic.postnummer} {clinic.lokation}
+            </p>
+            <div className="flex items-center mb-10">
+              <StarIcon className="h-6 w-6 text-amber-500 mr-2" />
+              <span className="font-semibold mr-2">
+                {clinic.avgRating != null ? clinic.avgRating.toFixed(1) : "N/A"}
+              </span>
+              <span className="text-gray-500">
+                ({clinic.ratingCount} anmeldelser)
+              </span>
+            </div>
 
-        <div className="mb-6">
-          <div className="flex flex-col space-y-2">
-            <div className="flex items-center">
-              <MapPinIcon className="h-6 w-6 text-gray-400 mr-2" />
-              <p>
-                {clinic.adresse}, {clinic.lokation}
-              </p>
-            </div>
-            <div className="flex items-center">
-              <GlobeAltIcon className="h-6 w-6 text-gray-400 mr-2" />
-              <a
-                href={clinic.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-logo-blue hover:underline"
-              >
-                {clinic.website}
-              </a>
-            </div>
-            <div className="flex items-center">
-              <PhoneIcon className="h-6 w-6 text-gray-400 mr-2" />
-              <span>{clinic.tlf}</span>
-            </div>
-            <div className="flex items-center">
-              <EnvelopeIcon className="h-6 w-6 text-gray-400 mr-2" />
-              <span>{clinic.email}</span>
-            </div>
-          </div>
-        </div>
+            {/* Jump link for mobile */}
+            <Button
+              variant="secondary"
+              className="block lg:hidden mb-8"
+              asChild
+            >
+              <a href="#contact-info">Se kontakt information</a>
+            </Button>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          <div>
-            <h2 className="text-2xl font-semibold mb-6">Priser</h2>
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <span>Første konsult (60 min)</span>
-                <span className="font-semibold">{clinic.førsteKons} kr</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span>Standard konsult (60 min)</span>
-                <span className="font-semibold">{clinic.opfølgning} kr</span>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <h2 className="text-2xl font-semibold mb-6">Åbningstider</h2>
-            <div className="space-y-2">
-              {[
-                "Mandag",
-                "Tirsdag",
-                "Onsdag",
-                "Torsdag",
-                "Fredag",
-                "Lørdag",
-                "Søndag",
-              ].map((day) => (
-                <div key={day} className="flex items-center justify-between">
-                  <span>{day}</span>
-                  <span className="font-semibold">
-                    {clinic[day.toLowerCase() as keyof typeof clinic]}
-                  </span>
+            {/* Priser section */}
+            <section className="py-8 border-b border-gray-200">
+              <h2 className="text-2xl font-semibold mb-4">Priser</h2>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <span>Første konsult (60 min)</span>
+                  <span className="font-semibold">{clinic.førsteKons} kr</span>
                 </div>
-              ))}
-            </div>
+                <div className="flex items-center justify-between">
+                  <span>Standard konsult (60 min)</span>
+                  <span className="font-semibold">{clinic.opfølgning} kr</span>
+                </div>
+              </div>
+            </section>
+
+            {clinic.northstar && (
+              <>
+                <MeetTheTeam />
+
+                {/* Specialer section */}
+                <section className="py-8 border-b border-gray-200">
+                  <h2 className="text-2xl font-semibold mb-2">Specialer</h2>
+                  <p className="mb-4">
+                    {clinic.klinikNavn} er ekstra gode til følgende
+                    fysioterapeut discipliner
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {specialer.map((speciale) => (
+                      <Badge
+                        key={speciale}
+                        variant="secondary"
+                        className="text-sm"
+                      >
+                        {speciale}
+                      </Badge>
+                    ))}
+                  </div>
+                </section>
+
+                {/* Forsikring */}
+                <section className="py-8 border-b border-gray-200">
+                  <h2 className="text-2xl font-semibold mb-4">Forsikring</h2>
+                  <p className="mb-4">
+                    {clinic.klinikNavn} samarbejder med følgende
+                    forsikringsselskaber:
+                  </p>
+                  <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+                    {insuranceCompanies.map((company) => (
+                      <li key={company} className="flex items-center">
+                        <Check className="w-5 h-5 text-green-500 mr-2" />
+                        <span>{company}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+
+                {/* Ekstra ydelser section */}
+                <section className="py-8 border-b border-gray-200">
+                  <h2 className="text-2xl font-semibold mb-2">
+                    Ekstra ydelser
+                  </h2>
+
+                  <div className="flex flex-wrap gap-2">
+                    {ekstraYdelser.map((ydelse) => (
+                      <Badge
+                        key={ydelse}
+                        variant="secondary"
+                        className="text-sm"
+                      >
+                        {ydelse}
+                      </Badge>
+                    ))}
+                  </div>
+                </section>
+              </>
+            )}
+
+            {/* Åbningstider section */}
+            <section className="py-8">
+              <h2 className="text-2xl font-semibold mb-4">
+                Åbningstider og adgang
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div>
+                  <div className="space-y-2">
+                    {[
+                      "Mandag",
+                      "Tirsdag",
+                      "Onsdag",
+                      "Torsdag",
+                      "Fredag",
+                      "Lørdag",
+                      "Søndag",
+                    ].map((day) => (
+                      <div
+                        key={day}
+                        className="flex items-center justify-between"
+                      >
+                        <span>{day}</span>
+                        <span className="font-semibold">
+                          {clinic[day.toLowerCase() as keyof typeof clinic]}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span>Parkering</span>
+                      <span className="font-semibold">{clinic.parkering}</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span>Handicap adgang</span>
+                      <span className="font-semibold">
+                        {clinic.handicapadgang}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Google Maps location section */}
+            <section className="py-8 border-b border-gray-200">
+              <h2 className="text-2xl font-semibold mb-6">Lokation</h2>
+              <GoogleMap address={`${clinic.adresse}, ${clinic.lokation}`} />
+            </section>
+
+            {/* Om */}
+            {clinic.northstar && (
+              <section className="py-8 border-b border-gray-200">
+                <h2 className="text-2xl font-semibold mb-2">
+                  Om {clinic.klinikNavn}
+                </h2>
+                <p className="text-gray-600">
+                  Som patient hos os, kan du forvente et professionelt
+                  behandlingsforløb, med behandling som er videnskabeligt og
+                  klinisk dokumenteret. Du bydes ind til nye og moderne
+                  omgivelser med en rolig og behagelig stemning, hvor du bliver
+                  sat i centrum.
+                </p>
+              </section>
+            )}
           </div>
 
-          <div>
-            <h2 className="text-2xl font-semibold mb-6">Andet</h2>
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <span>Parkering</span>
-                <span className="font-semibold">{clinic.parkering}</span>
+          {/* Sticky sidebar (2/5 width on large screens) */}
+          <div className="lg:w-2/5">
+            <div
+              id="contact-info"
+              className="sticky top-4 bg-white p-6 rounded-lg shadow-md"
+            >
+              <div className="flex items-center mb-4">
+                {/* Circular logo placeholder */}
+                {/* You can replace this with an actual image later */}
+                {clinic.northstar && (
+                  <Image
+                    src="/fysiopuls-logo.jpg"
+                    alt="Clinic logo"
+                    width={64}
+                    height={64}
+                    className="rounded-lg flex-shrink-0 mr-4"
+                  />
+                )}
+                <div>
+                  <h2 className="text-xl font-bold">{clinic.klinikNavn}</h2>
+                  <div className="flex items-center mt-1">
+                    <StarIcon className="h-5 w-5 text-amber-500 mr-2" />
+                    <span className="font-semibold mr-2">
+                      {clinic.avgRating != null
+                        ? clinic.avgRating.toFixed(1)
+                        : "N/A"}
+                    </span>
+                    <span className="text-gray-500 text-sm">
+                      ({clinic.ratingCount} anmeldelser)
+                    </span>
+                  </div>
+                </div>
               </div>
-              <div className="flex items-center justify-between">
-                <span>Handicap adgang</span>
-                <span className="font-semibold">{clinic.handicapadgang}</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span>Holdtræning</span>
-                <span className="font-semibold">{clinic.holdtræning}</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span>Hjemmetræning</span>
-                <span className="font-semibold">{clinic.hjemmetræning}</span>
+              <div className="space-y-4 mt-6">
+                {clinic.northstar && (
+                  <Button className="w-full mb-4" variant="default" asChild>
+                    <a
+                      href="https://application.complimentawork.dk/CamClientPortal/CamClientPortal.html?clinic=00000A00CA04000007D404000000016B027EE85F66BAA6BB"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Book tid
+                    </a>
+                  </Button>
+                )}
+                <div className="space-y-2">
+                  <Button
+                    variant="outline"
+                    className="w-full flex items-center justify-start"
+                    asChild
+                  >
+                    <a
+                      href={clinic.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Globe className="mr-2 h-4 w-4 text-gray-400" />
+                      <span>{clinic.website}</span>
+                    </a>
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className="w-full flex items-center justify-start"
+                    asChild
+                  >
+                    <a href={`tel:${clinic.tlf}`}>
+                      <Phone className="mr-2 h-4 w-4 text-gray-400" />
+                      {clinic.tlf}
+                    </a>
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className="w-full flex items-center justify-start"
+                    asChild
+                  >
+                    <a href={`mailto:${clinic.email}`}>
+                      <Mail className="mr-2 h-4 w-4 text-gray-400" />
+                      <span className="truncate">{clinic.email}</span>
+                    </a>
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-
-        <div className="mb-16">
-          <h2 className="text-2xl font-semibold mb-6">Lokation</h2>
-          <GoogleMap address={`${clinic.adresse}, ${clinic.lokation}`} />
         </div>
       </div>
     );

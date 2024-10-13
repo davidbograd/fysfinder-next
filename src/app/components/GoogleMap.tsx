@@ -16,7 +16,7 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ address }) => {
   return (
     <iframe
       width="100%"
-      height="450"
+      height="360"
       style={{ border: 0 }}
       loading="lazy"
       allowFullScreen
