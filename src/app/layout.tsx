@@ -26,8 +26,9 @@ export const metadata: Metadata = {
     title: "FysFinder",
   },
   openGraph: {
-    title: "FysFinder",
-    description: "Find den bedste fysioterapeut",
+    title: "FysFinder - Find den bedste fysioterapeut",
+    description:
+      "Se anmeldelser, specialer, priser og meget mere fra danske fysioterapeuter",
     images: [
       {
         url: "/opengraph-fysfinder.jpg",
