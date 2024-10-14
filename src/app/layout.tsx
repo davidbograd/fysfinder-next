@@ -25,6 +25,19 @@ export const metadata: Metadata = {
   appleWebApp: {
     title: "FysFinder",
   },
+  openGraph: {
+    title: "FysFinder",
+    description: "Find den bedste fysioterapeut",
+    images: [
+      {
+        url: "/opengraph-fysfinder.jpg",
+        width: 1200,
+        height: 630,
+        alt: "FysFinder - Find den bedste fysioterapeut",
+      },
+    ],
+    type: "website",
+  },
 };
 
 export default function RootLayout({
