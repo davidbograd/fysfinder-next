@@ -8,7 +8,22 @@ export const metadata: Metadata = {
   title: "FysFinder",
   description: "Find den bedste fysioterapeut",
   icons: {
-    icon: "/favicon.ico", // /public/favicon.ico
+    icon: [
+      { url: "/favicon/favicon-48x48.png", sizes: "48x48", type: "image/png" },
+      { url: "/favicon/favicon.svg", type: "image/svg+xml" },
+    ],
+    shortcut: "/favicon/favicon.ico",
+    apple: [
+      {
+        url: "/favicon/apple-touch-icon.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
+    ],
+  },
+  manifest: "/favicon/site.webmanifest",
+  appleWebApp: {
+    title: "FysFinder",
   },
 };
 
