@@ -10,7 +10,7 @@ interface Clinic {
   clinics_id: string;
   klinikNavn: string;
   antalBehandlere: number;
-  ydernummer: string;
+  ydernummer: boolean;
   avgRating: number;
   ratingCount: number;
   lokation: string;

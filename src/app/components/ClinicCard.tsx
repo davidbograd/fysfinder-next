@@ -5,7 +5,7 @@ import { XMarkIcon } from "@heroicons/react/24/solid";
 interface Props {
   klinikNavn: string;
   antalBehandlere: number;
-  ydernummer: string;
+  ydernummer: boolean;
   avgRating: number;
   ratingCount: number;
 }
@@ -18,11 +18,11 @@ const ClinicCard: React.FC<Props> = ({
   ratingCount,
 }) => {
   const getYdernummerIcon = () => {
-    if (ydernummer === "Ja")
+    if (ydernummer) {
       return <CheckIcon className="size-6 text-green-600" />;
-    if (ydernummer === "Nej")
+    } else {
       return <XMarkIcon className="size-6 text-red-500" />;
-    return <p>?</p>;
+    }
   };
 
   return (

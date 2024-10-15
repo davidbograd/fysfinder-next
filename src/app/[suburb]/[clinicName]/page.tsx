@@ -8,7 +8,7 @@ import { Metadata } from "next";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Check, Phone, Globe, Mail } from "lucide-react";
+import { Check, Phone, Globe, Mail, X } from "lucide-react";
 import { EmailButton } from "@/components/EmailButton";
 import { PhoneButton } from "@/components/PhoneButton";
 
@@ -16,7 +16,7 @@ interface Clinic {
   clinics_id: string; // Changed from uuid: string
   klinikNavn: string;
   antalBehandlere: number;
-  ydernummer: string;
+  ydernummer: boolean;
   avgRating: number;
   ratingCount: number;
   lokation: string;
@@ -168,6 +168,19 @@ export default async function ClinicPage({
             {/* Priser section */}
             <section className="py-8 border-b border-gray-200">
               <h2 className="text-2xl font-semibold mb-4">Priser</h2>
+              <div className="flex items-center mb-2">
+                <span className="mr-2">Ydernummer</span>
+                {clinic.ydernummer ? (
+                  <Check className="w-5 h-5 text-green-500" />
+                ) : (
+                  <X className="w-5 h-5 text-red-500" />
+                )}
+              </div>
+              <p className="text-sm text-gray-600 mb-4">
+                {clinic.ydernummer
+                  ? `${clinic.klinikNavn} har ydernummer og tilbyder behandling med tilskud fra den offentlige sygesikring.`
+                  : `${clinic.klinikNavn} har ikke ydernummer og tilbyder kun behandling uden tilskud fra den offentlige sygesikring.`}
+              </p>
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <span>Første konsult (60 min)</span>
