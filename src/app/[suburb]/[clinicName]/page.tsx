@@ -9,6 +9,8 @@ import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Check, Phone, Globe, Mail } from "lucide-react";
+import { EmailButton } from "@/components/EmailButton";
+import { PhoneButton } from "@/components/PhoneButton";
 
 interface Clinic {
   clinics_id: string; // Changed from uuid: string
@@ -349,7 +351,7 @@ export default async function ClinicPage({
                     <a
                       href="https://application.complimentawork.dk/CamClientPortal/CamClientPortal.html?clinic=00000A00CA04000007D404000000016B027EE85F66BAA6BB"
                       target="_blank"
-                      rel="noopener noreferrer"
+                      rel="noopener"
                     >
                       Book tid
                     </a>
@@ -361,35 +363,13 @@ export default async function ClinicPage({
                     className="w-full flex items-center justify-start"
                     asChild
                   >
-                    <a
-                      href={clinic.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
+                    <a href={clinic.website} target="_blank" rel="noopener">
                       <Globe className="mr-2 h-4 w-4 text-gray-400" />
                       <span>{clinic.website}</span>
                     </a>
                   </Button>
-                  <Button
-                    variant="outline"
-                    className="w-full flex items-center justify-start"
-                    asChild
-                  >
-                    <a href={`tel:${clinic.tlf}`}>
-                      <Phone className="mr-2 h-4 w-4 text-gray-400" />
-                      {clinic.tlf}
-                    </a>
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="w-full flex items-center justify-start"
-                    asChild
-                  >
-                    <a href={`mailto:${clinic.email}`}>
-                      <Mail className="mr-2 h-4 w-4 text-gray-400" />
-                      <span className="truncate">{clinic.email}</span>
-                    </a>
-                  </Button>
+                  <PhoneButton phoneNumber={clinic.tlf} />
+                  <EmailButton email={clinic.email} />
                 </div>
               </div>
             </div>
