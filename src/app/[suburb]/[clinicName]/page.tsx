@@ -170,16 +170,14 @@ export default async function ClinicPage({
               <h2 className="text-2xl font-semibold mb-4">Priser</h2>
               <div className="flex items-center mb-2">
                 <span className="mr-2">Ydernummer</span>
-                {clinic.ydernummer ? (
+                {clinic.ydernummer && (
                   <Check className="w-5 h-5 text-green-500" />
-                ) : (
-                  <X className="w-5 h-5 text-red-500" />
                 )}
               </div>
               <p className="text-sm text-gray-600 mb-4">
                 {clinic.ydernummer
                   ? `${clinic.klinikNavn} har ydernummer og tilbyder behandling med tilskud fra den offentlige sygesikring.`
-                  : `${clinic.klinikNavn} har ikke ydernummer og tilbyder kun behandling uden tilskud fra den offentlige sygesikring.`}
+                  : `${clinic.klinikNavn} har ikke ydernummer og kræver ingen henvisning.`}
               </p>
               <div className="space-y-2">
                 <div className="flex items-center justify-between">

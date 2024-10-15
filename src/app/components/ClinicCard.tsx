@@ -1,6 +1,5 @@
 import { StarIcon } from "@heroicons/react/24/solid";
 import { CheckIcon } from "@heroicons/react/24/solid";
-import { XMarkIcon } from "@heroicons/react/24/solid";
 
 interface Props {
   klinikNavn: string;
@@ -17,14 +16,6 @@ const ClinicCard: React.FC<Props> = ({
   avgRating,
   ratingCount,
 }) => {
-  const getYdernummerIcon = () => {
-    if (ydernummer) {
-      return <CheckIcon className="size-6 text-green-600" />;
-    } else {
-      return <XMarkIcon className="size-6 text-red-500" />;
-    }
-  };
-
   return (
     <div className="p-4 rounded-md border hover:shadow-lg transition-shadow duration-200">
       <h2 className="text-logo-blue text-lg font-semibold mb-2">
@@ -47,10 +38,12 @@ const ClinicCard: React.FC<Props> = ({
         >
           {antalBehandlere === null ? "?" : antalBehandlere} behandlere
         </p>
-        <div className="flex items-center">
-          <span className="mr-1 text-sm">Ydernummer</span>
-          {getYdernummerIcon()}
-        </div>
+        {ydernummer && (
+          <div className="flex items-center">
+            <span className="mr-1 text-sm">Ydernummer</span>
+            <CheckIcon className="size-5 text-green-600" />
+          </div>
+        )}
       </div>
     </div>
   );
