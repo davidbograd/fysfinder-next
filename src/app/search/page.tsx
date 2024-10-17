@@ -79,7 +79,7 @@ export default async function SearchPage({
             ))}
           </ul>
         ) : (
-          <p>No clinics found matching "{searchTerm}"</p>
+          <p>No clinics found matching &quot;{searchTerm}&quot;</p>
         )
       ) : null}
     </div>
