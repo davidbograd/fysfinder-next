@@ -1,7 +1,9 @@
 import React from "react";
 import { createClient } from "@/app/utils/supabase/server";
 import Link from "next/link";
-import { slugify } from "@/app/utils/slugify";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 interface Clinic {
   clinics_id: string;
@@ -47,37 +49,38 @@ export default async function SearchPage({
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-4">Search Clinics</h1>
-      <form className="mb-8">
-        <input
+      <form className="mb-8 space-y-4">
+        <Input
           type="text"
           name="q"
           defaultValue={searchTerm}
           placeholder="Search for a clinic..."
-          className="w-full p-2 border rounded"
+          className="w-full"
         />
-        <button
-          type="submit"
-          className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-        >
+        <Button type="submit" className="w-full">
           Search
-        </button>
+        </Button>
       </form>
       {errorMessage ? (
         <p className="text-red-500">Error: {errorMessage}</p>
       ) : searchTerm ? (
         clinics.length > 0 ? (
-          <ul className="space-y-4">
+          <div className="space-y-4">
             {clinics.map((clinic) => (
-              <li key={clinic.clinics_id} className="border p-4 rounded">
-                <Link
-                  href={`/${clinic.lokationSlug}/${clinic.klinikNavnSlug}`}
-                  className="text-blue-500 hover:underline"
-                >
-                  {clinic.klinikNavn}
-                </Link>
-              </li>
+              <Card key={clinic.clinics_id}>
+                <CardHeader>
+                  <CardTitle>
+                    <Link
+                      href={`/${clinic.lokationSlug}/${clinic.klinikNavnSlug}`}
+                      className="text-blue-500 hover:underline"
+                    >
+                      {clinic.klinikNavn}
+                    </Link>
+                  </CardTitle>
+                </CardHeader>
+              </Card>
             ))}
-          </ul>
+          </div>
         ) : (
           <p>No clinics found matching &quot;{searchTerm}&quot;</p>
         )
