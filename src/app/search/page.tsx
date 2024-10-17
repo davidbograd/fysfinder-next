@@ -3,7 +3,7 @@ import { createClient } from "@/app/utils/supabase/server";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface Clinic {
   clinics_id: string;
@@ -21,8 +21,8 @@ async function searchClinics(searchTerm: string): Promise<Clinic[]> {
     .order("klinikNavn", { ascending: true });
 
   if (error) {
-    console.error("Supabase error:", error);
-    throw new Error(`Failed to search clinics: ${error.message}`);
+    console.error("Supabase fejl:", error);
+    throw new Error(`Kunne ikke søge efter klinikker: ${error.message}`);
   }
 
   return data || [];
@@ -41,28 +41,28 @@ export default async function SearchPage({
     try {
       clinics = await searchClinics(searchTerm);
     } catch (error) {
-      console.error("Error in SearchPage:", error);
+      console.error("Fejl i SøgeSide:", error);
       errorMessage = (error as Error).message;
     }
   }
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-4">Search Clinics</h1>
+      <h1 className="text-3xl font-bold mb-4">Søg efter klinikker</h1>
       <form className="mb-8 space-y-4">
         <Input
           type="text"
           name="q"
           defaultValue={searchTerm}
-          placeholder="Search for a clinic..."
+          placeholder="Søg efter en klinik..."
           className="w-full"
         />
         <Button type="submit" className="w-full">
-          Search
+          Søg
         </Button>
       </form>
       {errorMessage ? (
-        <p className="text-red-500">Error: {errorMessage}</p>
+        <p className="text-red-500">Fejl: {errorMessage}</p>
       ) : searchTerm ? (
         clinics.length > 0 ? (
           <div className="space-y-4">
@@ -82,7 +82,7 @@ export default async function SearchPage({
             ))}
           </div>
         ) : (
-          <p>No clinics found matching &quot;{searchTerm}&quot;</p>
+          <p>Ingen klinikker fundet der matcher &quot;{searchTerm}&quot;</p>
         )
       ) : null}
     </div>
