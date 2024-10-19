@@ -12,6 +12,11 @@ import { Check, Phone, Globe, Mail, X } from "lucide-react";
 import { EmailButton } from "@/components/EmailButton";
 import { PhoneButton } from "@/components/PhoneButton";
 
+interface Specialty {
+  specialty_id: string;
+  specialty_name: string;
+}
+
 interface Clinic {
   clinics_id: string; // Changed from uuid: string
   klinikNavn: string;
@@ -41,6 +46,7 @@ interface Clinic {
   klinikNavnSlug: string;
   postnummer: number;
   northstar: boolean;
+  specialties: Specialty[];
 }
 
 async function fetchClinicBySlug(
@@ -50,7 +56,14 @@ async function fetchClinicBySlug(
   const supabase = createClient();
   const { data, error } = await supabase
     .from("clinics")
-    .select("*")
+    .select(
+      `
+      *,
+      specialties:clinic_specialties(
+        specialty:specialties(specialty_id, specialty_name)
+      )
+    `
+    )
     .eq("lokationSlug", suburbSlug)
     .eq("klinikNavnSlug", clinicSlug)
     .single();
@@ -60,6 +73,11 @@ async function fetchClinicBySlug(
     throw new Error(
       `Failed to fetch clinic: ${error.message}. Slug was ${clinicSlug}`
     );
+  }
+
+  if (data) {
+    // Flatten the specialties array
+    data.specialties = data.specialties.map((item: any) => item.specialty);
   }
 
   return data;
@@ -103,14 +121,7 @@ export default async function ClinicPage({
       { text: clinic.klinikNavn },
     ];
 
-    const specialer = [
-      "Ryg",
-      "Nakke",
-      "Skulder",
-      "Idrætsskader",
-      "Længerevarende smerter",
-      "Træning",
-    ];
+    // Remove the hardcoded specialer array
     const ekstraYdelser = [
       "Akupunktur",
       "Ultralyd",
@@ -133,6 +144,26 @@ export default async function ClinicPage({
       "Falck Healthcare",
       "Nordic Netcare",
       "Codan",
+    ];
+
+    const dayMapping: { [key: string]: keyof Clinic } = {
+      Mandag: "mandag",
+      Tirsdag: "tirsdag",
+      Onsdag: "onsdag",
+      Torsdag: "torsdag",
+      Fredag: "fredag",
+      Lørdag: "lørdag",
+      Søndag: "søndag",
+    };
+
+    const openingHours = [
+      { day: "Mandag", hours: clinic.mandag },
+      { day: "Tirsdag", hours: clinic.tirsdag },
+      { day: "Onsdag", hours: clinic.onsdag },
+      { day: "Torsdag", hours: clinic.torsdag },
+      { day: "Fredag", hours: clinic.fredag },
+      { day: "Lørdag", hours: clinic.lørdag },
+      { day: "Søndag", hours: clinic.søndag },
     ];
 
     return (
@@ -203,13 +234,13 @@ export default async function ClinicPage({
                     fysioterapeut discipliner
                   </p>
                   <div className="flex flex-wrap gap-2">
-                    {specialer.map((speciale) => (
+                    {clinic.specialties.map((specialty) => (
                       <Badge
-                        key={speciale}
+                        key={specialty.specialty_id}
                         variant="secondary"
                         className="text-sm"
                       >
-                        {speciale}
+                        {specialty.specialty_name}
                       </Badge>
                     ))}
                   </div>
@@ -253,43 +284,29 @@ export default async function ClinicPage({
               </>
             )}
 
-            {/* Åbningstider section */}
-            <section className="py-8">
+            {/* Åbningstider og adgang section */}
+            <section className="py-8 border-b border-gray-200">
               <h2 className="text-2xl font-semibold mb-4">
                 Åbningstider og adgang
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
                   <div className="space-y-2">
-                    {[
-                      "Mandag",
-                      "Tirsdag",
-                      "Onsdag",
-                      "Torsdag",
-                      "Fredag",
-                      "Lørdag",
-                      "Søndag",
-                    ].map((day) => (
-                      <div
-                        key={day}
-                        className="flex items-center justify-between"
-                      >
+                    {openingHours.map(({ day, hours }) => (
+                      <div key={day} className="flex justify-between">
                         <span>{day}</span>
-                        <span className="font-semibold">
-                          {clinic[day.toLowerCase() as keyof typeof clinic]}
-                        </span>
+                        <span className="font-semibold">{hours}</span>
                       </div>
                     ))}
                   </div>
                 </div>
-
                 <div>
                   <div className="space-y-2">
-                    <div className="flex items-center justify-between">
+                    <div className="flex justify-between">
                       <span>Parkering</span>
                       <span className="font-semibold">{clinic.parkering}</span>
                     </div>
-                    <div className="flex items-center justify-between">
+                    <div className="flex justify-between">
                       <span>Handicap adgang</span>
                       <span className="font-semibold">
                         {clinic.handicapadgang}
