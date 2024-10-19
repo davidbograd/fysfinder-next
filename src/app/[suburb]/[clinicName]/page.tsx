@@ -222,13 +222,13 @@ export default async function ClinicPage({
               </div>
             </section>
 
-            {clinic.northstar && (
-              <>
-                <MeetTheTeam />
+            {clinic.northstar && <MeetTheTeam />}
 
-                {/* Specialer section */}
-                <section className="py-8 border-b border-gray-200">
-                  <h2 className="text-2xl font-semibold mb-2">Specialer</h2>
+            {/* Specialer section - now always visible */}
+            <section className="py-8 border-b border-gray-200">
+              <h2 className="text-2xl font-semibold mb-2">Specialer</h2>
+              {clinic.specialties && clinic.specialties.length > 0 ? (
+                <>
                   <p className="mb-4">
                     {clinic.klinikNavn} er ekstra gode til følgende
                     fysioterapeut discipliner
@@ -244,8 +244,16 @@ export default async function ClinicPage({
                       </Badge>
                     ))}
                   </div>
-                </section>
+                </>
+              ) : (
+                <p className="text-gray-600">
+                  Denne klinik har ikke tilføjet nogen specialer endnu.
+                </p>
+              )}
+            </section>
 
+            {clinic.northstar && (
+              <>
                 {/* Forsikring */}
                 <section className="py-8 border-b border-gray-200">
                   <h2 className="text-2xl font-semibold mb-4">Forsikring</h2>
@@ -323,7 +331,6 @@ export default async function ClinicPage({
               <GoogleMap address={`${clinic.adresse}, ${clinic.lokation}`} />
             </section>
 
-            {/* Om */}
             {clinic.northstar && (
               <section className="py-8 border-b border-gray-200">
                 <h2 className="text-2xl font-semibold mb-2">
