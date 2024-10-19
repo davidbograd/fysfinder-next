@@ -224,7 +224,7 @@ export default async function ClinicPage({
 
             {clinic.northstar && <MeetTheTeam />}
 
-            {/* Specialer section - now always visible */}
+            {/* Specialer section */}
             <section className="py-8 border-b border-gray-200">
               <h2 className="text-2xl font-semibold mb-2">Specialer</h2>
               {clinic.specialties && clinic.specialties.length > 0 ? (
