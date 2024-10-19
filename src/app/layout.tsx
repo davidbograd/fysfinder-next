@@ -3,6 +3,7 @@ import "./globals.css";
 import { GeistSans } from "geist/font/sans";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "FysFinder",
@@ -56,21 +57,18 @@ export default function RootLayout({
           </div>
         </main>
         <Footer />
-        {/* Google tag (gtag.js) */}
-        <script
-          async
+        <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-BH38ZB6HYH"
+          strategy="afterInteractive"
         />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-BH38ZB6HYH');
-            `,
-          }}
-        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-BH38ZB6HYH');
+          `}
+        </Script>
       </body>
     </html>
   );
