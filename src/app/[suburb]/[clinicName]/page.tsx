@@ -247,7 +247,7 @@ export default async function ClinicPage({
                 </>
               ) : (
                 <p className="text-gray-600">
-                  Denne klinik har ikke tilføjet nogen specialer endnu.
+                  Denne klinik har ikke tilføjet nogen specialer endnu.!!
                 </p>
               )}
             </section>
