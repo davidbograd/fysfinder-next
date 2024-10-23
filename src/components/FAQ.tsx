@@ -38,7 +38,9 @@ const faqItems = [
 export function FAQ() {
   return (
     <section className="mb-12 mt-16">
-      <h2 className="text-2xl font-bold mb-4">Ofte stillede spørgsmål</h2>
+      <h2 className="text-2xl font-bold mb-4">
+        Ofte stillede spørgsmål omkring fysioterapeuter
+      </h2>
       <Accordion type="single" collapsible className="w-full">
         {faqItems.map((item, index) => (
           <AccordionItem key={index} value={`item-${index}`}>
