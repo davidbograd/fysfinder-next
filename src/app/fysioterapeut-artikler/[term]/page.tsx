@@ -1,6 +1,7 @@
 import { GlossaryEntry } from "@/components/GlossaryEntry";
 import { getGlossaryTerm, getGlossaryTerms } from "@/lib/glossary";
 import { Breadcrumbs } from "@/app/components/Breadcrumbs";
+import { Metadata } from "next";
 
 export async function generateStaticParams() {
   const terms = await getGlossaryTerms();
@@ -13,11 +14,11 @@ export async function generateMetadata({
   params,
 }: {
   params: { term: string };
-}) {
+}): Promise<Metadata> {
   const term = await getGlossaryTerm(params.term);
   return {
     title: `${term.title} | Fysioterapeut Artikler`,
-    description: `Lær mere om ${term.title} i vores fysioterapeut artikler.`,
+    description: term.description,
   };
 }
 
@@ -36,8 +37,6 @@ export default async function ArticlePage({
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-2xl mx-auto">
-        {" "}
-        {/* Added this wrapper div */}
         <Breadcrumbs items={breadcrumbItems} />
         <GlossaryEntry term={term} />
       </div>

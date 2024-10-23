@@ -13,6 +13,7 @@ export async function getGlossaryTerms() {
       return {
         slug: file.replace(/\.md$/, ""),
         title: data.title,
+        description: data.description,
       };
     })
   );
@@ -33,6 +34,7 @@ export async function getGlossaryTerm(slug: string) {
   return {
     slug,
     title: data.title,
+    description: data.description,
     content: processedContent,
   };
 }
