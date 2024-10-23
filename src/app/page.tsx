@@ -4,6 +4,13 @@ import { slugify } from "./utils/slugify";
 import { createClient } from "@/app/utils/supabase/server";
 import { Metadata } from "next";
 import { Button } from "@/components/ui/button";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { FAQ } from "@/components/FAQ";
 
 interface Clinic {
   clinics_id: string;
@@ -144,6 +151,7 @@ export default async function HomePage() {
           {regionData.map((region) => (
             <RegionSection key={region.name} region={region} />
           ))}
+          <FAQ />
         </div>
       </div>
     );
