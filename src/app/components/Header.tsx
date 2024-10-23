@@ -10,9 +10,19 @@ export default function Header() {
           <SiteLogo />
         </Link>
         <nav className="flex items-center space-x-6">
+          <Link href="/" className="text-gray-600 hover:text-gray-900">
+            Find fysioterapeut
+          </Link>
+          <Link
+            href="/fysioterapeut-artikler"
+            className="text-gray-600 hover:text-gray-900"
+          >
+            Artikler
+          </Link>
           {/* <Link href="/om-os" className="text-gray-600 hover:text-gray-900">
             Om os
-          </Link>
+          </Link> */}
+          {/* 
           <Button variant="default" asChild>
             <Link href="/tilfoej-klinik">Tilføj din klinik</Link>
           </Button> */}
