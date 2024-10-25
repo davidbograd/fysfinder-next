@@ -47,6 +47,7 @@ interface Clinic {
   postnummer: number;
   northstar: boolean;
   specialties: Specialty[];
+  om_os: string | null;
 }
 
 async function fetchClinicBySlug(
@@ -331,20 +332,20 @@ export default async function ClinicPage({
               <GoogleMap address={`${clinic.adresse}, ${clinic.lokation}`} />
             </section>
 
-            {clinic.northstar && (
-              <section className="py-8 border-b border-gray-200">
-                <h2 className="text-2xl font-semibold mb-2">
-                  Om {clinic.klinikNavn}
-                </h2>
+            {/* Update the "Om clinicNavn" section */}
+            <section className="py-8 border-b border-gray-200">
+              <h2 className="text-2xl font-semibold mb-2">
+                Om {clinic.klinikNavn}
+              </h2>
+              {clinic.om_os ? (
+                <p className="text-gray-600">{clinic.om_os}</p>
+              ) : (
                 <p className="text-gray-600">
-                  Som patient hos os, kan du forvente et professionelt
-                  behandlingsforløb, med behandling som er videnskabeligt og
-                  klinisk dokumenteret. Du bydes ind til nye og moderne
-                  omgivelser med en rolig og behagelig stemning, hvor du bliver
-                  sat i centrum.
+                  Vi har desværre ikke en beskrivelse af {clinic.klinikNavn}{" "}
+                  endnu.
                 </p>
-              </section>
-            )}
+              )}
+            </section>
           </div>
 
           {/* Sticky sidebar (2/5 width on large screens) */}
