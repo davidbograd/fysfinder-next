@@ -3,7 +3,7 @@ title: "Hælspore: Årsager, Symptomer og Behandlingsmuligheder"
 description: "Lær alt om hælspore, dens årsager, symptomer og effektive behandlingsmuligheder. En omfattende guide til at forstå og håndtere denne almindelige fodlidelse."
 ---
 
-KORT: Hælspore, ofte kaldet fasciitis plantaris, er en almindelig problematik, der rammer mange mennesker, især dem, der står eller går meget i løbet af dagen. Tilstanden kan være meget smertefuld og begrænsende, men med den rette behandling og forebyggelse kan symptomerne ofte lindres betydeligt.
+KORT: Hælspore, ofte kaldet fasciitis plantaris, er en almindelig problematik, der rammer mange mennesker, især dem, der står eller går meget i løbet af dagen. Tilstanden kan være meget smer tefuld og begrænsende, men med den rette behandling og forebyggelse kan symptomerne ofte lindres betydeligt.
 
 ![Illustration af hælspore](/images/haelspore-fod.png)
 
