@@ -1,6 +1,6 @@
 ---
 title: "Fibromyalgi: Forståelse, Symptomer og Håndtering"
-description: "Lær alt om hælspore, dens årsager, symptomer og effektive behandlingsmuligheder. En omfattende guide til at forstå og håndtere denne almindelige fodlidelse."
+description: "Lær alt om fibromyalgi, dens årsager, symptomer og effektive behandlingsmuligheder."
 ---
 
 KORT: Fibromyalgi er en kronisk smertetilstand, der påvirker millioner af mennesker verden over, og som har en betydelig indflydelse på både fysisk og psykisk velbefindende. Selvom årsagerne til fibromyalgi ikke er fuldt forståede, mener forskere, at tilstanden skyldes en kompleks blanding af genetiske, neurologiske og miljømæssige faktorer. Denne artikel vil dykke ned i, hvad fibromyalgi er, hvordan den diagnosticeres, og hvordan man bedst kan håndtere symptomerne i hverdagen.
