@@ -115,8 +115,8 @@ Hovedpine er en udbredt tilstand med mange forskellige udtryk og årsager. For a
 
 
 
-1. **World Health Organization** - "Headache Disorders." Tilgængelig på:[ www.who.int](https://www.who.int/news-room/fact-sheets/detail/headache-disorders)
-2. **Mayo Clinic** - "Headache: Types and treatment." Tilgængelig på:[ www.mayoclinic.org](https://www.mayoclinic.org/diseases-conditions/headache/symptoms-causes/syc-20370687)
-3. **National Institute of Neurological Disorders and Stroke** - "Headache Information Page." Tilgængelig på:[ www.ninds.nih.gov](https://www.ninds.nih.gov/health-information/disorders/headache)
-4. **Dansk Hovedpinecenter** - "Behandling af hovedpine og migræne." Tilgængelig på:[ www.dansk-hovedpinecenter.dk](https://www.dansk-hovedpinecenter.dk)
-5. **American Migraine Foundation** - "Understanding Headaches." Tilgængelig på: www.americanmigrainefoundation.org
+1. [**World Health Organization** - "Headache Disorders."](https://www.who.int/news-room/fact-sheets/detail/headache-disorders)
+2. [**Mayo Clinic** - "Headache: Types and treatment."](https://www.mayoclinic.org/diseases-conditions/headache/symptoms-causes/syc-20370687)
+3. [**National Institute of Neurological Disorders and Stroke** - "Headache Information Page."](https://www.ninds.nih.gov/health-information/disorders/headache)
+4. [**Dansk Hovedpinecenter** - "Behandling af hovedpine og migræne."](https://www.dansk-hovedpinecenter.dk)
+5. [**American Migraine Foundation** - "Understanding Headaches."](https://americanmigrainefoundation.org/) 
