@@ -30,8 +30,8 @@ export function GlossaryEntry({ term }: { term: GlossaryTerm }) {
             ),
             p: (props) => <p {...props} className="text-gray-700 mb-4" />,
             Image: (props) => (
-              <div className="w-full">
-                <Image {...props} />
+              <div className="w-full my-8">
+                <Image {...props} className="mx-auto" />
               </div>
             ),
             a: (props) => (
