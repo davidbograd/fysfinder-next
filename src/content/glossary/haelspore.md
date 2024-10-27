@@ -11,7 +11,7 @@ KORT: Hælspore, ofte kaldet fasciitis plantaris, er en almindelig problematik, 
 
 Der er faktisk forskel mellem hælspore og fasciitis plantaris, men i daglig tale bliver de brugt i flæng. En hælspore er en lille, knoglelignende udvækst på hælbenet, som opstår på grund af gentagen belastning eller irritation af fodens sene, plantarfascien. Fasciitis plantaris er en betændelsestilstand af svangsenen. Svangsenen er en tyk sene, der forbinder hælbenet med tæerne, og som hjælper med at støtte fodbuen. Når denne sene bliver overbelastet, kan den blive irriteret og betændt, hvilket fører til smerter i hælen.
 
-[Billede af hælspore og fasciitis plantaris]
+![Hælspore og fasciitis plantaris infographic](/images/articles/Hælspore-fasciitis-infographic.png)
 
 For at gøre denne artikel nemmere at læse, vil fasciitis plantaris og hælspore begge referere til betændelsestilstanden af svangsenen.
 
@@ -81,7 +81,7 @@ Denne behandlingsform anvender lydimpulser til at stimulere blodgennemstrømning
 
 I mere alvorlige tilfælde kan en læge foreslå en steroidinjektion for at mindske inflammation. Dette bør dog anvendes med forsigtighed, da gentagne injektioner kan skade vævet.
 
-[Billede af behandlingsmetoder]
+![Behandling af Hælspore infographic](/images/articles/Hælspore-behandling-infographic.png)
 
 ## Forebyggelse af hælspore
 

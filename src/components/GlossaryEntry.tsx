@@ -34,13 +34,16 @@ export function GlossaryEntry({ term }: { term: GlossaryTerm }) {
                 <Image {...props} />
               </div>
             ),
+            a: (props) => (
+              <a {...props} className="text-logo-blue hover:underline" />
+            ),
           }}
         />
       </div>
       <div className="mt-8">
         <Link
           href="/fysioterapeut-artikler"
-          className="text-blue-600 hover:underline"
+          className="text-logo-blue hover:underline"
         >
           &larr; Tilbage til artikler
         </Link>
