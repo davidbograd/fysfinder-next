@@ -31,12 +31,15 @@ export function GlossaryEntry({ term }: { term: GlossaryTerm }) {
             p: (props) => <p {...props} className="text-gray-700 mb-4" />,
             Image: (props) => (
               <div className="w-full my-8">
-                <Image {...props} className="mx-auto" />
+                <Image {...props} />
               </div>
             ),
             a: (props) => (
               <a {...props} className="text-logo-blue hover:underline" />
             ),
+            ul: (props) => <ul {...props} className="list-disc pl-6 mb-4" />,
+            ol: (props) => <ol {...props} className="list-decimal pl-6 mb-4" />,
+            li: (props) => <li {...props} className="mb-2" />,
           }}
         />
       </div>
