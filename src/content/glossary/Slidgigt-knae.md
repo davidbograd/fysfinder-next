@@ -22,7 +22,7 @@ Selvom mange mennesker med slidgigt oplever smerter, viser forskning, at graden 
 Der kan være mange forskellige symptomer på slidgigt i knæet. Det er vigtigt ikke selv at fortolke på symptomerne, da mange af dem også vil være til stede i helt sunde og raske knæ.
 
 
-![Illustration af symptomer på slidgigt i knæet](/images/articles/Slidgigt-knae-symptomer.png)
+![Illustration af symptomer på slidgigt i knæet](/images/articles/Slidtigt-knae-symptomer.png)
 
 
 
