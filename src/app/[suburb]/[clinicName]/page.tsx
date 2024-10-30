@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Check, Phone, Globe, Mail, X } from "lucide-react";
 import { EmailButton } from "@/components/EmailButton";
 import { PhoneButton } from "@/components/PhoneButton";
+import { ClinicSidebar } from "@/app/components/ClinicSidebar";
 
 interface Specialty {
   specialty_id: string;
@@ -348,68 +349,8 @@ export default async function ClinicPage({
             </section>
           </div>
 
-          {/* Sticky sidebar (2/5 width on large screens) */}
-          <div className="lg:w-2/5">
-            <div
-              id="contact-info"
-              className="sticky top-4 bg-white p-6 rounded-lg shadow-md"
-            >
-              <div className="flex items-center mb-4">
-                {/* Circular logo placeholder */}
-                {/* You can replace this with an actual image later */}
-                {clinic.northstar && (
-                  <Image
-                    src="/fysiopuls-logo.jpg"
-                    alt="Clinic logo"
-                    width={64}
-                    height={64}
-                    className="rounded-lg flex-shrink-0 mr-4"
-                  />
-                )}
-                <div>
-                  <h2 className="text-xl font-bold">{clinic.klinikNavn}</h2>
-                  <div className="flex items-center mt-1">
-                    <StarIcon className="h-5 w-5 text-amber-500 mr-2" />
-                    <span className="font-semibold mr-2">
-                      {clinic.avgRating != null
-                        ? clinic.avgRating.toFixed(1)
-                        : "N/A"}
-                    </span>
-                    <span className="text-gray-500 text-sm">
-                      ({clinic.ratingCount} anmeldelser)
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div className="space-y-4 mt-6">
-                {clinic.northstar && (
-                  <Button className="w-full mb-4" variant="default" asChild>
-                    <a
-                      href="https://application.complimentawork.dk/CamClientPortal/CamClientPortal.html?clinic=00000A00CA04000007D404000000016B027EE85F66BAA6BB"
-                      target="_blank"
-                      rel="noopener"
-                    >
-                      Book tid
-                    </a>
-                  </Button>
-                )}
-                <div className="space-y-2">
-                  <Button
-                    variant="outline"
-                    className="w-full flex items-center justify-start"
-                    asChild
-                  >
-                    <a href={clinic.website} target="_blank" rel="noopener">
-                      <Globe className="mr-2 h-4 w-4 text-gray-400" />
-                      <span>{clinic.website}</span>
-                    </a>
-                  </Button>
-                  <PhoneButton phoneNumber={clinic.tlf} />
-                  <EmailButton email={clinic.email} />
-                </div>
-              </div>
-            </div>
-          </div>
+          {/* Replace the old sidebar with the new component */}
+          <ClinicSidebar clinic={clinic} />
         </div>
       </div>
     );
