@@ -4,7 +4,7 @@ description: "Lær alt om slidgigt i knæet - årsager, symptomer og effektive b
 ---
 
 
-![Illustration af slidgigt i knaet](/images/articles/slidgigt.knæ.webp)
+![Illustration af slidgigt i knaet](/images/articles/Slidgigt_knæ.webp)
 
 
 Slidgigt i knæet, også kendt som knæartrose, er en almindelig ledsygdom, der påvirker millioner af mennesker, især ældre. Denne tilstand opstår, når brusken i knæleddet gradvist nedbrydes, hvilket resulterer i smerte, hævelse og stivhed. Slidgigt kan i alvorlige tilfælde påvirke mobiliteten og have stor indvirkning på daglige aktiviteter. I denne artikel ser vi nærmere på, hvad slidgigt i knæet er, samt hvordan det kan diagnosticeres og behandles.
@@ -22,7 +22,7 @@ Selvom mange mennesker med slidgigt oplever smerter, viser forskning, at graden 
 Der kan være mange forskellige symptomer på slidgigt i knæet. Det er vigtigt ikke selv at fortolke på symptomerne, da mange af dem også vil være til stede i helt sunde og raske knæ.
 
 
-![Illustration af symptomer på slidgigt i knæet](/images/articles/slidgigt-knae-symptomer.png)
+![Illustration af symptomer på slidgigt i knæet](/images/articles/Slidgigt-knae-symptomer.png)
 
 
 
@@ -54,7 +54,7 @@ Smerter og begrænset bevægelse kan føre til svækkelse af musklerne omkring k
 ## Årsager til slidgigt i knæet
 
 
-![Illustration af årsager til slidgigt i knæet](/images/articles/slidgigt-knae-aarsager.png)
+![Illustration af årsager til slidgigt i knæet](/images/articles/Slidgigt-knae-aarsager.png)
 
 ### Alder
 
