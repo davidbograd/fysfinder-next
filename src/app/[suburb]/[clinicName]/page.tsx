@@ -51,6 +51,24 @@ interface Clinic {
   om_os: string | null;
 }
 
+// Move the helper function outside of the component
+function hasAnyOpeningHours(clinic: Clinic): boolean {
+  return [
+    clinic.mandag,
+    clinic.tirsdag,
+    clinic.onsdag,
+    clinic.torsdag,
+    clinic.fredag,
+    clinic.lørdag,
+    clinic.søndag,
+  ].some((day) => day !== null);
+}
+
+// Add this helper function next to the existing hasAnyOpeningHours function
+function hasAccessInfo(clinic: Clinic): boolean {
+  return clinic.parkering !== null || clinic.handicapadgang !== null;
+}
+
 async function fetchClinicBySlug(
   suburbSlug: string,
   clinicSlug: string
@@ -212,16 +230,26 @@ export default async function ClinicPage({
                   ? `${clinic.klinikNavn} har ydernummer og tilbyder behandling med tilskud fra den offentlige sygesikring.`
                   : `${clinic.klinikNavn} har ikke ydernummer og kræver ingen henvisning.`}
               </p>
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <span>Første konsult (60 min)</span>
-                  <span className="font-semibold">{clinic.førsteKons} kr</span>
+              {clinic.førsteKons && clinic.opfølgning ? (
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span>Første konsult (60 min)</span>
+                    <span className="font-semibold">
+                      {clinic.førsteKons} kr
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span>Standard konsult (60 min)</span>
+                    <span className="font-semibold">
+                      {clinic.opfølgning} kr
+                    </span>
+                  </div>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span>Standard konsult (60 min)</span>
-                  <span className="font-semibold">{clinic.opfølgning} kr</span>
-                </div>
-              </div>
+              ) : (
+                <p className="text-gray-600">
+                  Denne klinik har ikke tilføjet nogen priser endnu.
+                </p>
+              )}
             </section>
 
             {clinic.northstar && <MeetTheTeam />}
@@ -301,28 +329,46 @@ export default async function ClinicPage({
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                  <div className="space-y-2">
-                    {openingHours.map(({ day, hours }) => (
-                      <div key={day} className="flex justify-between">
-                        <span>{day}</span>
-                        <span className="font-semibold">{hours}</span>
-                      </div>
-                    ))}
-                  </div>
+                  {hasAnyOpeningHours(clinic) ? (
+                    <div className="space-y-2">
+                      {openingHours.map(({ day, hours }) => (
+                        <div key={day} className="flex justify-between">
+                          <span>{day}</span>
+                          <span className="font-semibold">{hours}</span>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-gray-600">
+                      Åbningstider ikke tilføjet endnu.
+                    </p>
+                  )}
                 </div>
                 <div>
-                  <div className="space-y-2">
-                    <div className="flex justify-between">
-                      <span>Parkering</span>
-                      <span className="font-semibold">{clinic.parkering}</span>
+                  {hasAccessInfo(clinic) ? (
+                    <div className="space-y-2">
+                      {clinic.parkering !== null && (
+                        <div className="flex justify-between">
+                          <span>Parkering</span>
+                          <span className="font-semibold">
+                            {clinic.parkering}
+                          </span>
+                        </div>
+                      )}
+                      {clinic.handicapadgang !== null && (
+                        <div className="flex justify-between">
+                          <span>Handicap adgang</span>
+                          <span className="font-semibold">
+                            {clinic.handicapadgang}
+                          </span>
+                        </div>
+                      )}
                     </div>
-                    <div className="flex justify-between">
-                      <span>Handicap adgang</span>
-                      <span className="font-semibold">
-                        {clinic.handicapadgang}
-                      </span>
-                    </div>
-                  </div>
+                  ) : (
+                    <p className="text-gray-600">
+                      Adgangsforhold ikke tilføjet endnu.
+                    </p>
+                  )}
                 </div>
               </div>
             </section>
