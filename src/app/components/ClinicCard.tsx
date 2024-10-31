@@ -1,20 +1,24 @@
 import { StarIcon } from "@heroicons/react/24/solid";
-import { CheckIcon } from "@heroicons/react/24/solid";
+import { MapPin, Check } from "lucide-react";
 
 interface Props {
   klinikNavn: string;
-  antalBehandlere: number;
   ydernummer: boolean;
   avgRating: number;
   ratingCount: number;
+  adresse: string;
+  postnummer: number;
+  lokation: string;
 }
 
 const ClinicCard: React.FC<Props> = ({
   klinikNavn,
-  antalBehandlere,
   ydernummer,
   avgRating,
   ratingCount,
+  adresse,
+  postnummer,
+  lokation,
 }) => {
   return (
     <div className="p-4 rounded-md border hover:shadow-lg transition-shadow duration-200">
@@ -30,21 +34,18 @@ const ClinicCard: React.FC<Props> = ({
           ({ratingCount} anmeldelser)
         </span>
       </div>
-      <div className="flex justify-between items-center mt-2">
-        <p
-          className={`text-slate-700 ${
-            antalBehandlere === null ? "text-gray-300" : ""
-          }`}
-        >
-          {antalBehandlere === null ? "?" : antalBehandlere} behandlere
-        </p>
-        {ydernummer && (
-          <div className="flex items-center">
-            <span className="mr-1 text-sm">Ydernummer</span>
-            <CheckIcon className="size-5 text-green-600" />
-          </div>
-        )}
+      <div className="flex items-center text-gray-500 text-sm mb-2">
+        <MapPin className="size-5 mr-1 flex-shrink-0 stroke-2" />
+        <span>
+          {adresse}, {postnummer} {lokation}
+        </span>
       </div>
+      {ydernummer && (
+        <div className="flex items-center mt-2 text-gray-500">
+          <Check className="size-5 text-green-600 mr-1 stroke-2" />
+          <span className="text-sm">Har ydernummer</span>
+        </div>
+      )}
     </div>
   );
 };

@@ -15,6 +15,8 @@ interface Clinic {
   ratingCount: number;
   lokation: string;
   lokationSlug: string;
+  adresse: string;
+  postnummer: number;
 }
 
 async function fetchClinicsBySuburb(suburbSlug: string): Promise<Clinic[]> {
@@ -112,10 +114,12 @@ export default async function SuburbPage({
                 >
                   <ClinicCard
                     klinikNavn={clinic.klinikNavn}
-                    antalBehandlere={clinic.antalBehandlere}
                     ydernummer={clinic.ydernummer}
                     avgRating={clinic.avgRating}
                     ratingCount={clinic.ratingCount}
+                    adresse={clinic.adresse}
+                    postnummer={clinic.postnummer}
+                    lokation={clinic.lokation}
                   />
                 </Link>
               ))}
