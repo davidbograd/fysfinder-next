@@ -344,8 +344,8 @@ export default async function ClinicPage({
                     </p>
                   )}
                 </div>
-                <div>
-                  {hasAccessInfo(clinic) ? (
+                {hasAccessInfo(clinic) && (
+                  <div>
                     <div className="space-y-2">
                       {clinic.parkering !== null && (
                         <div className="flex justify-between">
@@ -364,12 +364,8 @@ export default async function ClinicPage({
                         </div>
                       )}
                     </div>
-                  ) : (
-                    <p className="text-gray-600">
-                      Adgangsforhold ikke tilføjet endnu.
-                    </p>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
             </section>
 
