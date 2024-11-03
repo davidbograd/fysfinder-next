@@ -118,7 +118,7 @@ Det kan være en rigtig god idé at søge hjælp fra en fysioterapeut, som kan g
 ![Illustration af behandling af frossen skulder](/images/articles/Frossen_skulder_fysioterapeut.webp)
  
 
-Med professionel vejledning kan du sikre, at du genopbygger skulderens styrke og mobilitet på en måde, der er både sikker og effektiv. En fysioterapeut kan hjælpe med at tilpasse øvelserne til dine behov og give dig den bedste plan for at genvinde fuld funktion og velvære. [Find fysioterapeut i nærheden af dig her](https://www.fysfinder.dk/)
+Med professionel vejledning kan du sikre, at du genopbygger skulderens styrke og mobilitet på en måde, der er både sikker og effektiv. En fysioterapeut kan hjælpe med at tilpasse øvelserne til dine behov og give dig den bedste plan for at genvinde fuld funktion og velvære. [Find en fysioterapeut i nærheden af dig her](https://www.fysfinder.dk/)
 
 
 ### Referenceliste
