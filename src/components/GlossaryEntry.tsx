@@ -25,8 +25,11 @@ export function GlossaryEntry({ term }: { term: GlossaryTerm }) {
             h3: (props) => (
               <h3
                 {...props}
-                className="text-lg font-semibold mb-1 mt-6 text-gray-800"
+                className="text-lg font-semibold mb-1 mt-8 text-gray-800"
               />
+            ),
+            h4: (props) => (
+              <h4 {...props} className="font-semibold mt-2 text-gray-800" />
             ),
             p: (props) => <p {...props} className="text-gray-700 mb-4" />,
             Image: (props) => (
