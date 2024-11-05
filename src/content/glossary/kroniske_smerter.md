@@ -3,7 +3,7 @@ title: "Kroniske smerter: Hvordan viden kan give håb"
 description: "Få en forståelse for kroniske smerter, hvad der foresager dem, og hvordan man bedst håndterer dem."
 ---
 
-![Illustration af frossen skulder](/images/articles/Kroniske_smerter.webp)
+![Illustration af kronisk smerte](/images/articles/Kroniske_smerter.webp)
 
 
 ## Hvorfor er det vigtigt at lære om smerte?
@@ -22,7 +22,7 @@ Smerter kan være svære at forklare, især når de ikke er direkte forbundet me
 Her kommer forskellen mellem smerte og skade ind i billedet. Hvor en akut skade ofte er en reaktion på vævsbeskadigelse, for eksempel et forstuvet led eller et sår, er kroniske smerter en mere kompleks proces. Smerte er nemlig ikke kun en indikator for, at noget er gået galt i kroppen; det er en subjektiv oplevelse, skabt af hjernen, der kan fortsætte eller endda forstærkes, selv når selve skaden er helet.
 
 
-![Illustration af frossen skulder](/images/articles/Smerter_akutvskronisk.png)
+![Illustration af akut vs kronisk smerte](/images/articles/Smerte_akutvskronisk.png)
 
 
 Dette betyder, at selv i fraværet af en synlig skade, kan nervesystemet stadig sende kraftige smertesignaler, som om kroppen stadig er truet. Kroniske smerter bliver derfor en form for overfølsomhed i nervesystemet – en slags "fejlindstilling", hvor smerteopfattelsen er forstærket. Men netop denne forståelse giver også håb: fordi smerte og skade ikke er det samme, kan smerte påvirkes og lindres på måder, vi måske ikke tidligere har overvejet.
@@ -33,7 +33,7 @@ Dette betyder, at selv i fraværet af en synlig skade, kan nervesystemet stadig 
 Når man oplever smerte, er det naturligt at blive bekymret for, om den signalerer noget farligt. Men det er vigtigt at forstå, at risikoen for, at smerte skyldes en alvorlig skade eller fare, falder drastisk over tid. Akut smerte, der opstår i forbindelse med en skade, kan i starten være en vigtig advarsel, men hvis smerten fortsætter i uger, måneder eller år, er sandsynligheden for, at den er forbundet med en vævsskade, meget lavere.
 
 
-![Illustration af frossen skulder](/images/articles/Smerter_over_tid.png)
+![Illustration af smerter over tid](/images/articles/Smerter_over_tid.png)
 
 
 Vores kroppe har en fantastisk evne til at hele, og forskning viser, at langt de fleste biomekaniske forklaringer, såsom en tidligere diskusprolaps eller slidgigt, ikke nødvendigvis er skyld i vedvarende smerteoplevelser. Det betyder, at selv hvis smerte føles intens og vedvarende, behøver den ikke at være en indikation på skade eller fare. Tværtimod kan nervesystemet være blevet mere følsomt og sende smertesignaler, selv når der ikke er nogen trussel mod væv eller sundhed.
@@ -53,7 +53,7 @@ Husk, at smerte ikke altid betyder skade. Ved forsigtigt at udfordre kroppen, ka
 ## Kan du forvente at leve et smertefrit liv?
 
 
-![Illustration af frossen skulder](/images/articles/Smerter_livskvalitet.webp)
+![Illustration af livskvalitet med smerter](/images/articles/Smerter_livskvalitet.webp)
 
 
 For mange med kroniske smerter føles smertefrihed som det ultimative mål, men at stræbe efter at blive helt fri for smerte kan være både urealistisk og demotiverende. Smerte er en naturlig og vigtig del af vores biologiske system – et beskyttelsessignal fra kroppen, der hjælper os med at navigere verden. Selv uden skader vil vi alle opleve smerte fra tid til anden. I stedet for at fokusere på at eliminere smerte helt, kan det være mere gavnligt at sætte mål for at forbedre sit funktionsniveau og livskvalitet.
