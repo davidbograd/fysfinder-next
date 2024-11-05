@@ -71,4 +71,4 @@ At [søge hjælp fra en fysioterapeut](https://www.fysfinder.dk/) er et værdifu
 
 [Neuroplasticity and pain: what does it all mean?](https://www.mja.com.au/journal/2020/212/11/neuroplasticity-and-pain-what-does-it-all-mean&#8203;:contentReference[oaicite:2]{index=2}.)
 
-[Implicit bias in healthcare: clinical practice and decision making](https://psnet.ahrq.gov/issue/implicit-bias-healthcare-clinical-practice-research-and-decision-making&#8203;:contentReference[oaicite:3]){index=3}.
+[Implicit bias in healthcare: clinical practice and decision making](https://psnet.ahrq.gov/issue/implicit-bias-healthcare-clinical-practice-research-and-decision-making&#8203;:contentReference[oaicite:3])
