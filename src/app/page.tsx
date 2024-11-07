@@ -89,7 +89,7 @@ function Header({ totalClinics }: { totalClinics: number }) {
           Find den bedste fysioterapeut
         </h1>
         <p className="text-base sm:text-lg mb-6 sm:mb-8 text-white/90">
-          Leder du efter fysioterapeut? Vi har information fra {totalClinics}{" "}
+          Leder du efter en fysioterapeut? Vi har information fra {totalClinics}{" "}
           danske klinikker. FysFinder har anmeldelser, specialer, priser og
           meget mere. Find den perfekte fysioterapeut til dit behov.
         </p>
