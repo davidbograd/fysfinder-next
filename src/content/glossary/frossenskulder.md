@@ -99,8 +99,8 @@ Det kan være en rigtig god idé at søge hjælp fra en fysioterapeut, som kan g
 
 ### Referenceliste
 
-1. [Surrey Physio. _Top 5 Exercises for Frozen Shoulder_](http://www.surreyphysio.co.uk).
-2. [Buoy Health. _Frozen Shoulder Exercises: How to Speed Recovery_](http://www.buoyhealth.com).
-3. [InjuryMap. _Frozen Shoulder? Try These Exercises!_](http://www.injurymap.com).
-4. [Navarro-Ledesma, S., et al. (2024). _A New Perspective of Frozen Shoulder Pathology: The Interplay Between the Brain and the Immune System_](https://www.frontiersin.org/journals/physiology/articles/10.3389/fphys.2024.1248612/full)
-5. [Oxford Biomedical Research Centre. _Frozen Shoulder Holds Key to Understanding Fibrosis Resolution_](http://www.ndorms.ox.ac.uk).
+1. Surrey Physio - "Top 5 Exercises for Frozen Shoulder." [www.surreyphysio.co.uk](http://www.surreyphysio.co.uk)
+2. Buoy Health - "Frozen Shoulder Exercises: How to Speed Recovery." [www.buoyhealth.com](http://www.buoyhealth.com)
+3. InjuryMap - "Frozen Shoulder? Try These Exercises!" [www.injurymap.com](http://www.injurymap.com)
+4. Navarro-Ledesma, S., et al. (2024) - "A New Perspective of Frozen Shoulder Pathology: The Interplay Between the Brain and the Immune System." [www.frontiersin.org](https://www.frontiersin.org/journals/physiology/articles/10.3389/fphys.2024.1248612/full)
+5. Oxford Biomedical Research Centre - "Frozen Shoulder Holds Key to Understanding Fibrosis Resolution." [www.ndorms.ox.ac.uk](http://www.ndorms.ox.ac.uk)

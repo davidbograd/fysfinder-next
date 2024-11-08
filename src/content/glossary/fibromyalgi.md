@@ -105,8 +105,8 @@ Fibromyalgi er en kompleks og udfordrende tilstand, men med den rette tilgang ka
 
 ### Referenceliste
 
-1. **National Institute of Arthritis and Musculoskeletal and Skin Diseases** - "Fibromyalgia." Tilgængelig på:[ www.niams.nih.gov](https://www.niams.nih.gov/health-topics/fibromyalgia)
-2. **Mayo Clinic** - "Fibromyalgia: Symptoms and causes." Tilgængelig på:[ www.mayoclinic.org](https://www.mayoclinic.org/diseases-conditions/fibromyalgia/symptoms-causes/syc-20354780)
-3. **American College of Rheumatology** - "Fibromyalgia." Tilgængelig på: www.rheumatology.org
-4. **Dansk Fibromyalgi-Forening** - "Fibromyalgi og håndtering." Tilgængelig på:[ www.fibromyalgi.dk](https://fibromyalgi.dk)
-5. **Johns Hopkins Medicine** - "Fibromyalgia Management and Treatment." Tilgængelig på: www.hopkinsmedicine.org
+1. National Institute of Arthritis and Musculoskeletal and Skin Diseases - "Fibromyalgia." [www.niams.nih.gov](https://www.niams.nih.gov/health-topics/fibromyalgia)
+2. Mayo Clinic - "Fibromyalgia: Symptoms and causes." [www.mayoclinic.org](https://www.mayoclinic.org/diseases-conditions/fibromyalgia/symptoms-causes/syc-20354780)
+3. American College of Rheumatology - "Fibromyalgia." [www.rheumatology.org](http://www.rheumatology.org)
+4. Dansk Fibromyalgi-Forening - "Fibromyalgi og håndtering." [www.fibromyalgi.dk](https://fibromyalgi.dk)
+5. Johns Hopkins Medicine - "Fibromyalgia Management and Treatment." [www.hopkinsmedicine.org](http://www.hopkinsmedicine.org)

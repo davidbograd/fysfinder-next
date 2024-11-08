@@ -145,7 +145,7 @@ Slidgigt i knæet er en udbredt tilstand, der kan påvirke livskvaliteten. Med d
 
 ### Referenceliste
 
-1. [**Arthritis Foundation** - "Osteoarthritis in the Knee."](https://www.arthritis.org/)
-2. [**Mayo Clinic** - "Osteoarthritis: Symptoms and causes."](https://www.mayoclinic.org/diseases-conditions/osteoarthritis/symptoms-causes/syc-20351925)
-3. [**National Institute of Arthritis and Musculoskeletal and Skin Diseases** - "Osteoarthritis."](https://www.niams.nih.gov/health-topics/osteoarthritis)
-4. [_\*\*Arthritis Foundation_, _The University of Sydney_ og _The Journal of Rheumatology_.](https://www.sydney.edu.au/news-opinion/news/2018/08/29/exercise-is-best-for-managing-osteoarthritis--new-guidelines.html) \*\*
+1. Arthritis Foundation - "Osteoarthritis in the Knee." [www.arthritis.org](https://www.arthritis.org/)
+2. Mayo Clinic - "Osteoarthritis: Symptoms and causes." [www.mayoclinic.org](https://www.mayoclinic.org/diseases-conditions/osteoarthritis/symptoms-causes/syc-20351925)
+3. National Institute of Arthritis and Musculoskeletal and Skin Diseases - "Osteoarthritis." [www.niams.nih.gov](https://www.niams.nih.gov/health-topics/osteoarthritis)
+4. The University of Sydney - "Exercise is best for managing osteoarthritis." [www.sydney.edu.au](https://www.sydney.edu.au/news-opinion/news/2018/08/29/exercise-is-best-for-managing-osteoarthritis--new-guidelines.html)
