@@ -1,11 +1,11 @@
+// To run this script, run:
+// npx ts-node scripts/import-specialties.ts
+
 require("dotenv").config({ path: ".env.local" });
 const { createClient } = require("@supabase/supabase-js");
 const Papa = require("papaparse");
 const fs = require("fs");
 const path = require("path");
-
-// To run this script, run:
-// npx ts-node scripts/import-specialties.ts
 
 // Define types
 interface Clinic {
