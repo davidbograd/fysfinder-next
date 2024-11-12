@@ -1,8 +1,6 @@
 # **** Global Settings ****
 User-agent: *
 Allow: /
-
-# Disallow sensitive or private routes
 Disallow: /search
 Disallow: /*?*  # Disallow URL parameters to prevent duplicate content crawling
 
@@ -28,13 +26,10 @@ Allow: /*.jpg$
 Allow: /*.gif$
 Allow: /*.svg$
 Allow: /*.ico$
-Crawl-delay: 1
 
 # **** Other Search Engines ****
 User-agent: Applebot-Extended
 User-agent: facebookbot
 Allow: /
-Crawl-delay: 1
 
-# Specify the location of your sitemap
 Sitemap: https://fysfinder.dk/sitemap.xml
