@@ -2,7 +2,6 @@
 User-agent: *
 Allow: /
 
-
 # Disallow sensitive or private routes
 Disallow: /search
 Disallow: /*?*  # Disallow URL parameters to prevent duplicate content crawling
@@ -38,4 +37,4 @@ Allow: /
 Crawl-delay: 1
 
 # Specify the location of your sitemap
-Sitemap: https://your-domain.com/sitemap.xml
+Sitemap: https://fysfinder.dk/sitemap.xml
