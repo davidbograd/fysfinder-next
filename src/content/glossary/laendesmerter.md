@@ -99,7 +99,7 @@ feber, uforklarligt vægttab, lammelse, eller tab af blære- og tarmkontrol. Dis
 I de fleste tilfælde er scanninger som MR- eller røntgenbilleder unødvendige ved lændesmerter. Da langt størstedelen af lændesmerter er non-specifikke og aftager over tid, bidrager scanning sjældent med brugbar information og kan endda føre til unødvendig bekymring. Mange fund, som små diskusprolapser eller slidforandringer, er almindelige og ofte uden relation til smerterne. Scanning anbefales kun, hvis der er vedvarende smerter, der ikke reagerer på behandling, eller hvis der er røde flag, som kan indikere alvorlige tilstande.
 
 
-![Illustration af MR-scanning af lændesmerter](/images/articles/Lændesmerter_scanning.webp)
+![Illustration af MR-scanning af lændesmerter](/images/articles/Lændersmerter_scanning.webp)
 
 
 
@@ -232,7 +232,7 @@ Selvom smerterne kan være ubehagelige, aftager de ofte af sig selv med tiden el
 ## Er vores medicinske samfund skyld i lændesmerter?
 
 
-![Illustration af iatrogene lændesmerter](/images/articles/Lændesmerter_iatrogenetik.webp)
+![Illustration af iatrogene lændesmerter](/images/articles/Lændersmerter_iatrogenetik.webp)
 
 
 En australsk undersøgelse viste, at vestlige medicinske tilgange – som scanninger og diagnoser – faktisk kunne forværre lændesmerter i Aboriginal-befolkningen. Inden vestlige metoder blev introduceret, opfattede mange Aboriginals lændesmerter som en naturlig del af livet uden større betydning for deres funktion. Efter indførsel af scanninger og diagnoser begyndte flere at betragte smerterne som farlige og invaliderende, hvilket medførte større sygdomsbyrde og begrænsninger i dagligdagen​
