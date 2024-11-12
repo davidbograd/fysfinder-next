@@ -48,7 +48,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={GeistSans.className}>
+    <html lang="da" className={GeistSans.className}>
       <body className="flex flex-col min-h-screen">
         <Header />
         <main className="flex-grow">
