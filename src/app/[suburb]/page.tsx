@@ -5,24 +5,8 @@ import ClinicCard from "../components/ClinicCard";
 import { Breadcrumbs } from "@/app/components/Breadcrumbs";
 import { deslugify, slugify } from "../utils/slugify";
 import { Metadata } from "next";
-
-interface SeoSection {
-  headline: string;
-  paragraph: string;
-}
-
-interface Clinic {
-  clinics_id: string;
-  klinikNavn: string;
-  antalBehandlere: number;
-  ydernummer: boolean;
-  avgRating: number;
-  ratingCount: number;
-  lokation: string;
-  lokationSlug: string;
-  adresse: string;
-  postnummer: number;
-}
+import { SuburbStructuredData } from "@/app/components/SuburbStructuredData";
+import { Clinic, SeoSection } from "@/app/types";
 
 async function fetchClinicsBySuburb(suburbSlug: string): Promise<Clinic[]> {
   const supabase = createClient();
@@ -120,6 +104,9 @@ export default async function SuburbPage({
 
     return (
       <div className="container mx-auto px-4">
+        {clinics.length > 0 && (
+          <SuburbStructuredData clinics={clinics} suburbName={suburbName} />
+        )}
         <Breadcrumbs items={breadcrumbItems} />
         {clinics.length === 0 ? (
           <div className="text-center py-10">
