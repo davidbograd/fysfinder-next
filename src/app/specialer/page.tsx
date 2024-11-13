@@ -1,7 +1,6 @@
 import { createClient } from "@/app/utils/supabase/server";
 import { Breadcrumbs } from "@/app/components/Breadcrumbs";
 import Link from "next/link";
-import { slugify } from "../utils/slugify";
 import { Metadata } from "next";
 
 interface SpecialtyWithCount {
@@ -69,7 +68,7 @@ export default async function SpecialtiesPage() {
             specialty.clinic_count > 0 ? (
               <Link
                 key={specialty.specialty_id}
-                href={`/speciale/${specialty.specialty_name_slug}`}
+                href={`/specialer/${specialty.specialty_name_slug}`}
                 className="p-6 rounded-lg border border-gray-200 hover:border-gray-300 transition-colors"
               >
                 <h2 className="text-xl font-semibold mb-2">

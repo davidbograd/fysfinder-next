@@ -84,7 +84,8 @@ export default async function SpecialtyPage({
 
     const breadcrumbItems = [
       { text: "Forside", link: "/" },
-      { text: `Speciale i ${specialtyName}` },
+      { text: "Specialer", link: "/specialer" },
+      { text: specialtyName },
     ];
 
     return (
