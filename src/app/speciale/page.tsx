@@ -7,6 +7,7 @@ import { Metadata } from "next";
 interface SpecialtyWithCount {
   specialty_id: string;
   specialty_name: string;
+  specialty_name_slug: string;
   clinic_count: number;
 }
 
@@ -16,6 +17,7 @@ async function fetchSpecialtiesWithCounts(): Promise<SpecialtyWithCount[]> {
   const { data, error } = await supabase.from("specialties").select(`
       specialty_id,
       specialty_name,
+      specialty_name_slug,
       clinic_specialties(count)
     `);
 
@@ -28,6 +30,7 @@ async function fetchSpecialtiesWithCounts(): Promise<SpecialtyWithCount[]> {
     .map((specialty) => ({
       specialty_id: specialty.specialty_id,
       specialty_name: specialty.specialty_name,
+      specialty_name_slug: specialty.specialty_name_slug,
       clinic_count: specialty.clinic_specialties[0]?.count || 0,
     }))
     .sort((a, b) => b.clinic_count - a.clinic_count);
@@ -66,7 +69,7 @@ export default async function SpecialtiesPage() {
             specialty.clinic_count > 0 ? (
               <Link
                 key={specialty.specialty_id}
-                href={`/speciale/${slugify(specialty.specialty_name)}`}
+                href={`/speciale/${specialty.specialty_name_slug}`}
                 className="p-6 rounded-lg border border-gray-200 hover:border-gray-300 transition-colors"
               >
                 <h2 className="text-xl font-semibold mb-2">

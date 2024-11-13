@@ -21,7 +21,7 @@ async function fetchSpecialtyAndClinics(specialtySlug: string): Promise<{
   const { data: specialty, error: specialtyError } = await supabase
     .from("specialties")
     .select("*")
-    .eq("specialty_name", deslugify(specialtySlug))
+    .eq("specialty_name_slug", specialtySlug)
     .single();
 
   if (specialtyError) {
