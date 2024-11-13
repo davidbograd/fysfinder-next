@@ -9,8 +9,6 @@ import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Check, Phone, Globe, Mail, X } from "lucide-react";
-import { EmailButton } from "@/components/EmailButton";
-import { PhoneButton } from "@/components/PhoneButton";
 import { ClinicSidebar } from "@/app/components/ClinicSidebar";
 
 interface Specialty {
@@ -118,7 +116,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${clinic.klinikNavn} | Fysioterapeut ${clinic.lokation} - Se alle detaljer`,
+    title: `${clinic.klinikNavn} - Se alle detaljer`,
     description: `Se åbningstider, priser og behandlingstyper for ${clinic.klinikNavn}, ${clinic.lokation}.`,
   };
 }
