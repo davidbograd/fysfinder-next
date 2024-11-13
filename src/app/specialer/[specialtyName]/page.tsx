@@ -127,35 +127,6 @@ export default async function SpecialtyPage({
             <p>Vi arbejder på at tilføje fysioterapeuter med dette speciale.</p>
           </div>
         )}
-
-        {/* SEO Content */}
-        <div className="h-px bg-gray-200 my-16 max-w-[672px]" />
-        <div className="max-w-[672px] space-y-12">
-          <section>
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">
-              Hvad er {specialtyName.toLowerCase()}?
-            </h2>
-            <p className="text-gray-600 leading-relaxed">
-              Dette speciale fokuserer på behandling og forebyggelse gennem
-              specialiserede teknikker og metoder. En fysioterapeut med speciale
-              i {specialtyName.toLowerCase()} har særlig ekspertise og erfaring
-              inden for dette område.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">
-              Hvorfor vælge en specialist i {specialtyName.toLowerCase()}?
-            </h2>
-            <p className="text-gray-600 leading-relaxed">
-              At vælge en fysioterapeut med speciale i{" "}
-              {specialtyName.toLowerCase()} kan give dig adgang til mere
-              målrettet og effektiv behandling. Specialister har typisk
-              gennemgået ekstra uddannelse og har omfattende erfaring inden for
-              deres felt.
-            </p>
-          </section>
-        </div>
       </div>
     );
   } catch (error) {
