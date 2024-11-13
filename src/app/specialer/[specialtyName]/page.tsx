@@ -9,6 +9,10 @@ import { Clinic } from "@/app/types";
 interface Specialty {
   specialty_id: string;
   specialty_name: string;
+  specialty_seo_text: Array<{
+    headline: string;
+    paragraph: string;
+  }>;
 }
 
 async function fetchSpecialtyAndClinics(specialtySlug: string): Promise<{
@@ -20,7 +24,7 @@ async function fetchSpecialtyAndClinics(specialtySlug: string): Promise<{
   // First get the specialty
   const { data: specialty, error: specialtyError } = await supabase
     .from("specialties")
-    .select("*")
+    .select("specialty_id, specialty_name, specialty_seo_text")
     .eq("specialty_name_slug", specialtySlug)
     .single();
 
@@ -127,6 +131,26 @@ export default async function SpecialtyPage({
             <p>Vi arbejder på at tilføje fysioterapeuter med dette speciale.</p>
           </div>
         )}
+
+        {/* SEO Content Section */}
+        {specialty?.specialty_seo_text &&
+          specialty.specialty_seo_text.length > 0 && (
+            <>
+              <div className="h-px bg-gray-200 my-16 max-w-[672px]" />
+              <section className="max-w-[672px]">
+                {specialty.specialty_seo_text.map((section, index) => (
+                  <div key={index} className="mb-12">
+                    <h2 className="text-xl font-semibold text-gray-900 mb-4">
+                      {section.headline}
+                    </h2>
+                    <p className="text-gray-600 leading-relaxed">
+                      {section.paragraph}
+                    </p>
+                  </div>
+                ))}
+              </section>
+            </>
+          )}
       </div>
     );
   } catch (error) {
