@@ -7,6 +7,7 @@ export interface Clinic {
   ratingCount: number;
   lokation: string;
   lokationSlug: string;
+  klinikNavnSlug: string;
   adresse: string;
   postnummer: number;
 }
