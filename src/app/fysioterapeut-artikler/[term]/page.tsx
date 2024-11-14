@@ -1,6 +1,7 @@
 import { GlossaryEntry } from "@/components/GlossaryEntry";
 import { getGlossaryTerm, getGlossaryTerms } from "@/lib/glossary";
 import { Breadcrumbs } from "@/app/components/Breadcrumbs";
+import { AuthorCard } from "@/components/AuthorCard";
 import { Metadata } from "next";
 
 export async function generateStaticParams() {
@@ -38,6 +39,7 @@ export default async function ArticlePage({
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-2xl mx-auto">
         <Breadcrumbs items={breadcrumbItems} />
+        <AuthorCard />
         <GlossaryEntry term={term} />
       </div>
     </div>
