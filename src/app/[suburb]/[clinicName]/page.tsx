@@ -62,7 +62,6 @@ function hasAnyOpeningHours(clinic: Clinic): boolean {
   ].some((day) => day !== null);
 }
 
-// Add this helper function next to the existing hasAnyOpeningHours function
 function hasAccessInfo(clinic: Clinic): boolean {
   return clinic.parkering !== null || clinic.handicapadgang !== null;
 }
@@ -101,7 +100,6 @@ async function fetchClinicBySlug(
   return data;
 }
 
-// Add this helper function near the top of the file
 function generateSeoTitle(clinicName: string): string {
   const suffix = " | Se detaljer";
   const maxLength = 60;
@@ -132,6 +130,151 @@ export async function generateMetadata({
     title: generateSeoTitle(clinic.klinikNavn),
     description: `Se åbningstider, priser og behandlingstyper for ${clinic.klinikNavn}, ${clinic.lokation}.`,
   };
+}
+
+interface ClinicStructuredDataProps {
+  clinic: Clinic;
+}
+
+function ClinicStructuredData({ clinic }: ClinicStructuredDataProps) {
+  // Helper function to format opening hours
+  function formatOpeningHours(timeString: string | null) {
+    if (!timeString) return null;
+    const [opens, closes] = timeString.split("-").map((time) => time.trim());
+    return { opens, closes };
+  }
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "MedicalBusiness",
+    "@id": `https://fysfinder.dk/${clinic.lokationSlug}/${clinic.klinikNavnSlug}`,
+    name: clinic.klinikNavn,
+    description: clinic.om_os || `Fysioterapi klinik i ${clinic.lokation}`,
+
+    // Location and contact info
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: clinic.adresse,
+      addressLocality: clinic.lokation,
+      postalCode: clinic.postnummer,
+      addressCountry: "DK",
+    },
+    telephone: clinic.tlf,
+    email: clinic.email,
+    url: clinic.website,
+
+    // Ratings
+    aggregateRating: clinic.avgRating
+      ? {
+          "@type": "AggregateRating",
+          ratingValue: clinic.avgRating,
+          reviewCount: clinic.ratingCount,
+          bestRating: "5",
+          worstRating: "1",
+        }
+      : undefined,
+
+    // Opening hours
+    openingHoursSpecification: [
+      clinic.mandag && {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Monday",
+        ...formatOpeningHours(clinic.mandag),
+      },
+      clinic.tirsdag && {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Tuesday",
+        ...formatOpeningHours(clinic.tirsdag),
+      },
+      clinic.onsdag && {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Wednesday",
+        ...formatOpeningHours(clinic.onsdag),
+      },
+      clinic.torsdag && {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Thursday",
+        ...formatOpeningHours(clinic.torsdag),
+      },
+      clinic.fredag && {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Friday",
+        ...formatOpeningHours(clinic.fredag),
+      },
+      clinic.lørdag && {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Saturday",
+        ...formatOpeningHours(clinic.lørdag),
+      },
+      clinic.søndag && {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Sunday",
+        ...formatOpeningHours(clinic.søndag),
+      },
+    ].filter(Boolean),
+
+    // Pricing
+    priceRange: clinic.ydernummer ? "Med ydernummer" : "Uden ydernummer",
+    currenciesAccepted: "DKK",
+
+    // Medical specialties and services
+    medicalSpecialty: clinic.specialties?.map((s) => s.specialty_name),
+    availableService: [
+      ...(clinic.specialties?.map((s) => ({
+        "@type": "MedicalTherapy",
+        name: s.specialty_name,
+      })) || []),
+      clinic.holdtræning && {
+        "@type": "MedicalTherapy",
+        name: "Holdtræning",
+      },
+      clinic.hjemmetræning && {
+        "@type": "MedicalTherapy",
+        name: "Hjemmetræning",
+      },
+    ].filter(Boolean),
+
+    // Accessibility features
+    amenityFeature: [
+      clinic.handicapadgang && {
+        "@type": "LocationFeatureSpecification",
+        name: "Handicap adgang",
+        value: true,
+      },
+      clinic.parkering && {
+        "@type": "LocationFeatureSpecification",
+        name: "Parkering",
+        value: true,
+      },
+    ].filter(Boolean),
+
+    // Pricing catalog
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Behandlinger",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          name: "Første konsultation",
+          price: clinic.førsteKons,
+          priceCurrency: "DKK",
+        },
+        {
+          "@type": "Offer",
+          name: "Opfølgende konsultation",
+          price: clinic.opfølgning,
+          priceCurrency: "DKK",
+        },
+      ],
+    },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+    />
+  );
 }
 
 export default async function ClinicPage({
@@ -199,6 +342,7 @@ export default async function ClinicPage({
 
     return (
       <div className="container mx-auto px-4 py-8">
+        {clinic && <ClinicStructuredData clinic={clinic} />}
         <Breadcrumbs items={breadcrumbItems} />
 
         <div className="flex flex-col lg:flex-row gap-16">
