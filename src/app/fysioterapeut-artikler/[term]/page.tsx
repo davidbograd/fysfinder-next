@@ -4,6 +4,65 @@ import { Breadcrumbs } from "@/app/components/Breadcrumbs";
 import { AuthorCard } from "@/components/AuthorCard";
 import { Metadata } from "next";
 
+interface ArticleStructuredDataProps {
+  term: {
+    title: string;
+    description: string;
+    content: string;
+    slug: string;
+  };
+}
+
+function ArticleStructuredData({ term }: ArticleStructuredDataProps) {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": ["WebPage", "MedicalWebPage", "Article"],
+    name: term.title,
+    headline: term.title,
+    description: term.description,
+    author: {
+      "@type": "Person",
+      name: "Joachim Bograd",
+      jobTitle: "Fysioterapeut",
+      description:
+        "Uddannet Bachelor i fysioterapi fra Københavns Professionshøjskole",
+      sameAs: ["https://www.linkedin.com/in/joachim-bograd-43b0a120a/"],
+      affiliation: {
+        "@type": "MedicalOrganization",
+        name: "FysFinder",
+        url: "https://fysfinder.dk",
+      },
+    },
+    about: {
+      "@type": "MedicalSpecialty",
+      name: "Fysioterapi",
+      relevantSpecialty: {
+        "@type": "MedicalSpecialty",
+        name: "Physical Therapy",
+      },
+    },
+    specialty: "Fysioterapi",
+    medicalAudience: "Patienter og sundhedsprofessionelle",
+    articleBody: term.content,
+    publisher: {
+      "@type": "Organization",
+      name: "FysFinder",
+      url: "https://fysfinder.dk",
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://fysfinder.dk/fysioterapeut-artikler/${term.slug}`,
+    },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+    />
+  );
+}
+
 export async function generateStaticParams() {
   const terms = await getGlossaryTerms();
   return terms.map((term) => ({
@@ -37,6 +96,7 @@ export default async function ArticlePage({
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <ArticleStructuredData term={term} />
       <div className="max-w-2xl mx-auto">
         <Breadcrumbs items={breadcrumbItems} />
         <AuthorCard />
