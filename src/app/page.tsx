@@ -177,8 +177,14 @@ function HomeStructuredData({
           name: suburb.suburb,
           containsPlace: {
             "@type": ["LocalBusiness", "MedicalClinic"],
+            name: `Fysioterapeuter i ${suburb.suburb}`,
             numberOfItems: suburb.count,
             medicalSpecialty: "Physical Therapy",
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: suburb.suburb,
+              addressCountry: "DK",
+            },
           },
         })),
       })),
