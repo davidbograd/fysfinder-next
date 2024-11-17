@@ -49,7 +49,7 @@ export async function generateMetadata({
   const clinicCount = clinics.length;
 
   return {
-    title: `Sammenlign ${clinicCount} Fysioterapeut i ${suburbName} - FysFinder`,
+    title: `Sammenlign ${clinicCount} Fysioterapeut i ${suburbName} | FysFinder`,
     description: `Sammenlign alle ${suburbName}s fysioterapeuter. Se ratings, åbeningstider og specialer og find den bedste fysioterapeut.`,
   };
 }
