@@ -133,6 +133,66 @@ function RegionSection({ region }: { region: RegionData }) {
   );
 }
 
+interface HomeStructuredDataProps {
+  totalClinics: number;
+  regions: RegionData[];
+}
+
+function HomeStructuredData({
+  totalClinics,
+  regions,
+}: HomeStructuredDataProps) {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": ["WebSite", "MedicalWebPage"],
+    name: "FysFinder",
+    url: "https://fysfinder.dk",
+    about: {
+      "@type": "MedicalSpecialty",
+      name: "Fysioterapi",
+      relevantSpecialty: {
+        "@type": "MedicalSpecialty",
+        name: "Physical Therapy",
+      },
+    },
+    description: "Find den bedste fysioterapeut tæt på dig",
+    specialty: "Fysioterapi",
+    medicalAudience: "Patienter der søger fysioterapi",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: "https://fysfinder.dk/{search_term_string}",
+      "query-input": "required name=search_term_string",
+    },
+    publisher: {
+      "@type": ["Organization", "MedicalOrganization"],
+      name: "FysFinder",
+      url: "https://fysfinder.dk",
+      description: `Danmarks største oversigt over fysioterapeuter med ${totalClinics} klinikker`,
+      medicalSpecialty: ["Fysioterapi", "Physical Therapy"],
+      areaServed: regions.map((region) => ({
+        "@type": "State",
+        name: region.name,
+        containsPlace: region.suburbs.map((suburb) => ({
+          "@type": "City",
+          name: suburb.suburb,
+          containsPlace: {
+            "@type": ["LocalBusiness", "MedicalClinic"],
+            numberOfItems: suburb.count,
+            medicalSpecialty: "Physical Therapy",
+          },
+        })),
+      })),
+    },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+    />
+  );
+}
+
 export const metadata: Metadata = {
   title: "Find den bedste fysioterapeut tæt på dig - Fysfinder",
   description:
@@ -146,6 +206,10 @@ export default async function HomePage() {
 
     return (
       <div>
+        <HomeStructuredData
+          totalClinics={clinics.length}
+          regions={regionData}
+        />
         <Header totalClinics={clinics.length} />
         <div className="max-w-6xl mx-auto px-4">
           {regionData.map((region) => (
