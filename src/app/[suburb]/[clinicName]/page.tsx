@@ -101,6 +101,19 @@ async function fetchClinicBySlug(
   return data;
 }
 
+// Add this helper function near the top of the file
+function generateSeoTitle(clinicName: string): string {
+  const suffix = " | Se detaljer";
+  const maxLength = 60;
+  const maxClinicNameLength = maxLength - suffix.length;
+
+  if (clinicName.length <= maxClinicNameLength) {
+    return clinicName + suffix;
+  }
+
+  return clinicName.slice(0, maxClinicNameLength - 1).trim() + "..." + suffix;
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -116,7 +129,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${clinic.klinikNavn} - Se alle detaljer`,
+    title: generateSeoTitle(clinic.klinikNavn),
     description: `Se åbningstider, priser og behandlingstyper for ${clinic.klinikNavn}, ${clinic.lokation}.`,
   };
 }
