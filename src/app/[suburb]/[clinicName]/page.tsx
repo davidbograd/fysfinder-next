@@ -213,8 +213,6 @@ function ClinicStructuredData({ clinic }: ClinicStructuredDataProps) {
       },
     ].filter(Boolean),
 
-    // Pricing
-    priceRange: clinic.ydernummer ? "Med ydernummer" : "Uden ydernummer",
     currenciesAccepted: "DKK",
 
     // Medical specialties and services
