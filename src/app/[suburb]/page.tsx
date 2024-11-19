@@ -46,16 +46,9 @@ export async function generateMetadata({
   const clinics = await fetchClinicsBySuburb(params.suburb);
   const suburbName =
     clinics.length > 0 ? clinics[0].lokation : deslugify(params.suburb);
-  const clinicCount = clinics.length;
-
-  const fullTitle = `Fysioterapi ${suburbName} | Find ${suburbName} fysioterapeuter`;
-
-  const shortTitle = `Fysioterapi ${suburbName} | Find fysioterapeuter`;
-
-  const title = fullTitle.length > 60 ? shortTitle : fullTitle;
 
   return {
-    title,
+    title: `Fysioterapi klinikker ${suburbName} | Find fysioterapeuter ›`,
     description: `Find og sammenlign ${suburbName} fysioterapeuter. Se anbefalinger, fysioterapi specialer, priser, åbningstider og mere. Start her →`,
   };
 }
@@ -130,7 +123,7 @@ export default async function SuburbPage({
         ) : (
           <>
             <h1 className="text-3xl font-bold mb-2">
-              Bedste fysioterapeuter i {suburbName}
+              Find og sammenlign fysioterapeuter {suburbName}
             </h1>
 
             <p className="text-gray-600 mb-8 max-w-[800px]">
@@ -138,9 +131,9 @@ export default async function SuburbPage({
               {suburbName}. Se anmeldelser, specialer, priser og find den
               perfekte fysioterapeut.
             </p>
-            <p className="text-sm text-gray-500 mb-4">
+            <h3 className="text-sm text-gray-500 mb-4">
               {clinics.length} fysioterapi klinikker fundet
-            </p>
+            </h3>
             <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
               {clinics.map((clinic) => (
                 <Link

@@ -120,14 +120,11 @@ export async function generateMetadata({
   const clinic = await fetchClinicBySlug(params.suburb, params.clinicName);
 
   if (!clinic) {
-    return {
-      title: "Klinik ikke fundet - Fysfinder",
-      description: "Beklager, vi kunne ikke finde den ønskede klinik.",
-    };
+    throw new Error("Clinic not found");
   }
 
   return {
-    title: generateSeoTitle(clinic.klinikNavn),
+    title: `${clinic.klinikNavn} | Se detaljer`,
     description: `Se åbningstider, priser og behandlingstyper for ${clinic.klinikNavn}, ${clinic.lokation}.`,
   };
 }
