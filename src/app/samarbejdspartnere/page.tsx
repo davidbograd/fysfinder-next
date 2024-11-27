@@ -8,7 +8,7 @@ import { Partner } from "../types";
 export const metadata: Metadata = {
   title: "Vores Samarbejdspartnere | FysFinder",
   description:
-    "Se vores samarbejdspartnere der hjælper med at sikre kvalitet og pålidelighed i vores tjeneste.",
+    "Se vores samarbejdspartnere der hjælper med at sikre kvalitet og pålidelighed når du skal finde en fysioterapeut.",
 };
 
 export default function PartnersPage() {
