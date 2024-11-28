@@ -48,7 +48,7 @@ Det kan derfor være en god idé at [finde en fysioterapeut](https://www.fysfind
 
 ## Symptomer på whiplash
 
-![Illustration af symptomer på whiplash](/images/articles/whiplash_symptomer.webp)
+![Illustration af symptomer på whiplash](/images/articles/whiplash_symptomer.png)
 
 ### Fysiske symptomer
 
