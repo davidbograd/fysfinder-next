@@ -1,4 +1,7 @@
-***TITLE***
+---
+title: "Whiplash/piskesmæld - en komplet oversigt?"
+description: "En grundig gennemgang af whiplash/piskesmæld. Herunder årsager, mekanismer, symptomer og behandlingsmuligheder"
+---
 
 ![Illustration af whiplash](/images/articles/whiplash_intro.webp)
 
