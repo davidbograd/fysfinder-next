@@ -86,7 +86,7 @@ export default function OmOsPage() {
               <FounderCard
                 name="David Bograd"
                 role="Co-founder & designer"
-                imageUrl="/images/om-os/davidbograd-fysfinder.jpg"
+                imageUrl="/images/om-os/davidbograd-fysfinder.jpeg"
               />
             </div>
           </section>
