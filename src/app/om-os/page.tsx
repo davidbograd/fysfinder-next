@@ -72,6 +72,12 @@ export default function OmOsPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <FounderCard
+                name="Joachim Bograd"
+                role="Founder & Fysioterapeut"
+                imageUrl="/images/om-os/joachimbograd-fysfinder.png"
+              />
+
+              <FounderCard
                 name="Alexander Christrup"
                 role="Co-founder & marketing ekspert"
                 imageUrl="/images/om-os/alexanderchristrup-fysfinder.jpeg"
@@ -81,12 +87,6 @@ export default function OmOsPage() {
                 name="David Bograd"
                 role="Co-founder & designer"
                 imageUrl="/images/om-os/davidbograd-fysfinder.jpg"
-              />
-
-              <FounderCard
-                name="Joachim Bograd"
-                role="Founder & Fysioterapeut"
-                imageUrl="/images/om-os/joachimbograd-fysfinder.png"
               />
             </div>
           </section>
@@ -134,7 +134,7 @@ export default function OmOsPage() {
                 rel="noopener noreferrer"
                 className="text-blue-600 hover:underline"
               >
-                FN's verdensmål #3 for sundhed og trivsel
+                FN&apos;s verdensmål #3 for sundhed og trivsel
               </a>
               . FysFinder bidrager ved at fremme adgangen til sundhedsydelser
               for patienter og støtte lokale klinikker i at styrke deres
