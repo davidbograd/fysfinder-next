@@ -125,7 +125,9 @@ export default function OmOsPage() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-semibold mb-4">FN's Verdensmål</h2>
+            <h2 className="text-2xl font-semibold mb-4">
+              FN&apos;s Verdensmål
+            </h2>
             <p>
               Vi arbejder i tråd med{" "}
               <a
