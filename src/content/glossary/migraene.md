@@ -49,7 +49,7 @@ For nogle kan migræne også starte med en såkaldt prodromal fase – forvarsle
 
 Migræne kan inddeles i forskellige typer, som hjælper med at beskrive de individuelle oplevelser:
 
-![Illustration af migræne typer](/images/articles/migraene_typer.png)
+![Illustration af migræne typer](/images/articles/migraene_type.png)
 
 
 #### **Migræne uden aura**
