@@ -75,18 +75,21 @@ export default function OmOsPage() {
                 name="Joachim Bograd"
                 role="Founder & Fysioterapeut"
                 imageUrl="/images/om-os/joachimbograd-fysfinder.png"
+                alt="Joachim Bograd FysFinder"
               />
 
               <FounderCard
                 name="Alexander Christrup"
                 role="Co-founder & marketing ekspert"
                 imageUrl="/images/om-os/alexanderchristrup-fysfinder.jpeg"
+                alt="Alexander Christrup FysFinder"
               />
 
               <FounderCard
                 name="David Bograd"
                 role="Co-founder & designer"
                 imageUrl="/images/om-os/davidbograd-fysfinder.jpeg"
+                alt="David Bograd FysFinder"
               />
             </div>
           </section>

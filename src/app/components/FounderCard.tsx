@@ -4,15 +4,16 @@ interface FounderCardProps {
   name: string;
   role: string;
   imageUrl: string;
+  alt: string;
 }
 
-export function FounderCard({ name, role, imageUrl }: FounderCardProps) {
+export function FounderCard({ name, role, imageUrl, alt }: FounderCardProps) {
   return (
     <div className="flex flex-col w-full">
       <div className="mb-4 relative aspect-square w-full">
         <Image
           src={imageUrl}
-          alt={name}
+          alt={alt}
           fill
           className="rounded-lg object-cover"
           priority
