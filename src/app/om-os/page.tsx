@@ -55,9 +55,9 @@ export default function OmOsPage() {
               behandlingsform du søger.
             </p>
             <p>
-              FysFinder vil også gerne hjælpe lokale klinikker med at få flere
-              patienter. Det er ikke nemt at overleve som fysioterapeutklinik,
-              og det vil vi gerne gøre noget ved.
+              FysFinder hjælper lokale klinikker med at få flere patienter. Det
+              er udfordrende at drive en fysioterapeutklinik, og det gør vi
+              noget ved gennem øget synlighed og flere patienthenvisninger.
             </p>
           </section>
 
@@ -67,15 +67,18 @@ export default function OmOsPage() {
             </h2>
             <p>
               FysFinder blev skabt på baggrund af Joachim Bograds frustration
-              med de nuværende tilbud. Joachim har selv været patient flere
-              gange, og er efterfølgende blev uddannet fysioterapeut. Han har
-              derfor haft mulighed for at opleve besværet ved at finde den
-              rigtige behandler, samt frustrationen hos de patienter, der er på
-              deres 3., eller måske endda 4. behandler.
+              med de nuværende tilbud. Joachim har selv været patient, og er
+              efterfølgende blev uddannet fysioterapeut. Han har derfor oplevet
+              besværet ved at finde den rigtige behandler, samt frustrationen
+              hos de patienter, der er på deres tredje, eller fjerde behandler.
             </p>
             <p className="mt-4">
               Løsningen blev FysFinder.dk, hvor vi gør det nemt og overskueligt
-              at sammenligne kvalificerede fysioterapeuter - helt gratis.
+              at{" "}
+              <Link href="/specialer" className="text-blue-600 hover:underline">
+                find fysioterapeuter med specialer
+              </Link>{" "}
+              tæt på dig og sammenligne kvalificerede behandlere - helt gratis.
             </p>
             <p className="mt-4">
               Platformen er blevet mødt af stor støtte. Patienter, klinikejere,
