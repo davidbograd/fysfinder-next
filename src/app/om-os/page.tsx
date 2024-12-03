@@ -70,15 +70,16 @@ export default function OmOsPage() {
               med de nuværende tilbud. Joachim har selv været patient, og er
               efterfølgende blev uddannet fysioterapeut. Han har derfor oplevet
               besværet ved at finde den rigtige behandler, samt frustrationen
-              hos de patienter, der er på deres tredje, eller fjerde behandler.
+              hos de patienter, der er på deres tredje eller fjerde behandler.
             </p>
             <p className="mt-4">
               Løsningen blev FysFinder.dk, hvor vi gør det nemt og overskueligt
               at{" "}
               <Link href="/specialer" className="text-blue-600 hover:underline">
-                find fysioterapeuter med specialer
+                finde fysioterapeuter med specialer
               </Link>{" "}
-              tæt på dig og sammenligne kvalificerede behandlere - helt gratis.
+              tæt på dig. Du kan sammenligne kvalificerede behandlere - helt
+              gratis.
             </p>
             <p className="mt-4">
               Platformen er blevet mødt af stor støtte. Patienter, klinikejere,
