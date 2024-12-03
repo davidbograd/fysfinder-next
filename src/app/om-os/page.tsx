@@ -2,24 +2,44 @@ import { Metadata } from "next";
 import { Breadcrumbs } from "@/app/components/Breadcrumbs";
 import Link from "next/link";
 import { FounderCard } from "@/app/components/FounderCard";
+import { AboutUsStructuredData } from "@/app/components/AboutUsStructuredData";
 
 export const metadata: Metadata = {
-  title: "Om os | FysFinder",
+  title: "Om Fysfinder.dk | Platform til at finde fysioterapeuter i Danmark",
   description:
-    "Lær mere om FysFinder og vores mission om at forbinde patienter med de rette fysioterapeuter.",
+    "Bliv klogere på FysFinder.dk. Danmarks go-to platform til at finde fysioterapeuter. Kom med bag facaden her ›",
 };
 
 export default function OmOsPage() {
+  const founders = [
+    {
+      name: "Joachim Bograd",
+      role: "Founder & Fysioterapeut",
+      linkedinUrl: "https://www.linkedin.com/in/joachim-bograd-43b0a120a/",
+    },
+    {
+      name: "Alexander Christrup",
+      role: "Co-founder & marketing ekspert",
+      linkedinUrl: "https://www.linkedin.com/in/alexander-christrup/",
+    },
+    {
+      name: "David Bograd",
+      role: "Co-founder & designer",
+      linkedinUrl: "https://www.linkedin.com/in/davidbograd/",
+    },
+  ];
+
   const breadcrumbItems = [{ text: "Forside", link: "/" }, { text: "Om os" }];
 
   return (
     <main className="container mx-auto px-4 py-8 max-w-4xl">
+      <AboutUsStructuredData founders={founders} />
       <Breadcrumbs items={breadcrumbItems} />
 
       <div className="space-y-12 mt-8">
         <header>
           <h1 className="text-3xl font-bold mb-6">
-            Fysfinder gør det lettere at finde og være fysioterapeut
+            Hvem er FysFinder.dk? Danmarks platform til at finde fysioterapeuter
           </h1>
         </header>
 
@@ -76,6 +96,7 @@ export default function OmOsPage() {
                 role="Founder & Fysioterapeut"
                 imageUrl="/images/om-os/joachimbograd-fysfinder.png"
                 alt="Joachim Bograd FysFinder"
+                linkedinUrl="https://www.linkedin.com/in/joachim-bograd-43b0a120a/"
               />
 
               <FounderCard
@@ -83,6 +104,7 @@ export default function OmOsPage() {
                 role="Co-founder & marketing ekspert"
                 imageUrl="/images/om-os/alexanderchristrup-fysfinder.jpeg"
                 alt="Alexander Christrup FysFinder"
+                linkedinUrl="https://www.linkedin.com/in/alexander-christrup/"
               />
 
               <FounderCard
@@ -90,12 +112,13 @@ export default function OmOsPage() {
                 role="Co-founder & designer"
                 imageUrl="/images/om-os/davidbograd-fysfinder.jpeg"
                 alt="David Bograd FysFinder"
+                linkedinUrl="https://www.linkedin.com/in/davidbograd/"
               />
             </div>
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-semibold mb-8">Vores Værdier</h2>
+            <h2 className="text-2xl font-semibold mb-8">Vores værdier</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div>
@@ -129,7 +152,7 @@ export default function OmOsPage() {
 
           <section className="mb-12">
             <h2 className="text-2xl font-semibold mb-4">
-              FN&apos;s Verdensmål
+              FN&apos;s verdensmål
             </h2>
             <p>
               Vi arbejder i tråd med{" "}
