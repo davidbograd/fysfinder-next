@@ -64,33 +64,38 @@ export default async function SpecialtiesPage() {
         </p>
 
         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-          {specialties.map((specialty) =>
-            specialty.clinic_count > 0 ? (
-              <Link
-                key={specialty.specialty_id}
-                href={`/specialer/${specialty.specialty_name_slug}`}
-                className="p-6 rounded-lg border border-gray-200 hover:border-gray-300 transition-colors"
+          {specialties.map((specialty) => (
+            <Link
+              key={specialty.specialty_id}
+              href={`/specialer/${specialty.specialty_name_slug}`}
+              className={`p-6 rounded-lg border transition-colors ${
+                specialty.clinic_count > 0
+                  ? "border-gray-200 hover:border-gray-300"
+                  : "border-gray-100 hover:border-gray-200 bg-gray-50/50"
+              }`}
+            >
+              <h2
+                className={`text-xl font-semibold mb-2 ${
+                  specialty.clinic_count === 0 ? "text-gray-600" : ""
+                }`}
               >
-                <h2 className="text-xl font-semibold mb-2">
-                  {specialty.specialty_name}
-                </h2>
-                <p className="text-gray-600">
-                  {specialty.clinic_count}{" "}
-                  {specialty.clinic_count === 1 ? "klinik" : "klinikker"}
-                </p>
-              </Link>
-            ) : (
-              <div
-                key={specialty.specialty_id}
-                className="p-6 rounded-lg border border-gray-100 bg-gray-50 cursor-not-allowed"
+                {specialty.specialty_name}
+              </h2>
+              <p
+                className={
+                  specialty.clinic_count === 0
+                    ? "text-gray-500"
+                    : "text-gray-600"
+                }
               >
-                <h2 className="text-xl font-semibold mb-2 text-gray-400">
-                  {specialty.specialty_name}
-                </h2>
-                <p className="text-gray-400">Ingen klinikker endnu</p>
-              </div>
-            )
-          )}
+                {specialty.clinic_count === 0
+                  ? "Ingen klinikker endnu"
+                  : `${specialty.clinic_count} ${
+                      specialty.clinic_count === 1 ? "klinik" : "klinikker"
+                    }`}
+              </p>
+            </Link>
+          ))}
         </div>
 
         {/* SEO Content */}

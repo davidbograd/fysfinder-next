@@ -70,22 +70,27 @@ export default async function SearchPage({
         <p className="text-red-500">Fejl: {errorMessage}</p>
       ) : searchTerm ? (
         clinics.length > 0 ? (
-          <div className="space-y-4">
-            {clinics.map((clinic) => (
-              <Card key={clinic.clinics_id}>
-                <CardHeader>
-                  <CardTitle>
-                    <Link
-                      href={`/${clinic.lokationSlug}/${clinic.klinikNavnSlug}`}
-                      className="text-blue-500 hover:underline"
-                    >
-                      {clinic.klinikNavn}
-                    </Link>
-                  </CardTitle>
-                </CardHeader>
-              </Card>
-            ))}
-          </div>
+          <>
+            <h3 className="text-sm text-gray-500 mb-4">
+              {clinics.length} fysioterapi klinikker fundet
+            </h3>
+            <div className="space-y-4">
+              {clinics.map((clinic) => (
+                <Card key={clinic.clinics_id}>
+                  <CardHeader>
+                    <CardTitle>
+                      <Link
+                        href={`/${clinic.lokationSlug}/${clinic.klinikNavnSlug}`}
+                        className="text-blue-500 hover:underline"
+                      >
+                        {clinic.klinikNavn}
+                      </Link>
+                    </CardTitle>
+                  </CardHeader>
+                </Card>
+              ))}
+            </div>
+          </>
         ) : (
           <p>Ingen klinikker fundet der matcher &quot;{searchTerm}&quot;</p>
         )

@@ -97,7 +97,7 @@ export default async function SpecialtyPage({
         <Breadcrumbs items={breadcrumbItems} />
 
         <h1 className="text-3xl font-bold mb-4">
-          {clinics.length} fysioterapeuter med speciale i {specialtyName}
+          Fysioterapeuter med speciale i {specialtyName}
         </h1>
 
         <p className="text-gray-600 mb-8 max-w-[800px]">
@@ -106,7 +106,12 @@ export default async function SpecialtyPage({
           og find den rette specialist til dine behov.
         </p>
 
-        {/* Clinics list */}
+        {clinics.length > 0 && (
+          <h3 className="text-sm text-gray-500 mb-4">
+            {clinics.length} fysioterapi klinikker fundet
+          </h3>
+        )}
+
         {clinics.length > 0 ? (
           <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
             {clinics.map((clinic) => (
@@ -127,8 +132,16 @@ export default async function SpecialtyPage({
             ))}
           </div>
         ) : (
-          <div className="py-8 text-gray-600">
-            <p>Vi arbejder på at tilføje fysioterapeuter med dette speciale.</p>
+          <div className="py-8">
+            <p className="text-gray-600">
+              Vi har i øjeblikket ingen fysioterapeuter registreret med speciale
+              i {specialtyName.toLowerCase()}.
+            </p>
+            <p className="text-gray-600 mt-2">
+              <Link href="/specialer" className="text-blue-600 hover:underline">
+                Gå tilbage til oversigten over specialer
+              </Link>
+            </p>
           </div>
         )}
 
