@@ -1,12 +1,9 @@
 ---
-title: "Hjertetsundhed i fokus - sådan får du et sundt hjerte"
+title: "Hjertesundhed i fokus - sådan får du et sundt hjerte"
 description: "Få forståelse for hvor udbredt hjertesygdomme er, hvad det indebærer, og hvordan man bedst håndterer det."
 ---
 
 ![Illustration af hjertet](/images/articles/hjerte_intro.webp)
-
-# Hjerte
-
 
 ## Hvad er hjertesygdomme?
 
