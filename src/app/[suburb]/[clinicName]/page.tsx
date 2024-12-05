@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Check, Phone, Globe, Mail, X } from "lucide-react";
 import { ClinicSidebar } from "@/app/components/ClinicSidebar";
+import { redirect } from "next/navigation";
 
 interface Specialty {
   specialty_id: string;
@@ -82,22 +83,25 @@ async function fetchClinicBySlug(
     `
     )
     .eq("lokationSlug", suburbSlug)
-    .eq("klinikNavnSlug", clinicSlug)
-    .single();
+    .eq("klinikNavnSlug", clinicSlug);
 
   if (error) {
     console.error("Supabase error:", error);
-    throw new Error(
-      `Failed to fetch clinic: ${error.message}. Slug was ${clinicSlug}`
-    );
+    throw new Error(`Database error: ${error.message}`);
   }
 
-  if (data) {
-    // Flatten the specialties array
-    data.specialties = data.specialties.map((item: any) => item.specialty);
+  // If no clinic found, return null
+  if (!data || data.length === 0) {
+    return null;
   }
 
-  return data;
+  // Get the first (and should be only) clinic
+  const clinic = data[0];
+
+  // Flatten the specialties array
+  clinic.specialties = clinic.specialties.map((item: any) => item.specialty);
+
+  return clinic;
 }
 
 function generateSeoTitle(clinicName: string): string {
@@ -120,7 +124,7 @@ export async function generateMetadata({
   const clinic = await fetchClinicBySlug(params.suburb, params.clinicName);
 
   if (!clinic) {
-    throw new Error("Clinic not found");
+    redirect(`/${params.suburb}`);
   }
 
   return {
@@ -281,7 +285,7 @@ export default async function ClinicPage({
     const clinic = await fetchClinicBySlug(params.suburb, params.clinicName);
 
     if (!clinic) {
-      return <div className="text-center mt-10">Clinic not found</div>;
+      redirect(`/${params.suburb}`);
     }
 
     const breadcrumbItems = [
