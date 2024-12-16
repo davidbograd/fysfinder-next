@@ -69,7 +69,7 @@ export async function generateMetadata({
     specialty?.specialty_name || deslugify(params.specialtyName);
 
   return {
-    title: `Find Fysioterapeut med speciale i ${specialtyName} - FysFinder`,
+    title: `Find Fysioterapeut med speciale i ${specialtyName}`,
     description: `Find fysioterapeuter der er specialiseret i ${specialtyName}. FysFinder hjælper dig med at finde den rette specialist til dine behov.`,
   };
 }
@@ -97,7 +97,7 @@ export default async function SpecialtyPage({
         <Breadcrumbs items={breadcrumbItems} />
 
         <h1 className="text-3xl font-bold mb-4">
-          Fysioterapeuter med speciale i {specialtyName}
+          Fysioterapeuter med speciale i behandling af {specialtyName}
         </h1>
 
         <p className="text-gray-600 mb-8 max-w-[800px]">
