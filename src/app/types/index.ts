@@ -17,10 +17,12 @@ export interface SeoSection {
   paragraph: string;
 }
 
+import { ReactNode } from "react";
+
 export interface Partner {
   id: string;
   name: string;
   logo: string;
-  description: string[];
-  website?: string;
+  description: (string | ReactNode)[];
+  website: string;
 }

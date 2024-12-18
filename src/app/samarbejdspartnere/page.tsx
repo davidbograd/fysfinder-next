@@ -18,8 +18,27 @@ export default function PartnersPage() {
       name: "Foreningen af kroniske smerteramte og pårørende (FAKS)",
       logo: "/images/samarbejdspartnere/FAKS-logo.webp",
       description: [
-        "FAKS er en landsdækkende patientforening for mennesker med kroniske smerter og deres pårørende. Foreningen arbejder for at forbedre vilkårene for mennesker med kroniske smerter gennem oplysning, rådgivning og politisk arbejde.",
-        "Gennem vores samarbejde med FAKS kan vi bedre forstå og imødekomme behovene hos personer med kroniske smerter, der søger fysioterapi. Dette partnerskab hjælper os med at sikre, at vores platform er tilgængelig og nyttig for alle, uanset deres smertetilstand.",
+        "FAKS er en landsdækkende forening, som siden 1990 har arbejdet på at skabe synlighed omkring udfordringerne for de over 1.3 millioner danskere, som dagligt er berørt af kroniske smerter.",
+
+        "Foreningens initiativer spænder lige fra at influere den politiske dagsorden, sikre tilbud til smerteramte (f.eks. offentlige og private tilbud), yde råd og vejledning og tilbyder muligheden for fællesskab og støtte til smerteramte og deres pårørende via lokalafdelinger rundt om i landet. Derudover tilbyder FAKS flere forskellige forløb med fokus på sygdoms- og smertemestring.",
+
+        "FAKS er ikke partipolitisk eller diagnoseorienteret – de fokuserer på den invaliderende sygdom, som det er at have kroniske smerter.",
+
+        <>
+          Gennem deres gratis rådgivningslinje, SmerteLinjen, giver FAKS
+          smerteramte mulighed for at få konstruktiv hjælp fra
+          smertesygeplejersker, socialrådgivere, fysioterapeuter og psykologer –
+          alle er frivillige. Du kan læse mere om dette tilbud på{" "}
+          <Link
+            href="https://smertelinjen.dk"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-logo-blue hover:underline"
+          >
+            smertelinjen.dk
+          </Link>
+          .
+        </>,
       ],
       website: "https://faks.dk",
     },
@@ -79,7 +98,7 @@ export default function PartnersPage() {
               <div className="mt-4 space-y-4">
                 {partner.description.map((paragraph, index) => (
                   <p key={index} className="text-gray-600 leading-relaxed">
-                    {paragraph}
+                    {typeof paragraph === "string" ? paragraph : paragraph}
                   </p>
                 ))}
               </div>
