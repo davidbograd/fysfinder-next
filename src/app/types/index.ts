@@ -26,3 +26,11 @@ export interface Partner {
   description: (string | ReactNode)[];
   website: string;
 }
+
+export interface PostalCode {
+  nr: string;
+  navn: string;
+  stormodtager: boolean;
+  visueltcenter: [number, number];
+  betegnelser?: string[];
+}
