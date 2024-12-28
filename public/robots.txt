@@ -2,6 +2,7 @@
 User-agent: *
 Allow: /
 Disallow: /search
+Disallow: /postnumre
 Disallow: /*?*  # Disallow URL parameters to prevent duplicate content crawling
 
 # **** AI Bot Specific Rules ****

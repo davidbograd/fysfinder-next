@@ -34,3 +34,17 @@ export interface PostalCode {
   visueltcenter: [number, number];
   betegnelser?: string[];
 }
+
+export interface City {
+  navn: string;
+  postal_codes: string[];
+  latitude: number;
+  longitude: number;
+  betegnelser: string[];
+  updated_at: string;
+}
+
+export interface SearchResult {
+  exact_match: City | null;
+  nearby_cities: Array<City & { distance: number }>;
+}
