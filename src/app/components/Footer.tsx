@@ -21,7 +21,7 @@ export default function Footer() {
             </Link>
           </div>
 
-          <div className="flex flex-col items-center sm:flex-row gap-2">
+          <div className="flex flex-col items-center sm:flex-row-reverse sm:items-center gap-2 sm:gap-4">
             <SiteLogo />
             <p className="text-gray-600 text-sm">Made in Copenhagen</p>
           </div>
