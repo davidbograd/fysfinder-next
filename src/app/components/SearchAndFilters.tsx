@@ -90,7 +90,7 @@ export function SearchAndFilters({
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onFocus={handleFocus}
-              placeholder="Søg efter postnummer eller by..."
+              placeholder="Søg efter postnummer..."
               className="w-full h-full pl-3 pr-5 focus:outline-none focus:ring-0 text-gray-900 placeholder:text-gray-500 text-base bg-transparent"
             />
           </div>
