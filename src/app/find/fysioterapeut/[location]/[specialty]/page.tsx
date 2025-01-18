@@ -4,6 +4,7 @@ import LocationPage, { fetchSpecialties, fetchCity } from "../page";
 import { createClient } from "@supabase/supabase-js";
 import { slugify } from "@/app/utils/slugify";
 import { CityRow, SpecialtyRow } from "@/app/types";
+import { SpecialtyStructuredData } from "@/app/components/SpecialtyStructuredData";
 
 export async function generateMetadata({
   params,

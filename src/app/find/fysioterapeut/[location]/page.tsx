@@ -10,6 +10,7 @@ import { Clinic, City, ClinicWithDistance } from "@/app/types/index";
 import { SpecialtyDropdown } from "@/app/components/SpecialtyDropdown";
 import { notFound } from "next/navigation";
 import { SearchAndFilters } from "@/app/components/SearchAndFilters";
+import { LocationStructuredData } from "@/app/components/LocationStructuredData";
 
 // Create a Supabase client for static generation
 const supabase = createClient(
