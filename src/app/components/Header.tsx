@@ -13,16 +13,10 @@ export default function Header() {
         </div>
         <nav className="flex justify-center sm:justify-start items-center space-x-4 sm:space-x-6">
           <Link
-            href="/"
+            href="/find/fysioterapeut/danmark"
             className="text-sm sm:text-base text-gray-600 hover:text-gray-900"
           >
-            Lokationer
-          </Link>
-          <Link
-            href="/specialer"
-            className="text-sm sm:text-base text-gray-600 hover:text-gray-900"
-          >
-            Specialer
+            Find fysioterapeut
           </Link>
           <Link
             href="/fysioterapeut-artikler"

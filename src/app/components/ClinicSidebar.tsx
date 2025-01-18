@@ -47,7 +47,7 @@ export function ClinicSidebar({ clinic }: ClinicSidebarProps) {
             />
           )}
           <div>
-            <h2 className="text-xl font-bold">{clinic.klinikNavn}</h2>
+            <p className="text-2xl font-semibold mb-4">{clinic.klinikNavn}</p>
             <div className="flex items-center mt-1">
               <StarIcon className="h-5 w-5 text-amber-500 mr-2" />
               <span className="font-semibold mr-2">
@@ -80,7 +80,11 @@ export function ClinicSidebar({ clinic }: ClinicSidebarProps) {
                     className="w-full flex items-center justify-start"
                     asChild
                   >
-                    <a href={clinic.website!} target="_blank" rel="noopener">
+                    <a
+                      href={clinic.website!}
+                      target="_blank"
+                      rel="noopener nofollow"
+                    >
                       <Globe className="mr-2 h-4 w-4 text-gray-400" />
                       <span>{clinic.website}</span>
                     </a>

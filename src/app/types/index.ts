@@ -10,6 +10,10 @@ export interface Clinic {
   klinikNavnSlug: string;
   adresse: string;
   postnummer: number;
+  specialties: {
+    specialty_id: string;
+    specialty_name: string;
+  }[];
 }
 
 export interface SeoSection {
@@ -36,15 +40,48 @@ export interface PostalCode {
 }
 
 export interface City {
-  navn: string;
+  id: string;
+  bynavn: string;
+  bynavn_slug: string;
   postal_codes: string[];
   latitude: number;
   longitude: number;
-  betegnelser: string[];
-  updated_at: string;
+  betegnelse: string;
 }
 
 export interface SearchResult {
   exact_match: City | null;
   nearby_cities: Array<City & { distance: number }>;
+}
+
+export interface CityRow {
+  bynavn: string;
+}
+
+export interface SpecialtyRow {
+  specialty_name_slug: string;
+  specialty_name: string;
+}
+
+export interface ClinicWithDistance extends Clinic {
+  distance?: number;
+  cityName: string;
+}
+
+export interface NearbyClinicResponse {
+  clinics_id: string;
+  klinikNavn: string;
+  ydernummer: boolean;
+  avgRating: string;
+  ratingCount: string;
+  adresse: string;
+  postnummer: string;
+  lokation: string;
+  klinikNavnSlug: string;
+  city_name: string;
+  distance: number;
+  clinic_specialties: Array<{
+    specialty_id: string;
+    specialty_name: string;
+  }> | null;
 }

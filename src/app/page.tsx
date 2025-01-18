@@ -4,28 +4,21 @@ import { slugify } from "./utils/slugify";
 import { createClient } from "@/app/utils/supabase/server";
 import { Metadata } from "next";
 import { Button } from "@/components/ui/button";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import { FAQ } from "@/components/FAQ";
+import { SearchAndFilters } from "@/app/components/SearchAndFilters";
+import { RegionList } from "@/app/components/RegionList";
 
-interface Clinic {
-  clinics_id: string;
-  lokation: string;
-  postnummer: string;
-}
-
-interface SuburbCount {
-  suburb: string;
-  count: number;
+interface CityWithCount {
+  id: string;
+  bynavn: string;
+  bynavn_slug: string;
+  postal_codes: string[];
+  clinic_count: number;
 }
 
 interface RegionData {
   name: string;
-  suburbs: SuburbCount[];
+  cities: CityWithCount[];
 }
 
 const regions: { [key: string]: { name: string; range: [number, number] } } = {
@@ -36,100 +29,90 @@ const regions: { [key: string]: { name: string; range: [number, number] } } = {
   nordjylland: { name: "Nordjylland", range: [9000, 9999] },
 };
 
-async function fetchClinics() {
+async function fetchCitiesWithCounts() {
   const supabase = createClient();
-  const { data, error } = await supabase
-    .from("clinics")
-    .select("clinics_id, lokation, postnummer");
+
+  const { data, error } = await supabase.from("cities").select(`
+      id,
+      bynavn,
+      bynavn_slug,
+      postal_codes,
+      clinics:clinics(count)
+    `);
 
   if (error) {
     console.error("Supabase error:", error);
-    throw new Error(`Failed to fetch clinics: ${error.message}`);
+    throw new Error(`Failed to fetch cities: ${error.message}`);
   }
 
-  return data as Clinic[];
+  return data.map((city) => ({
+    id: city.id,
+    bynavn: city.bynavn,
+    bynavn_slug: city.bynavn_slug,
+    postal_codes: city.postal_codes,
+    clinic_count: city.clinics?.[0]?.count ?? 0,
+  })) as CityWithCount[];
 }
 
-function processSuburbs(clinics: Clinic[]): RegionData[] {
-  const suburbCounts = clinics.reduce((acc, { lokation, postnummer }) => {
-    if (lokation && lokation.toLowerCase() !== "null") {
-      const key = lokation.toLowerCase();
-      if (!acc[key]) {
-        acc[key] = {
-          suburb: lokation,
-          count: 0,
-          postnummer: postnummer, // Keep one postnummer for region determination
-        };
-      }
-      acc[key].count++;
-    }
-    return acc;
-  }, {} as Record<string, SuburbCount & { postnummer: string }>);
+async function fetchSpecialties() {
+  const supabase = createClient();
+  const { data, error } = await supabase
+    .from("specialties")
+    .select("specialty_id, specialty_name, specialty_name_slug");
 
-  const sortedSuburbs = Object.values(suburbCounts).sort(
-    (a, b) => b.count - a.count
-  );
+  if (error) {
+    console.error("Supabase error:", error);
+    throw new Error(`Failed to fetch specialties: ${error.message}`);
+  }
 
+  return data;
+}
+
+function processCities(cities: CityWithCount[]): RegionData[] {
   return Object.entries(regions).map(([key, { name, range }]) => ({
     name,
-    suburbs: sortedSuburbs
-      .filter(({ postnummer }) => {
-        const postNum = parseInt(postnummer);
-        return postNum >= range[0] && postNum <= range[1];
+    cities: cities
+      .filter((city) => {
+        return city.postal_codes.some((postalCode) => {
+          const postNum = parseInt(postalCode);
+          return postNum >= range[0] && postNum <= range[1];
+        });
       })
-      .map(({ suburb, count }) => ({ suburb, count })), // Remove postnummer from final output
+      .sort((a, b) => b.clinic_count - a.clinic_count),
   }));
 }
 
-function Header({ totalClinics }: { totalClinics: number }) {
+function Header({
+  totalClinics,
+  specialties,
+}: {
+  totalClinics: number;
+  specialties: Array<{
+    specialty_id: string;
+    specialty_name: string;
+    specialty_name_slug: string;
+  }>;
+}) {
   return (
-    <div className="bg-logo-blue text-white py-10 sm:py-20 px-4 mb-8 sm:mb-12 rounded-lg">
-      <div className="max-w-4xl mx-auto text-center">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
+    <div className="bg-logo-blue py-10 sm:py-20 px-4 mb-8 sm:mb-12 rounded-lg">
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-white text-center">
           Find den bedste fysioterapeut
         </h1>
-        <p className="text-base sm:text-lg mb-6 sm:mb-8 text-white/90">
-          Leder du efter en fysioterapeut? Vi har information fra {totalClinics}{" "}
-          danske klinikker. FysFinder har anmeldelser, specialer, priser og
-          meget mere. Find den perfekte fysioterapeut til dit behov.
-        </p>
-        <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
-          {Object.entries(regions).map(([key, { name }]) => (
-            <Button key={key} variant="secondary" asChild>
-              <a href={`#${key}`}>{name}</a>
-            </Button>
-          ))}
+
+        <div className="max-w-2xl mx-auto bg-white rounded-full">
+          <SearchAndFilters
+            specialties={specialties}
+            defaultSearchValue=""
+            citySlug="danmark"
+          />
         </div>
+        <p className="text-base sm:text-lg text-white/90 text-center">
+          Se anmeldelser, specialer, priser og meget mere på {totalClinics}{" "}
+          danske klinikker.
+        </p>
       </div>
     </div>
-  );
-}
-
-function SuburbGrid({ suburbs }: { suburbs: SuburbCount[] }) {
-  return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {suburbs.map(({ suburb, count }) => (
-        <Link
-          key={suburb}
-          href={`/${slugify(suburb)}`}
-          className="block bg-white border p-4 rounded-md hover:shadow-lg transition-shadow duration-200"
-        >
-          <div className="flex justify-between items-center">
-            <span className="text-lg font-bold text-slate-800">{suburb}</span>
-            <span className="text-slate-600">{count} klinikker</span>
-          </div>
-        </Link>
-      ))}
-    </div>
-  );
-}
-
-function RegionSection({ region }: { region: RegionData }) {
-  return (
-    <section id={slugify(region.name)} className="mb-12">
-      <h2 className="text-2xl font-bold mb-4">{region.name}</h2>
-      <SuburbGrid suburbs={region.suburbs} />
-    </section>
   );
 }
 
@@ -172,17 +155,17 @@ function HomeStructuredData({
       areaServed: regions.map((region) => ({
         "@type": "State",
         name: region.name,
-        containsPlace: region.suburbs.map((suburb) => ({
+        containsPlace: region.cities.map((city) => ({
           "@type": "City",
-          name: suburb.suburb,
+          name: city.bynavn,
           containsPlace: {
             "@type": ["LocalBusiness", "MedicalClinic"],
-            name: `Fysioterapeuter i ${suburb.suburb}`,
-            numberOfItems: suburb.count,
+            name: `Fysioterapeuter i ${city.bynavn}`,
+            numberOfItems: city.clinic_count,
             medicalSpecialty: "Physical Therapy",
             address: {
               "@type": "PostalAddress",
-              addressLocality: suburb.suburb,
+              addressLocality: city.bynavn,
               addressCountry: "DK",
             },
           },
@@ -207,20 +190,23 @@ export const metadata: Metadata = {
 
 export default async function HomePage() {
   try {
-    const clinics = await fetchClinics();
-    const regionData = processSuburbs(clinics);
+    const [cities, specialties] = await Promise.all([
+      fetchCitiesWithCounts(),
+      fetchSpecialties(),
+    ]);
+
+    const regionData = processCities(cities);
+    const totalClinics = cities.reduce(
+      (sum, city) => sum + city.clinic_count,
+      0
+    );
 
     return (
       <div>
-        <HomeStructuredData
-          totalClinics={clinics.length}
-          regions={regionData}
-        />
-        <Header totalClinics={clinics.length} />
+        <HomeStructuredData totalClinics={totalClinics} regions={regionData} />
+        <Header totalClinics={totalClinics} specialties={specialties} />
         <div className="max-w-6xl mx-auto px-4">
-          {regionData.map((region) => (
-            <RegionSection key={region.name} region={region} />
-          ))}
+          <RegionList regions={regionData} />
           <FAQ />
         </div>
       </div>
@@ -229,7 +215,7 @@ export default async function HomePage() {
     console.error("Unexpected error:", error);
     return (
       <div className="text-red-500 font-bold text-center py-10">
-        Error loading clinics: {(error as Error).message}
+        Error loading cities: {(error as Error).message}
       </div>
     );
   }

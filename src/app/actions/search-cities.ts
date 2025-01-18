@@ -1,68 +1,20 @@
 "use server";
 
-import { City, SearchResult } from "@/app/types";
-
-function calculateDistance(
-  lat1: number,
-  lon1: number,
-  lat2: number,
-  lon2: number
-): number {
-  const R = 6371; // Earth's radius in km
-  const dLat = ((lat2 - lat1) * Math.PI) / 180;
-  const dLon = ((lon2 - lon1) * Math.PI) / 180;
-  const a =
-    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos((lat1 * Math.PI) / 180) *
-      Math.cos((lat2 * Math.PI) / 180) *
-      Math.sin(dLon / 2) *
-      Math.sin(dLon / 2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  return R * c;
-}
-
-function groupPostalCodes(postalCodes: Array<any>): City[] {
-  const grouped = postalCodes.reduce<Record<string, City>>((acc, curr) => {
-    if (!acc[curr.navn]) {
-      acc[curr.navn] = {
-        navn: curr.navn,
-        postal_codes: [],
-        latitude: curr.visueltcenter[1],
-        longitude: curr.visueltcenter[0],
-        betegnelser: curr.betegnelser || [],
-        updated_at: new Date().toISOString(),
-      };
-    }
-    acc[curr.navn].postal_codes.push(curr.nr);
-    return acc;
-  }, {});
-
-  return Object.values(grouped);
-}
+import { createClient } from "@/app/utils/supabase/server";
+import { SearchResult } from "@/app/types";
 
 export async function searchCities(query: string): Promise<SearchResult> {
-  const cleanQuery = query.trim();
+  const supabase = createClient();
+  const cleanQuery = query.trim().toLowerCase();
 
   try {
-    // Fetch all postal codes
-    const response = await fetch("https://api.dataforsyningen.dk/postnumre", {
-      next: { revalidate: 3600 }, // Cache for 1 hour
-    });
+    // First try to find exact match
+    const { data: exactMatch } = await supabase
+      .from("cities")
+      .select("*")
+      .or(`postal_codes.cs.{${cleanQuery}},bynavn_slug.eq.${cleanQuery}`)
+      .single();
 
-    if (!response.ok) throw new Error("Failed to fetch postal codes");
-
-    const postalCodes = await response.json();
-    const cities = groupPostalCodes(postalCodes);
-
-    // Find exact match
-    const exactMatch =
-      cities.find(
-        (city) =>
-          city.postal_codes.includes(cleanQuery) ||
-          city.navn.toLowerCase() === cleanQuery.toLowerCase()
-      ) || null;
-
-    // If no exact match found, return empty result
     if (!exactMatch) {
       return {
         exact_match: null,
@@ -70,28 +22,17 @@ export async function searchCities(query: string): Promise<SearchResult> {
       };
     }
 
-    // Find nearby cities within 5km
-    const nearbyCities = cities
-      .filter((city) => city.navn !== exactMatch.navn)
-      .map((city) => ({
-        ...city,
-        distance: calculateDistance(
-          exactMatch.latitude,
-          exactMatch.longitude,
-          city.latitude,
-          city.longitude
-        ),
-      }))
-      .filter((city) => city.distance <= 5)
-      .sort((a, b) => a.distance - b.distance)
-      .map((city) => ({
-        ...city,
-        distance: Math.round(city.distance * 10) / 10,
-      }));
+    // Then find nearby cities using PostGIS
+    const { data: nearbyCities } = await supabase.rpc("get_nearby_cities", {
+      origin_lat: exactMatch.latitude,
+      origin_lng: exactMatch.longitude,
+      max_distance_km: 5,
+      exclude_city_id: exactMatch.id,
+    });
 
     return {
       exact_match: exactMatch,
-      nearby_cities: nearbyCities,
+      nearby_cities: nearbyCities || [],
     };
   } catch (error) {
     console.error("Search failed:", error);
