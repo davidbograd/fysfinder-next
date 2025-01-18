@@ -47,7 +47,10 @@ export default function OmOsPage() {
           <section className="mb-12">
             <p className="mb-4">
               FysFinder er skabt som din go-to platform til at{" "}
-              <Link href="/" className="text-blue-600 hover:underline">
+              <Link
+                href="/find/fysioterapeut/danmark"
+                className="text-blue-600 hover:underline"
+              >
                 finde fysioterapeuter i hele Danmark
               </Link>
               . Med et overskueligt overblik samlet ét sted, gør vi det nemt at
@@ -74,12 +77,8 @@ export default function OmOsPage() {
             </p>
             <p className="mt-4">
               Løsningen blev FysFinder.dk, hvor vi gør det nemt og overskueligt
-              at{" "}
-              <Link href="/specialer" className="text-blue-600 hover:underline">
-                finde fysioterapeuter med specialer
-              </Link>{" "}
-              tæt på dig. Du kan sammenligne kvalificerede behandlere - helt
-              gratis.
+              at finde fysioterapeuter med specialer tæt på dig. Du kan
+              sammenligne kvalificerede behandlere - helt gratis.
             </p>
             <p className="mt-4">
               Platformen er blevet mødt af stor støtte. Patienter, klinikejere,
