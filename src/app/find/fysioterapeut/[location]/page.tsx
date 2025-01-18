@@ -10,7 +10,6 @@ import { Clinic, City, ClinicWithDistance } from "@/app/types/index";
 import { SpecialtyDropdown } from "@/app/components/SpecialtyDropdown";
 import { notFound } from "next/navigation";
 import { SearchAndFilters } from "@/app/components/SearchAndFilters";
-import { LocationStructuredData } from "@/app/components/LocationStructuredData";
 
 // Create a Supabase client for static generation
 const supabase = createClient(
@@ -231,6 +230,69 @@ export async function fetchSpecialties() {
   return data;
 }
 
+interface LocationStructuredDataProps {
+  city: City;
+  clinics: Clinic[];
+  specialtyName?: string | null;
+}
+
+function LocationStructuredData({
+  city,
+  clinics,
+  specialtyName,
+}: LocationStructuredDataProps) {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": ["WebPage", "MedicalWebPage"],
+    name: specialtyName
+      ? `Fysioterapeuter i ${city.bynavn} specialiseret i ${specialtyName}`
+      : `Fysioterapeuter i ${city.bynavn}`,
+    url: `https://fysfinder.dk/find/fysioterapeut/${city.bynavn_slug}${
+      specialtyName ? `/${slugify(specialtyName)}` : ""
+    }`,
+    about: {
+      "@type": "MedicalSpecialty",
+      name: specialtyName || "Fysioterapi",
+      relevantSpecialty: {
+        "@type": "MedicalSpecialty",
+        name: "Physical Therapy",
+      },
+    },
+    specialty: specialtyName || "Fysioterapi",
+    medicalAudience: "Patienter der søger fysioterapi",
+    description: `Find og sammenlign ${city.bynavn} fysioterapeuter. Se anbefalinger, fysioterapi specialer, priser, åbningstider og mere.`,
+    provider: clinics.map((clinic) => ({
+      "@type": ["LocalBusiness", "MedicalClinic"],
+      name: clinic.klinikNavn,
+      url: `https://fysfinder.dk/klinik/${clinic.klinikNavnSlug}`,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: clinic.adresse,
+        postalCode: clinic.postnummer,
+        addressLocality: city.bynavn,
+        addressCountry: "DK",
+      },
+      medicalSpecialty: clinic.specialties.map((s) => s.specialty_name),
+    })),
+    mainEntity: {
+      "@type": "City",
+      name: city.bynavn,
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: city.latitude,
+        longitude: city.longitude,
+      },
+    },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+    />
+  );
+}
+
 export default async function LocationPage({
   params,
 }: {
@@ -323,6 +385,11 @@ export default async function LocationPage({
 
   return (
     <div className="container mx-auto px-4">
+      <LocationStructuredData
+        city={city}
+        clinics={clinics}
+        specialtyName={specialtyName}
+      />
       <div className="max-w-[800px] mx-auto">
         <Breadcrumbs items={breadcrumbItems} />
 
