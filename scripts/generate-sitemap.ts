@@ -91,6 +91,14 @@ async function generateSitemaps() {
         loc: DOMAIN,
         priority: 1.0,
       },
+      {
+        loc: `${DOMAIN}/om-os`,
+        priority: 0.8,
+      },
+      {
+        loc: `${DOMAIN}/samarbejdspartnere`,
+        priority: 0.8,
+      },
     ];
 
     const cityUrls =

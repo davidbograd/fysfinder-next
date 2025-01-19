@@ -112,6 +112,82 @@ function hasAccessInfo(clinic: Clinic): boolean {
   return clinic.parkering !== null || clinic.handicapadgang !== null;
 }
 
+interface ClinicStructuredDataProps {
+  clinic: Clinic;
+}
+
+function ClinicStructuredData({ clinic }: ClinicStructuredDataProps) {
+  // Convert opening hours to structured format
+  const openingHours = [
+    { day: "Monday", hours: clinic.mandag },
+    { day: "Tuesday", hours: clinic.tirsdag },
+    { day: "Wednesday", hours: clinic.onsdag },
+    { day: "Thursday", hours: clinic.torsdag },
+    { day: "Friday", hours: clinic.fredag },
+    { day: "Saturday", hours: clinic.lørdag },
+    { day: "Sunday", hours: clinic.søndag },
+  ].filter(({ hours }) => hours);
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": ["LocalBusiness", "MedicalClinic", "MedicalOrganization"],
+    name: clinic.klinikNavn,
+    url: `https://fysfinder.dk/klinik/${clinic.klinikNavnSlug}`,
+    telephone: clinic.tlf,
+    email: clinic.email,
+    description: clinic.om_os || `Fysioterapi klinik i ${clinic.lokation}`,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: clinic.adresse,
+      postalCode: clinic.postnummer,
+      addressLocality: clinic.lokation,
+      addressCountry: "DK",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: clinic.lokation?.split(",")[0],
+      longitude: clinic.lokation?.split(",")[1],
+    },
+    openingHoursSpecification: openingHours.map(({ day, hours }) => ({
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: day,
+      opens: hours.split("-")[0].trim(),
+      closes: hours.split("-")[1].trim(),
+    })),
+    medicalSpecialty: clinic.specialties.map((s) => s.specialty_name),
+    priceRange:
+      clinic.førsteKons && clinic.opfølgning
+        ? `${clinic.førsteKons}-${clinic.opfølgning} DKK`
+        : undefined,
+    publicHealthCoverage: clinic.ydernummer ? "Ja" : "Nej",
+    amenityFeature: [
+      clinic.parkering && {
+        "@type": "LocationFeatureSpecification",
+        name: "Parkering",
+        value: clinic.parkering,
+      },
+      clinic.handicapadgang && {
+        "@type": "LocationFeatureSpecification",
+        name: "Handicapadgang",
+        value: clinic.handicapadgang,
+      },
+      clinic.holdtræning && {
+        "@type": "LocationFeatureSpecification",
+        name: "Holdtræning",
+        value: clinic.holdtræning,
+      },
+    ].filter(Boolean),
+    numberOfPractitioners: clinic.antalBehandlere || undefined,
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+    />
+  );
+}
+
 export default async function ClinicPage({
   params,
 }: {
