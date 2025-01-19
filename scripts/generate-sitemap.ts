@@ -107,7 +107,13 @@ async function generateSitemaps() {
         priority: 0.8,
       })) || [];
 
-    const specialtyUrls =
+    const specialtyCoreUrls =
+      specialties?.map((specialty: Specialty) => ({
+        loc: `${DOMAIN}/find/fysioterapeut/danmark/${specialty.specialty_name_slug}`,
+        priority: 0.7,
+      })) || [];
+
+    const specialtyCityUrls =
       cities?.flatMap(
         (city: City) =>
           specialties?.map((specialty: Specialty) => ({
@@ -115,6 +121,15 @@ async function generateSitemaps() {
             priority: 0.6,
           })) || []
       ) || [];
+
+    // Split city URLs into three parts based on alphabetical order
+    const sortedCityUrls = [...specialtyCityUrls].sort((a, b) =>
+      a.loc.localeCompare(b.loc)
+    );
+    const chunkSize = Math.ceil(sortedCityUrls.length / 3);
+    const specialtyCityUrls1 = sortedCityUrls.slice(0, chunkSize);
+    const specialtyCityUrls2 = sortedCityUrls.slice(chunkSize, chunkSize * 2);
+    const specialtyCityUrls3 = sortedCityUrls.slice(chunkSize * 2);
 
     const clinicUrls =
       clinics?.map((clinic: Clinic) => ({
@@ -139,8 +154,23 @@ async function generateSitemaps() {
     );
 
     await fsPromises.writeFile(
-      "public/sitemap-specialties.xml",
-      await generateSitemapXML(specialtyUrls)
+      "public/sitemap-specialties-core.xml",
+      await generateSitemapXML(specialtyCoreUrls)
+    );
+
+    await fsPromises.writeFile(
+      "public/sitemap-specialties-cities1.xml",
+      await generateSitemapXML(specialtyCityUrls1)
+    );
+
+    await fsPromises.writeFile(
+      "public/sitemap-specialties-cities2.xml",
+      await generateSitemapXML(specialtyCityUrls2)
+    );
+
+    await fsPromises.writeFile(
+      "public/sitemap-specialties-cities3.xml",
+      await generateSitemapXML(specialtyCityUrls3)
     );
 
     await fsPromises.writeFile(
@@ -157,7 +187,10 @@ async function generateSitemaps() {
     const sitemapFiles = [
       "sitemap-static.xml",
       "sitemap-cities.xml",
-      "sitemap-specialties.xml",
+      "sitemap-specialties-core.xml",
+      "sitemap-specialties-cities1.xml",
+      "sitemap-specialties-cities2.xml",
+      "sitemap-specialties-cities3.xml",
       "sitemap-clinics.xml",
       "sitemap-articles.xml",
     ];
