@@ -38,8 +38,6 @@ Sitemap: https://www.fysfinder.dk/sitemap.xml
 Sitemap: https://www.fysfinder.dk/sitemap-static.xml
 Sitemap: https://www.fysfinder.dk/sitemap-cities.xml
 Sitemap: https://www.fysfinder.dk/sitemap-specialties-core.xml
-Sitemap: https://www.fysfinder.dk/sitemap-specialties-cities1.xml
-Sitemap: https://www.fysfinder.dk/sitemap-specialties-cities2.xml
-Sitemap: https://www.fysfinder.dk/sitemap-specialties-cities3.xml
+Sitemap: https://www.fysfinder.dk/sitemap-specialties-cities.xml
 Sitemap: https://www.fysfinder.dk/sitemap-clinics.xml
 Sitemap: https://www.fysfinder.dk/sitemap-articles.xml
