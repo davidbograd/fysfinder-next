@@ -1,9 +1,9 @@
-import { redirect } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 
 export default async function SuburbPage({
   params,
 }: {
   params: { suburb: string };
 }) {
-  redirect(`/find/fysioterapeut/${params.suburb}`);
+  permanentRedirect(`/find/fysioterapeut/${params.suburb}`);
 }

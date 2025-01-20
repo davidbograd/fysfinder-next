@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 
 export default async function SpecialtyPage({
   params,
@@ -6,5 +6,5 @@ export default async function SpecialtyPage({
   params: { specialtyName: string };
 }) {
   // Redirect to the new URL structure
-  redirect(`/find/fysioterapeut/danmark/${params.specialtyName}`);
+  permanentRedirect(`/find/fysioterapeut/danmark/${params.specialtyName}`);
 }

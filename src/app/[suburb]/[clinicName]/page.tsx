@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 import { createClient } from "@/app/utils/supabase/server";
 
 export default async function ClinicPage({
@@ -16,10 +16,10 @@ export default async function ClinicPage({
     .single();
 
   if (clinic) {
-    // Redirect to the new URL structure
-    redirect(`/klinik/${clinic.klinikNavnSlug}`);
+    // Use permanentRedirect for 301 redirect
+    permanentRedirect(`/klinik/${clinic.klinikNavnSlug}`);
   } else {
-    // If clinic not found, redirect to the suburb page
-    redirect(`/find/fysioterapeut/${params.suburb}`);
+    // Use permanentRedirect for the fallback case
+    permanentRedirect(`/find/fysioterapeut/${params.suburb}`);
   }
 }
