@@ -19,7 +19,7 @@ interface City {
 }
 
 interface Specialty {
-  specialty_id: number;
+  specialty_id: string;
   specialty_name_slug: string;
 }
 
