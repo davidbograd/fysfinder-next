@@ -4,9 +4,6 @@ const fsPromises = require("fs/promises");
 const pathModule = require("path");
 const glob = require("glob-promise");
 
-// Add some debug logging
-console.log("Supabase URL:", process.env.NEXT_PUBLIC_SUPABASE_URL);
-
 // Initialize Supabase client
 const supabaseDb = supabaseClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -17,10 +14,12 @@ const DOMAIN = "https://www.fysfinder.dk";
 const LAST_MOD = new Date().toISOString();
 
 interface City {
+  id: number;
   bynavn_slug: string;
 }
 
 interface Specialty {
+  specialty_id: number;
   specialty_name_slug: string;
 }
 
@@ -67,17 +66,90 @@ ${sitemaps}
 
 async function generateSitemaps() {
   try {
-    // Fetch data from Supabase
+    // Fetch data from Supabase with clinic availability
     const { data: cities } = await supabaseDb.from("cities").select("*");
     const { data: specialties } = await supabaseDb
       .from("specialties")
       .select("*");
     const { data: clinics } = await supabaseDb.from("clinics").select("*");
 
-    // Add debug logging
-    console.log("Cities:", cities?.length, cities?.[0]);
-    console.log("Specialties:", specialties?.length, specialties?.[0]);
-    console.log("Clinics:", clinics?.length, clinics?.[0]);
+    // Fetch clinic-specialty relationships with city information
+    const { data: clinicSpecialties } = await supabaseDb.from(
+      "clinic_specialties"
+    ).select(`
+        specialty_id,
+        clinics_id,
+        clinics (
+          city_id
+        )
+      `);
+
+    // Add debug logging for initial data
+    console.log("Initial data counts:", {
+      cities: cities?.length || 0,
+      specialties: specialties?.length || 0,
+      clinicSpecialties: clinicSpecialties?.length || 0,
+    });
+
+    // Create a map of valid specialty-city combinations
+    const validSpecialtyCityPairs = new Set();
+
+    clinicSpecialties?.forEach((cs: any) => {
+      if (cs.clinics?.city_id) {
+        const pair = `${cs.specialty_id}-${cs.clinics.city_id}`;
+        validSpecialtyCityPairs.add(pair);
+      }
+    });
+
+    // Log a sample of the pairs and total count
+    console.log(
+      "Valid specialty-city pairs count:",
+      validSpecialtyCityPairs.size
+    );
+    console.log(
+      "First few valid pairs:",
+      Array.from(validSpecialtyCityPairs).slice(0, 3)
+    );
+
+    // Filter specialty-city combinations to only include those with clinics
+    const specialtyCityUrls =
+      cities?.flatMap(
+        (city: City) =>
+          specialties?.reduce((acc: any[], specialty: Specialty) => {
+            const pairKey = `${specialty.specialty_id}-${city.id}`;
+            const isValid = validSpecialtyCityPairs.has(pairKey);
+
+            // Log some sample checks
+            if (acc.length < 2) {
+              // Only log first few to avoid console spam
+              console.log("Checking pair:", {
+                pairKey,
+                cityId: city.id,
+                citySlug: city.bynavn_slug,
+                specialtyId: specialty.specialty_id,
+                specialtySlug: specialty.specialty_name_slug,
+                isValid,
+              });
+            }
+
+            if (isValid) {
+              acc.push({
+                loc: `${DOMAIN}/find/fysioterapeut/${city.bynavn_slug}/${specialty.specialty_name_slug}`,
+                priority: 0.6,
+              });
+            }
+            return acc;
+          }, []) || []
+      ) || [];
+
+    // Log final URLs count
+    console.log(
+      "Generated specialty-city URLs count:",
+      specialtyCityUrls.length
+    );
+    if (specialtyCityUrls.length > 0) {
+      console.log("First specialty-city URL:", specialtyCityUrls[0]);
+    }
 
     // Get article files
     const articleFiles = await glob("src/content/glossary/*.md");
@@ -113,24 +185,6 @@ async function generateSitemaps() {
         priority: 0.7,
       })) || [];
 
-    const specialtyCityUrls =
-      cities?.flatMap(
-        (city: City) =>
-          specialties?.map((specialty: Specialty) => ({
-            loc: `${DOMAIN}/find/fysioterapeut/${city.bynavn_slug}/${specialty.specialty_name_slug}`,
-            priority: 0.6,
-          })) || []
-      ) || [];
-
-    // Split city URLs into three parts based on alphabetical order
-    const sortedCityUrls = [...specialtyCityUrls].sort((a, b) =>
-      a.loc.localeCompare(b.loc)
-    );
-    const chunkSize = Math.ceil(sortedCityUrls.length / 3);
-    const specialtyCityUrls1 = sortedCityUrls.slice(0, chunkSize);
-    const specialtyCityUrls2 = sortedCityUrls.slice(chunkSize, chunkSize * 2);
-    const specialtyCityUrls3 = sortedCityUrls.slice(chunkSize * 2);
-
     const clinicUrls =
       clinics?.map((clinic: Clinic) => ({
         loc: `${DOMAIN}/klinik/${clinic.klinikNavnSlug}`,
@@ -159,18 +213,8 @@ async function generateSitemaps() {
     );
 
     await fsPromises.writeFile(
-      "public/sitemap-specialties-cities1.xml",
-      await generateSitemapXML(specialtyCityUrls1)
-    );
-
-    await fsPromises.writeFile(
-      "public/sitemap-specialties-cities2.xml",
-      await generateSitemapXML(specialtyCityUrls2)
-    );
-
-    await fsPromises.writeFile(
-      "public/sitemap-specialties-cities3.xml",
-      await generateSitemapXML(specialtyCityUrls3)
+      "public/sitemap-specialties-cities.xml",
+      await generateSitemapXML(specialtyCityUrls)
     );
 
     await fsPromises.writeFile(
@@ -183,14 +227,12 @@ async function generateSitemaps() {
       await generateSitemapXML(articleUrls)
     );
 
-    // Generate sitemap index
+    // Update sitemap index
     const sitemapFiles = [
       "sitemap-static.xml",
       "sitemap-cities.xml",
       "sitemap-specialties-core.xml",
-      "sitemap-specialties-cities1.xml",
-      "sitemap-specialties-cities2.xml",
-      "sitemap-specialties-cities3.xml",
+      "sitemap-specialties-cities.xml",
       "sitemap-clinics.xml",
       "sitemap-articles.xml",
     ];

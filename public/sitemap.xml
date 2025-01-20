@@ -3,34 +3,26 @@
 
   <sitemap>
     <loc>https://www.fysfinder.dk/sitemap-static.xml</loc>
-    <lastmod>2025-01-19T14:06:34.961Z</lastmod>
+    <lastmod>2025-01-20T07:31:17.081Z</lastmod>
   </sitemap>
   <sitemap>
     <loc>https://www.fysfinder.dk/sitemap-cities.xml</loc>
-    <lastmod>2025-01-19T14:06:34.961Z</lastmod>
+    <lastmod>2025-01-20T07:31:17.081Z</lastmod>
   </sitemap>
   <sitemap>
     <loc>https://www.fysfinder.dk/sitemap-specialties-core.xml</loc>
-    <lastmod>2025-01-19T14:06:34.961Z</lastmod>
+    <lastmod>2025-01-20T07:31:17.081Z</lastmod>
   </sitemap>
   <sitemap>
-    <loc>https://www.fysfinder.dk/sitemap-specialties-cities1.xml</loc>
-    <lastmod>2025-01-19T14:06:34.961Z</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>https://www.fysfinder.dk/sitemap-specialties-cities2.xml</loc>
-    <lastmod>2025-01-19T14:06:34.961Z</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>https://www.fysfinder.dk/sitemap-specialties-cities3.xml</loc>
-    <lastmod>2025-01-19T14:06:34.961Z</lastmod>
+    <loc>https://www.fysfinder.dk/sitemap-specialties-cities.xml</loc>
+    <lastmod>2025-01-20T07:31:17.081Z</lastmod>
   </sitemap>
   <sitemap>
     <loc>https://www.fysfinder.dk/sitemap-clinics.xml</loc>
-    <lastmod>2025-01-19T14:06:34.961Z</lastmod>
+    <lastmod>2025-01-20T07:31:17.081Z</lastmod>
   </sitemap>
   <sitemap>
     <loc>https://www.fysfinder.dk/sitemap-articles.xml</loc>
-    <lastmod>2025-01-19T14:06:34.961Z</lastmod>
+    <lastmod>2025-01-20T07:31:17.081Z</lastmod>
   </sitemap>
 </sitemapindex>
