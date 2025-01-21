@@ -494,25 +494,19 @@ export default async function LocationPage({ params }: LocationPageProps) {
         )}
       </div>
 
-      {/* Add the SEO content section after the clinic listings */}
-      {city.seo_tekst && (
+      {/* Only show SEO text if we're not on a specialty page */}
+      {city.seo_tekst && !params.specialty && (
         <div
           className="mt-12 prose prose-slate max-w-none
             prose-headings:text-gray-900
-            
             prose-h2:text-2xl prose-h2:font-semibold prose-h2:mb-4 prose-h2:mt-8
             prose-h3:text-xl prose-h3:font-medium prose-h3:mb-3 prose-h3:mt-6
-            
             prose-p:text-gray-600 prose-p:mb-4 prose-p:leading-relaxed
-            
             prose-ul:list-disc prose-ul:ml-6 prose-ul:mb-4 prose-ul:text-gray-600
             prose-ol:list-decimal prose-ol:ml-6 prose-ol:mb-4 prose-ol:text-gray-600
             prose-li:mb-2 prose-li:leading-relaxed
-            
             prose-strong:font-semibold prose-strong:text-gray-900
-            
             prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline
-            
             [&>*:first-child]:mt-0
             [&>*:last-child]:mb-0"
         >
