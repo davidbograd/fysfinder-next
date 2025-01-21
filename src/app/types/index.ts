@@ -47,6 +47,7 @@ export interface City {
   latitude: number;
   longitude: number;
   betegnelse: string;
+  seo_tekst?: string;
 }
 
 export interface SearchResult {
