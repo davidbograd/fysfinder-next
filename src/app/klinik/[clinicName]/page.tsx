@@ -446,7 +446,9 @@ export default async function ClinicPage({
                       ))}
                     </div>
                   ) : (
-                    <p className="text-gray-600">Ingen åbningstider tilføjet</p>
+                    <p className="text-gray-600">
+                      Ingen åbningstider tilføjet.
+                    </p>
                   )}
                 </div>
                 {hasAccessInfo(clinic) && (
