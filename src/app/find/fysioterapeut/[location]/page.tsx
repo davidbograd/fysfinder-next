@@ -486,12 +486,6 @@ export default async function LocationPage({ params }: LocationPageProps) {
             </div>
           </div>
         )}
-
-        {clinics.length === 0 && (
-          <Link href="/" className="text-blue-600 hover:underline">
-            Se alle områder
-          </Link>
-        )}
       </div>
 
       {/* Only show SEO text if we're not on a specialty page */}
