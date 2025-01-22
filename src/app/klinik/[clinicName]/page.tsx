@@ -132,7 +132,7 @@ function ClinicStructuredData({ clinic }: ClinicStructuredDataProps) {
     "@context": "https://schema.org",
     "@type": ["LocalBusiness", "MedicalClinic", "MedicalOrganization"],
     name: clinic.klinikNavn,
-    url: `https://fysfinder.dk/klinik/${clinic.klinikNavnSlug}`,
+    url: `https://www.fysfinder.dk/klinik/${clinic.klinikNavnSlug}`,
     telephone: clinic.tlf,
     email: clinic.email,
     description: clinic.om_os || `Fysioterapi klinik i ${clinic.lokation}`,
@@ -178,6 +178,58 @@ function ClinicStructuredData({ clinic }: ClinicStructuredDataProps) {
       },
     ].filter(Boolean),
     numberOfPractitioners: clinic.antalBehandlere || undefined,
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+    />
+  );
+}
+
+function generateClinicDescription(clinic: Clinic): string {
+  const parts = [];
+
+  if (clinic.specialties?.length > 0) {
+    parts.push(
+      `Specialiseret i ${clinic.specialties
+        .map((s) => s.specialty_name.toLowerCase())
+        .join(", ")}`
+    );
+  }
+
+  if (clinic.ydernummer) {
+    parts.push(
+      "Tilbyder behandling med tilskud fra den offentlige sygesikring"
+    );
+  }
+
+  if (clinic.førsteKons) {
+    parts.push(`Første konsultation fra ${clinic.førsteKons} kr`);
+  }
+
+  return parts.length > 0
+    ? `${clinic.klinikNavn} i ${clinic.lokation}. ${parts.join(". ")}.`
+    : `Fysioterapi klinik i ${clinic.lokation}`;
+}
+
+function BreadcrumbStructuredData({
+  items,
+}: {
+  items: Array<{ text: string; link?: string }>;
+}) {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@id": item.link ? `https://www.fysfinder.dk${item.link}` : "",
+        name: item.text,
+      },
+    })),
   };
 
   return (
@@ -245,6 +297,9 @@ export default async function ClinicPage({
 
     return (
       <div className="container mx-auto px-4 py-8">
+        <ClinicStructuredData clinic={clinic} />
+        <BreadcrumbStructuredData items={breadcrumbItems} />
+
         <Breadcrumbs items={breadcrumbItems} />
 
         <div className="flex flex-col lg:flex-row gap-16">
@@ -285,7 +340,7 @@ export default async function ClinicPage({
               <p className="text-sm text-gray-600 mb-4">
                 {clinic.ydernummer
                   ? `${clinic.klinikNavn} har ydernummer og tilbyder behandling med tilskud fra den offentlige sygesikring.`
-                  : `${clinic.klinikNavn} har ikke ydernummer og kræver ingen henvisning.`}
+                  : `${clinic.klinikNavn} har ikke ydernummer.`}
               </p>
               {clinic.førsteKons && clinic.opfølgning ? (
                 <div className="space-y-2">
@@ -303,9 +358,7 @@ export default async function ClinicPage({
                   </div>
                 </div>
               ) : (
-                <p className="text-gray-600">
-                  Denne klinik har ikke tilføjet nogen priser endnu.
-                </p>
+                <p className="text-gray-600">Ingen priser tilføjet.</p>
               )}
             </section>
 
@@ -333,9 +386,7 @@ export default async function ClinicPage({
                   </div>
                 </>
               ) : (
-                <p className="text-gray-600">
-                  Denne klinik har ikke tilføjet nogen specialer endnu.
-                </p>
+                <p className="text-gray-600">Ingen specialer tilføjet.</p>
               )}
             </section>
 
@@ -395,9 +446,7 @@ export default async function ClinicPage({
                       ))}
                     </div>
                   ) : (
-                    <p className="text-gray-600">
-                      Åbningstider ikke tilføjet endnu.
-                    </p>
+                    <p className="text-gray-600">Ingen åbningstider tilføjet</p>
                   )}
                 </div>
                 {hasAccessInfo(clinic) && (
@@ -439,10 +488,7 @@ export default async function ClinicPage({
               {clinic.om_os ? (
                 <p className="text-gray-600">{clinic.om_os}</p>
               ) : (
-                <p className="text-gray-600">
-                  Vi har desværre ikke en beskrivelse af {clinic.klinikNavn}{" "}
-                  endnu.
-                </p>
+                <p className="text-gray-600">Ingen beskrivelse tilføjet.</p>
               )}
             </section>
           </div>
