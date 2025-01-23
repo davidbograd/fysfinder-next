@@ -282,7 +282,7 @@ function LocationStructuredData({
         "@type": "ListItem",
         position: index + 1,
         item: {
-          "@type": ["LocalBusiness", "MedicalBusiness", "PhysicalTherapist"],
+          "@type": ["LocalBusiness", "MedicalBusiness"],
           name: clinic.klinikNavn,
           url: `https://www.fysfinder.dk/klinik/${clinic.klinikNavnSlug}`,
           address: {
