@@ -244,13 +244,15 @@ function LocationStructuredData({
 }: LocationStructuredDataProps) {
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": ["WebPage", "MedicalWebPage"],
+    "@type": "WebPage",
     name: specialtyName
       ? `Fysioterapeuter i ${city.bynavn} specialiseret i ${specialtyName}`
       : `Fysioterapeuter i ${city.bynavn}`,
-    url: `https://fysfinder.dk/find/fysioterapeut/${city.bynavn_slug}${
+    url: `https://www.fysfinder.dk/find/fysioterapeut/${city.bynavn_slug}${
       specialtyName ? `/${slugify(specialtyName)}` : ""
     }`,
+
+    // Medical Specialty Organization
     about: {
       "@type": "MedicalSpecialty",
       name: specialtyName || "Fysioterapi",
@@ -261,21 +263,9 @@ function LocationStructuredData({
     },
     specialty: specialtyName || "Fysioterapi",
     medicalAudience: "Patienter der søger fysioterapi",
-    description: `Find og sammenlign ${city.bynavn} fysioterapeuter. Se anbefalinger, fysioterapi specialer, priser, åbningstider og mere.`,
-    provider: clinics.map((clinic) => ({
-      "@type": ["LocalBusiness", "MedicalClinic"],
-      name: clinic.klinikNavn,
-      url: `https://fysfinder.dk/klinik/${clinic.klinikNavnSlug}`,
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: clinic.adresse,
-        postalCode: clinic.postnummer,
-        addressLocality: city.bynavn,
-        addressCountry: "DK",
-      },
-      medicalSpecialty: clinic.specialties.map((s) => s.specialty_name),
-    })),
-    mainEntity: {
+
+    // Location/Area Served
+    areaServed: {
       "@type": "City",
       name: city.bynavn,
       geo: {
@@ -283,6 +273,42 @@ function LocationStructuredData({
         latitude: city.latitude,
         longitude: city.longitude,
       },
+    },
+
+    // List of Clinics
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: clinics.map((clinic, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": ["LocalBusiness", "MedicalBusiness", "PhysicalTherapist"],
+          name: clinic.klinikNavn,
+          url: `https://www.fysfinder.dk/klinik/${clinic.klinikNavnSlug}`,
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: clinic.lokation,
+            postalCode: clinic.postnummer,
+            streetAddress: clinic.adresse,
+            addressCountry: "DK",
+          },
+          ...(clinic.avgRating && clinic.ratingCount > 0
+            ? {
+                aggregateRating: {
+                  "@type": "AggregateRating",
+                  ratingValue: clinic.avgRating,
+                  reviewCount: clinic.ratingCount,
+                  bestRating: 5,
+                  worstRating: 1,
+                },
+              }
+            : {}),
+          medicalSpecialty: [
+            "Physical Therapy",
+            ...clinic.specialties.map((s) => s.specialty_name),
+          ],
+        },
+      })),
     },
   };
 
