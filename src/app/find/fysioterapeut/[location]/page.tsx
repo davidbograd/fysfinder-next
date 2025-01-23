@@ -225,7 +225,7 @@ export async function fetchSpecialties() {
   const supabase = createServerClient();
   const { data, error } = await supabase
     .from("specialties")
-    .select("specialty_id, specialty_name, specialty_name_slug");
+    .select("specialty_id, specialty_name, specialty_name_slug, seo_tekst");
 
   if (error) throw error;
   return data;
@@ -316,6 +316,9 @@ export default async function LocationPage({ params }: LocationPageProps) {
   // Special handling for "danmark" page
   if (params.location === "danmark") {
     const clinics = await fetchAllClinics(params.specialty);
+    const specialty = params.specialty
+      ? specialties.find((s) => s.specialty_name_slug === params.specialty)
+      : null;
 
     return (
       <div className="container mx-auto px-4">
@@ -367,6 +370,26 @@ export default async function LocationPage({ params }: LocationPageProps) {
               </Link>
             ))}
           </div>
+
+          {/* Add SEO text for specialty when on danmark page */}
+          {params.specialty && specialty?.seo_tekst && (
+            <div
+              className="mt-12 prose prose-slate max-w-none
+                prose-headings:text-gray-900
+                prose-h2:text-2xl prose-h2:font-semibold prose-h2:mb-4 prose-h2:mt-8
+                prose-h3:text-xl prose-h3:font-medium prose-h3:mb-3 prose-h3:mt-6
+                prose-p:text-gray-600 prose-p:mb-4 prose-p:leading-relaxed
+                prose-ul:list-disc prose-ul:ml-6 prose-ul:mb-4 prose-ul:text-gray-600
+                prose-ol:list-decimal prose-ol:ml-6 prose-ol:mb-4 prose-ol:text-gray-600
+                prose-li:mb-2 prose-li:leading-relaxed
+                prose-strong:font-semibold prose-strong:text-gray-900
+                prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline
+                [&>*:first-child]:mt-0
+                [&>*:last-child]:mb-0"
+            >
+              <MDXRemote source={specialty.seo_tekst} />
+            </div>
+          )}
         </div>
       </div>
     );
