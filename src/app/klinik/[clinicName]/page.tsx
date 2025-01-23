@@ -339,7 +339,7 @@ export default async function ClinicPage({
               <p className="text-sm text-gray-600 mb-4">
                 {clinic.ydernummer
                   ? `${clinic.klinikNavn} har ydernummer og tilbyder behandling med tilskud fra den offentlige sygesikring.`
-                  : `${clinic.klinikNavn} har ikke ydernummer.`}
+                  : `${clinic.klinikNavn} har ikke ydernummer og kræver ingen henvisning.`}
               </p>
               {clinic.førsteKons && clinic.opfølgning ? (
                 <div className="space-y-2">
