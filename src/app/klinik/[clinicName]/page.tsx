@@ -130,12 +130,60 @@ function ClinicStructuredData({ clinic }: ClinicStructuredDataProps) {
 
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": ["LocalBusiness", "MedicalClinic", "MedicalOrganization"],
+    "@type": ["LocalBusiness", "MedicalBusiness", "PhysicalTherapist"],
     name: clinic.klinikNavn,
     url: `https://www.fysfinder.dk/klinik/${clinic.klinikNavnSlug}`,
     telephone: clinic.tlf,
     email: clinic.email,
     description: clinic.om_os || `Fysioterapi klinik i ${clinic.lokation}`,
+
+    // Medical Organization Details
+    medicalSpecialty: [
+      "Physical Therapy",
+      ...clinic.specialties.map((s) => s.specialty_name),
+    ],
+    healthcareReportingData: {
+      "@type": "HealthcareReportingData",
+      hasHealthPlanNetwork: clinic.ydernummer,
+    },
+
+    // Opening Hours
+    openingHoursSpecification: openingHours.map(({ day, hours }) => ({
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: day,
+      opens: hours.split("-")[0].trim(),
+      closes: hours.split("-")[1].trim(),
+    })),
+
+    // Reviews and Ratings (only if clinic has ratings)
+    ...(clinic.avgRating && clinic.ratingCount
+      ? {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: clinic.avgRating,
+            reviewCount: clinic.ratingCount,
+            bestRating: 5,
+            worstRating: 1,
+          },
+        }
+      : {}),
+
+    // Medical Services
+    availableService: clinic.specialties.map((specialty) => ({
+      "@type": "MedicalTherapy",
+      name: specialty.specialty_name,
+      description: `${specialty.specialty_name} behandling`,
+    })),
+
+    // Contact Points
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: clinic.tlf,
+      email: clinic.email,
+      contactType: "Customer Service",
+    },
+
+    // Location Information
     address: {
       "@type": "PostalAddress",
       streetAddress: clinic.adresse,
@@ -148,36 +196,6 @@ function ClinicStructuredData({ clinic }: ClinicStructuredDataProps) {
       latitude: clinic.lokation?.split(",")[0],
       longitude: clinic.lokation?.split(",")[1],
     },
-    openingHoursSpecification: openingHours.map(({ day, hours }) => ({
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: day,
-      opens: hours.split("-")[0].trim(),
-      closes: hours.split("-")[1].trim(),
-    })),
-    medicalSpecialty: clinic.specialties.map((s) => s.specialty_name),
-    priceRange:
-      clinic.førsteKons && clinic.opfølgning
-        ? `${clinic.førsteKons}-${clinic.opfølgning} DKK`
-        : undefined,
-    publicHealthCoverage: clinic.ydernummer ? "Ja" : "Nej",
-    amenityFeature: [
-      clinic.parkering && {
-        "@type": "LocationFeatureSpecification",
-        name: "Parkering",
-        value: clinic.parkering,
-      },
-      clinic.handicapadgang && {
-        "@type": "LocationFeatureSpecification",
-        name: "Handicapadgang",
-        value: clinic.handicapadgang,
-      },
-      clinic.holdtræning && {
-        "@type": "LocationFeatureSpecification",
-        name: "Holdtræning",
-        value: clinic.holdtræning,
-      },
-    ].filter(Boolean),
-    numberOfPractitioners: clinic.antalBehandlere || undefined,
   };
 
   return (
