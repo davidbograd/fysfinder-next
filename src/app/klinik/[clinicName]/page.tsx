@@ -117,17 +117,6 @@ interface ClinicStructuredDataProps {
 }
 
 function ClinicStructuredData({ clinic }: ClinicStructuredDataProps) {
-  // Convert opening hours to structured format
-  const openingHours = [
-    { day: "Monday", hours: clinic.mandag },
-    { day: "Tuesday", hours: clinic.tirsdag },
-    { day: "Wednesday", hours: clinic.onsdag },
-    { day: "Thursday", hours: clinic.torsdag },
-    { day: "Friday", hours: clinic.fredag },
-    { day: "Saturday", hours: clinic.lørdag },
-    { day: "Sunday", hours: clinic.søndag },
-  ].filter(({ hours }) => hours);
-
   const structuredData = {
     "@context": "https://schema.org",
     "@type": ["LocalBusiness", "MedicalBusiness", "PhysicalTherapist"],
@@ -146,14 +135,6 @@ function ClinicStructuredData({ clinic }: ClinicStructuredDataProps) {
       "@type": "HealthcareReportingData",
       hasHealthPlanNetwork: clinic.ydernummer,
     },
-
-    // Opening Hours
-    openingHoursSpecification: openingHours.map(({ day, hours }) => ({
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: day,
-      opens: hours.split("-")[0].trim(),
-      closes: hours.split("-")[1].trim(),
-    })),
 
     // Reviews and Ratings (only if clinic has ratings)
     ...(clinic.avgRating && clinic.ratingCount
