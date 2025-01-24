@@ -371,7 +371,7 @@ export default async function ClinicPage({
               {clinic.specialties && clinic.specialties.length > 0 ? (
                 <>
                   <p className="mb-4">
-                    {clinic.klinikNavn} er ekstra gode til følgende
+                    {clinic.klinikNavn} er specialiseret i følgende
                     fysioterapeut discipliner
                   </p>
                   <div className="flex flex-wrap gap-2">
