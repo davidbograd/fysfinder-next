@@ -472,12 +472,23 @@ export default async function LocationPage({ params }: LocationPageProps) {
         {clinics.length === 0 ? (
           <div className="text-center py-16">
             <h2 className="text-xl font-semibold mb-4">
-              Ingen klinikker fundet i {city.bynavn}
+              {specialtyName
+                ? `Ingen fysioterapeuter med speciale i ${specialtyName} i ${city.bynavn}`
+                : `Ingen klinikker fundet i ${city.bynavn}`}
             </h2>
             <p className="text-gray-600 mb-8">
-              Vi har desværre ikke registreret nogle fysioterapeuter i dette
-              område endnu.
+              {specialtyName
+                ? `Vi har desværre ikke registreret nogle fysioterapeuter med dette speciale i ${city.bynavn}. Prøv at vælge et andet speciale eller se alle fysioterapeuter i området.`
+                : `Vi har desværre ikke registreret nogle fysioterapeuter i dette område endnu.`}
             </p>
+            {specialtyName && (
+              <Link
+                href={`/find/fysioterapeut/${params.location}`}
+                className="text-logo-blue hover:underline"
+              >
+                Se alle fysioterapeuter i {city.bynavn} →
+              </Link>
+            )}
           </div>
         ) : (
           <>
