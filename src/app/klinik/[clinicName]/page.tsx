@@ -10,10 +10,12 @@ import { Button } from "@/components/ui/button";
 import { Check, Phone, Globe, Mail } from "lucide-react";
 import { ClinicSidebar } from "@/app/components/ClinicSidebar";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 
 interface Specialty {
   specialty_id: string;
   specialty_name: string;
+  specialty_name_slug: string;
 }
 
 interface Clinic {
@@ -57,7 +59,7 @@ async function fetchClinicBySlug(clinicSlug: string): Promise<Clinic | null> {
       `
       *,
       specialties:clinic_specialties(
-        specialty:specialties(specialty_id, specialty_name)
+        specialty:specialties(specialty_id, specialty_name, specialty_name_slug)
       )
     `
     )
@@ -374,13 +376,17 @@ export default async function ClinicPage({
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {clinic.specialties.map((specialty) => (
-                      <Badge
+                      <Link
                         key={specialty.specialty_id}
-                        variant="secondary"
-                        className="text-sm"
+                        href={`/find/fysioterapeut/danmark/${specialty.specialty_name_slug}`}
                       >
-                        {specialty.specialty_name}
-                      </Badge>
+                        <Badge
+                          variant="secondary"
+                          className="text-sm hover:bg-secondary/80 transition-colors cursor-pointer"
+                        >
+                          {specialty.specialty_name}
+                        </Badge>
+                      </Link>
                     ))}
                   </div>
                 </>
