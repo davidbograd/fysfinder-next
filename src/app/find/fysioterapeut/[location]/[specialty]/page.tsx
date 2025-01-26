@@ -1,24 +1,36 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import LocationPage, { fetchSpecialties, fetchCity } from "../page";
+import LocationPage, { fetchSpecialties, fetchLocationData } from "../page";
+import { SpecialtyWithSeo } from "@/app/types";
 
 export async function generateMetadata({
   params,
 }: {
   params: { location: string; specialty: string };
 }): Promise<Metadata> {
-  const city = await fetchCity(params.location);
-  const specialties = await fetchSpecialties();
+  const data = await fetchLocationData(params.location, params.specialty);
+  const specialties = data.specialties;
   const specialty = specialties.find(
-    (s) => s.specialty_name_slug === params.specialty
+    (s: SpecialtyWithSeo) => s.specialty_name_slug === params.specialty
   );
 
-  if (!city || !specialty) return notFound();
+  if (!specialty) return notFound();
+
+  // For danmark pages
+  if (params.location === "danmark") {
+    return {
+      title: `${specialty.specialty_name} fysioterapi i Danmark | Find fysioterapeuter ›`,
+      description: `Find ${specialty.specialty_name.toLowerCase()} fysioterapeuter i Danmark. Se anmeldelser, priser og book tid online. Start her →`,
+    };
+  }
+
+  // For city pages
+  if (!data.city) return notFound();
 
   return {
-    title: `${specialty.specialty_name} fysioterapi i ${city.bynavn} | Find fysioterapeuter ›`,
+    title: `${specialty.specialty_name} fysioterapi i ${data.city.bynavn} | Find fysioterapeuter ›`,
     description: `Find ${specialty.specialty_name.toLowerCase()} fysioterapeuter i ${
-      city.bynavn
+      data.city.bynavn
     }. Se anmeldelser, priser og book tid online. Start her →`,
   };
 }
@@ -28,13 +40,5 @@ export default function SpecialtyPage({
 }: {
   params: { location: string; specialty: string };
 }) {
-  console.log("SpecialtyPage params before passing:", params);
-
-  // Force isDanmark to true when location is danmark
-  const enhancedParams = {
-    ...params,
-    isDanmark: params.location.toLowerCase() === "danmark",
-  };
-
-  return <LocationPage params={enhancedParams} />;
+  return <LocationPage params={params} />;
 }

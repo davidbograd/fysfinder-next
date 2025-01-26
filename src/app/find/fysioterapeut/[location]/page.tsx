@@ -6,8 +6,14 @@ import ClinicCard from "@/app/components/ClinicCard";
 import { Breadcrumbs } from "@/app/components/Breadcrumbs";
 import { deslugify, slugify } from "@/app/utils/slugify";
 import { Metadata } from "next";
-import { Clinic, City, ClinicWithDistance } from "@/app/types/index";
-import { SpecialtyDropdown } from "@/app/components/SpecialtyDropdown";
+import {
+  Clinic,
+  City,
+  ClinicWithDistance,
+  DBClinicResponse,
+  LocationPageData,
+  SpecialtyWithSeo,
+} from "@/app/types/index";
 import { notFound } from "next/navigation";
 import { SearchAndFilters } from "@/app/components/SearchAndFilters";
 import { MDXRemote } from "next-mdx-remote/rsc";
@@ -18,191 +24,197 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
 
-// Generate static params for all cities
-export async function generateStaticParams() {
-  const { data: cities } = await supabase.from("cities").select("bynavn");
-
+/**
+ * Type guard function to validate clinic data
+ */
+function isValidClinicResponse(data: unknown): data is DBClinicResponse {
+  if (!data || typeof data !== "object") return false;
+  const clinic = data as any;
   return (
-    cities?.map((city) => ({
-      location: slugify(city.bynavn),
-    })) || []
+    "clinics_id" in clinic &&
+    "klinikNavn" in clinic &&
+    "clinic_specialties" in clinic &&
+    Array.isArray(clinic.clinic_specialties)
   );
 }
 
-export async function fetchCity(locationSlug: string): Promise<City | null> {
-  const supabase = createServerClient();
-  const { data } = await supabase
-    .from("cities")
-    .select("*")
-    .eq("bynavn_slug", locationSlug)
-    .single();
-
-  return data;
+/**
+ * Maps a database clinic response to our Clinic type
+ */
+function mapDBClinicToClinic(dbClinic: DBClinicResponse): Clinic {
+  return {
+    ...dbClinic,
+    specialties: dbClinic.clinic_specialties.map((cs) => cs.specialty),
+  };
 }
 
+/**
+ * Utility function to sort clinics by rating and review count
+ */
 function sortClinicsByRating<
   T extends { avgRating: number | null; ratingCount: number | null }
 >(clinics: T[]): T[] {
   return [...clinics].sort((a, b) => {
-    // Handle null/0 ratings
     const ratingA = a.avgRating || 0;
     const ratingB = b.avgRating || 0;
-
-    // If ratings are different, sort by rating
-    if (ratingA !== ratingB) {
-      return ratingB - ratingA;
-    }
-
-    // If ratings are the same, sort by number of reviews
+    if (ratingA !== ratingB) return ratingB - ratingA;
     const countA = a.ratingCount || 0;
     const countB = b.ratingCount || 0;
     return countB - countA;
   });
 }
 
-async function fetchClinicsByCity(
-  cityId: string,
+/**
+ * Fetches all data needed for the location page
+ */
+export async function fetchLocationData(
+  locationSlug: string,
   specialtySlug?: string
-): Promise<Clinic[]> {
-  const supabase = createServerClient();
+): Promise<LocationPageData> {
+  try {
+    // Fetch specialties first as we need them for both cases
+    const specialtiesResponse = await fetch(
+      `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/specialties?select=specialty_id,specialty_name,specialty_name_slug,seo_tekst`,
+      {
+        headers: {
+          apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
+        },
+        next: {
+          revalidate: 86400,
+        },
+      }
+    );
 
-  if (!specialtySlug) {
-    const { data, error } = await supabase
-      .from("clinics")
-      .select(
-        `
-        *,
-        clinic_specialties(
-          specialty:specialties(
-            specialty_id,
-            specialty_name
-          )
-        )
-      `
-      )
-      .eq("city_id", cityId);
+    const specialties =
+      (await specialtiesResponse.json()) as SpecialtyWithSeo[];
 
-    if (error) throw error;
+    // Special handling for "danmark" location
+    if (locationSlug === "danmark") {
+      let clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug))`;
 
-    const clinics = data.map((clinic: any) => ({
-      ...clinic,
-      specialties: clinic.clinic_specialties.map((cs: any) => cs.specialty),
-    }));
+      if (specialtySlug) {
+        clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),filtered_specialties:clinic_specialties!inner(specialty:specialties!inner(specialty_name_slug))&filtered_specialties.specialties.specialty_name_slug=eq.${specialtySlug}`;
+      }
 
-    return sortClinicsByRating(clinics);
-  }
+      const clinicsResponse = await fetch(clinicsUrl, {
+        headers: {
+          apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
+        },
+        next: {
+          revalidate: 86400,
+        },
+      });
 
-  // When a specialty is selected
-  const { data, error } = await supabase
-    .from("clinics")
-    .select(
-      `
-      *,
-      clinic_specialties(
-        specialty:specialties(
-          specialty_id,
-          specialty_name
-        )
-      ),
-      filtered_specialties:clinic_specialties!inner(
-        specialty:specialties!inner(
-          specialty_name_slug
-        )
-      )
-    `
-    )
-    .eq("city_id", cityId)
-    .eq("filtered_specialties.specialties.specialty_name_slug", specialtySlug);
+      const clinicsData = await clinicsResponse.json();
+      const validClinics = (clinicsData as unknown[]).filter(
+        isValidClinicResponse
+      );
+      const clinics = validClinics.map(mapDBClinicToClinic);
 
-  if (error) throw error;
-
-  const clinics = data.map((clinic: any) => ({
-    ...clinic,
-    specialties: clinic.clinic_specialties.map((cs: any) => cs.specialty),
-  }));
-
-  return sortClinicsByRating(clinics);
-}
-
-async function fetchNearbyClinics(
-  latitude: number,
-  longitude: number,
-  currentCityId: string,
-  maxDistance: number = 10
-): Promise<ClinicWithDistance[]> {
-  const supabase = createServerClient();
-
-  const { data: nearbyClinicsList, error } = await supabase.rpc(
-    "get_nearby_clinics",
-    {
-      origin_lat: latitude,
-      origin_lng: longitude,
-      max_distance_km: maxDistance,
-      exclude_city_id: currentCityId,
+      return {
+        city: null,
+        clinics: sortClinicsByRating(clinics),
+        nearbyClinicsList: [],
+        specialties,
+      };
     }
-  );
 
-  if (error) {
-    console.error("Error fetching nearby clinics:", error);
-    return [];
+    // For specific city locations
+    const cityResponse = await fetch(
+      `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/cities?bynavn_slug=eq.${locationSlug}&select=*`,
+      {
+        headers: {
+          apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
+        },
+        next: {
+          revalidate: 86400,
+        },
+      }
+    );
+
+    const cityData = await cityResponse.json();
+    const city = cityData[0] || null;
+
+    if (!city) {
+      return {
+        city: null,
+        clinics: [],
+        nearbyClinicsList: [],
+        specialties,
+      };
+    }
+
+    // Build the clinics query for city
+    let clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug))&city_id=eq.${city.id}`;
+
+    if (specialtySlug) {
+      clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),filtered_specialties:clinic_specialties!inner(specialty:specialties!inner(specialty_name_slug))&city_id=eq.${city.id}&filtered_specialties.specialties.specialty_name_slug=eq.${specialtySlug}`;
+    }
+
+    // Fetch clinics and nearby clinics in parallel
+    const [clinicsResponse, nearbyResponse] = await Promise.all([
+      fetch(clinicsUrl, {
+        headers: {
+          apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
+        },
+        next: {
+          revalidate: 86400,
+        },
+      }),
+      fetch(
+        `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/rpc/get_nearby_clinics`,
+        {
+          method: "POST",
+          headers: {
+            apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            origin_lat: city.latitude,
+            origin_lng: city.longitude,
+            max_distance_km: 10,
+            exclude_city_id: city.id,
+          }),
+          next: {
+            revalidate: 86400,
+          },
+        }
+      ),
+    ]);
+
+    const [clinicsData, nearbyData] = await Promise.all([
+      clinicsResponse.json(),
+      nearbyResponse.json(),
+    ]);
+
+    // Safely process the clinics data
+    const validClinics = (clinicsData as unknown[]).filter(
+      isValidClinicResponse
+    );
+    const clinics = validClinics.map(mapDBClinicToClinic);
+    const nearbyClinicsList = nearbyData || [];
+
+    return {
+      city,
+      clinics: sortClinicsByRating(clinics),
+      nearbyClinicsList: sortClinicsByRating(nearbyClinicsList),
+      specialties,
+    };
+  } catch (error) {
+    console.error("Error in fetchLocationData:", error);
+    throw error;
   }
-
-  return sortClinicsByRating(nearbyClinicsList || []);
 }
 
-async function fetchAllClinics(specialtySlug?: string): Promise<Clinic[]> {
-  const supabase = createServerClient();
-
-  if (!specialtySlug) {
-    const { data, error } = await supabase.from("clinics").select(`
-        *,
-        clinic_specialties(
-          specialty:specialties(
-            specialty_id,
-            specialty_name
-          )
-        )
-      `);
-
-    if (error) throw error;
-
-    const clinics = data.map((clinic: any) => ({
-      ...clinic,
-      specialties: clinic.clinic_specialties.map((cs: any) => cs.specialty),
-    }));
-
-    return sortClinicsByRating(clinics);
-  }
-
-  // When a specialty is selected
-  const { data, error } = await supabase
-    .from("clinics")
-    .select(
-      `
-      *,
-      clinic_specialties(
-        specialty:specialties(
-          specialty_id,
-          specialty_name
-        )
-      ),
-      filtered_specialties:clinic_specialties!inner(
-        specialty:specialties!inner(
-          specialty_name_slug
-        )
-      )
-    `
-    )
-    .eq("filtered_specialties.specialties.specialty_name_slug", specialtySlug);
-
-  if (error) throw error;
-
-  const clinics = data.map((clinic: any) => ({
-    ...clinic,
-    specialties: clinic.clinic_specialties.map((cs: any) => cs.specialty),
-  }));
-
-  return sortClinicsByRating(clinics);
+// Generate static params for all cities
+export async function generateStaticParams() {
+  const { data: cities } = await supabase.from("cities").select("bynavn");
+  return cities?.map((city) => ({ location: slugify(city.bynavn) })) || [];
 }
 
 export async function generateMetadata({
@@ -210,8 +222,8 @@ export async function generateMetadata({
 }: {
   params: { location: string; specialty?: string };
 }): Promise<Metadata> {
-  const city = await fetchCity(params.location);
-  const cityName = city?.bynavn || deslugify(params.location);
+  const data = await fetchLocationData(params.location);
+  const cityName = data.city?.bynavn || deslugify(params.location);
 
   return {
     title: `Fysioterapi klinikker ${cityName} | Find fysioterapeuter ›`,
@@ -328,22 +340,22 @@ interface LocationPageProps {
 }
 
 export default async function LocationPage({ params }: LocationPageProps) {
-  const [city, specialties] = await Promise.all([
-    fetchCity(params.location),
-    fetchSpecialties(),
-  ]);
+  const data = await fetchLocationData(params.location, params.specialty);
+  const specialties = data.specialties;
 
   // Get specialty name if we're on a specialty page
   const specialtyName = params.specialty
-    ? specialties.find((s) => s.specialty_name_slug === params.specialty)
-        ?.specialty_name
+    ? specialties.find(
+        (s: SpecialtyWithSeo) => s.specialty_name_slug === params.specialty
+      )?.specialty_name
     : null;
 
   // Special handling for "danmark" page
   if (params.location === "danmark") {
-    const clinics = await fetchAllClinics(params.specialty);
     const specialty = params.specialty
-      ? specialties.find((s) => s.specialty_name_slug === params.specialty)
+      ? specialties.find(
+          (s: SpecialtyWithSeo) => s.specialty_name_slug === params.specialty
+        )
       : null;
 
     return (
@@ -373,11 +385,11 @@ export default async function LocationPage({ params }: LocationPageProps) {
           />
 
           <h3 className="text-sm text-gray-500 mb-4">
-            {clinics.length} fysioterapi klinikker fundet
+            {data.clinics.length} fysioterapi klinikker fundet
           </h3>
 
           <div className="space-y-4">
-            {clinics.map((clinic) => (
+            {data.clinics.map((clinic: Clinic) => (
               <Link
                 key={clinic.clinics_id}
                 href={`/klinik/${clinic.klinikNavnSlug}`}
@@ -422,25 +434,18 @@ export default async function LocationPage({ params }: LocationPageProps) {
   }
 
   // For all other locations, we require city data
-  if (!city) return notFound();
-
-  const clinics = await fetchClinicsByCity(city.id, params.specialty);
-  const nearbyClinicsList = await fetchNearbyClinics(
-    city.latitude,
-    city.longitude,
-    city.id
-  );
+  if (!data.city) return notFound();
 
   const breadcrumbItems = [
     { text: "Forside", link: "/" },
-    { text: city.bynavn },
+    { text: data.city.bynavn },
   ];
 
   return (
     <div className="container mx-auto px-4">
       <LocationStructuredData
-        city={city}
-        clinics={clinics}
+        city={data.city}
+        clinics={data.clinics}
         specialtyName={specialtyName}
       />
       <div className="max-w-[800px] mx-auto">
@@ -448,37 +453,37 @@ export default async function LocationPage({ params }: LocationPageProps) {
 
         <h1 className="text-3xl font-bold mb-2">
           {specialtyName
-            ? `Find fysioterapeuter ${city.bynavn} specialiseret i ${specialtyName}`
-            : `Find og sammenlign fysioterapeuter ${city.bynavn}`}
+            ? `Find fysioterapeuter ${data.city.bynavn} specialiseret i ${specialtyName}`
+            : `Find og sammenlign fysioterapeuter ${data.city.bynavn}`}
         </h1>
 
-        {city.betegnelse && (
-          <p className="text-gray-600 mb-4">{city.betegnelse}</p>
+        {data.city.betegnelse && (
+          <p className="text-gray-600 mb-4">{data.city.betegnelse}</p>
         )}
 
         <p className="text-gray-600 mb-8">
           Fysfinder hjælper dig med at finde den bedste fysioterapeut i{" "}
-          {city.bynavn}. Se anmeldelser, specialer, priser og find den perfekte
-          fysioterapeut.
+          {data.city.bynavn}. Se anmeldelser, specialer, priser og find den
+          perfekte fysioterapeut.
         </p>
 
         <SearchAndFilters
           specialties={specialties}
           currentSpecialty={params.specialty}
           citySlug={params.location}
-          defaultSearchValue={city.bynavn}
+          defaultSearchValue={data.city.bynavn}
         />
 
-        {clinics.length === 0 ? (
+        {data.clinics.length === 0 ? (
           <div className="text-center py-16">
             <h2 className="text-xl font-semibold mb-4">
               {specialtyName
-                ? `Ingen fysioterapeuter med speciale i ${specialtyName} i ${city.bynavn}`
-                : `Ingen klinikker fundet i ${city.bynavn}`}
+                ? `Ingen fysioterapeuter med speciale i ${specialtyName} i ${data.city.bynavn}`
+                : `Ingen klinikker fundet i ${data.city.bynavn}`}
             </h2>
             <p className="text-gray-600 mb-8">
               {specialtyName
-                ? `Vi har desværre ikke registreret nogle fysioterapeuter med dette speciale i ${city.bynavn}. Prøv at vælge et andet speciale eller se alle fysioterapeuter i området.`
+                ? `Vi har desværre ikke registreret nogle fysioterapeuter med dette speciale i ${data.city.bynavn}. Prøv at vælge et andet speciale eller se alle fysioterapeuter i området.`
                 : `Vi har desværre ikke registreret nogle fysioterapeuter i dette område endnu.`}
             </p>
             {specialtyName && (
@@ -486,18 +491,18 @@ export default async function LocationPage({ params }: LocationPageProps) {
                 href={`/find/fysioterapeut/${params.location}`}
                 className="text-logo-blue hover:underline"
               >
-                Se alle fysioterapeuter i {city.bynavn} →
+                Se alle fysioterapeuter i {data.city.bynavn} →
               </Link>
             )}
           </div>
         ) : (
           <>
             <h3 className="text-sm text-gray-500 mb-4">
-              {clinics.length} fysioterapi klinikker fundet
+              {data.clinics.length} fysioterapi klinikker fundet
             </h3>
 
             <div className="space-y-4">
-              {clinics.map((clinic) => (
+              {data.clinics.map((clinic: Clinic) => (
                 <Link
                   key={clinic.clinics_id}
                   href={`/klinik/${clinic.klinikNavnSlug}`}
@@ -519,13 +524,13 @@ export default async function LocationPage({ params }: LocationPageProps) {
           </>
         )}
 
-        {nearbyClinicsList.length > 0 && (
+        {data.nearbyClinicsList.length > 0 && (
           <div className="mt-12">
             <h2 className="text-xl font-semibold mb-6">
-              Andre klinikker i nærheden af {city.bynavn}
+              Andre klinikker i nærheden af {data.city.bynavn}
             </h2>
             <div className="space-y-4">
-              {nearbyClinicsList.map((clinic) => (
+              {data.nearbyClinicsList.map((clinic: ClinicWithDistance) => (
                 <Link
                   key={clinic.clinics_id}
                   href={`/klinik/${clinic.klinikNavnSlug}`}
@@ -549,22 +554,22 @@ export default async function LocationPage({ params }: LocationPageProps) {
       </div>
 
       {/* Only show SEO text if we're not on a specialty page */}
-      {city.seo_tekst && !params.specialty && (
+      {data.city.seo_tekst && !params.specialty && (
         <div
           className="mt-12 prose prose-slate max-w-none
-            prose-headings:text-gray-900
-            prose-h2:text-2xl prose-h2:font-semibold prose-h2:mb-4 prose-h2:mt-8
-            prose-h3:text-xl prose-h3:font-medium prose-h3:mb-3 prose-h3:mt-6
-            prose-p:text-gray-600 prose-p:mb-4 prose-p:leading-relaxed
-            prose-ul:list-disc prose-ul:ml-6 prose-ul:mb-4 prose-ul:text-gray-600
-            prose-ol:list-decimal prose-ol:ml-6 prose-ol:mb-4 prose-ol:text-gray-600
-            prose-li:mb-2 prose-li:leading-relaxed
-            prose-strong:font-semibold prose-strong:text-gray-900
-            prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline
-            [&>*:first-child]:mt-0
-            [&>*:last-child]:mb-0"
+             prose-headings:text-gray-900
+             prose-h2:text-2xl prose-h2:font-semibold prose-h2:mb-4 prose-h2:mt-8
+             prose-h3:text-xl prose-h3:font-medium prose-h3:mb-3 prose-h3:mt-6
+             prose-p:text-gray-600 prose-p:mb-4 prose-p:leading-relaxed
+             prose-ul:list-disc prose-ul:ml-6 prose-ul:mb-4 prose-ul:text-gray-600
+             prose-ol:list-decimal prose-ol:ml-6 prose-ol:mb-4 prose-ol:text-gray-600
+             prose-li:mb-2 prose-li:leading-relaxed
+             prose-strong:font-semibold prose-strong:text-gray-900
+             prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline
+             [&>*:first-child]:mt-0
+             [&>*:last-child]:mb-0"
         >
-          <MDXRemote source={city.seo_tekst} />
+          <MDXRemote source={data.city.seo_tekst} />
         </div>
       )}
     </div>

@@ -86,3 +86,36 @@ export interface NearbyClinicResponse {
     specialty_name: string;
   }> | null;
 }
+
+export interface DBClinicResponse {
+  clinics_id: string;
+  klinikNavn: string;
+  antalBehandlere: number;
+  ydernummer: boolean;
+  avgRating: number;
+  ratingCount: number;
+  lokation: string;
+  lokationSlug: string;
+  klinikNavnSlug: string;
+  adresse: string;
+  postnummer: number;
+  clinic_specialties: {
+    specialty: {
+      specialty_id: string;
+      specialty_name: string;
+      specialty_name_slug: string;
+    };
+  }[];
+}
+
+export interface LocationPageData {
+  city: City | null;
+  clinics: Clinic[];
+  nearbyClinicsList: ClinicWithDistance[];
+  specialties: SpecialtyWithSeo[];
+}
+
+export interface SpecialtyWithSeo extends SpecialtyRow {
+  specialty_id: string;
+  seo_tekst?: string;
+}
