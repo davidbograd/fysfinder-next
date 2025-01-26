@@ -53,32 +53,34 @@ interface Clinic {
 
 async function fetchClinicBySlug(clinicSlug: string): Promise<Clinic | null> {
   const supabase = createClient();
-  const { data, error } = await supabase
-    .from("clinics")
-    .select(
-      `
-      *,
-      specialties:clinic_specialties(
-        specialty:specialties(specialty_id, specialty_name, specialty_name_slug)
-      )
-    `
-    )
-    .eq("klinikNavnSlug", clinicSlug)
-    .single();
 
-  if (error) {
-    console.error("Supabase error:", error);
-    throw new Error(`Database error: ${error.message}`);
-  }
+  // Use Next.js's fetch caching
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?klinikNavnSlug=eq.${clinicSlug}&select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug))`,
+    {
+      headers: {
+        apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
+      },
+      next: {
+        revalidate: 86400, // Cache for 24 hours
+      },
+    }
+  );
 
-  if (!data) {
+  const data = await response.json();
+
+  if (!data || data.length === 0) {
     return null;
   }
 
   // Flatten the specialties array
-  data.specialties = data.specialties.map((item: any) => item.specialty);
+  data[0].specialties = data[0].clinic_specialties.map(
+    (item: any) => item.specialty
+  );
+  delete data[0].clinic_specialties;
 
-  return data;
+  return data[0];
 }
 
 export async function generateMetadata({
