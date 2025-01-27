@@ -56,8 +56,9 @@ export function SpecialtyDropdown({
     <Select value={currentSpecialtyValue} onValueChange={handleSpecialtyChange}>
       <SelectTrigger
         className={cn(
-          "h-full border rounded-l-none rounded-r-full focus:ring-0 hover:bg-gray-50/50",
+          "h-full border-0 focus:ring-0 hover:bg-gray-50/50",
           "flex items-center text-left font-normal text-base",
+          "sm:border sm:border-l-0 sm:rounded-r-full",
           className
         )}
       >

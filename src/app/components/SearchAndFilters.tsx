@@ -73,43 +73,47 @@ export function SearchAndFilters({
 
   const handleFocus = () => {
     setIsFocused(true);
-    setQuery("");
   };
 
   return (
     <div className="relative" ref={searchRef}>
-      <div className="flex h-12 mb-8">
-        {/* Search Input Group */}
-        <div className="flex-1 relative flex">
-          <div className="flex-1 flex items-center relative border border-r-0 bg-white rounded-l-full overflow-hidden hover:bg-gray-50/50 transition-colors">
-            <div className="pl-4 flex items-center">
-              <MapPin className="text-gray-400 size-5" />
+      <div className="flex flex-col sm:flex-row sm:gap-0 mb-8">
+        <div className="flex-1 flex flex-col sm:flex-row border rounded-xl sm:border-0 overflow-hidden">
+          {/* Search Input Group */}
+          <div className="flex-1 relative flex">
+            <div className="flex-1 flex items-center relative sm:border bg-white sm:rounded-l-full overflow-hidden hover:bg-gray-50/50 transition-colors">
+              <div className="pl-4 flex items-center">
+                <MapPin className="text-gray-400 size-5" />
+              </div>
+              <input
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                onFocus={handleFocus}
+                placeholder="Søg efter postnummer..."
+                className="w-full h-12 pl-3 pr-5 focus:outline-none focus:ring-0 text-gray-900 placeholder:text-gray-500 text-base bg-transparent"
+              />
             </div>
-            <input
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              onFocus={handleFocus}
-              placeholder="Søg efter postnummer..."
-              className="w-full h-full pl-3 pr-5 focus:outline-none focus:ring-0 text-gray-900 placeholder:text-gray-500 text-base bg-transparent"
+          </div>
+
+          {/* Divider for mobile */}
+          <div className="h-px bg-gray-200 sm:hidden" />
+
+          {/* Specialty Dropdown */}
+          <div className="w-full sm:w-[260px]">
+            <SpecialtyDropdown
+              specialties={specialties}
+              currentSpecialty={currentSpecialty}
+              citySlug={citySlug}
+              className="sm:rounded-l-none sm:rounded-r-full h-12 w-full"
             />
           </div>
         </div>
-
-        {/* Specialty Dropdown */}
-        <div className="w-[260px]">
-          <SpecialtyDropdown
-            specialties={specialties}
-            currentSpecialty={currentSpecialty}
-            citySlug={citySlug}
-            className="rounded-l-none rounded-r-full h-full"
-          />
-        </div>
       </div>
 
-      {/* Search Results Dropdown - adjusted z-index and styling */}
+      {/* Search Results Dropdown */}
       {query && isFocused && (
-        <div className="absolute z-50 mt-1 w-full bg-white border rounded-md shadow-lg max-h-96 overflow-y-auto">
+        <div className="absolute z-50 left-0 right-0 mt-1 bg-white border rounded-md shadow-lg max-h-[calc(100vh-220px)] overflow-y-auto">
           {isLoading ? (
             <div className="p-4 text-gray-500 text-center">Søger...</div>
           ) : searchResult ? (
@@ -117,7 +121,7 @@ export function SearchAndFilters({
               {searchResult.exact_match && (
                 <Link
                   href={`/find/fysioterapeut/${searchResult.exact_match.bynavn_slug}`}
-                  className="block p-3 hover:bg-gray-50 border-b"
+                  className="block p-4 hover:bg-gray-50 border-b"
                 >
                   <div className="font-medium">
                     {searchResult.exact_match.bynavn}
@@ -131,7 +135,7 @@ export function SearchAndFilters({
                 <Link
                   key={city.id}
                   href={`/find/fysioterapeut/${city.bynavn_slug}`}
-                  className="block p-3 hover:bg-gray-50"
+                  className="block p-4 hover:bg-gray-50 border-b last:border-b-0"
                 >
                   <div className="font-medium">{city.bynavn}</div>
                   <div className="text-sm text-gray-500">
