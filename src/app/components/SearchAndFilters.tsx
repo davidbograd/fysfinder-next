@@ -78,7 +78,7 @@ export function SearchAndFilters({
   return (
     <div className="relative" ref={searchRef}>
       <div className="flex flex-col sm:flex-row sm:gap-0 mb-2">
-        <div className="flex-1 flex flex-col sm:flex-row border rounded-xl sm:border-0 overflow-hidden">
+        <div className="flex-1 flex flex-col sm:flex-row border bg-white rounded-xl sm:border-0 overflow-hidden">
           {/* Search Input Group */}
           <div className="flex-1 relative flex">
             <div className="flex-1 flex items-center relative sm:border bg-white sm:rounded-l-full overflow-hidden group">

@@ -100,7 +100,7 @@ function Header({
           Find den bedste fysioterapeut
         </h1>
 
-        <div className="max-w-2xl mx-auto bg-white rounded-full">
+        <div className="max-w-2xl mx-auto">
           <SearchAndFilters
             specialties={specialties}
             defaultSearchValue=""

@@ -59,7 +59,6 @@ export function SpecialtyDropdown({
           "h-full border-0 focus:ring-0 bg-white",
           "flex items-center text-left font-normal text-base",
           "sm:border sm:border-l-0 sm:rounded-r-full",
-          "hover:bg-gray-50/50 transition-colors",
           className
         )}
       >
