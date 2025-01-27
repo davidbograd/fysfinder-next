@@ -389,24 +389,39 @@ export default async function LocationPage({ params }: LocationPageProps) {
           </h3>
 
           <div className="space-y-4">
-            {data.clinics.map((clinic: Clinic) => (
-              <Link
-                key={clinic.clinics_id}
-                href={`/klinik/${clinic.klinikNavnSlug}`}
-                className="block"
-              >
-                <ClinicCard
-                  klinikNavn={clinic.klinikNavn}
-                  ydernummer={clinic.ydernummer}
-                  avgRating={clinic.avgRating}
-                  ratingCount={clinic.ratingCount}
-                  adresse={clinic.adresse}
-                  postnummer={clinic.postnummer}
-                  lokation={clinic.lokation}
-                  specialties={clinic.specialties}
-                />
-              </Link>
-            ))}
+            {data.clinics.map((clinic: Clinic) => {
+              // If we're on a specialty page, reorder the specialties array to show the current specialty first
+              let orderedSpecialties = clinic.specialties;
+              if (params.specialty && clinic.specialties) {
+                orderedSpecialties = [
+                  ...clinic.specialties.filter(
+                    (s) => s.specialty_name_slug === params.specialty
+                  ),
+                  ...clinic.specialties.filter(
+                    (s) => s.specialty_name_slug !== params.specialty
+                  ),
+                ];
+              }
+
+              return (
+                <Link
+                  key={clinic.clinics_id}
+                  href={`/klinik/${clinic.klinikNavnSlug}`}
+                  className="block"
+                >
+                  <ClinicCard
+                    klinikNavn={clinic.klinikNavn}
+                    ydernummer={clinic.ydernummer}
+                    avgRating={clinic.avgRating}
+                    ratingCount={clinic.ratingCount}
+                    adresse={clinic.adresse}
+                    postnummer={clinic.postnummer}
+                    lokation={clinic.lokation}
+                    specialties={orderedSpecialties}
+                  />
+                </Link>
+              );
+            })}
           </div>
 
           {/* Add SEO text for specialty when on danmark page */}
@@ -502,24 +517,39 @@ export default async function LocationPage({ params }: LocationPageProps) {
             </h3>
 
             <div className="space-y-4">
-              {data.clinics.map((clinic: Clinic) => (
-                <Link
-                  key={clinic.clinics_id}
-                  href={`/klinik/${clinic.klinikNavnSlug}`}
-                  className="block"
-                >
-                  <ClinicCard
-                    klinikNavn={clinic.klinikNavn}
-                    ydernummer={clinic.ydernummer}
-                    avgRating={clinic.avgRating}
-                    ratingCount={clinic.ratingCount}
-                    adresse={clinic.adresse}
-                    postnummer={clinic.postnummer}
-                    lokation={clinic.lokation}
-                    specialties={clinic.specialties}
-                  />
-                </Link>
-              ))}
+              {data.clinics.map((clinic: Clinic) => {
+                // If we're on a specialty page, reorder the specialties array to show the current specialty first
+                let orderedSpecialties = clinic.specialties;
+                if (params.specialty && clinic.specialties) {
+                  orderedSpecialties = [
+                    ...clinic.specialties.filter(
+                      (s) => s.specialty_name_slug === params.specialty
+                    ),
+                    ...clinic.specialties.filter(
+                      (s) => s.specialty_name_slug !== params.specialty
+                    ),
+                  ];
+                }
+
+                return (
+                  <Link
+                    key={clinic.clinics_id}
+                    href={`/klinik/${clinic.klinikNavnSlug}`}
+                    className="block"
+                  >
+                    <ClinicCard
+                      klinikNavn={clinic.klinikNavn}
+                      ydernummer={clinic.ydernummer}
+                      avgRating={clinic.avgRating}
+                      ratingCount={clinic.ratingCount}
+                      adresse={clinic.adresse}
+                      postnummer={clinic.postnummer}
+                      lokation={clinic.lokation}
+                      specialties={orderedSpecialties}
+                    />
+                  </Link>
+                );
+              })}
             </div>
           </>
         )}
@@ -530,24 +560,40 @@ export default async function LocationPage({ params }: LocationPageProps) {
               Andre klinikker i nærheden af {data.city.bynavn}
             </h2>
             <div className="space-y-4">
-              {data.nearbyClinicsList.map((clinic: ClinicWithDistance) => (
-                <Link
-                  key={clinic.clinics_id}
-                  href={`/klinik/${clinic.klinikNavnSlug}`}
-                  className="block"
-                >
-                  <ClinicCard
-                    klinikNavn={clinic.klinikNavn}
-                    ydernummer={clinic.ydernummer}
-                    avgRating={clinic.avgRating}
-                    ratingCount={clinic.ratingCount}
-                    adresse={clinic.adresse}
-                    postnummer={clinic.postnummer}
-                    lokation={clinic.lokation}
-                    distance={clinic.distance}
-                  />
-                </Link>
-              ))}
+              {data.nearbyClinicsList.map((clinic: ClinicWithDistance) => {
+                // If we're on a specialty page, reorder the specialties array to show the current specialty first
+                let orderedSpecialties = clinic.specialties;
+                if (params.specialty && clinic.specialties) {
+                  orderedSpecialties = [
+                    ...clinic.specialties.filter(
+                      (s) => s.specialty_name_slug === params.specialty
+                    ),
+                    ...clinic.specialties.filter(
+                      (s) => s.specialty_name_slug !== params.specialty
+                    ),
+                  ];
+                }
+
+                return (
+                  <Link
+                    key={clinic.clinics_id}
+                    href={`/klinik/${clinic.klinikNavnSlug}`}
+                    className="block"
+                  >
+                    <ClinicCard
+                      klinikNavn={clinic.klinikNavn}
+                      ydernummer={clinic.ydernummer}
+                      avgRating={clinic.avgRating}
+                      ratingCount={clinic.ratingCount}
+                      adresse={clinic.adresse}
+                      postnummer={clinic.postnummer}
+                      lokation={clinic.lokation}
+                      distance={clinic.distance}
+                      specialties={orderedSpecialties}
+                    />
+                  </Link>
+                );
+              })}
             </div>
           </div>
         )}

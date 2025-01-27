@@ -13,6 +13,7 @@ export interface Clinic {
   specialties: {
     specialty_id: string;
     specialty_name: string;
+    specialty_name_slug: string;
   }[];
 }
 

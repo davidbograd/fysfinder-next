@@ -71,6 +71,11 @@ const ClinicCard: React.FC<Props> = ({
                   {specialty.specialty_name}
                 </Badge>
               ))}
+              {specialties.length > 5 && (
+                <Badge variant="outline" className="text-sm">
+                  +{specialties.length - 5}
+                </Badge>
+              )}
             </div>
           )}
           {ydernummer && (
