@@ -77,7 +77,7 @@ export function SearchAndFilters({
 
   return (
     <div className="relative" ref={searchRef}>
-      <div className="flex flex-col sm:flex-row sm:gap-0 mb-2">
+      <div className="flex flex-col sm:flex-row sm:gap-0 mb-4">
         <div className="flex-1 flex flex-col sm:flex-row border bg-white rounded-xl sm:border-0 overflow-hidden">
           {/* Search Input Group */}
           <div className="flex-1 relative flex">
@@ -113,7 +113,7 @@ export function SearchAndFilters({
 
       {/* Search Results Dropdown */}
       {query && isFocused && (
-        <div className="absolute z-50 left-0 right-0 bg-white border rounded-md shadow-lg max-h-[calc(100vh-220px)] overflow-y-auto">
+        <div className="absolute z-50 left-0 right-0 -mt-2 bg-white border rounded-md shadow-lg max-h-[calc(100vh-220px)] overflow-y-auto">
           {isLoading ? (
             <div className="p-4 text-gray-500 text-center">Søger...</div>
           ) : searchResult ? (
