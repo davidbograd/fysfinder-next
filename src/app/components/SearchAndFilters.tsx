@@ -77,11 +77,11 @@ export function SearchAndFilters({
 
   return (
     <div className="relative" ref={searchRef}>
-      <div className="flex flex-col sm:flex-row sm:gap-0 mb-8">
+      <div className="flex flex-col sm:flex-row sm:gap-0 mb-2">
         <div className="flex-1 flex flex-col sm:flex-row border rounded-xl sm:border-0 overflow-hidden">
           {/* Search Input Group */}
           <div className="flex-1 relative flex">
-            <div className="flex-1 flex items-center relative sm:border bg-white sm:rounded-l-full overflow-hidden hover:bg-gray-50/50 transition-colors">
+            <div className="flex-1 flex items-center relative sm:border bg-white sm:rounded-l-full overflow-hidden group">
               <div className="pl-4 flex items-center">
                 <MapPin className="text-gray-400 size-5" />
               </div>
@@ -91,7 +91,7 @@ export function SearchAndFilters({
                 onChange={(e) => setQuery(e.target.value)}
                 onFocus={handleFocus}
                 placeholder="Søg efter postnummer..."
-                className="w-full h-12 pl-3 pr-5 focus:outline-none focus:ring-0 text-gray-900 placeholder:text-gray-500 text-base bg-transparent"
+                className="w-full h-12 pl-3 pr-5 focus:outline-none focus:ring-0 text-gray-900 placeholder:text-gray-500 text-base bg-white group-hover:bg-gray-50/50 transition-colors"
               />
             </div>
           </div>
@@ -113,7 +113,7 @@ export function SearchAndFilters({
 
       {/* Search Results Dropdown */}
       {query && isFocused && (
-        <div className="absolute z-50 left-0 right-0 mt-1 bg-white border rounded-md shadow-lg max-h-[calc(100vh-220px)] overflow-y-auto">
+        <div className="absolute z-50 left-0 right-0 bg-white border rounded-md shadow-lg max-h-[calc(100vh-220px)] overflow-y-auto">
           {isLoading ? (
             <div className="p-4 text-gray-500 text-center">Søger...</div>
           ) : searchResult ? (
