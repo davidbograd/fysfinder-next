@@ -193,11 +193,11 @@ export async function fetchLocationData(
     ]);
 
     // Safely process the clinics data
-    const validClinics = (clinicsData as unknown[]).filter(
-      isValidClinicResponse
-    );
+    const validClinics = Array.isArray(clinicsData)
+      ? clinicsData.filter(isValidClinicResponse)
+      : [];
     const clinics = validClinics.map(mapDBClinicToClinic);
-    const nearbyClinicsList = nearbyData || [];
+    const nearbyClinicsList = Array.isArray(nearbyData) ? nearbyData : [];
 
     return {
       city,
