@@ -12,7 +12,9 @@ export async function searchCities(query: string): Promise<SearchResult> {
     const { data: exactMatch } = await supabase
       .from("cities")
       .select("*")
-      .or(`postal_codes.cs.{${cleanQuery}},bynavn_slug.eq.${cleanQuery}`)
+      .or(
+        `postal_codes.cs.{${cleanQuery}},bynavn_slug.eq.${cleanQuery},bynavn.ilike.${cleanQuery}`
+      )
       .single();
 
     if (!exactMatch) {
