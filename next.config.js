@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['your-domain.com'], // Replace with your actual domain or remove if using only local images
+    domains: ['dbqnutjbrxydltkeftnv.supabase.co'], // Replace with your Supabase project URL
   },
   webpack: (config, { isServer }) => {
     // Add webpack ignore for punycode

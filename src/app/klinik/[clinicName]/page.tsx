@@ -18,6 +18,14 @@ interface Specialty {
   specialty_name_slug: string;
 }
 
+interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  image_url: string;
+  display_order: number;
+}
+
 interface Clinic {
   clinics_id: string;
   klinikNavn: string;
@@ -49,38 +57,67 @@ interface Clinic {
   northstar: boolean;
   specialties: Specialty[];
   om_os: string | null;
+  team_members: TeamMember[];
 }
 
 async function fetchClinicBySlug(clinicSlug: string): Promise<Clinic | null> {
   const supabase = createClient();
 
-  // Use Next.js's fetch caching
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?klinikNavnSlug=eq.${clinicSlug}&select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug))`,
-    {
+  try {
+    const requestUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?klinikNavnSlug=eq.${clinicSlug}&select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order)`;
+
+    const response = await fetch(requestUrl, {
       headers: {
         apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
+        "Content-Type": "application/json",
       },
       next: {
         revalidate: 86400, // Cache for 24 hours
       },
+    });
+
+    if (!response.ok) {
+      return null;
     }
-  );
 
-  const data = await response.json();
+    const data = await response.json();
 
-  if (!data || data.length === 0) {
+    if (!data || !Array.isArray(data) || data.length === 0) {
+      return null;
+    }
+
+    const clinic = data[0];
+
+    // Initialize empty arrays for safety
+    clinic.specialties = [];
+    clinic.team_members = [];
+
+    // Safely handle specialties
+    if (clinic.clinic_specialties && Array.isArray(clinic.clinic_specialties)) {
+      clinic.specialties = clinic.clinic_specialties
+        .filter((item: any) => item.specialty)
+        .map((item: any) => item.specialty);
+      delete clinic.clinic_specialties;
+    }
+
+    // Safely handle team members
+    if (
+      clinic.clinic_team_members &&
+      Array.isArray(clinic.clinic_team_members)
+    ) {
+      clinic.team_members = clinic.clinic_team_members
+        .filter((member: any) => member)
+        .sort(
+          (a: TeamMember, b: TeamMember) => a.display_order - b.display_order
+        );
+      delete clinic.clinic_team_members;
+    }
+
+    return clinic;
+  } catch (error) {
     return null;
   }
-
-  // Flatten the specialties array
-  data[0].specialties = data[0].clinic_specialties.map(
-    (item: any) => item.specialty
-  );
-  delete data[0].clinic_specialties;
-
-  return data[0];
 }
 
 export async function generateMetadata({
@@ -365,7 +402,12 @@ export default async function ClinicPage({
               )}
             </section>
 
-            {clinic.northstar && <MeetTheTeam />}
+            {clinic.team_members?.length > 0 && (
+              <MeetTheTeam
+                teamMembers={clinic.team_members}
+                clinicName={clinic.klinikNavn}
+              />
+            )}
 
             {/* Specialer section */}
             <section className="py-8 border-b border-gray-200">

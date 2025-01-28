@@ -4,69 +4,54 @@ import { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
-// Mock data for physios
-const mockPhysios = [
-  {
-    id: 1,
-    name: "Issam Farahat",
-    role: "Ejer | Muskuloskeletal Fysioterapeut Dip.Mpt",
-    image: "/issam-placeholder.jpg",
-  },
-  {
-    id: 2,
-    name: "Pablo Leal",
-    role: "Sports Fysioterapeut",
-    image: "/pablo-placeholder.jpg",
-  },
-  {
-    id: 3,
-    name: "Joachim Bograd",
-    role: "Fysioterapeut",
-    image: "/joa-placeholder.jpg",
-  },
-  {
-    id: 4,
-    name: "Sara Tasholm",
-    role: "Fysioterapeut Studerende",
-    image: "/sara-placeholder.jpg",
-  },
-  {
-    id: 5,
-    name: "Nicklas Jochumsen",
-    role: "Fysioterapeut Studerende",
-    image: "/nicklas-placeholder.jpg",
-  },
-  {
-    id: 6,
-    name: "Mathias Krogh Christensen",
-    role: "Fysioterapeut Studerende",
-    image: "/mathias-placeholder.jpg",
-  },
-];
+interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  image_url: string;
+  display_order: number;
+}
 
-export function MeetTheTeam() {
+interface MeetTheTeamProps {
+  teamMembers: TeamMember[];
+  clinicName: string;
+}
+
+export function MeetTheTeam({ teamMembers, clinicName }: MeetTheTeamProps) {
   const [showAllPhysios, setShowAllPhysios] = useState(false);
 
   const displayedPhysios = showAllPhysios
-    ? mockPhysios
-    : mockPhysios.slice(0, 4);
+    ? teamMembers
+    : teamMembers.slice(0, 4);
+
+  if (!teamMembers.length) {
+    return null;
+  }
 
   return (
     <section className="py-8 border-b border-gray-200">
       <h2 className="text-2xl font-semibold ">Mød teamet</h2>
       <p className="text-gray-600 mb-6">
-        Mød de {mockPhysios.length} fysioterapeuter hos Fysiopuls.
+        {teamMembers.length === 1
+          ? `1 fysioterapeut hos ${clinicName}.`
+          : `${teamMembers.length} fysioterapeuter hos ${clinicName}.`}
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
         {displayedPhysios.map((physio) => (
           <div key={physio.id} className="flex items-center space-x-4">
-            <Image
-              src={physio.image}
-              alt={physio.name}
-              width={96}
-              height={96}
-              className="rounded-full"
-            />
+            {physio.image_url ? (
+              <Image
+                src={physio.image_url}
+                alt={`${physio.name} - ${physio.role}`}
+                width={96}
+                height={96}
+                className="rounded-full object-cover"
+                placeholder="blur"
+                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSEkMjU1LC0yMi4xODY6Ojo4MS89PUBAQl5aXmJiYpSUlP///////2wBDAR"
+              />
+            ) : (
+              <div className="w-24 h-24 rounded-full bg-gray-200 flex-shrink-0" />
+            )}
             <div>
               <p className="font-medium">{physio.name}</p>
               <p className="text-sm text-gray-600">{physio.role}</p>
@@ -74,7 +59,7 @@ export function MeetTheTeam() {
           </div>
         ))}
       </div>
-      {!showAllPhysios && mockPhysios.length > 4 && (
+      {!showAllPhysios && teamMembers.length > 4 && (
         <Button
           variant="outline"
           onClick={() => setShowAllPhysios(true)}
