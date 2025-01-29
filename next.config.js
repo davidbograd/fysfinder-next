@@ -4,10 +4,13 @@ const nextConfig = {
     domains: ['dbqnutjbrxydltkeftnv.supabase.co'], // Replace with your Supabase project URL
   },
   webpack: (config, { isServer }) => {
-    // Add webpack ignore for punycode
-    config.resolve.fallback = {
-      ...config.resolve.fallback,
-      "punycode": false,
+    // Suppress the punycode warning
+    config.resolve = {
+      ...config.resolve,
+      fallback: {
+        ...config.resolve.fallback,
+        "punycode": require.resolve('punycode/'),
+      }
     };
     
     return config;

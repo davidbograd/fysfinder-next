@@ -6,7 +6,7 @@ export function AuthorCard() {
     <div className="flex items-center gap-4 mb-8">
       <div className="flex-shrink-0">
         <Image
-          src="/joa-placeholder.jpg"
+          src="/images/om-os/joachimbograd-fysfinder.png"
           alt="Joachim Bograd"
           width={64}
           height={64}
