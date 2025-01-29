@@ -4,12 +4,12 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Phone } from "lucide-react";
 
-interface PhoneButtonProps {
+export interface PhoneButtonProps {
   phoneNumber: string;
-  className?: string;
+  onClick?: () => void;
 }
 
-export function PhoneButton({ phoneNumber, className = "" }: PhoneButtonProps) {
+export function PhoneButton({ phoneNumber, onClick }: PhoneButtonProps) {
   const [isCopied, setIsCopied] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -29,6 +29,9 @@ export function PhoneButton({ phoneNumber, className = "" }: PhoneButtonProps) {
   }, []);
 
   const handlePhoneAction = async () => {
+    // Track the interaction
+    onClick?.();
+
     if (isMobile) {
       window.location.href = `tel:${phoneNumber}`;
     } else {
@@ -47,7 +50,7 @@ export function PhoneButton({ phoneNumber, className = "" }: PhoneButtonProps) {
   return (
     <Button
       variant="outline"
-      className={`w-full flex items-center justify-between ${className}`}
+      className="w-full flex items-center justify-between"
       onClick={handlePhoneAction}
     >
       <div className="flex items-center">

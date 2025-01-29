@@ -4,15 +4,18 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Mail } from "lucide-react";
 
-interface EmailButtonProps {
+export interface EmailButtonProps {
   email: string;
-  className?: string;
+  onClick?: () => void;
 }
 
-export function EmailButton({ email, className = "" }: EmailButtonProps) {
+export function EmailButton({ email, onClick }: EmailButtonProps) {
   const [isCopied, setIsCopied] = useState(false);
 
-  const handleCopyEmail = async () => {
+  const handleEmailAction = async () => {
+    // Track the interaction
+    onClick?.();
+
     try {
       await navigator.clipboard.writeText(email);
       setIsCopied(true);
@@ -27,8 +30,8 @@ export function EmailButton({ email, className = "" }: EmailButtonProps) {
   return (
     <Button
       variant="outline"
-      className={`w-full flex items-center justify-between ${className}`}
-      onClick={handleCopyEmail}
+      className="w-full flex items-center justify-between"
+      onClick={handleEmailAction}
     >
       <div className="flex items-center">
         <Mail className="mr-2 h-4 w-4 text-gray-400" />

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { EmailButton } from "@/components/EmailButton";
 import { PhoneButton } from "@/components/PhoneButton";
+import { useClinicAnalytics } from "@/app/hooks/useClinicAnalytics";
 
 interface ClinicSidebarProps {
   clinic: {
@@ -16,10 +17,17 @@ interface ClinicSidebarProps {
     tlf: string | null;
     email: string | null;
     northstar: boolean;
+    id?: string;
   };
 }
 
 export function ClinicSidebar({ clinic }: ClinicSidebarProps) {
+  const { trackWebsiteClick, trackPhoneClick, trackEmailClick } =
+    useClinicAnalytics({
+      clinicName: clinic.klinikNavn,
+      clinicId: clinic.id,
+    });
+
   // Helper function to check if a string is empty or null
   const hasValue = (str: string | null): boolean => {
     return str !== null && str.trim() !== "";
@@ -84,14 +92,25 @@ export function ClinicSidebar({ clinic }: ClinicSidebarProps) {
                       href={clinic.website!}
                       target="_blank"
                       rel="noopener nofollow"
+                      onClick={trackWebsiteClick}
                     >
                       <Globe className="mr-2 h-4 w-4 text-gray-400" />
-                      <span>{clinic.website}</span>
+                      <span className="truncate">{clinic.website}</span>
                     </a>
                   </Button>
                 )}
-                {hasPhone && <PhoneButton phoneNumber={clinic.tlf!} />}
-                {hasEmail && <EmailButton email={clinic.email!} />}
+                {hasPhone && (
+                  <PhoneButton
+                    phoneNumber={clinic.tlf!}
+                    onClick={trackPhoneClick}
+                  />
+                )}
+                {hasEmail && (
+                  <EmailButton
+                    email={clinic.email!}
+                    onClick={trackEmailClick}
+                  />
+                )}
               </>
             ) : (
               <p className="text-gray-500 text-center py-2">
