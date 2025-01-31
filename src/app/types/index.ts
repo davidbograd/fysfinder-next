@@ -121,6 +121,24 @@ export interface DBClinicResponse {
   klinikNavnSlug: string;
   adresse: string;
   postnummer: number;
+  website: string;
+  tlf: string;
+  email: string;
+  førsteKons: number;
+  opfølgning: number;
+  mandag: string;
+  tirsdag: string;
+  onsdag: string;
+  torsdag: string;
+  fredag: string;
+  lørdag: string;
+  søndag: string;
+  parkering: string;
+  handicapadgang: string;
+  holdtræning: string;
+  hjemmetræning: string;
+  northstar: boolean;
+  om_os: string | null;
   clinic_specialties: {
     specialty: {
       specialty_id: string;
@@ -133,6 +151,13 @@ export interface DBClinicResponse {
   }[];
   clinic_services: {
     service: ExtraService;
+  }[];
+  clinic_team_members?: {
+    id: string;
+    name: string;
+    role: string;
+    image_url: string;
+    display_order: number;
   }[];
 }
 

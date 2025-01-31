@@ -45,6 +45,9 @@ function mapDBClinicToClinic(dbClinic: DBClinicResponse): Clinic {
   return {
     ...dbClinic,
     specialties: dbClinic.clinic_specialties.map((cs) => cs.specialty),
+    team_members: dbClinic.clinic_team_members || [],
+    insurances: dbClinic.clinic_insurances?.map((ci) => ci.insurance) || [],
+    extraServices: dbClinic.clinic_services?.map((cs) => cs.service) || [],
   };
 }
 
