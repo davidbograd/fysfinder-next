@@ -7,64 +7,17 @@ import GoogleMap from "../../components/GoogleMap";
 import { Metadata } from "next";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Check, Phone, Globe, Mail } from "lucide-react";
+import { Check } from "lucide-react";
 import { ClinicSidebar } from "@/app/components/ClinicSidebar";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-
-interface Specialty {
-  specialty_id: string;
-  specialty_name: string;
-  specialty_name_slug: string;
-}
-
-interface TeamMember {
-  id: string;
-  name: string;
-  role: string;
-  image_url: string;
-  display_order: number;
-}
-
-interface Clinic {
-  clinics_id: string;
-  klinikNavn: string;
-  antalBehandlere: number;
-  ydernummer: boolean;
-  avgRating: number;
-  ratingCount: number;
-  lokation: string;
-  lokationSlug: string;
-  adresse: string;
-  website: string;
-  tlf: string;
-  email: string;
-  førsteKons: number;
-  opfølgning: number;
-  mandag: string;
-  tirsdag: string;
-  onsdag: string;
-  torsdag: string;
-  fredag: string;
-  lørdag: string;
-  søndag: string;
-  parkering: string;
-  handicapadgang: string;
-  holdtræning: string;
-  hjemmetræning: string;
-  klinikNavnSlug: string;
-  postnummer: number;
-  northstar: boolean;
-  specialties: Specialty[];
-  om_os: string | null;
-  team_members: TeamMember[];
-}
+import { Clinic, Insurance, ExtraService, TeamMember } from "@/app/types";
 
 async function fetchClinicBySlug(clinicSlug: string): Promise<Clinic | null> {
   const supabase = createClient();
 
   try {
-    const requestUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?klinikNavnSlug=eq.${clinicSlug}&select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order)`;
+    const requestUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?klinikNavnSlug=eq.${clinicSlug}&select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order),clinic_insurances(insurance:insurance_companies(insurance_id,insurance_name,insurance_name_slug)),clinic_services(service:extra_services(service_id,service_name,service_name_slug))`;
 
     const response = await fetch(requestUrl, {
       headers: {
@@ -92,6 +45,8 @@ async function fetchClinicBySlug(clinicSlug: string): Promise<Clinic | null> {
     // Initialize empty arrays for safety
     clinic.specialties = [];
     clinic.team_members = [];
+    clinic.insurances = [];
+    clinic.extraServices = [];
 
     // Safely handle specialties
     if (clinic.clinic_specialties && Array.isArray(clinic.clinic_specialties)) {
@@ -112,6 +67,22 @@ async function fetchClinicBySlug(clinicSlug: string): Promise<Clinic | null> {
           (a: TeamMember, b: TeamMember) => a.display_order - b.display_order
         );
       delete clinic.clinic_team_members;
+    }
+
+    // Handle insurances
+    if (clinic.clinic_insurances && Array.isArray(clinic.clinic_insurances)) {
+      clinic.insurances = clinic.clinic_insurances
+        .filter((item: any) => item.insurance)
+        .map((item: any) => item.insurance);
+      delete clinic.clinic_insurances;
+    }
+
+    // Handle extra services
+    if (clinic.clinic_services && Array.isArray(clinic.clinic_services)) {
+      clinic.extraServices = clinic.clinic_services
+        .filter((item: any) => item.service)
+        .map((item: any) => item.service);
+      delete clinic.clinic_services;
     }
 
     return clinic;
@@ -301,30 +272,6 @@ export default async function ClinicPage({
       { text: clinic.klinikNavn },
     ];
 
-    const ekstraYdelser = [
-      "Akupunktur",
-      "Ultralyd",
-      "Shockwave",
-      "Indlægssåler",
-      "Personlig træning",
-      "Online coaching",
-    ];
-
-    const insuranceCompanies = [
-      "PFA",
-      "Skandia",
-      "Mølhom",
-      "Dansk Sundhedssikring",
-      "Top Danmark",
-      "PrivatSikring",
-      "Tryg",
-      "PensionDanmark",
-      "Danica",
-      "Falck Healthcare",
-      "Nordic Netcare",
-      "Codan",
-    ];
-
     const openingHours = [
       { day: "Mandag", hours: clinic.mandag },
       { day: "Tirsdag", hours: clinic.tirsdag },
@@ -402,7 +349,7 @@ export default async function ClinicPage({
               )}
             </section>
 
-            {clinic.team_members?.length > 0 && (
+            {clinic.team_members && clinic.team_members.length > 0 && (
               <MeetTheTeam
                 teamMembers={clinic.team_members}
                 clinicName={clinic.klinikNavn}
@@ -440,44 +387,53 @@ export default async function ClinicPage({
               )}
             </section>
 
-            {clinic.northstar && (
-              <>
-                {/* Forsikring */}
-                <section className="py-8 border-b border-gray-200">
-                  <h2 className="text-2xl font-semibold mb-4">Forsikring</h2>
+            {/* Forsikring */}
+            <section className="py-8 border-b border-gray-200">
+              <h2 className="text-2xl font-semibold mb-4">Forsikring</h2>
+              {clinic.insurances && clinic.insurances.length > 0 ? (
+                <>
                   <p className="mb-4">
                     {clinic.klinikNavn} samarbejder med følgende
                     forsikringsselskaber:
                   </p>
                   <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
-                    {insuranceCompanies.map((company) => (
-                      <li key={company} className="flex items-center">
+                    {clinic.insurances.map((insurance) => (
+                      <li
+                        key={insurance.insurance_id}
+                        className="flex items-center"
+                      >
                         <Check className="w-5 h-5 text-green-500 mr-2" />
-                        <span>{company}</span>
+                        <span>{insurance.insurance_name}</span>
                       </li>
                     ))}
                   </ul>
-                </section>
+                </>
+              ) : (
+                <p className="text-gray-600">
+                  Ingen forsikringssamarbejder tilføjet.
+                </p>
+              )}
+            </section>
 
-                {/* Ekstra ydelser section */}
-                <section className="py-8 border-b border-gray-200">
-                  <h2 className="text-2xl font-semibold mb-2">
-                    Ekstra ydelser
-                  </h2>
-                  <div className="flex flex-wrap gap-2">
-                    {ekstraYdelser.map((ydelse) => (
-                      <Badge
-                        key={ydelse}
-                        variant="secondary"
-                        className="text-sm"
-                      >
-                        {ydelse}
-                      </Badge>
-                    ))}
-                  </div>
-                </section>
-              </>
-            )}
+            {/* Ekstra ydelser section */}
+            <section className="py-8 border-b border-gray-200">
+              <h2 className="text-2xl font-semibold mb-2">Ekstra ydelser</h2>
+              {clinic.extraServices && clinic.extraServices.length > 0 ? (
+                <div className="flex flex-wrap gap-2">
+                  {clinic.extraServices.map((service) => (
+                    <Badge
+                      key={service.service_id}
+                      variant="secondary"
+                      className="text-sm"
+                    >
+                      {service.service_name}
+                    </Badge>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-gray-600">Ingen ekstra ydelser tilføjet.</p>
+              )}
+            </section>
 
             {/* Åbningstider og adgang section */}
             <section className="py-8 border-b border-gray-200">

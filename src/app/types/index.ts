@@ -10,11 +10,32 @@ export interface Clinic {
   klinikNavnSlug: string;
   adresse: string;
   postnummer: number;
+  website: string;
+  tlf: string;
+  email: string;
+  førsteKons: number;
+  opfølgning: number;
+  mandag: string;
+  tirsdag: string;
+  onsdag: string;
+  torsdag: string;
+  fredag: string;
+  lørdag: string;
+  søndag: string;
+  parkering: string;
+  handicapadgang: string;
+  holdtræning: string;
+  hjemmetræning: string;
+  northstar: boolean;
+  om_os: string | null;
   specialties: {
     specialty_id: string;
     specialty_name: string;
     specialty_name_slug: string;
   }[];
+  team_members?: TeamMember[];
+  insurances?: Insurance[];
+  extraServices?: ExtraService[];
 }
 
 export interface SeoSection {
@@ -107,6 +128,12 @@ export interface DBClinicResponse {
       specialty_name_slug: string;
     };
   }[];
+  clinic_insurances: {
+    insurance: Insurance;
+  }[];
+  clinic_services: {
+    service: ExtraService;
+  }[];
 }
 
 export interface LocationPageData {
@@ -119,4 +146,24 @@ export interface LocationPageData {
 export interface SpecialtyWithSeo extends SpecialtyRow {
   specialty_id: string;
   seo_tekst?: string;
+}
+
+export interface Insurance {
+  insurance_id: string;
+  insurance_name: string;
+  insurance_name_slug: string;
+}
+
+export interface ExtraService {
+  service_id: string;
+  service_name: string;
+  service_name_slug: string;
+}
+
+export interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  image_url: string;
+  display_order: number;
 }
