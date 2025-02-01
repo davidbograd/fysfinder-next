@@ -1,3 +1,8 @@
+// This script is used to revalidate the pages in the production environment.
+// To run it use the terminal command: node scripts/revalidate.js
+
+require('dotenv').config({ path: '.env.local' }); // Load environment variables from .env.local
+
 const paths = [
   '/',
   '/find/fysioterapeut/danmark',
@@ -13,7 +18,7 @@ async function revalidatePaths() {
   // Get token from environment variable
   const token = process.env.REVALIDATE_TOKEN;
   if (!token) {
-    console.error('❌ REVALIDATE_TOKEN environment variable is not set');
+    console.error('❌ REVALIDATE_TOKEN environment variable is not set in .env.local');
     process.exit(1);
   }
   
