@@ -4,8 +4,18 @@ Allow: /
 Disallow: /search
 Disallow: /postnumre
 Disallow: /*?*  # Disallow URL parameters to prevent duplicate content crawling
+Crawl-delay: 1
 
-# **** AI Bot Specific Rules ****
+# **** Ahrefs Bot Settings ****
+User-agent: AhrefsBot
+Allow: /
+Disallow: /search
+Disallow: /postnumre
+Disallow: /*?*
+Crawl-delay: 2
+Request-rate: 1/2
+
+# **** AI Bot Settings ****
 User-agent: GPTBot
 User-agent: ChatGPT-User
 User-agent: CCBot
@@ -13,6 +23,11 @@ User-agent: anthropic-ai
 User-agent: Claude-Web
 User-agent: cohere-ai
 User-agent: PerplexityBot
+Allow: /
+Disallow: /search
+Disallow: /postnumre
+Disallow: /*?*
+Crawl-delay: 2
 
 # **** Google Bot Family ****
 User-agent: Googlebot
@@ -27,11 +42,13 @@ Allow: /*.jpg$
 Allow: /*.gif$
 Allow: /*.svg$
 Allow: /*.ico$
+Crawl-delay: 1
 
 # **** Other Search Engines ****
 User-agent: Applebot-Extended
 User-agent: facebookbot
 Allow: /
+Crawl-delay: 2
 
 # **** Sitemaps ****
 Sitemap: https://www.fysfinder.dk/sitemap.xml
