@@ -77,7 +77,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const term = await getGlossaryTerm(params.term);
   return {
-    title: `${term.title} | Fysioterapeut Artikler`,
+    title: `${term.title}`,
     description: term.description,
   };
 }
