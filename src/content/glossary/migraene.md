@@ -3,8 +3,6 @@ title: "Migræne - når hovedpine er mere end bare smerte"
 description: "Få forståelse for hvor udbredt migræne er, hvad den indebærer, og hvordan man bedst håndterer det."
 ---
 
-# Migræne
-
 ![Illustration af migræne](/images/articles/migraene_intro.webp)
 
 ## Hvad er migræne?
