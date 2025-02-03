@@ -3,8 +3,6 @@ title: "Sov dig slank, stærk og smertefri - er det muligt?"
 description: "Få et overblik over hvorfor søvn er vigtigt, og hvordan det påvirker din vægt, styrketræning, og smerte"
 ---
 
-# Sov dig slank, stærk og smertefri - er det muligt?
-
 ![Illustration af søvns effekt på træning, vægttab og smerte](/images/articles/Søvn_intro.webp)
 
 ## Introduktion til søvn
