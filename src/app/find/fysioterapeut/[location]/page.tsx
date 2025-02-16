@@ -17,6 +17,7 @@ import {
 import { notFound } from "next/navigation";
 import { SearchAndFilters } from "@/app/components/SearchAndFilters";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import { Badge } from "@/components/ui/badge";
 
 // Create a Supabase client for static generation
 const supabase = createClient(
@@ -342,6 +343,46 @@ interface LocationPageProps {
   };
 }
 
+interface SpecialtiesListProps {
+  city: City;
+  clinics: Clinic[];
+  specialties: SpecialtyWithSeo[];
+}
+
+function SpecialtiesList({ city, clinics, specialties }: SpecialtiesListProps) {
+  return (
+    <div className="mt-12">
+      <h2 className="text-xl font-semibold mb-6">
+        Se fysioterapeuter med specifikke specialer i {city.bynavn}
+      </h2>
+      <div className="flex flex-wrap gap-2">
+        {specialties
+          .filter((specialty) =>
+            clinics.some((clinic) =>
+              clinic.specialties.some(
+                (s) => s.specialty_name_slug === specialty.specialty_name_slug
+              )
+            )
+          )
+          .map((specialty) => (
+            <Link
+              key={specialty.specialty_id}
+              href={`/find/fysioterapeut/${city.bynavn_slug}/${specialty.specialty_name_slug}`}
+              className="transition-transform hover:scale-105"
+            >
+              <Badge
+                variant="secondary"
+                className="text-sm hover:bg-secondary/80 transition-colors cursor-pointer hover:shadow-sm"
+              >
+                {specialty.specialty_name}
+              </Badge>
+            </Link>
+          ))}
+      </div>
+    </div>
+  );
+}
+
 export default async function LocationPage({ params }: LocationPageProps) {
   const data = await fetchLocationData(params.location, params.specialty);
   const specialties = data.specialties;
@@ -599,6 +640,15 @@ export default async function LocationPage({ params }: LocationPageProps) {
               })}
             </div>
           </div>
+        )}
+
+        {/* Specialties section */}
+        {!params.specialty && data.clinics.length > 0 && data.city && (
+          <SpecialtiesList
+            city={data.city}
+            clinics={data.clinics}
+            specialties={specialties}
+          />
         )}
       </div>
 
