@@ -94,9 +94,9 @@ function Header({
   }>;
 }) {
   return (
-    <div className="bg-logo-blue py-10 sm:py-20 px-4 mb-8 sm:mb-12 rounded-lg">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-white text-center">
+    <div className="bg-logo-blue py-16 sm:py-28 px-4 mb-8 sm:mb-12 rounded-lg min-h-[65vh] flex items-center w-full">
+      <div className="max-w-4xl mx-auto w-full space-y-12 sm:space-y-16">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white text-center">
           Find den bedste fysioterapeut
         </h1>
 
