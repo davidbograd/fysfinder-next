@@ -375,6 +375,10 @@ function SpecialtiesList({ city, clinics, specialties }: SpecialtiesListProps) {
         specialtyMatchCounts[a.specialty_id.toString()]
     );
 
+  if (sortedSpecialties.length === 0) {
+    return null;
+  }
+
   return (
     <div className="mt-12">
       <h2 className="text-xl font-semibold mb-6">
