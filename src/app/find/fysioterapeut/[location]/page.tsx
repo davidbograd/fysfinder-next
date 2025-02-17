@@ -484,9 +484,8 @@ export default async function LocationPage({ params }: LocationPageProps) {
         )}
 
         <p className="text-gray-600 mb-8">
-          Fysfinder hjælper dig med at finde den bedste fysioterapeut i{" "}
-          {data.city.bynavn}. Se anmeldelser, specialer, priser og find den
-          perfekte fysioterapeut.
+          Find den bedste fysioterapi i {data.city.bynavn}. Se anmeldelser,
+          specialer, priser og find den perfekte fysioterapeut.
         </p>
 
         <SearchAndFilters
