@@ -43,7 +43,7 @@ export function MeetTheTeam({ teamMembers, clinicName }: MeetTheTeamProps) {
               <div className="relative w-24 h-24 flex-shrink-0">
                 <Image
                   src={physio.image_url}
-                  alt={`${physio.name} - ${physio.role}`}
+                  alt={`${physio.name} - ${physio.role} hos ${clinicName}`}
                   fill
                   sizes="96px"
                   className="rounded-full object-cover"
