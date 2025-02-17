@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { createClient } from "@supabase/supabase-js";
 import { createClient as createServerClient } from "@/app/utils/supabase/server";
@@ -18,6 +18,8 @@ import { notFound } from "next/navigation";
 import { SearchAndFilters } from "@/app/components/SearchAndFilters";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { SpecialtiesList } from "@/components/SpecialtiesList";
 
 // Create a Supabase client for static generation
 const supabase = createClient(
@@ -343,69 +345,6 @@ interface LocationPageProps {
   };
 }
 
-interface SpecialtiesListProps {
-  city: City;
-  clinics: Clinic[];
-  specialties: SpecialtyWithSeo[];
-}
-
-function SpecialtiesList({ city, clinics, specialties }: SpecialtiesListProps) {
-  // Count matches for each specialty
-  const specialtyMatchCounts = specialties.reduce<Record<string, number>>(
-    (acc, specialty) => {
-      const matchCount = clinics.filter((clinic) =>
-        clinic.specialties.some(
-          (s) => s.specialty_name_slug === specialty.specialty_name_slug
-        )
-      ).length;
-      acc[specialty.specialty_id.toString()] = matchCount;
-      return acc;
-    },
-    {}
-  );
-
-  // Sort specialties by match count
-  const sortedSpecialties = [...specialties]
-    .filter(
-      (specialty) => specialtyMatchCounts[specialty.specialty_id.toString()] > 0
-    )
-    .sort(
-      (a, b) =>
-        specialtyMatchCounts[b.specialty_id.toString()] -
-        specialtyMatchCounts[a.specialty_id.toString()]
-    );
-
-  if (sortedSpecialties.length === 0) {
-    return null;
-  }
-
-  return (
-    <div className="mt-12">
-      <h2 className="text-xl font-semibold mb-6">
-        Find {city.bynavn} fysioterapeuter med speciale i...
-      </h2>
-      <div className="flex flex-wrap gap-2">
-        {sortedSpecialties.map((specialty) => (
-          <Link
-            key={specialty.specialty_id}
-            href={`/find/fysioterapeut/${city.bynavn_slug}/${specialty.specialty_name_slug}`}
-            className="transition-transform hover:scale-105"
-          >
-            <Badge
-              variant="secondary"
-              className="text-sm hover:bg-secondary/80 transition-colors cursor-pointer hover:shadow-sm"
-            >
-              <p>
-                {specialty.specialty_name} fysioterapi {city.bynavn}
-              </p>
-            </Badge>
-          </Link>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 export default async function LocationPage({ params }: LocationPageProps) {
   const data = await fetchLocationData(params.location, params.specialty);
   const specialties = data.specialties;
@@ -557,6 +496,15 @@ export default async function LocationPage({ params }: LocationPageProps) {
           defaultSearchValue={data.city.bynavn}
         />
 
+        {/* Specialties section */}
+        {!params.specialty && data.clinics.length > 0 && data.city && (
+          <SpecialtiesList
+            city={data.city}
+            clinics={data.clinics}
+            specialties={specialties}
+          />
+        )}
+
         {data.clinics.length === 0 ? (
           <div className="text-center py-16">
             <h2 className="text-xl font-semibold mb-4">
@@ -666,15 +614,6 @@ export default async function LocationPage({ params }: LocationPageProps) {
               })}
             </div>
           </div>
-        )}
-
-        {/* Specialties section */}
-        {!params.specialty && data.clinics.length > 0 && data.city && (
-          <SpecialtiesList
-            city={data.city}
-            clinics={data.clinics}
-            specialties={specialties}
-          />
         )}
       </div>
 
