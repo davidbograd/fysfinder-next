@@ -350,34 +350,53 @@ interface SpecialtiesListProps {
 }
 
 function SpecialtiesList({ city, clinics, specialties }: SpecialtiesListProps) {
+  // Count matches for each specialty
+  const specialtyMatchCounts = specialties.reduce<Record<string, number>>(
+    (acc, specialty) => {
+      const matchCount = clinics.filter((clinic) =>
+        clinic.specialties.some(
+          (s) => s.specialty_name_slug === specialty.specialty_name_slug
+        )
+      ).length;
+      acc[specialty.specialty_id.toString()] = matchCount;
+      return acc;
+    },
+    {}
+  );
+
+  // Sort specialties by match count
+  const sortedSpecialties = [...specialties]
+    .filter(
+      (specialty) => specialtyMatchCounts[specialty.specialty_id.toString()] > 0
+    )
+    .sort(
+      (a, b) =>
+        specialtyMatchCounts[b.specialty_id.toString()] -
+        specialtyMatchCounts[a.specialty_id.toString()]
+    );
+
   return (
     <div className="mt-12">
       <h2 className="text-xl font-semibold mb-6">
-        Se fysioterapeuter med specifikke specialer i {city.bynavn}
+        Find {city.bynavn} fysioterapeuter med speciale i...
       </h2>
       <div className="flex flex-wrap gap-2">
-        {specialties
-          .filter((specialty) =>
-            clinics.some((clinic) =>
-              clinic.specialties.some(
-                (s) => s.specialty_name_slug === specialty.specialty_name_slug
-              )
-            )
-          )
-          .map((specialty) => (
-            <Link
-              key={specialty.specialty_id}
-              href={`/find/fysioterapeut/${city.bynavn_slug}/${specialty.specialty_name_slug}`}
-              className="transition-transform hover:scale-105"
+        {sortedSpecialties.map((specialty) => (
+          <Link
+            key={specialty.specialty_id}
+            href={`/find/fysioterapeut/${city.bynavn_slug}/${specialty.specialty_name_slug}`}
+            className="transition-transform hover:scale-105"
+          >
+            <Badge
+              variant="secondary"
+              className="text-sm hover:bg-secondary/80 transition-colors cursor-pointer hover:shadow-sm"
             >
-              <Badge
-                variant="secondary"
-                className="text-sm hover:bg-secondary/80 transition-colors cursor-pointer hover:shadow-sm"
-              >
-                {specialty.specialty_name}
-              </Badge>
-            </Link>
-          ))}
+              <p>
+                {specialty.specialty_name} fysioterapi {city.bynavn}
+              </p>
+            </Badge>
+          </Link>
+        ))}
       </div>
     </div>
   );
