@@ -152,10 +152,10 @@ export async function fetchLocationData(
     }
 
     // Build the clinics query for city
-    let clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug))&city_id=eq.${city.id}`;
+    let clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order)&city_id=eq.${city.id}`;
 
     if (specialtySlug) {
-      clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),filtered_specialties:clinic_specialties!inner(specialty:specialties!inner(specialty_name_slug))&city_id=eq.${city.id}&filtered_specialties.specialties.specialty_name_slug=eq.${specialtySlug}`;
+      clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order),filtered_specialties:clinic_specialties!inner(specialty:specialties!inner(specialty_name_slug))&city_id=eq.${city.id}&filtered_specialties.specialties.specialty_name_slug=eq.${specialtySlug}`;
     }
 
     // Fetch clinics and nearby clinics in parallel
@@ -481,6 +481,7 @@ export default async function LocationPage({ params }: LocationPageProps) {
                     postnummer={clinic.postnummer}
                     lokation={clinic.lokation}
                     specialties={orderedSpecialties}
+                    team_members={clinic.team_members}
                   />
                 </Link>
               );
@@ -609,6 +610,7 @@ export default async function LocationPage({ params }: LocationPageProps) {
                       postnummer={clinic.postnummer}
                       lokation={clinic.lokation}
                       specialties={orderedSpecialties}
+                      team_members={clinic.team_members}
                     />
                   </Link>
                 );
@@ -653,6 +655,7 @@ export default async function LocationPage({ params }: LocationPageProps) {
                       lokation={clinic.lokation}
                       distance={clinic.distance}
                       specialties={orderedSpecialties}
+                      team_members={clinic.team_members}
                     />
                   </Link>
                 );

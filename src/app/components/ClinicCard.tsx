@@ -1,6 +1,11 @@
+"use client";
+
 import { StarIcon } from "@heroicons/react/24/solid";
 import { MapPin, Check } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
+import { TeamMember } from "@/app/types";
+import { useState } from "react";
 
 interface Props {
   klinikNavn: string;
@@ -15,6 +20,7 @@ interface Props {
     specialty_name: string;
     specialty_id: string;
   }[];
+  team_members?: TeamMember[];
 }
 
 const ClinicCard: React.FC<Props> = ({
@@ -27,7 +33,13 @@ const ClinicCard: React.FC<Props> = ({
   lokation,
   distance,
   specialties = [],
+  team_members = [],
 }) => {
+  const MAX_VISIBLE_MEMBERS = 5;
+  const hasMoreMembers = team_members.length > MAX_VISIBLE_MEMBERS;
+  const visibleMembers = team_members.slice(0, MAX_VISIBLE_MEMBERS);
+  const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
+
   return (
     <div className="p-6 rounded-lg border hover:shadow-md transition-shadow duration-200 bg-white w-full">
       <div className="flex flex-col sm:flex-row sm:justify-between">
@@ -60,8 +72,13 @@ const ClinicCard: React.FC<Props> = ({
               )}
             </div>
           </div>
+
           {specialties.length > 0 && (
-            <div className="flex flex-wrap gap-2 mb-3">
+            <div
+              className={`flex flex-wrap gap-2 ${
+                ydernummer || team_members.length > 0 ? "mb-3" : ""
+              }`}
+            >
               {specialties.slice(0, 5).map((specialty) => (
                 <Badge
                   key={specialty.specialty_id}
@@ -81,11 +98,65 @@ const ClinicCard: React.FC<Props> = ({
           {ydernummer && (
             <Badge
               variant="secondary"
-              className="inline-flex items-center gap-1 w-auto"
+              className={`inline-flex items-center gap-1 w-auto ${
+                team_members.length > 0 ? "mb-3" : ""
+              }`}
             >
               <Check className="size-3 stroke-2 text-logo-blue" />
               Har ydernummer
             </Badge>
+          )}
+
+          {/* Team members photos */}
+          {team_members.length > 0 && (
+            <div className="flex items-center">
+              <div className="flex -space-x-3">
+                {visibleMembers.map((member) => (
+                  <div
+                    key={member.id}
+                    className="relative w-12 h-12 flex-shrink-0"
+                  >
+                    {member.image_url ? (
+                      <>
+                        <div
+                          className={`absolute inset-0 rounded-full bg-gray-200 animate-pulse ${
+                            loadedImages[member.id] ? "hidden" : "block"
+                          }`}
+                        />
+                        <Image
+                          src={member.image_url}
+                          alt={`${member.name} - ${member.role}`}
+                          fill
+                          sizes="48px"
+                          loading="lazy"
+                          className={`rounded-full object-cover border-2 border-white transition-opacity duration-200 ${
+                            loadedImages[member.id]
+                              ? "opacity-100"
+                              : "opacity-0"
+                          }`}
+                          style={{ objectPosition: "center 30%" }}
+                          onLoad={() =>
+                            setLoadedImages((prev) => ({
+                              ...prev,
+                              [member.id]: true,
+                            }))
+                          }
+                        />
+                      </>
+                    ) : (
+                      <div className="w-12 h-12 rounded-full bg-gray-200 border-2 border-white" />
+                    )}
+                  </div>
+                ))}
+                {hasMoreMembers && (
+                  <div className="relative w-12 h-12 flex-shrink-0 rounded-full bg-gray-100 border-2 border-white flex items-center justify-center">
+                    <span className="text-sm text-gray-600 font-medium">
+                      +{team_members.length - MAX_VISIBLE_MEMBERS}
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
           )}
         </div>
         <div className="mt-4 sm:mt-0 sm:ml-4 sm:text-right">
