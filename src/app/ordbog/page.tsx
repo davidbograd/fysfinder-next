@@ -60,7 +60,7 @@ function DictionaryStructuredData({ terms }: DictionaryStructuredDataProps) {
 }
 
 export const metadata = {
-  title: "FysFinder ordbogen |  Krop - Anatomi - Sundhed - Træning",
+  title: "FysFinder ordbogen | Alt om krop, sundhed og træning",
   description:
     "Vi har samlet forklaringer og viden inden for anatomi, sundhed og træning til dig, der ønsker at leve et sundere liv og forstå kroppen bedre.",
 };
