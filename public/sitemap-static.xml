@@ -3,17 +3,22 @@
 
   <url>
     <loc>https://www.fysfinder.dk</loc>
-    <lastmod>2025-02-19T03:50:25.117Z</lastmod>
+    <lastmod>2025-02-19T03:55:14.200Z</lastmod>
     <priority>1.00</priority>
   </url>
   <url>
     <loc>https://www.fysfinder.dk/om-os</loc>
-    <lastmod>2025-02-19T03:50:25.117Z</lastmod>
+    <lastmod>2025-02-19T03:55:14.200Z</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.fysfinder.dk/samarbejdspartnere</loc>
-    <lastmod>2025-02-19T03:50:25.117Z</lastmod>
+    <lastmod>2025-02-19T03:55:14.200Z</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.fysfinder.dk/ordbog</loc>
+    <lastmod>2025-02-19T03:55:14.200Z</lastmod>
     <priority>0.80</priority>
   </url>
 </urlset>
