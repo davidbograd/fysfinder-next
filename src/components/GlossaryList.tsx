@@ -28,7 +28,7 @@ export function GlossaryList({ terms }: GlossaryListProps) {
             {terms.map((term) => (
               <li key={term.slug}>
                 <Link
-                  href={`/fysioterapeut-artikler/${term.slug}`}
+                  href={`/ordbog/${term.slug}`}
                   className="text-logo-blue hover:underline"
                 >
                   {term.title}

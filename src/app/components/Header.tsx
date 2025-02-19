@@ -19,10 +19,10 @@ export default function Header() {
             Find fysioterapeut
           </Link>
           <Link
-            href="/fysioterapeut-artikler"
+            href="/ordbog"
             className="text-sm sm:text-base text-gray-600 hover:text-gray-900"
           >
-            Artikler
+            Ordbog
           </Link>
         </nav>
       </div>
