@@ -9,6 +9,23 @@ interface GlossaryListProps {
   terms: GlossaryTerm[];
 }
 
+// Danish alphabet order helper
+function getDanishAlphabetOrder(letter: string): number {
+  const upperLetter = letter.toUpperCase();
+
+  // Special handling for Danish letters to place them after Z
+  switch (upperLetter) {
+    case "Æ":
+      return 100; // After Z (90)
+    case "Ø":
+      return 101;
+    case "Å":
+      return 102;
+    default:
+      return upperLetter.charCodeAt(0);
+  }
+}
+
 export function GlossaryList({ terms }: GlossaryListProps) {
   const groupedTerms = terms.reduce((acc, term) => {
     const firstLetter = term.title[0].toUpperCase();
@@ -19,23 +36,43 @@ export function GlossaryList({ terms }: GlossaryListProps) {
     return acc;
   }, {} as Record<string, GlossaryTerm[]>);
 
+  // Sort entries according to Danish alphabet
+  const sortedEntries = Object.entries(groupedTerms).sort(
+    ([a], [b]) => getDanishAlphabetOrder(a) - getDanishAlphabetOrder(b)
+  );
+
   return (
     <div>
-      {Object.entries(groupedTerms).map(([letter, terms]) => (
-        <div key={letter} className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">{letter}</h2>
-          <ul className="space-y-2">
+      {/* Alphabetical Index */}
+      <div className="mb-8 flex flex-wrap gap-2 justify-center border-b pb-4">
+        {sortedEntries.map(([letter]) => (
+          <a
+            key={letter}
+            href={`#letter-${letter}`}
+            className="min-w-[32px] text-center px-2 py-1.5 text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors font-medium text-sm"
+          >
+            {letter}
+          </a>
+        ))}
+      </div>
+
+      {/* Glossary Entries */}
+      {sortedEntries.map(([letter, terms]) => (
+        <div key={letter} id={`letter-${letter}`} className="mb-12">
+          <h2 className="text-2xl font-semibold mb-4 border-b pb-2">
+            {letter}
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-2">
             {terms.map((term) => (
-              <li key={term.slug}>
-                <Link
-                  href={`/ordbog/${term.slug}`}
-                  className="text-logo-blue hover:underline"
-                >
-                  {term.title}
-                </Link>
-              </li>
+              <Link
+                key={term.slug}
+                href={`/ordbog/${term.slug}`}
+                className="text-logo-blue hover:underline truncate"
+              >
+                {term.title}
+              </Link>
             ))}
-          </ul>
+          </div>
         </div>
       ))}
     </div>

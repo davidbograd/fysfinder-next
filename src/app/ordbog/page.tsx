@@ -71,7 +71,7 @@ export default async function DictionaryPage() {
   return (
     <div className="container mx-auto px-4 py-8">
       <DictionaryStructuredData terms={terms} />
-      <div className="max-w-2xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <h1 className="text-3xl font-bold mb-6">
           FysFinder ordbogen – Forklaringer om krop, sundhed og træning
         </h1>
