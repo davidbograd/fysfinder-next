@@ -62,7 +62,7 @@ function DictionaryStructuredData({ terms }: DictionaryStructuredDataProps) {
 export const metadata = {
   title: "FysFinder ordbogen – Forklaringer om krop, sundhed og træning",
   description:
-    "Vi har samlet forklaringer og viden om alt inden for krop, sundhed og træning og gjort det lidt mere spiseligt for dig for den almindelige borger.",
+    "Vi har samlet forklaringer og viden inden for anatomi, sundhed og træning til dig, der ønsker at leve et sundere liv og forstå kroppen bedre.",
 };
 
 export default async function DictionaryPage() {
