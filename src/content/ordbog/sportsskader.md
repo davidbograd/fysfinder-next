@@ -2,11 +2,11 @@
 lastUpdated: "19/02/2025"
 ---
 
-Sportsskader refererer til skader, der opstår som følge af fysisk aktivitet eller sport. Disse skader kan variere fra mindre forstuvninger og overbelastningsskader til mere alvorlige brud og ligamentlæsioner. Det er vigtigt at forstå, hvordan man forebygger, behandler og rehabiliterer sportsskader for at sikre en hurtig og effektiv genopretning.
+Sportsskader refererer til skader, der opstår som følge af fysisk aktivitet eller sport. Disse skader kan variere fra mindre forstuvninger og overbelastningsskader til mere alvorlige brud og ligamentlæsioner. Det er vigtigt at forstå, hvordan man forebygger, behandler og rehabiliterer sportsskader for at sikre en hurtig og effektiv genoptræning.
 
 ## Hvad er de mest almindelige typer af sportsskader?
 
-De mest almindelige typer af sportsskader inkluderer forstuvninger, forstrækninger, senebetændelse, brud og knæskader. Forstuvninger opstår ofte i ankler og knæ, mens forstrækninger typisk påvirker musklerne i benene. Senebetændelse kan opstå i forskellige dele af kroppen, afhængigt af den aktivitet, der udføres. 
+De mest almindelige typer af sportsskader inkluderer forstuvninger, forstrækninger, senebetændelse, brud og knæskader. Forstuvninger opstår ofte i ankler og knæ, mens forstrækninger typisk påvirker musklerne i benene. Senebetændelse kan opstå i forskellige dele af kroppen, afhængigt af den aktivitet, der udføres.
 
 ## Hvordan kan man forebygge sportsskader?
 
@@ -18,11 +18,11 @@ Hvis man får en sportsskade, er det vigtigt at følge RICE-princippet: Rest (hv
 
 ## Hvornår skal man søge hjælp fra en fysioterapeut?
 
-Det er en god idé at søge hjælp fra en fysioterapeut, hvis smerten vedvarer, eller hvis man har svært ved at bevæge det skadede område. Fysioterapeuter kan tilbyde specialiseret behandling, herunder manuel terapi, øvelser og rehabiliteringsprogrammer, der er skræddersyet til den enkelte skade. Tidlig intervention kan ofte forkorte genopretningstiden og forbedre resultaterne.
+Det er en god idé at søge hjælp fra en fysioterapeut, hvis smerten vedvarer, eller hvis man har svært ved at bevæge det skadede område. Fysioterapeuter kan tilbyde specialiseret behandling, herunder manuel terapi, øvelser og rehabiliteringsprogrammer, der er skræddersyet til den enkelte skade. Tidlig intervention kan ofte forkorte genoptræningstiden og forbedre resultaterne.
 
 ## Hvordan foregår rehabilitering efter en sportsskade?
 
-Rehabilitering efter en sportsskade involverer typisk en kombination af fysioterapi, øvelser og gradvis tilbagevenden til sport. Fysioterapeuten vil arbejde sammen med patienten for at udvikle et individuelt program, der fokuserer på at genopbygge styrke, fleksibilitet og funktionalitet. Det er vigtigt at følge rehabiliteringsprogrammet nøje for at sikre en sikker og effektiv genopretning.
+Rehabilitering efter en sportsskade involverer typisk en kombination af fysioterapi, øvelser og gradvis tilbagevenden til sport. Fysioterapeuten vil arbejde sammen med patienten for at udvikle et individuelt program, der fokuserer på at genopbygge styrke, fleksibilitet og funktionalitet. Det er vigtigt at følge rehabiliteringsprogrammet nøje for at sikre en sikker og effektiv genoptræning.
 
 ## Hvilke behandlinger er tilgængelige for sportsskader?
 
@@ -32,7 +32,7 @@ Behandlinger for sportsskader kan variere afhængigt af skadens art og sværheds
 
 ### Hvad er forskellen mellem en forstuvning og en forstrækning?
 
-En forstuvning involverer skader på ledbåndene, der forbinder knoglerne i et led, mens en forstrækning involverer skader på musklerne eller senerne. 
+En forstuvning involverer skader på ledbåndene, der forbinder knoglerne i et led, mens en forstrækning involverer skader på musklerne eller senerne.
 
 ### Kan man træne med en sportsskade?
 
@@ -40,7 +40,7 @@ Det afhænger af skadens art og sværhedsgrad. Det er vigtigt at konsultere en f
 
 ### Hvor lang tid tager det at komme sig efter en sportsskade?
 
-Genopretningstiden varierer afhængigt af skadens type og sværhedsgrad. Nogle mindre skader kan heles på få dage, mens mere alvorlige skader kan tage flere uger eller måneder. 
+Genoptræningstiden varierer afhængigt af skadens type og sværhedsgrad. Nogle mindre skader kan heles på få dage, mens mere alvorlige skader kan tage flere uger eller måneder.
 
 ### Er der nogen specifikke øvelser, der kan hjælpe med at forebygge sportsskader?
 

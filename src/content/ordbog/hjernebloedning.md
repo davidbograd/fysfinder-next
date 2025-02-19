@@ -14,7 +14,7 @@ Diagnosen af hjerneblødning stilles typisk gennem en kombination af medicinsk h
 
 ## Hvilke behandlingsmuligheder findes der for hjerneblødning?
 
-Behandlingen af hjerneblødning afhænger af blødningens størrelse og placering samt patientens generelle helbred. I nogle tilfælde kan det være nødvendigt med kirurgi for at fjerne blodet eller reparere skader på blodkar. Medicinsk behandling kan også være nødvendig for at kontrollere blodtrykket og forhindre yderligere blødninger. Rehabilitering, herunder fysioterapi, kan være en vigtig del af genopretningen.
+Behandlingen af hjerneblødning afhænger af blødningens størrelse og placering samt patientens generelle helbred. I nogle tilfælde kan det være nødvendigt med kirurgi for at fjerne blodet eller reparere skader på blodkar. Medicinsk behandling kan også være nødvendig for at kontrollere blodtrykket og forhindre yderligere blødninger. Rehabilitering, herunder fysioterapi, kan være en vigtig del af genoptræningen.
 
 ## Hvordan kan fysioterapi hjælpe efter en hjerneblødning?
 

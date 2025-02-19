@@ -2,7 +2,7 @@
 lastUpdated: "19/02/2025"
 ---
 
-Forstuvning er en almindelig skade, der opstår, når ledbåndene omkring et led strækkes eller rives over. Det sker ofte i anklerne, men kan også påvirke knæ, håndled og andre led. Forstuvninger kan variere i sværhedsgrad fra milde til alvorlige, og det er vigtigt at forstå, hvordan man håndterer dem korrekt for at fremme heling og genopretning.
+Forstuvning er en almindelig skade, der opstår, når ledbåndene omkring et led strækkes eller rives over. Det sker ofte i anklerne, men kan også påvirke knæ, håndled og andre led. Forstuvninger kan variere i sværhedsgrad fra milde til alvorlige, og det er vigtigt at forstå, hvordan man håndterer dem korrekt for at fremme heling og genoptræning.
 
 ## Hvad er symptomerne på en forstuvning?
 

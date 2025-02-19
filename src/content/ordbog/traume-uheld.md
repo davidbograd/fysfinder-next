@@ -2,7 +2,7 @@
 lastUpdated: "19/02/2024"
 ---
 
-Et traume, ofte refereret til som et uheld, er en pludselig og uventet hændelse, der kan forårsage fysisk skade eller psykisk stress. Traumer kan opstå fra forskellige kilder, herunder sportsaktiviteter, bilulykker, fald eller andre uheld. Det er vigtigt at forstå, hvordan traumer påvirker kroppen og sindet, samt hvordan fysioterapi kan spille en afgørende rolle i rehabilitering og genopretning.
+Et traume, ofte refereret til som et uheld, er en pludselig og uventet hændelse, der kan forårsage fysisk skade eller psykisk stress. Traumer kan opstå fra forskellige kilder, herunder sportsaktiviteter, bilulykker, fald eller andre uheld. Det er vigtigt at forstå, hvordan traumer påvirker kroppen og sindet, samt hvordan fysioterapi kan spille en afgørende rolle i rehabilitering og genoptræning.
 
 ## Hvad er de mest almindelige typer af traumer?
 
@@ -10,7 +10,7 @@ Traumer kan klassificeres i flere kategorier, herunder bløddelstraumer, knogleb
 
 ## Hvordan påvirker traumer kroppen?
 
-Traumer kan have en betydelig indvirkning på kroppen, både fysisk og psykisk. Fysiske symptomer kan inkludere smerte, hævelse, nedsat bevægelighed og muskelspændinger. Psykiske konsekvenser kan omfatte angst, depression og posttraumatisk stresslidelse (PTSD). Det er vigtigt at adressere både de fysiske og psykiske aspekter af traumer for at sikre en effektiv genopretning.
+Traumer kan have en betydelig indvirkning på kroppen, både fysisk og psykisk. Fysiske symptomer kan inkludere smerte, hævelse, nedsat bevægelighed og muskelspændinger. Psykiske konsekvenser kan omfatte angst, depression og posttraumatisk stresslidelse (PTSD). Det er vigtigt at adressere både de fysiske og psykiske aspekter af traumer for at sikre en effektiv genoptræning.
 
 ## Hvordan kan fysioterapi hjælpe med traumer?
 

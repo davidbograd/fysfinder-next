@@ -44,4 +44,4 @@ Ja, mange hofteproblemer kan behandles effektivt med konservative metoder som fy
 
 ### Hvor lang tid tager det at komme sig efter hoftebehandling?
 
-Genopretningstiden varierer afhængigt af typen af behandling og den specifikke tilstand. Mange mennesker oplever forbedringer inden for få uger med korrekt fysioterapi og øvelser, men fuld genopretning kan tage længere tid.
+Genoptræningstiden varierer afhængigt af typen af behandling og den specifikke tilstand. Mange mennesker oplever forbedringer inden for få uger med korrekt fysioterapi og øvelser, men fuld genoptræning kan tage længere tid.

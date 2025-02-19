@@ -14,7 +14,7 @@ Der er mange forskellige skulderproblemer, som kan opstå, herunder rotator cuff
 
 ## Hvordan kan fysioterapi hjælpe med skulderproblemer?
 
-Fysioterapi er en effektiv behandlingsmetode for mange skulderproblemer. Fysioterapeuter kan hjælpe med at lindre smerte, forbedre bevægelse og genopbygge styrke i skulderen. Behandlingen kan inkludere øvelser, manuel terapi og rådgivning om ergonomi og livsstil. En skræddersyet fysioterapiplan kan være afgørende for en hurtig og effektiv genopretning.
+Fysioterapi er en effektiv behandlingsmetode for mange skulderproblemer. Fysioterapeuter kan hjælpe med at lindre smerte, forbedre bevægelse og genopbygge styrke i skulderen. Behandlingen kan inkludere øvelser, manuel terapi og rådgivning om ergonomi og livsstil. En skræddersyet fysioterapiplan kan være afgørende for en hurtig og effektiv genoptræning.
 
 ## Hvilke øvelser er gode for skulderen?
 

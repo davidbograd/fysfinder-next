@@ -10,7 +10,7 @@ Knæskader kan variere fra mindre forstuvninger til alvorlige ligamentlæsioner.
 
 ## Hvordan kan fysioterapi hjælpe med knæproblemer?
 
-Fysioterapi er en effektiv behandlingsmetode for knæproblemer. Fysioterapeuter kan hjælpe med at lindre smerte, forbedre bevægelighed og styrke musklerne omkring knæet. Gennem skræddersyede øvelser og behandlingsteknikker kan fysioterapeuter støtte genopretningen og forhindre fremtidige skader.
+Fysioterapi er en effektiv behandlingsmetode for knæproblemer. Fysioterapeuter kan hjælpe med at lindre smerte, forbedre bevægelighed og styrke musklerne omkring knæet. Gennem skræddersyede øvelser og behandlingsteknikker kan fysioterapeuter støtte genoptræningen og forhindre fremtidige skader.
 
 ## Hvilke øvelser er gode for knæet?
 
@@ -18,11 +18,11 @@ Der findes mange øvelser, der kan styrke knæet og forbedre dets funktion. Styr
 
 ## Hvornår skal man søge hjælp fra en fysioterapeut?
 
-Det er en god idé at søge hjælp fra en fysioterapeut, hvis du oplever vedvarende smerte, hævelse eller begrænset bevægelighed i knæet. Tidlig intervention kan forhindre, at problemerne forværres, og kan hjælpe med at sikre en hurtigere og mere effektiv genopretning.
+Det er en god idé at søge hjælp fra en fysioterapeut, hvis du oplever vedvarende smerte, hævelse eller begrænset bevægelighed i knæet. Tidlig intervention kan forhindre, at problemerne forværres, og kan hjælpe med at sikre en hurtigere og mere effektiv genoptræning.
 
 ## Hvilke behandlinger tilbyder fysioterapeuter for knæskader?
 
-Fysioterapeuter tilbyder en række behandlinger for knæskader, herunder manuel terapi, ultralyd, elektroterapi og specifikke rehabiliteringsøvelser. Behandlingen tilpasses den enkelte patients behov og skadens art for at sikre optimal genopretning.
+Fysioterapeuter tilbyder en række behandlinger for knæskader, herunder manuel terapi, ultralyd, elektroterapi og specifikke rehabiliteringsøvelser. Behandlingen tilpasses den enkelte patients behov og skadens art for at sikre optimal genoptræning.
 
 ## Hvordan kan man forebygge knæskader?
 
@@ -52,4 +52,4 @@ Mange knæskader kan behandles effektivt uden kirurgi gennem fysioterapi, medici
 
 ### Hvor lang tid tager det at komme sig efter en knæskade?
 
-Genopretningstiden varierer afhængigt af skadens type og sværhedsgrad. Nogle mindre skader kan heles på få uger, mens mere alvorlige skader kan tage flere måneder at komme sig fra.
+Genoptræningstiden varierer afhængigt af skadens type og sværhedsgrad. Nogle mindre skader kan heles på få uger, mens mere alvorlige skader kan tage flere måneder at komme sig fra.

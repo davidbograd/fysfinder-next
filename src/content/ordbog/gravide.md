@@ -32,7 +32,7 @@ Under en fysioterapi session vil den gravide kvinde typisk gennemgå en vurderin
 
 ### Hvad er fordelene ved fysioterapi under graviditeten?
 
-Fysioterapi kan hjælpe med at lindre smerter, forbedre mobilitet og styrke, samt forberede kroppen til fødslen. Det kan også reducere risikoen for komplikationer og fremme en hurtigere genopretning efter fødslen.
+Fysioterapi kan hjælpe med at lindre smerter, forbedre mobilitet og styrke, samt forberede kroppen til fødslen. Det kan også reducere risikoen for komplikationer og fremme en hurtigere genoptræning efter fødslen.
 
 ### Er fysioterapi sikkert for gravide kvinder?
 
