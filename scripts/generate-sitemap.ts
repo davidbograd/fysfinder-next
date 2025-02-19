@@ -152,7 +152,7 @@ async function generateSitemaps() {
     }
 
     // Get article files
-    const articleFiles = await glob("src/content/glossary/*.md");
+    const articleFiles = await glob("src/content/ordbog/*.md");
     const articles = articleFiles.map((file: string) =>
       pathModule.basename(file, ".md")
     );
@@ -192,7 +192,7 @@ async function generateSitemaps() {
       })) || [];
 
     const articleUrls = articles.map((article: string) => ({
-      loc: `${DOMAIN}/fysioterapeut-artikler/${article}`,
+      loc: `${DOMAIN}/ordbog/${article}`,
       priority: 0.6,
     }));
 
@@ -223,7 +223,7 @@ async function generateSitemaps() {
     );
 
     await fsPromises.writeFile(
-      "public/sitemap-articles.xml",
+      "public/sitemap-ordbog.xml",
       await generateSitemapXML(articleUrls)
     );
 
@@ -234,7 +234,7 @@ async function generateSitemaps() {
       "sitemap-specialties-core.xml",
       "sitemap-specialties-cities.xml",
       "sitemap-clinics.xml",
-      "sitemap-articles.xml",
+      "sitemap-ordbog.xml",
     ];
 
     await fsPromises.writeFile(
