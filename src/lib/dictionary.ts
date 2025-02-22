@@ -6,15 +6,17 @@ import { formatDanishDate } from "@/lib/utils";
 
 const dictionaryDir = path.join(process.cwd(), "src/content/ordbog");
 
-function getTermTitle(slug: string): string {
+function getTermTitle(slug: string, frontmatterTitle?: string): string {
+  if (frontmatterTitle) {
+    return frontmatterTitle;
+  }
   // Convert slug to title with only first letter capitalized
   // e.g., "frossen-skulder" -> "Frossen skulder"
   const title = deslugify(slug);
   return title.charAt(0).toUpperCase() + title.slice(1).toLowerCase();
 }
 
-function getMetaTitle(slug: string): string {
-  const title = getTermTitle(slug);
+function getMetaTitle(title: string): string {
   return `${title} - hvad er ${title.toLowerCase()}?`;
 }
 
@@ -58,11 +60,11 @@ export async function getDictionaryTerms() {
       const slug = file.replace(/\.md$/, "");
       const filePath = path.join(dictionaryDir, file);
       const content = await fs.readFile(filePath, "utf-8");
-      const { content: markdownContent } = matter(content);
+      const { content: markdownContent, data } = matter(content);
 
       return {
         slug,
-        title: getTermTitle(slug),
+        title: getTermTitle(slug, data.title),
         description: extractDescription(markdownContent),
       };
     })
@@ -81,9 +83,11 @@ export async function getDictionaryTerm(slug: string) {
     '<Image src="$2" alt="$1" width={1200} height={800} layout="responsive" className="rounded-lg my-4" />'
   );
 
+  const title = getTermTitle(slug, data.title);
+
   return {
     slug,
-    title: getTermTitle(slug),
+    title,
     description: extractDescription(markdownContent),
     content: processedContent,
     lastUpdated: data.lastUpdated || formatDanishDate(new Date()),

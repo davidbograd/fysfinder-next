@@ -15,6 +15,15 @@ const nextConfig = {
     
     return config;
   },
+  redirects: async () => {
+    return [
+      {
+        source: '/ordbog/artrose-slidgigt-',
+        destination: '/ordbog/artrose-slidgigt',
+        permanent: true, // This is a 308 redirect
+      },
+    ];
+  },
 }
 
 module.exports = nextConfig

@@ -85,10 +85,10 @@ export async function generateMetadata({
 }: {
   params: { term: string };
 }): Promise<Metadata> {
-  const title = deslugify(params.term);
+  const term = await getDictionaryTerm(params.term);
   return {
-    title: `${title} - hvad er ${title.toLowerCase()}?`,
-    description: `Lær alt om ${title.toLowerCase()} - årsager, symptomer og behandlingsmuligheder.`,
+    title: `${term.title} - hvad er ${term.title.toLowerCase()}?`,
+    description: `Lær alt om ${term.title.toLowerCase()} - årsager, symptomer og behandlingsmuligheder.`,
   };
 }
 

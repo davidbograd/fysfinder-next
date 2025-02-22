@@ -1,4 +1,5 @@
 ---
+title: "Artrose (slidgigt)"
 lastUpdated: "19/02/2025"
 ---
 
@@ -32,7 +33,7 @@ Det er vigtigt at søge hjælp, hvis man oplever vedvarende ledsmerter, stivhed 
 
 ### Hvad er forskellen mellem artrose og arthritis?
 
-Artrose er en degenerativ ledsygdom, mens arthritis generelt refererer til betændelse i leddene, som kan være forårsaget af forskellige tilstande, herunder autoimmune sygdomme. 
+Artrose er en degenerativ ledsygdom, mens arthritis generelt refererer til betændelse i leddene, som kan være forårsaget af forskellige tilstande, herunder autoimmune sygdomme.
 
 ### Kan artrose helbredes?
 

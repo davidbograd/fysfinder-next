@@ -1,4 +1,5 @@
 ---
+title: "GLAiD træning"
 lastUpdated: "19/02/2025"
 ---
 
