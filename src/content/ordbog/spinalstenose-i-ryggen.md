@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Spinalstenose i ryggen – Hvad er spinalstenose? Læs mere
 ---
 
 Spinalstenose i ryggen refererer til en indsnævring af rygmarvskanalen, som kan føre til tryk på rygmarven og nerverne. Dette kan forårsage smerte, svaghed og følelsesløshed i ryggen og lemmerne. Det er en tilstand, der ofte opstår med alderen, men kan også være forårsaget af skader eller medfødte misdannelser.

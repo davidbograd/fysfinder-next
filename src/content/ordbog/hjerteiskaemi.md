@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Hjerteiskæmi – Hvad er hjerteiskæmi? Symptomer/behandling
 ---
 
 Hjerteiskæmi, også kendt som iskæmisk hjertesygdom, opstår, når blodtilførslen til hjertet er nedsat, hvilket kan føre til alvorlige helbredsproblemer. Denne tilstand kan forårsage brystsmerter, åndenød og i værste fald hjerteanfald. Det er vigtigt at forstå årsagerne, symptomerne og behandlingsmulighederne for hjerteiskæmi for at kunne håndtere tilstanden effektivt.

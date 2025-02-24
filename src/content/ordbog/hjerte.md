@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Hjerte – Hvad er et hjerte? Læs om sundhed og funktioner
 ---
 
 Hjertet er et centralt organ i menneskekroppen, der spiller en afgørende rolle i cirkulationen af blod og ilt til kroppens væv. Det er vigtigt at forstå, hvordan hjertet fungerer, og hvordan det påvirker vores generelle sundhed.

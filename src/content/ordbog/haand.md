@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Hånd – Hvad er hånden? Læs om skader og behandlinger
 ---
 
 Hånden er en kompleks del af kroppen, der spiller en afgørende rolle i vores daglige liv. Den muliggør bevægelse, greb og interaktion med vores omgivelser. I fysioterapi er forståelsen af hånden og dens funktioner essentiel for at kunne behandle skader og lidelser, der påvirker denne vitale del af kroppen.

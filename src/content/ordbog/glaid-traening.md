@@ -1,6 +1,7 @@
 ---
-title: "GLAiD træning"
-lastUpdated: "19/02/2025"
+title: GLAiD træning
+lastUpdated: 19/02/2025
+metaTitle: GLAiD træning – Hvad er GLAiD træning? Læs mere her
 ---
 
 GLAiD træning, eller GLA:D, står for "Godt Liv med Artrose i Danmark" og er et evidensbaseret træningsprogram designet til personer med knæ- og hofteartrose. Programmet fokuserer på at forbedre funktionalitet, reducere smerter og øge livskvaliteten gennem målrettet træning og undervisning. GLAiD træning er udviklet i samarbejde med fysioterapeuter og forskere og er tilpasset individuelle behov.

@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Løberknæ – Hvad er et løberknæ? Symptomer og behandling
 ---
 
 Løberknæ, også kendt som iliotibialbåndsyndrom, er en almindelig overbelastningsskade, der ofte rammer løbere og sportsudøvere. Det opstår, når iliotibialbåndet, som strækker sig fra hoften til knæet, bliver stramt eller irriteret, hvilket kan føre til smerter på ydersiden af knæet. Forståelse af løberknæ er essentiel for at kunne forebygge og behandle denne tilstand effektivt.

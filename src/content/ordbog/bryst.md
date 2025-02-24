@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Bryst – Hvad er et bryst? Læs om anatomi og behandling
 ---
 
 Brystet er en vigtig del af menneskekroppen, der rummer flere vitale organer og strukturer. Det omfatter brystmusklerne, ribbenene, lungerne, hjertet og brystvæggen. I fysioterapi er forståelsen af brystets anatomi og funktioner afgørende for at kunne behandle forskellige tilstande og skader relateret til dette område.

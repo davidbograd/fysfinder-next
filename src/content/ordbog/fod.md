@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: 'Fod – Hvad er foden? Bliv klogere på fodens anatomi '
 ---
 
 Foden er en kompleks struktur, der spiller en afgørende rolle i vores bevægelse og balance. Den består af mange knogler, led, muskler og sener, der arbejder sammen for at støtte vores krop og muliggøre gang, løb og andre aktiviteter. At forstå fodens anatomi og funktion er vigtigt for at kunne identificere og behandle eventuelle problemer, der kan opstå.

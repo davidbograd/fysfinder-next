@@ -87,7 +87,8 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const term = await getDictionaryTerm(params.term);
   return {
-    title: `${term.title} - hvad er ${term.title.toLowerCase()}?`,
+    title:
+      term.metaTitle || `${term.title} - hvad er ${term.title.toLowerCase()}?`,
     description: `Lær alt om ${term.title.toLowerCase()} - årsager, symptomer og behandlingsmuligheder.`,
   };
 }

@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Gyn Obs – Hvad er gynækologi og obstetrik? Læs mere her
 ---
 
 Gyn Obs, eller gynækologi og obstetrik, er en medicinsk specialisering, der fokuserer på kvinders reproduktive sundhed og graviditet. Dette felt dækker en bred vifte af emner, herunder menstruationscyklus, fertilitet, graviditet, fødsel og postpartum pleje. Gyn Obs er afgørende for at sikre, at kvinder får den nødvendige pleje og støtte gennem hele deres reproduktive liv.

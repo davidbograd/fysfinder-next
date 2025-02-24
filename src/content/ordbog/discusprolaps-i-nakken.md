@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Discusprolaps i nakken – Hvad er en discusprolaps i nakken?
 ---
 
 Discusprolaps i nakken, også kendt som cervical discusprolaps, opstår, når en af de bløde skiver mellem ryghvirvlerne i nakken buler ud eller brister. Dette kan føre til smerte, nedsat bevægelighed og i nogle tilfælde nerveirritation. Det er en tilstand, der kan påvirke livskvaliteten betydeligt, og det er vigtigt at forstå symptomer, årsager og behandlingsmuligheder.

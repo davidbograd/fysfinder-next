@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Angst – Hvad er angst? Læs om behandling og hjælp
 ---
 
 Angst er en almindelig følelse, som mange mennesker oplever i forskellige situationer. Det kan være en naturlig reaktion på stress, usikkerhed eller fare. I denne artikel vil vi udforske, hvordan angst påvirker vores liv, og hvordan fysioterapi kan spille en rolle i håndteringen af angstlidelser.

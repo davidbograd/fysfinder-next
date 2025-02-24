@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Hoftedysplasi – Hvad er hoftedysplasi? Læs mere her
 ---
 
 Hoftedysplasi er en tilstand, hvor hofteleddet ikke udvikler sig korrekt, hvilket kan føre til problemer med bevægelse og smerte. Denne tilstand ses ofte hos spædbørn og småbørn, men kan også påvirke voksne. Det er vigtigt at forstå, hvordan hoftedysplasi diagnosticeres, behandles og hvilke symptomer man skal være opmærksom på.

@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Svangseneproblematik – Hvad er svangseneproblematik?
 ---
 
 Svangseneproblematik refererer til en række tilstande og smerter relateret til svangsenerne, som er de sener, der forbinder musklerne i underbenet til foden. Disse problemer kan opstå som følge af overbelastning, skader eller underliggende medicinske tilstande og kan påvirke en persons evne til at gå, løbe eller udføre dagligdags aktiviteter.

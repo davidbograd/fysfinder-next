@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Neurologiske lidelser – Hvad er neurologiske lidelser?
 ---
 
 Neurologiske lidelser refererer til en bred vifte af sygdomme og tilstande, der påvirker nervesystemet, herunder hjernen, rygmarven og nerverne. Disse lidelser kan have en betydelig indvirkning på en persons livskvalitet og funktionsevne. Det er vigtigt at forstå, hvordan fysioterapi kan spille en rolle i behandlingen og rehabiliteringen af personer med neurologiske lidelser.

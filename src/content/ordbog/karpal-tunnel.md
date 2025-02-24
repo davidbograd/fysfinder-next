@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Karpal tunnel – Hvad er karpaltunnel? Symptomer/behandling
 ---
 
 Karpal tunnel er en smal passage i håndleddet, der indeholder nerver og sener, som er essentielle for håndens funktion. Når denne tunnel bliver indsnævret, kan det føre til karpaltunnelsyndrom, en tilstand der forårsager smerte, svaghed og følelsesløshed i hånden.

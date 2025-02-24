@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Finger – Hvad er fingre? Læs om skader og behandling
 ---
 
 Fingre er essentielle dele af vores hænder, der spiller en vigtig rolle i vores daglige liv. De muliggør præcise bevægelser, greb og interaktion med vores omgivelser. Skader eller problemer med fingrene kan have en betydelig indvirkning på vores funktionalitet og livskvalitet, hvilket gør fysioterapi til en vigtig del af rehabilitering og behandling.

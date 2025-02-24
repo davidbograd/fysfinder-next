@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Nedsunken forfod – Hvad er en nedsunken forfod? Læs mere
 ---
 
 Nedsunken forfod, også kendt som forfodssyndrom eller metatarsalgi, refererer til en tilstand, hvor forfoden synker ned, hvilket kan føre til smerte og ubehag. Denne tilstand kan påvirke gangmønsteret og føre til yderligere problemer i fødderne og resten af kroppen. Det er vigtigt at forstå årsagerne, symptomerne og behandlingsmulighederne for nedsunken forfod for at kunne håndtere tilstanden effektivt.

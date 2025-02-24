@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Håndled – Hvad er et håndled? Læs om skader og behandling
 ---
 
 Håndleddet er en kompleks struktur, der forbinder hånden med underarmen. Det spiller en afgørende rolle i vores evne til at udføre dagligdags opgaver, fra at gribe fat i genstande til at udføre præcise bevægelser. Forståelse af håndleddet og dets funktioner kan hjælpe med at identificere og behandle skader og lidelser, der påvirker dette vigtige led.

@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Ældre – Hvad er en ældre? Helbredsproblemer og behandling
 ---
 
 Ældre refererer til personer, der er i den sene fase af livet, typisk over 65 år. Denne gruppe kan have særlige behov for fysioterapi, da de ofte oplever aldersrelaterede helbredsproblemer, som kan påvirke deres mobilitet og livskvalitet. Fysioterapi kan spille en afgørende rolle i at forbedre deres fysiske funktioner og generelle velvære.

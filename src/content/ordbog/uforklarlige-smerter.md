@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Uforklarlige smerter – Hvad er uforklarlige smerter? Læs mere
 ---
 
 Uforklarlige smerter refererer til smerter, der opstår uden en åbenlys årsag eller diagnose. Disse smerter kan være frustrerende og forvirrende for dem, der oplever dem, da de ofte ikke kan relateres til en specifik skade eller sygdom. Det er vigtigt at forstå, at selvom smerten kan være uforklarlig, er den stadig reel og kan have en betydelig indvirkning på livskvaliteten.

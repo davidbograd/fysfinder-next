@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Astma – Hvad er astma? Læs om symptomer og behandling
 ---
 
 Astma er en kronisk lungesygdom, der påvirker luftvejene og gør det svært at trække vejret. Det er en almindelig tilstand, der kan variere i sværhedsgrad og kan påvirke mennesker i alle aldre. Astma kan forårsages af en række faktorer, herunder allergener, luftforurening, motion og stress. Behandling af astma fokuserer på at kontrollere symptomerne og forbedre livskvaliteten.

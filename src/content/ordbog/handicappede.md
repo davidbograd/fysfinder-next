@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Handicappede – Hvad er en handicappet? Få svar her
 ---
 
 Handicappede refererer til personer, der har fysiske, mentale eller sensoriske begrænsninger, som kan påvirke deres dagligdag og livskvalitet. I Danmark er der fokus på at sikre, at handicappede har adgang til de nødvendige ressourcer og støtte, herunder fysioterapi, for at forbedre deres livssituation.

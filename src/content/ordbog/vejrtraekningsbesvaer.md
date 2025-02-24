@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Vejrtrækningsbesvær – Hvad er vejrtrækningsbesvær?
 ---
 
 Vejrtrækningsbesvær refererer til vanskeligheder med at trække vejret, hvilket kan være en ubehagelig og skræmmende oplevelse. Det kan skyldes en række forskellige årsager, herunder fysiske, psykiske eller miljømæssige faktorer. At forstå årsagerne og behandlingsmulighederne for vejrtrækningsbesvær er vigtigt for at kunne håndtere tilstanden effektivt.

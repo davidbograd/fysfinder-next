@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Mave – Hvad er maven? Læs om anatomi og behandling
 ---
 
 Maven er en central del af vores fordøjelsessystem og spiller en vigtig rolle i vores generelle sundhed. Den er ansvarlig for at nedbryde mad, absorbere næringsstoffer og fjerne affald. Mange mennesker oplever problemer relateret til maven, hvilket kan påvirke deres livskvalitet. I denne artikel vil vi udforske forskellige aspekter af maven, herunder almindelige problemer, behandlinger og hvordan fysioterapi kan hjælpe.

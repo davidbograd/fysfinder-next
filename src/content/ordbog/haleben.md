@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Haleben – Hvad er et haleben? Læs om smerter & behandling
 ---
 
 Halebenet, også kendt som coccyx, er den lille knogle, der sidder i bunden af rygsøjlen. Det er en vigtig del af kroppens struktur, selvom det ofte overses. Halebenet fungerer som et ankerpunkt for muskler, sener og ligamenter, der er involveret i bækkenets funktion og stabilitet. Skader eller smerter i halebenet kan have en betydelig indvirkning på en persons livskvalitet, hvilket gør det vigtigt at forstå, hvad halebenet er, og hvordan man kan håndtere relaterede problemer.

@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2024"
+lastUpdated: 19/02/2024
+metaTitle: Migræne – Hvad er migræne? Symptomer og behandling
 ---
 
 ![Illustration af migræne](/images/articles/migraene_intro.webp)

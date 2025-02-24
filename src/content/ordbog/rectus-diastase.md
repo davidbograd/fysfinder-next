@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Rectus diastase – Hvad er rectus diastase? Læs mere her
 ---
 
 Rectus diastase er en tilstand, hvor de lige mavemuskler (rectus abdominis) adskilles, hvilket kan føre til en synlig bule i maven. Denne tilstand ses ofte hos gravide kvinder, men kan også forekomme hos mænd og kvinder uden for graviditet. Det er vigtigt at forstå, hvordan rectus diastase opstår, og hvilke behandlingsmuligheder der findes.

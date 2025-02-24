@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Osteoporose – Hvad er osteoporose? Symptomer/behandling
 ---
 
 Osteoporose er en sygdom, der påvirker knoglerne og gør dem svage og skrøbelige. Denne tilstand kan føre til en øget risiko for brud, selv ved lette fald eller skader. Osteoporose er ofte asymptomatisk i de tidlige stadier, hvilket gør det vigtigt at være opmærksom på risikofaktorer og symptomer.

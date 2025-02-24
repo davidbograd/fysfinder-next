@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Golfalbue – Hvad er en golfalbue? Symptomer og behandling
 ---
 
 Golfalbue, også kendt som medial epikondylitis, er en tilstand, der påvirker senerne i underarmen, hvor de hæfter sig til den indre del af albuen. Denne tilstand opstår ofte som følge af overbelastning, typisk ved gentagne bevægelser, der involverer håndleddet og underarmen. Selvom det kaldes golfalbue, kan det også ramme personer, der ikke spiller golf, men som udfører aktiviteter, der kræver gentagne bevægelser af håndleddet.

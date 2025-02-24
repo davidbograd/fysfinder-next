@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Konditionstræning – Hvad er konditionstræning? Bliv klogere
 ---
 
 Konditionstræning refererer til fysiske aktiviteter, der har til formål at forbedre kroppens evne til at udføre arbejde over længere tid. Det involverer typisk aktiviteter, der øger hjertefrekvensen og forbedrer udholdenhed, såsom løb, cykling, svømning og aerobic. Denne form for træning er essentiel for at opnå en god fysisk form og generelt velvære.

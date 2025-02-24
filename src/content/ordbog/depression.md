@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Depression – Hvad er en depression? Alt om despressioner
 ---
 
 Depression er en alvorlig mental helbredstilstand, der påvirker, hvordan en person føler, tænker og håndterer dagligdags aktiviteter. Det kan føre til en vedvarende følelse af tristhed og tab af interesse for aktiviteter, som tidligere var glædelige. At forstå depression er vigtigt for at kunne søge den rette hjælp og behandling.

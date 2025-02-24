@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Springhofte – Hvad er en springhofte? Bliv klogere her
 ---
 
 Springhofte, også kendt som "springhofte", refererer til en tilstand, hvor hoften oplever smerte og begrænset bevægelse, ofte forårsaget af irritation af senerne omkring hoften. Denne tilstand kan påvirke både aktive og stillesiddende personer og kan være resultatet af overbelastning, skader eller degenerative ændringer i hofteleddet. Det er vigtigt at forstå symptomerne, årsagerne og behandlingsmulighederne for at kunne håndtere denne tilstand effektivt.

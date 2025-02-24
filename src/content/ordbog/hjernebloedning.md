@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Hjerneblødning – Hvad er en hjerneblødning? Læs mere her
 ---
 
 Hjerneblødning, også kendt som intracerebral blødning, opstår, når der er en blødning i hjernen. Dette kan føre til alvorlige komplikationer og kræver ofte hurtig medicinsk intervention. Hjerneblødninger kan være forårsaget af forskellige faktorer, herunder højt blodtryk, blodfortyndende medicin, eller traumer. Det er vigtigt at forstå symptomerne, behandlingsmulighederne og rehabiliteringsprocessen for at kunne håndtere denne tilstand effektivt.

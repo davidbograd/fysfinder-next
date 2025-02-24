@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2024"
+lastUpdated: 19/02/2024
+metaTitle: Elitesport – Hvad er elitesport? Læs mere her
 ---
 
 Elitesport refererer til den højeste form for sportsudøvelse, hvor atleter træner og konkurrerer på et professionelt niveau. Det involverer ofte intensiv træning, specialiserede teknikker og en dedikation til at opnå toppræstationer. Elitesportsudøvere kan have brug for fysioterapi for at optimere deres præstationer, forebygge skader og rehabilitere efter skader.

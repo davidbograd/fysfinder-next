@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2024"
+lastUpdated: 19/02/2024
+metaTitle: Frossen skulder – Hvad er en frossen skulder? Læs mere
 ---
 
 En frossen skulder, også kaldet **adhesiv kapsulitis**, er en tilstand, hvor skulderleddet gradvist bliver stift og smertefuldt. Denne tilstand kan være frustrerende og langvarig, ofte med en uforudsigelig bedringstid, som kan strække sig over flere år.

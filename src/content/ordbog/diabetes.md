@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2024"
+lastUpdated: 19/02/2024
+metaTitle: Diabetes – Hvad er diabetes? Læs om symptomer og behandling
 ---
 
 ![Illustration af diabetes](/images/articles/diabetes_intro.webp)

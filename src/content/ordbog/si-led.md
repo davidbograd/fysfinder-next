@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: SI-led – Hvad er et SI-led? Læs om symptomer og behandling
 ---
 
 SI-led, eller sacroiliacale led, er de led, der forbinder korsbenet (sacrum) med hoftebenene (ilium). Disse led spiller en vigtig rolle i kroppens stabilitet og bevægelse, da de bærer vægten fra overkroppen og overfører kraft mellem overkroppen og benene. Problemer med SI-leddene kan føre til smerter i lænden, hofterne og benene, hvilket kan påvirke dagligdagen og livskvaliteten.

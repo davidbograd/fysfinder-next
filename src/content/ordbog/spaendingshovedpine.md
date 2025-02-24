@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Spændingshovedpine – Hvad er spændingshovedpine?
 ---
 
 Spændingshovedpine er en almindelig form for hovedpine, der ofte beskrives som en trykkende eller strammende fornemmelse omkring hovedet. Denne type hovedpine kan variere i intensitet og varighed og påvirker mange mennesker i deres daglige liv. Det er vigtigt at forstå årsagerne, symptomerne og behandlingsmulighederne for spændingshovedpine for at kunne håndtere tilstanden effektivt.

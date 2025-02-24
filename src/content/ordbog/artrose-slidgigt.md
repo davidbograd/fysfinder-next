@@ -1,6 +1,7 @@
 ---
 title: "Artrose (slidgigt)"
 lastUpdated: "19/02/2025"
+metaTitle: Artrose – Hvad er slidgigt (artrose)? Symptomer og behandling
 ---
 
 Artrose, også kendt som slidgigt, er en degenerativ ledsygdom, der påvirker brusk og knogler i leddene. Det er en almindelig tilstand, der ofte opstår med alderen, men kan også påvirke yngre mennesker, især dem med tidligere skader eller genetiske dispositioner. Artrose kan føre til smerte, stivhed og nedsat bevægelighed, hvilket kan påvirke livskvaliteten betydeligt.

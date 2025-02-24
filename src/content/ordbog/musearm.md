@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Musearm – Hvad er musearm? Symptomer og behandling
 ---
 
 Musearm, også kendt som "repetitive strain injury" (RSI), er en tilstand, der opstår som følge af gentagne bevægelser, ofte forbundet med brugen af computere og andre digitale enheder. Denne tilstand kan føre til smerter, ubehag og nedsat funktion i armene, hænderne og håndleddene. Det er vigtigt at forstå musearm for at kunne forebygge og behandle det effektivt.

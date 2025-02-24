@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Kræft gener – Hvad er gener relateret til kræft? Læs mere her
 ---
 
 Gener relateret til kræft refererer til de genetiske faktorer, der kan påvirke en persons risiko for at udvikle kræft. Disse gener kan enten være arvelige, hvilket betyder, at de kan overføres fra forældre til børn, eller de kan opstå som mutationer i cellerne i løbet af livet. Forståelsen af disse gener er afgørende for at kunne vurdere risikoen for kræft og for at udvikle målrettede behandlingsmetoder.

@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Forkalkning – Hvad er forkalkning? Symptomer og behandling
 ---
 
 Forkalkning er en tilstand, hvor der dannes kalkaflejringer i kroppens væv, hvilket kan føre til nedsat funktion og smerte. Det er en almindelig tilstand, der ofte rammer led og sener, og kan være forbundet med aldring, overbelastning eller skader. Forkalkning kan påvirke bevægeligheden og livskvaliteten, og det er vigtigt at forstå, hvordan man kan håndtere og behandle denne tilstand.

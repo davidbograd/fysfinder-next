@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Ribben – Hvad er et ribben? Læs om funktion og behandling
 ---
 
 Ribben er en vigtig del af menneskets skelet og spiller en central rolle i beskyttelsen af vitale organer samt i åndedrætsprocessen. Ribbenene er buede knogler, der danner en del af brystkassen og forbinder rygsøjlen med brystbenet. I denne artikel vil vi udforske forskellige aspekter af ribben, herunder deres funktion, skader og behandling.

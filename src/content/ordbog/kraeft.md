@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Kræft – Hvad er kræft? Læs om symptomer og behandling
 ---
 
 Kræft er en kompleks sygdom, der opstår, når celler i kroppen begynder at vokse ukontrolleret. Denne ukontrollerede vækst kan føre til dannelse af tumorer, som kan være godartede eller ondartede. Kræft kan påvirke næsten enhver del af kroppen og kan have alvorlige konsekvenser for den generelle sundhed og livskvalitet.

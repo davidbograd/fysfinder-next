@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2024"
+lastUpdated: 19/02/2024
+metaTitle: Hvad er et færdselsuheld? Læs om skader og hjælp
 ---
 
 Færdselsuheld refererer til ulykker, der involverer køretøjer og fodgængere, og kan resultere i skader på personer og materiel. Disse uheld kan have alvorlige konsekvenser for de involverede, og det er vigtigt at forstå, hvordan fysioterapi kan spille en rolle i rehabilitering efter sådanne hændelser.

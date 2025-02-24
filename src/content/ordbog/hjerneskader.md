@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Hjerneskader – Hvad er hjerneskader? Læs om behandling her
 ---
 
 Hjerneskader refererer til skader på hjernen, der kan opstå som følge af traumer, sygdomme eller iltmangel. Disse skader kan have vidtrækkende konsekvenser for en persons fysiske og mentale funktioner. Det er vigtigt at forstå, hvordan fysioterapi kan spille en afgørende rolle i rehabiliteringen af personer med hjerneskader.

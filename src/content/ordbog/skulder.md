@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Skulder – Hvad er en skulder? Læs om behandling og øvelser
 ---
 
 Skulderen er en kompleks del af kroppen, der spiller en afgørende rolle i vores bevægelse og funktion. Den består af flere knogler, muskler og sener, der arbejder sammen for at give os en bred vifte af bevægelser. Skulderproblemer kan påvirke vores dagligdag og livskvalitet, hvilket gør det vigtigt at forstå de forskellige aspekter af skulderens anatomi og behandling.

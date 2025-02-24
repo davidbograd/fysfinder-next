@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Ergonomi – Hvad er ergonomi? Få en bedre kropsholdning
 ---
 
 Ergonomi handler om at tilpasse arbejdspladsen og arbejdsopgaverne til den enkelte medarbejder for at fremme sundhed, komfort og produktivitet. Det er en vigtig disciplin, der fokuserer på at reducere risikoen for skader og belastninger, der kan opstå ved forkert arbejdsstilling eller uhensigtsmæssige arbejdsmetoder.

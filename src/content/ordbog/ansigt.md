@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Ansigt – Hvad er et ansigt? Anatomi og hjælp til ansigtssmerter
 ---
 
 Ansigtet er en central del af menneskekroppen, der ikke kun spiller en vigtig rolle i vores udseende, men også i vores kommunikation og sociale interaktioner. I fysioterapi kan ansigtet være fokus for behandling, især når det kommer til smerter, bevægelsesbegrænsninger eller efter skader.

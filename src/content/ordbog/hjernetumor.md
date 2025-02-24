@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Hjernetumor – Hvad er en hjernetumor? Læs mere her
 ---
 
 Hjernetumor refererer til unormale vækster af celler i hjernen, som kan være godartede eller ondartede. Disse tumorer kan påvirke hjernens funktion og forårsage en række symptomer, afhængigt af deres størrelse og placering. Det er vigtigt at forstå de forskellige typer af hjernetumorer, deres symptomer, diagnose og behandlingsmuligheder for at kunne håndtere denne alvorlige tilstand.

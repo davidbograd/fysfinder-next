@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Gangfunktion – Hvad er gangfunktion? Læs mere her
 ---
 
 Gangfunktion refererer til evnen til at gå og bevæge sig effektivt og sikkert. Det er en vigtig del af vores daglige liv og påvirker vores mobilitet, uafhængighed og generelle livskvalitet. For mange mennesker, især dem med skader eller sygdomme, kan gangfunktion være nedsat, hvilket kan føre til behov for fysioterapi og rehabilitering.

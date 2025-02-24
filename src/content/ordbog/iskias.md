@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Iskias – Hvad er iskias? Læs om symptomer og behandling
 ---
 
 Iskias refererer til en tilstand, der involverer irritation eller kompression af iskiasnerven, som er den længste nerve i kroppen. Denne nerve strækker sig fra rygsøjlen ned gennem balderne og benene. Iskias kan forårsage smerte, svaghed, følelsesløshed og prikken i benene, og det er en almindelig årsag til rygsmerter.

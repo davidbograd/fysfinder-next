@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2024"
+lastUpdated: 19/02/2024
+metaTitle: Reumatologi – Hvad er reumatologi? Læs mere her
 ---
 
 Reumatologi er en medicinsk specialitet, der fokuserer på diagnosen og behandlingen af reumatiske sygdomme, som ofte påvirker led, muskler og bindevæv. Denne disciplin er essentiel for at forstå og håndtere tilstande som gigt, lupus og fibromyalgi, der kan have en betydelig indvirkning på livskvaliteten.

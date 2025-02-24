@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Sklerose – Hvad er sklerose? Symptomer og behandling
 ---
 
 Sklerose er en kompleks neurologisk sygdom, der påvirker centralnervesystemet og kan føre til en række fysiske og kognitive udfordringer. Det er vigtigt at forstå, hvordan sklerose påvirker kroppen, og hvordan fysioterapi kan spille en afgørende rolle i behandlingen og håndteringen af sygdommen.

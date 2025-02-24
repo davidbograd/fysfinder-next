@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Løb – Hvad er løb? Alt om løb og tips til at komme i gang
 ---
 
 Løb er en populær form for motion, der ikke kun forbedrer den fysiske kondition, men også har en positiv indvirkning på mental sundhed. Det er en aktivitet, der kan udføres næsten hvor som helst og kræver minimal udstyr. I denne artikel vil vi udforske forskellige aspekter af løb, herunder dets fordele, hvordan man kommer i gang, og hvordan fysioterapi kan hjælpe med at forbedre løbeoplevelsen.

@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Tennisalbue – Hvad er tennisalbue? Få hjælp til smerte
 ---
 
 Tennisalbue, også kendt som lateral epikondylitis, er en smertefuld tilstand, der påvirker senerne i albuen. Selvom det ofte forbindes med tennis, kan det opstå hos enhver, der udfører gentagne bevægelser med armen. Denne tilstand kan have en betydelig indvirkning på dagligdagen og kræver ofte fysioterapeutisk behandling for at lindre smerte og genoprette funktion.

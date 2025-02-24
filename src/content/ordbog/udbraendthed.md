@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Udbrændthed – Hvad er udbrændthed? Symptomer/behandling
 ---
 
 Udbrændthed, også kendt som burnout, er en tilstand præget af fysisk, mental og følelsesmæssig udmattelse, ofte forårsaget af langvarig stress og overbelastning. Det er en alvorlig tilstand, der kan påvirke ens livskvalitet og evne til at fungere i hverdagen. I denne artikel vil vi udforske, hvad udbrændthed er, hvordan man genkender symptomerne, og hvilke behandlingsmuligheder der findes.

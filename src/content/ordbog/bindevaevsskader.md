@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Bindevævsskader – Hvad er en bindevævsskade? Læs mere
 ---
 
 Bindevævsskader refererer til skader på kroppens bindevæv, som inkluderer sener, ledbånd og fascia. Disse skader kan opstå som følge af overbelastning, traumer eller degenerative tilstande og kan føre til smerte, nedsat bevægelighed og funktionsnedsættelse. Det er vigtigt at forstå, hvordan bindevævsskader opstår, hvordan de kan behandles, og hvilke fysioterapeutiske metoder der kan anvendes for at fremme heling og genoptræning.

@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Sportsskader – Hvad er en sportsskade? Læs om forebyggelse
 ---
 
 Sportsskader refererer til skader, der opstår som følge af fysisk aktivitet eller sport. Disse skader kan variere fra mindre forstuvninger og overbelastningsskader til mere alvorlige brud og ligamentlæsioner. Det er vigtigt at forstå, hvordan man forebygger, behandler og rehabiliterer sportsskader for at sikre en hurtig og effektiv genoptræning.

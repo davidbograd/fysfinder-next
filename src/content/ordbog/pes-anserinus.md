@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Pes anserinus – Hvad er pes anserinus? Læs mere her
 ---
 
 Pes anserinus, også kendt som "gåsefod", refererer til en specifik anatomisk struktur på det indre knæ, hvor senerne fra tre muskler mødes og fæstner sig til skinnebenet. Denne struktur spiller en vigtig rolle i stabiliseringen af knæleddet og er ofte involveret i forskellige knæskader og tilstande.

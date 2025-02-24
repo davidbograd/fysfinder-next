@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Kæbe – Hvad er en kæbe? Find hjælp til kæbesmerter her
 ---
 
 Kæben er en kompleks struktur, der spiller en afgørende rolle i vores evne til at tale, spise og udtrykke følelser. Den består af flere knogler og led, der arbejder sammen for at muliggøre bevægelse og funktion. Kæbesmerter og dysfunktion kan påvirke livskvaliteten betydeligt, og fysioterapi kan være en effektiv behandlingsmetode.

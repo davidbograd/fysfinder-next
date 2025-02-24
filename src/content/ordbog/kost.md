@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Kost – Hvad er kost? Få hjælpe til en bedre og sundere livsstil
 ---
 
 Kost refererer til den mad og de drikkevarer, som en person indtager for at opretholde et sundt liv. En balanceret kost er essentiel for at sikre, at kroppen får de nødvendige næringsstoffer, vitaminer og mineraler, der understøtter både fysisk og mental sundhed.

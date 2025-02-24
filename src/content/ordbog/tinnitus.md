@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Tinnitus – Hvad er tinnitus? Symptomer og behandling
 ---
 
 Tinnitus er en tilstand, hvor en person oplever en vedvarende lyd i ørerne, som ikke stammer fra en ekstern kilde. Det kan beskrives som en ringende, summende eller brummende lyd, og det kan variere i intensitet og tonehøjde. Tinnitus kan være en frustrerende og invaliderende tilstand, der påvirker livskvaliteten for mange mennesker.

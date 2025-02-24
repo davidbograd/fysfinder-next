@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Hold i nakken – Hvad er hold i nakken? Symptomer/behandling
 ---
 
 Hold i nakken er en tilstand, der ofte opstår som følge af muskelspændinger, skader eller overbelastning i nakkeområdet. Det kan medføre smerter, stivhed og ubehag, hvilket kan påvirke dagligdagen og livskvaliteten. Det er vigtigt at forstå årsagerne til hold i nakken samt de tilgængelige behandlingsmuligheder for at kunne håndtere tilstanden effektivt.

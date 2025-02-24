@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Cerebral parese – Hvad er cerebral parese? Læs mere her
 ---
 
 Cerebral parese er en neurologisk tilstand, der påvirker bevægelse og muskelkoordination. Den opstår som følge af skader på hjernen, typisk under graviditet, fødsel eller tidlig barndom. Tilstanden kan variere i sværhedsgrad og påvirker ofte en persons evne til at bevæge sig, tale og udføre dagligdags aktiviteter.

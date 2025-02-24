@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Inkontinens – Hvad er inkontinens? Bliv klogere her
 ---
 
 Inkontinens er en tilstand, hvor en person har svært ved at kontrollere sin blære eller tarm, hvilket kan føre til utilsigtet lækage af urin eller afføring. Det er en almindelig, men ofte tabubelagt tilstand, der kan påvirke livskvaliteten betydeligt. Mange mennesker lider i stilhed, men der er hjælp at hente gennem fysioterapi og andre behandlingsmetoder.

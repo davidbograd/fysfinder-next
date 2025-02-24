@@ -1,5 +1,6 @@
 ---
 lastUpdated: "19/02/2024"
+metaTitle: Whiplash – Hvad er piskesmæld? Symptomer og behandling
 ---
 
 ![Illustration af whiplash](/images/articles/whiplash_intro.webp)

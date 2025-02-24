@@ -1,6 +1,7 @@
 ---
 title: "Traume (uheld)"
 lastUpdated: "19/02/2024"
+metaTitle: "Traume (uheld) – Hvad er et traume? Læs mere her"
 ---
 
 Et traume, ofte refereret til som et uheld, er en pludselig og uventet hændelse, der kan forårsage fysisk skade eller psykisk stress. Traumer kan opstå fra forskellige kilder, herunder sportsaktiviteter, bilulykker, fald eller andre uheld. Det er vigtigt at forstå, hvordan traumer påvirker kroppen og sindet, samt hvordan fysioterapi kan spille en afgørende rolle i rehabilitering og genoptræning.

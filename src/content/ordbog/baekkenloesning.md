@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2025"
+lastUpdated: 19/02/2025
+metaTitle: Bækkenløsning – Hvad er en bækkenløsning? Læs mere her
 ---
 
 Bækkenløsning refererer til en tilstand, hvor leddene i bækkenet bliver mere bevægelige end normalt, hvilket kan føre til smerter og ubehag. Denne tilstand ses ofte hos gravide kvinder, men kan også påvirke andre. Det er vigtigt at forstå årsagerne, symptomerne og behandlingsmulighederne for bækkenløsning for at kunne håndtere tilstanden effektivt.
