@@ -10,6 +10,7 @@
     "generate-sitemap": "ts-node scripts/generate-sitemap.ts"
   },
   "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.4.0",
     "@heroicons/react": "^2.1.5",
     "@radix-ui/react-accordion": "^1.2.1",
     "@radix-ui/react-dialog": "^1.1.2",
