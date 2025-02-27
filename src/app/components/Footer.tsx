@@ -20,7 +20,7 @@ export default function Footer() {
               Samarbejdspartnere
             </Link>
             <Link
-              href="/kontakt"
+              href="/om-os#kontakt"
               className="text-gray-600 hover:text-gray-900 text-sm"
             >
               Kontakt

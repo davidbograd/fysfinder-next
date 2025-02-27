@@ -3,6 +3,7 @@ import { Breadcrumbs } from "@/app/components/Breadcrumbs";
 import Link from "next/link";
 import { FounderCard } from "@/app/components/FounderCard";
 import { AboutUsStructuredData } from "@/app/components/AboutUsStructuredData";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Om Fysfinder.dk | Platform til at finde fysioterapeuter i Danmark",
@@ -36,16 +37,16 @@ export default function OmOsPage() {
       <AboutUsStructuredData founders={founders} />
       <Breadcrumbs items={breadcrumbItems} />
 
-      <div className="space-y-12 mt-8">
+      <div className="space-y-8 mt-6">
         <header>
-          <h1 className="text-3xl font-bold mb-6">
+          <h1 className="text-3xl font-bold mb-4">
             Hvem er FysFinder.dk? Danmarks platform til at finde fysioterapeuter
           </h1>
         </header>
 
-        <div className="prose prose-lg max-w-none">
-          <section className="mb-12">
-            <p className="mb-4">
+        <div className="space-y-8">
+          <section>
+            <p className="mb-3 text-lg">
               FysFinder er skabt som din go-to platform til at{" "}
               <Link
                 href="/find/fysioterapeut/danmark"
@@ -57,43 +58,46 @@ export default function OmOsPage() {
               sammenligne fysioterapeut tilbud og klinikker, uanset hvilken
               behandlingsform du søger.
             </p>
-            <p>
+            <p className="text-lg">
               FysFinder hjælper lokale klinikker med at få flere patienter. Det
               er udfordrende at drive en fysioterapeutklinik, og det gør vi
               noget ved gennem øget synlighed og flere patienthenvisninger.
             </p>
           </section>
 
-          <section className="mb-12">
-            <h2 className="text-2xl font-semibold mb-4">
+          <section>
+            <h2 className="text-2xl font-semibold mb-3">
               Hvorfor blev FysFinder skabt?
             </h2>
-            <p>
-              FysFinder blev skabt på baggrund af Joachim Bograds frustration
-              med de nuværende tilbud. Joachim har selv været patient, og er
-              efterfølgende blev uddannet fysioterapeut. Han har derfor oplevet
-              besværet ved at finde den rigtige behandler, samt frustrationen
-              hos de patienter, der er på deres tredje eller fjerde behandler.
-            </p>
-            <p className="mt-4">
-              Løsningen blev FysFinder.dk, hvor vi gør det nemt og overskueligt
-              at finde fysioterapeuter med specialer tæt på dig. Du kan
-              sammenligne kvalificerede behandlere - helt gratis.
-            </p>
-            <p className="mt-4">
-              Platformen er blevet mødt af stor støtte. Patienter, klinikejere,
-              fysioterapeuter og foreninger har alle taget godt imod FysFinder,
-              hvilket giver os endnu større motivation for at gøre platformen så
-              god som muligt.
-            </p>
+            <div className="space-y-3 text-lg">
+              <p>
+                FysFinder blev skabt på baggrund af Joachim Bograds frustration
+                med de nuværende tilbud. Joachim har selv været patient, og er
+                efterfølgende blev uddannet fysioterapeut. Han har derfor
+                oplevet besværet ved at finde den rigtige behandler, samt
+                frustrationen hos de patienter, der er på deres tredje eller
+                fjerde behandler.
+              </p>
+              <p>
+                Løsningen blev FysFinder.dk, hvor vi gør det nemt og
+                overskueligt at finde fysioterapeuter med specialer tæt på dig.
+                Du kan sammenligne kvalificerede behandlere - helt gratis.
+              </p>
+              <p>
+                Platformen er blevet mødt af stor støtte. Patienter,
+                klinikejere, fysioterapeuter og foreninger har alle taget godt
+                imod FysFinder, hvilket giver os endnu større motivation for at
+                gøre platformen så god som muligt.
+              </p>
+            </div>
           </section>
 
-          <section className="mb-12">
-            <h2 className="text-2xl font-semibold mb-8">
+          <section>
+            <h2 className="text-2xl font-semibold mb-6">
               Personerne bag FysFinder
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <FounderCard
                 name="Joachim Bograd"
                 role="Founder & Fysioterapeut"
@@ -120,10 +124,10 @@ export default function OmOsPage() {
             </div>
           </section>
 
-          <section className="mb-12">
-            <h2 className="text-2xl font-semibold mb-8">Vores værdier</h2>
+          <section>
+            <h2 className="text-2xl font-semibold mb-6">Vores værdier</h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
                 <h3 className="text-xl font-semibold mb-2">Vision</h3>
                 <p className="text-gray-600">
@@ -153,11 +157,11 @@ export default function OmOsPage() {
             </div>
           </section>
 
-          <section className="mb-12">
-            <h2 className="text-2xl font-semibold mb-4">
+          <section>
+            <h2 className="text-2xl font-semibold mb-3">
               FN&apos;s verdensmål
             </h2>
-            <p>
+            <p className="text-lg">
               Vi arbejder i tråd med{" "}
               <a
                 href="https://www.verdensmaalene.dk/maal/3"
@@ -171,6 +175,29 @@ export default function OmOsPage() {
               for patienter og støtte lokale klinikker i at styrke deres
               praksis.
             </p>
+          </section>
+
+          {/* Contact Section */}
+          <section className="pt-24 border-t pb-48" id="kontakt">
+            <h2 className="text-3xl font-semibold mb-6">Kontakt os</h2>
+
+            <div>
+              <div className="space-y-4 mb-6">
+                <p className="text-lg">
+                  Er du interesseret i at høre mere om mulighederne for
+                  samarbejde?
+                </p>
+
+                <p className="text-lg">
+                  Har du en klinik, der endnu ikke er på Fysfinder, eller ønsker
+                  du at få opdateret dine oplysninger?
+                </p>
+
+                <p className="text-lg">Kontakt os, så tager vi en snak på:</p>
+              </div>
+
+              <div className="text-lg font-medium">kontakt@fysfinder.dk</div>
+            </div>
           </section>
         </div>
       </div>

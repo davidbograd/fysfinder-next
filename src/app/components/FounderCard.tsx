@@ -18,7 +18,7 @@ export function FounderCard({
 }: FounderCardProps) {
   return (
     <div className="flex flex-col w-full">
-      <div className="mb-4 relative aspect-square w-full">
+      <div className="mb-3 relative aspect-square w-full">
         <Image
           src={imageUrl}
           alt={alt}
@@ -28,13 +28,13 @@ export function FounderCard({
         />
       </div>
       <div className="text-left w-full">
-        <div className="flex items-center gap-2 mb-1">
+        <div className="flex items-center gap-2">
           <h3 className="text-xl font-semibold">{name}</h3>
           <a
             href={linkedinUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-600 hover:text-blue-600"
+            className="text-gray-500 hover:text-blue-600"
           >
             <svg
               className="w-5 h-5"
@@ -46,7 +46,7 @@ export function FounderCard({
             </svg>
           </a>
         </div>
-        <p className="text-gray-600 mb-2">{role}</p>
+        <p className="text-gray-600 mt-1">{role}</p>
       </div>
     </div>
   );
