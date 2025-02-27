@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { createClient } from "@supabase/supabase-js";
 import { createClient as createServerClient } from "@/app/utils/supabase/server";
 import ClinicCard from "@/app/components/ClinicCard";
@@ -380,8 +381,22 @@ export default async function LocationPage({ params }: LocationPageProps) {
           <p className="text-gray-600 mb-8">
             Fysfinder hjælper dig med at finde den bedste fysioterapeut i
             Danmark. Se anmeldelser, specialer, priser og find den perfekte
-            fysioterapeut.
+            fysioterapeut.{" "}
+            {params.specialty === "kroniske-smerter" &&
+              "I samarbejde med FAKS, Foreningen af kroniske smerteramte og pårørende."}
           </p>
+
+          {params.specialty === "kroniske-smerter" && (
+            <div className="mb-4 flex justify-start">
+              <Image
+                src="/images/samarbejdspartnere/FAKS-smertelinjen-logo.png"
+                alt="FAKS - Foreningen af kroniske smerteramte og pårørende"
+                width={500}
+                height={250}
+                className="object-contain"
+              />
+            </div>
+          )}
 
           <SearchAndFilters
             specialties={specialties}
@@ -485,8 +500,22 @@ export default async function LocationPage({ params }: LocationPageProps) {
 
         <p className="text-gray-600 mb-8">
           Find den bedste fysioterapi i {data.city.bynavn}. Se anmeldelser,
-          specialer, priser og find den perfekte fysioterapeut.
+          specialer, priser og find den perfekte fysioterapeut.{" "}
+          {params.specialty === "kroniske-smerter" &&
+            "I samarbejde med FAKS, Foreningen af kroniske smerteramte og pårørende."}
         </p>
+
+        {params.specialty === "kroniske-smerter" && (
+          <div className="mb-4 flex justify-start">
+            <Image
+              src="/images/samarbejdspartnere/FAKS-smertelinjen-logo.png"
+              alt="FAKS - Foreningen af kroniske smerteramte og pårørende"
+              width={500}
+              height={250}
+              className="object-contain"
+            />
+          </div>
+        )}
 
         <SearchAndFilters
           specialties={specialties}
