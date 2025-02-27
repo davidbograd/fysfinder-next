@@ -381,20 +381,22 @@ export default async function LocationPage({ params }: LocationPageProps) {
           <p className="text-gray-600 mb-8">
             Fysfinder hjælper dig med at finde den bedste fysioterapeut i
             Danmark. Se anmeldelser, specialer, priser og find den perfekte
-            fysioterapeut.{" "}
-            {params.specialty === "kroniske-smerter" &&
-              "I samarbejde med FAKS, Foreningen af kroniske smerteramte og pårørende."}
+            fysioterapeut.
           </p>
 
           {params.specialty === "kroniske-smerter" && (
-            <div className="mb-4 flex justify-start">
+            <div className="mb-4 flex flex-wrap items-center gap-4 sm:gap-8">
               <Image
                 src="/images/samarbejdspartnere/FAKS-smertelinjen-logo.png"
                 alt="FAKS - Foreningen af kroniske smerteramte og pårørende"
-                width={500}
+                width={400}
                 height={250}
-                className="object-contain"
+                className="object-contain w-full sm:w-auto"
               />
+              <p className="text-gray-600 w-full sm:w-auto sm:flex-1">
+                I samarbejde med FAKS, Foreningen af kroniske smerteramte og
+                pårørende.
+              </p>
             </div>
           )}
 
@@ -500,20 +502,22 @@ export default async function LocationPage({ params }: LocationPageProps) {
 
         <p className="text-gray-600 mb-8">
           Find den bedste fysioterapi i {data.city.bynavn}. Se anmeldelser,
-          specialer, priser og find den perfekte fysioterapeut.{" "}
-          {params.specialty === "kroniske-smerter" &&
-            "I samarbejde med FAKS, Foreningen af kroniske smerteramte og pårørende."}
+          specialer, priser og find den perfekte fysioterapeut.
         </p>
 
         {params.specialty === "kroniske-smerter" && (
-          <div className="mb-4 flex justify-start">
+          <div className="mb-4 flex flex-wrap items-center gap-4 sm:gap-8">
             <Image
               src="/images/samarbejdspartnere/FAKS-smertelinjen-logo.png"
               alt="FAKS - Foreningen af kroniske smerteramte og pårørende"
-              width={500}
+              width={400}
               height={250}
-              className="object-contain"
+              className="object-contain w-full sm:w-auto"
             />
+            <p className="text-gray-600 w-full sm:w-auto sm:flex-1">
+              I samarbejde med FAKS, Foreningen af kroniske smerteramte og
+              pårørende.
+            </p>
           </div>
         )}
 
