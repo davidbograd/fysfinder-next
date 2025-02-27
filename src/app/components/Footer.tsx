@@ -19,6 +19,12 @@ export default function Footer() {
             >
               Samarbejdspartnere
             </Link>
+            <Link
+              href="/kontakt"
+              className="text-gray-600 hover:text-gray-900 text-sm"
+            >
+              Kontakt
+            </Link>
           </div>
 
           <div className="flex flex-col items-center sm:flex-row-reverse sm:items-center gap-2 sm:gap-4">
