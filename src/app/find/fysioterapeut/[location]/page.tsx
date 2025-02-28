@@ -28,6 +28,27 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
 
+// Add this utility function at the top of the file
+async function fetchWithRetry(
+  url: string,
+  options: any,
+  retries = 3,
+  delay = 1000
+) {
+  for (let i = 0; i < retries; i++) {
+    try {
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return await response.json();
+    } catch (error) {
+      if (i === retries - 1) throw error;
+      await new Promise((resolve) => setTimeout(resolve, delay * (i + 1)));
+    }
+  }
+}
+
 /**
  * Type guard function to validate clinic data
  */
@@ -78,23 +99,22 @@ export async function fetchLocationData(
   locationSlug: string,
   specialtySlug?: string
 ): Promise<LocationPageData> {
+  const headers = {
+    apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
+  };
+
+  const fetchOptions = {
+    headers,
+    next: { revalidate: 86400 },
+  };
+
   try {
     // Fetch specialties first as we need them for both cases
-    const specialtiesResponse = await fetch(
+    const specialties = (await fetchWithRetry(
       `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/specialties?select=specialty_id,specialty_name,specialty_name_slug,seo_tekst`,
-      {
-        headers: {
-          apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
-        },
-        next: {
-          revalidate: 86400,
-        },
-      }
-    );
-
-    const specialties =
-      (await specialtiesResponse.json()) as SpecialtyWithSeo[];
+      fetchOptions
+    )) as SpecialtyWithSeo[];
 
     // Special handling for "danmark" location
     if (locationSlug === "danmark") {
@@ -104,17 +124,7 @@ export async function fetchLocationData(
         clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),filtered_specialties:clinic_specialties!inner(specialty:specialties!inner(specialty_name_slug))&filtered_specialties.specialties.specialty_name_slug=eq.${specialtySlug}`;
       }
 
-      const clinicsResponse = await fetch(clinicsUrl, {
-        headers: {
-          apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
-        },
-        next: {
-          revalidate: 86400,
-        },
-      });
-
-      const clinicsData = await clinicsResponse.json();
+      const clinicsData = await fetchWithRetry(clinicsUrl, fetchOptions);
       const validClinics = (clinicsData as unknown[]).filter(
         isValidClinicResponse
       );
@@ -129,20 +139,11 @@ export async function fetchLocationData(
     }
 
     // For specific city locations
-    const cityResponse = await fetch(
+    const cityData = await fetchWithRetry(
       `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/cities?bynavn_slug=eq.${locationSlug}&select=*`,
-      {
-        headers: {
-          apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
-        },
-        next: {
-          revalidate: 86400,
-        },
-      }
+      fetchOptions
     );
 
-    const cityData = await cityResponse.json();
     const city = cityData[0] || null;
 
     if (!city) {
@@ -161,42 +162,23 @@ export async function fetchLocationData(
       clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order),filtered_specialties:clinic_specialties!inner(specialty:specialties!inner(specialty_name_slug))&city_id=eq.${city.id}&filtered_specialties.specialties.specialty_name_slug=eq.${specialtySlug}`;
     }
 
-    // Fetch clinics and nearby clinics in parallel
-    const [clinicsResponse, nearbyResponse] = await Promise.all([
-      fetch(clinicsUrl, {
-        headers: {
-          apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
-        },
-        next: {
-          revalidate: 86400,
-        },
-      }),
-      fetch(
+    // Fetch clinics and nearby clinics in parallel with retry
+    const [clinicsData, nearbyData] = await Promise.all([
+      fetchWithRetry(clinicsUrl, fetchOptions),
+      fetchWithRetry(
         `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/rpc/get_nearby_clinics`,
         {
+          ...fetchOptions,
           method: "POST",
-          headers: {
-            apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
-            "Content-Type": "application/json",
-          },
+          headers: { ...headers, "Content-Type": "application/json" },
           body: JSON.stringify({
             origin_lat: city.latitude,
             origin_lng: city.longitude,
             max_distance_km: 10,
             exclude_city_id: city.id,
           }),
-          next: {
-            revalidate: 86400,
-          },
         }
       ),
-    ]);
-
-    const [clinicsData, nearbyData] = await Promise.all([
-      clinicsResponse.json(),
-      nearbyResponse.json(),
     ]);
 
     // Safely process the clinics data
@@ -214,7 +196,13 @@ export async function fetchLocationData(
     };
   } catch (error) {
     console.error("Error in fetchLocationData:", error);
-    throw error;
+    // Return a minimal valid response instead of throwing
+    return {
+      city: null,
+      clinics: [],
+      nearbyClinicsList: [],
+      specialties: [],
+    };
   }
 }
 
@@ -389,9 +377,9 @@ export default async function LocationPage({ params }: LocationPageProps) {
               <Image
                 src="/images/samarbejdspartnere/FAKS-smertelinjen-logo.png"
                 alt="FAKS - Foreningen af kroniske smerteramte og pårørende"
-                width={400}
-                height={250}
-                className="object-contain w-full sm:w-auto"
+                width={640}
+                height={400}
+                className="w-full sm:max-w-[400px] h-auto"
               />
               <p className="text-gray-600 w-full sm:w-auto sm:flex-1">
                 I samarbejde med FAKS, Foreningen af kroniske smerteramte og
@@ -510,9 +498,9 @@ export default async function LocationPage({ params }: LocationPageProps) {
             <Image
               src="/images/samarbejdspartnere/FAKS-smertelinjen-logo.png"
               alt="FAKS - Foreningen af kroniske smerteramte og pårørende"
-              width={400}
-              height={250}
-              className="object-contain w-full sm:w-auto"
+              width={640}
+              height={400}
+              className="w-full sm:max-w-[400px] h-auto"
             />
             <p className="text-gray-600 w-full sm:w-auto sm:flex-1">
               I samarbejde med FAKS, Foreningen af kroniske smerteramte og
