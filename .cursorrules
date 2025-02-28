@@ -47,3 +47,11 @@ Key Conventions
   - Avoid for data fetching or state management.
 
 Follow Next.js docs for Data Fetching, Rendering, and Routing.
+
+Comments and context of each file
+
+- When you create a new file, make sure to add a comment at the top of the file with the changes you made.
+- When you update/make changes to a file, make sure to rewrite the comment at the top of the file with the changes you made. If there is no comment, then add one."
+
+React component sizes
+React components should not exceed 300 lines. All designs should use a component approach so that they are easier to work on and fix without breaking other features.

@@ -1,8 +1,7 @@
 const SiteLogo = () => {
   return (
     <svg
-      width="167"
-      height="40"
+      className="w-[117px] h-[28px] sm:w-[167px] sm:h-[40px]"
       viewBox="0 0 167 40"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
