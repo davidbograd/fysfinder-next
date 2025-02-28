@@ -51,7 +51,7 @@ export default function RootLayout({
     <html lang="da" className={GeistSans.className}>
       <body className="flex flex-col min-h-screen">
         <Header />
-        <main className="flex-grow">
+        <main className="flex-grow pt-6 sm:pt-8">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {children}
           </div>
