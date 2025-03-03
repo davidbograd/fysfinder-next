@@ -42,7 +42,7 @@ export function ClinicSidebar({ clinic }: ClinicSidebarProps) {
     <div className="lg:w-2/5">
       <div
         id="contact-info"
-        className="sticky top-4 bg-white p-6 rounded-lg shadow-md"
+        className="sticky top-20 sm:top-16 bg-white p-6 rounded-lg shadow-md"
       >
         <div className="flex items-center mb-4">
           {clinic.northstar && (
