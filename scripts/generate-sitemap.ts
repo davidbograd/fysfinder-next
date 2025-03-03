@@ -1,13 +1,15 @@
-require("dotenv").config({ path: ".env.local" });
-const { createClient: supabaseClient } = require("@supabase/supabase-js");
-const fsPromises = require("fs/promises");
-const pathModule = require("path");
-const glob = require("glob-promise");
+import { config } from "dotenv";
+import { createClient } from "@supabase/supabase-js";
+import { promises as fsPromises } from "fs";
+import * as pathModule from "path";
+import glob from "glob-promise";
+
+config({ path: ".env.local" });
 
 // Initialize Supabase client
-const supabaseDb = supabaseClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+const supabaseDb = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
 
 const DOMAIN = "https://www.fysfinder.dk";
@@ -254,5 +256,5 @@ async function generateSitemaps() {
 
 generateSitemaps();
 
-// At the end, export the function if needed
-module.exports = { generateSitemaps };
+// Export as ESM module
+export { generateSitemaps };
