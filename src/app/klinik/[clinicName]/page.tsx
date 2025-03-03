@@ -526,6 +526,22 @@ export default async function ClinicPage({
                 <p className="text-gray-600">Ingen beskrivelse tilføjet.</p>
               )}
             </section>
+
+            {/* Claim Clinic section */}
+            <section className="py-8">
+              <div className="flex items-center gap-4">
+                <p className="text-gray-600">Ejer du {clinic.klinikNavn}?</p>
+                <Button variant="outline" asChild>
+                  <a
+                    href="https://tally.so/r/wdk75r"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Claim klinik
+                  </a>
+                </Button>
+              </div>
+            </section>
           </div>
 
           {/* Sidebar */}
