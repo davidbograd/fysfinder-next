@@ -318,7 +318,7 @@ export default async function ClinicPage({
             {/* Priser section */}
             <section className="py-8 border-b border-gray-200">
               <h2 className="text-2xl font-semibold mb-4">Priser</h2>
-              {clinic.ydernummer !== null && (
+              {clinic.ydernummer === true && (
                 <div className="flex items-center mb-2">
                   <span className="mr-2">Ydernummer</span>
                   <Check className="w-5 h-5 text-green-500" />
