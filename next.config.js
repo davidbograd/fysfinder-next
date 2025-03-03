@@ -9,7 +9,7 @@ const nextConfig = {
       ...config.resolve,
       fallback: {
         ...config.resolve.fallback,
-        "punycode": require.resolve('punycode/'),
+        "punycode": false, // Disable punycode polyfill as it's not needed in modern environments
       }
     };
     
@@ -26,4 +26,4 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+export default nextConfig

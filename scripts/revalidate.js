@@ -1,7 +1,15 @@
 // This script is used to revalidate the pages in the production environment.
 // To run it use the terminal command: node scripts/revalidate.js
 
-require('dotenv').config({ path: '.env.local' }); // Load environment variables from .env.local
+import { config } from 'dotenv';
+import { fileURLToPath } from 'url';
+import { dirname, resolve } from 'path';
+
+// Get the directory name of the current module
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+// Load environment variables from .env.local
+config({ path: resolve(__dirname, '../.env.local') });
 
 const paths = [
   '/',

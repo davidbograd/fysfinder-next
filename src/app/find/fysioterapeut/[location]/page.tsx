@@ -18,8 +18,6 @@ import {
 import { notFound } from "next/navigation";
 import { SearchAndFilters } from "@/app/components/SearchAndFilters";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { SpecialtiesList } from "@/components/SpecialtiesList";
 
 // Create a Supabase client for static generation

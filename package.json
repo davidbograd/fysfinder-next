@@ -20,13 +20,11 @@
     "@radix-ui/react-toast": "^1.2.2",
     "@radix-ui/react-tooltip": "^1.1.2",
     "@supabase/ssr": "^0.5.1",
-    "@supabase/supabase-js": "^2.46.1",
     "@types/glob": "^8.1.0",
     "@types/papaparse": "^5.3.15",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.4",
-    "dotenv": "^16.4.5",
     "embla-carousel-react": "^8.2.0",
     "geist": "^1.3.1",
     "glob-promise": "^6.0.7",
@@ -46,17 +44,20 @@
     "use-debounce": "^10.0.4"
   },
   "devDependencies": {
+    "@supabase/supabase-js": "^2.49.1",
     "@tailwindcss/typography": "^0.5.16",
     "@types/node": "^20.17.6",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "csv-parse": "^5.6.0",
     "csv-stringify": "^6.5.2",
+    "dotenv": "^16.4.7",
     "eslint": "^8",
     "eslint-config-next": "14.2.6",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3"
-  }
+  },
+  "type": "module"
 }
