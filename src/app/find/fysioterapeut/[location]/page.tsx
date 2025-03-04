@@ -19,6 +19,7 @@ import { notFound } from "next/navigation";
 import { SearchAndFilters } from "@/app/components/SearchAndFilters";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { SpecialtiesList } from "@/components/SpecialtiesList";
+import { ClinicsList } from "@/app/components/ClinicsList";
 
 // Create a Supabase client for static generation
 const supabase = createClient(
@@ -116,10 +117,10 @@ export async function fetchLocationData(
 
     // Special handling for "danmark" location
     if (locationSlug === "danmark") {
-      let clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug))`;
+      let clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug))&limit=10000`;
 
       if (specialtySlug) {
-        clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),filtered_specialties:clinic_specialties!inner(specialty:specialties!inner(specialty_name_slug))&filtered_specialties.specialties.specialty_name_slug=eq.${specialtySlug}`;
+        clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),filtered_specialties:clinic_specialties!inner(specialty:specialties!inner(specialty_name_slug))&filtered_specialties.specialties.specialty_name_slug=eq.${specialtySlug}&limit=10000`;
       }
 
       const clinicsData = await fetchWithRetry(clinicsUrl, fetchOptions);
@@ -393,46 +394,11 @@ export default async function LocationPage({ params }: LocationPageProps) {
             defaultSearchValue="Danmark"
           />
 
-          <h3 className="text-sm text-gray-500 mb-4">
-            {data.clinics.length} fysioterapi klinikker fundet
-          </h3>
-
-          <div className="space-y-4">
-            {data.clinics.map((clinic: Clinic) => {
-              // If we're on a specialty page, reorder the specialties array to show the current specialty first
-              let orderedSpecialties = clinic.specialties;
-              if (params.specialty && clinic.specialties) {
-                orderedSpecialties = [
-                  ...clinic.specialties.filter(
-                    (s) => s.specialty_name_slug === params.specialty
-                  ),
-                  ...clinic.specialties.filter(
-                    (s) => s.specialty_name_slug !== params.specialty
-                  ),
-                ];
-              }
-
-              return (
-                <Link
-                  key={clinic.clinics_id}
-                  href={`/klinik/${clinic.klinikNavnSlug}`}
-                  className="block"
-                >
-                  <ClinicCard
-                    klinikNavn={clinic.klinikNavn}
-                    ydernummer={clinic.ydernummer}
-                    avgRating={clinic.avgRating}
-                    ratingCount={clinic.ratingCount}
-                    adresse={clinic.adresse}
-                    postnummer={clinic.postnummer}
-                    lokation={clinic.lokation}
-                    specialties={orderedSpecialties}
-                    team_members={clinic.team_members}
-                  />
-                </Link>
-              );
-            })}
-          </div>
+          <ClinicsList
+            clinics={data.clinics}
+            totalClinics={data.clinics.length}
+            specialtySlug={params.specialty}
+          />
 
           {/* Add SEO text for specialty when on danmark page */}
           {params.specialty && specialty?.seo_tekst && (
