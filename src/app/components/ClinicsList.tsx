@@ -31,7 +31,9 @@ export function ClinicsList({
   return (
     <div>
       <h3 className="text-sm text-gray-500 mb-4">
-        {totalClinics} fysioterapi klinikker fundet
+        {totalClinics >= 1000
+          ? "Over 1000 fysioterapi klinikker fundet"
+          : `${totalClinics} fysioterapi klinikker fundet`}
       </h3>
 
       <div className="space-y-4">
