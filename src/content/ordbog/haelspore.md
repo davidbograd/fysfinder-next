@@ -71,7 +71,7 @@ Gode sko med stødabsorbering og støtte til fodbuen kan reducere belastningen p
 
 ### Fysioterapi
 
-En fysioterapeut kan arbejde med specifikke øvelser og teknikker for at forbedre fodens biomekanik og reducere smerter.
+Det kan være en god idé at [finde en fysioterapeut specialiseret i hælspore](https://www.fysfinder.dk/find/fysioterapeut/danmark/haelspore, der kan arbejde med specifikke øvelser og teknikker for at forbedre fodens biomekanik og reducere smerter.
 
 ### Shockwave-terapi
 
