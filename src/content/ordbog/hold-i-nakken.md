@@ -82,5 +82,5 @@ Helbredelsestiden afhænger af årsagen og behandlingen, men mange oplever bedri
 3. National Institute of Neurological Disorders and Stroke – *Neck Pain Information Page.*[ www.ninds.nih.gov](https://www.ninds.nih.gov)
 4. Sundhed.dk – *Nakkesmerter – Årsager og behandling.*[ www.sundhed.dk](https://www.sundhed.dk)
 5. Dansk Selskab for Fysioterapi – *Behandling og forebyggelse af nakkesmerter.*[ www.fysio.dk](https://www.fysio.dk)
-6. Beerman, J. – *Smertefri bevægelse: Individuel tilpasning og håndtering af smerte.*[ www.smertefribevægelse.dk](https://www.smertefribev%C3%A6gelse.dk)
-7. Borghouts, J. A., et al. – *The clinical course and prognostic factors of non-specific neck pain: A systematic review.* *Pain.* https://doi.org/10.1016/S0304-3959(98)00058-X
+6. Beerman, J. – *Smertefri bevægelse: Individuel tilpasning og håndtering af smerte.*[ www.smertefribevægelse.dk](https://smertefribevaegelse.dk/)
+7. Borghouts, J. A., et al. – *The clinical course and prognostic factors of non-specific neck pain: A systematic review.* *Pain.* [www.doi.org](https://doi.org/10.1016/S0304-3959(98)00058-X)
