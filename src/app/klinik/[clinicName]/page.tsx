@@ -129,6 +129,17 @@ interface ClinicStructuredDataProps {
 }
 
 function ClinicStructuredData({ clinic }: ClinicStructuredDataProps) {
+  // Calculate price ranges if available
+  const priceRange =
+    clinic.førsteKons && clinic.opfølgning
+      ? {
+          "@type": "PriceSpecification",
+          price: clinic.førsteKons,
+          priceCurrency: "DKK",
+          description: "Første konsultation",
+        }
+      : undefined;
+
   const structuredData = {
     "@context": "https://schema.org",
     "@type": ["LocalBusiness", "MedicalBusiness", "PhysicalTherapist"],
@@ -136,7 +147,16 @@ function ClinicStructuredData({ clinic }: ClinicStructuredDataProps) {
     url: `https://www.fysfinder.dk/klinik/${clinic.klinikNavnSlug}`,
     telephone: clinic.tlf,
     email: clinic.email,
-    description: clinic.om_os || `Fysioterapi klinik i ${clinic.lokation}`,
+    description: generateClinicDescription(clinic),
+
+    // Price Information
+    ...(priceRange && {
+      priceRange: `${clinic.opfølgning}-${clinic.førsteKons} DKK`,
+      offers: {
+        "@type": "Offer",
+        priceSpecification: priceRange,
+      },
+    }),
 
     // Medical Organization Details
     medicalSpecialty: [
@@ -148,7 +168,7 @@ function ClinicStructuredData({ clinic }: ClinicStructuredDataProps) {
       hasHealthPlanNetwork: clinic.ydernummer,
     },
 
-    // Reviews and Ratings (only if clinic has ratings)
+    // Enhanced Reviews and Ratings with more detail
     ...(clinic.avgRating && clinic.ratingCount
       ? {
           aggregateRating: {
@@ -158,14 +178,49 @@ function ClinicStructuredData({ clinic }: ClinicStructuredDataProps) {
             bestRating: 5,
             worstRating: 1,
           },
+          review: [
+            {
+              "@type": "Review",
+              reviewRating: {
+                "@type": "Rating",
+                ratingValue: clinic.avgRating,
+                bestRating: 5,
+                worstRating: 1,
+              },
+              author: {
+                "@type": "Organization",
+                name: "Fysfinder",
+              },
+              publisher: {
+                "@type": "Organization",
+                name: "Fysfinder",
+                logo: {
+                  "@type": "ImageObject",
+                  url: "https://www.fysfinder.dk/logo.png", // Make sure this exists
+                },
+              },
+              reviewBody: `Gennemsnitlig bedømmelse baseret på ${clinic.ratingCount} anmeldelser`,
+              datePublished: new Date().toISOString().split("T")[0],
+            },
+          ],
         }
       : {}),
 
-    // Medical Services
+    // Medical Services with Prices
     availableService: clinic.specialties.map((specialty) => ({
       "@type": "MedicalTherapy",
       name: specialty.specialty_name,
       description: `${specialty.specialty_name} behandling`,
+      ...(clinic.ydernummer && {
+        offers: {
+          "@type": "Offer",
+          priceSpecification: {
+            "@type": "PriceSpecification",
+            price: clinic.opfølgning || "Ring for pris",
+            priceCurrency: "DKK",
+          },
+        },
+      }),
     })),
 
     // Contact Points
@@ -174,6 +229,7 @@ function ClinicStructuredData({ clinic }: ClinicStructuredDataProps) {
       telephone: clinic.tlf,
       email: clinic.email,
       contactType: "Customer Service",
+      availableLanguage: ["da", "en"],
     },
 
     // Location Information
@@ -189,6 +245,52 @@ function ClinicStructuredData({ clinic }: ClinicStructuredDataProps) {
       latitude: clinic.lokation?.split(",")[0],
       longitude: clinic.lokation?.split(",")[1],
     },
+
+    // Opening Hours
+    openingHoursSpecification: [
+      clinic.mandag && {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Monday",
+        opens: clinic.mandag.split("-")[0]?.trim(),
+        closes: clinic.mandag.split("-")[1]?.trim(),
+      },
+      clinic.tirsdag && {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Tuesday",
+        opens: clinic.tirsdag.split("-")[0]?.trim(),
+        closes: clinic.tirsdag.split("-")[1]?.trim(),
+      },
+      clinic.onsdag && {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Wednesday",
+        opens: clinic.onsdag.split("-")[0]?.trim(),
+        closes: clinic.onsdag.split("-")[1]?.trim(),
+      },
+      clinic.torsdag && {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Thursday",
+        opens: clinic.torsdag.split("-")[0]?.trim(),
+        closes: clinic.torsdag.split("-")[1]?.trim(),
+      },
+      clinic.fredag && {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Friday",
+        opens: clinic.fredag.split("-")[0]?.trim(),
+        closes: clinic.fredag.split("-")[1]?.trim(),
+      },
+      clinic.lørdag && {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Saturday",
+        opens: clinic.lørdag.split("-")[0]?.trim(),
+        closes: clinic.lørdag.split("-")[1]?.trim(),
+      },
+      clinic.søndag && {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Sunday",
+        opens: clinic.søndag.split("-")[0]?.trim(),
+        closes: clinic.søndag.split("-")[1]?.trim(),
+      },
+    ].filter(Boolean),
   };
 
   return (
