@@ -7,6 +7,10 @@ import { Button } from "@/components/ui/button";
 import { FAQ } from "@/components/FAQ";
 import { SearchAndFilters } from "@/app/components/SearchAndFilters";
 import { RegionList } from "@/app/components/RegionList";
+import { NetworkSection } from "@/app/components/NetworkSection";
+import { StatsSection } from "@/app/components/StatsSection";
+import { BenefitsSection } from "@/app/components/BenefitsSection";
+import { MapIcon } from "lucide-react";
 
 interface CityWithCount {
   id: string;
@@ -205,6 +209,9 @@ export default async function HomePage() {
       <div>
         <HomeStructuredData totalClinics={totalClinics} regions={regionData} />
         <Header totalClinics={totalClinics} specialties={specialties} />
+        <NetworkSection />
+        <StatsSection totalClinics={totalClinics} />
+        <BenefitsSection />
         <div className="max-w-6xl mx-auto px-4">
           <RegionList regions={regionData} />
           <FAQ />
