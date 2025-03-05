@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/select";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { ListFilter } from "lucide-react";
+import { BookHeart } from "lucide-react";
 
 interface Props {
   specialties: {
@@ -63,7 +63,7 @@ export function SpecialtyDropdown({
         )}
       >
         <div className="flex items-center">
-          <ListFilter className="text-gray-400 size-5 mr-3" />
+          <BookHeart className="text-gray-400 size-5 mr-3" />
           <SelectValue placeholder="Alle specialer" className="text-gray-900" />
         </div>
       </SelectTrigger>

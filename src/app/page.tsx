@@ -7,10 +7,8 @@ import { Button } from "@/components/ui/button";
 import { FAQ } from "@/components/FAQ";
 import { SearchAndFilters } from "@/app/components/SearchAndFilters";
 import { RegionList } from "@/app/components/RegionList";
-import { NetworkSection } from "@/app/components/NetworkSection";
-import { StatsSection } from "@/app/components/StatsSection";
 import { BenefitsSection } from "@/app/components/BenefitsSection";
-import { MapIcon } from "lucide-react";
+import { StarIcon } from "@heroicons/react/24/solid";
 
 interface CityWithCount {
   id: string;
@@ -98,23 +96,62 @@ function Header({
   }>;
 }) {
   return (
-    <div className="bg-logo-blue py-16 sm:py-28 px-4 mb-8 sm:mb-12 rounded-lg min-h-[65vh] flex items-center w-full">
-      <div className="max-w-4xl mx-auto w-full space-y-12 sm:space-y-16">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white text-center">
-          Find den bedste fysioterapeut
-        </h1>
+    <div className="mb-8 sm:mb-12 w-full">
+      {/* Hero section with background image */}
+      <div className="relative py-16 sm:py-28 px-4 min-h-[65vh] flex flex-col justify-center w-full rounded-lg overflow-hidden mb-16">
+        {/* Background image */}
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage:
+              "url('/images/homepage/hero-background-image.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
 
-        <div className="max-w-2xl mx-auto">
-          <SearchAndFilters
-            specialties={specialties}
-            defaultSearchValue=""
-            citySlug="danmark"
-          />
+        {/* Content */}
+        <div className="relative z-10 max-w-4xl mx-auto w-full space-y-12">
+          <div className="text-center space-y-2">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl text-slate-900 font-normal">
+              Find den bedste
+              <br />
+              <span className="font-bold">fysioterapeut</span>
+            </h1>
+          </div>
+
+          <div className="max-w-2xl mx-auto w-full">
+            <SearchAndFilters
+              specialties={specialties}
+              defaultSearchValue=""
+              citySlug="danmark"
+            />
+          </div>
         </div>
-        <p className="text-base sm:text-lg text-white/90 text-center">
-          Se anmeldelser, specialer, priser og meget mere på {totalClinics}{" "}
-          danske klinikker.
-        </p>
+      </div>
+
+      {/* Stats section */}
+      <div className="max-w-4xl mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+          <div className="space-y-2">
+            <p className="text-4xl font-bold">{totalClinics}</p>
+            <p className="text-slate-600">danske fysioterapi klinikker</p>
+          </div>
+          <div className="space-y-2">
+            <p className="text-4xl font-bold">{specialties.length}</p>
+            <p className="text-slate-600">forskellige specialer</p>
+          </div>
+          <div className="space-y-2">
+            <div className="text-4xl font-bold flex justify-center">
+              <div className="flex">
+                {[...Array(5)].map((_, i) => (
+                  <StarIcon key={i} className="h-8 w-8 text-amber-500" />
+                ))}
+              </div>
+            </div>
+            <p className="text-slate-600">Den bedste oplevelse</p>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -209,8 +246,6 @@ export default async function HomePage() {
       <div>
         <HomeStructuredData totalClinics={totalClinics} regions={regionData} />
         <Header totalClinics={totalClinics} specialties={specialties} />
-        <NetworkSection />
-        <StatsSection totalClinics={totalClinics} />
         <BenefitsSection />
         <div className="max-w-6xl mx-auto px-4">
           <RegionList regions={regionData} />
