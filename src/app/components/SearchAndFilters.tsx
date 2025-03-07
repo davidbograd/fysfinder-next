@@ -6,7 +6,7 @@ import { searchCities } from "@/app/actions/search-cities";
 import { SpecialtyDropdown } from "./SpecialtyDropdown";
 import { SearchResult } from "@/app/types";
 import Link from "next/link";
-import { MapPin } from "lucide-react";
+import { MapPin, Loader2 } from "lucide-react";
 
 interface Props {
   specialties: {
@@ -26,7 +26,7 @@ export function SearchAndFilters({
   defaultSearchValue,
 }: Props) {
   const [query, setQuery] = useState(defaultSearchValue || "");
-  const [debouncedQuery] = useDebounce(query, 300);
+  const [debouncedQuery] = useDebounce(query, query.length < 2 ? 0 : 300);
   const [searchResult, setSearchResult] = useState<SearchResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
@@ -51,7 +51,7 @@ export function SearchAndFilters({
   }, [searchResult]);
 
   async function handleSearch() {
-    if (!debouncedQuery) {
+    if (!debouncedQuery || debouncedQuery.length < 2) {
       setSearchResult(null);
       return;
     }
@@ -90,7 +90,7 @@ export function SearchAndFilters({
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onFocus={handleFocus}
-                placeholder="Søg efter postnummer..."
+                placeholder="By eller postnummer"
                 className="w-full h-12 pl-3 pr-5 focus:outline-none focus:ring-0 text-gray-900 placeholder:text-gray-500 text-base bg-white group-hover:bg-gray-50/50 transition-colors"
               />
             </div>
@@ -115,7 +115,10 @@ export function SearchAndFilters({
       {query && isFocused && (
         <div className="absolute z-50 left-0 right-0 -mt-2 bg-white border rounded-md shadow-lg max-h-[calc(100vh-220px)] overflow-y-auto">
           {isLoading ? (
-            <div className="p-4 text-gray-500 text-center">Søger...</div>
+            <div className="p-4 text-gray-500 text-center flex items-center justify-center gap-2">
+              <Loader2 className="h-4 w-4 animate-spin" />
+              <span>Finder klinikker</span>
+            </div>
           ) : searchResult ? (
             <>
               {searchResult.exact_match && (
@@ -123,11 +126,11 @@ export function SearchAndFilters({
                   href={`/find/fysioterapeut/${searchResult.exact_match.bynavn_slug}`}
                   className="block p-4 hover:bg-gray-50 border-b"
                 >
-                  <div className="font-medium">
-                    {searchResult.exact_match.bynavn}
-                  </div>
-                  <div className="text-sm text-gray-500">
-                    {searchResult.exact_match.postal_codes.join(", ")}
+                  <div className="font-medium flex items-center gap-2">
+                    <span>{searchResult.exact_match.bynavn}</span>
+                    <span className="text-gray-500">
+                      {searchResult.exact_match.postal_codes.join(", ")}
+                    </span>
                   </div>
                 </Link>
               )}
@@ -137,10 +140,14 @@ export function SearchAndFilters({
                   href={`/find/fysioterapeut/${city.bynavn_slug}`}
                   className="block p-4 hover:bg-gray-50 border-b last:border-b-0"
                 >
-                  <div className="font-medium">{city.bynavn}</div>
-                  <div className="text-sm text-gray-500">
-                    {city.postal_codes.join(", ")} • {city.distance.toFixed(1)}{" "}
-                    km væk
+                  <div className="font-medium flex items-center gap-2">
+                    <span>{city.bynavn}</span>
+                    <span className="text-gray-500">
+                      {city.postal_codes.join(", ")}
+                      {city.distance >= 0 && (
+                        <> • {city.distance.toFixed(1)} km væk</>
+                      )}
+                    </span>
                   </div>
                 </Link>
               ))}
