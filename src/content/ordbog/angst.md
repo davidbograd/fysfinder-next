@@ -93,9 +93,9 @@ Angst er ikke en sygdom i traditionel forstand, men en psykisk tilstand, der kan
 
 **Referencer:**
 
-1. Angst – Patienthåndbogen. [www.sundhed.dk](https://www.sundhed.dk/borger/patienthaandbogen/sygdomme/hjerne-og-nerver/angst/)
+1. Angst – Patienthåndbogen. [www.sundhed.dk](https://www.sundhed.dk/borger/patienthaandbogen/psyke/symptomer/angst/)
 
-2. Angst – Netdoktor. [www.netdoktor.dk](https://www.netdoktor.dk/sygdomme/fakta/angst.htm)
+2. Angst – Netdoktor. [www.netdoktor.dk](https://netdoktor.dk/psykiatri/angst/sygdomme/angst/)
 
-3. Angstlidelser – Sundhed.dk. [www.sundhed.dk](https://www.sundhed.dk/borger/sygdomme-a-aa/hjerne-og-nerver/angstlidelser/)
+3. Angstlidelser – Sundhed.dk. [www.sundhed.dk](https://www.sundhed.dk/borger/patienthaandbogen/psyke/sygdomme/angsttilstande/generaliseret-angst-symptomer-og-tegn/)
 
