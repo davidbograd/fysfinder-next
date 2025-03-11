@@ -98,17 +98,19 @@ function Header({
   return (
     <div className="mb-8 sm:mb-12 w-full">
       {/* Hero section with background image */}
-      <div className="relative py-16 sm:py-28 px-4 min-h-[65vh] flex flex-col justify-center w-full rounded-lg overflow-hidden mb-16">
-        {/* Background image */}
-        <div
-          className="absolute inset-0 z-0"
-          style={{
-            backgroundImage:
-              "url('/images/homepage/hero-background-image.jpg')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        />
+      <div className="relative py-16 sm:py-28 px-4 min-h-[65vh] flex flex-col justify-center w-full mb-16">
+        {/* Background image container with overflow hidden */}
+        <div className="absolute inset-0 z-0 rounded-lg overflow-hidden">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage:
+                "url('/images/homepage/hero-background-image.jpg')",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
+        </div>
 
         {/* Content */}
         <div className="relative z-10 max-w-4xl mx-auto w-full space-y-12">
