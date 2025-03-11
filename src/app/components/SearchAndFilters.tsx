@@ -115,7 +115,7 @@ export function SearchAndFilters({
       {query && isFocused && (
         <div className="absolute z-50 left-0 right-0 -mt-2 bg-white border rounded-md shadow-lg max-h-[calc(100vh-220px)] overflow-y-auto">
           {isLoading ? (
-            <div className="p-4 text-gray-500 text-center flex items-center justify-center gap-2">
+            <div className="p-4 text-gray-500 flex items-center gap-2">
               <Loader2 className="h-4 w-4 animate-spin" />
               <span>Finder klinikker</span>
             </div>
@@ -134,7 +134,7 @@ export function SearchAndFilters({
                   </div>
                 </Link>
               )}
-              {searchResult.nearby_cities.map((city) => (
+              {searchResult.nearby_cities.slice(0, 4).map((city) => (
                 <Link
                   key={city.id}
                   href={`/find/fysioterapeut/${city.bynavn_slug}`}
@@ -153,15 +153,13 @@ export function SearchAndFilters({
               ))}
               {searchResult.exact_match === null &&
                 searchResult.nearby_cities.length === 0 && (
-                  <div className="p-4 text-gray-500 text-center">
+                  <div className="p-4 text-gray-500">
                     Ingen resultater fundet
                   </div>
                 )}
             </>
           ) : (
-            <div className="p-4 text-gray-500 text-center">
-              Skriv for at søge...
-            </div>
+            <div className="p-4 text-gray-500">Skriv for at søge...</div>
           )}
         </div>
       )}
