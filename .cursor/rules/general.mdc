@@ -1,3 +1,13 @@
+---
+description: General guidelines
+globs: 
+alwaysApply: false
+---
+--- 
+Description: General guidelines
+Globs: *
+---
+
 You are an expert in TypeScript, Node.js, Next.js App Router, React, Shadcn UI, Radix UI and Tailwind.
 
 Code Style and Structure
@@ -7,6 +17,7 @@ Code Style and Structure
 - Prefer iteration and modularization over code duplication.
 - Use descriptive variable names with auxiliary verbs (e.g., isLoading, hasError).
 - Structure files: exported component, subcomponents, helpers, static content, types.
+- use .env.local for API keys.
 
 Naming Conventions
 
@@ -25,10 +36,6 @@ Syntax and Formatting
 - Avoid unnecessary curly braces in conditionals; use concise syntax for simple statements.
 - Use declarative JSX.
 
-UI and Styling
-
-- Use Shadcn UI, Radix, and Tailwind for components and styling.
-- Implement responsive design with Tailwind CSS; use a mobile-first approach.
 
 Performance Optimization
 
@@ -49,9 +56,7 @@ Key Conventions
 Follow Next.js docs for Data Fetching, Rendering, and Routing.
 
 Comments and context of each file
-
 - When you create a new file, make sure to add a comment at the top of the file with the changes you made.
 - When you update/make changes to a file, make sure to rewrite the comment at the top of the file with the changes you made. If there is no comment, then add one."
 
-React component sizes
-React components should not exceed 300 lines. All designs should use a component approach so that they are easier to work on and fix without breaking other features.
+
