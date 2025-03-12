@@ -211,7 +211,7 @@ export default function PrivacyPolicyPage() {
             </p>
             <p className="mt-4">
               Vi opfordrer til, at du først kontakter os, så vi kan forsøge at
-              løse problemet i mindelighed.
+              løse problemet.
             </p>
           </section>
         </div>

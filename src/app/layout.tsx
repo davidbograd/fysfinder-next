@@ -4,6 +4,7 @@ import { GeistSans } from "geist/font/sans";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Script from "next/script";
+import { CookieConsentBanner } from "./components/CookieConsent";
 
 export const metadata: Metadata = {
   title: "FysFinder",
@@ -57,6 +58,7 @@ export default function RootLayout({
           </div>
         </main>
         <Footer />
+        <CookieConsentBanner testMode={true} />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-BH38ZB6HYH"
           strategy="afterInteractive"
@@ -66,7 +68,9 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-BH38ZB6HYH');
+            gtag('config', 'G-BH38ZB6HYH', {
+              'consent_mode': 'advanced'
+            });
           `}
         </Script>
       </body>
