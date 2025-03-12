@@ -20,6 +20,12 @@ export default function Footer() {
               Samarbejdspartnere
             </Link>
             <Link
+              href="/privatlivspolitik"
+              className="text-gray-600 hover:text-gray-900 text-sm"
+            >
+              Privatlivspolitik
+            </Link>
+            <Link
               href="/om-os#kontakt"
               className="text-gray-600 hover:text-gray-900 text-sm"
             >
