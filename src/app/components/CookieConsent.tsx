@@ -9,13 +9,7 @@ interface CookiePreferences {
   marketing: boolean;
 }
 
-interface CookieConsentBannerProps {
-  testMode?: boolean;
-}
-
-export function CookieConsentBanner({
-  testMode = false,
-}: CookieConsentBannerProps) {
+export function CookieConsentBanner() {
   const [mounted, setMounted] = useState(false);
 
   // Only render on client side to avoid hydration issues
@@ -54,8 +48,7 @@ export function CookieConsentBanner({
       buttonText="Acceptér alle cookies"
       declineButtonText="Kun nødvendige"
       cookieName="fysfinder-cookie-consent"
-      expires={testMode ? 0.001 : 150}
-      debug={testMode}
+      expires={150}
       disableStyles={true}
       containerClasses="fixed left-1/2 -translate-x-1/2 bottom-4 max-w-4xl w-full mx-auto bg-white rounded-lg shadow-xl p-4 text-sm flex flex-col sm:flex-row items-center gap-4 sm:items-center sm:justify-between sm:m-4"
       buttonWrapperClasses="flex items-center space-x-2 shrink-0"
@@ -68,9 +61,6 @@ export function CookieConsentBanner({
           Læs mere
         </a>
         .
-        {testMode && (
-          <span className="text-red-500 font-bold"> (Test Mode)</span>
-        )}
       </p>
     </CookieConsent>
   );

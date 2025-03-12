@@ -58,7 +58,7 @@ export default function RootLayout({
           </div>
         </main>
         <Footer />
-        <CookieConsentBanner testMode={true} />
+        <CookieConsentBanner />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-BH38ZB6HYH"
           strategy="afterInteractive"
