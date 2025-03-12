@@ -31,7 +31,7 @@ export default function PrivacyPolicyPage() {
             formål at forbinde patienter og fysioterapi-klinikker i Danmark på
             en nem og overskuelig måde. I den forbindelse behandler vi visse
             personoplysninger om både klinikejere og besøgende brugere. Vi
-            overholder EU's Databeskyttelsesforordning (GDPR) og dansk
+            overholder EU&apos;s Databeskyttelsesforordning (GDPR) og dansk
             databeskyttelseslovgivning i al behandling af persondata.
           </p>
 
@@ -102,7 +102,8 @@ export default function PrivacyPolicyPage() {
             <ul className="list-disc pl-6 space-y-2">
               <li>
                 <strong>Klinikoplysninger:</strong> Kliniknavn (evt. inkl.
-                personnavn ved "v/[navn]"), adresse, telefon, åbningstider mv.
+                personnavn ved &quot;v/[navn]&quot;), adresse, telefon,
+                åbningstider mv.
               </li>
               <li>
                 <strong>Kontaktoplysninger fra henvendelser:</strong> Navn,
@@ -210,7 +211,7 @@ export default function PrivacyPolicyPage() {
             </p>
             <p className="mt-4">
               Vi opfordrer til, at du først kontakter os, så vi kan forsøge at
-              løse problemet.
+              løse problemet i mindelighed.
             </p>
           </section>
         </div>
