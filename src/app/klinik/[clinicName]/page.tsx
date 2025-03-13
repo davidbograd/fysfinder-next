@@ -632,15 +632,21 @@ export default async function ClinicPage({
             {/* Claim Clinic section */}
             {!clinic.claimed_klinik && (
               <section className="py-8">
-                <div className="flex items-center gap-4">
-                  <p className="text-gray-600">Ejer du {clinic.klinikNavn}?</p>
-                  <Button variant="outline" asChild>
+                <div className="flex flex-col gap-2">
+                  <p>
+                    <strong>Ejer du {clinic.klinikNavn}?</strong>
+                  </p>
+                  <p className="text-gray-600">
+                    Opdater dine oplysninger, og tiltræk flere patienter med
+                    korrekt information.
+                  </p>
+                  <Button variant="outline" className="self-start" asChild>
                     <a
                       href="https://tally.so/r/wdk75r"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      Claim klinik
+                      Verificer klinik
                     </a>
                   </Button>
                 </div>
