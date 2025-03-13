@@ -38,6 +38,19 @@ export function ClinicSidebar({ clinic }: ClinicSidebarProps) {
   const hasEmail = hasValue(clinic.email);
   const hasAnyContactInfo = hasWebsite || hasPhone || hasEmail;
 
+  // Helper function to add UTM parameters to URLs
+  const addUtmParameters = (url: string): string => {
+    try {
+      const urlObj = new URL(url);
+      urlObj.searchParams.set("utm_source", "fysfinder-dk");
+      urlObj.searchParams.set("utm_medium", "referral");
+      return urlObj.toString();
+    } catch (e) {
+      // If URL parsing fails, return original URL
+      return url;
+    }
+  };
+
   return (
     <div className="lg:w-2/5">
       <div
@@ -89,7 +102,9 @@ export function ClinicSidebar({ clinic }: ClinicSidebarProps) {
                     asChild
                   >
                     <a
-                      href={clinic.website!}
+                      href={
+                        hasWebsite ? addUtmParameters(clinic.website!) : "#"
+                      }
                       target="_blank"
                       rel="noopener nofollow"
                       onClick={trackWebsiteClick}
