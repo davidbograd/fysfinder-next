@@ -51,6 +51,20 @@ export function ClinicSidebar({ clinic }: ClinicSidebarProps) {
     }
   };
 
+  // Helper function to clean URLs for display
+  const getDisplayUrl = (url: string): string => {
+    try {
+      const urlObj = new URL(url);
+      // Remove protocol (http:// or https://)
+      let displayUrl = urlObj.hostname;
+      // Remove 'www.' if present
+      displayUrl = displayUrl.replace(/^www\./, "");
+      return displayUrl;
+    } catch (e) {
+      return url;
+    }
+  };
+
   return (
     <div className="lg:w-2/5">
       <div
@@ -110,7 +124,9 @@ export function ClinicSidebar({ clinic }: ClinicSidebarProps) {
                       onClick={trackWebsiteClick}
                     >
                       <Globe className="mr-2 h-4 w-4 text-gray-400" />
-                      <span className="truncate">{clinic.website}</span>
+                      <span className="truncate">
+                        {getDisplayUrl(clinic.website!)}
+                      </span>
                     </a>
                   </Button>
                 )}
