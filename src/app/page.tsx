@@ -1,8 +1,5 @@
 import React from "react";
-import Link from "next/link";
-import { slugify } from "./utils/slugify";
 import { Metadata } from "next";
-import { Button } from "@/components/ui/button";
 import { FAQ } from "@/components/features/content/FAQ";
 import { SearchAndFilters } from "@/components/features/search/SearchAndFilters";
 import { RegionList } from "@/components/features/search/RegionList";
