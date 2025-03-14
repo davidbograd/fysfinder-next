@@ -7,10 +7,17 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "generate-sitemap": "ts-node scripts/generate-sitemap.ts",
+    "generate:sitemap": "ts-node scripts/generate-sitemap.ts",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "import:clinics": "ts-node scripts/import-clinics.ts",
+    "import:specialties": "ts-node scripts/import-specialties.ts",
+    "ingest:articles": "ts-node scripts/ingest-ordbog-articles.ts",
+    "fetch:physio": "ts-node scripts/fetch-physiotherapists-google-maps.ts",
+    "update:imports": "node scripts/update-imports.mjs",
+    "revalidate": "node scripts/revalidate.js",
+    "populate:postal": "ts-node scripts/populate-postal-codes.ts"
   },
   "dependencies": {
     "@googlemaps/google-maps-services-js": "^3.4.0",
