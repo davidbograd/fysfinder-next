@@ -1,5 +1,5 @@
 import Link from "next/link";
-import SiteLogo from "./Icons/SiteLogo";
+import SiteLogo from "@/components/ui/Icons/SiteLogo";
 import { Button } from "@/components/ui/button";
 
 export default function Header() {

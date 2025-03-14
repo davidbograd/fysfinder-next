@@ -1,4 +1,4 @@
-import { GlossaryList } from "@/components/GlossaryList";
+import { GlossaryList } from '@/components/features/content/GlossaryList';
 import { getDictionaryTerms } from "@/lib/dictionary";
 
 interface DictionaryStructuredDataProps {

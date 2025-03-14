@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { GeistSans } from "geist/font/sans";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 import Script from "next/script";
-import { CookieConsentBanner } from "./components/CookieConsent";
+import { CookieConsentBanner } from "@/components/layout/CookieConsent";
 
 export const metadata: Metadata = {
   title: "FysFinder",
   description: "Find den bedste fysioterapeut",
+  metadataBase: new URL("https://www.fysfinder.dk"),
   icons: {
     icon: [
       { url: "/favicon/favicon-48x48.png", sizes: "48x48", type: "image/png" },

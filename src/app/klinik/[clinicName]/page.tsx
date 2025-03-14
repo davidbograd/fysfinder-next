@@ -1,14 +1,14 @@
 import React from "react";
-import { MeetTheTeam } from "@/app/components/MeetTheTeam";
+import { MeetTheTeam } from "@/components/features/team/MeetTheTeam";
 import { createClient } from "@/app/utils/supabase/server";
-import { Breadcrumbs } from "@/app/components/Breadcrumbs";
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { StarIcon } from "@heroicons/react/24/solid";
-import GoogleMap from "../../components/GoogleMap";
+import GoogleMap from "@/components/features/map/GoogleMap";
 import { Metadata } from "next";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
-import { ClinicSidebar } from "@/app/components/ClinicSidebar";
+import { ClinicSidebar } from "@/components/features/clinic/ClinicSidebar";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Clinic, Insurance, ExtraService, TeamMember } from "@/app/types";

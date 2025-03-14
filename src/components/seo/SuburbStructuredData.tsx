@@ -1,4 +1,4 @@
-import { Clinic } from "../types";
+import { Clinic } from "@/app/types";
 
 interface SuburbStructuredDataProps {
   clinics: Clinic[];

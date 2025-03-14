@@ -1,8 +1,8 @@
-import { GlossaryEntry } from "@/components/GlossaryEntry";
+import { GlossaryEntry } from '@/components/features/content/GlossaryEntry';
 import { getDictionaryTerm, getDictionaryTerms } from "@/lib/dictionary";
-import { Breadcrumbs } from "@/app/components/Breadcrumbs";
-import { AuthorCard } from "@/components/AuthorCard";
-import { TableOfContents } from "@/components/TableOfContents";
+import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
+import { AuthorCard } from '@/components/features/content/AuthorCard';
+import { TableOfContents } from '@/components/features/content/TableOfContents';
 import {
   calculateReadingTime,
   extractTableOfContents,

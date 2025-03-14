@@ -37,3 +37,12 @@ next-env.d.ts
 
 # data
 data/*.csv
+
+# Environment files
+.env
+.env.local
+.env.*.local
+.env.development
+.env.test
+.env.production
+!.env.example

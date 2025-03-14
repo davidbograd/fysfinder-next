@@ -1,8 +1,8 @@
 import { Metadata } from "next";
-import { Breadcrumbs } from "@/app/components/Breadcrumbs";
+import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
 import Link from "next/link";
-import { FounderCard } from "@/app/components/FounderCard";
-import { AboutUsStructuredData } from "@/app/components/AboutUsStructuredData";
+import { FounderCard } from '@/components/features/team/FounderCard';
+import { AboutUsStructuredData } from '@/components/seo/AboutUsStructuredData';
 import Image from "next/image";
 
 export const metadata: Metadata = {

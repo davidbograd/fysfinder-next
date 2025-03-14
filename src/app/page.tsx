@@ -4,11 +4,13 @@ import { slugify } from "./utils/slugify";
 import { createClient } from "@/app/utils/supabase/server";
 import { Metadata } from "next";
 import { Button } from "@/components/ui/button";
-import { FAQ } from "@/components/FAQ";
-import { SearchAndFilters } from "@/app/components/SearchAndFilters";
-import { RegionList } from "@/app/components/RegionList";
-import { BenefitsSection } from "@/app/components/BenefitsSection";
+import { FAQ } from "@/components/features/content/FAQ";
+import { SearchAndFilters } from "@/components/features/search/SearchAndFilters";
+import { RegionList } from "@/components/features/search/RegionList";
+import { BenefitsSection } from "@/components/features/content/BenefitsSection";
 import { StarIcon } from "@heroicons/react/24/solid";
+
+export const dynamic = "force-dynamic";
 
 interface CityWithCount {
   id: string;

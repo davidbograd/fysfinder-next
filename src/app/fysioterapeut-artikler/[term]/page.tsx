@@ -1,7 +1,7 @@
-import { GlossaryEntry } from "@/components/GlossaryEntry";
+import { GlossaryEntry } from '@/components/features/content/GlossaryEntry';
 import { getGlossaryTerm, getGlossaryTerms } from "@/lib/glossary";
-import { Breadcrumbs } from "@/app/components/Breadcrumbs";
-import { AuthorCard } from "@/components/AuthorCard";
+import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
+import { AuthorCard } from '@/components/features/content/AuthorCard';
 import { Metadata } from "next";
 
 interface ArticleStructuredDataProps {

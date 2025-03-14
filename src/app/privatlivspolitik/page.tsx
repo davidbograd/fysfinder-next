@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { Breadcrumbs } from "@/app/components/Breadcrumbs";
+import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
 
 export const metadata: Metadata = {
   title: "Privatlivspolitik | FysFinder.dk",

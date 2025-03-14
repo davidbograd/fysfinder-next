@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useDebounce } from "use-debounce";
 import { searchCities } from "@/app/actions/search-cities";
-import { SpecialtyDropdown } from "./SpecialtyDropdown";
+import { SpecialtyDropdown } from "@/components/features/specialty/SpecialtyDropdown";
 import { SearchResult } from "@/app/types";
 import Link from "next/link";
 import { MapPin, Loader2 } from "lucide-react";
@@ -50,7 +50,7 @@ export function SearchAndFilters({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [searchResult]);
 
-  async function handleSearch() {
+  const handleSearch = useCallback(async () => {
     if (!debouncedQuery || debouncedQuery.length < 2) {
       setSearchResult(null);
       return;
@@ -65,11 +65,11 @@ export function SearchAndFilters({
     } finally {
       setIsLoading(false);
     }
-  }
+  }, [debouncedQuery, setSearchResult]);
 
   useEffect(() => {
     handleSearch();
-  }, [debouncedQuery]);
+  }, [debouncedQuery, handleSearch]);
 
   const handleFocus = () => {
     setIsFocused(true);
