@@ -18,12 +18,7 @@ Ergonomi handler om at tilpasse arbejdspladsen og arbejdsopgaverne til medarbejd
 En arbejdsplads, der understøtter variation og bevægelse, kan have en positiv effekt på medarbejdernes trivsel og velbefindende. Justerbare skriveborde og stole kan give mulighed for at skifte arbejdsstilling, men det er vigtigere, at medarbejdere ikke sidder fast i den samme position for længe. Derudover kan fokus på et sundt arbejdsmiljø, hvor medarbejdere opfordres til at tage pauser og bevæge sig, være en langt vigtigere faktor end specifikke ergonomiske produkter.
 
 
-
-<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image2.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
 ![Illustration af ergonomiske strategier](/images/articles/ergonomi-strategi.png)
-
 
 
 ## **Ergonomiske principper**
