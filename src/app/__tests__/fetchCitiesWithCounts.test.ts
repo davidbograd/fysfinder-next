@@ -1,4 +1,4 @@
-import { fetchCitiesWithCounts } from "../page";
+import { fetchCitiesWithCounts } from "../utils/cityUtils";
 
 // Mock Supabase client
 jest.mock("@/app/utils/supabase/server", () => ({

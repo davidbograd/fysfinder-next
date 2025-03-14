@@ -1,5 +1,4 @@
-import { type SpecialtyWithSeo } from "@/app/types";
-import { fetchSpecialties } from "../page";
+import { fetchSpecialties, type Specialty } from "../utils/cityUtils";
 
 // Mock Supabase client
 jest.mock("@/app/utils/supabase/server", () => ({

@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import { slugify } from "./utils/slugify";
-import { createClient } from "@/app/utils/supabase/server";
 import { Metadata } from "next";
 import { Button } from "@/components/ui/button";
 import { FAQ } from "@/components/features/content/FAQ";
@@ -9,21 +8,16 @@ import { SearchAndFilters } from "@/components/features/search/SearchAndFilters"
 import { RegionList } from "@/components/features/search/RegionList";
 import { BenefitsSection } from "@/components/features/content/BenefitsSection";
 import { StarIcon } from "@heroicons/react/24/solid";
+import {
+  fetchCitiesWithCounts,
+  fetchSpecialties,
+  processCities,
+  type CityWithCount,
+  type RegionData,
+  type Specialty,
+} from "./utils/cityUtils";
 
 export const dynamic = "force-dynamic";
-
-export interface CityWithCount {
-  id: string;
-  bynavn: string;
-  bynavn_slug: string;
-  postal_codes: string[];
-  clinic_count: number;
-}
-
-export interface RegionData {
-  name: string;
-  cities: CityWithCount[];
-}
 
 const regions: { [key: string]: { name: string; range: [number, number] } } = {
   hovedstaden: { name: "Hovedstaden", range: [1000, 2999] },
@@ -33,69 +27,12 @@ const regions: { [key: string]: { name: string; range: [number, number] } } = {
   nordjylland: { name: "Nordjylland", range: [9000, 9999] },
 };
 
-export async function fetchCitiesWithCounts() {
-  const supabase = createClient();
-
-  const { data, error } = await supabase.from("cities").select(`
-      id,
-      bynavn,
-      bynavn_slug,
-      postal_codes,
-      clinics:clinics(count)
-    `);
-
-  if (error) {
-    console.error("Supabase error:", error);
-    throw new Error(`Failed to fetch cities: ${error.message}`);
-  }
-
-  return data.map((city) => ({
-    id: city.id,
-    bynavn: city.bynavn,
-    bynavn_slug: city.bynavn_slug,
-    postal_codes: city.postal_codes,
-    clinic_count: city.clinics?.[0]?.count ?? 0,
-  })) as CityWithCount[];
-}
-
-export async function fetchSpecialties() {
-  const supabase = createClient();
-  const { data, error } = await supabase
-    .from("specialties")
-    .select("specialty_id, specialty_name, specialty_name_slug");
-
-  if (error) {
-    console.error("Supabase error:", error);
-    throw new Error(`Failed to fetch specialties: ${error.message}`);
-  }
-
-  return data;
-}
-
-export function processCities(cities: CityWithCount[]): RegionData[] {
-  return Object.entries(regions).map(([key, { name, range }]) => ({
-    name,
-    cities: cities
-      .filter((city) => {
-        return city.postal_codes.some((postalCode) => {
-          const postNum = parseInt(postalCode);
-          return postNum >= range[0] && postNum <= range[1];
-        });
-      })
-      .sort((a, b) => b.clinic_count - a.clinic_count),
-  }));
-}
-
 function Header({
   totalClinics,
   specialties,
 }: {
   totalClinics: number;
-  specialties: Array<{
-    specialty_id: string;
-    specialty_name: string;
-    specialty_name_slug: string;
-  }>;
+  specialties: Specialty[];
 }) {
   return (
     <div className="mb-8 sm:mb-12 w-full">
@@ -235,24 +172,22 @@ export const metadata: Metadata = {
 
 export default async function HomePage() {
   try {
-    const [cities, specialties] = await Promise.all([
-      fetchCitiesWithCounts(),
-      fetchSpecialties(),
-    ]);
-
-    const regionData = processCities(cities);
+    const cities = await fetchCitiesWithCounts();
+    const regions = processCities(cities);
     const totalClinics = cities.reduce(
       (sum, city) => sum + city.clinic_count,
       0
     );
 
+    const specialties = await fetchSpecialties();
+
     return (
       <div>
-        <HomeStructuredData totalClinics={totalClinics} regions={regionData} />
+        <HomeStructuredData totalClinics={totalClinics} regions={regions} />
         <Header totalClinics={totalClinics} specialties={specialties} />
         <BenefitsSection />
         <div className="max-w-6xl mx-auto px-4">
-          <RegionList regions={regionData} />
+          <RegionList regions={regions} />
           <FAQ />
         </div>
       </div>
