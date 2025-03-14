@@ -78,14 +78,11 @@ Hvis du har behov for vejledning i, hvordan du bedst kan tilpasse din arbejdspla
 3. Fysisk aktivitet og ergonomi på arbejdspladsen.  
    [www.sst.dk](https://www.sst.dk)  
 
-4. Ergonomi og smerteforebyggelse.  
-   [www.arbejdsmiljoviden.dk](https://www.arbejdsmiljoviden.dk)  
+4. Arbejdsmiljø.  
+   [www.maxer.dk](https://maxer.dk/staerk-smertefri/fysisk-aktivitet-paradoks)  
 
-5. Fysioterapi, smerteforståelse og arbejdsmiljø.  
-   [www.jacobbeerman.dk](https://www.jacobbeerman.dk)  
-
-6. What low back pain is and why we need to pay attention.  
+5. What low back pain is and why we need to pay attention.  
    [www.thelancet.com](https://www.thelancet.com)  
 
-7. Explain Pain Supercharged.  
+6. Explain Pain Supercharged.  
    [www.noigroup.com](https://www.noigroup.com)  
