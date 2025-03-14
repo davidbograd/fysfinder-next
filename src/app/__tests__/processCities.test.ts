@@ -1,4 +1,4 @@
-import { processCities, CityWithCount, RegionData } from "../page";
+import { processCities, CityWithCount, RegionData } from "../utils/cityUtils";
 
 const mockCities: CityWithCount[] = [
   {

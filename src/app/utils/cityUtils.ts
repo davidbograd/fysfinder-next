@@ -69,28 +69,36 @@ export async function fetchCitiesWithCounts() {
 }
 
 export function processCities(cities: CityWithCount[]): RegionData[] {
-  const regionMap = new Map<string, CityWithCount[]>();
+  // Initialize regionMap with all regions
+  const regionMap = new Map<string, CityWithCount[]>(
+    Object.entries(regions).map(([key, _]) => [key, []])
+  );
 
+  // Process each city
   for (const city of cities) {
-    const postalCode = city.postal_codes[0];
-    const regionKey = Object.keys(regions).find(
-      (key) =>
-        postalCode >= regions[key].range[0].toString() &&
-        postalCode <= regions[key].range[1].toString()
-    );
+    // Check each postal code of the city
+    for (const postalCode of city.postal_codes) {
+      const regionKey = Object.keys(regions).find(
+        (key) =>
+          postalCode >= regions[key].range[0].toString() &&
+          postalCode <= regions[key].range[1].toString()
+      );
 
-    if (regionKey) {
-      if (!regionMap.has(regionKey)) {
-        regionMap.set(regionKey, []);
+      if (regionKey) {
+        // Add city to region if not already present
+        const regionCities = regionMap.get(regionKey)!;
+        if (!regionCities.some((c) => c.id === city.id)) {
+          regionCities.push(city);
+        }
       }
-      regionMap.get(regionKey)!.push(city);
     }
   }
 
+  // Convert map to array and sort cities by clinic count
   return Array.from(regionMap.entries())
     .map(([key, cities]) => ({
       name: regions[key].name,
-      cities: cities.sort((a, b) => a.bynavn.localeCompare(b.bynavn)),
+      cities: cities.sort((a, b) => b.clinic_count - a.clinic_count),
     }))
     .sort((a, b) => a.name.localeCompare(b.name));
 }
