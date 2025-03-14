@@ -43,3 +43,6 @@ data/*.csv
 .env.test
 .env.production
 !.env.example
+
+# Cursor
+.cursor/
