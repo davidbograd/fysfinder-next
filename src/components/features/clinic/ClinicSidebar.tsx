@@ -7,6 +7,7 @@ import Image from "next/image";
 import { EmailButton } from "@/components/EmailButton";
 import { PhoneButton } from "@/components/PhoneButton";
 import { useClinicAnalytics } from "@/app/hooks/useClinicAnalytics";
+import { getDisplayUrl } from "./utils";
 
 interface ClinicSidebarProps {
   clinic: {
@@ -47,20 +48,6 @@ export function ClinicSidebar({ clinic }: ClinicSidebarProps) {
       return urlObj.toString();
     } catch (e) {
       // If URL parsing fails, return original URL
-      return url;
-    }
-  };
-
-  // Helper function to clean URLs for display
-  const getDisplayUrl = (url: string): string => {
-    try {
-      const urlObj = new URL(url);
-      // Remove protocol (http:// or https://)
-      let displayUrl = urlObj.hostname;
-      // Remove 'www.' if present
-      displayUrl = displayUrl.replace(/^www\./, "");
-      return displayUrl;
-    } catch (e) {
       return url;
     }
   };

@@ -12,7 +12,7 @@ import { StarIcon } from "@heroicons/react/24/solid";
 
 export const dynamic = "force-dynamic";
 
-interface CityWithCount {
+export interface CityWithCount {
   id: string;
   bynavn: string;
   bynavn_slug: string;
@@ -20,7 +20,7 @@ interface CityWithCount {
   clinic_count: number;
 }
 
-interface RegionData {
+export interface RegionData {
   name: string;
   cities: CityWithCount[];
 }
@@ -33,7 +33,7 @@ const regions: { [key: string]: { name: string; range: [number, number] } } = {
   nordjylland: { name: "Nordjylland", range: [9000, 9999] },
 };
 
-async function fetchCitiesWithCounts() {
+export async function fetchCitiesWithCounts() {
   const supabase = createClient();
 
   const { data, error } = await supabase.from("cities").select(`
@@ -58,7 +58,7 @@ async function fetchCitiesWithCounts() {
   })) as CityWithCount[];
 }
 
-async function fetchSpecialties() {
+export async function fetchSpecialties() {
   const supabase = createClient();
   const { data, error } = await supabase
     .from("specialties")
@@ -72,7 +72,7 @@ async function fetchSpecialties() {
   return data;
 }
 
-function processCities(cities: CityWithCount[]): RegionData[] {
+export function processCities(cities: CityWithCount[]): RegionData[] {
   return Object.entries(regions).map(([key, { name, range }]) => ({
     name,
     cities: cities
