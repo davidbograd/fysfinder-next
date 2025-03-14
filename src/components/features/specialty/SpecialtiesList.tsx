@@ -50,41 +50,45 @@ export function SpecialtiesList({
 
   const displayedSpecialties = showAll
     ? sortedSpecialties
-    : sortedSpecialties.slice(0, 10);
+    : sortedSpecialties.slice(0, 5);
 
   return (
-    <div className="mt-12">
-      <h2 className="text-xl font-semibold mb-6">
-        Fysioterapeuter med speciale i behandling af...
+    <div className="mt-6 mb-8">
+      <h2 className="text-lg font-semibold mb-2">
+        Udforsk {city.bynavn} fysioterapeuter med speciale i behandling af...
       </h2>
       <div className="flex flex-wrap gap-2">
-        {displayedSpecialties.map((specialty) => (
+        {sortedSpecialties.map((specialty, index) => (
           <Link
             key={specialty.specialty_id}
             href={`/find/fysioterapeut/${city.bynavn_slug}/${specialty.specialty_name_slug}`}
-            className="transition-transform hover:scale-105"
+            className={`transition-transform hover:scale-105 ${
+              !showAll && index >= 5 ? "sr-only" : ""
+            }`}
           >
             <Badge
               variant="secondary"
               className="text-sm hover:bg-secondary/80 transition-colors cursor-pointer hover:shadow-sm"
             >
               <p>
-                {specialty.specialty_name} {city.bynavn} (
-                {specialtyMatchCounts[specialty.specialty_id]})
+                <span className="font-medium">{specialty.specialty_name}</span>{" "}
+                <span className="text-gray-500">
+                  {specialtyMatchCounts[specialty.specialty_id]}
+                </span>
               </p>
             </Badge>
           </Link>
         ))}
+        {sortedSpecialties.length > 5 && !showAll && (
+          <Button
+            variant="ghost"
+            onClick={() => setShowAll(true)}
+            className="text-sm text-gray-500 hover:text-gray-900 px-2 h-7"
+          >
+            + {sortedSpecialties.length - 5} flere specialer
+          </Button>
+        )}
       </div>
-      {sortedSpecialties.length > 10 && !showAll && (
-        <Button
-          variant="outline"
-          onClick={() => setShowAll(true)}
-          className="w-full mt-4"
-        >
-          Vis alle {sortedSpecialties.length} specialer
-        </Button>
-      )}
     </div>
   );
 }
