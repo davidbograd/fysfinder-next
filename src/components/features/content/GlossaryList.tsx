@@ -58,7 +58,11 @@ export function GlossaryList({ terms }: GlossaryListProps) {
 
       {/* Glossary Entries */}
       {sortedEntries.map(([letter, terms]) => (
-        <div key={letter} id={`letter-${letter}`} className="mb-12">
+        <div
+          key={letter}
+          id={`letter-${letter}`}
+          className="mb-12 scroll-mt-20 sm:scroll-mt-24"
+        >
           <h2 className="text-2xl font-semibold mb-4 border-b pb-2">
             {letter}
           </h2>
