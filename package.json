@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "generate:sitemap": "ts-node scripts/generate-sitemap.ts",
-    "test": "jest",
+    "test": "NODE_NO_WARNINGS=1 jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "import:clinics": "ts-node scripts/import-clinics.ts",
