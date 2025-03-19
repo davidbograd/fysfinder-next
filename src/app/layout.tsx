@@ -5,6 +5,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import Script from "next/script";
 import { CookieConsentBanner } from "@/components/layout/CookieConsent";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   title: "FysFinder",
@@ -74,6 +75,7 @@ export default function RootLayout({
             });
           `}
         </Script>
+        <SpeedInsights />
       </body>
     </html>
   );
