@@ -1,188 +1,187 @@
 ---
-lastUpdated: "19/02/2024"
+lastUpdated: "21/03/2025"
 ---
 
 ![Illustration af lændesmerter](/images/articles/Lændesmerter_intro.webp)
 
 ## Hvad er lændesmerter
 
-Lændesmerter er smerter i den nedre del af ryggen, som ofte er beskrevet som ubehag eller stivhed omkring området mellem de nederste ribben og hoftekammen. Lænden består af muskler, led, nerver og ryghvirvler, der arbejder sammen for at give stabilitet og fleksibilitet. Når vi taler om lændesmerter, refererer vi i de fleste tilfælde til, hvad der kaldes _non-specifikke lændesmerter_. Dette betyder, at man ikke med sikkerhed kan fastslå en præcis årsag til smerten. Det er kun i omkring 5-10% af tilfældene, at der findes en specifik, strukturel årsag, såsom en diskusprolaps, knoglebrud eller infektion.
+Lændesmerter refererer til smerter eller ubehag i den nederste del af ryggen, typisk mellem det nederste ribben og hofterne. Området består af en kompleks kombination af muskler, led, ryghvirvler og nerver, som tilsammen sikrer stabilitet og bevægelighed. De fleste tilfælde af lændesmerter betegnes som uspecifikke lændesmerter, hvilket betyder, at smerten ikke kan tilskrives en konkret årsag. Kun i ca. 5-10% af tilfældene kan en klar fysisk årsag, såsom diskusprolaps eller knoglebrud, identificeres.
 
 ## Symptomer på lændesmerter
 
-Symptomerne på lændesmerter kan variere fra en mild, konstant ømhed til en skarp eller brændende smerte i den nedre del af ryggen. Nogle oplever smerter, der stråler ud til balderne eller benene, kendt som udstrålende smerter eller ischias, hvilket kan indikere tryk på nerverne. Smerten kan forværres ved bestemte bevægelser, såsom at bøje sig, dreje ryggen eller løfte tunge genstande. Stivhed, nedsat bevægelighed og muskelspændinger omkring lænden er også almindelige symptomer, som ofte begrænser daglige aktiviteter.
+Symptomer på lændesmerter varierer fra mild, vedvarende ømhed til stærke, skarpe eller brændende smerter. Hos nogle spreder smerterne sig til balder eller ben – dette kaldes ischias eller udstrålende smerter og kan skyldes nervepåvirkning. Typisk forværres smerterne ved bestemte bevægelser som løft, vrid eller foroverbøjning. Stivhed, nedsat bevægelighed og muskelspændinger er også almindelige symptomer, der kan begrænse almindelige aktiviteter. Det kan være en idé at [finde en fysioterapeut specialiseret i ryg](https://www.fysfinder.dk/find/fysioterapeut/danmark/ryg), hvis du er i tvivl om hvad dine symptomer betyder.
 
 ## Hvem får lændesmerter?
 
-Lændesmerter er en af de mest udbredte smerteformer i Danmark og påvirker mennesker på tværs af aldersgrupper og køn. Undersøgelser viser, at op mod 80% af alle danskere vil opleve lændesmerter på et eller andet tidspunkt i deres liv. Selv om lændesmerter kan ramme alle, ser vi en øget forekomst blandt voksne i aldersgruppen 30-60 år, hvilket ofte skyldes en kombination af fysisk belastning og aldersrelaterede ændringer i rygsøjlens struktur.
+Lændesmerter er blandt de hyppigste smertetilstande i Danmark og rammer alle aldersgrupper og køn. Op mod 80% af befolkningen vil opleve lændesmerter i løbet af livet. Særligt voksne mellem 30 og 60 år rammes hyppigere, ofte på grund af fysisk belastning kombineret med aldersmæssige ændringer i ryggen.
 
-Arbejdsmæssige faktorer, såsom tungt fysisk arbejde og stillesiddende arbejde, kan også øge risikoen, og dermed er det især folk i bestemte erhverv og personer med inaktive livsstile, der er i risikogruppen.
+Arbejdsrelaterede faktorer som tunge løft og stillesiddende arbejde øger risikoen, hvilket gør, at personer med visse job eller en inaktiv livsstil er særligt udsatte.
 
 ![Illustration af statistik over lændesmerter i Danmark](/images/articles/Lændesmerter_statistik.png)
 
 ## Hvor mange får lændesmerter?
 
-Hvert år oplever ca. 15-20% af danskerne lændesmerter, hvilket gør det til en af de mest almindelige smerteproblematikker i befolkningen. For de fleste varer smerten kortvarigt og aftager inden for få uger, men hos omkring 10% kan smerterne udvikle sig til en kronisk tilstand, som varer over tre måneder og kan påvirke livskvaliteten betydeligt.
+Hvert år oplever 15-20% af danskerne smerter i lænden. Hos langt de fleste forsvinder smerterne inden for få uger, men omkring 10% udvikler kroniske smerter, der varer mere end tre måneder og kan påvirke hverdagen betydeligt.
 
 ## Forskellige typer af lændesmerter
 
-Lændesmerter kan opdeles i forskellige typer, som varierer både i årsag og varighed. Generelt skelnes der mellem følgende kategorier:
+Lændesmerter kan inddeles i kategorier ud fra årsag og varighed:
 
 ### Akutte lændesmerter
 
-Dette er smerter, der varer under seks uger og ofte opstår pludseligt. Akutte lændesmerter udgør størstedelen af tilfældene, med op mod 80-90% af alle lændesmerter, og aftager typisk af sig selv eller med let behandling.
+Smerter, der opstår pludseligt og varer under seks uger. De udgør 80-90% af alle tilfælde og forbedres normalt uden omfattende behandling.
 
 ### Subakutte lændesmerter
 
-Disse smerter varer mellem seks uger og tre måneder. Omkring 5-10% af dem med akutte smerter vil opleve, at deres smerter udvikler sig til subakutte smerter.
+Smerter, der varer mellem seks uger og tre måneder. Cirka 5-10% af akutte tilfælde bliver subakutte.
 
 ### Kroniske lændesmerter
 
-Når smerterne varer over tre måneder, kategoriseres de som kroniske. Omkring 10% af danskere med lændesmerter ender med kroniske smerter, som ofte kræver mere målrettet behandling og kan have stor indflydelse på livskvaliteten.
+Vedvarende smerter, som varer længere end tre måneder. Dette sker for omkring 10% af dem med lændesmerter og kræver ofte mere intensiv behandling.
 
 ### Diskusprolaps
 
-En diskusprolaps opstår, når en diskus i rygsøjlen trykker på nerverne, hvilket kan give smerter, der stråler ud i benene og forårsager følelsesløshed.
+Når en diskus i rygsøjlen presser på en nerve, opstår diskusprolaps, der kan medføre udstrålende smerter og føleforstyrrelser i benene.
+
 
 ### Spinal stenose
 
-Spinal stenose er en forsnævring af rygmarvskanalen, som trykker på nerverne og typisk medfører smerter og stivhed i lænden, især hos ældre.
+En forsnævring af rygmarvskanalen, der især hos ældre kan give smerter og stivhed i lænden.
 
 ### Facetledssyndrom
 
-Facetledssyndrom opstår ved betændelse eller slid i facetleddene og kan give lokal lændesmerte og stivhed, især ved bestemte bevægelser.
+Slid eller irritation i facetleddene kan skabe lokal smerte og stivhed, særligt ved bestemte bevægelser.
 
 ### Frakturer
 
-Frakturer i ryghvirvlerne kan skyldes traumer eller osteoporose og fører ofte til pludselige, intense smerter i lænden, der kræver behandling.
+Ryghvirvelbrud kan skyldes traumer eller knogleskørhed og medfører ofte akutte, stærke smerter.
 
 ### Inflammatoriske sygdomme
 
-Sygdomme som ankyloserende spondylitis giver kroniske lændesmerter og stivhed, der ofte lindres ved bevægelse.
+Tilstande som ankyloserende spondylitis kan give langvarige smerter og stivhed, som typisk lindres ved bevægelse.
 
 ### Infektioner og tumorer
 
-Infektioner og tumorer i rygsøjlen er sjældne, men alvorlige årsager til lændesmerter og ledsages typisk af feber og vægttab.
+Selvom sjældne, kan infektioner og tumorer i ryggen være alvorlige årsager til lændesmerter, ofte sammen med feber og vægttab.
 
 ![Illustration af forskellige typer lændesmerter](/images/articles/Lændesmerter_typer.webp)
 
 ## Hvornår er lændesmerter farlige?
 
-Lændesmerter kan være farlige, hvis de ledsages af såkaldte "røde flag" – symptomer som
-
-feber, uforklarligt vægttab, lammelse, eller tab af blære- og tarmkontrol. Disse tegn kan indikere alvorlige tilstande som infektion, tumor eller nerveskader. Det er dog vigtigt at vurdere konteksten, da røde flag ikke nødvendigvis betyder, at noget alvorligt er galt. Ved tvivl bør man opsøge en sundhedsprofessionel for at få en korrekt vurdering og eventuelt behandling.
+Lændesmerter kan være alvorlige, hvis de optræder sammen med "røde flag" som feber, uforklarligt vægttab, lammelser eller tab af blære- og tarmkontrol. Disse symptomer kan indikere alvorlige tilstande som infektioner, tumorer eller nerveskader. Ved tvivl bør man altid konsultere en sundhedsprofessionel.
 
 ## Skal dine lændesmerter scannes?
 
-I de fleste tilfælde er scanninger som MR- eller røntgenbilleder unødvendige ved lændesmerter. Da langt størstedelen af lændesmerter er non-specifikke og aftager over tid, bidrager scanning sjældent med brugbar information og kan endda føre til unødvendig bekymring. Mange fund, som små diskusprolapser eller slidforandringer, er almindelige og ofte uden relation til smerterne. Scanning anbefales kun, hvis der er vedvarende smerter, der ikke reagerer på behandling, eller hvis der er røde flag, som kan indikere alvorlige tilstande.
+Scanninger som MR eller røntgen er sjældent nødvendige, da de fleste lændesmerter er uspecifikke og forbedres over tid. Scanninger kan unødigt bekymre, især fordi små forandringer i ryggen ofte ikke har sammenhæng med smerterne. Scanning anbefales primært ved vedvarende smerter eller ved røde flag.
 
 ![Illustration af MR-scanning af lændesmerter](/images/articles/Lændersmerter_scanning.webp)
 
 ## Hvordan stilles diagnosen?
 
-Diagnosen for lændesmerter baseres primært på en grundig samtale og fysisk undersøgelse, hvor sundhedsprofessionelle vurderer symptomer og eventuelle røde flag. Da de fleste lændesmerter er non-specifikke, handler diagnosen ofte om at udelukke alvorlige tilstande som diskusprolaps, frakturer eller infektioner. Ved fravær af røde flag og alvorlige symptomer stilles diagnosen ofte som non-specifikke lændesmerter, og behandlingen rettes mod smertelindring og bevægelse frem for omfattende tests.
+Diagnosen baseres på en grundig samtale og fysisk undersøgelse, hvor symptomer og mulige røde flag vurderes. Ved uspecifikke lændesmerter stilles diagnosen ved at udelukke alvorlige tilstande og herefter sætte fokus på behandling og genoptræning frem for yderligere test.
 
 ## Undersøgelse af lændesmerter
 
 ![Illustration af undersøgelse af lændesmerter](/images/articles/Lændesmerter_undersøgelse.webp)
 
-En typisk undersøgelse for lændesmerter starter med en samtale om symptomer, tidligere skader, og aktiviteter, som kan have udløst smerten. Herefter foretager sundhedsprofessionelle en fysisk undersøgelse, hvor de vurderer bevægelighed, muskelstyrke, og nervefunktion. Ofte testes også reflekser og følesans for at udelukke alvorlige nerveproblemer. I de fleste tilfælde afsluttes undersøgelsen uden behov for scanning, da informationen fra samtale og fysiske tests er tilstrækkelig til at fastslå en behandlingsplan.
+Undersøgelsen begynder typisk med samtale om symptomer, tidligere skader og mulige årsager. Herefter gennemføres en fysisk vurdering af bevægelighed, styrke og nervefunktion, herunder reflekser og følesans. Ofte er dette tilstrækkeligt, og scanning er sjældent nødvendigt.
 
 ## Hvorfor får du lændesmerter?
 
-Årsagerne til lændesmerter er ofte komplekse og kan skyldes en kombination af livsstilsfaktorer og genetik. Her spiller de såkaldte KRAMS-faktorer – kost, rygning, alkohol, motion og stress – en stor rolle i risikoen for at udvikle lændesmerter.
+Lændesmerter opstår ofte som følge af flere samvirkende faktorer, hvor både livsstil og arvelighed spiller ind. De såkaldte KRAMS-faktorer – kost, rygning, alkohol, motion og stress – har betydelig indflydelse på, om man udvikler smerter i lænden.
 
 ### Kost
 
-En usund kost kan føre til overvægt, som belaster lænden og øger risikoen for smerter. En varieret kost med fokus på næringsstoffer kan derimod støtte rygsøjlens sundhed.
+En ensidig eller usund kost kan føre til overvægt, hvilket lægger ekstra pres på lænden og øger risikoen for smerter. En ernæringsrig kost med variation støtter derimod kroppens og rygsøjlens sundhed.
 
 ### Rygning
 
-Rygning hæmmer blodcirkulationen til rygsøjlen og kan medføre hurtigere slid på rygsøjlens strukturer, hvilket kan bidrage til lændesmerter.
+Nikotin og andre stoffer i cigaretter forringer blodgennemstrømningen til rygsøjlens væv og kan fremskynde nedslidning, hvilket kan være medvirkende til smerter i lænden.
 
 ### Alkohol
 
-Overdrevent alkoholforbrug kan svække kroppens væv og muskler, hvilket på sigt kan øge risikoen for rygsmerter, herunder i lænden.
+Et højt forbrug af alkohol kan medføre svækkelse af muskel- og bindevæv, hvilket over tid kan gøre kroppen mere sårbar over for rygsmerter, herunder smerter i lændeområdet.
 
 ### Motion
 
-Mangel på motion og langvarig inaktivitet kan svække musklerne, der støtter ryggen, hvilket kan øge risikoen for lændesmerter. Regelmæssig bevægelse styrker og stabiliserer lænden.
+Begrænset fysisk aktivitet eller stillesiddende livsstil svækker muskulaturen omkring lænden, hvilket øger risikoen for smerter. Regelmæssig bevægelse hjælper med at styrke og stabilisere området.
 
 ### Stress
 
-Højt stressniveau kan føre til spændinger i musklerne omkring lænden og påvirke smertesystemet, så smerterne føles mere intense.
+Vedvarende stress kan føre til spændinger i muskulaturen omkring ryggen og forstærke kroppens smerteopfattelse, hvilket kan gøre lændesmerterne mere påtrængende.
 
 ### Genetik
 
-Genetisk disposition spiller også en rolle, da nogle personer arver strukturelle forhold i rygsøjlen, som kan gøre dem mere sårbare over for lændesmerter.
+Arvelige faktorer kan have betydning, da nogle mennesker er genetisk disponeret for strukturelle forhold i ryggen, som kan gøre dem mere udsatte for at udvikle lændesmerter.
 
 ![Illustration af årsager til lændesmerter](/images/articles/Lændesmerter_årsager.webp)
 
 ## Behandlinger mod lændesmerter
 
-Behandling af lændesmerter kan variere afhængigt af årsagen og smerternes varighed. De fleste behandlinger fokuserer på at lindre smerter og styrke lænden, og de fleste personer oplever bedring med en kombination af nedenstående metoder.
+Hvilken behandling der er mest gavnlig, afhænger af både årsagen til smerterne og hvor længe de har stået på. Målet med de fleste tilgange er at reducere smerterne og styrke kroppen – og mange oplever fremgang med en kombination af nedenstående metoder.
 
 ### Bevægelse
 
-Regelmæssig og tilpasset bevægelse er en af de mest effektive måder at mindske lændesmerter på. Gåture, strækøvelser og lette styrkeøvelser styrker lændemusklerne og øger fleksibiliteten, hvilket kan reducere smerten over tid.
+En vigtig nøgle til at mindske lændesmerter er regelmæssig, tilpasset bevægelse. Let træning såsom gåture, stræk og styrkeøvelser forbedrer både muskelstyrke og smidighed og kan derved mindske smerterne gradvist.
 
 ### Fysioterapeut
 
-En fysioterapeut kan hjælpe med at udvikle et individuelt tilpasset øvelsesprogram og arbejde med kropsholdning, stabilitet og styrke. Fysioterapeuter kan også anvende behandlingsteknikker som massage og mobilisering til at lindre smerter.
+En fysioterapeut kan skræddersy et øvelsesprogram og arbejde målrettet med holdning, stabilitet og styrke. Derudover kan man få manuelle behandlinger som mobilisering og massage for at lindre smerterne. Du kan [finde en fysioterapeut her](https://www.fysfinder.dk/).
 
 ### Kiropraktor
 
-En kiropraktor kan gennem justeringer og manipulation af rygsøjlen forsøge at forbedre bevægeligheden i lænden. Dette kan være en kortvarig løsning og virker bedst i kombination med øvelser og bevægelse.
+Gennem ledmobilisering og justeringer kan en kiropraktor øge bevægeligheden i lænderyggen. Effekten er typisk midlertidig og mest effektiv i samspil med øvelser og fysisk aktivitet.
 
 ### Medicin
 
-Smertestillende medicin, som fx paracetamol eller NSAID-præparater, kan midlertidigt lindre smerter, men bør bruges med forsigtighed og kun kortvarigt. I sværere tilfælde kan lægen anbefale stærkere smertestillende midler.
+Smertestillende medicin – fx paracetamol eller NSAID – kan give midlertidig lindring, men bør bruges med omtanke og helst ikke over længere tid. I visse tilfælde kan lægen ordinere stærkere præparater.
 
 ### Akupunktur
 
-Akupunktur er en alternativ behandlingsmetode, der kan lindre smerter hos nogle ved at stimulere kroppens eget smertesystem. Effekten varierer fra person til person, men bruges ofte som et supplement til andre behandlinger.
+Akupunktur er en alternativ behandlingsform, der hos nogle kan have en smertelindrende effekt ved at stimulere kroppens eget smertesystem. Resultatet varierer individuelt og ses ofte som et supplement til anden behandling.
 
 ### Varme og kulde
 
-Varme- eller kuldebehandlinger kan hjælpe med at reducere spændinger og smerter i lænden. Varme kan løsne stive muskler, mens kulde kan mindske betændelse og hævelse i det akutte stadie af smerterne.
+Brug af varme eller kulde kan hjælpe med at mindske muskelspændinger og smerter i lænden. Varme løsner op for spændte muskler, mens kulde kan mindske inflammation i akutte faser.
 
 ### Operation
 
-Operation er sjældent nødvendigt, men kan være relevant i tilfælde af alvorlige strukturelle problemer som diskusprolaps eller spinal stenose, hvor konservative behandlinger ikke har haft effekt. En operation bør vurderes nøje og kun efter grundige overvejelser.
+Kirurgisk indgreb er kun sjældent nødvendigt, men kan komme på tale ved mere alvorlige tilstande som fx diskusprolaps eller spinal stenose, hvor konservative tiltag ikke har haft effekt. Det bør altid overvejes grundigt.
 
 ## Hvordan forebygger du lændesmerter?
 
-Forebyggelse af lændesmerter handler i høj grad om at bevæge sig regelmæssigt, styrke kroppen og undgå langvarig inaktivitet. Nye studier peger på, at daglige gåture kan være en effektiv metode til at mindske risikoen for både nye og tilbagevendende episoder med lændesmerter.
+Forebyggelse af lændesmerter bygger på regelmæssig bevægelse, fysisk styrke og undgåelse af længerevarende inaktivitet. Forskning viser, at daglige aktiviteter som gåture har en markant forebyggende effekt.
 
 ### **Daglige gåture**
 
-En nylig undersøgelse viste, at daglige gåture, hvor man arbejder sig op til 30 minutter fem gange om ugen, næsten halverede risikoen for tilbagevendende lændesmerter og øgede tiden mellem episoderne​. Gåture øger blodcirkulationen og frigiver endorfiner, som kan mindske oplevelsen af smerte.
+Et nyere studie har vist, at man kan halvere risikoen for tilbagevendende lændesmerter ved at gå dagligt i op til 30 minutter, fem gange om ugen. Det forbedrer blodcirkulationen og frigiver endorfiner, som dæmper smerteoplevelsen.
 
 ![Illustration af behandling af lændesmerter](/images/articles/Lændesmerter_gåture.webp)
 
 ### **Styrketræning**
 
-Styrketræning kan bidrage til at reducere risikoen for lændesmerter ved at gøre kroppen mere robust og tolerant over for belastning. Der er ikke én type træning, som nødvendigvis er bedre end andre, men styrketræning, der involverer hele kroppen, har vist sig effektiv til at forbedre funktion og mindske smerter. Regelmæssig styrketræning kan desuden forbedre kroppens evne til at håndtere daglige bevægelser og reducere risikoen for belastningssmerter.
+Ved at styrketræne regelmæssigt øges kroppens modstandsdygtighed over for belastninger, hvilket kan mindske risikoen for lændesmerter. Træning af hele kroppen har vist sig effektiv til både at forbedre funktion og reducere smerter over tid.
 
 ### **Undgå langvarig inaktivitet**
 
-Inaktivitet og langvarig siddestilling kan øge risikoen for lændesmerter. Selvom hvile kan være nødvendigt i akutte tilfælde, er det vigtigt at undgå inaktivitet og i stedet fokusere på let bevægelse og aktivitet i hverdagen.
+Langvarig stillesiddende adfærd er en kendt risikofaktor for smerter i lænden. Selvom hvile kan være gavnlig i akutte tilfælde, er det vigtigt at vende tilbage til aktivitet så hurtigt som muligt i takt med smerten tillader det.
 
 ## Er lændesmerter naturligt?
 
-Lændesmerter er en almindelig oplevelse for de fleste mennesker og en del af kroppens normale respons på belastning, alder og livsstil. I løbet af livet vil omkring 80% opleve lændesmerter på et tidspunkt, hvilket understøtter, at smerterne kan være en naturlig del af kroppens tilpasning til ændringer i aktivitet, arbejdsstillinger eller fysisk belastning. Smerten kan ses som kroppens måde at signalere, at noget er uvant eller overbelastet, men det betyder sjældent, at der er alvorlige skader.
+Det er helt almindeligt at opleve smerter i lænden i løbet af livet – omkring 8 ud af 10 vil mærke det på et tidspunkt. Lændesmerter er ofte kroppens naturlige respons på belastning, forandringer i aktivitetsniveau eller alder.
 
-Selvom smerterne kan være ubehagelige, aftager de ofte af sig selv med tiden eller kan lindres ved bevægelse og en tilpasset livsstil. Det er vigtigt at forstå, at smerter ikke nødvendigvis betyder, at noget er alvorligt galt, men snarere er et signal, der i mange tilfælde blot kræver små justeringer og opmærksomhed på kroppen.
+Smerterne skyldes sjældent alvorlig skade, men er i mange tilfælde et signal om, at kroppen har brug for tilpasning. De aftager ofte af sig selv eller kan afhjælpes med bevægelse og livsstilsændringer.
 
 ## Er vores medicinske samfund skyld i lændesmerter?
 
 ![Illustration af iatrogene lændesmerter](/images/articles/Lændersmerter_iatrogenetik.webp)
 
-En australsk undersøgelse viste, at vestlige medicinske tilgange – som scanninger og diagnoser – faktisk kunne forværre lændesmerter i Aboriginal-befolkningen. Inden vestlige metoder blev introduceret, opfattede mange Aboriginals lændesmerter som en naturlig del af livet uden større betydning for deres funktion. Efter indførsel af scanninger og diagnoser begyndte flere at betragte smerterne som farlige og invaliderende, hvilket medførte større sygdomsbyrde og begrænsninger i dagligdagen​
+En australsk undersøgelse viste, at introduktionen af vestlig medicin – herunder scanninger og specifikke diagnoser – kunne forværre lændesmerter blandt Aboriginals. Før disse tiltag blev indført, betragtede mange smerter i lænden som en naturlig del af hverdagen og levede videre uden bekymring. Efter indførelsen blev smerterne i højere grad anset som alvorlige, hvilket førte til mere sygdomsadfærd.
 
-Denne tendens kan også ses i vores eget samfund i Danmark, hvor tilgangen til lændesmerter ofte er præget af et ønske om at identificere konkrete årsager gennem scanninger og detaljerede diagnoser. Når patienter bliver informeret om små fund i rygsøjlen, som ofte ikke er smerterelaterede, kan det øge frygten for skade og skabe en følelse af sårbarhed. Dette kan føre til, at smerterne opleves som værre eller mere alvorlige, og det kan i nogle tilfælde resultere i unødig inaktivitet eller afhængighed af behandlinger.
+Et lignende mønster ses i Danmark, hvor mange patienter får scanninger og detaljerede diagnoser, som kan føre til bekymring – selv når fundene ikke er relevante for smerterne. Det kan forværre oplevelsen af smerte og føre til inaktivitet eller unødvendig behandling.
 
-I stedet tyder forskning på, at en tilgang med fokus på forståelse, bevægelse og gradvis opbygning af funktion kan være mere effektiv og mindske sygdomsbyrden. Det understreger, at måden, vi behandler og taler om lændesmerter på, kan have stor indflydelse på, hvordan vi oplever og håndterer dem.
+Forskningen peger i stedet på, at en mere balanceret tilgang med fokus på viden, bevægelse og opbygning af funktion er mere gavnlig. Hvordan vi taler om og behandler lændesmerter, har derfor stor betydning for både oplevelse og håndtering.
 
 ## Referenceliste
 
