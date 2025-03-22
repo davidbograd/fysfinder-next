@@ -81,20 +81,20 @@ export default async function handler(
         .filter(Boolean) || [];
 
     // Get excluded insurances
-    const excludedInsurances = fields
-      .filter(
-        (f) =>
-          f.type === "CHECKBOXES" &&
-          f.label.startsWith(
-            "Er der nogle forsikringsselskaber, I IKKE samarbejder med?"
-          ) &&
-          f.value === true
-      )
-      .map((f) => {
-        const match = f.label.match(/\((.*?)\)$/);
-        return match ? match[1] : null;
-      })
-      .filter(Boolean);
+    const excludedInsurancesField = fields.find(
+      (f) =>
+        f.label === "Er der nogle forsikringsselskaber, I IKKE samarbejder med?"
+    );
+    const excludedInsurances =
+      excludedInsurancesField?.value
+        ?.map((id: string) => {
+          // Find the option text for this ID
+          const option = excludedInsurancesField.options?.find(
+            (opt) => opt.id === id
+          );
+          return option?.text;
+        })
+        .filter(Boolean) || [];
 
     // Get specialties from multi-select
     const specialtiesField = fields.find(
@@ -108,6 +108,13 @@ export default async function handler(
           return option?.text;
         })
         .filter(Boolean) || [];
+
+    // Get ydernummer value
+    const ydernummerField = fields.find(
+      (f) => f.label === "Har klinikken ydernummer?"
+    );
+    const ydernummerValue =
+      ydernummerField?.value?.[0] === "433b7074-8f56-4822-9cab-048b50dc435b"; // This is the ID for "Ja"
 
     // Insert structured data into staging
     console.log("Attempting to insert into Supabase...");
@@ -125,7 +132,7 @@ export default async function handler(
           website: getValue("Link til hjemmeside"),
           adresse: getValue("Adresse på klinikken"),
           postnummer: getValue("Postnummer"),
-          ydernummer: getValue("Har klinikken ydernummer?") === "Ja",
+          ydernummer: ydernummerValue,
           forste_konsultation_pris: getValue(
             "Prisen for en første konsultation?"
           ),

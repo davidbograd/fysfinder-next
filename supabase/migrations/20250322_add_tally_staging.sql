@@ -32,11 +32,18 @@ RETURNS void AS $$
 DECLARE
     staging_record RECORD;
     clinic_id UUID;
+    matching_city_id UUID;
+    matching_city_name TEXT;
 BEGIN
     -- Get the staging record
     SELECT * INTO staging_record 
     FROM clinic_submissions_staging 
     WHERE id = submission_id;
+
+    -- Find the matching city based on postal code
+    SELECT id, bynavn INTO matching_city_id, matching_city_name
+    FROM cities
+    WHERE staging_record.postnummer::text = ANY(postal_codes);
 
     -- Insert into clinics table
     INSERT INTO clinics (
@@ -51,7 +58,10 @@ BEGIN
         "opfølgning",
         "handicapadgang",
         "holdtræning",
-        "om_os"
+        "om_os",
+        "verified_klinik",
+        "city_id",
+        "lokation"
     ) VALUES (
         staging_record.klinik_navn,
         staging_record.email,
@@ -64,7 +74,10 @@ BEGIN
         staging_record.normal_konsultation_pris::text,
         staging_record.handicap_adgang,
         staging_record.holdtraening,
-        staging_record.om_klinikken
+        staging_record.om_klinikken,
+        TRUE,
+        matching_city_id,
+        matching_city_name
     )
     RETURNING "clinics_id" INTO clinic_id;
 
