@@ -14,11 +14,17 @@ type ResponseData = {
   message?: string;
 };
 
+interface TallyOption {
+  id: string;
+  text: string;
+}
+
 interface TallyField {
   key: string;
   type: string;
   label: string;
   value: any;
+  options?: TallyOption[];
 }
 
 export default async function handler(
@@ -61,7 +67,21 @@ export default async function handler(
     const getValue = (label: string) =>
       fields.find((f) => f.label === label)?.value;
 
-    // Get insurance companies that are NOT worked with
+    // Get services
+    const services = fields
+      .filter(
+        (f) =>
+          f.type === "CHECKBOXES" &&
+          f.label.startsWith("Hvilke af disse ekstra ydelser har klinikken?") &&
+          f.value === true
+      )
+      .map((f) => {
+        const option = f.options?.find((opt) => opt.id === f.value);
+        return option?.text;
+      })
+      .filter(Boolean);
+
+    // Get excluded insurances
     const excludedInsurances = fields
       .filter(
         (f) =>
@@ -71,25 +91,24 @@ export default async function handler(
           ) &&
           f.value === true
       )
-      .map((f) => f.label.match(/\((.*?)\)$/)?.[1])
-      .filter(Boolean);
-
-    // Get services
-    const services = fields
-      .filter(
-        (f) =>
-          f.type === "CHECKBOXES" &&
-          f.label.startsWith("Hvilke af disse ekstra ydelser har klinikken?") &&
-          f.value === true
-      )
-      .map((f) => f.label.match(/\((.*?)\)$/)?.[1])
+      .map((f) => {
+        const match = f.label.match(/\((.*?)\)$/);
+        return match ? match[1] : null;
+      })
       .filter(Boolean);
 
     // Get specialties from multi-select
     const specialtiesField = fields.find(
       (f) => f.label === "Hvilke specialer har klinikken? (Max 10 kan vælges)"
     );
-    const specialties = specialtiesField?.value || [];
+    const specialties =
+      specialtiesField?.value
+        ?.map((id: string) => {
+          // Find the option text for this ID
+          const option = specialtiesField.options?.find((opt) => opt.id === id);
+          return option?.text;
+        })
+        .filter(Boolean) || [];
 
     // Insert structured data into staging
     console.log("Attempting to insert into Supabase...");
