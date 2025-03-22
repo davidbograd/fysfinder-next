@@ -4,7 +4,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 // Initialize Supabase client
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY! // Using service role key for admin operations
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
 
 // Type for the response
@@ -14,12 +14,27 @@ type ResponseData = {
   message?: string;
 };
 
+interface TallyField {
+  key: string;
+  type: string;
+  label: string;
+  value: any;
+}
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResponseData>
 ) {
+  // Log all incoming requests
+  console.log("Webhook received:", {
+    method: req.method,
+    headers: req.headers,
+    body: req.body,
+  });
+
   // Only allow POST requests
   if (req.method !== "POST") {
+    console.log("Method not allowed:", req.method);
     return res.status(405).json({ error: "Method not allowed" });
   }
 
@@ -31,23 +46,83 @@ export default async function handler(
     // }
 
     const tallyData = req.body;
+    console.log("Tally data received:", JSON.stringify(tallyData, null, 2));
 
-    // Basic validation
-    if (!tallyData || !tallyData.eventId) {
+    if (!tallyData?.data?.fields) {
+      console.log("Invalid request body:", tallyData);
       return res.status(400).json({
         error: "Invalid request body",
         message: "Request body must contain Tally form data",
       });
     }
 
-    // Insert into staging table
+    // Extract fields into a more manageable format
+    const fields = tallyData.data.fields as TallyField[];
+    const getValue = (label: string) =>
+      fields.find((f) => f.label === label)?.value;
+
+    // Get insurance companies that are NOT worked with
+    const excludedInsurances = fields
+      .filter(
+        (f) =>
+          f.type === "CHECKBOXES" &&
+          f.label.startsWith(
+            "Er der nogle forsikringsselskaber, I IKKE samarbejder med?"
+          ) &&
+          f.value === true
+      )
+      .map((f) => f.label.match(/\((.*?)\)$/)?.[1])
+      .filter(Boolean);
+
+    // Get services
+    const services = fields
+      .filter(
+        (f) =>
+          f.type === "CHECKBOXES" &&
+          f.label.startsWith("Hvilke af disse ekstra ydelser har klinikken?") &&
+          f.value === true
+      )
+      .map((f) => f.label.match(/\((.*?)\)$/)?.[1])
+      .filter(Boolean);
+
+    // Get specialties from multi-select
+    const specialtiesField = fields.find(
+      (f) => f.label === "Hvilke specialer har klinikken? (Max 10 kan vælges)"
+    );
+    const specialties = specialtiesField?.value || [];
+
+    // Insert structured data into staging
+    console.log("Attempting to insert into Supabase...");
     const { data, error } = await supabase
       .from("clinic_submissions_staging")
       .insert([
         {
           tally_submission_id: tallyData.eventId,
           submitted_at: new Date().toISOString(),
-          raw_data: tallyData,
+          raw_data: tallyData, // Keep raw data for reference
+          // Structured data
+          klinik_navn: getValue("Klinik navn"),
+          email: getValue("Kontakt email (til booking)"),
+          telefon: getValue("Telefon nummer"),
+          website: getValue("Link til hjemmeside"),
+          adresse: getValue("Adresse på klinikken"),
+          postnummer: getValue("Postnummer"),
+          ydernummer: getValue("Har klinikken ydernummer?") === "Ja",
+          forste_konsultation_pris: getValue(
+            "Prisen for en første konsultation?"
+          ),
+          normal_konsultation_pris: getValue(
+            "Prisen for en normal konsultation"
+          ),
+          handicap_adgang: getValue("Har klinikken handicapadgang?") === "Ja",
+          holdtraening: getValue("Har klinikken holdtræning?") === "Ja",
+          om_klinikken: getValue(
+            'Skriv en "Om klinikken" tekst til jeres kunder. Max 320 karakterer (omkring 4 linjer)'
+          ),
+          services: services,
+          specialties: specialties,
+          excluded_insurances: excludedInsurances,
+          verified: false,
         },
       ]);
 
@@ -59,7 +134,7 @@ export default async function handler(
       });
     }
 
-    // Log success (optional - remove in production if not needed)
+    console.log("Successfully inserted data:", data);
     console.log(`Successfully processed submission: ${tallyData.eventId}`);
 
     // Return success
