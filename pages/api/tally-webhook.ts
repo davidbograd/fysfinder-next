@@ -68,18 +68,17 @@ export default async function handler(
       fields.find((f) => f.label === label)?.value;
 
     // Get services
-    const services = fields
-      .filter(
-        (f) =>
-          f.type === "CHECKBOXES" &&
-          f.label.startsWith("Hvilke af disse ekstra ydelser har klinikken?") &&
-          f.value === true
-      )
-      .map((f) => {
-        const option = f.options?.find((opt) => opt.id === f.value);
-        return option?.text;
-      })
-      .filter(Boolean);
+    const servicesField = fields.find(
+      (f) => f.label === "Hvilke af disse ekstra ydelser har klinikken?"
+    );
+    const services =
+      servicesField?.value
+        ?.map((id: string) => {
+          // Find the option text for this ID
+          const option = servicesField.options?.find((opt) => opt.id === id);
+          return option?.text;
+        })
+        .filter(Boolean) || [];
 
     // Get excluded insurances
     const excludedInsurances = fields

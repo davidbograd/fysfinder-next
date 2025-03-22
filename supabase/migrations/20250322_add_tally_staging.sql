@@ -32,14 +32,6 @@ RETURNS void AS $$
 DECLARE
     staging_record RECORD;
     clinic_id UUID;
-    all_insurance_companies TEXT[] := ARRAY[
-        'PFA', 'Skandia', 'Mølholm', 'Dansk Sundhedssikring', 'TopDanmark', 
-        'PrivatSikring', 'Gjensidig', 'Tryg', 'PensionDanmark', 'Falck Healthcare',
-        'Danica', 'Nordic Healthcare', 'Codan', 'AP Pension', 'Alm. Brand',
-        'GF Forsikring', 'Købstædernes Forsikring', 'Lærestandends Brandforsikring LB',
-        'TJM Forsikring'
-    ];
-    included_insurances TEXT[];
 BEGIN
     -- Get the staging record
     SELECT * INTO staging_record 
@@ -76,36 +68,31 @@ BEGIN
     )
     RETURNING "clinics_id" INTO clinic_id;
 
-    -- Handle specialties - using the IDs directly from Tally
-    INSERT INTO clinic_specialties ("clinics_id", "specialty_id", "clinic_name")
+    -- Handle specialties - lookup IDs by name
+    INSERT INTO clinic_specialties ("clinics_id", "specialty_id")
     SELECT 
         clinic_id,
-        specialty::uuid,  -- Convert the specialty ID to UUID
-        staging_record.klinik_navn
-    FROM unnest(staging_record.specialties) AS specialty;
+        s.specialty_id
+    FROM unnest(staging_record.specialties) AS submitted_specialty_name
+    JOIN specialties s ON s.specialty_name = submitted_specialty_name;
 
-    -- Handle services
-    INSERT INTO clinic_services ("clinic_id", "service_name", "clinic_name")
+    -- Handle services - lookup IDs by name
+    INSERT INTO clinic_services ("clinic_id", "service_id")
     SELECT 
         clinic_id,
-        unnest(staging_record.services),
-        staging_record.klinik_navn;
+        es.service_id
+    FROM unnest(staging_record.services) AS submitted_service_name
+    JOIN extra_services es ON es.service_name = submitted_service_name;
 
-    -- Calculate included insurances (all minus excluded)
-    included_insurances := (
-        SELECT ARRAY(
-            SELECT unnest(all_insurance_companies)
-            EXCEPT
-            SELECT unnest(staging_record.excluded_insurances)
-        )
+    -- Handle insurances - lookup IDs by name
+    INSERT INTO clinic_insurances ("clinic_id", "insurance_id")
+    SELECT 
+        clinic_id,
+        ic.insurance_id
+    FROM insurance_companies ic
+    WHERE ic.insurance_name NOT IN (
+        SELECT unnest(staging_record.excluded_insurances)
     );
-
-    -- Insert included insurances
-    INSERT INTO clinic_insurances ("clinic_id", "insurance_name", "clinic_name")
-    SELECT 
-        clinic_id,
-        unnest(included_insurances),
-        staging_record.klinik_navn;
 
     -- Update staging record as processed
     UPDATE clinic_submissions_staging
