@@ -2,16 +2,19 @@ import React from "react";
 import { MeetTheTeam } from "@/components/features/team/MeetTheTeam";
 import { createClient } from "@/app/utils/supabase/server";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
-import { StarIcon } from "@heroicons/react/24/solid";
-import GoogleMap from "@/components/features/map/GoogleMap";
 import { Metadata } from "next";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Check } from "lucide-react";
 import { ClinicSidebar } from "@/components/features/clinic/ClinicSidebar";
 import { redirect } from "next/navigation";
-import Link from "next/link";
 import { Clinic, Insurance, ExtraService, TeamMember } from "@/app/types";
+import { ClinicHeader } from "@/components/features/clinic/ClinicHeader";
+import { ClinicPricing } from "@/components/features/clinic/ClinicPricing";
+import { ClinicSpecialties } from "@/components/features/clinic/ClinicSpecialties";
+import { ClinicInsurance } from "@/components/features/clinic/ClinicInsurance";
+import { ClinicServices } from "@/components/features/clinic/ClinicServices";
+import { ClinicHours } from "@/components/features/clinic/ClinicHours";
+import { ClinicLocation } from "@/components/features/clinic/ClinicLocation";
+import { ClinicAbout } from "@/components/features/clinic/ClinicAbout";
+import { ClinicClaim } from "@/components/features/clinic/ClinicClaim";
 
 async function fetchClinicBySlug(clinicSlug: string): Promise<Clinic | null> {
   const supabase = createClient();
@@ -374,16 +377,6 @@ export default async function ClinicPage({
       { text: clinic.klinikNavn },
     ];
 
-    const openingHours = [
-      { day: "Mandag", hours: clinic.mandag },
-      { day: "Tirsdag", hours: clinic.tirsdag },
-      { day: "Onsdag", hours: clinic.onsdag },
-      { day: "Torsdag", hours: clinic.torsdag },
-      { day: "Fredag", hours: clinic.fredag },
-      { day: "Lørdag", hours: clinic.lørdag },
-      { day: "Søndag", hours: clinic.søndag },
-    ];
-
     return (
       <div className="container mx-auto px-4 py-8">
         <ClinicStructuredData clinic={clinic} />
@@ -391,267 +384,25 @@ export default async function ClinicPage({
 
         <Breadcrumbs items={breadcrumbItems} />
 
+        <ClinicHeader clinic={clinic} />
+
         <div className="flex flex-col lg:flex-row gap-16">
           {/* Main content (3/5 width on large screens) */}
           <div className="lg:w-3/5">
-            <h1 className="text-3xl font-bold mb-2">{clinic.klinikNavn}</h1>
-            <p className="text-gray-500 mb-2">
-              {clinic.adresse}, {clinic.postnummer} {clinic.lokation}
-            </p>
-            <div className="flex items-center mb-10">
-              <StarIcon className="h-6 w-6 text-amber-500 mr-2" />
-              <span className="font-semibold mr-2">
-                {clinic.avgRating != null ? clinic.avgRating.toFixed(1) : "N/A"}
-              </span>
-              <span className="text-gray-500">
-                ({clinic.ratingCount} anmeldelser)
-              </span>
-            </div>
-
-            {/* Jump link for mobile */}
-            <Button
-              variant="secondary"
-              className="block lg:hidden mb-8"
-              asChild
-            >
-              <a href="#contact-info">Se kontakt information</a>
-            </Button>
-
-            {/* Priser section */}
-            <section className="py-8 border-b border-gray-200">
-              <h2 className="text-2xl font-semibold mb-4">Priser</h2>
-              {clinic.ydernummer === true && (
-                <div className="flex items-center mb-2">
-                  <span className="mr-2">Ydernummer</span>
-                  <Check className="w-5 h-5 text-green-500" />
-                </div>
-              )}
-              {clinic.ydernummer !== null && (
-                <p className="text-sm text-gray-600 mb-4">
-                  {clinic.ydernummer
-                    ? `${clinic.klinikNavn} har ydernummer og tilbyder behandling med tilskud fra den offentlige sygesikring.`
-                    : `${clinic.klinikNavn} har ikke ydernummer og kræver ingen henvisning.`}
-                </p>
-              )}
-              {clinic.ydernummer === true ? (
-                <div className="space-y-4">
-                  <div>
-                    <div className="flex items-center justify-between">
-                      <span>Første konsult (30 min)</span>
-                      <div className="text-right">
-                        <div className="font-semibold">514,47 kr</div>
-                        <div className="text-sm text-gray-500">
-                          Med lægehenvisning: 312,28 kr
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div className="flex items-center justify-between">
-                      <span>Standard konsult (30 min)</span>
-                      <div className="text-right">
-                        <div className="font-semibold">327,12 kr</div>
-                        <div className="text-sm text-gray-500">
-                          Med lægehenvisning: 198,56 kr
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ) : clinic.førsteKons && clinic.opfølgning ? (
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <span>Første konsult (60 min)</span>
-                    <span className="font-semibold">
-                      {clinic.førsteKons} kr
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span>Standard konsult (30 min)</span>
-                    <span className="font-semibold">
-                      {clinic.opfølgning} kr
-                    </span>
-                  </div>
-                </div>
-              ) : (
-                <p className="text-gray-600">Ingen priser tilføjet.</p>
-              )}
-            </section>
-
+            <ClinicPricing clinic={clinic} />
             {clinic.team_members && clinic.team_members.length > 0 && (
               <MeetTheTeam
                 teamMembers={clinic.team_members}
                 clinicName={clinic.klinikNavn}
               />
             )}
-
-            {/* Specialer section */}
-            <section className="py-8 border-b border-gray-200">
-              <h2 className="text-2xl font-semibold mb-2">Specialer</h2>
-              {clinic.specialties && clinic.specialties.length > 0 ? (
-                <>
-                  <p className="mb-4">
-                    {clinic.klinikNavn} er specialiseret i følgende
-                    fysioterapeut discipliner
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {clinic.specialties.map((specialty) => (
-                      <Link
-                        key={specialty.specialty_id}
-                        href={`/find/fysioterapeut/danmark/${specialty.specialty_name_slug}`}
-                        className="transition-transform hover:scale-105"
-                      >
-                        <Badge
-                          variant="secondary"
-                          className="text-sm hover:bg-secondary/80 transition-colors cursor-pointer hover:shadow-sm"
-                        >
-                          {specialty.specialty_name}
-                        </Badge>
-                      </Link>
-                    ))}
-                  </div>
-                </>
-              ) : (
-                <p className="text-gray-600">Ingen specialer tilføjet.</p>
-              )}
-            </section>
-
-            {/* Forsikring */}
-            <section className="py-8 border-b border-gray-200">
-              <h2 className="text-2xl font-semibold mb-4">Forsikring</h2>
-              {clinic.insurances && clinic.insurances.length > 0 ? (
-                <>
-                  <p className="mb-4">
-                    {clinic.klinikNavn} samarbejder med følgende
-                    forsikringsselskaber:
-                  </p>
-                  <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
-                    {clinic.insurances.map((insurance) => (
-                      <li
-                        key={insurance.insurance_id}
-                        className="flex items-center"
-                      >
-                        <Check className="w-5 h-5 text-green-500 mr-2" />
-                        <span>{insurance.insurance_name}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </>
-              ) : (
-                <p className="text-gray-600">
-                  Ingen forsikringssamarbejder tilføjet.
-                </p>
-              )}
-            </section>
-
-            {/* Ekstra ydelser section */}
-            <section className="py-8 border-b border-gray-200">
-              <h2 className="text-2xl font-semibold mb-2">Ekstra ydelser</h2>
-              {clinic.extraServices && clinic.extraServices.length > 0 ? (
-                <div className="flex flex-wrap gap-2">
-                  {clinic.extraServices.map((service) => (
-                    <Badge
-                      key={service.service_id}
-                      variant="secondary"
-                      className="text-sm"
-                    >
-                      {service.service_name}
-                    </Badge>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-gray-600">Ingen ekstra ydelser tilføjet.</p>
-              )}
-            </section>
-
-            {/* Åbningstider og adgang section */}
-            <section className="py-8 border-b border-gray-200">
-              <h2 className="text-2xl font-semibold mb-4">
-                Åbningstider og adgang
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div>
-                  {hasAnyOpeningHours(clinic) ? (
-                    <div className="space-y-2">
-                      {openingHours.map(({ day, hours }) => (
-                        <div key={day} className="flex justify-between">
-                          <span>{day}</span>
-                          <span className="font-semibold">{hours}</span>
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <p className="text-gray-600">
-                      Ingen åbningstider tilføjet.
-                    </p>
-                  )}
-                </div>
-                {hasAccessInfo(clinic) && (
-                  <div>
-                    <div className="space-y-2">
-                      {clinic.parkering !== null && (
-                        <div className="flex justify-between">
-                          <span>Parkering</span>
-                          <span className="font-semibold">
-                            {clinic.parkering}
-                          </span>
-                        </div>
-                      )}
-                      {clinic.handicapadgang !== null && (
-                        <div className="flex justify-between">
-                          <span>Handicap adgang</span>
-                          <span className="font-semibold">
-                            {clinic.handicapadgang}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
-              </div>
-            </section>
-
-            {/* Google Maps location section */}
-            <section className="py-8 border-b border-gray-200">
-              <h2 className="text-2xl font-semibold mb-6">Lokation</h2>
-              <GoogleMap address={`${clinic.adresse}, ${clinic.lokation}`} />
-            </section>
-
-            {/* Om clinicNavn section */}
-            <section className="py-8 border-b border-gray-200">
-              <h2 className="text-2xl font-semibold mb-2">
-                Om {clinic.klinikNavn}
-              </h2>
-              {clinic.om_os ? (
-                <p className="text-gray-600">{clinic.om_os}</p>
-              ) : (
-                <p className="text-gray-600">Ingen beskrivelse tilføjet.</p>
-              )}
-            </section>
-
-            {/* Claim Clinic section */}
-            {!clinic.claimed_klinik && (
-              <section className="py-8">
-                <div className="flex flex-col gap-2">
-                  <p>
-                    <strong>Ejer du {clinic.klinikNavn}?</strong>
-                  </p>
-                  <p className="text-gray-600">
-                    Opdater dine oplysninger, og tiltræk flere patienter med
-                    korrekt information.
-                  </p>
-                  <Button variant="outline" className="self-start" asChild>
-                    <a
-                      href="https://tally.so/r/wdk75r"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Verificer klinik
-                    </a>
-                  </Button>
-                </div>
-              </section>
-            )}
+            <ClinicSpecialties clinic={clinic} />
+            <ClinicInsurance clinic={clinic} />
+            <ClinicServices clinic={clinic} />
+            <ClinicHours clinic={clinic} />
+            <ClinicLocation clinic={clinic} />
+            <ClinicAbout clinic={clinic} />
+            <ClinicClaim clinic={clinic} />
           </div>
 
           {/* Sidebar */}

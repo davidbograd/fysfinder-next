@@ -70,8 +70,8 @@ CREATE TABLE IF NOT EXISTS public.clinics (
     google_maps_url_cid TEXT,
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW(),
-    claimed_klinik BOOLEAN DEFAULT FALSE,
-    claimed_email TEXT
+    verified_klinik BOOLEAN DEFAULT FALSE,
+    verified_email TEXT
 );
 
 -- Clinic specialties junction table
