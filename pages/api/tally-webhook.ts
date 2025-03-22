@@ -116,6 +116,20 @@ export default async function handler(
     const ydernummerValue =
       ydernummerField?.value?.[0] === "433b7074-8f56-4822-9cab-048b50dc435b"; // This is the ID for "Ja"
 
+    // Get handicap access value
+    const handicapField = fields.find(
+      (f) => f.label === "Har klinikken handicapadgang?"
+    );
+    const handicapValue =
+      handicapField?.value?.[0] === "c052f6e7-fe52-4f37-a26a-ec9608de2663"; // This is the ID for "Ja"
+
+    // Get group training value
+    const holdtraeningField = fields.find(
+      (f) => f.label === "Har klinikken holdtræning?"
+    );
+    const holdtraeningValue =
+      holdtraeningField?.value?.[0] === "6960b2b1-f6e8-4f0d-905b-876f6e974842"; // This is the ID for "Ja"
+
     // Insert structured data into staging
     console.log("Attempting to insert into Supabase...");
     const { data, error } = await supabase
@@ -139,8 +153,8 @@ export default async function handler(
           normal_konsultation_pris: getValue(
             "Prisen for en normal konsultation"
           ),
-          handicap_adgang: getValue("Har klinikken handicapadgang?") === "Ja",
-          holdtraening: getValue("Har klinikken holdtræning?") === "Ja",
+          handicap_adgang: handicapValue,
+          holdtraening: holdtraeningValue,
           om_klinikken: getValue(
             'Skriv en "Om klinikken" tekst til jeres kunder. Max 320 karakterer (omkring 4 linjer)'
           ),
