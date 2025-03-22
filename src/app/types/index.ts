@@ -28,7 +28,7 @@ export interface Clinic {
   hjemmetræning: string;
   northstar: boolean;
   om_os: string | null;
-  verified_klinik: boolean;
+  verified_klinik?: boolean;
   verified_email?: string;
   specialties: {
     specialty_id: string;

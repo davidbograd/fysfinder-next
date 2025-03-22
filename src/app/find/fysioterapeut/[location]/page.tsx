@@ -3,8 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { createClient } from "@supabase/supabase-js";
 import { createClient as createServerClient } from "@/app/utils/supabase/server";
-import ClinicCard from '@/components/features/clinic/ClinicCard';
-import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
+import ClinicCard from "@/components/features/clinic/ClinicCard";
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { deslugify, slugify } from "@/app/utils/slugify";
 import { Metadata } from "next";
 import {
@@ -16,10 +16,10 @@ import {
   SpecialtyWithSeo,
 } from "@/app/types/index";
 import { notFound } from "next/navigation";
-import { SearchAndFilters } from '@/components/features/search/SearchAndFilters';
+import { SearchAndFilters } from "@/components/features/search/SearchAndFilters";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { SpecialtiesList } from '@/components/features/specialty/SpecialtiesList';
-import { ClinicsList } from '@/components/features/clinic/ClinicsList';
+import { SpecialtiesList } from "@/components/features/specialty/SpecialtiesList";
+import { ClinicsList } from "@/components/features/clinic/ClinicsList";
 
 // Create a Supabase client for static generation
 const supabase = createClient(
