@@ -1,5 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 import type { NextApiRequest, NextApiResponse } from "next";
+import crypto from "crypto";
 
 // Initialize Supabase client
 const supabase = createClient(
@@ -68,6 +69,39 @@ function formatWebsiteUrl(url: string | null): string | null {
   return formatted;
 }
 
+// Verify Tally webhook signature
+function verifyTallySignature(
+  payload: string,
+  signature: string | string[] | undefined
+): boolean {
+  if (!process.env.TALLY_WEBHOOK_SECRET) {
+    console.error("TALLY_WEBHOOK_SECRET is not set");
+    return false;
+  }
+
+  if (!signature || Array.isArray(signature)) {
+    console.error("Invalid signature format");
+    return false;
+  }
+
+  try {
+    // Calculate expected signature
+    const expectedSignature = crypto
+      .createHmac("sha256", process.env.TALLY_WEBHOOK_SECRET)
+      .update(payload)
+      .digest("base64");
+
+    // Compare signatures
+    return crypto.timingSafeEqual(
+      Buffer.from(signature),
+      Buffer.from(expectedSignature)
+    );
+  } catch (error) {
+    console.error("Error verifying signature:", error);
+    return false;
+  }
+}
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResponseData>
@@ -76,7 +110,6 @@ export default async function handler(
   console.log("Webhook received:", {
     method: req.method,
     headers: req.headers,
-    body: req.body,
   });
 
   // Only allow POST requests
@@ -85,13 +118,14 @@ export default async function handler(
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  try {
-    // Optional: Add webhook security verification
-    // const tallySignature = req.headers['x-tally-signature'];
-    // if (!verifyTallySignature(tallySignature, req.body)) {
-    //   return res.status(401).json({ error: 'Invalid signature' });
-    // }
+  // Verify webhook signature
+  const signature = req.headers["tally-signature"];
+  if (!verifyTallySignature(JSON.stringify(req.body), signature)) {
+    console.error("Invalid webhook signature");
+    return res.status(401).json({ error: "Invalid signature" });
+  }
 
+  try {
     const tallyData = req.body;
     console.log("Tally data received:", JSON.stringify(tallyData, null, 2));
 
