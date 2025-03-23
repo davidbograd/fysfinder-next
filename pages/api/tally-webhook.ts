@@ -27,6 +27,47 @@ interface TallyField {
   options?: TallyOption[];
 }
 
+function formatPhoneNumber(phone: string | null): string | null {
+  if (!phone) return null;
+
+  // Remove any whitespace
+  const cleaned = phone.trim();
+
+  // Skip if empty after trim
+  if (!cleaned) return null;
+
+  // Check if it's a Danish number (starts with +45)
+  if (cleaned.startsWith("+45")) {
+    // Remove +45 and format the remaining 8 digits
+    const numbers = cleaned.substring(3); // Remove +45
+    // Insert spaces after every 2 digits
+    return numbers.replace(/(\d{2})(?=\d)/g, "$1 ").trim();
+  }
+
+  // For non-Danish numbers, return as is
+  return cleaned;
+}
+
+function formatWebsiteUrl(url: string | null): string | null {
+  if (!url) return null;
+
+  // Remove whitespace
+  let formatted = url.trim();
+
+  // Skip if empty after trim
+  if (!formatted) return null;
+
+  // Force https:// and remove www.
+  formatted = formatted
+    .replace(/^https?:\/\//, "") // Remove any existing protocol
+    .replace(/^www\./, ""); // Remove www.
+
+  // Add https://
+  formatted = `https://${formatted}`;
+
+  return formatted;
+}
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResponseData>
@@ -142,8 +183,8 @@ export default async function handler(
           // Structured data
           klinik_navn: getValue("Klinik navn"),
           email: getValue("Kontakt email (til booking)"),
-          telefon: getValue("Telefon nummer"),
-          website: getValue("Link til hjemmeside"),
+          telefon: formatPhoneNumber(getValue("Telefon nummer")),
+          website: formatWebsiteUrl(getValue("Link til hjemmeside")),
           adresse: getValue("Adresse på klinikken"),
           postnummer: getValue("Postnummer"),
           ydernummer: ydernummerValue,
