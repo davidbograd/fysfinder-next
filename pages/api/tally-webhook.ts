@@ -110,7 +110,7 @@ export default async function handler(
 
     // Get services
     const servicesField = fields.find(
-      (f) => f.label === "Hvilke af disse ekstra ydelser har klinikken?"
+      (f) => f.label === "Hvilke ekstra ydelser har klinikken?"
     );
     const services =
       servicesField?.value
@@ -188,12 +188,8 @@ export default async function handler(
           adresse: getValue("Adresse på klinikken"),
           postnummer: getValue("Postnummer"),
           ydernummer: ydernummerValue,
-          forste_konsultation_pris: getValue(
-            "Prisen for en første konsultation?"
-          ),
-          normal_konsultation_pris: getValue(
-            "Prisen for en normal konsultation"
-          ),
+          forste_konsultation_pris: getValue("Pris for første konsultation?"),
+          normal_konsultation_pris: getValue("Pris for normal konsultation?"),
           handicap_adgang: handicapValue,
           holdtraening: holdtraeningValue,
           om_klinikken: getValue(
