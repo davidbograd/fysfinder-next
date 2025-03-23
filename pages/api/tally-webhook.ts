@@ -192,36 +192,102 @@ export default async function handler(
       return option?.text === "Ja";
     });
 
+    // Get clinic name
+    const klinikNavn = getValue("Klinik navn");
+
+    console.log("========== CLINIC MATCHING ==========");
+    console.log("Searching for clinic:", klinikNavn);
+
+    // Normalize the clinic name for matching
+    const normalizedName = klinikNavn
+      ?.toLowerCase()
+      .replace(/[^a-zæøå0-9]/g, ""); // Remove special characters, keep Danish letters
+
+    console.log("Normalized name for matching:", normalizedName);
+
+    // Check for existing clinic with similar name
+    const { data: existingClinics, error: matchError } = await supabase
+      .from("clinics")
+      .select("clinics_id, klinikNavn")
+      .neq("klinikNavn", ""); // Ensure we don't match empty names
+
+    let matchedClinic: { clinics_id: string; klinikNavn: string } | null = null;
+
+    if (matchError) {
+      console.error("Error checking for existing clinic:", matchError);
+    } else {
+      console.log(
+        "Number of clinics to check against:",
+        existingClinics?.length || 0
+      );
+
+      // Find best match by comparing normalized names
+      const match = existingClinics?.find((clinic) => {
+        const normalizedExisting = clinic.klinikNavn
+          ?.toLowerCase()
+          .replace(/[^a-zæøå0-9]/g, "");
+
+        const isMatch = normalizedName === normalizedExisting;
+        if (isMatch) {
+          console.log("Found match!");
+          console.log("Original submitted name:", klinikNavn);
+          console.log("Matched with existing clinic:", clinic.klinikNavn);
+          console.log("Clinic ID:", clinic.clinics_id);
+        }
+        return isMatch;
+      });
+
+      if (match) {
+        matchedClinic = match;
+      } else {
+        console.log("No matching clinic found in database");
+      }
+    }
+    console.log("===================================");
+
     // Insert structured data into staging
     console.log("Attempting to insert into Supabase...");
+
+    // Log optional fields for debugging
+    console.log("Optional fields:", {
+      email: getValue("Kontakt email (til booking)"),
+      website: formatWebsiteUrl(getValue("Link til hjemmeside")),
+    });
+
     const { data, error } = await supabase
       .from("clinic_submissions_staging")
-      .insert([
-        {
-          tally_submission_id: tallyData.eventId,
-          submitted_at: new Date().toISOString(),
-          raw_data: tallyData, // Keep raw data for reference
-          // Structured data
-          klinik_navn: getValue("Klinik navn"),
-          email: getValue("Kontakt email (til booking)"),
-          telefon: formatPhoneNumber(getValue("Telefon nummer")),
-          website: formatWebsiteUrl(getValue("Link til hjemmeside")),
-          adresse: getValue("Adresse på klinikken"),
-          postnummer: getValue("Postnummer"),
-          ydernummer: ydernummerValue,
-          forste_konsultation_pris: getValue("Pris for første konsultation?"),
-          normal_konsultation_pris: getValue("Pris for normal konsultation?"),
-          handicap_adgang: handicapValue,
-          holdtraening: holdtraeningValue,
-          om_klinikken: getValue(
-            'Skriv en "Om klinikken" tekst til jeres kunder. Max 320 karakterer (omkring 4 linjer)'
-          ),
-          services: services,
-          specialties: specialties,
-          excluded_insurances: excludedInsurances,
-          verified: false,
-        },
-      ]);
+      .insert({
+        tally_submission_id: tallyData.eventId,
+        submitted_at: new Date().toISOString(),
+        raw_data: tallyData,
+        // Structured data
+        klinik_navn: klinikNavn,
+        email: getValue("Kontakt email (til booking)"),
+        telefon: formatPhoneNumber(getValue("Telefon nummer")),
+        website: formatWebsiteUrl(getValue("Link til hjemmeside")),
+        adresse: getValue("Adresse på klinikken"),
+        postnummer: parseInt(getValue("Postnummer") || "0"),
+        ydernummer: ydernummerValue,
+        forste_konsultation_pris: parseInt(
+          getValue("Pris for første konsultation?") || "0"
+        ),
+        normal_konsultation_pris: parseInt(
+          getValue("Pris for normal konsultation?") || "0"
+        ),
+        handicap_adgang: handicapValue,
+        holdtraening: holdtraeningValue,
+        om_klinikken: getValue(
+          'Skriv en "Om klinikken" tekst til jeres kunder. Max 320 karakterer (omkring 4 linjer)'
+        ),
+        services: services,
+        specialties: specialties,
+        excluded_insurances: excludedInsurances,
+        // Update tracking
+        matched_clinic_id: matchedClinic?.clinics_id || null,
+        is_update: !!matchedClinic,
+      })
+      .select()
+      .single();
 
     if (error) {
       console.error("Supabase insertion error:", error);
