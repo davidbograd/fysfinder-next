@@ -154,22 +154,43 @@ export default async function handler(
     const ydernummerField = fields.find(
       (f) => f.label === "Har klinikken ydernummer?"
     );
-    const ydernummerValue =
-      ydernummerField?.value?.[0] === "433b7074-8f56-4822-9cab-048b50dc435b"; // This is the ID for "Ja"
+    // Log ydernummer field data
+    console.log("Ydernummer field data:", {
+      value: ydernummerField?.value,
+      options: ydernummerField?.options,
+    });
+    const ydernummerValue = ydernummerField?.value?.some((id: string) => {
+      const option = ydernummerField.options?.find((opt) => opt.id === id);
+      return option?.text === "Ja";
+    });
 
     // Get handicap access value
     const handicapField = fields.find(
       (f) => f.label === "Har klinikken handicapadgang?"
     );
-    const handicapValue =
-      handicapField?.value?.[0] === "c052f6e7-fe52-4f37-a26a-ec9608de2663"; // This is the ID for "Ja"
+    // Log handicap field data
+    console.log("Handicap field data:", {
+      value: handicapField?.value,
+      options: handicapField?.options,
+    });
+    const handicapValue = handicapField?.value?.some((id: string) => {
+      const option = handicapField.options?.find((opt) => opt.id === id);
+      return option?.text === "Ja";
+    });
 
     // Get group training value
     const holdtraeningField = fields.find(
       (f) => f.label === "Har klinikken holdtræning?"
     );
-    const holdtraeningValue =
-      holdtraeningField?.value?.[0] === "6960b2b1-f6e8-4f0d-905b-876f6e974842"; // This is the ID for "Ja"
+    // Log holdtraening field data
+    console.log("Holdtraening field data:", {
+      value: holdtraeningField?.value,
+      options: holdtraeningField?.options,
+    });
+    const holdtraeningValue = holdtraeningField?.value?.some((id: string) => {
+      const option = holdtraeningField.options?.find((opt) => opt.id === id);
+      return option?.text === "Ja";
+    });
 
     // Insert structured data into staging
     console.log("Attempting to insert into Supabase...");
