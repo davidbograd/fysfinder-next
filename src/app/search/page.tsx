@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Metadata } from "next";
+import { RevalidateButton } from "@/app/search/revalidate-button";
 
 export const metadata: Metadata = {
   robots: "noindex",
@@ -53,7 +54,10 @@ export default async function SearchPage({
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-4">Søg efter klinikker</h1>
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-3xl font-bold">Søg efter klinikker</h1>
+        <RevalidateButton />
+      </div>
       <form className="mb-8 space-y-4">
         <Input
           type="text"

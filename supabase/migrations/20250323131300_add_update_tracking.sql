@@ -118,17 +118,3 @@ BEGIN
     WHERE id = submission_id;
 END;
 $$ LANGUAGE plpgsql;
-
--- Rollback changes if needed (down)
--- Note: Commented out to prevent accidental execution
-/*
-ALTER TABLE clinic_submissions_staging
-    DROP COLUMN matched_clinic_id,
-    DROP COLUMN is_update;
-
--- Restore original function
-CREATE OR REPLACE FUNCTION process_verified_submission(submission_id UUID)
-RETURNS void AS $$
--- Original function code here
-$$ LANGUAGE plpgsql;
-*/ 
