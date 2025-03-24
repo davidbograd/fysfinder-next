@@ -34,7 +34,7 @@ export default function Header() {
                 href="/ordbog"
                 className="text-base text-gray-600 hover:text-gray-900"
               >
-                Ordbog TEST
+                Ordbog
               </Link>
               <Link
                 href="/om-os"
