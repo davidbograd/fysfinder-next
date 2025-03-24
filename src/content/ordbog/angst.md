@@ -43,7 +43,7 @@ Flere typer øvelser kan have en gavnlig effekt på angst. Mindfulness-baserede 
 
 ## Hvordan finder man en fysioterapeut til behandling af angst?
 
-Når man søger en fysioterapeut til behandling af angst, er det vigtigt at finde en specialist med erfaring inden for stresshåndtering og psykosomatiske lidelser. [FysFinder.dk](FysFinder.dk) tilbyder en oversigt over fysioterapeuter med forskellige specialer, hvilket gør det nemmere at finde den rette behandler baseret på anmeldelser, ekspertiseområder og geografisk placering.
+Når man søger en [fysioterapeut til behandling af angst](https://www.fysfinder.dk/find/fysioterapeut/danmark/angst), er det vigtigt at finde en specialist med erfaring inden for stresshåndtering og psykosomatiske lidelser. Vi tilbyder en oversigt over fysioterapeuter med forskellige specialer, hvilket gør det nemmere at finde den rette behandler baseret på anmeldelser, ekspertiseområder og geografisk placering.
 
 
 ## Hvad kan man forvente under en fysioterapi behandling for angst?
