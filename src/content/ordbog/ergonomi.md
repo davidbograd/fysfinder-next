@@ -51,7 +51,7 @@ Den bedste måde at forbedre ergonomien derhjemme er at sikre, at du varierer di
 
 ### Find en fysioterapeut med ekspertise i ergonomi
 
-Hvis du har behov for vejledning i, hvordan du bedst kan tilpasse din arbejdsplads for at reducere smerte og fremme bevægelse, kan du finde en fysioterapeut med speciale i arbejdsrelaterede belastningsskader på [FysFinder.dk](FysFinder.dk). Her kan du sammenligne forskellige behandlere og finde den rette ekspert til dine behov.
+Hvis du har behov for vejledning i, hvordan du bedst kan tilpasse din arbejdsplads for at reducere smerte og fremme bevægelse, kan du finde en fysioterapeut med speciale i arbejdsrelaterede belastningsskader på FysFinder. Her kan du sammenligne forskellige behandlere og finde den rette ekspert til dine behov.
 
 ## Referenceliste
 
