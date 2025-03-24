@@ -5,6 +5,7 @@ import type { Clinic } from "@/app/actions/search-clinics";
 import { Loader2, Search, UserCircle2, MessageCircle } from "lucide-react";
 import { useDebounce } from "use-debounce";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 function highlightSearchTerm(text: string, searchTerm: string) {
   if (!searchTerm) return text;
@@ -25,7 +26,7 @@ export function ClinicSearch() {
     <section id="clinic-search" className="w-full bg-gray-50 py-12 md:py-24">
       <div className="container px-4 md:px-6">
         <h2 className="text-center text-2xl font-bold md:text-3xl mb-12">
-          Sådan kommer du i gang
+          Sådan får du din klinik på FysFinder
         </h2>
 
         <div className="max-w-3xl mx-auto space-y-6">
@@ -40,19 +41,20 @@ export function ClinicSearch() {
               </h3>
             </div>
             <p className="mb-6 text-gray-600">
-              Vi har allerede hundredvis af klinikker på Fysfinder, måske din
-              klinik allerede eksiterer. Søg her.
+              Vi har tusindvis af klinikker på FysFinder. Tjek om din klinik
+              allerede eksisterer. Søg her.
             </p>
 
             <div className="space-y-4">
-              <SearchInput />
-
-              <div className="text-center">
+              <div className="flex flex-col-reverse sm:flex-row gap-4">
+                <div className="flex-1">
+                  <SearchInput />
+                </div>
                 <a
                   href="https://tally.so/r/wdk75r"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-logo-blue rounded-lg hover:bg-logo-blue/90 transition-colors"
+                  className="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-logo-blue rounded-lg hover:bg-logo-blue/90 transition-colors whitespace-nowrap sm:w-auto w-full"
                 >
                   Verificer eller tilføj klinik
                 </a>
@@ -69,8 +71,8 @@ export function ClinicSearch() {
               <h3 className="text-xl font-semibold">Opdater information</h3>
             </div>
             <p className="text-gray-600">
-              Tilføj information så du er klar til at tiltrække dine fremtidige
-              patienter
+              Tilføj relevant information om din klinik, der kan tiltrække flere
+              patienthenvendelser.
             </p>
           </div>
 
@@ -83,8 +85,8 @@ export function ClinicSearch() {
               <h3 className="text-xl font-semibold">Få flere patienter</h3>
             </div>
             <p className="text-gray-600">
-              Modtag henvendelser fra de tusindvis af danskere der bruger
-              Fysfinder månedligt
+              Modtag henvendelser fra de tusindvis af danskere, der månedligt
+              bruger FysFinder.
             </p>
           </div>
         </div>
@@ -144,12 +146,13 @@ function SearchInput() {
             ) : searchResults.length > 0 ? (
               <>
                 {searchResults.slice(0, 5).map((clinic) => (
-                  <div
+                  <Link
                     key={clinic.clinics_id}
-                    className="cursor-pointer px-4 py-3 hover:bg-gray-50"
+                    href={`/klinik/${clinic.klinikNavnSlug}`}
+                    className="block px-4 py-3 hover:bg-gray-50 cursor-pointer"
                   >
                     {highlightSearchTerm(clinic.klinikNavn, searchTerm)}
-                  </div>
+                  </Link>
                 ))}
                 {searchResults.length > 5 && (
                   <div className="border-t border-gray-100 px-4 py-2 text-sm text-gray-600">

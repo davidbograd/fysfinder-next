@@ -11,7 +11,7 @@ export function CTASection() {
               Er du klar til at få flere patienter?
             </h2>
             <p className="max-w-[900px] text-gray-100 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Bliv en del af de fysioterapeuter, der får nye patienter gennem
+              Bliv en af de fysioterapeuter, der får nye patienter gennem
               Fysfinder.
             </p>
           </div>
@@ -21,7 +21,7 @@ export function CTASection() {
               className="bg-white text-logo-blue hover:bg-white/90"
               asChild
             >
-              <Link href="#clinic-search">Tilmeld Din Klinik</Link>
+              <Link href="#clinic-search">Tilmeld din klinik</Link>
             </Button>
             <Button
               size="lg"
@@ -29,7 +29,7 @@ export function CTASection() {
               className="bg-transparent text-white border-white hover:bg-white/10"
               asChild
             >
-              <Link href="/om-os#kontakt">Kontakt Os</Link>
+              <Link href="/om-os#kontakt">Kontakt os</Link>
             </Button>
           </div>
         </div>

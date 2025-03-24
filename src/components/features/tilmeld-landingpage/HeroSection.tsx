@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export function HeroSection() {
   return (
@@ -9,38 +10,50 @@ export function HeroSection() {
         <div className="flex flex-col lg:flex-row items-start gap-12">
           <div className="flex-1 space-y-8">
             <div className="space-y-6">
+              <p className="text-sm text-logo-blue font-medium">
+                FYSIOTERAPEUTKLINIKKER
+              </p>
               <h1 className="text-5xl font-bold tracking-tight leading-tight">
                 Få flere patienter
                 <br />
-                til din fysioterapi klinik
+                og fyld din kalender
               </h1>
               <p className="text-xl text-gray-600">
-                Få din klinik på Fysfinder og bliv synlig for patienter, der
-                søger kvalificeret fysioterapi i dit område.
+                Få din klinik på FysFinder og bliv synlig for patienter, der
+                søger fysioterapeuter i dit område.
               </p>
             </div>
 
             <div className="flex flex-wrap gap-4">
-              <Button className="bg-black text-white hover:bg-black/90" asChild>
-                <Link href="#clinic-search">Kom i gang i dag</Link>
+              <Button
+                className="bg-logo-blue text-white hover:bg-logo-blue/90"
+                asChild
+              >
+                <Link href="#clinic-search">Kom gratis i gang</Link>
               </Button>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-6">
               <div className="flex items-center gap-2">
                 <Check className="h-5 w-5 text-black" />
-                <span>Gratis Basis Profil</span>
+                <span>Gratis basis profil</span>
               </div>
               <div className="flex items-center gap-2">
                 <Check className="h-5 w-5 text-black" />
-                <span>Verificeret Badge</span>
+                <span>Verificeret badge</span>
               </div>
             </div>
           </div>
 
           <div className="flex-1 flex items-center justify-center">
-            {/* Placeholder for hero image */}
-            <div className="w-[640px] aspect-video bg-gray-100 rounded-lg" />
+            <Image
+              src="/images/tilmeld/fysioterapi-flere-patienter.jpg"
+              alt="Fysioterapeut behandler patient"
+              width={640}
+              height={360}
+              className="rounded-lg"
+              priority
+            />
           </div>
         </div>
       </div>

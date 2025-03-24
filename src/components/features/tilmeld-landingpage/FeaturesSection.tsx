@@ -1,4 +1,9 @@
-import { MapPin, Award, Shield, CheckCircle } from "lucide-react";
+import {
+  ChartNoAxesCombined,
+  BadgeCheck,
+  Wand2,
+  CalendarArrowUp,
+} from "lucide-react";
 
 export function FeaturesSection() {
   return (
@@ -10,23 +15,22 @@ export function FeaturesSection() {
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">
             <div className="inline-block rounded-lg bg-logo-blue px-3 py-1 text-sm text-white">
-              Funktioner
+              Alt-i-en platform
             </div>
             <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-              Alt hvad du behøver for at udvikle din praksis
+              Sådan får du flere patienter med FysFinder
             </h2>
             <p className="max-w-[900px] text-gray-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Vores platform giver dig alle de værktøjer, du har brug for til at
-              tiltrække flere patienter og administrere din online
-              tilstedeværelse effektivt.
+              FysFinder giver dig smarte værktøjer til nemt at tiltrække flere
+              patienter.
             </p>
           </div>
         </div>
         <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
           <div className="flex gap-4">
-            <MapPin className="h-8 w-8 text-logo-blue" />
+            <ChartNoAxesCombined className="h-8 w-8 text-logo-blue" />
             <div className="space-y-2">
-              <h3 className="text-xl font-bold">Øget Synlighed</h3>
+              <h3 className="text-xl font-bold">Øget synlighed</h3>
               <p className="text-gray-600">
                 Vær blandt de første i søgeresultaterne, når patienter leder
                 efter fysioterapi i dit område.
@@ -34,9 +38,9 @@ export function FeaturesSection() {
             </div>
           </div>
           <div className="flex gap-4">
-            <Award className="h-8 w-8 text-logo-blue" />
+            <BadgeCheck className="h-8 w-8 text-logo-blue" />
             <div className="space-y-2">
-              <h3 className="text-xl font-bold">Verificeret Badge</h3>
+              <h3 className="text-xl font-bold">Verificeret badge</h3>
               <p className="text-gray-600">
                 Skil dig ud med et verificeret badge, der viser patienter, at
                 din klinik er legitim og pålidelig.
@@ -44,7 +48,7 @@ export function FeaturesSection() {
             </div>
           </div>
           <div className="flex gap-4">
-            <Shield className="h-8 w-8 text-logo-blue" />
+            <Wand2 className="h-8 w-8 text-logo-blue" />
             <div className="space-y-2">
               <h3 className="text-xl font-bold">Profiltilpasning</h3>
               <p className="text-gray-600">
@@ -54,12 +58,17 @@ export function FeaturesSection() {
             </div>
           </div>
           <div className="flex gap-4">
-            <CheckCircle className="h-8 w-8 text-logo-blue" />
+            <CalendarArrowUp className="h-8 w-8 text-logo-blue" />
             <div className="space-y-2">
-              <h3 className="text-xl font-bold">Direkte Booking</h3>
+              <div className="flex items-center gap-2">
+                <h3 className="text-xl font-bold">Direkte booking</h3>
+                <span className="bg-amber-100 text-amber-800 text-xs px-2 py-0.5 rounded-full font-medium">
+                  Premium
+                </span>
+              </div>
               <p className="text-gray-600">
-                Lad patienter booke tider direkte gennem din profil med vores
-                integrerede bookingsystem.
+                Lad patienter booke tider gennem din profil med link direkte til
+                dit bookingsystem.
               </p>
             </div>
           </div>

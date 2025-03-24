@@ -9,16 +9,16 @@ export async function StatsSection() {
       <div className="container px-4 md:px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
           <div className="space-y-2">
-            <h3 className="text-4xl font-bold">Over 1,000</h3>
-            <p className="text-gray-600">Månedlige patientsøgninger</p>
+            <h3 className="text-4xl font-bold">1.000+</h3>
+            <p className="text-gray-600">månedlige besøgende</p>
           </div>
           <div className="space-y-2">
             <h3 className="text-4xl font-bold">{totalClinics}</h3>
             <p className="text-gray-600">Registrerede klinikker</p>
           </div>
           <div className="space-y-2">
-            <h3 className="text-4xl font-bold">📈</h3>
-            <p className="text-gray-600">Stigning i bookinger</p>
+            <h3 className="text-4xl font-bold">300+</h3>
+            <p className="text-gray-600">månedlige patienthenvendelser</p>
           </div>
         </div>
       </div>
