@@ -6,9 +6,9 @@ import { ClinicSearch } from "@/components/features/tilmeld-landingpage/ClinicSe
 import { CTASection } from "@/components/features/tilmeld-landingpage/CTASection";
 
 export const metadata: Metadata = {
-  title: "Tilmeld din klinik | Fysfinder",
+  title: "Få flere patienter til din fysioterapiklinik",
   description:
-    "Tilmeld din fysioterapiklinik til Fysfinder og få kontakt med flere patienter. Søg efter din klinik eller opret en ny profil.",
+    "Få din fysioterapiklinik på Fysfinder og få kontakt med flere patienter. Søg efter din klinik eller opret en ny profil.",
 };
 
 export default function ClinicOwnerPage() {
