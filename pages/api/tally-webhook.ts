@@ -157,8 +157,7 @@ export default async function handler(
 
     // Get excluded insurances
     const excludedInsurancesField = fields.find(
-      (f) =>
-        f.label === "Er der nogle forsikringsselskaber, I IKKE samarbejder med?"
+      (f) => f.label === "Hvilke forsikringsselskaber arbejder I ikke med?"
     );
     const excludedInsurances =
       excludedInsurancesField?.value
