@@ -133,6 +133,9 @@ function SearchInput() {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         onFocus={() => setShowResults(true)}
+        onBlur={() => {
+          setTimeout(() => setShowResults(false), 2);
+        }}
       />
 
       {showResults &&
@@ -150,6 +153,7 @@ function SearchInput() {
                     key={clinic.clinics_id}
                     href={`/klinik/${clinic.klinikNavnSlug}`}
                     className="block px-4 py-3 hover:bg-gray-50 cursor-pointer"
+                    onMouseDown={(e) => e.preventDefault()}
                   >
                     {highlightSearchTerm(clinic.klinikNavn, searchTerm)}
                   </Link>
