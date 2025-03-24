@@ -5,7 +5,7 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { Metadata } from "next";
 import { ClinicSidebar } from "@/components/features/clinic/ClinicSidebar";
 import { redirect } from "next/navigation";
-import { Clinic, Insurance, ExtraService, TeamMember } from "@/app/types";
+import { Clinic, TeamMember } from "@/app/types";
 import { ClinicHeader } from "@/components/features/clinic/ClinicHeader";
 import { ClinicPricing } from "@/components/features/clinic/ClinicPricing";
 import { ClinicSpecialties } from "@/components/features/clinic/ClinicSpecialties";
@@ -14,7 +14,6 @@ import { ClinicServices } from "@/components/features/clinic/ClinicServices";
 import { ClinicHours } from "@/components/features/clinic/ClinicHours";
 import { ClinicLocation } from "@/components/features/clinic/ClinicLocation";
 import { ClinicAbout } from "@/components/features/clinic/ClinicAbout";
-import { ClinicClaim } from "@/components/features/clinic/ClinicClaim";
 
 async function fetchClinicBySlug(clinicSlug: string): Promise<Clinic | null> {
   const supabase = createClient();
@@ -402,11 +401,15 @@ export default async function ClinicPage({
             <ClinicHours clinic={clinic} />
             <ClinicLocation clinic={clinic} />
             <ClinicAbout clinic={clinic} />
-            <ClinicClaim clinic={clinic} />
           </div>
 
           {/* Sidebar */}
-          <ClinicSidebar clinic={clinic} />
+          <ClinicSidebar
+            clinic={{
+              ...clinic,
+              verified_klinik: clinic.verified_klinik ?? false,
+            }}
+          />
         </div>
       </div>
     );
