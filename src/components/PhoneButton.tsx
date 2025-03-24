@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Phone } from "lucide-react";
+import { Phone, Eye } from "lucide-react";
 
 export interface PhoneButtonProps {
   phoneNumber: string;
@@ -12,6 +12,7 @@ export interface PhoneButtonProps {
 export function PhoneButton({ phoneNumber, onClick }: PhoneButtonProps) {
   const [isCopied, setIsCopied] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isRevealed, setIsRevealed] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -28,10 +29,25 @@ export function PhoneButton({ phoneNumber, onClick }: PhoneButtonProps) {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  const handlePhoneAction = async () => {
-    // Track the interaction
-    onClick?.();
+  const maskPhoneNumber = (number: string) => {
+    // Show first 6 digits, mask only the last 2 with XX
+    const cleanNumber = number.replace(/\s/g, ""); // Remove any spaces
+    const visiblePart = cleanNumber
+      .slice(0, 6)
+      .replace(/(.{2})/g, "$1 ")
+      .trim(); // Add space after every 2 digits
+    return `${visiblePart} XX...`;
+  };
 
+  const handlePhoneAction = async () => {
+    if (!isRevealed) {
+      // First click - reveal number and track
+      setIsRevealed(true);
+      onClick?.();
+      return;
+    }
+
+    // Second click - handle mobile call or copy
     if (isMobile) {
       window.location.href = `tel:${phoneNumber}`;
     } else {
@@ -47,6 +63,21 @@ export function PhoneButton({ phoneNumber, onClick }: PhoneButtonProps) {
     }
   };
 
+  const getButtonText = () => {
+    if (!isRevealed) {
+      return (
+        <span className="flex items-center gap-1">
+          <Eye className="h-4 w-4" />
+          Vis nummer
+        </span>
+      );
+    }
+    if (isMobile) {
+      return "Ring op";
+    }
+    return isCopied ? "Kopieret" : "Kopier";
+  };
+
   return (
     <Button
       variant="outline"
@@ -55,10 +86,12 @@ export function PhoneButton({ phoneNumber, onClick }: PhoneButtonProps) {
     >
       <div className="flex items-center">
         <Phone className="mr-2 h-4 w-4 text-gray-400" />
-        <span className="truncate">{phoneNumber}</span>
+        <span className="truncate">
+          {isRevealed ? phoneNumber : maskPhoneNumber(phoneNumber)}
+        </span>
       </div>
       <span className="ml-2 text-sm text-gray-400 transition-all duration-300">
-        {isMobile ? "Ring op" : isCopied ? "Kopieret" : "Kopier"}
+        {getButtonText()}
       </span>
     </Button>
   );
