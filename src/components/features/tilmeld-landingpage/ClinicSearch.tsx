@@ -2,7 +2,7 @@
 
 import { searchClinics } from "@/app/actions/search-clinics";
 import type { Clinic } from "@/app/actions/search-clinics";
-import { Loader2, Search, Wand2, ChartNoAxesCombined } from "lucide-react";
+import { Loader2, Search, Pencil, ChartNoAxesCombined } from "lucide-react";
 import { useDebounce } from "use-debounce";
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -66,7 +66,7 @@ export function ClinicSearch() {
           <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-200">
             <div className="flex items-center gap-3 mb-4">
               <div className="rounded-full bg-logo-blue p-3 text-white">
-                <Wand2 className="h-6 w-6" />
+                <Pencil className="h-6 w-6" />
               </div>
               <h3 className="text-xl font-semibold">Opdater information</h3>
             </div>
