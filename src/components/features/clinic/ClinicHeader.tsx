@@ -54,11 +54,6 @@ export function ClinicHeader({ clinic }: ClinicHeaderProps) {
           {clinic.adresse}, {clinic.postnummer} {clinic.lokation}
         </p>
       </div>
-
-      {/* Jump link for mobile */}
-      <Button variant="secondary" className="block lg:hidden mt-4" asChild>
-        <a href="#contact-info">Se kontakt information</a>
-      </Button>
     </div>
   );
 }

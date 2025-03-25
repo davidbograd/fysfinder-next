@@ -4,6 +4,7 @@ import { createClient } from "@/app/utils/supabase/server";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { Metadata } from "next";
 import { ClinicSidebar } from "@/components/features/clinic/ClinicSidebar";
+import { ClinicSidebarMobile } from "@/components/features/clinic/ClinicSidebarMobile";
 import { redirect } from "next/navigation";
 import { Clinic, TeamMember } from "@/app/types";
 import { ClinicHeader } from "@/components/features/clinic/ClinicHeader";
@@ -385,6 +386,14 @@ export default async function ClinicPage({
 
         <ClinicHeader clinic={clinic} />
 
+        {/* Mobile Sidebar - Top */}
+        <ClinicSidebarMobile
+          clinic={{
+            ...clinic,
+            verified_klinik: clinic.verified_klinik ?? false,
+          }}
+        />
+
         <div className="flex flex-col lg:flex-row gap-16">
           {/* Main content (3/5 width on large screens) */}
           <div className="lg:w-3/5">
@@ -403,7 +412,7 @@ export default async function ClinicPage({
             <ClinicAbout clinic={clinic} />
           </div>
 
-          {/* Sidebar */}
+          {/* Desktop Sidebar */}
           <ClinicSidebar
             clinic={{
               ...clinic,

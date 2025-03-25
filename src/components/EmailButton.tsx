@@ -30,14 +30,14 @@ export function EmailButton({ email, onClick }: EmailButtonProps) {
   return (
     <Button
       variant="outline"
-      className="w-full flex items-center justify-between"
+      className="w-full flex items-center justify-between gap-2"
       onClick={handleEmailAction}
     >
-      <div className="flex items-center">
-        <Mail className="mr-2 h-4 w-4 text-gray-400" />
+      <div className="flex items-center min-w-0 flex-1">
+        <Mail className="shrink-0 mr-2 h-4 w-4 text-gray-400" />
         <span className="truncate">{email}</span>
       </div>
-      <span className="ml-2 text-sm text-gray-400 transition-all duration-300">
+      <span className="shrink-0 text-sm text-gray-400 transition-all duration-300">
         {isCopied ? "Kopieret" : "Kopier"}
       </span>
     </Button>
