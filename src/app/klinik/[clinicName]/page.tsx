@@ -111,22 +111,6 @@ export async function generateMetadata({
   };
 }
 
-function hasAnyOpeningHours(clinic: Clinic): boolean {
-  return [
-    clinic.mandag,
-    clinic.tirsdag,
-    clinic.onsdag,
-    clinic.torsdag,
-    clinic.fredag,
-    clinic.lørdag,
-    clinic.søndag,
-  ].some((day) => day !== null);
-}
-
-function hasAccessInfo(clinic: Clinic): boolean {
-  return clinic.parkering !== null || clinic.handicapadgang !== null;
-}
-
 interface ClinicStructuredDataProps {
   clinic: Clinic;
 }
