@@ -1,7 +1,8 @@
 ---
-title: "Kropsbalance"
-lastUpdated: "24/02/2024"
-metaTitle: "Kropsbalance – Hvad er kropsbalance? Læs mere her"
+title: Kropsbalance
+lastUpdated: 24/02/2024
+metaTitle: Kropsbalance – Hvad er kropsbalance? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Kropsbalance refererer til den tilstand, hvor kroppens forskellige systemer og funktioner arbejder harmonisk sammen. Det er en essentiel del af vores fysiske og mentale velvære, og det kan påvirkes af mange faktorer, herunder livsstil, kost, motion og stressniveau. At opnå og opretholde en god kropsbalance er vigtigt for at forebygge skader og sygdomme samt for at forbedre den generelle livskvalitet.

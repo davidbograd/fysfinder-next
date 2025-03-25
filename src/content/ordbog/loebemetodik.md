@@ -1,7 +1,8 @@
 ---
-title: "Løbemetodik"
-lastUpdated: "24/02/2024"
-metaTitle: "Løbemetodik – Hvad er løbemetodik? Læs mere her"
+title: Løbemetodik
+lastUpdated: 24/02/2024
+metaTitle: Løbemetodik – Hvad er løbemetodik? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Løbemetodik refererer til de forskellige metoder og teknikker, der anvendes til at forbedre løbepræstationer og forebygge skader. Det omfatter alt fra korrekt løbeteknik til træningsprogrammer og restitution. At forstå løbemetodik er essentielt for både nybegyndere og erfarne løbere, der ønsker at optimere deres træning og opnå bedre resultater.

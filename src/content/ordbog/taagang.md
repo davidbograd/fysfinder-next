@@ -1,7 +1,8 @@
 ---
-title: "Tågang"
-lastUpdated: "24/02/2024"
-metaTitle: "Tågang – Hvad er tågang? Læs om årsager og behandlinger"
+title: Tågang
+lastUpdated: 24/02/2024
+metaTitle: Tågang – Hvad er tågang? Læs om årsager og behandlinger
+datePublished: 19/02/2025
 ---
 
 Tågang refererer til en gangart, hvor man går på tæerne i stedet for at sætte hælen ned først. Denne gangart kan være en del af normal udvikling hos børn, men kan også indikere underliggende problemer, hvis det fortsætter ind i voksenlivet. Det er vigtigt at forstå, hvad tågang er, og hvordan det kan påvirke ens fysiske sundhed.

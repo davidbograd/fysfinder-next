@@ -1,7 +1,8 @@
 ---
-title: "Gulvøvelser"
-lastUpdated: "24/02/2024"
-metaTitle: "Gulvøvelser – Hvad er gulvøvelser? Få tips og råd til træning"
+title: Gulvøvelser
+lastUpdated: 24/02/2024
+metaTitle: Gulvøvelser – Hvad er gulvøvelser? Få tips og råd til træning
+datePublished: 19/02/2025
 ---
 
 Gulvøvelser er en vigtig del af fysioterapi, der fokuserer på at styrke og stabilisere kroppen gennem øvelser udført på gulvet. Disse øvelser kan være særligt gavnlige for personer, der ønsker at forbedre deres fleksibilitet, styrke og balance, samt for dem, der genoptræner efter skader.

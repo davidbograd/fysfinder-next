@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Hjerteklapfejl – Hvad er en hjerteklapfejl? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Hjerteklapfejl refererer til tilstande, hvor en eller flere af hjerteklapperne ikke fungerer korrekt. Dette kan føre til problemer med blodgennemstrømningen i hjertet og resten af kroppen. Hjerteklapperne spiller en afgørende rolle i at sikre, at blodet flyder i den rigtige retning, og når de ikke fungerer optimalt, kan det have alvorlige konsekvenser for ens helbred.

@@ -1,7 +1,8 @@
 ---
-title: "Restitution"
-lastUpdated: "24/02/2024"
-metaTitle: "Restitution – Hvad er restitution? Læs om vigtigheden her"
+title: Restitution
+lastUpdated: 24/02/2024
+metaTitle: Restitution – Hvad er restitution? Læs om vigtigheden her
+datePublished: 19/02/2025
 ---
 
 Restitution refererer til den proces, hvor kroppen genopretter sig efter fysisk aktivitet eller skade. Det er en essentiel del af træning og rehabilitering, da det hjælper med at genopbygge muskler, genoprette energiniveauer og reducere risikoen for skader. En effektiv restitutionsstrategi kan forbedre præstationen og fremme en sund livsstil.

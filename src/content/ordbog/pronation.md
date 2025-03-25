@@ -1,7 +1,8 @@
 ---
-title: "Pronation"
-lastUpdated: "24/02/2024"
-metaTitle: "Pronation – Hvad er pronation? Læs om skader og løsninger"
+title: Pronation
+lastUpdated: 24/02/2024
+metaTitle: Pronation – Hvad er pronation? Læs om skader og løsninger
+datePublished: 19/02/2025
 ---
 
 Pronation refererer til den naturlige bevægelse af foden, når den ruller indad under gang eller løb. Det er en vigtig del af vores gangcyklus og spiller en central rolle i at absorbere stød og fordele belastningen på kroppen. Forståelse af pronation kan hjælpe med at identificere potentielle skader og vælge det rigtige fodtøj.

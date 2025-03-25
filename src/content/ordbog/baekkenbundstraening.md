@@ -1,7 +1,8 @@
 ---
-title: "Bækkenbundstræning"
-lastUpdated: "24/02/2024"
-metaTitle: "Bækkenbundstræning – Hvad er bækkenbundstræning?"
+title: Bækkenbundstræning
+lastUpdated: 24/02/2024
+metaTitle: Bækkenbundstræning – Hvad er bækkenbundstræning?
+datePublished: 19/02/2025
 ---
 
 Bækkenbundstræning refererer til øvelser, der styrker musklerne i bækkenbunden. Disse muskler spiller en vigtig rolle i at støtte organerne i bækkenet, herunder blære, livmoder og tarm. Træning af bækkenbunden kan være gavnligt for både mænd og kvinder, især i forbindelse med graviditet, fødsel og aldring.

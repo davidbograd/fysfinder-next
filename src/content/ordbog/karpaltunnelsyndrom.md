@@ -1,7 +1,8 @@
 ---
-title: "Karpaltunnelsyndrom"
-lastUpdated: "24/02/2024"
-metaTitle: "Karpaltunnelsyndrom – Hvad er karpaltunnelsyndrom?"
+title: Karpaltunnelsyndrom
+lastUpdated: 24/02/2024
+metaTitle: Karpaltunnelsyndrom – Hvad er karpaltunnelsyndrom?
+datePublished: 19/02/2025
 ---
 
 Karpaltunnelsyndrom er en tilstand, der opstår, når medianusnerven, som løber fra underarmen til hånden, bliver komprimeret i karpaltunnelen i håndleddet. Dette kan føre til smerte, svaghed og følelsesløshed i hånden og fingrene. Det er en almindelig lidelse, der ofte rammer personer, der udfører gentagne bevægelser med hænderne.

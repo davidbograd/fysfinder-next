@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Leddegigt – Hvad er leddegigt? Symptomer og behandling
+datePublished: 19/02/2025
 ---
 
 Leddegigt, også kendt som rheumatoid arthritis, er en kronisk inflammatorisk sygdom, der primært påvirker leddene. Denne tilstand kan føre til smerte, hævelse og stivhed, hvilket kan begrænse bevægelsesfriheden og påvirke livskvaliteten. Det er vigtigt at forstå, hvordan leddegigt opstår, dens symptomer, behandlinger og hvordan fysioterapi kan spille en rolle i håndteringen af sygdommen.

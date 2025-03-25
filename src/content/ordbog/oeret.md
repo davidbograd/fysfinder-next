@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Øret – Hvad er et øre? Læs om ørets anatomi her
+datePublished: 19/02/2025
 ---
 
 Øret er et komplekst sanseorgan, der spiller en afgørende rolle i vores evne til at høre og opretholde balance. Det består af tre hoveddele: det ydre øre, mellemøret og det indre øre. Hver del har sin egen funktion og bidrager til den samlede oplevelse af lyd og balance. I denne artikel vil vi udforske forskellige aspekter af øret, herunder dets anatomi, funktioner, almindelige problemer og behandlingsmuligheder.

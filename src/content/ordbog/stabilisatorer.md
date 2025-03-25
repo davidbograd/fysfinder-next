@@ -1,7 +1,8 @@
 ---
-title: "Stabilisatorer"
-lastUpdated: "24/02/2024"
-metaTitle: "Stabilisatorer – Hvad er stabilisatorer? Læs mere her"
+title: Stabilisatorer
+lastUpdated: 24/02/2024
+metaTitle: Stabilisatorer – Hvad er stabilisatorer? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Stabilisatorer er essentielle komponenter i kroppens muskulære system, der hjælper med at opretholde stabilitet og kontrol under bevægelse. De spiller en vigtig rolle i rehabilitering og forebyggelse af skader, især i forbindelse med fysioterapi.

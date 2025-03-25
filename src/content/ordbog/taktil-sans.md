@@ -1,7 +1,8 @@
 ---
-title: "Taktil sans"
-lastUpdated: "24/02/2024"
-metaTitle: "Taktil sans – Hvad er taktil sans? Læs mere her"
+title: Taktil sans
+lastUpdated: 24/02/2024
+metaTitle: Taktil sans – Hvad er taktil sans? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Taktil sans refererer til den sans, der gør det muligt for os at føle og opfatte berøring, tryk, temperatur og smerte gennem huden. Denne sans spiller en afgørende rolle i vores daglige liv, da den hjælper os med at interagere med vores omgivelser og forstå vores krop. I fysioterapi er det vigtigt at forstå taktil sans, da den kan påvirke rehabilitering og behandling af forskellige fysiske tilstande.

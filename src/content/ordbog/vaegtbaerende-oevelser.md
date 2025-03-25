@@ -1,7 +1,8 @@
 ---
-title: "Vægtbærende øvelser"
-lastUpdated: "24/02/2024"
-metaTitle: "Vægtbærende øvelser – Hvad er vægtbærende øvelser? Læs mere her"
+title: Vægtbærende øvelser
+lastUpdated: 24/02/2024
+metaTitle: Vægtbærende øvelser – Hvad er vægtbærende øvelser? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Vægtbærende øvelser er fysiske aktiviteter, hvor kroppen bærer sin egen vægt, hvilket hjælper med at styrke musklerne og forbedre knogletætheden. Disse øvelser er essentielle for at opretholde en sund krop og kan være en vigtig del af rehabilitering og fysioterapi.

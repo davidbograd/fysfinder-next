@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Ankel – Hvad er ankelskader? Læs om behandling og øvelser
+datePublished: 19/02/2025
 ---
 
 Anklen er en kompleks ledstruktur, der forbinder foden med benet. Den spiller en afgørende rolle i vores bevægelse og stabilitet, og skader eller problemer med anklen kan have en betydelig indvirkning på vores daglige liv. I denne artikel vil vi udforske forskellige aspekter af anklen, herunder almindelige skader, behandlingsmuligheder og hvordan fysioterapi kan hjælpe.

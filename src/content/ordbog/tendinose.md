@@ -1,7 +1,8 @@
 ---
-title: "Tendinose"
-lastUpdated: "24/02/2024"
-metaTitle: "Tendinose – Hvad er tendinose? Symptomer og behandling"
+title: Tendinose
+lastUpdated: 24/02/2024
+metaTitle: Tendinose – Hvad er tendinose? Symptomer og behandling
+datePublished: 19/02/2025
 ---
 
 Tendinose er en degenerativ tilstand, der påvirker senerne i kroppen. Det opstår typisk som følge af overbelastning eller gentagne bevægelser, hvilket fører til smerte og nedsat funktion i det berørte område. I modsætning til tendinitis, som er en betændelsestilstand, er tendinose karakteriseret ved en nedbrydning af senestrukturen uden den akutte inflammation.

@@ -1,7 +1,8 @@
 ---
-title: "Immunforsvar"
-lastUpdated: "24/02/2024"
-metaTitle: "Immunforsvaret – Hvad er immunforsvaret? Læs mere her"
+title: Immunforsvar
+lastUpdated: 24/02/2024
+metaTitle: Immunforsvaret – Hvad er immunforsvaret? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Immunforsvaret er kroppens naturlige forsvarssystem, der beskytter mod sygdomme og infektioner. Det spiller en afgørende rolle i at opretholde vores generelle sundhed og velvære. Et stærkt immunforsvar kan hjælpe med at forhindre sygdomme og fremme hurtigere helbredelse, når vi bliver syge.

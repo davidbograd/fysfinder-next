@@ -1,7 +1,8 @@
 ---
-title: "Respiratorisk fysioterapi"
-lastUpdated: "24/02/2024"
-metaTitle: "Respiratorisk fysioterapi – Hvad er respiratorisk fysioterapi?"
+title: Respiratorisk fysioterapi
+lastUpdated: 24/02/2024
+metaTitle: Respiratorisk fysioterapi – Hvad er respiratorisk fysioterapi?
+datePublished: 19/02/2025
 ---
 
 Respiratorisk fysioterapi er en specialiseret form for fysioterapi, der fokuserer på behandling af patienter med respiratoriske (åndedræts-) problemer. Denne type fysioterapi er essentiel for at forbedre lungefunktion, øge iltoptagelsen og fremme generel sundhed hos personer med kroniske lungesygdomme eller akutte respiratoriske tilstande.

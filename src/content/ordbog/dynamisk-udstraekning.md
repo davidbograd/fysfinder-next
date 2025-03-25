@@ -1,7 +1,8 @@
 ---
-title: "Dynamisk udstrækning"
-lastUpdated: "24/02/2024"
-metaTitle: "Dynamisk udstrækning – Hvad er dynamisk udstrækning?"
+title: Dynamisk udstrækning
+lastUpdated: 24/02/2024
+metaTitle: Dynamisk udstrækning – Hvad er dynamisk udstrækning?
+datePublished: 19/02/2025
 ---
 
 Dynamisk udstrækning er en form for opvarmning og strækøvelse, der involverer bevægelse og dynamiske bevægelser for at forberede musklerne til fysisk aktivitet. Denne teknik er populær blandt atleter og fitnessentusiaster, da den hjælper med at forbedre fleksibilitet, styrke og præstation.

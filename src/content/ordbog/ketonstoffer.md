@@ -1,7 +1,8 @@
 ---
-title: "Ketonstoffer"
-lastUpdated: "24/02/2024"
-metaTitle: "Ketonstoffer – Hvad er ketonstoffer? Læs mere her"
+title: Ketonstoffer
+lastUpdated: 24/02/2024
+metaTitle: Ketonstoffer – Hvad er ketonstoffer? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Ketonstoffer er organiske forbindelser, der dannes i kroppen under en proces kaldet ketogenese. Denne proces opstår, når kroppen har begrænset adgang til kulhydrater og i stedet begynder at nedbryde fedt til energi. Ketonstoffer fungerer som en alternativ energikilde, især for hjernen, når glukose er knap. 

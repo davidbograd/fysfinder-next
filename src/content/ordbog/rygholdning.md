@@ -1,7 +1,8 @@
 ---
-title: "Rygholdning"
-lastUpdated: "24/02/2024"
-metaTitle: "Rygholdning – Hvad er god rygholdning? Læs mere her"
+title: Rygholdning
+lastUpdated: 24/02/2024
+metaTitle: Rygholdning – Hvad er god rygholdning? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Rygholdning refererer til den måde, hvorpå vi holder vores rygsøjle og krop i en korrekt position, når vi står, sidder eller bevæger os. En god rygholdning er essentiel for at undgå smerter og skader, samt for at fremme en sund livsstil. I denne artikel vil vi udforske vigtigheden af rygholdning, hvordan man opnår en god holdning, og hvilke fysioterapeutiske metoder der kan hjælpe.

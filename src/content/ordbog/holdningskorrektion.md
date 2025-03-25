@@ -1,7 +1,8 @@
 ---
-title: "Holdningskorrektion"
-lastUpdated: "24/02/2024"
-metaTitle: "Holdningskorrektion – Hvad er holdningskorrektion?"
+title: Holdningskorrektion
+lastUpdated: 24/02/2024
+metaTitle: Holdningskorrektion – Hvad er holdningskorrektion?
+datePublished: 19/02/2025
 ---
 
 Holdningskorrektion refererer til de metoder og teknikker, der anvendes til at forbedre kroppens holdning. En god holdning er essentiel for at opretholde en sund krop og undgå smerter og skader. Mange mennesker lider af dårlig holdning på grund af stillesiddende livsstil, forkert ergonomi og manglende opmærksomhed på kroppens position. Gennem fysioterapi kan man lære at justere sin holdning og dermed forbedre sin generelle velvære.

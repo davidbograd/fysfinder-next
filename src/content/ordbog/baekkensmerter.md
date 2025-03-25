@@ -1,7 +1,8 @@
 ---
-title: "Bækkensmerter"
-lastUpdated: "24/02/2024"
-metaTitle: "Bækkensmerter – Hvad er smerter i bækken? Læs mere"
+title: Bækkensmerter
+lastUpdated: 24/02/2024
+metaTitle: Bækkensmerter – Hvad er smerter i bækken? Læs mere
+datePublished: 19/02/2025
 ---
 
 Bækkensmerter refererer til smerter, der opstår i bækkenområdet, som kan påvirke både mænd og kvinder. Disse smerter kan have mange årsager, herunder skader, betændelse, eller underliggende medicinske tilstande. Det er vigtigt at forstå, hvad der forårsager bækkensmerter, og hvordan fysioterapi kan hjælpe med at lindre symptomerne og forbedre livskvaliteten.

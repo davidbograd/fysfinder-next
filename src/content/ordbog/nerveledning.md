@@ -1,7 +1,8 @@
 ---
-title: "Nerveledning"
-lastUpdated: "24/02/2024"
-metaTitle: "Nerveledning – Hvad er nerveledning? Læs mere"
+title: Nerveledning
+lastUpdated: 24/02/2024
+metaTitle: Nerveledning – Hvad er nerveledning? Læs mere
+datePublished: 19/02/2025
 ---
 
 Nerveledning refererer til den proces, hvor nerveimpulser bevæger sig langs nerverne i kroppen. Denne proces er afgørende for, hvordan vi føler, bevæger os og reagerer på stimuli. Nerveledning kan påvirkes af forskellige faktorer, herunder skader, sygdomme og betændelsestilstande, hvilket kan føre til nedsat funktion og ubehag.

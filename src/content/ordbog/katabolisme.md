@@ -1,7 +1,8 @@
 ---
-title: "Katabolisme"
-lastUpdated: "24/02/2024"
-metaTitle: "Katabolisme – Hvad er katabolisme? Læs mere her"
+title: Katabolisme
+lastUpdated: 24/02/2024
+metaTitle: Katabolisme – Hvad er katabolisme? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Katabolisme refererer til de biokemiske processer, hvor komplekse molekyler nedbrydes til enklere forbindelser, hvilket frigiver energi. Denne proces er essentiel for kroppens energistyring og spiller en central rolle i metabolismen.

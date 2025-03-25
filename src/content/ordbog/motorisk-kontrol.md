@@ -1,7 +1,8 @@
 ---
-title: "Motorisk kontrol"
-lastUpdated: "24/02/2024"
-metaTitle: "Motorisk kontrol – Hvad er motorisk kontrol? Læs mere her"
+title: Motorisk kontrol
+lastUpdated: 24/02/2024
+metaTitle: Motorisk kontrol – Hvad er motorisk kontrol? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Motorisk kontrol refererer til evnen til at styre og koordinere bevægelser i kroppen. Det er en essentiel del af vores daglige liv, da det påvirker alt fra at gå og løbe til mere komplekse opgaver som at skrive eller spille et instrument. Forståelsen af motorisk kontrol er vigtig for fysioterapeuter, da det hjælper dem med at vurdere og behandle patienter med bevægelsesforstyrrelser.

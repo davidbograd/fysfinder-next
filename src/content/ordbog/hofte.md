@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Hofte – Hvad er en hofte? Læs om problemer og behandlinger
+datePublished: 19/02/2025
 ---
 
 Hofte er en central del af kroppens bevægeapparat og spiller en vigtig rolle i vores daglige aktiviteter. Det er et komplekst led, der forbinder benet med bækkenet og muliggør bevægelse som gang, løb og siddende stillinger. Forståelse af hofteproblemer og behandlinger er afgørende for at opretholde en aktiv livsstil.

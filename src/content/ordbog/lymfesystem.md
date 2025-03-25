@@ -1,7 +1,8 @@
 ---
-title: "Lymfesystem"
-lastUpdated: "24/02/2024"
-metaTitle: "Lymfesystemet – Hvad er lymfesystemet? Læs mere her"
+title: Lymfesystem
+lastUpdated: 24/02/2024
+metaTitle: Lymfesystemet – Hvad er lymfesystemet? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Lymfesystemet er en vigtig del af kroppens immunsystem og spiller en central rolle i at opretholde væskebalancen. Det består af et netværk af lymfekar, lymfeknuder og lymfevæv, der hjælper med at transportere lymfe, en væske der indeholder hvide blodlegemer, som bekæmper infektioner og sygdomme.

@@ -1,7 +1,8 @@
 ---
-title: "Marvskader"
-lastUpdated: "24/02/2024"
-metaTitle: "Marvskader – Hvad er marvskader? Symptomer & behandling"
+title: Marvskader
+lastUpdated: 24/02/2024
+metaTitle: Marvskader – Hvad er marvskader? Symptomer & behandling
+datePublished: 19/02/2025
 ---
 
 Marvskader refererer til skader på rygmarven, som kan have alvorlige konsekvenser for en persons motoriske og sensoriske funktioner. Disse skader kan opstå som følge af traumer, sygdomme eller degenerative tilstande og kan variere i sværhedsgrad fra milde til livsændrende.

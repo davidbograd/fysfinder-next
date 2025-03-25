@@ -1,7 +1,8 @@
 ---
-title: "Seneirritation"
-lastUpdated: "24/02/2024"
-metaTitle: "Seneirritation – Hvad er seneirritation? Læs mere her"
+title: Seneirritation
+lastUpdated: 24/02/2024
+metaTitle: Seneirritation – Hvad er seneirritation? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Seneirritation refererer til betændelse eller irritation af senerne, som er de bånd af væv, der forbinder muskler til knogler. Denne tilstand kan opstå som følge af overbelastning, skader eller gentagne bevægelser, og den kan påvirke en persons evne til at udføre dagligdags aktiviteter.

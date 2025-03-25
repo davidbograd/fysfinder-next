@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Springerknæ – Hvad er et springerknæ? Skader og behandling
+datePublished: 19/02/2025
 ---
 
 Springerknæ, også kendt som patellar tendinopati, er en almindelig tilstand, der påvirker knæet, især hos sportsudøvere, der deltager i aktiviteter med gentagne hop og hurtige bevægelser. Tilstanden opstår, når senen, der forbinder knæskallen (patella) til skinnebenet, bliver overbelastet og irriteret. Dette kan føre til smerte, hævelse og nedsat funktion i knæet.

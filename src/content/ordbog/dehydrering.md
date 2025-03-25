@@ -1,7 +1,8 @@
 ---
-title: "Dehydrering"
-lastUpdated: "24/02/2024"
-metaTitle: "Dehydrering – Hvad er dehydrering? Symptomer & behandling"
+title: Dehydrering
+lastUpdated: 24/02/2024
+metaTitle: Dehydrering – Hvad er dehydrering? Symptomer & behandling
+datePublished: 19/02/2025
 ---
 
 Dehydrering er en tilstand, hvor kroppen mister mere væske, end den indtager. Dette kan føre til en ubalance i kroppens elektrolytter og påvirke dens funktioner. Det er vigtigt at forstå årsagerne, symptomerne og behandlingen af dehydrering for at kunne håndtere det effektivt.

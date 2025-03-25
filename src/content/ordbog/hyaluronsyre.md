@@ -1,7 +1,8 @@
 ---
-title: "Hyaluronsyre"
-lastUpdated: "24/02/2024"
-metaTitle: "Hyaluronsyre – Hvad er hyaluronsyre? Læs mere her"
+title: Hyaluronsyre
+lastUpdated: 24/02/2024
+metaTitle: Hyaluronsyre – Hvad er hyaluronsyre? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Hyaluronsyre er et naturligt stof, der findes i kroppen, især i bindevæv, hud og ledvæsker. Det spiller en vigtig rolle i at opretholde fugtighed, elasticitet og smidighed i vævene. I fysioterapi anvendes hyaluronsyre ofte til behandling af ledproblemer og til at fremme heling af skader.

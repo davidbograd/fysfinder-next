@@ -1,7 +1,8 @@
 ---
-title: "Vibrationsterapi"
-lastUpdated: "24/02/2024"
-metaTitle: "Vibrationsterapi – Hvad er vibrationsterapi? Læs mere her"
+title: Vibrationsterapi
+lastUpdated: 24/02/2024
+metaTitle: Vibrationsterapi – Hvad er vibrationsterapi? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Vibrationsterapi er en innovativ behandlingsmetode, der anvender vibrationer til at forbedre muskelstyrke, fleksibilitet og generel sundhed. Denne terapi er blevet populær inden for fysioterapi og bruges til at lindre smerter, rehabilitere skader og forbedre præstationen hos både atleter og almindelige borgere.

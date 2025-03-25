@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Stress – Hvad er stress? Læs om symptomer og behandling
+datePublished: 19/02/2025
 ---
 
 Stress er en naturlig reaktion fra kroppen, der opstår som svar på udfordringer eller krav i hverdagen. Det kan være forårsaget af både fysiske og psykiske faktorer og kan påvirke vores helbred og velvære negativt, hvis det ikke håndteres korrekt. I denne artikel vil vi udforske, hvad stress er, hvordan det påvirker os, og hvilke behandlingsmuligheder der findes.

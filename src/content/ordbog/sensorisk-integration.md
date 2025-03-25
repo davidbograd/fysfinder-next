@@ -1,7 +1,8 @@
 ---
-title: "Sensorisk integration"
-lastUpdated: "24/02/2024"
-metaTitle: "Sensorisk integration – Hvad er sensorisk integration?"
+title: Sensorisk integration
+lastUpdated: 24/02/2024
+metaTitle: Sensorisk integration – Hvad er sensorisk integration?
+datePublished: 19/02/2025
 ---
 
 Sensorisk integration refererer til den proces, hvor vores hjerne organiserer og fortolker information fra vores sanser. Dette er en essentiel funktion, der gør det muligt for os at forstå og reagere på vores omgivelser. For mange mennesker, især børn, kan der opstå udfordringer med sensorisk integration, hvilket kan påvirke deres daglige liv og udvikling.

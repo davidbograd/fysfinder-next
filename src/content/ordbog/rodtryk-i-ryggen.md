@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2024
 metaTitle: Rodtryk i ryggen – Hvad er rodtryk i ryggen? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Rodtryk i ryggen refererer til en tilstand, hvor nerverne i rygsøjlen bliver komprimeret eller irriteret, hvilket kan føre til smerte, svaghed eller følelsesløshed i ryggen og andre dele af kroppen. Denne tilstand kan opstå af forskellige årsager, herunder skader, degenerative sygdomme eller diskusprolapser. Det er vigtigt at forstå, hvordan rodtryk opstår, og hvilke behandlingsmuligheder der findes for at lindre symptomerne.

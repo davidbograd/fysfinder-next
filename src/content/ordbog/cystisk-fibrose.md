@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Cystisk fibrose – Hvad er cystisk fibrose? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Cystisk fibrose er en genetisk sygdom, der påvirker kroppens evne til at producere slim, hvilket kan føre til alvorlige problemer med lungerne og fordøjelsessystemet. Denne tilstand kræver ofte tværfaglig behandling, herunder fysioterapi, for at forbedre livskvaliteten og håndtere symptomerne.

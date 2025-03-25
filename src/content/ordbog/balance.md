@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Balance – Hvad er balance? Læs om vigtigheden her
+datePublished: 19/02/2025
 ---
 
 Balance refererer til kroppens evne til at opretholde stabilitet og kontrol, når vi står, går eller udfører forskellige bevægelser. Det er en essentiel del af vores fysiske funktion og spiller en vigtig rolle i vores daglige liv, især når det kommer til at forhindre fald og skader.

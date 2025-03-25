@@ -1,7 +1,8 @@
 ---
-title: "Sportstape"
-lastUpdated: "24/02/2024"
-metaTitle: "Sportstape – Hvad er sportstape? Fordele og funktion"
+title: Sportstape
+lastUpdated: 24/02/2024
+metaTitle: Sportstape – Hvad er sportstape? Fordele og funktion
+datePublished: 19/02/2025
 ---
 
 Sportstape er en type tape, der anvendes i sportsverdenen til at støtte og stabilisere muskler og led under fysisk aktivitet. Det er en vigtig del af mange atleters udstyr, da det kan hjælpe med at forebygge skader og forbedre præstationen.

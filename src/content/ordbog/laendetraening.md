@@ -1,7 +1,8 @@
 ---
-title: "Lændetræning"
-lastUpdated: "24/02/2024"
-metaTitle: "Lændetræning – Hvad er lændetræning? Styrk din ryg"
+title: Lændetræning
+lastUpdated: 24/02/2024
+metaTitle: Lændetræning – Hvad er lændetræning? Styrk din ryg
+datePublished: 19/02/2025
 ---
 
 Lændetræning refererer til specifikke øvelser og teknikker designet til at styrke og stabilisere lænderyggen. Dette er vigtigt for at forebygge skader, lindre smerter og forbedre den generelle funktionalitet i hverdagen. Lændetræning kan være gavnligt for personer med rygproblemer, atleter, eller dem, der ønsker at forbedre deres fysiske præstationer.

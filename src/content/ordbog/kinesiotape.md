@@ -1,7 +1,8 @@
 ---
-title: "Kinesiotape"
-lastUpdated: "24/02/2024"
-metaTitle: "Kinesiotape – Hvad er kinesiotape? Læs mere her"
+title: Kinesiotape
+lastUpdated: 24/02/2024
+metaTitle: Kinesiotape – Hvad er kinesiotape? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Kinesiotape er en elastisk tape, der anvendes i fysioterapi til at støtte og stabilisere muskler og led uden at begrænse bevægelse. Det er blevet populært blandt både professionelle atleter og almindelige borgere, der ønsker at lindre smerte og fremme heling.

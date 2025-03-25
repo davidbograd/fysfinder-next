@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Taleforstyrelser – Hvad er taleforstyrelser? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Taleforstyrelser refererer til en række tilstande, der påvirker evnen til at kommunikere effektivt. Disse forstyrrelser kan variere fra vanskeligheder med at danne ord til problemer med at forstå eller bruge sprog korrekt. Det er vigtigt at forstå, at taleforstyrelser kan påvirke både børn og voksne og kan have en betydelig indvirkning på livskvaliteten.

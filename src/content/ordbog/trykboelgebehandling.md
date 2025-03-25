@@ -1,7 +1,8 @@
 ---
-title: "Trykbølgebehandling"
-lastUpdated: "24/02/2024"
-metaTitle: "Trykbølgebehandling – Hvad er trykbølgebehandling?"
+title: Trykbølgebehandling
+lastUpdated: 24/02/2024
+metaTitle: Trykbølgebehandling – Hvad er trykbølgebehandling?
+datePublished: 19/02/2025
 ---
 
 Trykbølgebehandling er en innovativ fysioterapeutisk metode, der anvender akustiske bølger til at stimulere helingsprocesser i kroppen. Denne behandling er især effektiv til at lindre smerter og fremme regenerering af væv, hvilket gør den populær blandt både patienter og behandlere.

@@ -1,7 +1,8 @@
 ---
-title: "Triceps tendinopati"
-lastUpdated: "24/02/2024"
-metaTitle: "Triceps tendinopati – Hvad er triceps tendinopati? Læs mere"
+title: Triceps tendinopati
+lastUpdated: 24/02/2024
+metaTitle: Triceps tendinopati – Hvad er triceps tendinopati? Læs mere
+datePublished: 19/02/2025
 ---
 
 Triceps tendinopati er en tilstand, der påvirker tricepssenen, som forbinder tricepsmusklen til albueleddet. Denne tilstand kan forårsage smerte og ubehag, især under aktiviteter, der involverer strækning eller belastning af armen. Det er vigtigt at forstå årsagerne, symptomerne og behandlingsmulighederne for at kunne håndtere denne tilstand effektivt.

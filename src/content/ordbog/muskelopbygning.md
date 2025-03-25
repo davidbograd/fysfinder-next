@@ -1,7 +1,8 @@
 ---
-title: "Muskelopbygning"
-lastUpdated: "24/02/2024"
-metaTitle: "Muskelopbygning – Hvad er muskelopbygning? Læs mere"
+title: Muskelopbygning
+lastUpdated: 24/02/2024
+metaTitle: Muskelopbygning – Hvad er muskelopbygning? Læs mere
+datePublished: 19/02/2025
 ---
 
 Muskelopbygning refererer til processen, hvor kroppen øger muskelmasse og styrke gennem træning og ernæring. Det er en vigtig del af mange menneskers fitnessrejse og kan have betydelige sundhedsmæssige fordele.

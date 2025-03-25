@@ -1,7 +1,8 @@
 ---
-title: "Kompressionsbehandling"
-lastUpdated: "24/02/2024"
-metaTitle: "Kompressionsbehandling – Hvad er kompressionsbehandling?"
+title: Kompressionsbehandling
+lastUpdated: 24/02/2024
+metaTitle: Kompressionsbehandling – Hvad er kompressionsbehandling?
+datePublished: 19/02/2025
 ---
 
 Kompressionsbehandling er en terapeutisk metode, der anvendes til at forbedre blodcirkulationen og reducere hævelse i kroppen. Denne behandling er især nyttig for personer med venøse problemer, lymfødem eller efter operationer. I denne artikel vil vi udforske, hvad kompressionsbehandling indebærer, hvordan den fungerer, og hvilke fordele den kan have for din sundhed.

@@ -1,7 +1,8 @@
 ---
-title: "Knogleskørhed"
-lastUpdated: "24/02/2024"
-metaTitle: "Knogleskørhed – Hvad er knogleskørhed? Bliv klogere her"
+title: Knogleskørhed
+lastUpdated: 24/02/2024
+metaTitle: Knogleskørhed – Hvad er knogleskørhed? Bliv klogere her
+datePublished: 19/02/2025
 ---
 
 Knogleskørhed, også kendt som osteoporose, er en tilstand, hvor knoglerne bliver svage og skrøbelige, hvilket øger risikoen for brud. Det er en almindelig sygdom, især blandt ældre mennesker, og kan have alvorlige konsekvenser for livskvaliteten. Forståelse af knogleskørhed og dens behandling er vigtig for at bevare knoglesundheden.

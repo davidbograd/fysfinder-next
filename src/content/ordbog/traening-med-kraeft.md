@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Træning og kræft – Kan du træne med kræft? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Træning med kræft refererer til den fysiske aktivitet, som personer med kræft kan udføre for at forbedre deres fysiske og mentale velvære. Forskning viser, at træning kan have en positiv indvirkning på kræftpatienters livskvalitet, hjælpe med at håndtere symptomer og forbedre den generelle sundhed.

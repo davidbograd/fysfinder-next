@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Hjemmebehandling – Hvad er hjemmebehandling? Find hjælp
+datePublished: 19/02/2025
 ---
 
 Hjemmebehandling refererer til fysioterapeutiske behandlinger, der udføres i patientens eget hjem. Dette kan være en praktisk løsning for personer, der har svært ved at komme til en klinik, eller som har behov for individuel opmærksomhed i en tryg og velkendt atmosfære. Hjemmebehandling kan dække en bred vifte af fysioterapeutiske ydelser, herunder genoptræning, smertebehandling og vejledning i øvelser.

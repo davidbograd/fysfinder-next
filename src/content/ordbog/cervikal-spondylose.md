@@ -1,7 +1,8 @@
 ---
-title: "Cervikal spondylose"
-lastUpdated: "24/02/2024"
-metaTitle: "Cervikal spondylose – Hvad er cervikal spondylose? Læs mere"
+title: Cervikal spondylose
+lastUpdated: 24/02/2024
+metaTitle: Cervikal spondylose – Hvad er cervikal spondylose? Læs mere
+datePublished: 19/02/2025
 ---
 
 Cervikal spondylose er en degenerativ tilstand, der påvirker nakkevirvlerne og de tilhørende strukturer. Det er en almindelig tilstand, der ofte opstår med alderen og kan føre til smerter, stivhed og nedsat bevægelighed i nakken. For mange mennesker kan cervikal spondylose være en kilde til ubehag, men med den rette behandling kan symptomerne ofte lindres.

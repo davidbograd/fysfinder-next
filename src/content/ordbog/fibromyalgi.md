@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2024
 metaTitle: Fibromyalgi – Hvad er fibromyalgi? Symptomer og behandling
+datePublished: 19/02/2025
 ---
 
 KORT: Fibromyalgi er en kronisk smertetilstand, der påvirker millioner af mennesker verden over, og som har en betydelig indflydelse på både fysisk og psykisk velbefindende. Selvom årsagerne til fibromyalgi ikke er fuldt forståede, mener forskere, at tilstanden skyldes en kompleks blanding af genetiske, neurologiske og miljømæssige faktorer. Denne artikel vil dykke ned i, hvad fibromyalgi er, hvordan den diagnosticeres, og hvordan man bedst kan håndtere symptomerne i hverdagen.

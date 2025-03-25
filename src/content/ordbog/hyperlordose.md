@@ -1,7 +1,8 @@
 ---
-title: "Hyperlordose"
-lastUpdated: "24/02/2024"
-metaTitle: "Hyperlordose – Hvad er hyperlordose? Symptomer/behandling"
+title: Hyperlordose
+lastUpdated: 24/02/2024
+metaTitle: Hyperlordose – Hvad er hyperlordose? Symptomer/behandling
+datePublished: 19/02/2025
 ---
 
 Hyperlordose er en tilstand, hvor der er en unormal krumning i lænderyggen, hvilket resulterer i en overdreven bule i rygsøjlen. Denne tilstand kan føre til ubehag og smerter, og det er vigtigt at forstå årsagerne, symptomerne og behandlingsmulighederne for hyperlordose.

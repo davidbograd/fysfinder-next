@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2024
 metaTitle: Hovedpine – Hvad er hovedpine? Årsager og behandling
+datePublished: 19/02/2025
 ---
 
 Hovedpine er en af de mest almindelige sundhedsproblemer og påvirker millioner af mennesker på verdensplan. For de fleste mennesker er hovedpine en forbigående tilstand, men for andre kan det være en kronisk udfordring, der har stor indflydelse på deres livskvalitet. Hovedpine kan have mange forskellige årsager og præsentere sig på flere måder, hvilket gør det vigtigt at forstå de forskellige typer, årsager og effektive behandlingsmuligheder.

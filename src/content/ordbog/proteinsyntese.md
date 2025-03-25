@@ -1,7 +1,8 @@
 ---
-title: "Proteinsyntese"
-lastUpdated: "24/02/2024"
-metaTitle: "Proteinsyntese – Hvad er proteinsyntese? Læs mere her"
+title: Proteinsyntese
+lastUpdated: 24/02/2024
+metaTitle: Proteinsyntese – Hvad er proteinsyntese? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Proteinsyntese er den biologiske proces, hvor celler producerer proteiner, som er essentielle for kroppens funktioner. Denne proces involverer flere trin, herunder transkription og translation, og er afgørende for vækst, reparation og vedligeholdelse af væv.

@@ -1,7 +1,8 @@
 ---
-title: "Myoser"
-lastUpdated: "24/02/2024"
-metaTitle: "Myoser – Hvad er myoser? Læs om symptomer og behandling"
+title: Myoser
+lastUpdated: 24/02/2024
+metaTitle: Myoser – Hvad er myoser? Læs om symptomer og behandling
+datePublished: 19/02/2025
 ---
 
 Myoser er en tilstand, der opstår, når musklerne i kroppen udvikler små, smertefulde knuder, også kendt som triggerpunkter. Disse knuder kan forårsage smerte, stivhed og ubehag, og de kan påvirke en persons bevægelse og livskvalitet. Myoser kan opstå som følge af overbelastning, stress, dårlig kropsholdning eller traumer. Det er vigtigt at forstå, hvordan myoser dannes, og hvordan de kan behandles for at forbedre ens velvære.

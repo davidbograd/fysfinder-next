@@ -1,6 +1,7 @@
 ---
 lastUpdated: 14/03/2025
 metaTitle: Ergonomi – Hvad er ergonomi? Få en bedre kropsholdning
+datePublished: 19/02/2025
 ---
 
 ![Illustration af ergonomi](/images/articles/ergonomi-intro.webp)

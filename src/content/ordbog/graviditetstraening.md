@@ -1,7 +1,8 @@
 ---
-title: "Graviditetstræning"
-lastUpdated: "24/02/2024"
-metaTitle: "Graviditetstræning – Hvad er graviditetstræning? Læs mere"
+title: Graviditetstræning
+lastUpdated: 24/02/2024
+metaTitle: Graviditetstræning – Hvad er graviditetstræning? Læs mere
+datePublished: 19/02/2025
 ---
 
 Graviditetstræning refererer til de fysiske aktiviteter og øvelser, der er designet specielt til gravide kvinder. Formålet med graviditetstræning er at støtte den gravide kvindes krop gennem de fysiske forandringer, der sker under graviditeten, samt at forberede hende til fødslen og den efterfølgende genoptræning.

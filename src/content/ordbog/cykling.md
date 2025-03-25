@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Cykling – Hvad er cykling? Læs om sundhedsfordele nu
+datePublished: 19/02/2025
 ---
 
 Cykling er en populær form for motion og transport, der ikke kun forbedrer den fysiske sundhed, men også bidrager til mental velvære. Det er en aktivitet, der kan tilpasses alle aldre og fitnessniveauer, hvilket gør det til en ideel måde at holde sig aktiv på.

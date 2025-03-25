@@ -1,7 +1,8 @@
 ---
-title: "Lymfødem"
-lastUpdated: "24/02/2024"
-metaTitle: "Lymfødem – Hvad er lymfødem? Få hjælp til behandling"
+title: Lymfødem
+lastUpdated: 24/02/2024
+metaTitle: Lymfødem – Hvad er lymfødem? Få hjælp til behandling
+datePublished: 19/02/2025
 ---
 
 Lymfødem er en tilstand, der opstår, når lymfesystemet ikke fungerer korrekt, hvilket fører til hævelse, typisk i arme eller ben. Det kan være en udfordrende tilstand, der kræver specialiseret behandling for at lindre symptomerne og forbedre livskvaliteten.

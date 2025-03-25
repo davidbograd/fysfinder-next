@@ -1,7 +1,8 @@
 ---
-title: "Muskelkramp"
-lastUpdated: "24/02/2024"
-metaTitle: "Muskelkramp – Hvad er muskelkramp? Årsager og løsninger"
+title: Muskelkramp
+lastUpdated: 24/02/2024
+metaTitle: Muskelkramp – Hvad er muskelkramp? Årsager og løsninger
+datePublished: 19/02/2025
 ---
 
 Muskelkramp er en ufrivillig og pludselig sammentrækning af en muskel eller en muskelgruppe, der ofte medfører smerte og ubehag. Det kan opstå i forskellige dele af kroppen og kan være forårsaget af en række faktorer, herunder dehydrering, overanstrengelse eller ubalancer i elektrolytter.

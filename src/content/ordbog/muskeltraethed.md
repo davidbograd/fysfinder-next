@@ -1,7 +1,8 @@
 ---
-title: "Muskeltræthed"
-lastUpdated: "24/02/2024"
-metaTitle: "Muskeltræthed – Hvad er muskeltræthed? Læs mere her"
+title: Muskeltræthed
+lastUpdated: 24/02/2024
+metaTitle: Muskeltræthed – Hvad er muskeltræthed? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Muskeltræthed refererer til den tilstand, hvor musklerne mister deres styrke og udholdenhed efter gentagen brug eller anstrengelse. Det er en almindelig oplevelse, især efter fysisk aktivitet, og kan påvirke ens evne til at udføre dagligdags opgaver. Forståelse af muskeltræthed er vigtig for at kunne håndtere og forebygge det effektivt.

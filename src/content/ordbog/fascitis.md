@@ -1,7 +1,8 @@
 ---
-title: "Fascitis"
-lastUpdated: "24/02/2024"
-metaTitle: "Fascitis – Hvad er fascitis? Læs om symptomer og behandling"
+title: Fascitis
+lastUpdated: 24/02/2024
+metaTitle: Fascitis – Hvad er fascitis? Læs om symptomer og behandling
+datePublished: 19/02/2025
 ---
 
 Fascitis er en betændelse i fascien, det bindevev, der omgiver muskler, nerver og blodkar. Denne tilstand kan forårsage smerte og ubehag, især i fødderne og benene, og kan påvirke en persons daglige liv og aktivitetsniveau. Det er vigtigt at forstå årsagerne, symptomerne og behandlingsmulighederne for fascitis for at kunne håndtere tilstanden effektivt.

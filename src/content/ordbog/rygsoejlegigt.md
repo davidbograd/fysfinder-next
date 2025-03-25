@@ -1,7 +1,8 @@
 ---
-title: "Rygsøjlegigt"
-lastUpdated: "24/02/2024"
-metaTitle: "Rygsøjlegigt – Hvad er rygsøjlegigt? Symptomer & behandling"
+title: Rygsøjlegigt
+lastUpdated: 24/02/2024
+metaTitle: Rygsøjlegigt – Hvad er rygsøjlegigt? Symptomer & behandling
+datePublished: 19/02/2025
 ---
 
 Rygsøjlegigt, også kendt som ankyloserende spondylitis, er en kronisk inflammatorisk sygdom, der primært påvirker rygsøjlen og kan føre til stivhed og smerte. Denne tilstand kan have en betydelig indvirkning på livskvaliteten, og det er vigtigt at forstå dens symptomer, behandling og hvordan fysioterapi kan hjælpe.

@@ -1,7 +1,8 @@
 ---
-title: "Ledstivhed"
-lastUpdated: "24/02/2024"
-metaTitle: "Ledstivhed – Hvad er ledstivhed? Symptomer & behandling"
+title: Ledstivhed
+lastUpdated: 24/02/2024
+metaTitle: Ledstivhed – Hvad er ledstivhed? Symptomer & behandling
+datePublished: 19/02/2025
 ---
 
 Ledstivhed refererer til en tilstand, hvor leddene i kroppen bliver stive og mindre fleksible, hvilket kan føre til begrænset bevægelse og ubehag. Denne tilstand kan påvirke dagligdagen og kan være forårsaget af forskellige faktorer, herunder skader, sygdomme eller naturlig aldring.

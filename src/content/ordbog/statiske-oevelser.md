@@ -1,7 +1,8 @@
 ---
-title: "Statiske øvelser"
-lastUpdated: "24/02/2024"
-metaTitle: "Statiske øvelser – Hvad er statiske øvelser? Læs mere her"
+title: Statiske øvelser
+lastUpdated: 24/02/2024
+metaTitle: Statiske øvelser – Hvad er statiske øvelser? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Statiske øvelser er en type træning, hvor musklerne aktiveres uden at ændre længden af musklen eller leddene. Disse øvelser er ofte anvendt i fysioterapi for at forbedre muskelstyrke, stabilitet og kontrol, og de kan være en effektiv del af rehabilitering og forebyggelse af skader.

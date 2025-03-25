@@ -1,7 +1,8 @@
 ---
-title: "Selvmyofascial release"
-lastUpdated: "24/02/2024"
-metaTitle: "Selvmyofascial release – Hvad er selvmyofascial release?"
+title: Selvmyofascial release
+lastUpdated: 24/02/2024
+metaTitle: Selvmyofascial release – Hvad er selvmyofascial release?
+datePublished: 19/02/2025
 ---
 
 Selvmyofascial release er en teknik inden for fysioterapi, der fokuserer på at løsne spændinger i muskler og bindevæv. Denne metode anvendes ofte til at forbedre bevægelighed, reducere smerte og fremme restitution efter træning. Ved at anvende tryk på specifikke punkter i kroppen kan man frigøre spændinger og forbedre blodcirkulationen.

@@ -1,7 +1,8 @@
 ---
-title: "Isotonisk træning"
-lastUpdated: "24/02/2024"
-metaTitle: "Isotonisk træning – Hvad er isotonisk træning? Læs mere her"
+title: Isotonisk træning
+lastUpdated: 24/02/2024
+metaTitle: Isotonisk træning – Hvad er isotonisk træning? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Isotonisk træning refererer til en form for styrketræning, hvor musklerne arbejder med en konstant belastning, hvilket resulterer i bevægelse af leddene. Denne træningsmetode er populær blandt både atleter og almindelige mennesker, da den kan forbedre muskelstyrke, udholdenhed og generel fysisk formåen.

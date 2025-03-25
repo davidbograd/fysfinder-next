@@ -1,7 +1,8 @@
 ---
-title: "Slidgigt i tommelfinger"
-lastUpdated: "24/02/2024"
-metaTitle: "Slidgigt i tommelfinger – Hvad er slidgigt i tommelfinger?"
+title: Slidgigt i tommelfinger
+lastUpdated: 24/02/2024
+metaTitle: Slidgigt i tommelfinger – Hvad er slidgigt i tommelfinger?
+datePublished: 19/02/2025
 ---
 
 Slidgigt i tommelfinger, også kendt som basal gigt, er en degenerativ ledsygdom, der påvirker leddene i tommelfingeren. Denne tilstand opstår, når brusk, der beskytter leddene, slides væk, hvilket kan føre til smerte, stivhed og nedsat bevægelighed. Det er en almindelig tilstand, især blandt ældre voksne, og kan have en betydelig indvirkning på dagligdags aktiviteter.

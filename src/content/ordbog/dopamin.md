@@ -1,7 +1,8 @@
 ---
-title: "Dopamin"
-lastUpdated: "24/02/2024"
-metaTitle: "Dopamin – Hvad er dopamin? Læs om dets betydning her"
+title: Dopamin
+lastUpdated: 24/02/2024
+metaTitle: Dopamin – Hvad er dopamin? Læs om dets betydning her
+datePublished: 19/02/2025
 ---
 
 Dopamin er en vigtig neurotransmitter i hjernen, der spiller en central rolle i mange af kroppens funktioner, herunder bevægelse, motivation, belønning og regulering af humør. Det er ofte omtalt som "lykkehormonet", da det er forbundet med følelser af glæde og tilfredshed.

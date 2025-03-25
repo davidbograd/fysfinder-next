@@ -1,7 +1,8 @@
 ---
-title: "Svag core"
-lastUpdated: "24/02/2024"
-metaTitle: "Svag core – Hvad er en svag core? Årsager og løsninger"
+title: Svag core
+lastUpdated: 24/02/2024
+metaTitle: Svag core – Hvad er en svag core? Årsager og løsninger
+datePublished: 19/02/2025
 ---
 
 En svag core refererer til en utilstrækkelig styrke i de muskler, der stabiliserer og understøtter kroppen, især i mave- og rygområdet. En stærk core er essentiel for at opretholde en god kropsholdning, forbedre balance og reducere risikoen for skader. Mange mennesker oplever problemer med en svag core, hvilket kan påvirke deres daglige aktiviteter og sportspræstationer.

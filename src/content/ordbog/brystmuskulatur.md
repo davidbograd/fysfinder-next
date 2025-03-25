@@ -1,7 +1,8 @@
 ---
-title: "Brystmuskulatur"
-lastUpdated: "24/02/2024"
-metaTitle: "Brystmuskulatur – Hvad er brystmuskulaturen? Læs mere her"
+title: Brystmuskulatur
+lastUpdated: 24/02/2024
+metaTitle: Brystmuskulatur – Hvad er brystmuskulaturen? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Brystmuskulaturen, også kendt som pectoralis, er en gruppe af muskler, der spiller en central rolle i bevægelsen af overkroppen. Disse muskler er essentielle for mange dagligdags aktiviteter og sportslige præstationer, og en god forståelse af brystmuskulaturen kan hjælpe med at forbedre både styrke og funktionalitet.

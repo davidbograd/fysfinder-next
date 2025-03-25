@@ -1,7 +1,8 @@
 ---
-title: "SI-led blokering"
-lastUpdated: "24/02/2024"
-metaTitle: "SI-led blokering – Hvad er SI-led blokering? Læs mere her"
+title: SI-led blokering
+lastUpdated: 24/02/2024
+metaTitle: SI-led blokering – Hvad er SI-led blokering? Læs mere her
+datePublished: 19/02/2025
 ---
 
 SI-led blokering refererer til en tilstand, hvor sacroiliac leddene, som forbinder rygsøjlen med bækkenet, bliver låst eller begrænset i bevægelse. Dette kan føre til smerter i nedre ryg, hofter og ben, og det kan påvirke en persons daglige aktiviteter. Behandlingen af SI-led blokering involverer ofte fysioterapi, som kan hjælpe med at genoprette bevægelsen og lindre smerter.

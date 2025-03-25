@@ -1,7 +1,8 @@
 ---
-title: "Seneskedehindebetændelse"
-lastUpdated: "24/02/2024"
-metaTitle: "Hvad er seneskedehindebetændelse? Læs alt om tilstanden"
+title: Seneskedehindebetændelse
+lastUpdated: 24/02/2024
+metaTitle: Hvad er seneskedehindebetændelse? Læs alt om tilstanden
+datePublished: 19/02/2025
 ---
 
 Seneskedehindebetændelse, også kendt som tendovaginitis, er en betændelsestilstand, der påvirker seneskederne, som er de beskyttende lag omkring senerne. Denne tilstand kan forårsage smerte, hævelse og nedsat bevægelse i det berørte område, hvilket ofte påvirker dagligdags aktiviteter. Det er vigtigt at forstå årsagerne, symptomerne og behandlingsmulighederne for seneskedehindebetændelse for at kunne håndtere tilstanden effektivt.

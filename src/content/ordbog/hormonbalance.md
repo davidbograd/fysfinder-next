@@ -1,7 +1,8 @@
 ---
-title: "Hormonbalance"
-lastUpdated: "24/02/2024"
-metaTitle: "Hormonbalance – Hvad er hormonbalance? Læs mere her"
+title: Hormonbalance
+lastUpdated: 24/02/2024
+metaTitle: Hormonbalance – Hvad er hormonbalance? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Hormonbalance refererer til den optimale tilstand af hormoner i kroppen, hvor de fungerer harmonisk for at opretholde fysisk og mental velvære. Hormoner spiller en afgørende rolle i mange af kroppens funktioner, herunder stofskifte, humør, vækst og reproduktion. En ubalance kan føre til en række sundhedsproblemer, hvilket gør det vigtigt at forstå, hvordan man kan opnå og vedligeholde hormonbalance.

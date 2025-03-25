@@ -1,7 +1,8 @@
 ---
-title: "Taping-teknikker"
-lastUpdated: "24/02/2024"
-metaTitle: "Taping-teknikker – Hvad er taping-teknikker? Læs mere her"
+title: Taping-teknikker
+lastUpdated: 24/02/2024
+metaTitle: Taping-teknikker – Hvad er taping-teknikker? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Taping-teknikker er en vigtig del af fysioterapi, der anvendes til at støtte og stabilisere muskler og led. Disse teknikker kan hjælpe med at reducere smerte, forbedre bevægelse og fremme heling. Taping kan være en effektiv metode til at håndtere skader og forebygge yderligere problemer.

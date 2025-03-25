@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Bakers cyste – Hvad er en bakers cyste? Læs mere her
+datePublished: 19/02/2025
 ---
 
 En Bakers cyste, også kendt som en popliteal cyste, er en væskefyldt sæk, der dannes bag knæet. Denne cyste opstår typisk som følge af en underliggende tilstand, der forårsager irritation eller betændelse i knæleddet, hvilket resulterer i overskydende synovialvæske. Det er vigtigt at forstå, hvordan en Bakers cyste kan påvirke ens liv og hvilke behandlingsmuligheder der findes.

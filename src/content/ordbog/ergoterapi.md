@@ -1,7 +1,8 @@
 ---
-title: "Ergoterapi"
-lastUpdated: "24/02/2024"
-metaTitle: "Ergoterapi – Hvad er ergoterapi? Læs mere her"
+title: Ergoterapi
+lastUpdated: 24/02/2024
+metaTitle: Ergoterapi – Hvad er ergoterapi? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Ergoterapi er en sundhedsfaglig disciplin, der fokuserer på at hjælpe mennesker med at opnå større uafhængighed og forbedre deres livskvalitet gennem meningsfulde aktiviteter. Ergoterapeuter arbejder med personer, der har fysiske, mentale eller sociale udfordringer, og tilpasser behandlinger og aktiviteter for at støtte deres rehabilitering og daglige funktion.

@@ -1,7 +1,8 @@
 ---
-title: "Underaktiv muskulatur"
-lastUpdated: "24/02/2024"
-metaTitle: "Underaktiv muskulatur – Hvad er underaktiv muskulatur?"
+title: Underaktiv muskulatur
+lastUpdated: 24/02/2024
+metaTitle: Underaktiv muskulatur – Hvad er underaktiv muskulatur?
+datePublished: 19/02/2025
 ---
 
 Underaktiv muskulatur refererer til muskler, der ikke arbejder optimalt eller ikke aktiveres tilstrækkeligt under fysisk aktivitet. Dette kan føre til svaghed, ubalance i kroppen og øget risiko for skader. Det er vigtigt at forstå, hvordan underaktiv muskulatur påvirker vores bevægelsesmønstre og generelle sundhed.

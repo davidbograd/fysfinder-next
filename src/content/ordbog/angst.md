@@ -1,6 +1,7 @@
 ---
 lastUpdated: 08/03/2025
 metaTitle: Angst – Hvad er angst? Læs om behandling og hjælp
+datePublished: 19/02/2025
 ---
 
 

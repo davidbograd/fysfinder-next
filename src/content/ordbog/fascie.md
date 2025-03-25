@@ -1,7 +1,8 @@
 ---
-title: "Fascie"
-lastUpdated: "24/02/2024"
-metaTitle: "Fascie – Hvad er fascie? Læs om dens vigtige funktioner"
+title: Fascie
+lastUpdated: 24/02/2024
+metaTitle: Fascie – Hvad er fascie? Læs om dens vigtige funktioner
+datePublished: 19/02/2025
 ---
 
 Fascie er et bindevev, der danner et netværk af støtte og beskyttelse omkring muskler, organer og andre strukturer i kroppen. Dette væv spiller en afgørende rolle i kroppens funktion og bevægelse, da det hjælper med at opretholde strukturel integritet og muliggør glidning mellem forskellige væv.

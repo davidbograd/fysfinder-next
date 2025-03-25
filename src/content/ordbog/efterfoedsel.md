@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Efterfødsel – Hvad er efterfødsel? Bliv klogere på restitution
+datePublished: 19/02/2025
 ---
 
 Efterfødsel refererer til den periode, der følger efter en kvindes fødsel, hvor kroppen gennemgår en række fysiske og følelsesmæssige forandringer. Det er en vigtig tid for både mor og barn, hvor der er behov for særlig opmærksomhed på helbred og velvære.

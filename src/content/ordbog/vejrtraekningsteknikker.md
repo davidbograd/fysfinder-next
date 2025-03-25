@@ -1,7 +1,8 @@
 ---
-title: "Vejrtrækningsteknikker"
-lastUpdated: "24/02/2024"
-metaTitle: "Vejrtrækningsteknikker – Hvad er vejrtrækningsteknikker?"
+title: Vejrtrækningsteknikker
+lastUpdated: 24/02/2024
+metaTitle: Vejrtrækningsteknikker – Hvad er vejrtrækningsteknikker?
+datePublished: 19/02/2025
 ---
 
 Vejrtrækningsteknikker refererer til forskellige metoder og øvelser, der hjælper med at forbedre vejrtrækningen. Disse teknikker kan være nyttige for personer med åndedrætsbesvær, stress eller dem, der ønsker at optimere deres fysiske præstationer. Gennem korrekt vejrtrækning kan man opnå bedre iltoptagelse, reducere angst og forbedre den generelle velvære.

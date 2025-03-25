@@ -1,7 +1,8 @@
 ---
-title: "Skuldersmerter"
-lastUpdated: "24/02/2024"
-metaTitle: "Skuldersmerter – Hvad er skuldersmerter? Læs mere her"
+title: Skuldersmerter
+lastUpdated: 24/02/2024
+metaTitle: Skuldersmerter – Hvad er skuldersmerter? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Skuldersmerter er en almindelig tilstand, der kan påvirke mennesker i alle aldre. Det kan skyldes en række faktorer, herunder skader, overbelastning, eller underliggende medicinske tilstande. At forstå årsagerne og behandlingsmulighederne for skuldersmerter er vigtigt for at kunne håndtere og lindre symptomerne effektivt.

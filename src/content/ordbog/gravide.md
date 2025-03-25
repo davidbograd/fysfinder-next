@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Gravide – Hvad er fysioterapi for gravide? Bliv klogere her
+datePublished: 19/02/2025
 ---
 
 Gravide refererer til kvinder, der er i en tilstand af graviditet, hvor de bærer et foster i deres livmoder. Denne periode kræver særlig opmærksomhed på både fysisk og mental sundhed, og fysioterapi kan spille en vigtig rolle i at støtte gravide kvinder gennem de fysiske forandringer, der sker i kroppen.

@@ -1,6 +1,7 @@
 ---
 lastUpdated: 04/03/2025
 metaTitle: Hold i nakken – Hvad er hold i nakken? Symptomer/behandling
+datePublished: 19/02/2025
 ---
 
 ![Illustration af hold i nakken](/images/articles/hold-i-nakken-intro.webp)

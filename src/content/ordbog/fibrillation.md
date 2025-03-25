@@ -1,7 +1,8 @@
 ---
-title: "Fibrillation"
-lastUpdated: "24/02/2024"
-metaTitle: "Fibrillation – Hvad er fibrillation? Symptomer og behandling"
+title: Fibrillation
+lastUpdated: 24/02/2024
+metaTitle: Fibrillation – Hvad er fibrillation? Symptomer og behandling
+datePublished: 19/02/2025
 ---
 
 Fibrillation er en medicinsk tilstand, der involverer uregelmæssige og ofte hurtige hjerteslag. Det kan påvirke hjertets evne til at pumpe blod effektivt og kan føre til alvorlige sundhedsmæssige komplikationer. Forståelse af fibrillation er vigtig for at kunne håndtere og behandle tilstanden korrekt.

@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Hofte impingement – Hvad er hofte impingement? Læs mere
+datePublished: 19/02/2025
 ---
 
 Hofte impingement, også kendt som femoroacetabulært impingement (FAI), er en tilstand, hvor der opstår en unormal kontakt mellem lårbenet og hofteleddet. Dette kan føre til smerte, nedsat bevægelighed og i nogle tilfælde slidgigt. Det er vigtigt at forstå symptomerne, årsagerne og behandlingsmulighederne for hofte impingement for at kunne håndtere tilstanden effektivt.

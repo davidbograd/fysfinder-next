@@ -1,7 +1,8 @@
 ---
-title: "Kropsvægtstræning"
-lastUpdated: "24/02/2024"
-metaTitle: "Kropsvægtstræning – Hvad er kropsvægtstræning? Læs mere"
+title: Kropsvægtstræning
+lastUpdated: 24/02/2024
+metaTitle: Kropsvægtstræning – Hvad er kropsvægtstræning? Læs mere
+datePublished: 19/02/2025
 ---
 
 Kropsvægtstræning er en form for træning, hvor man bruger sin egen kropsvægt som modstand for at opnå styrke, fleksibilitet og udholdenhed. Denne træningsmetode er populær, da den kan udføres hvor som helst og kræver minimal eller ingen udstyr.

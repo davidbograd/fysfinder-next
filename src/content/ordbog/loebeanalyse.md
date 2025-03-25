@@ -1,7 +1,8 @@
 ---
-title: "Løbeanalyse"
-lastUpdated: "24/02/2024"
-metaTitle: "Løbeanalyse – Hvad er løbeanalyse? Forbedr din løbestil"
+title: Løbeanalyse
+lastUpdated: 24/02/2024
+metaTitle: Løbeanalyse – Hvad er løbeanalyse? Forbedr din løbestil
+datePublished: 19/02/2025
 ---
 
 Løbeanalyse er en vigtig proces, der hjælper løbere med at forstå deres løbestil og identificere eventuelle biomekaniske problemer. Gennem en grundig vurdering kan fysioterapeuter og specialister give værdifuld indsigt, der kan forbedre præstationen og reducere risikoen for skader.

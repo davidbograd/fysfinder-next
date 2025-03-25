@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Brud – Hvad er et brud? Læs om symptomer og behandling
+datePublished: 19/02/2025
 ---
 
 Et brud, også kendt som en fraktur, opstår, når et knoglevæv er brudt eller revnet. Dette kan ske som følge af traumer, fald, overbelastning eller sygdomme, der svækker knoglerne. Behandlingen af brud varierer afhængigt af bruddets type og placering, og fysioterapi spiller en vigtig rolle i rehabiliteringsprocessen.

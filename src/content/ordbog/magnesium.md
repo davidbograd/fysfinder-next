@@ -1,7 +1,8 @@
 ---
-title: "Magnesium"
-lastUpdated: "24/02/2024"
-metaTitle: "Magnesium – Hvad er magnesium? Læs om dets fordele"
+title: Magnesium
+lastUpdated: 24/02/2024
+metaTitle: Magnesium – Hvad er magnesium? Læs om dets fordele
+datePublished: 19/02/2025
 ---
 
 Magnesium er et essentielt mineral, der spiller en vigtig rolle i mange af kroppens funktioner. Det er nødvendigt for at opretholde en sund nerve- og muskelfunktion, regulere blodtrykket og støtte immunforsvaret. Magnesium findes naturligt i mange fødevarer og kan også tages som kosttilskud.

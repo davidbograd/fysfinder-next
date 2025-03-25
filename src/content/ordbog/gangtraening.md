@@ -1,7 +1,8 @@
 ---
-title: "Gangtræning"
-lastUpdated: "24/02/2024"
-metaTitle: "Gangtræning – Hvad er gangtræning? Forbedr din mobilitet"
+title: Gangtræning
+lastUpdated: 24/02/2024
+metaTitle: Gangtræning – Hvad er gangtræning? Forbedr din mobilitet
+datePublished: 19/02/2025
 ---
 
 Gangtræning er en vigtig del af rehabilitering og behandling af forskellige fysiske skader og sygdomme. Det fokuserer på at forbedre gangfunktion, styrke og balance, hvilket er essentielt for at genoprette mobilitet og selvstændighed hos patienter. Denne form for træning kan være gavnlig for personer i alle aldre, der ønsker at forbedre deres fysiske tilstand og livskvalitet.

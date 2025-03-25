@@ -1,7 +1,8 @@
 ---
-title: "Ubalance i muskulaturen"
-lastUpdated: "24/02/2024"
-metaTitle: "Ubalance i muskulaturen – Hvad er ubalance i muskulaturen?"
+title: Ubalance i muskulaturen
+lastUpdated: 24/02/2024
+metaTitle: Ubalance i muskulaturen – Hvad er ubalance i muskulaturen?
+datePublished: 19/02/2025
 ---
 
 Ubalance i muskulaturen refererer til en tilstand, hvor der er en forskel i styrke, fleksibilitet eller funktion mellem forskellige muskelgrupper i kroppen. Dette kan føre til en række problemer, herunder smerter, nedsat bevægelsesområde og øget risiko for skader. At forstå og adressere muskulære ubalancer er vigtigt for at opretholde en sund krop og optimere fysisk præstation.

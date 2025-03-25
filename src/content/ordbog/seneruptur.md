@@ -1,7 +1,8 @@
 ---
-title: "Seneruptur"
-lastUpdated: "24/02/2024"
-metaTitle: "Seneruptur – Hvad er en seneruptur? Læs mere her"
+title: Seneruptur
+lastUpdated: 24/02/2024
+metaTitle: Seneruptur – Hvad er en seneruptur? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Seneruptur refererer til en skade, hvor en sene, der forbinder muskel til knogle, brister. Dette kan ske som følge af pludselige bevægelser, overbelastning eller traumer. Senerupturer kan forekomme i forskellige dele af kroppen, men er mest almindelige i skulderen, anklen og knæet. Behandlingen kan variere afhængigt af skadens alvorlighed og placering.

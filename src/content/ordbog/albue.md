@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Albue – Hvad er en albue? Læs om skader og behandlinger
+datePublished: 19/02/2025
 ---
 
 Albuen er en kompleks ledstruktur, der forbinder overarmen med underarmen. Den spiller en afgørende rolle i bevægelsen af armen og muliggør aktiviteter som at løfte, bære og kaste. Skader eller smerter i albuen kan have en betydelig indvirkning på dagligdagen, hvilket gør det vigtigt at forstå de forskellige aspekter af albueproblemer og behandlingsmuligheder.

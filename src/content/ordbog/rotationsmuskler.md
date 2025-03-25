@@ -1,7 +1,8 @@
 ---
-title: "Rotationsmuskler"
-lastUpdated: "24/02/2024"
-metaTitle: "Rotationsmuskler – Hvad er rotationsmuskler? Læs mere"
+title: Rotationsmuskler
+lastUpdated: 24/02/2024
+metaTitle: Rotationsmuskler – Hvad er rotationsmuskler? Læs mere
+datePublished: 19/02/2025
 ---
 
 Rotationsmuskler er en vigtig del af kroppens muskulatur, der spiller en central rolle i bevægelse og stabilitet. Disse muskler er ansvarlige for at rotere led og giver os mulighed for at udføre en række dagligdags aktiviteter, fra at dreje hovedet til at udføre sportslige bevægelser. Forståelsen af rotationsmusklernes funktion og betydning kan hjælpe med at forbedre vores fysiske præstationer og forebygge skader.

@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Nervesmerter – Hvad er nervesmerter? Bliv klogere her
+datePublished: 19/02/2025
 ---
 
 Nervesmerter, også kendt som neuropatiske smerter, opstår som følge af skader eller sygdomme i nervesystemet. Disse smerter kan være intense og svære at håndtere, og de kan påvirke livskvaliteten betydeligt. Det er vigtigt at forstå årsagerne, symptomerne og behandlingsmulighederne for nervesmerter for at kunne søge den rette hjælp.

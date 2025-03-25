@@ -91,6 +91,7 @@ export async function getDictionaryTerm(slug: string) {
     description: extractDescription(markdownContent),
     content: processedContent,
     lastUpdated: data.lastUpdated || formatDanishDate(new Date()),
+    datePublished: data.datePublished || "19/02/2025",
     metaTitle: data.metaTitle || `${title} - hvad er ${title.toLowerCase()}?`,
   };
 }

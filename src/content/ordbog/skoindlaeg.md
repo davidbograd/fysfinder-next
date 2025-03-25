@@ -1,7 +1,8 @@
 ---
-title: "Skoindlæg"
-lastUpdated: "24/02/2024"
-metaTitle: "Skoindlæg – Hvad er skoindlæg? Find den bedste løsning"
+title: Skoindlæg
+lastUpdated: 24/02/2024
+metaTitle: Skoindlæg – Hvad er skoindlæg? Find den bedste løsning
+datePublished: 19/02/2025
 ---
 
 Skoindlæg er specialdesignede indlæg, der placeres i sko for at forbedre komfort, støtte og funktionalitet. De kan være afgørende for personer med fodproblemer, der ønsker at lindre smerte og forbedre deres gangmønster.

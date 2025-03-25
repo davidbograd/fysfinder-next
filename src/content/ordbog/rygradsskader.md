@@ -1,7 +1,8 @@
 ---
-title: "Rygradsskader"
-lastUpdated: "24/02/2024"
-metaTitle: "Rygradsskader – Hvad er en rygradsskade? Læs mere her"
+title: Rygradsskader
+lastUpdated: 24/02/2024
+metaTitle: Rygradsskader – Hvad er en rygradsskade? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Rygradsskader refererer til skader, der påvirker rygsøjlen, som kan resultere i smerte, nedsat bevægelighed og i nogle tilfælde neurologiske problemer. Disse skader kan opstå som følge af traumer, overbelastning eller degenerative tilstande. Det er vigtigt at forstå, hvordan rygradsskader opstår, deres symptomer og behandlingsmuligheder for at kunne håndtere dem effektivt.

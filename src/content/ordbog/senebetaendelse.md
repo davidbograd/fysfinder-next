@@ -1,7 +1,8 @@
 ---
-title: "Senebetændelse"
-lastUpdated: "24/02/2024"
-metaTitle: "Senebetændelse – Hvad er senebetændelse? Læs mere her"
+title: Senebetændelse
+lastUpdated: 24/02/2024
+metaTitle: Senebetændelse – Hvad er senebetændelse? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Senebetændelse, også kendt som tendinitis, er en betændelsestilstand, der påvirker senerne, de stærke bånd af væv, der forbinder muskler til knogler. Denne tilstand kan opstå i forskellige dele af kroppen og er ofte forbundet med overbelastning, skader eller gentagne bevægelser. Det er vigtigt at forstå symptomerne, årsagerne og behandlingsmulighederne for senebetændelse for at kunne håndtere tilstanden effektivt.

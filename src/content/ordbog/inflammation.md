@@ -1,7 +1,8 @@
 ---
-title: "Inflammation"
-lastUpdated: "24/02/2024"
-metaTitle: "Inflammation – Hvad er inflammation? Læs mere her"
+title: Inflammation
+lastUpdated: 24/02/2024
+metaTitle: Inflammation – Hvad er inflammation? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Inflammation er kroppens naturlige reaktion på skade eller infektion. Det er en kompleks proces, der involverer immunsystemet, blodkar og forskellige celler, og som har til formål at beskytte kroppen og fremme heling. Selvom inflammation er en vigtig del af kroppens forsvar, kan det også føre til problemer, hvis det bliver kronisk eller overdrevent.

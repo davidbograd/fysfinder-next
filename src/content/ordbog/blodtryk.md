@@ -1,7 +1,8 @@
 ---
-title: "Blodtryk"
-lastUpdated: "24/02/2024"
-metaTitle: "Blodtryk – Hvad er blodtryk? Læs om blotrykkets funktion"
+title: Blodtryk
+lastUpdated: 24/02/2024
+metaTitle: Blodtryk – Hvad er blodtryk? Læs om blotrykkets funktion
+datePublished: 19/02/2025
 ---
 
 Blodtryk er et vigtigt mål for vores kardiovaskulære sundhed og refererer til den kraft, som blodet udøver mod væggene i blodkarrene, når det pumpes rundt i kroppen. At forstå blodtryk er essentielt for at kunne vurdere og opretholde en god sundhedstilstand.

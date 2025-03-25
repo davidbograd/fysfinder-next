@@ -1,7 +1,8 @@
 ---
-title: "Syreophobning"
-lastUpdated: "24/02/2024"
-metaTitle: "Syreophobning – Hvad er syreophobning? Læs mere her"
+title: Syreophobning
+lastUpdated: 24/02/2024
+metaTitle: Syreophobning – Hvad er syreophobning? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Syreophobning refererer til en tilstand, hvor kroppen har en ophobning af syrer, hvilket kan føre til forskellige sundhedsproblemer. Det er vigtigt at forstå, hvordan syreophobning opstår, og hvilke symptomer og behandlinger der er tilgængelige for at håndtere denne tilstand.

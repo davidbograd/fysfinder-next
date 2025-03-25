@@ -1,6 +1,7 @@
 ---
 lastUpdated: 04/03/2025
 metaTitle: Sportsskader – Hvad er en sportsskade? Læs om forebyggelse
+datePublished: 19/02/2025
 ---
 
 ![Illustration af sportsskader](/images/articles/sportsskade-intro.webp)

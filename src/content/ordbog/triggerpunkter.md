@@ -1,7 +1,8 @@
 ---
-title: "Triggerpunkter"
-lastUpdated: "24/02/2024"
-metaTitle: "Triggerpunkter – Hvad er triggerpunkter? Læs mere her"
+title: Triggerpunkter
+lastUpdated: 24/02/2024
+metaTitle: Triggerpunkter – Hvad er triggerpunkter? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Triggerpunkter, også kendt som myofasciale triggerpunkter, er små, stramme områder i muskelvævet, der kan forårsage smerte og ubehag. Disse punkter kan opstå som følge af overbelastning, stress eller skader og kan føre til en række symptomer, herunder muskelspændinger, nedsat bevægelighed og referred pain, hvor smerten mærkes i andre dele af kroppen. For mange mennesker kan behandling af triggerpunkter være en vigtig del af fysioterapi og rehabilitering.

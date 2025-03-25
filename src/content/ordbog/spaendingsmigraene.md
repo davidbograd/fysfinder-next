@@ -1,7 +1,8 @@
 ---
-title: "Spændingsmigræne"
-lastUpdated: "24/02/2024"
-metaTitle: "Spændingsmigræne – Hvad er spændingsmigræne? "
+title: Spændingsmigræne
+lastUpdated: 24/02/2024
+metaTitle: 'Spændingsmigræne – Hvad er spændingsmigræne? '
+datePublished: 19/02/2025
 ---
 
 Spændingsmigræne er en type hovedpine, der ofte beskrives som en trykkende eller strammende fornemmelse i hovedet. Denne tilstand kan være forårsaget af stress, muskelspændinger eller dårlig kropsholdning og kan påvirke dagligdagen betydeligt. Det er vigtigt at forstå symptomerne, årsagerne og behandlingsmulighederne for at kunne håndtere spændingsmigræne effektivt.

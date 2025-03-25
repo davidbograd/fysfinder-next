@@ -1,7 +1,8 @@
 ---
-title: "Pludselige smerter"
-lastUpdated: "24/02/2024"
-metaTitle: "Pludselige smerter – Hvad er pludselige smerter? Læs mere"
+title: Pludselige smerter
+lastUpdated: 24/02/2024
+metaTitle: Pludselige smerter – Hvad er pludselige smerter? Læs mere
+datePublished: 19/02/2025
 ---
 
 Pludselige smerter kan være en skræmmende oplevelse, der ofte opstår uden varsel. Disse smerter kan variere i intensitet og kan påvirke forskellige dele af kroppen. Det er vigtigt at forstå, hvad pludselige smerter kan indikere, og hvordan man bedst håndterer dem.

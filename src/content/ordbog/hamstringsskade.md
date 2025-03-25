@@ -1,7 +1,8 @@
 ---
-title: "Hamstringsskade"
-lastUpdated: "24/02/2024"
-metaTitle: "Hamstringsskade – Hvad er hamstringsskade? Læs mere her"
+title: Hamstringsskade
+lastUpdated: 24/02/2024
+metaTitle: Hamstringsskade – Hvad er hamstringsskade? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Hamstringsskade refererer til en skade på muskelgruppen, der strækker sig langs bagsiden af låret. Disse muskler spiller en vigtig rolle i bevægelse og stabilitet, og skader kan opstå under sport eller fysisk aktivitet, hvor der er pludselige bevægelser eller stræk. Det er vigtigt at forstå årsagerne, symptomerne og behandlingsmulighederne for hamstringsskader for at kunne håndtere dem effektivt.

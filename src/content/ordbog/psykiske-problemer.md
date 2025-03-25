@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Psykiske problemer – Hvad er psykiske problemer?
+datePublished: 19/02/2025
 ---
 
 Psykiske problemer refererer til en bred vifte af mentale helbredsudfordringer, der kan påvirke en persons tanker, følelser og adfærd. Disse problemer kan variere fra milde til alvorlige og kan have en betydelig indvirkning på en persons dagligdag og livskvalitet. Det er vigtigt at forstå, hvordan fysioterapi kan spille en rolle i håndteringen af psykiske problemer.

@@ -1,7 +1,8 @@
 ---
-title: "Slidgigt i fødder"
-lastUpdated: "24/02/2024"
-metaTitle: "Slidgigt i fødderne – Hvad er slidgigt i fødderne? Læs mere"
+title: Slidgigt i fødder
+lastUpdated: 24/02/2024
+metaTitle: Slidgigt i fødderne – Hvad er slidgigt i fødderne? Læs mere
+datePublished: 19/02/2025
 ---
 
 Slidgigt i fødderne, også kendt som artrose, er en degenerativ ledsygdom, der påvirker leddene i fødderne. Denne tilstand kan føre til smerte, stivhed og nedsat bevægelighed, hvilket kan påvirke dagligdagen og livskvaliteten. Det er vigtigt at forstå årsagerne, symptomerne og behandlingsmulighederne for slidgigt i fødderne for at kunne håndtere tilstanden effektivt.

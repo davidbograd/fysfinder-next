@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Impingement – Hvad er impingement? Symptomer/behandling
+datePublished: 19/02/2025
 ---
 
 Impingement er en tilstand, der opstår, når senerne i skulderen bliver klemt eller irriteret, ofte under bevægelse. Dette kan føre til smerte, nedsat bevægelighed og ubehag i skulderområdet. Det er en almindelig årsag til skuldersmerter og kan påvirke både aktive og stillesiddende personer.

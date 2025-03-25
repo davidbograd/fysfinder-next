@@ -1,7 +1,8 @@
 ---
-title: "Knyster"
-lastUpdated: "24/02/2024"
-metaTitle: "Kyster – Hvad er knyster? Læs om symptomer og behandling"
+title: Knyster
+lastUpdated: 24/02/2024
+metaTitle: Kyster – Hvad er knyster? Læs om symptomer og behandling
+datePublished: 19/02/2025
 ---
 
 Knyster, også kendt som hallux valgus, er en almindelig fodlidelse, der ofte rammer mange mennesker, især kvinder. Det er karakteriseret ved en deformation af stortåens led, hvilket resulterer i en bule på indersiden af foden. Denne tilstand kan forårsage smerte, ubehag og vanskeligheder med at finde passende fodtøj.

@@ -1,7 +1,8 @@
 ---
-title: "Hydration"
-lastUpdated: "24/02/2024"
-metaTitle: "Hydrering – Hvad er hydrering? Læs om vigtigheden her"
+title: Hydration
+lastUpdated: 24/02/2024
+metaTitle: Hydrering – Hvad er hydrering? Læs om vigtigheden her
+datePublished: 19/02/2025
 ---
 
 Hydration refers to the process of providing adequate fluids to the body to maintain optimal physiological functions. It is essential for overall health, affecting everything from physical performance to cognitive function. Understanding hydration is crucial, especially for those engaged in physical activities or recovering from injuries.

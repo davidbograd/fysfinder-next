@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2024
 metaTitle: Synkeforstyrelser – Hvad er synkeforstyrelser? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Synkeforstyrelser refererer til en række problemer, der kan opstå, når man har vanskeligheder med at synke. Dette kan påvirke både mad og væskeindtag og kan føre til ubehag, smerte og i alvorlige tilfælde, kvælning. Det er vigtigt at forstå årsagerne til synkeforstyrelser og hvordan fysioterapi kan hjælpe med at håndtere disse udfordringer.

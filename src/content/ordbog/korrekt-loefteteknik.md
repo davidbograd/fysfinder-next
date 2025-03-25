@@ -1,7 +1,8 @@
 ---
-title: "Korrekt løfteteknik"
-lastUpdated: "24/02/2024"
-metaTitle: "Korrekt løfteteknik – Hvad er korrekt løfteteknik? Tips og råd"
+title: Korrekt løfteteknik
+lastUpdated: 24/02/2024
+metaTitle: Korrekt løfteteknik – Hvad er korrekt løfteteknik? Tips og råd
+datePublished: 19/02/2025
 ---
 
 Korrekt løfteteknik er en essentiel færdighed, der hjælper med at forebygge skader og belastninger i kroppen, især i ryggen. At lære den rigtige måde at løfte på kan gøre en stor forskel for både fysisk velvære og dagligdags aktiviteter.

@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Fitness – Hvad er fitness? Alt om at holde sig i gang
+datePublished: 19/02/2025
 ---
 
 Fitness refererer til en tilstand af fysisk velvære, hvor en person har evnen til at udføre dagligdags aktiviteter med energi og uden træthed. Det omfatter en kombination af styrke, udholdenhed, fleksibilitet og kropssammensætning. At opnå og opretholde fitness er vigtigt for både fysisk og mental sundhed.

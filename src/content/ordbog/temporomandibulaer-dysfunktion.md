@@ -1,7 +1,8 @@
 ---
-title: "Temporomandibulær dysfunktion"
-lastUpdated: "24/02/2024"
-metaTitle: "Temporomandibulær dysfunktion – Hvad er TMD? Læs mere"
+title: Temporomandibulær dysfunktion
+lastUpdated: 24/02/2024
+metaTitle: Temporomandibulær dysfunktion – Hvad er TMD? Læs mere
+datePublished: 19/02/2025
 ---
 
 Temporomandibulær dysfunktion (TMD) refererer til en gruppe af tilstande, der påvirker kæbeleddet og de omkringliggende muskler. Denne tilstand kan forårsage smerte, ubehag og begrænset bevægelse i kæben, hvilket kan påvirke dagligdagen og livskvaliteten. Det er vigtigt at forstå symptomerne, årsagerne og behandlingsmulighederne for TMD for at kunne søge den rette hjælp.

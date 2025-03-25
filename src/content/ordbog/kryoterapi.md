@@ -1,7 +1,8 @@
 ---
-title: "Kryoterapi"
-lastUpdated: "24/02/2024"
-metaTitle: "Kryoterapi – Hvad er kryoterapi? Læs om fordelene her"
+title: Kryoterapi
+lastUpdated: 24/02/2024
+metaTitle: Kryoterapi – Hvad er kryoterapi? Læs om fordelene her
+datePublished: 19/02/2025
 ---
 
 Kryoterapi er en behandlingsmetode, der anvender ekstrem kulde til at lindre smerte, reducere inflammation og fremme heling. Denne teknik er blevet populær inden for fysioterapi og sportsmedicin, da den kan hjælpe med at forbedre restitutionen efter skader og træning.

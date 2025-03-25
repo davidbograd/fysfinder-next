@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Parkinson – Hvad er Parkinson? Find hjælp til behandling
+datePublished: 19/02/2025
 ---
 
 Parkinson er en neurodegenerativ sygdom, der påvirker bevægelse og motoriske færdigheder. Sygdommen opstår, når nerveceller i hjernen, der producerer dopamin, gradvist dør. Dette kan føre til en række symptomer, herunder rysten, stivhed, langsomme bevægelser og balanceproblemer. Fysioterapi spiller en vigtig rolle i behandlingen af Parkinsons sygdom ved at hjælpe patienter med at bevare deres mobilitet og forbedre livskvaliteten.

@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Kropsholdning – Hvad er god kropsholdning? Bliv klogere her
+datePublished: 19/02/2025
 ---
 
 Kropsholdning refererer til den måde, hvorpå vi holder vores krop, når vi står, sidder eller bevæger os. En god kropsholdning er essentiel for at opretholde en sund krop og forebygge skader. Det påvirker ikke kun vores fysiske velvære, men også vores mentale tilstand og selvtillid.

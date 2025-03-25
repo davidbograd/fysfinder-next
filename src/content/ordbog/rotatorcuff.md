@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Rotatorcuff – Hvad er rotatorcuff? Skader og behandling
+datePublished: 19/02/2025
 ---
 
 Rotatorcuffen er en gruppe af muskler og sener, der stabiliserer skulderleddet og muliggør bevægelse af armen. Denne struktur er afgørende for at opretholde skulderens funktion og bevægelighed, og skader på rotatorcuffen kan føre til smerte og nedsat funktion.

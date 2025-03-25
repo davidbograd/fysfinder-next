@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Urologi – Hvad er urologi? Få indsigt i specialet her
+datePublished: 19/02/2025
 ---
 
 Urologi er en medicinsk specialitet, der fokuserer på sygdomme og lidelser i urinvejene hos både mænd og kvinder samt det mandlige reproduktive system. Urologer diagnosticerer og behandler en bred vifte af tilstande, herunder urinvejsinfektioner, nyresten, prostataproblemer og blæresygdomme. Denne artikel vil give dig en dybdegående forståelse af urologi og de forskellige aspekter af denne specialitet.

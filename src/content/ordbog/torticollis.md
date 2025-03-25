@@ -1,7 +1,8 @@
 ---
-title: "Torticollis"
-lastUpdated: "24/02/2024"
-metaTitle: "Torticollis – Hvad er torticollis? Bliv klogere på her"
+title: Torticollis
+lastUpdated: 24/02/2024
+metaTitle: Torticollis – Hvad er torticollis? Bliv klogere på her
+datePublished: 19/02/2025
 ---
 
 Torticollis, også kendt som "skæv hals", er en tilstand, hvor hovedet er skævt eller drejet til den ene side. Dette kan skyldes muskelspændinger, skader eller medfødte faktorer. Torticollis kan påvirke både børn og voksne og kan variere i sværhedsgrad.

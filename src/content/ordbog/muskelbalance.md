@@ -1,7 +1,8 @@
 ---
-title: "Muskelbalance"
-lastUpdated: "24/02/2024"
-metaTitle: "Muskelbalance – Hvad er muskelbalance? Læs mere her"
+title: Muskelbalance
+lastUpdated: 24/02/2024
+metaTitle: Muskelbalance – Hvad er muskelbalance? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Muskelbalance refererer til den optimale tilstand, hvor musklerne i kroppen arbejder harmonisk sammen for at opretholde en korrekt kropsholdning og bevægelse. En god muskelbalance er essentiel for at forebygge skader, forbedre præstationer og sikre en generel sundhedstilstand.

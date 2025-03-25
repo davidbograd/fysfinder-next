@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Discusprolaps i ryggen – Hvad er discusprolaps? Læs mere
+datePublished: 19/02/2025
 ---
 
 Discusprolaps i ryggen, også kendt som en hernieret skive, opstår, når en af de bløde skiver mellem ryghvirvlerne i rygsøjlen buler ud eller brister. Dette kan føre til smerte, nedsat bevægelighed og i nogle tilfælde nerveirritation. Det er en almindelig tilstand, der kan påvirke mennesker i alle aldre, men er mest udbredt blandt voksne.

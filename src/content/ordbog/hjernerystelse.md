@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Hjernerystelse – Hvad er en hjernerystelse?
+datePublished: 19/02/2025
 ---
 
 Hjernerystelse er en form for traumatisk hjerneskade, der opstår, når hovedet rammes eller rystes kraftigt. Det kan føre til en række symptomer, herunder hovedpine, svimmelhed, forvirring og hukommelsestab. Det er vigtigt at forstå, hvordan man genkender og håndterer hjernerystelse for at sikre en korrekt behandling og hurtig bedring.

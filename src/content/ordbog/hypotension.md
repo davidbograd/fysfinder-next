@@ -1,7 +1,8 @@
 ---
-title: "Hypotension"
-lastUpdated: "24/02/2024"
-metaTitle: "Hypotension – Hvad er hypotension? Læs mere her"
+title: Hypotension
+lastUpdated: 24/02/2024
+metaTitle: Hypotension – Hvad er hypotension? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Hypotension, eller lavt blodtryk, refererer til en tilstand, hvor blodtrykket i arterierne er lavere end det normale niveau. Dette kan føre til en række symptomer og sundhedsmæssige problemer, og det er vigtigt at forstå årsagerne, symptomerne og behandlingsmulighederne for at kunne håndtere tilstanden effektivt.

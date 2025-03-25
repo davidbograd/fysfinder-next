@@ -1,7 +1,8 @@
 ---
-title: "Fejlstilling"
-lastUpdated: "24/02/2024"
-metaTitle: "Fejlstilling – Hvad er fejlstilling? Læs om behandling her"
+title: Fejlstilling
+lastUpdated: 24/02/2024
+metaTitle: Fejlstilling – Hvad er fejlstilling? Læs om behandling her
+datePublished: 19/02/2025
 ---
 
 Fejlstilling refererer til en unormal position eller justering af knogler, led eller muskler, som kan føre til smerte, nedsat bevægelighed og andre sundhedsproblemer. Det er en tilstand, der ofte kræver professionel behandling for at genoprette normal funktion og lindre ubehag.

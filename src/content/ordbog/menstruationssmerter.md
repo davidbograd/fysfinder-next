@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Menstruationssmerter – Hvad er menstruationssmerter?
+datePublished: 19/02/2025
 ---
 
 Menstruationssmerter, også kendt som dysmenorré, refererer til de smertefulde fornemmelser, som mange kvinder oplever før eller under menstruationen. Disse smerter kan variere fra milde til svære og kan påvirke dagligdagen betydeligt. Det er vigtigt at forstå årsagerne til menstruationssmerter samt de forskellige behandlingsmuligheder, der findes.

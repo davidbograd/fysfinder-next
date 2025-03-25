@@ -1,5 +1,6 @@
 ---
-lastUpdated: "19/02/2024"
+lastUpdated: 19/02/2024
+datePublished: 19/02/2025
 ---
 
 ![Illustration af slidgigt i knaet](/images/articles/Slidgigt_knæ.webp)

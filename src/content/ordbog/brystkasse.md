@@ -1,7 +1,8 @@
 ---
-title: "Brystkasse"
-lastUpdated: "24/02/2024"
-metaTitle: "Brystkasse – Hvad er brystkassen? Læs om dens funktioner"
+title: Brystkasse
+lastUpdated: 24/02/2024
+metaTitle: Brystkasse – Hvad er brystkassen? Læs om dens funktioner
+datePublished: 19/02/2025
 ---
 
 Brystkassen, også kendt som thorax, er den del af kroppen, der beskytter de vitale organer som hjerte og lunger. Det er en kompleks struktur, der spiller en afgørende rolle i respiration og cirkulation. Forståelsen af brystkassens anatomi og funktion er vigtig for at kunne diagnosticere og behandle forskellige tilstande, der kan påvirke denne del af kroppen.

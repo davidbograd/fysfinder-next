@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Achillessene – Hvad er achillessenen? Skader og pleje
+datePublished: 19/02/2025
 ---
 
 Achillessenen er den stærkeste sene i menneskekroppen og forbinder lægmusklerne til hælbenet. Denne sene spiller en afgørende rolle i bevægelse, især når det kommer til at gå, løbe og hoppe. Skader på achillessenen kan føre til betydelige smerter og begrænsninger i dagligdagen, hvilket gør det vigtigt at forstå dens funktion og hvordan man kan pleje den.

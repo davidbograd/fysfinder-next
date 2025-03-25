@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Overgangsalder – Hvad er overgangsalderen? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Overgangsalderen, også kendt som menopause, er en naturlig fase i en kvindes liv, hvor kroppen gennemgår betydelige hormonelle forandringer. Denne periode markerer afslutningen på menstruationscyklussen og kan medføre en række fysiske og følelsesmæssige symptomer. Det er vigtigt at forstå, hvad overgangsalderen indebærer, og hvordan man kan håndtere de udfordringer, der følger med.

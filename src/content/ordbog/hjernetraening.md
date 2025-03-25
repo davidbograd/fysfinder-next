@@ -1,7 +1,8 @@
 ---
-title: "Hjernetræning"
-lastUpdated: "24/02/2024"
-metaTitle: "Hjernetræning – Hvad er hjernetræning? Styrk din hjerne"
+title: Hjernetræning
+lastUpdated: 24/02/2024
+metaTitle: Hjernetræning – Hvad er hjernetræning? Styrk din hjerne
+datePublished: 19/02/2025
 ---
 
 Hjernetræning refererer til en række aktiviteter og øvelser designet til at forbedre kognitive funktioner som hukommelse, opmærksomhed, problemløsning og beslutningstagning. Det er en vigtig del af rehabilitering for personer, der har lidt af hjerneskader eller neurologiske lidelser, men det kan også være gavnligt for alle, der ønsker at styrke deres mentale kapacitet.

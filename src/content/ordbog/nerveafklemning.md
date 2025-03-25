@@ -1,7 +1,8 @@
 ---
-title: "Nerveafklemning"
-lastUpdated: "24/02/2024"
-metaTitle: "Nerveafklemning – Hvad er nerveafklemning? Læs mere"
+title: Nerveafklemning
+lastUpdated: 24/02/2024
+metaTitle: Nerveafklemning – Hvad er nerveafklemning? Læs mere
+datePublished: 19/02/2025
 ---
 
 Nerveafklemning er en tilstand, hvor en nerve bliver komprimeret eller irriteret, hvilket kan føre til smerte, svaghed, eller følelsesløshed i det område, som nerven forsyner. Det kan opstå i forskellige dele af kroppen og kan påvirke dagligdagen betydeligt.

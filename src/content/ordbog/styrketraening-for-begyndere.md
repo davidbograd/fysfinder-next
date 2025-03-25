@@ -1,7 +1,8 @@
 ---
-title: "Styrketræning for begyndere"
-lastUpdated: "24/02/2024"
-metaTitle: "Styrketræning – Hvad er styrketræning? Start din rejse nu"
+title: Styrketræning for begyndere
+lastUpdated: 24/02/2024
+metaTitle: Styrketræning – Hvad er styrketræning? Start din rejse nu
+datePublished: 19/02/2025
 ---
 
 Styrketræning for begyndere refererer til de grundlæggende principper og øvelser, der er designet til at hjælpe nye udøvere med at opbygge styrke og muskelmasse. Det er en effektiv måde at forbedre den generelle fysiske formåen, øge muskeltonus og fremme en sund livsstil.

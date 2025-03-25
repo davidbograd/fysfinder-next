@@ -1,7 +1,8 @@
 ---
-title: "Funktionel træning"
-lastUpdated: "24/02/2024"
-metaTitle: "Funktionel træning – Hvad er funktionel træning? Læs mere"
+title: Funktionel træning
+lastUpdated: 24/02/2024
+metaTitle: Funktionel træning – Hvad er funktionel træning? Læs mere
+datePublished: 19/02/2025
 ---
 
 Funktionel træning er en træningsmetode, der fokuserer på at forbedre kroppens evne til at udføre dagligdags aktiviteter. Denne form for træning involverer øvelser, der efterligner bevægelser, vi udfører i hverdagen, hvilket gør det til en effektiv måde at styrke musklerne og forbedre koordinationen.

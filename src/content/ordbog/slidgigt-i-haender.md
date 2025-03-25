@@ -1,7 +1,8 @@
 ---
-title: "Slidgigt i hænder"
-lastUpdated: "24/02/2024"
-metaTitle: "Slidgigt i hænder – Hvad er slidgigt i hænder? Læs mere "
+title: Slidgigt i hænder
+lastUpdated: 24/02/2024
+metaTitle: 'Slidgigt i hænder – Hvad er slidgigt i hænder? Læs mere '
+datePublished: 19/02/2025
 ---
 
 Slidgigt i hænder, også kendt som håndartrose, er en degenerativ ledsygdom, der påvirker leddene i hænderne. Denne tilstand opstår, når brusk, der beskytter leddene, slides ned over tid, hvilket kan føre til smerte, stivhed og nedsat bevægelighed. Slidgigt i hænderne er en almindelig tilstand, især blandt ældre voksne, og kan have en betydelig indvirkning på dagligdagen.

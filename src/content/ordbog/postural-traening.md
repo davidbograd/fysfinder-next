@@ -1,7 +1,8 @@
 ---
-title: "Postural træning"
-lastUpdated: "24/02/2024"
-metaTitle: "Postural træning – Hvad er postural træning? Læs mere her"
+title: Postural træning
+lastUpdated: 24/02/2024
+metaTitle: Postural træning – Hvad er postural træning? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Postural træning refererer til en række øvelser og teknikker, der har til formål at forbedre kroppens holdning og alignment. En god kropsholdning er essentiel for at forebygge skader, reducere smerter og forbedre den generelle funktionalitet i hverdagen. I denne artikel vil vi udforske, hvad postural træning indebærer, dens fordele, og hvordan man kan implementere det i sin daglige rutine.

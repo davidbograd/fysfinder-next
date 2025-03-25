@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Arbejdsskader – Hvad er en arbejdsskade? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Arbejdsskader refererer til skader, der opstår som følge af arbejdsrelaterede aktiviteter. Disse skader kan variere fra mindre skader som forstuvninger til mere alvorlige tilstande, der kræver langvarig behandling. Det er vigtigt at forstå, hvordan arbejdsskader opstår, og hvordan fysioterapi kan hjælpe med at genoprette funktion og lindre smerte.

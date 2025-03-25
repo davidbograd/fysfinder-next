@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Lunge – Hvad er lungerne? Læs om deres funktioner
+datePublished: 19/02/2025
 ---
 
 Lungerne er vitale organer i det menneskelige åndedrætssystem, der spiller en central rolle i iltning af blodet og fjernelse af kuldioxid. De er ansvarlige for at bringe ilt ind i kroppen og udskille affaldsgasser, hvilket er essentielt for vores overlevelse og generelle sundhed.

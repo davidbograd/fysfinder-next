@@ -1,5 +1,6 @@
 ---
-lastUpdated: "21/03/2025"
+lastUpdated: 21/03/2025
+datePublished: 19/02/2025
 ---
 
 ![Illustration af lændesmerter](/images/articles/Lændesmerter_intro.webp)

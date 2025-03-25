@@ -1,7 +1,8 @@
 ---
-title: "Doms (Delayed Onset Muscle Soreness)"
-lastUpdated: "24/02/2024"
-metaTitle: "Doms – Hvad er doms? Læs om symptomer og lindring"
+title: Doms (Delayed Onset Muscle Soreness)
+lastUpdated: 24/02/2024
+metaTitle: Doms – Hvad er doms? Læs om symptomer og lindring
+datePublished: 19/02/2025
 ---
 
 Doms, eller forsinket muskelømhed, er en almindelig tilstand, der opstår efter fysisk aktivitet, især når man udfører nye eller intense øvelser. Det er en naturlig reaktion fra kroppen, der ofte viser sig som ømhed og stivhed i musklerne, typisk 24 til 72 timer efter træning. At forstå doms kan hjælpe med at håndtere og forebygge ubehag, så man kan fortsætte med at træne effektivt.

@@ -1,7 +1,8 @@
 ---
-title: "Dyspnø"
-lastUpdated: "24/02/2024"
-metaTitle: "Dyspnø – Hvad er dyspnø? Bliv klogere på åndenød her"
+title: Dyspnø
+lastUpdated: 24/02/2024
+metaTitle: Dyspnø – Hvad er dyspnø? Bliv klogere på åndenød her
+datePublished: 19/02/2025
 ---
 
 Dyspnø, ofte beskrevet som åndenød eller åndedrætsbesvær, er en tilstand, hvor en person oplever en følelse af utilstrækkelig luft eller besvær med at trække vejret. Det kan være en midlertidig tilstand eller et symptom på en underliggende sygdom. Dyspnø kan påvirke livskvaliteten betydeligt og kræver ofte professionel vurdering og behandling.

@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Hold i ryggen – Hvad er hold i ryggen? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Hold i ryggen er en almindelig tilstand, der påvirker mange mennesker i Danmark. Det kan være forårsaget af en række faktorer, herunder dårlig kropsholdning, overbelastning, skader eller degenerative tilstande. At forstå årsagerne, symptomerne og behandlingsmulighederne for hold i ryggen er vigtigt for at kunne håndtere og lindre smerterne effektivt.

@@ -1,7 +1,8 @@
 ---
-title: "Manipulation"
-lastUpdated: "24/02/2024"
-metaTitle: "Manipulation – Hvad er manipulation? Læs mere her"
+title: Manipulation
+lastUpdated: 24/02/2024
+metaTitle: Manipulation – Hvad er manipulation? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Manipulation er en fysioterapeutisk teknik, der anvendes til at behandle smerter og bevægelsesproblemer i muskler og led. Denne metode involverer hurtige, præcise bevægelser for at genoprette normal funktion og lindre ubehag. Manipulation kan være en effektiv del af behandlingen for mange patienter, der lider af muskel- og skeletproblemer.

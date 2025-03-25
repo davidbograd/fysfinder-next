@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Børnefysioterapi – Hvad er børnefysioterapi? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Børnefysioterapi er en specialiseret form for fysioterapi, der fokuserer på at hjælpe børn med forskellige fysiske udfordringer og udviklingsforstyrrelser. Denne type terapi er designet til at støtte børns motoriske færdigheder, styrke, balance og koordination, hvilket er essentielt for deres generelle udvikling og trivsel.

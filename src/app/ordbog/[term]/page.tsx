@@ -1,8 +1,8 @@
-import { GlossaryEntry } from '@/components/features/content/GlossaryEntry';
+import { GlossaryEntry } from "@/components/features/content/GlossaryEntry";
 import { getDictionaryTerm, getDictionaryTerms } from "@/lib/dictionary";
-import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
-import { AuthorCard } from '@/components/features/content/AuthorCard';
-import { TableOfContents } from '@/components/features/content/TableOfContents';
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
+import { AuthorCard } from "@/components/features/content/AuthorCard";
+import { TableOfContents } from "@/components/features/content/TableOfContents";
 import {
   calculateReadingTime,
   extractTableOfContents,
@@ -18,6 +18,8 @@ interface DictionaryTermStructuredDataProps {
     description: string;
     content: string;
     slug: string;
+    lastUpdated: string;
+    datePublished: string;
   };
 }
 
@@ -30,6 +32,8 @@ function DictionaryTermStructuredData({
     name: term.title,
     headline: term.title,
     description: term.description,
+    dateModified: term.lastUpdated,
+    datePublished: term.datePublished,
     author: {
       "@type": "Person",
       name: "Joachim Bograd",
@@ -101,7 +105,7 @@ export default async function DictionaryTermPage({
   const term = await getDictionaryTerm(params.term);
   const headings = extractTableOfContents(term.content);
   const readingTime = calculateReadingTime(term.content);
-  const lastUpdated = formatDanishDate(new Date());
+  const lastUpdated = term.lastUpdated;
 
   const breadcrumbItems = [
     { text: "Ordbog", link: "/ordbog" },

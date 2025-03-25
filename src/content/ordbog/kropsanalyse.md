@@ -1,7 +1,8 @@
 ---
-title: "Kropsanalyse"
-lastUpdated: "24/02/2024"
-metaTitle: "Kropsanalyse – Hvad er kropsanalyse? Analyse af kroppen"
+title: Kropsanalyse
+lastUpdated: 24/02/2024
+metaTitle: Kropsanalyse – Hvad er kropsanalyse? Analyse af kroppen
+datePublished: 19/02/2025
 ---
 
 Kropsanalyse er en metode til at vurdere kroppens sammensætning og funktionelle tilstand. Denne proces kan hjælpe med at identificere styrker og svagheder i kroppen, hvilket er essentielt for at tilpasse træningsprogrammer og rehabiliteringsforløb. Kropsanalyse anvendes ofte af fysioterapeuter for at skabe en skræddersyet behandlingsplan, der tager højde for den enkelte patients behov.

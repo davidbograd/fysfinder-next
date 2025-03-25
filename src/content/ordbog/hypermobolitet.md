@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Hypermobilitet – Hvad er hypermobilitet? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Hypermobilitet refererer til en tilstand, hvor leddene har en usædvanlig stor bevægelighed. Dette kan føre til både fordele og ulemper, afhængigt af individets situation. Mange mennesker med hypermobilitet oplever ikke symptomer, mens andre kan have smerter eller problemer med stabilitet og funktion.

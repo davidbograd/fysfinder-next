@@ -1,7 +1,8 @@
 ---
-title: "Vestibulær træning"
-lastUpdated: "24/02/2024"
-metaTitle: "Vestibulær træning – Hvad er vestibulær træning? Læs mere"
+title: Vestibulær træning
+lastUpdated: 24/02/2024
+metaTitle: Vestibulær træning – Hvad er vestibulær træning? Læs mere
+datePublished: 19/02/2025
 ---
 
 Vestibulær træning er en specialiseret form for fysioterapi, der fokuserer på at forbedre balancen og den vestibulære funktion i kroppen. Denne type træning er særligt nyttig for personer, der lider af svimmelhed, balanceproblemer eller vestibulære lidelser. Gennem målrettede øvelser kan vestibulær træning hjælpe med at genoptræne hjernen og kroppen til bedre at håndtere bevægelse og positionering.

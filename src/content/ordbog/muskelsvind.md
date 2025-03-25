@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Muskelsvind – Hvad er muskelsvind? Få hjælp og støtte her
+datePublished: 19/02/2025
 ---
 
 Muskelsvind refererer til en tilstand, hvor musklerne svinder eller svækkes, hvilket kan påvirke en persons evne til at bevæge sig og udføre dagligdags aktiviteter. Denne tilstand kan være forårsaget af forskellige faktorer, herunder genetiske sygdomme, neurologiske lidelser eller skader. Det er vigtigt at forstå muskelsvind for at kunne søge den rette behandling og støtte.

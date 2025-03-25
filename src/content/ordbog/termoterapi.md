@@ -1,7 +1,8 @@
 ---
-title: "Termoterapi"
-lastUpdated: "24/02/2024"
-metaTitle: "Termoterapi – Hvad er termoterapi? Læs mere om behandling"
+title: Termoterapi
+lastUpdated: 24/02/2024
+metaTitle: Termoterapi – Hvad er termoterapi? Læs mere om behandling
+datePublished: 19/02/2025
 ---
 
 Termoterapi er en behandlingsmetode, der anvender varme og kulde til at lindre smerter, reducere inflammation og fremme heling i kroppen. Denne form for terapi er ofte en del af fysioterapi og kan være effektiv til behandling af forskellige muskel- og ledsmerter.

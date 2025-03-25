@@ -1,7 +1,8 @@
 ---
-title: "Diskusdegeneration"
-lastUpdated: "24/02/2024"
-metaTitle: "Diskusdegeneration – Hvad er diskusdegeneration? Læs mere"
+title: Diskusdegeneration
+lastUpdated: 24/02/2024
+metaTitle: Diskusdegeneration – Hvad er diskusdegeneration? Læs mere
+datePublished: 19/02/2025
 ---
 
 Diskusdegeneration refererer til en tilstand, hvor de intervertebrale skiver i rygsøjlen mister deres struktur og funktion over tid. Dette kan føre til smerter, nedsat bevægelighed og andre symptomer, der påvirker livskvaliteten. Det er en almindelig tilstand, især blandt ældre voksne, og kan være forårsaget af en kombination af aldring, slid og skader.

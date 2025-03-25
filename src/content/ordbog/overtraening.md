@@ -1,7 +1,8 @@
 ---
-title: "Overtræning"
-lastUpdated: "24/02/2024"
-metaTitle: "Overtræning – Hvad er overtræning? Symptomer & behandling"
+title: Overtræning
+lastUpdated: 24/02/2024
+metaTitle: Overtræning – Hvad er overtræning? Symptomer & behandling
+datePublished: 19/02/2025
 ---
 
 Overtræning er en tilstand, der opstår, når kroppen ikke får tilstrækkelig tid til at komme sig efter intens fysisk aktivitet. Det kan føre til en række fysiske og mentale symptomer, der påvirker præstationen og det generelle velvære. At forstå overtræning er vigtigt for at kunne forebygge og behandle det effektivt.

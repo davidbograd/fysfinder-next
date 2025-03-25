@@ -1,7 +1,8 @@
 ---
-title: "Kardiovaskulær træning"
-lastUpdated: "24/02/2024"
-metaTitle: "Kardiovaskulær træning – Hvad er kardiovaskulær træning?"
+title: Kardiovaskulær træning
+lastUpdated: 24/02/2024
+metaTitle: Kardiovaskulær træning – Hvad er kardiovaskulær træning?
+datePublished: 19/02/2025
 ---
 
 Kardiovaskulær træning, også kendt som aerob træning, er en form for fysisk aktivitet, der fokuserer på at forbedre hjertets og lungernes funktion. Denne type træning er essentiel for at opretholde en sund livsstil og kan hjælpe med at forebygge en række sygdomme.

@@ -1,7 +1,8 @@
 ---
-title: "Neuromuskulær træning"
-lastUpdated: "24/02/2024"
-metaTitle: "Neuromuskulær træning – Hvad er neuromuskulær træning?"
+title: Neuromuskulær træning
+lastUpdated: 24/02/2024
+metaTitle: Neuromuskulær træning – Hvad er neuromuskulær træning?
+datePublished: 19/02/2025
 ---
 
 Neuromuskulær træning er en specialiseret form for træning, der fokuserer på at forbedre kommunikationen mellem nerver og muskler. Denne træningsmetode er designet til at optimere muskelstyrke, koordination og balance, hvilket er essentielt for at forbedre funktionelle bevægelser og reducere risikoen for skader.

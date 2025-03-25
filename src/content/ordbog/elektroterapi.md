@@ -1,7 +1,8 @@
 ---
-title: "Elektroterapi"
-lastUpdated: "24/02/2024"
-metaTitle: "Elektroterapi – Hvad er elektroterapi? Læs mere her"
+title: Elektroterapi
+lastUpdated: 24/02/2024
+metaTitle: Elektroterapi – Hvad er elektroterapi? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Elektroterapi er en behandlingsmetode, der anvender elektriske strømme til at lindre smerte, fremme heling og forbedre muskelstyrke. Denne form for terapi er ofte anvendt i fysioterapi for at hjælpe patienter med forskellige muskel- og skeletproblemer.

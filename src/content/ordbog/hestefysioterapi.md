@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Hestefysioterapi – Hvad er hestefysioterapi? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Hestefysioterapi er en specialiseret form for fysioterapi, der fokuserer på at forbedre og vedligeholde hestens fysiske sundhed og præstation. Denne behandlingsform anvender forskellige teknikker til at lindre smerte, forbedre bevægelse og fremme helbredelse hos heste, hvilket er essentielt for både konkurrence- og fritidsheste.

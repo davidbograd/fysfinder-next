@@ -1,7 +1,8 @@
 ---
-title: "Blodcirkulation"
-lastUpdated: "24/02/2024"
-metaTitle: "Blodcirkulation – Hvad er blodcirkulation? Læs mere her"
+title: Blodcirkulation
+lastUpdated: 24/02/2024
+metaTitle: Blodcirkulation – Hvad er blodcirkulation? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Blodcirkulation refererer til den proces, hvor blodet bevæger sig gennem kroppen via blodkar, hvilket er essentielt for at transportere ilt og næringsstoffer til cellerne samt fjerne affaldsstoffer. En sund blodcirkulation er afgørende for vores generelle velvære og kan påvirkes af forskellige faktorer, herunder livsstil, kost og motion.

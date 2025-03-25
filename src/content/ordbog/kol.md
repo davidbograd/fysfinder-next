@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: KOL – Hvad er KOL? Læs om symptomer og behandling
+datePublished: 19/02/2025
 ---
 
 KOL, eller kronisk obstruktiv lungesygdom, er en progressiv lungesygdom, der gør det svært at trække vejret. Det er en af de mest almindelige lungesygdomme og kan have en betydelig indvirkning på livskvaliteten. KOL er ofte forårsaget af langvarig eksponering for skadelige partikler eller gasser, typisk fra rygning. Behandling og rehabilitering er afgørende for at forbedre symptomerne og livskvaliteten for personer med KOL.

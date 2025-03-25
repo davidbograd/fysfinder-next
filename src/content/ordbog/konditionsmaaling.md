@@ -1,7 +1,8 @@
 ---
-title: "Konditionsmåling"
-lastUpdated: "24/02/2024"
-metaTitle: "Konditionsmåling – Hvad er konditionsmåling? Få indsigt nu"
+title: Konditionsmåling
+lastUpdated: 24/02/2024
+metaTitle: Konditionsmåling – Hvad er konditionsmåling? Få indsigt nu
+datePublished: 19/02/2025
 ---
 
 Konditionsmåling refererer til metoder og teknikker, der anvendes til at vurdere en persons fysiske kondition, især med fokus på hjerte-kar-systemets effektivitet. Det er en vigtig del af fysioterapi og træningsprogrammer, da det hjælper med at identificere individuelle behov og mål for forbedring af konditionen.

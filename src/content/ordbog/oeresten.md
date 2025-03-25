@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Øresten – Hvad er øresten? Læs mere om svimmelhed
+datePublished: 19/02/2025
 ---
 
 Øresten er en tilstand, der opstår, når små krystaller af calciumcarbonat, kendt som otolitter, løsner sig fra deres normale placering i det indre øre og bevæger sig ind i de halvcirkelformede kanaler. Dette kan forårsage svimmelhed og balanceproblemer, da hjernen modtager forkerte signaler om kroppens position. Øresten kan være en ubehagelig oplevelse, men der findes behandlinger, der kan hjælpe med at lindre symptomerne.

@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2024
 metaTitle: Migræne – Hvad er migræne? Symptomer og behandling
+datePublished: 19/02/2025
 ---
 
 ![Illustration af migræne](/images/articles/migraene_intro.webp)

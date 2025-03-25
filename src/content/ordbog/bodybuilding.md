@@ -1,7 +1,8 @@
 ---
-title: "Bodybuilding"
-lastUpdated: "24/02/2024"
-metaTitle: "Bodybuilding – Hvad er bodybuilding? Læs om træningsformen"
+title: Bodybuilding
+lastUpdated: 24/02/2024
+metaTitle: Bodybuilding – Hvad er bodybuilding? Læs om træningsformen
+datePublished: 19/02/2025
 ---
 
 Bodybuilding er en træningsform, der fokuserer på at udvikle muskelmasse og styrke gennem specifikke øvelser og kost. Det er en populær aktivitet blandt både mænd og kvinder, der ønsker at forbedre deres fysiske udseende og generelle sundhed.

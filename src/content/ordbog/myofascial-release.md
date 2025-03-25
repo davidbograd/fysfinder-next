@@ -1,7 +1,8 @@
 ---
-title: "Myofascial release"
-lastUpdated: "24/02/2024"
-metaTitle: "Myofascial release – Hvad er myofascial release? Læs mere"
+title: Myofascial release
+lastUpdated: 24/02/2024
+metaTitle: Myofascial release – Hvad er myofascial release? Læs mere
+datePublished: 19/02/2025
 ---
 
 Myofascial release er en manuel terapiform, der fokuserer på at lindre spændinger og smerter i kroppens fasciale system. Dette system består af bindevæv, der omfavner muskler, knogler og organer, og kan blive stramt eller begrænset af forskellige årsager, hvilket kan føre til ubehag og nedsat bevægelighed. Myofascial release sigter mod at frigøre disse spændinger og genoprette normal funktion.

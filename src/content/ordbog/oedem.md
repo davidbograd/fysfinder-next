@@ -1,7 +1,8 @@
 ---
-title: "Ødem"
-lastUpdated: "24/02/2024"
-metaTitle: "Ødem – Hvad er ødem? Læs om årsager og behandlinger"
+title: Ødem
+lastUpdated: 24/02/2024
+metaTitle: Ødem – Hvad er ødem? Læs om årsager og behandlinger
+datePublished: 19/02/2025
 ---
 
 Ødem er en tilstand, hvor der opstår en unormal ophobning af væske i kroppens væv, hvilket kan føre til hævelse. Denne tilstand kan påvirke forskellige dele af kroppen, herunder ben, arme, ansigt og mave. Ødem kan være forårsaget af en række faktorer, herunder skader, betændelse, hjerteproblemer, nyresygdomme og visse medikamenter. Det er vigtigt at forstå årsagerne og behandlingsmulighederne for ødem for at kunne håndtere tilstanden effektivt.

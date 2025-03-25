@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Rodtryk i nakken – Hvad er rodtryk i nakken? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Rodtryk i nakken refererer til en tilstand, hvor nerverne i nakken bliver komprimeret eller irriteret, hvilket kan føre til smerte, svaghed eller følelsesløshed i nakken, skuldrene, armene og hænderne. Denne tilstand kan opstå af forskellige årsager, herunder skader, slidgigt eller diskusprolaps. Det er vigtigt at forstå symptomerne og behandlingsmulighederne for at kunne håndtere rodtryk effektivt.

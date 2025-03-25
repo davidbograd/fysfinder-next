@@ -1,7 +1,8 @@
 ---
-title: "Muskelatrofi"
-lastUpdated: "24/02/2024"
-metaTitle: "Muskelatrofi – Hvad er muskelatrofi? Behandling/forebyggelse"
+title: Muskelatrofi
+lastUpdated: 24/02/2024
+metaTitle: Muskelatrofi – Hvad er muskelatrofi? Behandling/forebyggelse
+datePublished: 19/02/2025
 ---
 
 Muskelatrofi refererer til tabet af muskelmasse og styrke, som kan opstå af forskellige årsager, herunder inaktivitet, sygdom eller skader. Det er en tilstand, der kan påvirke både fysisk funktion og livskvalitet, og det er vigtigt at forstå, hvordan man kan forebygge og behandle muskelatrofi.

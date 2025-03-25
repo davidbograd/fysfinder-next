@@ -1,7 +1,8 @@
 ---
-title: "Arvæv"
-lastUpdated: "24/02/2024"
-metaTitle: "Arvæv – Hvad er arvæv? Læs om behandling og heling"
+title: Arvæv
+lastUpdated: 24/02/2024
+metaTitle: Arvæv – Hvad er arvæv? Læs om behandling og heling
+datePublished: 19/02/2025
 ---
 
 Arvæv er en type væv, der dannes som en del af kroppens helingsproces efter en skade eller operation. Det er en vigtig del af reparationen, men kan også medføre udfordringer, hvis det ikke heler korrekt. Forståelse af arvæv og dets indvirkning på kroppen kan hjælpe med at navigere i behandlingsmuligheder og rehabilitering.

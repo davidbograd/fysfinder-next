@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Baldemusklerne – Hvad er baldemuskler? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Baldet er en vigtig del af kroppens anatomi og spiller en central rolle i bevægelse og stabilitet. Det refererer til den muskuløse del af kroppen, der dækker hofterne og bagdelen, og det er afgørende for mange dagligdags aktiviteter som at gå, løbe og sidde. I fysioterapi fokuseres der ofte på baldemusklerne for at forbedre funktionalitet og reducere smerter.

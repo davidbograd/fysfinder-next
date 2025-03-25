@@ -1,7 +1,8 @@
 ---
-title: "Flade fødder"
-lastUpdated: "24/02/2024"
-metaTitle: "Flade fødder – Hvad er flade fødder? Symptomer & behandling"
+title: Flade fødder
+lastUpdated: 24/02/2024
+metaTitle: Flade fødder – Hvad er flade fødder? Symptomer & behandling
+datePublished: 19/02/2025
 ---
 
 Flade fødder, også kendt som pes planus, er en tilstand, hvor fodbuen er flad eller næsten flad, hvilket kan føre til en række problemer med fødderne og kroppen generelt. Denne tilstand kan påvirke gangmønsteret og forårsage smerter i fødder, ankler, knæ og ryg. Det er vigtigt at forstå flade fødder for at kunne søge den rette behandling og forebygge yderligere komplikationer.

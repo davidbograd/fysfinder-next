@@ -1,7 +1,8 @@
 ---
-title: "Ledmobilisering"
-lastUpdated: "24/02/2024"
-metaTitle: "Ledmobilisering – Hvad er ledmobilisering? Bliv klogere her"
+title: Ledmobilisering
+lastUpdated: 24/02/2024
+metaTitle: Ledmobilisering – Hvad er ledmobilisering? Bliv klogere her
+datePublished: 19/02/2025
 ---
 
 Ledmobilisering er en fysioterapeutisk teknik, der fokuserer på at forbedre bevægelsen og funktionen af led. Denne metode anvendes ofte til at lindre smerte, øge bevægelsesomfanget og genoprette normal funktion i leddene. Ledmobilisering kan være en effektiv behandling for personer, der lider af stivhed, smerte eller nedsat bevægelse i deres led.

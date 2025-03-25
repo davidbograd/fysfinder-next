@@ -1,7 +1,8 @@
 ---
-title: "Neuropati"
-lastUpdated: "24/02/2024"
-metaTitle: "Neuropati – Hvad er neuropati? Symptomer og behandling"
+title: Neuropati
+lastUpdated: 24/02/2024
+metaTitle: Neuropati – Hvad er neuropati? Symptomer og behandling
+datePublished: 19/02/2025
 ---
 
 Neuropati refererer til en tilstand, hvor nerverne i kroppen er beskadiget eller ikke fungerer korrekt. Dette kan føre til en række symptomer, herunder smerte, svaghed, følelsesløshed og problemer med at bevæge sig. Neuropati kan påvirke forskellige dele af kroppen og kan være forårsaget af en række faktorer, herunder diabetes, infektioner, autoimmune sygdomme og toksiner.

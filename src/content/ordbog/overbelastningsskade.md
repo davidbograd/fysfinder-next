@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Overbelastningsskade – Hvad er en overbelastningsskade?
+datePublished: 19/02/2025
 ---
 
 Overbelastningsskader er en type skade, der opstår som følge af gentagne belastninger på muskler, sener eller led. Disse skader er ofte forbundet med sport eller fysisk aktivitet, men kan også opstå i forbindelse med dagligdags aktiviteter. Det er vigtigt at forstå, hvordan overbelastningsskader opstår, hvordan de kan forebygges, og hvilke behandlingsmuligheder der findes.

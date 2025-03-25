@@ -1,7 +1,8 @@
 ---
-title: "Udholdenhedstræning"
-lastUpdated: "24/02/2024"
-metaTitle: "Udholdenhedstræning – Hvad er udholdenhedstræning? "
+title: Udholdenhedstræning
+lastUpdated: 24/02/2024
+metaTitle: 'Udholdenhedstræning – Hvad er udholdenhedstræning? '
+datePublished: 19/02/2025
 ---
 
 Udholdenhedstræning refererer til en form for fysisk træning, der har til formål at forbedre kroppens evne til at udføre aktiviteter over længere tid. Denne træningsform er essentiel for at opbygge både fysisk og mental styrke, hvilket er vigtigt for at kunne klare dagligdagens udfordringer samt sportslige præstationer.

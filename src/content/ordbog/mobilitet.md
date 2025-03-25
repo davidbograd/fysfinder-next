@@ -1,7 +1,8 @@
 ---
-title: "Mobilitet"
-lastUpdated: "24/02/2024"
-metaTitle: "Mobilitet – Hvad er mobilitet? Bliv klogere på kroppen"
+title: Mobilitet
+lastUpdated: 24/02/2024
+metaTitle: Mobilitet – Hvad er mobilitet? Bliv klogere på kroppen
+datePublished: 19/02/2025
 ---
 
 Mobilitet refererer til evnen til at bevæge sig frit og let, hvilket er essentielt for at opretholde en aktiv livsstil og generel sundhed. I fysioterapi er mobilitet en central komponent, da det påvirker både fysisk funktion og livskvalitet. At forbedre mobiliteten kan hjælpe med at reducere smerte, forhindre skader og fremme genopretning.

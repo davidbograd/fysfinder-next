@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Skoliose – Hvad er skoliose? Symptomer og behandling
+datePublished: 19/02/2025
 ---
 
 Skoliose er en tilstand, hvor rygsøjlen er unormalt krum, hvilket kan føre til en række fysiske problemer. Denne tilstand kan påvirke både børn og voksne og kan variere i sværhedsgrad. Det er vigtigt at forstå skoliose for at kunne søge den rette behandling og støtte.

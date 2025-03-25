@@ -1,7 +1,8 @@
 ---
-title: "Reposition"
-lastUpdated: "24/02/2024"
-metaTitle: "Reposition – Hvad er reposition? Opnå smertefri bevægelse"
+title: Reposition
+lastUpdated: 24/02/2024
+metaTitle: Reposition – Hvad er reposition? Opnå smertefri bevægelse
+datePublished: 19/02/2025
 ---
 
 Reposition er en vigtig proces inden for fysioterapi, der fokuserer på at ændre en patients kropsposition for at forbedre deres funktionelle evner og lindre smerte. Denne teknik anvendes ofte til patienter med nedsat mobilitet, smerter eller efter operationer, hvor det er nødvendigt at justere kroppens stilling for at fremme heling og genopretning.

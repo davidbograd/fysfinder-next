@@ -1,7 +1,8 @@
 ---
-title: "Isometrisk træning"
-lastUpdated: "24/02/2024"
-metaTitle: "Isometrisk træning – Hvad er isometrisk træning? Læs mere her"
+title: Isometrisk træning
+lastUpdated: 24/02/2024
+metaTitle: Isometrisk træning – Hvad er isometrisk træning? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Isometrisk træning er en form for styrketræning, hvor musklerne aktiveres uden at ændre længden på musklerne. Dette betyder, at der ikke er nogen bevægelse i leddene, men musklerne arbejder hårdt for at opretholde en position. Isometrisk træning kan være en effektiv metode til at opbygge styrke, stabilitet og muskeludholdenhed.

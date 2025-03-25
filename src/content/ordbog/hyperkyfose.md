@@ -1,7 +1,8 @@
 ---
-title: "Hyperkyfose"
-lastUpdated: "24/02/2024"
-metaTitle: "Hyperkyfose – Hvad er hyperkyfose? Symptomer/behandling"
+title: Hyperkyfose
+lastUpdated: 24/02/2024
+metaTitle: Hyperkyfose – Hvad er hyperkyfose? Symptomer/behandling
+datePublished: 19/02/2025
 ---
 
 Hyperkyfose er en tilstand, hvor rygsøjlen er unormalt buet, hvilket resulterer i en fremadrettet krumning af ryggen. Denne tilstand kan føre til en række fysiske problemer, herunder smerter, nedsat bevægelighed og en ændret kropsholdning. Det er vigtigt at forstå hyperkyfose for at kunne søge den rette behandling og forebygge yderligere komplikationer.

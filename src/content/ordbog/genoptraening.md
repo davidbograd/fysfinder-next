@@ -1,7 +1,8 @@
 ---
-title: "Genoptræning"
-lastUpdated: "24/02/2024"
-metaTitle: "Genoptræning – Hvad er genoptræning? Læs mere her"
+title: Genoptræning
+lastUpdated: 24/02/2024
+metaTitle: Genoptræning – Hvad er genoptræning? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Genoptræning refererer til den proces, hvor en person arbejder på at genvinde funktioner og styrke efter en skade, operation eller sygdom. Det er en vigtig del af rehabilitering, der hjælper individer med at genoptage deres daglige aktiviteter og forbedre deres livskvalitet.

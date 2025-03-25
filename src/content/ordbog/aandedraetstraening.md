@@ -1,7 +1,8 @@
 ---
-title: "Åndedrætstræning"
-lastUpdated: "24/02/2024"
-metaTitle: "Åndedrætstræning – Hvad er åndedrætstræning? Tips og råd"
+title: Åndedrætstræning
+lastUpdated: 24/02/2024
+metaTitle: Åndedrætstræning – Hvad er åndedrætstræning? Tips og råd
+datePublished: 19/02/2025
 ---
 
 Åndedrætstræning er en vigtig del af fysioterapi, der fokuserer på at forbedre vejrtrækningsteknikker og lungefunktion. Det er en metode, der kan hjælpe med at lindre symptomer på forskellige respiratoriske tilstande og forbedre den generelle livskvalitet.

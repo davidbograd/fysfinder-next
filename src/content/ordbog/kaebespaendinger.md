@@ -1,7 +1,8 @@
 ---
-title: "Kæbespændinger"
-lastUpdated: "24/02/2024"
-metaTitle: "Kæbespændinger – Hvad er kæbespændinger? Læs mere her"
+title: Kæbespændinger
+lastUpdated: 24/02/2024
+metaTitle: Kæbespændinger – Hvad er kæbespændinger? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Kæbespændinger refererer til en tilstand, hvor musklerne i kæben er anspændte, hvilket kan føre til smerte og ubehag. Dette fænomen kan påvirke både den fysiske og mentale velvære og kan være forårsaget af forskellige faktorer, herunder stress, dårlig holdning og tandproblemer. 

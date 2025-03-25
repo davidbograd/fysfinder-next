@@ -1,7 +1,8 @@
 ---
-title: "Vævsskader"
-lastUpdated: "24/02/2024"
-metaTitle: "Vævsskader – Hvad er vævsskader? Årsager og behandling"
+title: Vævsskader
+lastUpdated: 24/02/2024
+metaTitle: Vævsskader – Hvad er vævsskader? Årsager og behandling
+datePublished: 19/02/2025
 ---
 
 Vævsskader refererer til skader på kroppens væv, som kan opstå som følge af traumer, overbelastning eller sygdom. Disse skader kan påvirke muskler, sener, ligamenter og andre bløde væv, hvilket kan føre til smerte, hævelse og nedsat funktion. For at forstå vævsskader bedre, er det vigtigt at kende til deres årsager, symptomer og behandlingsmuligheder.

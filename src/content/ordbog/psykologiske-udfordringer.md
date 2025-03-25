@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Psykologiske udfordringer – Hvad er psykologiske udfordringer?
+datePublished: 19/02/2025
 ---
 
 Psykologiske udfordringer refererer til en bred vifte af mentale og følelsesmæssige problemer, som kan påvirke en persons velbefindende og livskvalitet. Disse udfordringer kan variere fra mild angst og stress til mere alvorlige tilstande som depression og PTSD. Det er vigtigt at forstå, hvordan disse udfordringer kan påvirke ens liv og hvordan fysioterapi kan spille en rolle i behandlingen.

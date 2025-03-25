@@ -1,7 +1,8 @@
 ---
-title: "Blødt væv manipulation"
-lastUpdated: "24/02/2024"
-metaTitle: "Blødt væv manipulation – Hvad er blødt væv manipulation?"
+title: Blødt væv manipulation
+lastUpdated: 24/02/2024
+metaTitle: Blødt væv manipulation – Hvad er blødt væv manipulation?
+datePublished: 19/02/2025
 ---
 
 Blødt væv manipulation er en terapeutisk teknik, der fokuserer på behandling af muskler, sener, ledbånd og fascia. Denne metode anvendes ofte af fysioterapeuter for at lindre smerte, forbedre bevægelse og fremme heling i det bløde væv i kroppen.

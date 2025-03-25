@@ -1,7 +1,8 @@
 ---
-title: "Massageterapi"
-lastUpdated: "24/02/2024"
-metaTitle: "Massageterapi – Hvad er massageterapi? Unik massageform"
+title: Massageterapi
+lastUpdated: 24/02/2024
+metaTitle: Massageterapi – Hvad er massageterapi? Unik massageform
+datePublished: 19/02/2025
 ---
 
 Massageterapi er en behandlingsform, der anvender forskellige teknikker til at manipulere muskler og blødt væv i kroppen. Denne form for terapi kan hjælpe med at lindre smerter, reducere stress og forbedre den generelle velvære. Massageterapi er populær blandt både sportsudøvere og personer med kroniske smerter, og den kan tilpasses individuelle behov.

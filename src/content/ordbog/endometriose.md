@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Endometriose – Hvad er endometriose? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Endometriose er en kronisk sygdom, hvor væv, der ligner livmoderslimhinden, vokser uden for livmoderen. Dette kan føre til smertefulde symptomer og påvirke kvinders livskvalitet. Det er vigtigt at forstå, hvordan endometriose påvirker kroppen, og hvilke behandlingsmuligheder der findes.

@@ -1,7 +1,8 @@
 ---
-title: "Metabolisme"
-lastUpdated: "24/02/2024"
-metaTitle: "Metabolisme – Hvad er metabolisme? Læs mere her"
+title: Metabolisme
+lastUpdated: 24/02/2024
+metaTitle: Metabolisme – Hvad er metabolisme? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Metabolisme refererer til de biokemiske processer, der foregår i kroppen for at omdanne mad til energi. Det er en kompleks proces, der involverer nedbrydning af næringsstoffer og opbygning af celler, hvilket er essentielt for at opretholde liv og sundhed.

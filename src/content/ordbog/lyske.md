@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Lyske – Hvad er lyskeskader? Forebyggelse og behandling
+datePublished: 19/02/2025
 ---
 
 Lyskeskader er en almindelig form for skade, der påvirker lysken, området mellem maven og låret. Disse skader kan opstå som følge af overbelastning, pludselige bevægelser eller traumer og kan føre til smerte og nedsat bevægelighed. Det er vigtigt at forstå, hvordan man kan forebygge og behandle lyskeskader for at sikre en hurtig og effektiv genoptræning.

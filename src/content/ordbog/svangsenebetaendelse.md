@@ -1,7 +1,8 @@
 ---
-title: "Svangsenebetændelse"
-lastUpdated: "24/02/2024"
-metaTitle: "Svangsenebetændelse – Hvad er svangsenebetændelse?"
+title: Svangsenebetændelse
+lastUpdated: 24/02/2024
+metaTitle: Svangsenebetændelse – Hvad er svangsenebetændelse?
+datePublished: 19/02/2025
 ---
 
 Svangsenebetændelse, også kendt som Achilles tendinitis, er en betændelsestilstand, der påvirker svangsenen, som forbinder lægmusklerne til hælen. Denne tilstand kan forårsage smerte og ubehag, især under fysisk aktivitet, og er ofte forbundet med overbelastning eller skader.

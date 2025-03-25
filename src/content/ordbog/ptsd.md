@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: PTSD – Hvad er PTSD? Alt om post-traumatic stress disorder
+datePublished: 19/02/2025
 ---
 
 PTSD, eller posttraumatisk stresslidelse, er en mental sundhedstilstand, der kan opstå efter at have oplevet eller været vidne til en traumatisk hændelse. Det kan påvirke en persons livskvalitet og evne til at fungere i hverdagen. Behandling af PTSD kan involvere forskellige former for terapi, herunder fysioterapi, som kan hjælpe med at lindre symptomer og forbedre livskvaliteten.

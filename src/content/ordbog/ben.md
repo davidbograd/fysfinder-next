@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Ben – Hvad er benet? Læs om skader og behandlinger her
+datePublished: 19/02/2025
 ---
 
 Benen er en af de mest komplekse og essentielle dele af menneskekroppen, der spiller en afgørende rolle i vores mobilitet og daglige aktiviteter. Fra at gå og løbe til at stå og sidde, er benene involveret i næsten alle bevægelser, vi udfører. I denne artikel vil vi udforske forskellige aspekter af benene, herunder almindelige skader, behandlinger og hvordan fysioterapi kan hjælpe med at genoprette funktion og lindre smerte.

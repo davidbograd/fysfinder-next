@@ -1,7 +1,8 @@
 ---
-title: "KRAM-faktorer"
-lastUpdated: "24/02/2024"
-metaTitle: "KRAM-faktorer – Hvad er KRAM-faktorerne? Læs mere her"
+title: KRAM-faktorer
+lastUpdated: 24/02/2024
+metaTitle: KRAM-faktorer – Hvad er KRAM-faktorerne? Læs mere her
+datePublished: 19/02/2025
 ---
 
 KRAM-faktorerne står for Kost, Rygning, Alkohol og Motion. Disse faktorer er centrale for at forstå og forbedre vores sundhed. At have kontrol over disse elementer kan føre til en bedre livskvalitet og forebygge mange sygdomme.

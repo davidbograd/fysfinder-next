@@ -1,7 +1,8 @@
 ---
-title: "Rehabilitering"
-lastUpdated: "24/02/2024"
-metaTitle: "Rehabilitering – Hvad er rehabilitering? Læs mere her"
+title: Rehabilitering
+lastUpdated: 24/02/2024
+metaTitle: Rehabilitering – Hvad er rehabilitering? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Rehabilitering er en proces, der har til formål at hjælpe personer med at genvinde deres funktionsevne og livskvalitet efter sygdom, skade eller operation. Det involverer ofte en tværfaglig tilgang, hvor fysioterapeuter spiller en central rolle i at støtte patienterne gennem skræddersyede træningsprogrammer og behandlinger.

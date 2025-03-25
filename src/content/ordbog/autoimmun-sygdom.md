@@ -1,7 +1,8 @@
 ---
-title: "Autoimmun sygdom"
-lastUpdated: "24/02/2024"
-metaTitle: "Autoimmun sygdom – Hvad er en autoimmun sygdom?"
+title: Autoimmun sygdom
+lastUpdated: 24/02/2024
+metaTitle: Autoimmun sygdom – Hvad er en autoimmun sygdom?
+datePublished: 19/02/2025
 ---
 
 Autoimmune sygdomme er tilstande, hvor kroppens immunsystem fejlagtigt angriber sunde celler og væv. Dette kan føre til en række forskellige symptomer og sundhedsproblemer, afhængigt af hvilken del af kroppen der er påvirket. Forståelse af autoimmune sygdomme er vigtig for at kunne søge den rette behandling og støtte.

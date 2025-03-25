@@ -1,7 +1,8 @@
 ---
-title: "Cupping"
-lastUpdated: "24/02/2024"
-metaTitle: "Cupping – Hvad er cupping? Læs om behandling og fordele"
+title: Cupping
+lastUpdated: 24/02/2024
+metaTitle: Cupping – Hvad er cupping? Læs om behandling og fordele
+datePublished: 19/02/2025
 ---
 
 Cupping er en alternativ behandlingsmetode, der anvendes til at lindre smerter og fremme heling ved at skabe undertryk på huden. Denne teknik har rødder i traditionel kinesisk medicin og er blevet populær i mange dele af verden, herunder Danmark. Cupping involverer brugen af specielle kopper, der placeres på huden for at trække blod til overfladen og stimulere blodcirkulationen.

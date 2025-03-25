@@ -1,7 +1,8 @@
 ---
-title: "Vener og blodkar"
-lastUpdated: "24/02/2024"
-metaTitle: "Vener og blodkar – Hvad er vener og blodkar? Læs mere her"
+title: Vener og blodkar
+lastUpdated: 24/02/2024
+metaTitle: Vener og blodkar – Hvad er vener og blodkar? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Vener og blodkar er essentielle komponenter i kroppens kredsløbssystem, der spiller en afgørende rolle i transporten af blod og næringsstoffer til og fra kroppens væv. Venerne er de blodkar, der fører blod tilbage til hjertet, mens arterierne fører blod væk fra hjertet. Forståelsen af vener og blodkar er vigtig for at kunne vurdere og behandle forskellige medicinske tilstande, der kan påvirke kredsløbet.

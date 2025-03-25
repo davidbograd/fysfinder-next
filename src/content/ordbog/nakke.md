@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Nakke – Hvad er nakkesmerter? Læs om nakkeproblemer
+datePublished: 19/02/2025
 ---
 
 Nakken er en kompleks del af kroppen, der spiller en afgørende rolle i vores bevægelse og daglige funktioner. Den består af syv cervikale hvirvler, muskler, nerver og ledbånd, der alle arbejder sammen for at give os mulighed for at bevæge hovedet og støtte vores kranium. Problemer i nakken kan føre til smerte, stivhed og nedsat bevægelighed, hvilket kan påvirke livskvaliteten.

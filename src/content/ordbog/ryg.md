@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Ryg – Hvad er ryggen? Få hjælp til dine rygproblemer
+datePublished: 19/02/2025
 ---
 
 Ryggen er en kompleks struktur, der spiller en afgørende rolle i vores bevægelse og generelle velvære. Den består af knogler, muskler, sener og nerver, der arbejder sammen for at støtte kroppen og muliggøre bevægelse. Rygproblemer er almindelige og kan påvirke livskvaliteten betydeligt. Det er her, fysioterapi kan være en effektiv løsning.

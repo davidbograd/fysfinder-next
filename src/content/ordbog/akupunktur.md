@@ -1,7 +1,8 @@
 ---
-title: "Akupunktur"
-lastUpdated: "24/02/2024"
-metaTitle: "Akupunktur – Hvad er akupunktur? Bliv klogere her"
+title: Akupunktur
+lastUpdated: 24/02/2024
+metaTitle: Akupunktur – Hvad er akupunktur? Bliv klogere her
+datePublished: 19/02/2025
 ---
 
 Akupunktur er en alternativ behandlingsmetode, der stammer fra traditionel kinesisk medicin. Den involverer indsættelse af meget fine nåle i specifikke punkter på kroppen for at lindre smerte, forbedre helbredelse og fremme generel velvære. Mange mennesker søger akupunktur som en del af deres fysioterapeutiske behandling for at håndtere forskellige tilstande og symptomer.

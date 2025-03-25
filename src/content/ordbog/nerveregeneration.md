@@ -1,7 +1,8 @@
 ---
-title: "Nerveregeneration"
-lastUpdated: "24/02/2024"
-metaTitle: "Nerveregeneration – Hvad er nerveregeneration? Læs mere"
+title: Nerveregeneration
+lastUpdated: 24/02/2024
+metaTitle: Nerveregeneration – Hvad er nerveregeneration? Læs mere
+datePublished: 19/02/2025
 ---
 
 Nerveregeneration refererer til den proces, hvor nervevæv repareres eller genopbygges efter skade. Dette kan være en kompleks og langvarig proces, der involverer forskellige biologiske mekanismer og kan påvirkes af flere faktorer, herunder skadens art og omfang, samt den generelle sundhedstilstand hos individet.

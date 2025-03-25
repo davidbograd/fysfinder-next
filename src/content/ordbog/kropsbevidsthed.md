@@ -1,7 +1,8 @@
 ---
-title: "Kropsbevidsthed"
-lastUpdated: "24/02/2024"
-metaTitle: "Kropsbevidsthed – Hvad er kropsbevidsthed? Læs mere her"
+title: Kropsbevidsthed
+lastUpdated: 24/02/2024
+metaTitle: Kropsbevidsthed – Hvad er kropsbevidsthed? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Kropsbevidsthed refererer til den bevidsthed, man har om sin egen krop, dens bevægelser, og hvordan den interagerer med omverdenen. Det er en vigtig del af fysioterapi, da det kan hjælpe med at forbedre både fysisk og mental sundhed.

@@ -1,7 +1,8 @@
 ---
-title: "Ligamentskader"
-lastUpdated: "24/02/2024"
-metaTitle: "Ligamentskader – Hvad er ligamentskader? Læs mere her"
+title: Ligamentskader
+lastUpdated: 24/02/2024
+metaTitle: Ligamentskader – Hvad er ligamentskader? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Ligamentskader refererer til skader på de bånd af væv, der forbinder knoglerne i leddene. Disse skader kan opstå som følge af traumer, overbelastning eller pludselige bevægelser, og de kan variere i sværhedsgrad fra mild forstuvning til alvorlige brud. Forståelse af ligamentskader er vigtig for at kunne søge den rette behandling og rehabilitering.

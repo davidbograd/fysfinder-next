@@ -1,7 +1,8 @@
 ---
-title: "Gluteal tendinopati"
-lastUpdated: "24/02/2024"
-metaTitle: "Gluteal tendinopati – Hvad er gluteal tendinopati? Læs mere"
+title: Gluteal tendinopati
+lastUpdated: 24/02/2024
+metaTitle: Gluteal tendinopati – Hvad er gluteal tendinopati? Læs mere
+datePublished: 19/02/2025
 ---
 
 Gluteal tendinopati er en tilstand, der påvirker senerne i glutealmusklerne, som er placeret i den øverste del af låret. Denne tilstand kan forårsage smerte og ubehag i hoften og kan påvirke en persons evne til at udføre dagligdags aktiviteter. Det er vigtigt at forstå årsagerne, symptomerne og behandlingsmulighederne for gluteal tendinopati for at kunne håndtere tilstanden effektivt.

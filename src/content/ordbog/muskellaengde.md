@@ -1,7 +1,8 @@
 ---
-title: "Muskellængde"
-lastUpdated: "24/02/2024"
-metaTitle: "Muskellængde – Hvad er muskellængde? Læs mere her"
+title: Muskellængde
+lastUpdated: 24/02/2024
+metaTitle: Muskellængde – Hvad er muskellængde? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Muskellængde refererer til længden af en muskel, som kan påvirke dens funktion og evne til at generere kraft. Forståelsen af muskellængde er essentiel for fysioterapeuter, da det spiller en central rolle i rehabilitering og træning.

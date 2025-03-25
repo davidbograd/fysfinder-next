@@ -1,7 +1,8 @@
 ---
-title: "Lændehold"
-lastUpdated: "24/02/2024"
-metaTitle: "Lændehold – Hvad er lændehold? Få hjælp til smerterne"
+title: Lændehold
+lastUpdated: 24/02/2024
+metaTitle: Lændehold – Hvad er lændehold? Få hjælp til smerterne
+datePublished: 19/02/2025
 ---
 
 Lændehold er en tilstand, der involverer smerter og stivhed i lænderegionen, ofte forårsaget af muskelspændinger, skader eller overbelastning. Det kan påvirke dagligdagen og begrænse bevægelsesfriheden, hvilket gør det vigtigt at forstå årsagerne, symptomerne og behandlingsmulighederne.

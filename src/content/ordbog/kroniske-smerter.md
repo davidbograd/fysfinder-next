@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2024
 metaTitle: Kroniske smerter – Hvad er kroniske smerter? Læs mere her
+datePublished: 19/02/2025
 ---
 
 ![Illustration af kronisk smerte](/images/articles/Kroniske_smerter.webp)

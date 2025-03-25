@@ -1,7 +1,8 @@
 ---
-title: "Nervebetændelse"
-lastUpdated: "24/02/2024"
-metaTitle: "Nervebetændelse – Hvad er nervebetændelse? Læs mer"
+title: Nervebetændelse
+lastUpdated: 24/02/2024
+metaTitle: Nervebetændelse – Hvad er nervebetændelse? Læs mer
+datePublished: 19/02/2025
 ---
 
 Nervebetændelse, også kendt som neuritis, er en tilstand, hvor nerverne i kroppen bliver betændte. Dette kan føre til smerte, svaghed, følelsesløshed og andre neurologiske symptomer. Nervebetændelse kan påvirke en eller flere nerver og kan være forårsaget af forskellige faktorer, herunder infektioner, autoimmune sygdomme, traumer eller toksiner.

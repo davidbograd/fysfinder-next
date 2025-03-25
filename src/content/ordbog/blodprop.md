@@ -1,6 +1,7 @@
 ---
 lastUpdated: 19/02/2025
 metaTitle: Blodprop – Hvad er en blodprop? Symptomer og behandling
+datePublished: 19/02/2025
 ---
 
 En blodprop, også kendt som trombe, opstår, når blodet størkner og danner en klump, der kan blokere blodgennemstrømningen i blodkarrene. Dette kan føre til alvorlige helbredsproblemer, herunder hjerteanfald og slagtilfælde. Det er vigtigt at forstå årsagerne, symptomerne og behandlingsmulighederne for blodpropper for at kunne håndtere dem effektivt.

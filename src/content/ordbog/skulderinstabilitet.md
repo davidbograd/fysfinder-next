@@ -1,7 +1,8 @@
 ---
-title: "Skulderinstabilitet"
-lastUpdated: "24/02/2024"
-metaTitle: "Skulderinstabilitet – Hvad er skulderinstabilitet? Læs mere her"
+title: Skulderinstabilitet
+lastUpdated: 24/02/2024
+metaTitle: Skulderinstabilitet – Hvad er skulderinstabilitet? Læs mere her
+datePublished: 19/02/2025
 ---
 
 Skulderinstabilitet refererer til en tilstand, hvor skulderleddet ikke er i stand til at forblive stabilt under bevægelse. Dette kan føre til smerte, nedsat bevægelighed og en øget risiko for skader. Det er en almindelig tilstand, der kan påvirke både aktive personer og dem, der har lidt en skade.

@@ -1,7 +1,8 @@
 ---
-title: "Muskelspændinger"
-lastUpdated: "24/02/2024"
-metaTitle: "Muskelspændinger – Hvad er muskelspændinger? Læs mere"
+title: Muskelspændinger
+lastUpdated: 24/02/2024
+metaTitle: Muskelspændinger – Hvad er muskelspændinger? Læs mere
+datePublished: 19/02/2025
 ---
 
 Muskelspændinger refererer til en tilstand, hvor musklerne er stramme, stive eller smertefulde. Dette kan ske som følge af overanstrengelse, stress, dårlig kropsholdning eller skader. Muskelspændinger kan påvirke ens daglige liv og bevægelsesfrihed, og det er vigtigt at forstå årsagerne og behandlingsmulighederne.
