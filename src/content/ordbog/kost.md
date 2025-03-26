@@ -1,5 +1,5 @@
 ---
-lastUpdated: 19/02/2025
+lastUpdated: 26/03/2025
 metaTitle: Kost – Hvad er kost? Få hjælpe til en bedre og sundere livsstil
 datePublished: 19/02/2025
 ---
@@ -24,7 +24,7 @@ For at forbedre sin kost kan man starte med at inkludere flere frugter og grønt
 
 ## Hvad er kosttilskud, og hvornår er de nødvendige?
 
-Kosttilskud er produkter, der indeholder vitaminer, mineraler eller andre næringsstoffer, som kan tages for at supplere kosten. De kan være nødvendige for personer med specifikke ernæringsmæssige behov, såsom gravide kvinder, ældre eller personer med visse medicinske tilstande. Det er dog altid bedst at få næringsstoffer fra naturlige kilder, når det er muligt.
+[Kosttilskud](https://getbiglab.dk/kosttilskud/) er produkter, der indeholder vitaminer, mineraler eller andre næringsstoffer, som kan tages for at supplere kosten. De kan være nødvendige for personer med specifikke ernæringsmæssige behov, såsom gravide kvinder, ældre eller personer med visse medicinske tilstande. Det er dog altid bedst at få næringsstoffer fra naturlige kilder, når det er muligt.
 
 ## Hvordan kan man finde en kostvejleder?
 
