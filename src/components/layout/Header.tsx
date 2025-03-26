@@ -122,7 +122,7 @@ export default function Header() {
                     Om os
                   </Link>
                   <Link
-                    href="/kontakt"
+                    href="/om-os#kontakt"
                     className="text-lg font-medium text-gray-900 py-2"
                     onClick={toggleMenu}
                   >

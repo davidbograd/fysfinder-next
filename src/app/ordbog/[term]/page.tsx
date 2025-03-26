@@ -10,7 +10,6 @@ import {
 } from "@/lib/utils";
 import { Metadata } from "next";
 import { Calendar, Clock } from "lucide-react";
-import { deslugify } from "@/app/utils/slugify";
 
 interface DictionaryTermStructuredDataProps {
   term: {
