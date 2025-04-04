@@ -201,4 +201,5 @@ export interface PremiumListing {
   id: string;
   start_date: string;
   end_date: string;
+  booking_link: string | null;
 }

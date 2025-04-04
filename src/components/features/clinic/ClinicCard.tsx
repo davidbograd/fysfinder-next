@@ -2,7 +2,6 @@
 
 import { StarIcon } from "@heroicons/react/24/solid";
 import { MapPin, Check } from "lucide-react";
-import { Sparkles } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import { TeamMember, PremiumListing } from "@/app/types";
@@ -59,10 +58,10 @@ const ClinicCard: React.FC<Props> = ({
   return (
     <div
       className={cn(
-        "p-6 rounded-lg border transition-all duration-200 bg-white w-full",
+        "p-6 rounded-lg transition-all duration-200 bg-white w-full",
         isPremium
-          ? "border-amber-200 shadow-md hover:shadow-lg scale-[1.02] bg-gradient-to-r from-amber-50/50 to-white"
-          : "border-gray-200 hover:shadow-md"
+          ? "border-2 border-logo-blue/30 shadow-md hover:shadow-lg scale-[1.02] bg-gradient-to-r from-logo-blue/5 to-white"
+          : "border border-gray-200 hover:shadow-md"
       )}
     >
       <div className="flex flex-col sm:flex-row sm:justify-between">
@@ -74,10 +73,9 @@ const ClinicCard: React.FC<Props> = ({
             {isPremium && (
               <Badge
                 variant="secondary"
-                className="flex items-center gap-1 bg-amber-100 text-amber-700 border-amber-200"
+                className="flex items-center gap-1 bg-logo-blue/10 text-logo-blue border-logo-blue/20"
               >
-                <Sparkles className="size-3" />
-                Featured
+                Sponsoreret
               </Badge>
             )}
           </div>

@@ -4,7 +4,6 @@ import { createClient } from "@/app/utils/supabase/server";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { Metadata } from "next";
 import { ClinicSidebar } from "@/components/features/clinic/ClinicSidebar";
-import { ClinicSidebarMobile } from "@/components/features/clinic/ClinicSidebarMobile";
 import { redirect } from "next/navigation";
 import { Clinic, TeamMember } from "@/app/types";
 import { ClinicHeader } from "@/components/features/clinic/ClinicHeader";
@@ -20,7 +19,7 @@ async function fetchClinicBySlug(clinicSlug: string): Promise<Clinic | null> {
   const supabase = createClient();
 
   try {
-    const requestUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?klinikNavnSlug=eq.${clinicSlug}&select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order),clinic_insurances(insurance:insurance_companies(insurance_id,insurance_name,insurance_name_slug)),clinic_services(service:extra_services(service_id,service_name,service_name_slug))`;
+    const requestUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?klinikNavnSlug=eq.${clinicSlug}&select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order),clinic_insurances(insurance:insurance_companies(insurance_id,insurance_name,insurance_name_slug)),clinic_services(service:extra_services(service_id,service_name,service_name_slug)),premium_listings(id,start_date,end_date,booking_link)`;
 
     const response = await fetch(requestUrl, {
       headers: {
@@ -50,6 +49,8 @@ async function fetchClinicBySlug(clinicSlug: string): Promise<Clinic | null> {
     clinic.team_members = [];
     clinic.insurances = [];
     clinic.extraServices = [];
+    clinic.premium_listing = clinic.premium_listings?.[0] || null; // Set premium_listing from the array
+    delete clinic.premium_listings; // Clean up the array since we don't need it anymore
 
     // Safely handle specialties
     if (clinic.clinic_specialties && Array.isArray(clinic.clinic_specialties)) {
@@ -370,14 +371,6 @@ export default async function ClinicPage({
 
         <ClinicHeader clinic={clinic} />
 
-        {/* Mobile Sidebar - Top */}
-        <ClinicSidebarMobile
-          clinic={{
-            ...clinic,
-            verified_klinik: clinic.verified_klinik ?? false,
-          }}
-        />
-
         <div className="flex flex-col lg:flex-row gap-16">
           {/* Main content (3/5 width on large screens) */}
           <div className="lg:w-3/5">
@@ -396,11 +389,18 @@ export default async function ClinicPage({
             <ClinicAbout clinic={clinic} />
           </div>
 
-          {/* Desktop Sidebar */}
+          {/* Sidebar - Adapts to mobile/desktop */}
           <ClinicSidebar
             clinic={{
-              ...clinic,
+              klinikNavn: clinic.klinikNavn,
+              avgRating: clinic.avgRating,
+              ratingCount: clinic.ratingCount,
+              website: clinic.website,
+              tlf: clinic.tlf,
+              email: clinic.email,
+              id: clinic.clinics_id,
               verified_klinik: clinic.verified_klinik ?? false,
+              premium_listing: clinic.premium_listing,
             }}
           />
         </div>

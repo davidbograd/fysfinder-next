@@ -8,7 +8,7 @@ export function useClinicAnalytics({
   clinicId,
 }: ClinicAnalyticsProps) {
   const trackClinicInteraction = (
-    interactionType: "website" | "phone" | "email"
+    interactionType: "website" | "phone" | "email" | "booking"
   ) => {
     // Ensure gtag is available
     if (typeof window !== "undefined" && "gtag" in window) {
@@ -28,5 +28,6 @@ export function useClinicAnalytics({
     trackWebsiteClick: () => trackClinicInteraction("website"),
     trackPhoneClick: () => trackClinicInteraction("phone"),
     trackEmailClick: () => trackClinicInteraction("email"),
+    trackBookingClick: () => trackClinicInteraction("booking"),
   };
 }
