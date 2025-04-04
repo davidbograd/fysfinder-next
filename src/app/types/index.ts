@@ -38,6 +38,7 @@ export interface Clinic {
   team_members?: TeamMember[];
   insurances?: Insurance[];
   extraServices?: ExtraService[];
+  premium_listing?: PremiumListing | null;
 }
 
 export interface SeoSection {
@@ -161,6 +162,7 @@ export interface DBClinicResponse {
     image_url: string;
     display_order: number;
   }[];
+  premium_listings?: PremiumListing[];
 }
 
 export interface LocationPageData {
@@ -193,4 +195,10 @@ export interface TeamMember {
   role: string;
   image_url: string;
   display_order: number;
+}
+
+export interface PremiumListing {
+  id: string;
+  start_date: string;
+  end_date: string;
 }

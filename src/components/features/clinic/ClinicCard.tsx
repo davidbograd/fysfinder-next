@@ -2,10 +2,12 @@
 
 import { StarIcon } from "@heroicons/react/24/solid";
 import { MapPin, Check } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
-import { TeamMember } from "@/app/types";
+import { TeamMember, PremiumListing } from "@/app/types";
 import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 interface Props {
   klinikNavn: string;
@@ -21,6 +23,18 @@ interface Props {
     specialty_id: string;
   }[];
   team_members?: TeamMember[];
+  premium_listing?: PremiumListing | null;
+}
+
+function isPremiumActive(
+  premium_listing: PremiumListing | null | undefined
+): boolean {
+  if (!premium_listing) return false;
+  const now = new Date();
+  return (
+    new Date(premium_listing.start_date) <= now &&
+    new Date(premium_listing.end_date) > now
+  );
 }
 
 const ClinicCard: React.FC<Props> = ({
@@ -34,19 +48,39 @@ const ClinicCard: React.FC<Props> = ({
   distance,
   specialties = [],
   team_members = [],
+  premium_listing,
 }) => {
   const MAX_VISIBLE_MEMBERS = 5;
   const hasMoreMembers = team_members.length > MAX_VISIBLE_MEMBERS;
   const visibleMembers = team_members.slice(0, MAX_VISIBLE_MEMBERS);
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
+  const isPremium = isPremiumActive(premium_listing);
 
   return (
-    <div className="p-6 rounded-lg border hover:shadow-md transition-shadow duration-200 bg-white w-full">
+    <div
+      className={cn(
+        "p-6 rounded-lg border transition-all duration-200 bg-white w-full",
+        isPremium
+          ? "border-amber-200 shadow-md hover:shadow-lg scale-[1.02] bg-gradient-to-r from-amber-50/50 to-white"
+          : "border-gray-200 hover:shadow-md"
+      )}
+    >
       <div className="flex flex-col sm:flex-row sm:justify-between">
         <div className="flex-grow">
-          <h3 className="text-xl font-semibold mb-2 text-gray-900">
-            {klinikNavn}
-          </h3>
+          <div className="flex items-start gap-2 mb-2">
+            <h3 className="text-xl font-semibold text-gray-900">
+              {klinikNavn}
+            </h3>
+            {isPremium && (
+              <Badge
+                variant="secondary"
+                className="flex items-center gap-1 bg-amber-100 text-amber-700 border-amber-200"
+              >
+                <Sparkles className="size-3" />
+                Featured
+              </Badge>
+            )}
+          </div>
           <div className="flex items-center mb-3">
             <StarIcon className="size-5 mr-2 flex-shrink-0 text-amber-500" />
             <div className="flex items-center">
