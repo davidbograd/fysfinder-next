@@ -4,7 +4,7 @@ metaTitle: Gangfunktion – Hvad er gangfunktion? Læs mere her
 datePublished: 19/02/2025
 ---
 
-![Illustration af gangfunktion](/images/articles/gangfunktion.webp)
+![Illustration af gangfunktion](/images/articles/gangfunktion.png)
 
 ## **Gangfunktion: Nøglen til mobilitet og livskvalitet**
 
@@ -36,7 +36,7 @@ Fysioterapi er en effektiv metode til at genoptræne gangfunktionen og opnå bed
 Træning af gangfunktionen kan omfatte mange forskellige former for øvelser, afhængigt af dine behov. Øvelser med fokus på benstyrke, især omkring hofte og knæ, kan være centrale. Samtidig er det vigtigt at arbejde med balancen, fx ved at stå på ét ben eller lave kontrollerede vægtskift. Fleksibilitet i hofte- og ankelled kan også spille en rolle, ligesom gangtræning – fx ved at øve gang på forskellige underlag eller i et bestemt tempo – ofte er en del af forløbet. En fysioterapeut kan vejlede dig i, hvilke øvelser der passer bedst til dig.
 
 
-![Illustration af nedsat gangfunktion](/images/articles/gangfunktion_nedsat.webp)
+![Illustration af nedsat gangfunktion](/images/articles/gangfunktion_nedsat.png)
 
 
 
@@ -78,20 +78,20 @@ Fysioterapeuter har specialviden om bevægelse og funktion og kan hjælpe dig me
 
 ### Referenceliste
 
-1. **Perry, J., & Burnfield, J. M. (2010). *Gait Analysis: Normal and Pathological Function* (2. udg.). SLACK Incorporated.**  
-   [https://www.routledge.com/Gait-Analysis-Normal-and-Pathological-Function/Perry-Burnfield/p/book/9781556427664](https://www.routledge.com/Gait-Analysis-Normal-and-Pathological-Function/Perry-Burnfield/p/book/9781556427664)
+1. Perry, J., & Burnfield, J. M. - "Gait Analysis: Normal and Pathological Function."  
+[www.routledge.com](https://www.routledge.com/Gait-Analysis-Normal-and-Pathological-Function/Perry-Burnfield/p/book/9781556427664)
 
-2. **Pollock, A., Baer, G., Campbell, P., Choo, P. L., Forster, A., Morris, J., Pomeroy, V. M., & Langhorne, P. (2014). Physical rehabilitation approaches for the recovery of function and mobility following stroke. *Cochrane Database of Systematic Reviews*, Issue 4.**  
-   [https://doi.org/10.1002/14651858.CD001920.pub3](https://doi.org/10.1002/14651858.CD001920.pub3)
+2. Pollock, A., et al. - "Physical rehabilitation approaches for the recovery of function and mobility following stroke."  
+[www.cochranelibrary.com](https://doi.org/10.1002/14651858.CD001920.pub3)
 
-3. **Hausdorff, J. M. (2007). Gait dynamics, fractals and falls: Finding meaning in the stride-to-stride fluctuations of human walking. *Human Movement Science*, 26(4), 555–589.**  
-   [https://doi.org/10.1016/j.humov.2007.05.003](https://doi.org/10.1016/j.humov.2007.05.003)
+3. Hausdorff, J. M. - "Gait dynamics, fractals and falls: Finding meaning in the stride-to-stride fluctuations of human walking."  
+[www.sciencedirect.com](https://doi.org/10.1016/j.humov.2007.05.003)
 
-4. **Lord, S. R., Sherrington, C., & Menz, H. B. (2007). *Falls in Older People: Risk Factors and Strategies for Prevention* (2. udg.). Cambridge University Press.**  
-   [https://www.cambridge.org/core/books/falls-in-older-people/5B9E08C7AB2CFEB4E5777A804ACDF015](https://www.cambridge.org/core/books/falls-in-older-people/5B9E08C7AB2CFEB4E5777A804ACDF015)
+4. Lord, S. R., Sherrington, C., & Menz, H. B. - "Falls in Older People: Risk Factors and Strategies for Prevention."  
+[www.cambridge.org](https://www.cambridge.org/core/books/falls-in-older-people/5B9E08C7AB2CFEB4E5777A804ACDF015)
 
-5. **Winstein, C. J., Stein, J., Arena, R., Bates, B., Cherney, L. R., Cramer, S. C., Deruyter, F., Eng, J. J., Fisher, B., Harvey, R. L., Lang, C. E., MacKay-Lyons, M., Ottenbacher, K. J., Pugh, S., Reeves, M. J., Richards, L. G., Stiers, W., & Zorowitz, R. D. (2016). Guidelines for Adult Stroke Rehabilitation and Recovery: A Guideline for Healthcare Professionals. *Stroke*, 47(6), e98–e169.**  
-   [https://doi.org/10.1161/STR.0000000000000098](https://doi.org/10.1161/STR.0000000000000098)
+5. Winstein, C. J., et al. - "Guidelines for Adult Stroke Rehabilitation and Recovery: A Guideline for Healthcare Professionals."  
+[www.ahajournals.org](https://doi.org/10.1161/STR.0000000000000098)
 
-6. **Zhang, W., Low, L. F., Gwynn, J. D., Clemson, L., & Brodaty, H. (2019). Interventions to improve gait in older adults with cognitive impairment: A systematic review. *Journal of the American Geriatrics Society*, 67(2), 381–389.**  
-   [https://doi.org/10.1111/jgs.15660](https://doi.org/10.1111/jgs.15660)
+6. Zhang, W., et al. - "Interventions to improve gait in older adults with cognitive impairment: A systematic review."  
+[www.onlinelibrary.wiley.com](https://doi.org/10.1111/jgs.15660)
