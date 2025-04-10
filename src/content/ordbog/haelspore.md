@@ -1,10 +1,10 @@
 ---
-lastUpdated: 19/02/2024
+lastUpdated: 10/04/2024
 metaTitle: Hælspore – Hvad er hælspore? Symptomer og behandling
 datePublished: 19/02/2025
 ---
 
-Hælspore, ofte kaldet fasciitis plantaris, er en almindelig problematik, der rammer mange mennesker, især dem, der står eller går meget i løbet af dagen. Tilstanden kan være meget smer tefuld og begrænsende, men med den rette behandling og forebyggelse kan symptomerne ofte lindres betydeligt.
+Hælspore, ofte kaldet fasciitis plantaris, er en almindelig problematik, der rammer mange mennesker, især dem, der står eller går meget i løbet af dagen. Tilstanden kan være meget smertefuld og begrænsende, men med den rette behandling og forebyggelse kan symptomerne ofte lindres betydeligt.
 
 ![Illustration af hælspore](/images/articles/Hælspore_smerte_behandling.webp)
 
