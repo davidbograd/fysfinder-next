@@ -92,7 +92,7 @@ function mapDBClinicToClinic(dbClinic: DBClinicResponse): Clinic {
 }
 
 /**
- * Utility function to sort clinics by premium status and rating
+ * Utility function to sort clinics by rating
  */
 function sortClinicsByRating<
   T extends { avgRating: number | null; ratingCount: number | null }
@@ -109,6 +109,25 @@ function sortClinicsByRating<
     if (ratingA !== ratingB) return ratingB - ratingA;
 
     // Finally sort by review count
+    const countA = a.ratingCount || 0;
+    const countB = b.ratingCount || 0;
+    return countB - countA;
+  });
+}
+
+/**
+ * Utility function to sort clinics by rating for Danmark page (ignores premium status)
+ */
+function sortClinicsByRatingDanmark<
+  T extends { avgRating: number | null; ratingCount: number | null }
+>(clinics: T[]): T[] {
+  return [...clinics].sort((a, b) => {
+    // Sort by rating first
+    const ratingA = a.avgRating || 0;
+    const ratingB = b.avgRating || 0;
+    if (ratingA !== ratingB) return ratingB - ratingA;
+
+    // Then sort by review count
     const countA = a.ratingCount || 0;
     const countB = b.ratingCount || 0;
     return countB - countA;
@@ -155,7 +174,7 @@ export async function fetchLocationData(
 
       return {
         city: null,
-        clinics: sortClinicsByRating(clinics),
+        clinics: sortClinicsByRatingDanmark(clinics),
         nearbyClinicsList: [],
         specialties,
       };
