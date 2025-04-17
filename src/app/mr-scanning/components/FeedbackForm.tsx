@@ -10,8 +10,8 @@ export function FeedbackForm({ onReset }: FeedbackFormProps) {
   const handleFeedback = (isPositive: boolean) => {
     // Track the event in Google Analytics
     if (typeof window !== "undefined" && "gtag" in window) {
-      (window as any).gtag("event", "mr_translation_feedback", {
-        event_category: "MR Translation",
+      (window as any).gtag("event", "mr_scanning_feedback", {
+        event_category: "MR Scanning",
         event_action: "Feedback",
         event_label: isPositive ? "Positive" : "Negative",
       });
