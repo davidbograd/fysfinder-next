@@ -18,6 +18,7 @@ Code Style and Structure
 - Use descriptive variable names with auxiliary verbs (e.g., isLoading, hasError).
 - Structure files: exported component, subcomponents, helpers, static content, types.
 - use .env.local for API keys.
+- Our project use src/app. Be aware of that when creating new files.
 
 Naming Conventions
 
