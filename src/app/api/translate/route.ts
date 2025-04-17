@@ -3,6 +3,10 @@ import { NextResponse } from "next/server";
 import { rateLimitMiddleware } from "./rate-limit";
 import { headers } from "next/headers";
 
+if (!process.env.ANTHROPIC_API_KEY) {
+  throw new Error("ANTHROPIC_API_KEY is not set");
+}
+
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
 });
@@ -98,15 +102,25 @@ export async function POST(request: Request) {
     const headersList = headers();
     const ip = headersList.get("x-forwarded-for") || "unknown";
 
-    logTranslationRequest(
-      ip,
-      false,
-      error instanceof Error ? error.message : "Unknown error"
-    );
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
+    const errorDetails = error instanceof Error ? error.stack : String(error);
 
-    console.error("Translation error:", error);
+    console.error("Translation error:", {
+      message: errorMessage,
+      details: errorDetails,
+      timestamp: new Date().toISOString(),
+      ip,
+    });
+
+    logTranslationRequest(ip, false, errorMessage);
+
     return NextResponse.json(
-      { error: "Der opstod en fejl under oversættelsen" },
+      {
+        error: "Der opstod en fejl under oversættelsen",
+        details:
+          process.env.NODE_ENV === "development" ? errorMessage : undefined,
+      },
       { status: 500 }
     );
   }
