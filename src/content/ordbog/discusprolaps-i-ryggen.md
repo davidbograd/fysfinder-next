@@ -75,18 +75,14 @@ Ja, risikofaktorer inkluderer stigende alder, overvægt, stillesiddende livsstil
 1) Diskusprolaps i lænderyggen
 [Sundhed.dk](https://www.sundhed.dk/borger/patienthaandbogen/hjerne-og-nerver/sygdomme/ryg-og-nakke-sygdomme/diskusprolaps-i-laenderyggen/)​
 
-
 2) Diskusprolaps – Symptomer og behandling
 [Gigtforeningen.dk](https://www.gigtforeningen.dk/viden-om-gigt/diagnoser/diskusprolaps/symptomer-ved-diskusprolaps/)​
-
 
 3) Behandling af diskusprolaps
 [Gigtforeningen.dk](https://www.gigtforeningen.dk/viden-om-gigt/diagnoser/diskusprolaps/behandling-af-diskusprolaps/)​
 
-
 4) National klinisk retningslinje for lumbal nerverodspåvirkning
 [Fysio.dk](https://www.fysio.dk/fafo/faglige-anbefalinger/kliniske-retningslinjer/publicerede-kliniske-retningslinjer/muskuloskeletale-lidelser/lumbal-nerverod)​
-
 
 5. Smerter i ryggen? Her er, hvad du kan gøre
 [Fysio.dk](https://www.fysio.dk/guide-til-et-liv-i-bevagelse/smerter-i-ryggen-her-er-hvad-du-kan-gore)
