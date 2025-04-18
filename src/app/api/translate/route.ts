@@ -3,6 +3,8 @@ import { NextResponse } from "next/server";
 import { rateLimitMiddleware } from "./rate-limit";
 import { headers } from "next/headers";
 
+export const runtime = "edge";
+
 if (!process.env.ANTHROPIC_API_KEY) {
   throw new Error("ANTHROPIC_API_KEY is not set");
 }
@@ -48,9 +50,6 @@ export async function POST(request: Request) {
       );
     }
 
-    // Log the incoming request
-    logTranslationRequest(ip, true, undefined, text.length);
-
     const systemPrompt = `
    Du er en ekspert i at forstå og forklare MR-scanningsbeskrivelser. Din opgave er at omskrive komplekse medicinske MR-beskrivelser til en kort og letforståelig tekst, som alle kan forstå – også uden medicinsk baggrund.
 
@@ -71,8 +70,8 @@ export async function POST(request: Request) {
 
     const message = await anthropic.messages.create({
       model: "claude-3-5-haiku-20241022",
-      max_tokens: 1000,
-      temperature: 0.2,
+      max_tokens: 750,
+      temperature: 0.1,
       system: systemPrompt,
       messages: [
         {
@@ -96,6 +95,9 @@ export async function POST(request: Request) {
     if (!translation) {
       throw new Error("No translation received from Claude API");
     }
+
+    // Add logging here after successful translation
+    logTranslationRequest(ip, true, undefined, text.length);
 
     return NextResponse.json({ translation });
   } catch (error) {
