@@ -20,6 +20,12 @@ export default function Footer() {
               Samarbejdspartnere
             </Link>
             <Link
+              href="/samarbejdspartnere"
+              className="text-gray-600 hover:text-gray-900 text-sm"
+            >
+              Forstå MR-scanning
+            </Link>
+            <Link
               href="/privatlivspolitik"
               className="text-gray-600 hover:text-gray-900 text-sm"
             >
