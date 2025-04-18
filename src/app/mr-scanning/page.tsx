@@ -20,8 +20,7 @@ export default function MRScanPage() {
             oversætter
           </h1>
           <p className="text-gray-600 text-sm sm:text-base">
-            Indtast teksten fra din MR-scanning rapport nedenfor, og få den
-            oversat til letforståeligt dansk.
+            Få din MR-scanning rapport oversat til letforståeligt dansk.
           </p>
         </div>
 
