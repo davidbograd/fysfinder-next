@@ -42,7 +42,7 @@ export default function MRScanPage() {
                 på sundhed.dk eller MinSundhed appen.
               </li>
               <li>
-                Lad vores værktøj analyserer dit resultat og give dig et svar på
+                Lad vores værktøj analysere dit resultat og give dig et svar på
                 under 30 sekunder.
               </li>
             </ol>
