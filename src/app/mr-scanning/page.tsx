@@ -5,9 +5,8 @@ import { Shield, Clock } from "lucide-react";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "Komplet guide om MR-scanning | Få svar på alle dine spørgsmål",
-  description:
-    "Oversæt din MR-scanning rapport til letforståeligt dansk sprog.",
+  title: "Komplet MR-scanning guide | Få svar på dine spørgsmål ✅",
+  description: "Oversæt din MR-scanning rapport til letforståeligt dansk.",
 };
 
 export default function MRScanPage() {
