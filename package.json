@@ -13,7 +13,7 @@
     "test:coverage": "jest --coverage",
     "import:clinics": "ts-node scripts/import-clinics.ts",
     "import:specialties": "ts-node scripts/import-specialties.ts",
-    "ingest:articles": "ts-node scripts/ingest-ordbog-articles.ts",
+    "ingest:articles": "node scripts/ingest-ordbog-articles.mjs",
     "fetch:physio": "ts-node scripts/fetch-physiotherapists-google-maps.ts",
     "update:imports": "node scripts/update-imports.mjs",
     "revalidate": "node scripts/revalidate.js",

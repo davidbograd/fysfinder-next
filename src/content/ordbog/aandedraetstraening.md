@@ -1,6 +1,6 @@
 ---
 title: Åndedrætstræning
-lastUpdated: 24/02/2024
+lastUpdated: 24/02/2025
 metaTitle: Åndedrætstræning – Hvad er åndedrætstræning? Tips og råd
 datePublished: 19/02/2025
 ---
