@@ -317,15 +317,61 @@ function LocationStructuredData({
   clinics,
   specialtyName,
 }: LocationStructuredDataProps) {
+  // Create the base URL for the page
+  const baseUrl = "https://www.fysfinder.dk";
+  const locationUrl = `${baseUrl}/find/fysioterapeut/${city.bynavn_slug}`;
+  const currentUrl = specialtyName
+    ? `${locationUrl}/${slugify(specialtyName)}`
+    : locationUrl;
+
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebPage",
     name: specialtyName
       ? `Fysioterapeuter i ${city.bynavn} specialiseret i ${specialtyName}`
       : `Fysioterapeuter i ${city.bynavn}`,
-    url: `https://www.fysfinder.dk/find/fysioterapeut/${city.bynavn_slug}${
-      specialtyName ? `/${slugify(specialtyName)}` : ""
-    }`,
+    url: currentUrl,
+
+    // Add BreadcrumbList
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          item: {
+            "@type": "WebPage",
+            "@id": baseUrl,
+            name: "Forside",
+            url: baseUrl,
+          },
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          item: {
+            "@type": "WebPage",
+            "@id": locationUrl,
+            name: city.bynavn,
+            url: locationUrl,
+          },
+        },
+        ...(specialtyName
+          ? [
+              {
+                "@type": "ListItem",
+                position: 3,
+                item: {
+                  "@type": "WebPage",
+                  "@id": currentUrl,
+                  name: specialtyName,
+                  url: currentUrl,
+                },
+              },
+            ]
+          : []),
+      ],
+    },
 
     // Medical Specialty Organization
     about: {
@@ -359,7 +405,7 @@ function LocationStructuredData({
         item: {
           "@type": ["LocalBusiness", "MedicalBusiness"],
           name: clinic.klinikNavn,
-          url: `https://www.fysfinder.dk/klinik/${clinic.klinikNavnSlug}`,
+          url: `${baseUrl}/klinik/${clinic.klinikNavnSlug}`,
           address: {
             "@type": "PostalAddress",
             addressLocality: clinic.lokation,
@@ -400,9 +446,13 @@ interface LocationPageProps {
     location: string;
     specialty?: string;
   };
+  customBreadcrumbs?: React.ReactNode;
 }
 
-export default async function LocationPage({ params }: LocationPageProps) {
+export default async function LocationPage({
+  params,
+  customBreadcrumbs,
+}: LocationPageProps) {
   const data = await fetchLocationData(params.location, params.specialty);
   const specialties = data.specialties;
 
@@ -510,7 +560,8 @@ export default async function LocationPage({ params }: LocationPageProps) {
         specialtyName={specialtyName}
       />
       <div className="max-w-[800px] mx-auto">
-        <Breadcrumbs items={breadcrumbItems} />
+        {!customBreadcrumbs && <Breadcrumbs items={breadcrumbItems} />}
+        {customBreadcrumbs}
 
         <h1 className="text-3xl font-bold mb-2">
           {specialtyName
