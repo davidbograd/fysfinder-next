@@ -1,3 +1,12 @@
+// HOW TO USE
+// 1. Update the CSV file with the new articles
+const CSV_FILENAME = "ordbog-materiale.csv"; // Update this to the new CSV filename
+// 2. Update the date below to current date
+const CURRENT_DATE = "20/04/2025"; // Update this date when running the script
+// 3. Run the script
+
+
+
 import fs from "node:fs";
 import path from "node:path";
 import { parse } from "csv-parse/sync";
@@ -46,7 +55,7 @@ async function processArticles() {
     const csvPath = path.join(
       process.cwd(),
       "public",
-      "ordbog-materiale.csv"
+      CSV_FILENAME
     );
     const csvContent = fs.readFileSync(csvPath, "utf-8");
 
@@ -92,9 +101,9 @@ async function processArticles() {
         // Create frontmatter and content
         const fileContent = `---
 title: "${title}"
-lastUpdated: "24/02/2024"
+lastUpdated: "${CURRENT_DATE}"
 metaTitle: "${record["Meta title"]}"
-datePublished: "24/02/2024"
+datePublished: "${CURRENT_DATE}"
 ---
 
 ${remainingContent}`;

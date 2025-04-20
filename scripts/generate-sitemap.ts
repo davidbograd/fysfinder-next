@@ -1,3 +1,7 @@
+// HOW TO USE
+// 1. Run the script "npx tsx scripts/generate-sitemap.ts"
+// 2. Push to github
+
 import { config } from "dotenv";
 import { createClient } from "@supabase/supabase-js";
 import { promises as fsPromises } from "fs";
