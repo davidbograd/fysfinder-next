@@ -2,7 +2,6 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import LocationPage, { fetchSpecialties, fetchLocationData } from "../page";
 import { SpecialtyWithSeo } from "@/app/types";
-import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 
 export async function generateMetadata({
   params,
@@ -36,29 +35,10 @@ export async function generateMetadata({
   };
 }
 
-export default async function SpecialtyPage({
+export default function SpecialtyPage({
   params,
 }: {
   params: { location: string; specialty: string };
 }) {
-  const data = await fetchLocationData(params.location, params.specialty);
-  const specialty = data.specialties.find(
-    (s: SpecialtyWithSeo) => s.specialty_name_slug === params.specialty
-  );
-
-  if (!specialty || !data.city) return notFound();
-
-  // Create breadcrumb items including the specialty
-  const breadcrumbItems = [
-    { text: "Forside", link: "/" },
-    { text: data.city.bynavn, link: `/find/fysioterapeut/${params.location}` },
-    { text: specialty.specialty_name },
-  ];
-
-  return (
-    <LocationPage
-      params={params}
-      customBreadcrumbs={<Breadcrumbs items={breadcrumbItems} />}
-    />
-  );
+  return <LocationPage params={params} />;
 }
