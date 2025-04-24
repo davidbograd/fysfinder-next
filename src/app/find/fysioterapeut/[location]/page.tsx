@@ -15,7 +15,7 @@ import {
   LocationPageData,
   SpecialtyWithSeo,
 } from "@/app/types/index";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { SearchAndFilters } from "@/components/features/search/SearchAndFilters";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { SpecialtiesList } from "@/components/features/specialty/SpecialtiesList";
@@ -317,15 +317,18 @@ function LocationStructuredData({
   clinics,
   specialtyName,
 }: LocationStructuredDataProps) {
-  const structuredData = {
+  const baseUrl = "https://www.fysfinder.dk";
+  const locationPath = `/find/fysioterapeut/${city.bynavn_slug}`;
+  const specialtyPath = specialtyName ? `/${slugify(specialtyName)}` : "";
+  const currentUrl = `${baseUrl}${locationPath}${specialtyPath}`;
+
+  const webPageSchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
     name: specialtyName
       ? `Fysioterapeuter i ${city.bynavn} specialiseret i ${specialtyName}`
       : `Fysioterapeuter i ${city.bynavn}`,
-    url: `https://www.fysfinder.dk/find/fysioterapeut/${city.bynavn_slug}${
-      specialtyName ? `/${slugify(specialtyName)}` : ""
-    }`,
+    url: currentUrl,
 
     // Medical Specialty Organization
     about: {
@@ -359,7 +362,7 @@ function LocationStructuredData({
         item: {
           "@type": ["LocalBusiness", "MedicalBusiness"],
           name: clinic.klinikNavn,
-          url: `https://www.fysfinder.dk/klinik/${clinic.klinikNavnSlug}`,
+          url: `${baseUrl}/klinik/${clinic.klinikNavnSlug}`,
           address: {
             "@type": "PostalAddress",
             addressLocality: clinic.lokation,
@@ -387,11 +390,156 @@ function LocationStructuredData({
     },
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Forside",
+        item: baseUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: city.bynavn,
+        item: `${baseUrl}${locationPath}`,
+      },
+      ...(specialtyName
+        ? [
+            {
+              "@type": "ListItem",
+              position: 3,
+              name: specialtyName,
+              item: currentUrl,
+            },
+          ]
+        : []),
+    ],
+  };
+
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+    </>
+  );
+}
+
+function DanmarkStructuredData({
+  clinics,
+  specialtyName,
+}: {
+  clinics: Clinic[];
+  specialtyName?: string | null;
+}) {
+  const baseUrl = "https://www.fysfinder.dk";
+  const locationPath = "/find/fysioterapeut/danmark";
+  const specialtyPath = specialtyName ? `/${slugify(specialtyName)}` : "";
+  const currentUrl = `${baseUrl}${locationPath}${specialtyPath}`;
+
+  const webPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: specialtyName
+      ? `Fysioterapeuter i Danmark specialiseret i ${specialtyName}`
+      : "Find og sammenlign fysioterapeuter i Danmark",
+    url: currentUrl,
+
+    about: {
+      "@type": "MedicalSpecialty",
+      name: specialtyName || "Fysioterapi",
+      relevantSpecialty: {
+        "@type": "MedicalSpecialty",
+        name: "Physical Therapy",
+      },
+    },
+    specialty: specialtyName || "Fysioterapi",
+    medicalAudience: "Patienter der søger fysioterapi",
+
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: clinics.map((clinic, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": ["LocalBusiness", "MedicalBusiness"],
+          name: clinic.klinikNavn,
+          url: `${baseUrl}/klinik/${clinic.klinikNavnSlug}`,
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: clinic.lokation,
+            postalCode: clinic.postnummer,
+            streetAddress: clinic.adresse,
+            addressCountry: "DK",
+          },
+          ...(clinic.avgRating && clinic.ratingCount > 0
+            ? {
+                aggregateRating: {
+                  "@type": "AggregateRating",
+                  ratingValue: clinic.avgRating,
+                  reviewCount: clinic.ratingCount,
+                  bestRating: 5,
+                  worstRating: 1,
+                },
+              }
+            : {}),
+          medicalSpecialty: [
+            "Physical Therapy",
+            ...clinic.specialties.map((s) => s.specialty_name),
+          ],
+        },
+      })),
+    },
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Forside",
+        item: baseUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Danmark",
+        item: `${baseUrl}${locationPath}`,
+      },
+      ...(specialtyName
+        ? [
+            {
+              "@type": "ListItem",
+              position: 3,
+              name: specialtyName,
+              item: currentUrl,
+            },
+          ]
+        : []),
+    ],
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+    </>
   );
 }
 
@@ -407,25 +555,34 @@ export default async function LocationPage({ params }: LocationPageProps) {
   const specialties = data.specialties;
 
   // Get specialty name if we're on a specialty page
-  const specialtyName = params.specialty
+  const specialty = params.specialty
     ? specialties.find(
         (s: SpecialtyWithSeo) => s.specialty_name_slug === params.specialty
-      )?.specialty_name
+      )
     : null;
+
+  // Redirect to location page if specialty doesn't exist but was specified
+  if (params.specialty && !specialty) {
+    redirect(`/find/fysioterapeut/${params.location}`);
+  }
+
+  const specialtyName = specialty?.specialty_name;
 
   // Special handling for "danmark" page
   if (params.location === "danmark") {
-    const specialty = params.specialty
-      ? specialties.find(
-          (s: SpecialtyWithSeo) => s.specialty_name_slug === params.specialty
-        )
-      : null;
-
     return (
       <div className="container mx-auto px-4">
+        <DanmarkStructuredData
+          clinics={data.clinics}
+          specialtyName={specialtyName}
+        />
         <div className="max-w-[800px] mx-auto">
           <Breadcrumbs
-            items={[{ text: "Forside", link: "/" }, { text: "Danmark" }]}
+            items={[
+              { text: "Forside", link: "/" },
+              { text: "Danmark", link: "/find/fysioterapeut/danmark" },
+              ...(specialtyName ? [{ text: specialtyName }] : []),
+            ]}
           />
 
           <h1 className="text-3xl font-bold mb-2">
@@ -499,7 +656,8 @@ export default async function LocationPage({ params }: LocationPageProps) {
 
   const breadcrumbItems = [
     { text: "Forside", link: "/" },
-    { text: data.city.bynavn },
+    { text: data.city.bynavn, link: `/find/fysioterapeut/${params.location}` },
+    ...(specialtyName ? [{ text: specialtyName }] : []),
   ];
 
   return (
