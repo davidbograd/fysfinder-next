@@ -1,7 +1,7 @@
-import { ContentEntry } from "@/components/features/content/ContentEntry";
+import { ContentEntry } from "@/components/features/blog-og-ordbog/ContentEntry";
 import { getBlogPost, getBlogPosts } from "@/lib/blog";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
-import { AuthorCard } from "@/components/features/content/AuthorCard";
+import { AuthorCard } from "@/components/features/blog-og-ordbog/AuthorCard";
 import { Metadata } from "next";
 
 interface BlogPostStructuredDataProps {

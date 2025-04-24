@@ -1,4 +1,4 @@
-import { BlogList } from "@/components/features/content/BlogList";
+import { BlogList } from "@/components/features/blog-og-ordbog/BlogList";
 import { getBlogPosts } from "@/lib/blog";
 import type { BlogPost } from "@/lib/blog";
 

@@ -1,8 +1,8 @@
-import { ContentEntry } from "@/components/features/content/ContentEntry";
+import { ContentEntry } from "@/components/features/blog-og-ordbog/ContentEntry";
 import { getDictionaryTerm, getDictionaryTerms } from "@/lib/dictionary";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
-import { AuthorCard } from "@/components/features/content/AuthorCard";
-import { TableOfContents } from "@/components/features/content/TableOfContents";
+import { AuthorCard } from "@/components/features/blog-og-ordbog/AuthorCard";
+import { TableOfContents } from "@/components/features/blog-og-ordbog/TableOfContents";
 import {
   calculateReadingTime,
   extractTableOfContents,

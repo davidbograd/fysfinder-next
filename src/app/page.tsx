@@ -1,9 +1,9 @@
 import React from "react";
 import { Metadata } from "next";
-import { FAQ } from "@/components/features/content/FAQ";
+import { FAQ } from "@/components/features/blog-og-ordbog/FAQ";
 import { SearchAndFilters } from "@/components/features/search/SearchAndFilters";
 import { RegionList } from "@/components/features/search/RegionList";
-import { BenefitsSection } from "@/components/features/content/BenefitsSection";
+import { BenefitsSection } from "@/components/features/blog-og-ordbog/BenefitsSection";
 import { StarIcon } from "@heroicons/react/24/solid";
 import {
   fetchCitiesWithCounts,

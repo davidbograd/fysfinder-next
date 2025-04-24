@@ -1,4 +1,4 @@
-import { ContentList } from "@/components/features/content/ContentList";
+import { ContentList } from "@/components/features/blog-og-ordbog/ContentList";
 import { getDictionaryTerms } from "@/lib/dictionary";
 
 interface DictionaryStructuredDataProps {
