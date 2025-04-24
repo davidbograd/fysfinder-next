@@ -10,7 +10,6 @@ import { Metadata } from "next";
 import {
   Clinic,
   City,
-  ClinicWithDistance,
   DBClinicResponse,
   LocationPageData,
   SpecialtyWithSeo,
@@ -22,6 +21,7 @@ import { SpecialtiesList } from "@/components/features/specialty/SpecialtiesList
 import { ClinicsList } from "@/components/features/clinic/ClinicsList";
 import { NoResultsFound } from "@/app/find/fysioterapeut/[location]/components/NoResultsFound";
 import { NearbyClinicsList } from "@/app/find/fysioterapeut/[location]/components/NearbyClinicsList";
+import { LocationStructuredData } from "@/components/seo/LocationStructuredData";
 
 // Create a Supabase client for static generation
 const supabase = createClient(
@@ -306,243 +306,6 @@ export async function fetchSpecialties() {
   return data;
 }
 
-interface LocationStructuredDataProps {
-  city: City;
-  clinics: Clinic[];
-  specialtyName?: string | null;
-}
-
-function LocationStructuredData({
-  city,
-  clinics,
-  specialtyName,
-}: LocationStructuredDataProps) {
-  const baseUrl = "https://www.fysfinder.dk";
-  const locationPath = `/find/fysioterapeut/${city.bynavn_slug}`;
-  const specialtyPath = specialtyName ? `/${slugify(specialtyName)}` : "";
-  const currentUrl = `${baseUrl}${locationPath}${specialtyPath}`;
-
-  const webPageSchema = {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    name: specialtyName
-      ? `Fysioterapeuter i ${city.bynavn} specialiseret i ${specialtyName}`
-      : `Fysioterapeuter i ${city.bynavn}`,
-    url: currentUrl,
-
-    // Medical Specialty Organization
-    about: {
-      "@type": "MedicalSpecialty",
-      name: specialtyName || "Fysioterapi",
-      relevantSpecialty: {
-        "@type": "MedicalSpecialty",
-        name: "Physical Therapy",
-      },
-    },
-    specialty: specialtyName || "Fysioterapi",
-    medicalAudience: "Patienter der søger fysioterapi",
-
-    // Location/Area Served
-    areaServed: {
-      "@type": "City",
-      name: city.bynavn,
-      geo: {
-        "@type": "GeoCoordinates",
-        latitude: city.latitude,
-        longitude: city.longitude,
-      },
-    },
-
-    // List of Clinics
-    mainEntity: {
-      "@type": "ItemList",
-      itemListElement: clinics.map((clinic, index) => ({
-        "@type": "ListItem",
-        position: index + 1,
-        item: {
-          "@type": ["LocalBusiness", "MedicalBusiness"],
-          name: clinic.klinikNavn,
-          url: `${baseUrl}/klinik/${clinic.klinikNavnSlug}`,
-          address: {
-            "@type": "PostalAddress",
-            addressLocality: clinic.lokation,
-            postalCode: clinic.postnummer,
-            streetAddress: clinic.adresse,
-            addressCountry: "DK",
-          },
-          ...(clinic.avgRating && clinic.ratingCount > 0
-            ? {
-                aggregateRating: {
-                  "@type": "AggregateRating",
-                  ratingValue: clinic.avgRating,
-                  reviewCount: clinic.ratingCount,
-                  bestRating: 5,
-                  worstRating: 1,
-                },
-              }
-            : {}),
-          medicalSpecialty: [
-            "Physical Therapy",
-            ...clinic.specialties.map((s) => s.specialty_name),
-          ],
-        },
-      })),
-    },
-  };
-
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Forside",
-        item: baseUrl,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: city.bynavn,
-        item: `${baseUrl}${locationPath}`,
-      },
-      ...(specialtyName
-        ? [
-            {
-              "@type": "ListItem",
-              position: 3,
-              name: specialtyName,
-              item: currentUrl,
-            },
-          ]
-        : []),
-    ],
-  };
-
-  return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
-    </>
-  );
-}
-
-function DanmarkStructuredData({
-  clinics,
-  specialtyName,
-}: {
-  clinics: Clinic[];
-  specialtyName?: string | null;
-}) {
-  const baseUrl = "https://www.fysfinder.dk";
-  const locationPath = "/find/fysioterapeut/danmark";
-  const specialtyPath = specialtyName ? `/${slugify(specialtyName)}` : "";
-  const currentUrl = `${baseUrl}${locationPath}${specialtyPath}`;
-
-  const webPageSchema = {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    name: specialtyName
-      ? `Fysioterapeuter i Danmark specialiseret i ${specialtyName}`
-      : "Find og sammenlign fysioterapeuter i Danmark",
-    url: currentUrl,
-
-    about: {
-      "@type": "MedicalSpecialty",
-      name: specialtyName || "Fysioterapi",
-      relevantSpecialty: {
-        "@type": "MedicalSpecialty",
-        name: "Physical Therapy",
-      },
-    },
-    specialty: specialtyName || "Fysioterapi",
-    medicalAudience: "Patienter der søger fysioterapi",
-
-    mainEntity: {
-      "@type": "ItemList",
-      itemListElement: clinics.map((clinic, index) => ({
-        "@type": "ListItem",
-        position: index + 1,
-        item: {
-          "@type": ["LocalBusiness", "MedicalBusiness"],
-          name: clinic.klinikNavn,
-          url: `${baseUrl}/klinik/${clinic.klinikNavnSlug}`,
-          address: {
-            "@type": "PostalAddress",
-            addressLocality: clinic.lokation,
-            postalCode: clinic.postnummer,
-            streetAddress: clinic.adresse,
-            addressCountry: "DK",
-          },
-          ...(clinic.avgRating && clinic.ratingCount > 0
-            ? {
-                aggregateRating: {
-                  "@type": "AggregateRating",
-                  ratingValue: clinic.avgRating,
-                  reviewCount: clinic.ratingCount,
-                  bestRating: 5,
-                  worstRating: 1,
-                },
-              }
-            : {}),
-          medicalSpecialty: [
-            "Physical Therapy",
-            ...clinic.specialties.map((s) => s.specialty_name),
-          ],
-        },
-      })),
-    },
-  };
-
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Forside",
-        item: baseUrl,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Danmark",
-        item: `${baseUrl}${locationPath}`,
-      },
-      ...(specialtyName
-        ? [
-            {
-              "@type": "ListItem",
-              position: 3,
-              name: specialtyName,
-              item: currentUrl,
-            },
-          ]
-        : []),
-    ],
-  };
-
-  return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
-    </>
-  );
-}
-
 interface LocationPageProps {
   params: {
     location: string;
@@ -572,9 +335,10 @@ export default async function LocationPage({ params }: LocationPageProps) {
   if (params.location === "danmark") {
     return (
       <div className="container mx-auto px-4">
-        <DanmarkStructuredData
+        <LocationStructuredData
           clinics={data.clinics}
           specialtyName={specialtyName}
+          isDanmarkPage={true}
         />
         <div className="max-w-[800px] mx-auto">
           <Breadcrumbs
