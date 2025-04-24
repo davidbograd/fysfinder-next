@@ -43,10 +43,10 @@ export default function Header() {
                 Om os
               </Link>
               <Link
-                href="/om-os#kontakt"
+                href="/blog"
                 className="text-base text-gray-600 hover:text-gray-900"
               >
-                Kontakt
+                Blog
               </Link>
             </nav>
           </div>
@@ -122,11 +122,11 @@ export default function Header() {
                     Om os
                   </Link>
                   <Link
-                    href="/om-os#kontakt"
+                    href="/blog"
                     className="text-lg font-medium text-gray-900 py-2"
                     onClick={toggleMenu}
                   >
-                    Kontakt
+                    Blog
                   </Link>
                 </div>
                 {/* Bottom buttons */}
