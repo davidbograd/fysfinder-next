@@ -1,15 +1,12 @@
-import { ContentList } from "@/components/features/content/ContentList";
-import { getGlossaryTerms } from "@/lib/glossary";
+import { BlogList } from "@/components/features/content/BlogList";
+import { getBlogPosts } from "@/lib/blog";
+import type { BlogPost } from "@/lib/blog";
 
-interface ArticlesStructuredDataProps {
-  terms: Array<{
-    title: string;
-    slug: string;
-    description: string;
-  }>;
+interface BlogStructuredDataProps {
+  posts: BlogPost[];
 }
 
-function ArticlesStructuredData({ terms }: ArticlesStructuredDataProps) {
+function BlogStructuredData({ posts }: BlogStructuredDataProps) {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": ["WebPage", "Blog", "CollectionPage"],
@@ -38,11 +35,12 @@ function ArticlesStructuredData({ terms }: ArticlesStructuredDataProps) {
     },
     specialty: "Fysioterapi",
     medicalAudience: "Patienter og sundhedsprofessionelle",
-    hasPart: terms.map((term) => ({
+    blogPosts: posts.map((post) => ({
       "@type": "BlogPosting",
-      name: term.title,
-      description: term.description,
-      url: `https://fysfinder.dk/blog/${term.slug}`,
+      name: post.title,
+      description: post.description,
+      datePublished: post.datePublished,
+      url: `https://fysfinder.dk/blog/${post.slug}`,
       author: {
         "@type": "Person",
         name: "Joachim Bograd",
@@ -65,19 +63,19 @@ export const metadata = {
 };
 
 export default async function BlogPage() {
-  const terms = await getGlossaryTerms();
+  const posts = await getBlogPosts();
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <ArticlesStructuredData terms={terms} />
-      <div className="max-w-2xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6">FysFinder Blog</h1>
-        <p className="mb-8">
-          Velkommen til FysFinder's blog! Her finder du spændende artikler og
-          indlæg om fysioterapi, sundhed og velvære. Bliv klogere på din krop og
-          hvordan du bedst tager vare på den.
-        </p>
-        <ContentList terms={terms} baseUrl="/blog" />
+    <div className="container mx-auto py-8">
+      <BlogStructuredData posts={posts} />
+      <div className="max-w-7xl mx-auto">
+        <div className="mb-12">
+          <h1 className="text-4xl font-bold mb-4">FysFinder Blog</h1>
+          <p className="text-xl text-gray-600 max-w-2xl">
+            Her finder du spændende artikler om fysioterapi, sundhed og velvære.
+          </p>
+        </div>
+        <BlogList posts={posts} />
       </div>
     </div>
   );

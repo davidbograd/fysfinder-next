@@ -1,8 +1,8 @@
 import fs from "fs/promises";
-import path from "path";
+import * as path from "path";
 import matter from "gray-matter";
 
-const glossaryDir = path.join(process.cwd(), "src/content/glossary");
+const glossaryDir = path.join(process.cwd(), "src/content/blog");
 
 export async function getGlossaryTerms() {
   const files = await fs.readdir(glossaryDir);

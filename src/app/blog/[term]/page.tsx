@@ -1,5 +1,5 @@
 import { ContentEntry } from "@/components/features/content/ContentEntry";
-import { getGlossaryTerm, getGlossaryTerms } from "@/lib/glossary";
+import { getBlogPost, getBlogPosts } from "@/lib/blog";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { AuthorCard } from "@/components/features/content/AuthorCard";
 import { Metadata } from "next";
@@ -7,9 +7,11 @@ import { Metadata } from "next";
 interface BlogPostStructuredDataProps {
   term: {
     title: string;
-    description: string;
+    description?: string;
     content: string;
     slug: string;
+    datePublished: string;
+    lastUpdated: string;
   };
 }
 
@@ -19,7 +21,9 @@ function BlogPostStructuredData({ term }: BlogPostStructuredDataProps) {
     "@type": ["WebPage", "BlogPosting"],
     name: term.title,
     headline: term.title,
-    description: term.description,
+    description: term.description || term.title,
+    datePublished: term.datePublished,
+    dateModified: term.lastUpdated,
     author: {
       "@type": "Person",
       name: "Joachim Bograd",
@@ -64,9 +68,9 @@ function BlogPostStructuredData({ term }: BlogPostStructuredDataProps) {
 }
 
 export async function generateStaticParams() {
-  const terms = await getGlossaryTerms();
-  return terms.map((term) => ({
-    term: term.slug,
+  const posts = await getBlogPosts();
+  return posts.map((post) => ({
+    term: post.slug,
   }));
 }
 
@@ -75,10 +79,10 @@ export async function generateMetadata({
 }: {
   params: { term: string };
 }): Promise<Metadata> {
-  const term = await getGlossaryTerm(params.term);
+  const post = await getBlogPost(params.term);
   return {
-    title: `${term.title} | FysFinder Blog`,
-    description: term.description,
+    title: post.metaTitle || `${post.title} | FysFinder Blog`,
+    description: post.description,
   };
 }
 
@@ -87,21 +91,21 @@ export default async function BlogPostPage({
 }: {
   params: { term: string };
 }) {
-  const term = await getGlossaryTerm(params.term);
+  const post = await getBlogPost(params.term);
 
   const breadcrumbItems = [
     { text: "Blog", link: "/blog" },
-    { text: term.title },
+    { text: post.title },
   ];
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <BlogPostStructuredData term={term} />
+      <BlogPostStructuredData term={post} />
       <div className="max-w-2xl mx-auto">
         <Breadcrumbs items={breadcrumbItems} />
         <AuthorCard />
         <ContentEntry
-          term={term}
+          term={post}
           backLink={{
             href: "/blog",
             text: "Tilbage til blog",
