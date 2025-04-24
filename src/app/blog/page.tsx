@@ -58,7 +58,7 @@ function BlogStructuredData({ posts }: BlogStructuredDataProps) {
 }
 
 export const metadata = {
-  title: "FysFinder Blog",
+  title: "Fysfinder blog | Alt om fysioterapi, sundhed og velvære",
   description: "Læs de seneste blogindlæg om fysioterapi, sundhed og velvære",
 };
 
