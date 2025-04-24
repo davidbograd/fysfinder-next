@@ -1,4 +1,4 @@
-import { GlossaryList } from '@/components/features/content/GlossaryList';
+import { ContentList } from "@/components/features/content/ContentList";
 import { getGlossaryTerms } from "@/lib/glossary";
 
 interface ArticlesStructuredDataProps {
@@ -12,19 +12,16 @@ interface ArticlesStructuredDataProps {
 function ArticlesStructuredData({ terms }: ArticlesStructuredDataProps) {
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": ["WebPage", "MedicalWebPage", "CollectionPage"],
-    name: "Fysioterapeut Artikler",
-    description:
-      "En omfattende samling af fysioterapeutiske artikler og begreber",
+    "@type": ["WebPage", "Blog", "CollectionPage"],
+    name: "FysFinder Blog",
+    description: "Læs de seneste blogindlæg om fysioterapi, sundhed og velvære",
     author: {
       "@type": "Person",
       name: "Joachim Bograd",
       jobTitle: "Fysioterapeut",
       description:
         "Uddannet Bachelor i fysioterapi fra Københavns Professionshøjskole",
-      sameAs: [
-        "https://www.linkedin.com/in/joachim-bograd-43b0a120a/", // Add actual LinkedIn URL
-      ],
+      sameAs: ["https://www.linkedin.com/in/joachim-bograd-43b0a120a/"],
       affiliation: {
         "@type": "MedicalOrganization",
         name: "FysFinder",
@@ -42,10 +39,10 @@ function ArticlesStructuredData({ terms }: ArticlesStructuredDataProps) {
     specialty: "Fysioterapi",
     medicalAudience: "Patienter og sundhedsprofessionelle",
     hasPart: terms.map((term) => ({
-      "@type": "MedicalWebPage",
+      "@type": "BlogPosting",
       name: term.title,
       description: term.description,
-      url: `https://fysfinder.dk/fysioterapeut-artikler/${term.slug}`,
+      url: `https://fysfinder.dk/blog/${term.slug}`,
       author: {
         "@type": "Person",
         name: "Joachim Bograd",
@@ -63,24 +60,24 @@ function ArticlesStructuredData({ terms }: ArticlesStructuredDataProps) {
 }
 
 export const metadata = {
-  title: "Fysioterapeut Artikler",
-  description:
-    "En omfattende samling af fysioterapeutiske artikler og begreber",
+  title: "FysFinder Blog",
+  description: "Læs de seneste blogindlæg om fysioterapi, sundhed og velvære",
 };
 
-export default async function ArticlesPage() {
+export default async function BlogPage() {
   const terms = await getGlossaryTerms();
 
   return (
     <div className="container mx-auto px-4 py-8">
       <ArticlesStructuredData terms={terms} />
       <div className="max-w-2xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6">Fysioterapeut Artikler</h1>
+        <h1 className="text-3xl font-bold mb-6">FysFinder Blog</h1>
         <p className="mb-8">
-          Udforsk og forstå de mest populære og aktuelle fysioterapeutiske emner
-          med vores komplette A-Å liste af artikler.
+          Velkommen til FysFinder's blog! Her finder du spændende artikler og
+          indlæg om fysioterapi, sundhed og velvære. Bliv klogere på din krop og
+          hvordan du bedst tager vare på den.
         </p>
-        <GlossaryList terms={terms} />
+        <ContentList terms={terms} baseUrl="/blog" />
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { GlossaryList } from '@/components/features/content/GlossaryList';
+import { ContentList } from "@/components/features/content/ContentList";
 import { getDictionaryTerms } from "@/lib/dictionary";
 
 interface DictionaryStructuredDataProps {
@@ -80,7 +80,7 @@ export default async function DictionaryPage() {
           træning til dig, der ønsker at leve et sundere liv og forstå kroppen
           bedre.
         </p>
-        <GlossaryList terms={terms} />
+        <ContentList terms={terms} baseUrl="/ordbog" />
       </div>
     </div>
   );

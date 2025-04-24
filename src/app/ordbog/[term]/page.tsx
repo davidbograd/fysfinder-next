@@ -1,4 +1,4 @@
-import { GlossaryEntry } from "@/components/features/content/GlossaryEntry";
+import { ContentEntry } from "@/components/features/content/ContentEntry";
 import { getDictionaryTerm, getDictionaryTerms } from "@/lib/dictionary";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { AuthorCard } from "@/components/features/content/AuthorCard";
@@ -129,7 +129,13 @@ export default async function DictionaryTermPage({
             </div>
           </div>
           <AuthorCard />
-          <GlossaryEntry term={term} />
+          <ContentEntry
+            term={term}
+            backLink={{
+              href: "/ordbog",
+              text: "Tilbage til ordbog",
+            }}
+          />
         </div>
       </div>
     </div>

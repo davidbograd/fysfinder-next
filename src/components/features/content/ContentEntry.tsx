@@ -4,13 +4,21 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { slugify } from "@/app/utils/slugify";
 
-interface GlossaryTerm {
+interface ContentTerm {
   slug: string;
   title: string;
   content: string;
 }
 
-export function GlossaryEntry({ term }: { term: GlossaryTerm }) {
+interface ContentEntryProps {
+  term: ContentTerm;
+  backLink: {
+    href: string;
+    text: string;
+  };
+}
+
+export function ContentEntry({ term, backLink }: ContentEntryProps) {
   return (
     <article className="text-gray-800">
       <h1 className="text-4xl font-bold mb-6">{term.title}</h1>
@@ -63,8 +71,8 @@ export function GlossaryEntry({ term }: { term: GlossaryTerm }) {
         />
       </div>
       <div className="mt-8">
-        <Link href="/ordbog" className="text-logo-blue hover:underline">
-          &larr; Tilbage til ordbog
+        <Link href={backLink.href} className="text-logo-blue hover:underline">
+          &larr; {backLink.text}
         </Link>
       </div>
     </article>

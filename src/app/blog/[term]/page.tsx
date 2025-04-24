@@ -1,10 +1,10 @@
-import { GlossaryEntry } from '@/components/features/content/GlossaryEntry';
+import { ContentEntry } from "@/components/features/content/ContentEntry";
 import { getGlossaryTerm, getGlossaryTerms } from "@/lib/glossary";
-import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
-import { AuthorCard } from '@/components/features/content/AuthorCard';
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
+import { AuthorCard } from "@/components/features/content/AuthorCard";
 import { Metadata } from "next";
 
-interface ArticleStructuredDataProps {
+interface BlogPostStructuredDataProps {
   term: {
     title: string;
     description: string;
@@ -13,10 +13,10 @@ interface ArticleStructuredDataProps {
   };
 }
 
-function ArticleStructuredData({ term }: ArticleStructuredDataProps) {
+function BlogPostStructuredData({ term }: BlogPostStructuredDataProps) {
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": ["WebPage", "MedicalWebPage", "Article"],
+    "@type": ["WebPage", "BlogPosting"],
     name: term.title,
     headline: term.title,
     description: term.description,
@@ -51,7 +51,7 @@ function ArticleStructuredData({ term }: ArticleStructuredDataProps) {
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://fysfinder.dk/fysioterapeut-artikler/${term.slug}`,
+      "@id": `https://fysfinder.dk/blog/${term.slug}`,
     },
   };
 
@@ -77,12 +77,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const term = await getGlossaryTerm(params.term);
   return {
-    title: `${term.title}`,
+    title: `${term.title} | FysFinder Blog`,
     description: term.description,
   };
 }
 
-export default async function ArticlePage({
+export default async function BlogPostPage({
   params,
 }: {
   params: { term: string };
@@ -90,17 +90,23 @@ export default async function ArticlePage({
   const term = await getGlossaryTerm(params.term);
 
   const breadcrumbItems = [
-    { text: "Artikler", link: "/fysioterapeut-artikler" },
+    { text: "Blog", link: "/blog" },
     { text: term.title },
   ];
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <ArticleStructuredData term={term} />
+      <BlogPostStructuredData term={term} />
       <div className="max-w-2xl mx-auto">
         <Breadcrumbs items={breadcrumbItems} />
         <AuthorCard />
-        <GlossaryEntry term={term} />
+        <ContentEntry
+          term={term}
+          backLink={{
+            href: "/blog",
+            text: "Tilbage til blog",
+          }}
+        />
       </div>
     </div>
   );

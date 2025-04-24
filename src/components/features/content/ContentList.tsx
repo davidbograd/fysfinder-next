@@ -1,12 +1,13 @@
 import Link from "next/link";
 
-interface GlossaryTerm {
+interface ContentTerm {
   slug: string;
   title: string;
 }
 
-interface GlossaryListProps {
-  terms: GlossaryTerm[];
+interface ContentListProps {
+  terms: ContentTerm[];
+  baseUrl: string; // New prop to make the component more flexible
 }
 
 // Danish alphabet order helper
@@ -26,7 +27,8 @@ function getDanishAlphabetOrder(letter: string): number {
   }
 }
 
-export function GlossaryList({ terms }: GlossaryListProps) {
+export function ContentList({ terms, baseUrl }: ContentListProps) {
+  // Group terms by first letter
   const groupedTerms = terms.reduce((acc, term) => {
     const firstLetter = term.title[0].toUpperCase();
     if (!acc[firstLetter]) {
@@ -34,7 +36,7 @@ export function GlossaryList({ terms }: GlossaryListProps) {
     }
     acc[firstLetter].push(term);
     return acc;
-  }, {} as Record<string, GlossaryTerm[]>);
+  }, {} as Record<string, ContentTerm[]>);
 
   // Sort entries according to Danish alphabet
   const sortedEntries = Object.entries(groupedTerms).sort(
@@ -56,7 +58,7 @@ export function GlossaryList({ terms }: GlossaryListProps) {
         ))}
       </div>
 
-      {/* Glossary Entries */}
+      {/* Content Entries */}
       {sortedEntries.map(([letter, terms]) => (
         <div
           key={letter}
@@ -70,7 +72,7 @@ export function GlossaryList({ terms }: GlossaryListProps) {
             {terms.map((term) => (
               <Link
                 key={term.slug}
-                href={`/ordbog/${term.slug}`}
+                href={`${baseUrl}/${term.slug}`}
                 className="text-logo-blue hover:underline truncate"
               >
                 {term.title}
