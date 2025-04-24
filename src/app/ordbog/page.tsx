@@ -69,16 +69,15 @@ export default async function DictionaryPage() {
   const terms = await getDictionaryTerms();
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto py-8">
       <DictionaryStructuredData terms={terms} />
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6">
+      <div>
+        <h1 className="md:text-4xl text-3xl font-bold mb-4">
           FysFinder ordbogen – Forklaringer om krop, sundhed og træning
         </h1>
-        <p className="mb-8">
+        <p className="text-xl text-gray-600 mb-8">
           Vi har samlet forklaringer og viden inden for anatomi, sundhed og
-          træning til dig, der ønsker at leve et sundere liv og forstå kroppen
-          bedre.
+          træning. Lev et sundere liv og forstå kroppen bedre.
         </p>
         <ContentList terms={terms} baseUrl="/ordbog" />
       </div>

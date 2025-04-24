@@ -70,7 +70,9 @@ export default async function BlogPage() {
       <BlogStructuredData posts={posts} />
       <div className="max-w-7xl mx-auto">
         <div className="mb-12">
-          <h1 className="text-4xl font-bold mb-4">FysFinder Blog</h1>
+          <h1 className="md:text-4xl text-3xl font-bold mb-4">
+            FysFinder Blog
+          </h1>
           <p className="text-xl text-gray-600 max-w-2xl">
             Her finder du spændende artikler om fysioterapi, sundhed og velvære.
           </p>
