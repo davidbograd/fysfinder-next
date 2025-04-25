@@ -58,7 +58,7 @@ const ClinicCard: React.FC<Props> = ({
   return (
     <div
       className={cn(
-        "p-6 rounded-lg transition-all duration-200 bg-white w-full",
+        "p-6 rounded-lg transition-all duration-200 bg-white w-full group",
         isPremium
           ? "border-2 border-logo-blue/30 shadow-md hover:shadow-lg scale-[1.02] bg-gradient-to-r from-logo-blue/5 to-white"
           : "border border-gray-200 hover:shadow-md"
@@ -66,18 +66,13 @@ const ClinicCard: React.FC<Props> = ({
     >
       <div className="flex flex-col sm:flex-row sm:justify-between">
         <div className="flex-grow">
+          {isPremium && (
+            <p className="text-gray-600 text-sm mb-1">Sponsoreret</p>
+          )}
           <div className="flex items-start gap-2 mb-2">
             <h3 className="text-xl font-semibold text-gray-900">
               {klinikNavn}
             </h3>
-            {isPremium && (
-              <Badge
-                variant="secondary"
-                className="flex items-center gap-1 bg-logo-blue/10 text-logo-blue border-logo-blue/20"
-              >
-                Sponsoreret
-              </Badge>
-            )}
           </div>
           <div className="flex items-center mb-3">
             <StarIcon className="size-5 mr-2 flex-shrink-0 text-amber-500" />
@@ -191,9 +186,9 @@ const ClinicCard: React.FC<Props> = ({
             </div>
           )}
         </div>
-        <div className="mt-4 sm:mt-0 sm:ml-4 sm:text-right">
-          <span className="text-logo-blue hover:text-blue-700 font-medium">
-            Se klinik →
+        <div className="hidden md:block mt-4 sm:mt-0 sm:ml-4 sm:text-right">
+          <span className="hidden md:inline text-logo-blue font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            →
           </span>
         </div>
       </div>
