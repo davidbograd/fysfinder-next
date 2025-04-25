@@ -144,7 +144,9 @@ export default function MRScanPage() {
                 </tr>
                 <tr className="even:bg-gray-50">
                   <td className="px-4 py-2 border">Corpus vertebrae</td>
-                  <td className="px-4 py-2 border">Ryghvirvelens "krop"</td>
+                  <td className="px-4 py-2 border">
+                    Ryghvirvelens &quot;krop&quot;
+                  </td>
                 </tr>
                 <tr className="even:bg-gray-50">
                   <td className="px-4 py-2 border">Degeneration</td>
