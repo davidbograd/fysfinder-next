@@ -3,6 +3,8 @@ import { TranslatorForm } from "./components/TranslatorForm";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { Shield, Clock } from "lucide-react";
 import Image from "next/image";
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
+import WebAppStructuredData from "@/components/seo/VaerktoejerStructuredData";
 
 export const metadata: Metadata = {
   title: "Komplet MR-scanning guide | Få svar på dine spørgsmål ✅",
@@ -10,9 +12,21 @@ export const metadata: Metadata = {
 };
 
 export default function MRScanPage() {
+  const breadcrumbItems = [
+    { text: "Værktøjer", link: "/vaerktoejer" },
+    { text: "MR-scanning Oversætter" },
+  ];
+
   return (
     <main className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-3xl">
+      <WebAppStructuredData
+        type="tool"
+        name="MR-scanning Oversætter"
+        description="Oversæt din MR-scanning rapport til letforståeligt dansk"
+        breadcrumbs={breadcrumbItems}
+      />
       <div className="space-y-6 sm:space-y-8">
+        <Breadcrumbs items={breadcrumbItems} />
         <div className="space-y-4">
           <h1 className="text-2xl sm:text-3xl font-bold">
             Hvad betyder din MR-scanning? Prøv vores MR-scanningsrapport
@@ -130,7 +144,7 @@ export default function MRScanPage() {
                 </tr>
                 <tr className="even:bg-gray-50">
                   <td className="px-4 py-2 border">Corpus vertebrae</td>
-                  <td className="px-4 py-2 border">Ryghvirvelens ”krop”</td>
+                  <td className="px-4 py-2 border">Ryghvirvelens "krop"</td>
                 </tr>
                 <tr className="even:bg-gray-50">
                   <td className="px-4 py-2 border">Degeneration</td>
