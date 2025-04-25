@@ -270,7 +270,7 @@ export default function MRScanPage() {
             </p>
             <div className="relative w-full aspect-[16/10] mt-8">
               <Image
-                src="/images/mr-scanning/mr-scanning.png"
+                src="/images/mr-scanning/mr-scanner-process.jpg"
                 alt="Moderne MR-scanner (Magnetic Resonance Imaging) i et lyst, professionelt hospitalsmiljø"
                 fill
                 className="object-cover rounded-xl"
