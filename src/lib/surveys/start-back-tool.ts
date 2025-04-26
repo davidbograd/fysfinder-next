@@ -63,53 +63,80 @@ export const questions: Question[] = [
   },
 ];
 
-export const answerOptions: AnswerOption[] = [
-  { id: "totally_agree", text: "Helt enig", score: 1 },
-  { id: "agree", text: "Enig", score: 1 },
-  { id: "neutral", text: "Hverken enig eller uenig", score: 0 },
-  { id: "disagree", text: "Uenig", score: 0 },
-  { id: "totally_disagree", text: "Helt uenig", score: 0 },
-];
+export const answerOptions: Record<string, AnswerOption[]> = {
+  standard: [
+    { id: "agree", text: "Enig", score: 1 },
+    { id: "disagree", text: "Uenig", score: 0 },
+  ],
+  q9: [
+    { id: "totally_agree", text: "Helt enig", score: 1 },
+    { id: "agree", text: "Enig", score: 1 },
+    { id: "neutral", text: "Hverken enig eller uenig", score: 0 },
+    { id: "disagree", text: "Uenig", score: 0 },
+    { id: "totally_disagree", text: "Helt uenig", score: 0 },
+  ],
+};
 
 export const resultCategories: Record<string, ResultCategory> = {
   low: {
     name: "Lav risiko",
     description: "Total score ≤ 3",
     recommendation:
-      "Denne score indikerer lav risiko for udvikling af vedvarende rygsmerter. Generel rådgivning og selvhjælpsstrategier anbefales.",
+      "Dine rygsmerter virker helt ufarlige - og bør gå væk helt af sig selv! Hvis du ikke har fået det bedre i løbet af 14 dage, så er det en god idé at finde en behandler.\n\nHvis du gerne vil forstå dine rygsmerter, og hvad du selv kan gøre.",
+    actions: [
+      {
+        text: "Læs mere om lændesmerter",
+        url: "https://www.fysfinder.dk/ordbog/laendesmerter",
+      },
+    ],
+    path: "/start-back-screening-tool/lav",
   },
   medium: {
     name: "Mellem risiko",
     description: "Total score ≥ 4 og psykosocial score < 4",
     recommendation:
-      "Denne score indikerer moderat risiko. Fysioterapi og målrettet behandling kan være gavnlig.",
+      "Dine rygsmerter kan have godt af at blive behandlet af en fysioterapeut, så de kan finde årsagen og opstarte det rigtige behandlingsforløb for dig.",
+    actions: [
+      {
+        text: "Find ryg fysioterapeut",
+        url: "https://www.fysfinder.dk/find/fysioterapeut/danmark/ryg",
+      },
+    ],
+    path: "/start-back-screening-tool/medium",
   },
   high: {
     name: "Høj risiko",
     description: "Total score ≥ 4 og psykosocial score ≥ 4",
     recommendation:
-      "Denne score indikerer høj risiko. En kombineret fysisk og psykologisk tilgang anbefales, evt. med henvisning til specialist.",
+      "Det er vigtigt at du får hjælp til at tage hånd om dine rygsmerter! Din smerte påvirker dig fysisk og psykisk i løbet af hverdagen, og du har derfor brug for hjælp fra en fysioterapeut specialiseret i kroniske smerter.",
+    actions: [
+      {
+        text: "Find kroniske smerte fysioterapeut",
+        url: "https://www.fysfinder.dk/find/fysioterapeut/danmark/kroniske-smerter",
+      },
+    ],
+    path: "/start-back-screening-tool/hoej",
   },
 };
 
 export function calculateScore(answers: Answer[]): StartBackScore {
-  // Special handling for Q9 (only "Helt enig" scores 1)
-  const q9Score =
-    answers.find((a) => a.questionId === "q9")?.answer === "totally_agree"
-      ? 1
-      : 0;
+  // Calculate total score for questions 1-8
+  const standardQuestionsScore = answers
+    .filter((a) => a.questionId !== "q9")
+    .reduce((sum, answer) => sum + answer.score, 0);
 
-  // Calculate total score (questions 1-8 normal scoring + special Q9 scoring)
-  const totalScore =
-    answers
-      .filter((a) => a.questionId !== "q9")
-      .reduce((sum, answer) => sum + answer.score, 0) + q9Score;
+  // Special handling for Q9 (only "Helt enig" and "Enig" score 1)
+  const q9Answer = answers.find((a) => a.questionId === "q9")?.answer;
+  const q9Score = q9Answer === "totally_agree" || q9Answer === "agree" ? 1 : 0;
+
+  const totalScore = standardQuestionsScore + q9Score;
 
   // Calculate psychosocial score (Q5-Q9)
-  const psychosocialScore =
-    answers
-      .filter((a) => ["q5", "q6", "q7", "q8"].includes(a.questionId))
-      .reduce((sum, answer) => sum + answer.score, 0) + q9Score;
+  const psychosocialQuestionsScore = answers
+    .filter((a) => ["q5", "q6", "q7", "q8"].includes(a.questionId))
+    .reduce((sum, answer) => sum + answer.score, 0);
+
+  const psychosocialScore = psychosocialQuestionsScore + q9Score;
 
   // Determine risk level
   let riskLevel: "low" | "medium" | "high";

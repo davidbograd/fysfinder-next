@@ -36,4 +36,13 @@ export interface ResultCategory {
   name: string;
   description: string;
   recommendation: string;
+  actions: Array<{
+    text: string;
+    url: string;
+  }>;
+  path: string;
+  links?: {
+    readMore?: string;
+    [key: string]: string | undefined;
+  };
 }

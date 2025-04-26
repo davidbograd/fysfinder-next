@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Answer } from "@/types/survey";
 import {
   questions,
@@ -8,31 +8,43 @@ import {
   calculateScore,
   resultCategories,
 } from "@/lib/surveys/start-back-tool";
-import { QuestionCard } from "@/components/surveys/QuestionCard";
-import { ResultsDisplay } from "@/components/surveys/ResultsDisplay";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
-import WebAppStructuredData from "@/components/seo/VaerktoejerStructuredData";
+import VaerktoejerStructuredData from "@/components/seo/VaerktoejerStructuredData";
+import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 export default function StartBackScreeningTool() {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Answer[]>([]);
-  const [isComplete, setIsComplete] = useState(false);
+  const router = useRouter();
 
-  const progress = (currentQuestionIndex / questions.length) * 100;
+  const progress = useMemo(() => {
+    return (answers.length / questions.length) * 100;
+  }, [answers]);
 
   const breadcrumbItems = [
     { text: "Værktøjer", link: "/vaerktoejer" },
     { text: "STarT Back Screening Tool" },
   ];
 
-  const handleAnswer = (answer: Answer) => {
+  const handleAnswer = (
+    questionId: string,
+    answerId: string,
+    score: number
+  ) => {
     setAnswers((prev) => {
       const newAnswers = [...prev];
       const existingIndex = newAnswers.findIndex(
-        (a) => a.questionId === answer.questionId
+        (a) => a.questionId === questionId
       );
+
+      const answer: Answer = {
+        questionId,
+        answer: answerId,
+        score,
+      };
 
       if (existingIndex >= 0) {
         newAnswers[existingIndex] = answer;
@@ -44,95 +56,115 @@ export default function StartBackScreeningTool() {
     });
   };
 
-  const currentAnswer = answers.find(
-    (a) => a.questionId === questions[currentQuestionIndex].id
-  )?.answer;
-
-  const canGoNext = currentAnswer !== undefined;
-  const isLastQuestion = currentQuestionIndex === questions.length - 1;
-
-  const handleNext = () => {
-    if (isLastQuestion) {
-      setIsComplete(true);
-    } else {
-      setCurrentQuestionIndex((prev) => prev + 1);
+  const handleSubmit = () => {
+    if (answers.length === questions.length) {
+      const score = calculateScore(answers);
+      const resultPath = resultCategories[score.riskLevel].path;
+      router.push(resultPath);
     }
   };
 
-  const handlePrevious = () => {
-    setCurrentQuestionIndex((prev) => prev - 1);
-  };
-
-  const handleRestart = () => {
-    setAnswers([]);
-    setCurrentQuestionIndex(0);
-    setIsComplete(false);
-  };
-
-  if (isComplete) {
-    const score = calculateScore(answers);
-    return (
-      <div className="container max-w-2xl mx-auto py-8 px-4">
-        <WebAppStructuredData
-          type="tool"
-          name="STarT Back Screening Tool"
-          description="Vurder risikoen for langvarige rygsmerter med dette validerede spørgeskema"
-          breadcrumbs={breadcrumbItems}
-        />
-        <Breadcrumbs items={breadcrumbItems} />
-        <ResultsDisplay score={score} resultCategories={resultCategories} />
-        <div className="mt-6">
-          <Button
-            onClick={handleRestart}
-            className="bg-logo-blue hover:bg-logo-blue/90"
-          >
-            Start forfra
-          </Button>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="container max-w-2xl mx-auto py-8 px-4">
-      <WebAppStructuredData
+    <div className="container max-w-5xl mx-auto py-8 px-4">
+      <VaerktoejerStructuredData
         type="tool"
         name="STarT Back Screening Tool"
         description="Vurder risikoen for langvarige rygsmerter med dette validerede spørgeskema"
         breadcrumbs={breadcrumbItems}
       />
       <Breadcrumbs items={breadcrumbItems} />
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold mb-4">STarT Back Screening Tool</h1>
+      <h1 className="text-2xl font-bold mb-8">STarT Back Screening Tool</h1>
+
+      <div className="sticky top-14 sm:top-16 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-40 py-4 border-b">
         <Progress value={progress} className="w-full bg-gray-200" />
         <p className="text-sm text-gray-500 mt-2">
-          Spørgsmål {currentQuestionIndex + 1} af {questions.length}
+          {answers.length} af {questions.length} spørgsmål besvaret
         </p>
       </div>
 
-      <div className="space-y-6">
-        <QuestionCard
-          key={currentQuestionIndex}
-          question={questions[currentQuestionIndex]}
-          answerOptions={answerOptions}
-          currentAnswer={undefined}
-          onAnswerChange={handleAnswer}
-        />
+      <div className="space-y-4 mt-8">
+        {/* Questions 1-8 */}
+        {questions.slice(0, 8).map((question, index) => {
+          const currentAnswer = answers.find(
+            (a) => a.questionId === question.id
+          )?.answer;
+          const options = answerOptions.standard;
 
-        <div className="flex gap-4">
+          return (
+            <div key={question.id}>
+              <div className="flex flex-col sm:flex-row sm:items-center gap-4 py-4">
+                <p className="font-medium flex-1">
+                  {index + 1}. {question.text}
+                </p>
+                <div className="flex gap-2 sm:min-w-[200px] justify-end">
+                  {options.map((option) => (
+                    <button
+                      key={option.id}
+                      onClick={() =>
+                        handleAnswer(question.id, option.id, option.score)
+                      }
+                      className={cn(
+                        "flex-1 sm:flex-initial inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors",
+                        "h-10 px-6",
+                        "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+                        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                        "disabled:pointer-events-none disabled:opacity-50",
+                        currentAnswer === option.id &&
+                          "bg-gray-800 text-white hover:bg-gray-800/90 hover:text-white"
+                      )}
+                    >
+                      {option.text}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <Separator />
+            </div>
+          );
+        })}
+
+        {/* Question 9 (special case) */}
+        {questions.slice(8, 9).map((question, index) => {
+          const currentAnswer = answers.find(
+            (a) => a.questionId === question.id
+          )?.answer;
+          const options = answerOptions.q9;
+
+          return (
+            <div key={question.id} className="mt-8 space-y-4">
+              <p className="font-medium">9. {question.text}</p>
+              <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
+                {options.map((option) => (
+                  <button
+                    key={option.id}
+                    onClick={() =>
+                      handleAnswer(question.id, option.id, option.score)
+                    }
+                    className={cn(
+                      "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors",
+                      "px-4 py-2",
+                      "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+                      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                      "disabled:pointer-events-none disabled:opacity-50",
+                      currentAnswer === option.id &&
+                        "bg-gray-800 text-white hover:bg-gray-800/90 hover:text-white"
+                    )}
+                  >
+                    {option.text}
+                  </button>
+                ))}
+              </div>
+            </div>
+          );
+        })}
+
+        <div>
           <Button
-            variant="outline"
-            onClick={handlePrevious}
-            disabled={currentQuestionIndex === 0}
+            onClick={handleSubmit}
+            disabled={answers.length !== questions.length}
+            className="w-full bg-logo-blue hover:bg-logo-blue/90 mt-8 h-14 text-lg"
           >
-            Forrige
-          </Button>
-          <Button
-            onClick={handleNext}
-            disabled={!canGoNext}
-            className="bg-logo-blue hover:bg-logo-blue/90"
-          >
-            {isLastQuestion ? "Afslut" : "Næste"}
+            Se resultat
           </Button>
         </div>
       </div>
