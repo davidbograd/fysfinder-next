@@ -9,24 +9,36 @@ interface Tool {
   href: string;
   imageUrl: string;
   imageAlt: string;
+  type: string;
 }
 
 const tools: Tool[] = [
   {
-    title: "Rygsmerter - test din risiko for at udvikle langvarige rygsmerter",
+    title: "Test dine rygsmerter",
     description:
-      "Vurder risikoen for langvarige rygsmerter med dette validerede spørgeskema. Få øjeblikkelig indsigt i din risikoprofil og anbefalinger til behandling.",
+      "Vurder din risiko for langvarige rygsmerter. Få indsigt og anbefalinger til behandling.",
     href: "/start-back-screening-tool",
     imageUrl: "/images/vaerktoejer/ryg-smerter-survey.jpg",
     imageAlt: "STarT Back Screening Tool illustration",
+    type: "Kropdele og smerter",
   },
   {
-    title: "MR-scanning Oversætter",
+    title: "MR-scanning oversætter",
     description:
-      "Få din MR-scanning rapport oversat til letforståeligt dansk. Forstå din diagnose bedre med vores brugervenlige værktøj.",
+      "Få din MR-scanning oversat til letforståeligt dansk og forstå din scanning bedre.",
     href: "/mr-scanning",
     imageUrl: "/images/mr-scanning/mr-scanning.png",
     imageAlt: "MR-scanning maskine i et hospital miljø",
+    type: "Forstå din scanning",
+  },
+  {
+    title: "[KOMMER SNART] DEXA-scan oversætter",
+    description:
+      "Få din DEXA-scanning oversat til letforståeligt dansk og forstå din knoglesundhed bedre.",
+    href: "#",
+    imageUrl: "/images/mr-scanning/mr-scanning.png",
+    imageAlt: "DEXA-scanning illustration",
+    type: "Forstå din scanning",
   },
 ];
 
@@ -60,6 +72,13 @@ export const metadata: Metadata = {
 export default function ToolsPage() {
   const breadcrumbItems = [{ text: "Værktøjer" }];
 
+  // Group tools by type
+  const groupedTools = tools.reduce<{ [type: string]: Tool[] }>((acc, tool) => {
+    if (!acc[tool.type]) acc[tool.type] = [];
+    acc[tool.type].push(tool);
+    return acc;
+  }, {});
+
   return (
     <div className="container mx-auto py-8">
       <VaerktoejerStructuredData
@@ -79,9 +98,17 @@ export default function ToolsPage() {
             træning, kost og sundhed.
           </p>
         </div>
-        <div className="grid md:grid-cols-2 gap-8">
-          {tools.map((tool) => (
-            <ToolCard key={tool.href} tool={tool} />
+        {/* Render tools grouped by type */}
+        <div className="space-y-12 mb-16">
+          {Object.entries(groupedTools).map(([type, tools]) => (
+            <div key={type}>
+              <h2 className="text-2xl font-semibold mb-4">{type}</h2>
+              <div className="grid md:grid-cols-2 gap-8">
+                {tools.map((tool) => (
+                  <ToolCard key={tool.href + tool.title} tool={tool} />
+                ))}
+              </div>
+            </div>
           ))}
         </div>
         <div className="space-y-8 mt-16 max-w-prose mx-auto">
