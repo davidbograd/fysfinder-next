@@ -93,7 +93,7 @@ export default function StartBackScreeningTool() {
           return (
             <div key={question.id}>
               <div className="flex flex-col sm:flex-row sm:items-center gap-4 py-4">
-                <p className="font-medium flex-1">
+                <p className="flex-1">
                   {index + 1}. {question.text}
                 </p>
                 <div className="flex gap-2 sm:min-w-[200px] justify-end">
@@ -132,7 +132,7 @@ export default function StartBackScreeningTool() {
 
           return (
             <div key={question.id} className="mt-8 space-y-4">
-              <p className="font-medium">9. {question.text}</p>
+              <p>9. {question.text}</p>
               <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
                 {options.map((option) => (
                   <button

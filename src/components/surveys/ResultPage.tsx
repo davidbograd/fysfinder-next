@@ -49,21 +49,20 @@ export default function ResultPage({ category }: ResultPageProps) {
       <Breadcrumbs items={breadcrumbItems} />
 
       <div className="mt-8 space-y-4">
+        <div
+          className={cn(
+            "px-3 py-1 rounded-full text-sm font-medium w-fit",
+            riskStyle.bgColor,
+            riskStyle.textColor
+          )}
+        >
+          {category.name}
+        </div>
         <p className="text-muted-foreground">
           Dit resultat - STarT Back Screening Tool
         </p>
-
         <div className="flex items-center gap-3">
           <h1 className="text-3xl font-bold">{riskStyle.heading}</h1>
-          <div
-            className={cn(
-              "px-3 py-1 rounded-full text-sm font-medium",
-              riskStyle.bgColor,
-              riskStyle.textColor
-            )}
-          >
-            {category.name}
-          </div>
         </div>
 
         <div className="prose prose-blue max-w-none">
@@ -76,22 +75,42 @@ export default function ResultPage({ category }: ResultPageProps) {
 
         <div className="space-y-4">
           <div className="flex flex-col gap-2">
-            {category.actions.map((action, index) => (
-              <Button
-                key={index}
-                asChild
-                className="bg-logo-blue hover:bg-logo-blue/90"
-              >
-                <Link href={action.url}>{action.text}</Link>
-              </Button>
-            ))}
+            {category.actions.map((action, index) => {
+              let isRyg =
+                action.text === "Find fysioterapeut specialiseret i ryg";
+              let isKroniske =
+                action.text ===
+                "Find fysioterapeut specialiseret i kroniske smerter";
+              return (
+                <Button
+                  key={index}
+                  asChild
+                  className="bg-logo-blue hover:bg-logo-blue/90 break-words whitespace-normal"
+                >
+                  <Link href={action.url}>
+                    <span className="sm:hidden">
+                      {action.textMobile || action.text}
+                    </span>
+                    <span className="hidden sm:inline">{action.text}</span>
+                  </Link>
+                </Button>
+              );
+            })}
           </div>
 
-          <div className="flex gap-4 pt-4 border-t">
-            <Button asChild variant="outline" className="hover:bg-accent">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 pt-4 border-t">
+            <Button
+              asChild
+              variant="outline"
+              className="hover:bg-accent break-words whitespace-normal"
+            >
               <Link href="/vaerktoejer">Tilbage til alle værktøjer</Link>
             </Button>
-            <Button asChild variant="outline" className="hover:bg-accent">
+            <Button
+              asChild
+              variant="outline"
+              className="hover:bg-accent break-words whitespace-normal"
+            >
               <Link href="/start-back-screening-tool">Tag testen igen</Link>
             </Button>
           </div>

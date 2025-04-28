@@ -38,6 +38,7 @@ export interface ResultCategory {
   recommendation: string;
   actions: Array<{
     text: string;
+    textMobile?: string;
     url: string;
   }>;
   path: string;

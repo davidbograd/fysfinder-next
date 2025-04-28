@@ -13,7 +13,7 @@ interface Tool {
 
 const tools: Tool[] = [
   {
-    title: "STarT Back Screening Tool",
+    title: "Rygsmerter - test din risiko for at udvikle langvarige rygsmerter",
     description:
       "Vurder risikoen for langvarige rygsmerter med dette validerede spørgeskema. Få øjeblikkelig indsigt i din risikoprofil og anbefalinger til behandling.",
     href: "/start-back-screening-tool",

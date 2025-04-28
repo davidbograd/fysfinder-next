@@ -6,58 +6,59 @@ import {
   ResultCategory,
 } from "@/types/survey";
 
+// Updated standard answer options order to 'Nej' before 'Ja' as of [date].
 export const questions: Question[] = [
   {
     id: "q1",
-    text: "Jeg har haft smerter i det ene eller begge ben i forbindelse med mine rygsmerter.",
+    text: "I løbet af de seneste 2 uger har mine rygsmerter bredt sig ned i mit/mine ben",
     type: "SINGLE_CHOICE",
     required: true,
   },
   {
     id: "q2",
-    text: "Jeg har haft smerter i skulderen eller nakken i forbindelse med mine rygsmerter.",
+    text: "Jeg har haft smerter i mine skuldre eller nakke i løbet af de seneste 2 uger",
     type: "SINGLE_CHOICE",
     required: true,
   },
   {
     id: "q3",
-    text: "Mine rygsmerter har gjort det svært for mig at gå.",
+    text: "Jeg har kun gået korte afstande på grund af mine rygsmerter",
     type: "SINGLE_CHOICE",
     required: true,
   },
   {
     id: "q4",
-    text: "Mine rygsmerter har gjort det vanskeligt for mig at rejse mig fra en stol.",
+    text: "I løbet af de seneste 2 uger har jeg klædt mig langsommere på end normalt på grund af rygsmerter",
     type: "SINGLE_CHOICE",
     required: true,
   },
   {
     id: "q5",
-    text: "Mine rygsmerter har påvirket mit daglige arbejde, ude eller hjemme.",
+    text: "Jeg føler det er usikkert for en person i min tilstand at være fysisk aktiv",
     type: "SINGLE_CHOICE",
     required: true,
   },
   {
     id: "q6",
-    text: "Jeg har været bekymret på grund af mine rygsmerter.",
+    text: "Mine rygsmerter gør mig bekymret meget af tiden",
     type: "SINGLE_CHOICE",
     required: true,
   },
   {
     id: "q7",
-    text: "Mine rygsmerter har fået mig til at føle mig anspændt eller stresset.",
+    text: "Jeg føler mine rygsmerter er forfærdelige, og de aldrig bliver bedre",
     type: "SINGLE_CHOICE",
     required: true,
   },
   {
     id: "q8",
-    text: "Generelt har jeg haft det dårligt på grund af mine rygsmerter.",
+    text: "Jeg har generelt haft svært ved at nyde alle de ting, som jeg plejer at nyde",
     type: "SINGLE_CHOICE",
     required: true,
   },
   {
     id: "q9",
-    text: "I løbet af de sidste to uger har jeg tænkt, at min ryg måske aldrig bliver bedre.",
+    text: "Hvor generende har dine rygsmerter været de seneste 2 uger?",
     type: "SINGLE_CHOICE",
     required: true,
   },
@@ -65,15 +66,15 @@ export const questions: Question[] = [
 
 export const answerOptions: Record<string, AnswerOption[]> = {
   standard: [
-    { id: "agree", text: "Enig", score: 1 },
-    { id: "disagree", text: "Uenig", score: 0 },
+    { id: "no", text: "Nej", score: 0 },
+    { id: "yes", text: "Ja", score: 1 },
   ],
   q9: [
-    { id: "totally_agree", text: "Helt enig", score: 1 },
-    { id: "agree", text: "Enig", score: 1 },
-    { id: "neutral", text: "Hverken enig eller uenig", score: 0 },
-    { id: "disagree", text: "Uenig", score: 0 },
-    { id: "totally_disagree", text: "Helt uenig", score: 0 },
+    { id: "not_at_all", text: "Slet ikke", score: 0 },
+    { id: "a_little", text: "Lidt", score: 1 },
+    { id: "moderate", text: "Middel", score: 2 },
+    { id: "very", text: "Meget", score: 3 },
+    { id: "extreme", text: "Ekstremt", score: 4 },
   ],
 };
 
@@ -98,7 +99,8 @@ export const resultCategories: Record<string, ResultCategory> = {
       "Dine rygsmerter kan have godt af at blive behandlet af en fysioterapeut, så de kan finde årsagen og opstarte det rigtige behandlingsforløb for dig.",
     actions: [
       {
-        text: "Find ryg fysioterapeut",
+        text: "Find fysioterapeut specialiseret i ryg",
+        textMobile: "Find specialist i ryg",
         url: "https://www.fysfinder.dk/find/fysioterapeut/danmark/ryg",
       },
     ],
@@ -111,7 +113,8 @@ export const resultCategories: Record<string, ResultCategory> = {
       "Det er vigtigt at du får hjælp til at tage hånd om dine rygsmerter! Din smerte påvirker dig fysisk og psykisk i løbet af hverdagen, og du har derfor brug for hjælp fra en fysioterapeut specialiseret i kroniske smerter.",
     actions: [
       {
-        text: "Find kroniske smerte fysioterapeut",
+        text: "Find fysioterapeut specialiseret i kroniske smerter",
+        textMobile: "Find specialist i kroniske smerter",
         url: "https://www.fysfinder.dk/find/fysioterapeut/danmark/kroniske-smerter",
       },
     ],
