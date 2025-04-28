@@ -1,5 +1,5 @@
 ---
-lastUpdated: 19/02/2025
+lastUpdated: 28/04/2025
 metaTitle: Fitness – Hvad er fitness? Alt om at holde sig i gang
 datePublished: 19/02/2025
 ---
@@ -25,6 +25,8 @@ At holde motivationen oppe kan være en udfordring, men der er flere strategier,
 ## Hvordan påvirker kost min fitness?
 
 Kost spiller en afgørende rolle i at opnå og opretholde fitness. En balanceret kost, der inkluderer en række næringsstoffer, er essentiel for at støtte din træning og restitution. Det er vigtigt at indtage tilstrækkeligt med protein for muskelopbygning, kulhydrater for energi og sunde fedtstoffer for generel sundhed. Hydrering er også vigtig, da væske hjælper med at opretholde ydeevnen under træning.
+
+Derudover, så kan brug af koffein være med til at give dig en bedre træning, fordi at du får mere energi. For mange hjælper det med en god kop kaffe 30 minutter inden træningen. Det anbefales selvfølgelig at finde den [bedste kaffemaskine](https://kaffedrikke.dk/bedste-kaffemaskine-i-test/), så man også kan nyde kaffen!
 
 ## Hvad er forskellen mellem fitness og træning?
 
