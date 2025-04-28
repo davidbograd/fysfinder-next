@@ -160,7 +160,7 @@ export function TranslatorForm() {
     }, 50);
 
     try {
-      const response = await fetch("/api/translate", {
+      const response = await fetch("/api/mr-scanning", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
