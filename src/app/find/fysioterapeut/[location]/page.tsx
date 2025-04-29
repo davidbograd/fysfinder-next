@@ -180,6 +180,49 @@ export async function fetchLocationData(
       };
     }
 
+    // Special handling for "online" location
+    if (locationSlug === "online") {
+      let clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order),premium_listings(id,start_date,end_date,booking_link)`;
+
+      // Add specialty filter if needed
+      const specialtyFilter = specialtySlug
+        ? `&filtered_specialties.specialties.specialty_name_slug=eq.${specialtySlug}`
+        : "";
+
+      // If specialty is specified, modify the query to include specialty join
+      if (specialtySlug) {
+        clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order),premium_listings(id,start_date,end_date,booking_link),filtered_specialties:clinic_specialties!inner(specialty:specialties!inner(specialty_name_slug))${specialtyFilter}`;
+      }
+
+      // Add the OR condition for online clinics
+      clinicsUrl += `&or=(lokationSlug.eq.online,online_fysioterapeut.eq.true)`;
+
+      const clinicsData = await fetchWithRetry(clinicsUrl, fetchOptions);
+      const validClinics = (clinicsData as unknown[]).filter(
+        isValidClinicResponse
+      );
+      const clinics = validClinics.map(mapDBClinicToClinic);
+
+      // For online location, we create a minimal city object
+      const onlineCity: City = {
+        id: "online",
+        bynavn: "Online",
+        bynavn_slug: "online",
+        latitude: 0,
+        longitude: 0,
+        postal_codes: [],
+        betegnelse: "Online fysioterapi",
+        seo_tekst: undefined,
+      };
+
+      return {
+        city: onlineCity,
+        clinics: sortClinicsByRating(clinics),
+        nearbyClinicsList: [],
+        specialties,
+      };
+    }
+
     // For specific city locations
     const cityData = await fetchWithRetry(
       `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/cities?bynavn_slug=eq.${locationSlug}&select=*`,
@@ -418,9 +461,14 @@ export default async function LocationPage({ params }: LocationPageProps) {
   // For all other locations, we require city data
   if (!data.city) return notFound();
 
+  const isOnline = params.location.toLowerCase() === "online";
+
   const breadcrumbItems = [
     { text: "Forside", link: "/" },
-    { text: data.city.bynavn, link: `/find/fysioterapeut/${params.location}` },
+    {
+      text: isOnline ? "Online" : data.city.bynavn,
+      link: `/find/fysioterapeut/${params.location}`,
+    },
     ...(specialtyName ? [{ text: specialtyName }] : []),
   ];
 
@@ -435,21 +483,27 @@ export default async function LocationPage({ params }: LocationPageProps) {
         <Breadcrumbs items={breadcrumbItems} />
 
         <h1 className="text-3xl font-bold mb-2">
-          {specialtyName
+          {isOnline
+            ? specialtyName
+              ? `Find online fysioterapeuter specialiseret i ${specialtyName}`
+              : "Find og sammenlign online fysioterapeuter"
+            : specialtyName
             ? `Find fysioterapeuter ${data.city.bynavn} specialiseret i ${specialtyName}`
             : `Find og sammenlign fysioterapeuter ${data.city.bynavn}`}
         </h1>
 
-        {data.city.betegnelse && (
+        {/* Only show betegnelse if not online */}
+        {!isOnline && data.city.betegnelse && (
           <p className="text-gray-600 mb-4">{data.city.betegnelse}</p>
         )}
 
         <p className="text-gray-600 mb-8">
-          Find den bedste fysioterapi i {data.city.bynavn}. Se anmeldelser,
-          specialer, priser og find den perfekte fysioterapeut.
+          {isOnline
+            ? "Find den bedste online fysioterapi. Se anmeldelser, specialer, priser og find den perfekte fysioterapeut."
+            : `Find den bedste fysioterapi i ${data.city.bynavn}. Se anmeldelser, specialer, priser og find den perfekte fysioterapeut.`}
         </p>
 
-        {params.specialty === "kroniske-smerter" && (
+        {params.specialty === "kroniske-smerter" && !isOnline && (
           <div className="mb-4 flex flex-wrap items-center gap-4 sm:gap-8">
             <Image
               src="/images/samarbejdspartnere/FAKS-smertelinjen-logo.png"
@@ -469,7 +523,7 @@ export default async function LocationPage({ params }: LocationPageProps) {
           specialties={specialties}
           currentSpecialty={params.specialty}
           citySlug={params.location}
-          defaultSearchValue={data.city.bynavn}
+          defaultSearchValue={isOnline ? "Online" : data.city.bynavn}
         />
 
         {/* Specialties section */}
@@ -483,7 +537,7 @@ export default async function LocationPage({ params }: LocationPageProps) {
 
         {data.clinics.length === 0 ? (
           <NoResultsFound
-            cityName={data.city.bynavn}
+            cityName={isOnline ? "Online" : data.city.bynavn}
             specialtyName={specialtyName}
             locationSlug={params.location}
           />
@@ -533,11 +587,14 @@ export default async function LocationPage({ params }: LocationPageProps) {
           </>
         )}
 
-        <NearbyClinicsList
-          clinics={data.nearbyClinicsList}
-          cityName={data.city.bynavn}
-          specialtySlug={params.specialty}
-        />
+        {/* Hide NearbyClinicsList for Online location */}
+        {!isOnline && (
+          <NearbyClinicsList
+            clinics={data.nearbyClinicsList}
+            cityName={data.city.bynavn}
+            specialtySlug={params.specialty}
+          />
+        )}
       </div>
 
       {/* Only show SEO text if we're not on a specialty page */}
