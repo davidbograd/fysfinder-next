@@ -1,6 +1,6 @@
 ---
-title: Diskusprolaps: 6 myter der forhindrer din bedring
-metaTitle: Diskusprolaps: 6 myter der forhindrer din bedring
+title: "Diskusprolaps: 6 myter der forhindrer din bedring"
+metaTitle: "Diskusprolaps: 6 myter der forhindrer din bedring"
 datePublished: 29-04-2025
 lastUpdated: 29-04-2025
 previewImage: /images/blog/diskusprolaps_myter.png
