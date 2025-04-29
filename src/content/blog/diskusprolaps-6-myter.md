@@ -46,7 +46,7 @@ Desuden kan selv store prolapser trække sig tilbage. Kroppens immunsystem er i 
 Smerte er ikke en direkte spejling af skade. Det er en kompleks oplevelse, påvirket af følelser, tidligere erfaringer og nervesystemets følsomhed. Mange mennesker kommer sig helt eller delvist – og langt de fleste kan vende tilbage til et aktivt liv uden kirurgi.
 
 
-![Illustration af en oversigt over myter og misinformation om diskusprolaps](/images/blog/diskusprolaps_myter_oversigt.png)
+![Illustration af en oversigt over myter og misinformation om diskusprolaps](/images/blog/discusprolaps_myter_oversigt.png)
 
 
 
