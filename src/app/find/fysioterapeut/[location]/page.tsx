@@ -458,7 +458,7 @@ export default async function LocationPage({ params }: LocationPageProps) {
                 prose-ol:list-decimal prose-ol:ml-6 prose-ol:mb-4 prose-ol:text-gray-600
                 prose-li:mb-2 prose-li:leading-relaxed
                 prose-strong:font-semibold prose-strong:text-gray-900
-                prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline
+                prose-a:text-logo-blue prose-a:no-underline hover:prose-a:underline
                 [&>*:first-child]:mt-0
                 [&>*:last-child]:mb-0"
             >
@@ -630,7 +630,7 @@ export default async function LocationPage({ params }: LocationPageProps) {
              prose-ol:list-decimal prose-ol:ml-6 prose-ol:mb-4 prose-ol:text-gray-600
              prose-li:mb-2 prose-li:leading-relaxed
              prose-strong:font-semibold prose-strong:text-gray-900
-             prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline
+             prose-a:text-logo-blue prose-a:no-underline hover:prose-a:underline
              [&>*:first-child]:mt-0
              [&>*:last-child]:mb-0"
         >
