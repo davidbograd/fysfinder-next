@@ -57,13 +57,14 @@ const rehypeInternalLinks: Plugin<[RehypeInternalLinksOptions], Root> = (
   const MAX_LINKS_PER_PAGE = 15;
 
   return (tree: Root) => {
-    // Visit paragraph elements first
-    visit(tree, "element", (pNode: Element) => {
-      if (pNode.tagName !== "p") {
-        return CONTINUE; // Skip non-p elements
+    // Visit potential text container elements
+    visit(tree, "element", (containerNode: Element) => {
+      // Target only <p> and <li> elements
+      if (!["p", "li"].includes(containerNode.tagName)) {
+        return CONTINUE; // Skip other elements
       }
 
-      // Process children of the paragraph
+      // Process children of the container element (p or li)
       const newChildren: (Element | Text)[] = [];
       let buffer: Text[] = []; // Buffer for consecutive text nodes
 
@@ -85,13 +86,14 @@ const rehypeInternalLinks: Plugin<[RehypeInternalLinksOptions], Root> = (
 
           for (const keyword of sortedKeywords) {
             // Use regex for whole word, case-insensitive matching within the combined text
-            // Using negative lookarounds for more robust word boundary checking
+            // Using negative lookarounds with specific Danish chars for word boundary checking
             const escapedKeyword = keyword.replace(
               /[-\/\\^$*+?.()|[\]{}]/g,
               "\\$&"
             ); // Escape regex chars
             const keywordRegex = new RegExp(
-              `(?<!\\w)${escapedKeyword}(?!\\w)`,
+              // Ensure character before/after is NOT a standard word char OR æøåÆØÅ
+              `(?<![a-zA-Z0-9_æøåÆØÅ])${escapedKeyword}(?![a-zA-Z0-9_æøåÆØÅ])`,
               "i"
             );
             const matchResult = combinedText
@@ -166,8 +168,8 @@ const rehypeInternalLinks: Plugin<[RehypeInternalLinksOptions], Root> = (
         buffer = []; // Clear the buffer
       };
 
-      // Iterate through children of the paragraph
-      for (const child of pNode.children) {
+      // Iterate through children of the container
+      for (const child of containerNode.children) {
         if (isText(child)) {
           // Add text nodes to the buffer
           buffer.push(child);
@@ -194,10 +196,10 @@ const rehypeInternalLinks: Plugin<[RehypeInternalLinksOptions], Root> = (
       // Process any remaining text in the buffer after the loop
       processBuffer();
 
-      // Replace the paragraph's children with the new processed children
-      pNode.children = newChildren;
+      // Replace the container's children with the new processed children
+      containerNode.children = newChildren;
 
-      return CONTINUE; // Continue visiting other paragraphs
+      return CONTINUE; // Continue visiting other elements
     });
   };
 };
