@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "NODE_NO_WARNINGS=1 next dev",
     "build": "NODE_NO_WARNINGS=1 next build",
+    "compile:internal-linking": "tsc -p lib/internal-linking/tsconfig.json",
+    "build:links": "npm run build && npm run compile:internal-linking && node scripts/process-internal-links.mjs",
     "start": "next start",
     "lint": "next lint",
     "generate:sitemap": "ts-node scripts/generate-sitemap.ts",

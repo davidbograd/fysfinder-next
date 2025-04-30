@@ -1,62 +1,64 @@
-# Internal Linking Tool PRD
+# Internal Linking Tool PRD - MVP Version
 
 ## Overview
 
-The Internal Linking Tool is a lightweight, automated system for managing internal links across specified sections of fysfinder.dk. It aims to improve site navigation, SEO, and user experience by automatically inserting relevant internal links based on predefined keywords and their corresponding destinations.
+The Internal Linking Tool is a lightweight, automated system for managing internal links across specified sections of fysfinder.dk. It aims to improve site navigation, SEO, and user experience by automatically inserting relevant internal links based on predefined keywords and their corresponding destinations. This document describes the **Minimum Viable Product (MVP)** version.
 
 ## Goals
 
 - Improve site navigation and user experience
 - Enhance SEO through strategic internal linking
 - Reduce manual effort in maintaining internal links
-- Ensure consistent linking across content
-- Maintain content readability by avoiding over-linking
+- Establish a foundation for future linking enhancements
 
 ## Scope
 
-### In Scope
+### In Scope (MVP)
 
-- Automated link insertion in specified page paths:
+- Automated link insertion in specified page paths during build time:
   - /ordbog/\*
   - /blog/\*
   - /mr-scanning
-- Processing content within `<p>` tags only
-- Configurable maximum links per page
-- Prevention of duplicate links to the same destination on a single page
-- Simple configuration system for keywords and their destinations
+- Processing content within `<p>` tags only.
+- Basic configuration system for keywords and their destinations (e.g., JSON file or hardcoded object).
+- Case-insensitive keyword matching.
+- Link insertion for the _first_ occurrence of each unique keyword found on a page.
+- Avoidance of inserting links within existing `<a>` tags.
 
-### Out of Scope
+### Out of Scope (for MVP, potential future enhancements)
 
-- Link insertion in headlines or other HTML elements
-- Real-time link insertion
-- Admin UI for managing keywords (first version)
-- Analytics tracking
-- Link validation
+- Link insertion in headlines or other HTML elements besides `<p>`.
+- Real-time link insertion (MVP is build-time only).
+- Admin UI for managing keywords.
+- Configurable maximum links per page.
+- Prevention of multiple links pointing to the _same destination_ from _different keywords_ on a single page.
+- Keyword priority handling.
+- Advanced word boundary detection (MVP uses simple string matching).
+- Development mode hot reloading for configuration.
+- Extensive error handling and warnings (MVP will have basic build failure on critical errors).
+- Comprehensive unit/integration testing (MVP will have minimal checks).
+- Detailed documentation (MVP will have basic setup info).
+- Analytics tracking.
+- Link validation.
+- Advanced performance optimizations (e.g., keyword tries).
 
 ## Technical Requirements
 
 ### Implementation Strategy
 
-The system will be implemented as a build-time HTML transformation utility that processes content during the Next.js build phase. This approach offers several advantages:
+The system will be implemented as a build-time HTML transformation utility that processes content during the Next.js build phase.
 
-- Simple, focused implementation without React component overhead
-- Pure function transformation that's easy to test and debug
-- Optimal performance with no runtime overhead
-- Content is processed and links are inserted during build
-- Static HTML output with pre-processed links
-- Framework-agnostic design that could be used with other systems
+- Simple, focused implementation.
+- Pure function transformation.
+- Optimal performance with no runtime overhead (links are in static HTML).
+- Framework-agnostic core logic.
+- Transformer processes content within `<p>` tags during `next build`.
 
-The transformer will process content within `<p>` tags during the build phase, ensuring that all internal links are generated before the page is served to the client. This build-time approach means:
+### Link Configuration (MVP)
 
-- No client-side JavaScript overhead
-- No React component complexity
-- Improved Core Web Vitals
-- Better SEO performance
-- Consistent link generation across builds
+The system will use a simple configuration source (e.g., JSON file or hardcoded object) defining keyword-to-destination mappings.
 
-### Link Configuration
-
-The system will use a JSON configuration file with the following structure:
+Example Structure:
 
 ```json
 {
@@ -64,173 +66,90 @@ The system will use a JSON configuration file with the following structure:
     "anatomy": [
       {
         "keywords": ["rygsøjle", "columna"],
-        "destination": "/ordbog/rygsoejle",
-        "priority": 1
+        "destination": "/ordbog/rygsoejle"
       }
     ],
     "conditions": [
       {
         "keywords": ["diskusprolaps", "prolaps"],
-        "destination": "/ordbog/diskusprolaps",
-        "priority": 1
+        "destination": "/ordbog/diskusprolaps"
       }
     ]
-  },
-  "settings": {
-    "maxLinksPerPage": 5,
-    "targetPaths": ["/ordbog/", "/blog/", "/mr-scanning"],
-    "enabled": true,
-    "debug": false
   }
+  // No "settings" object in MVP
+  // No "priority" field in MVP
 }
 ```
 
-### Link Processing Rules
+### Link Processing Rules (MVP)
 
-1. **Path Matching**
-
-   - Only process pages matching specified paths
-   - Use exact match for single pages (e.g., /mr-scanning)
-   - Use prefix matching for directory paths (e.g., /ordbog/\*)
-
-2. **Content Processing**
-
-   - Only scan and modify content within `<p>` tags
-   - Preserve existing HTML attributes and structure
-   - Skip processing of existing links (`<a>` tags)
-
-3. **Link Insertion**
-   - Maximum N links per page (configurable)
-   - No duplicate destinations per page
-   - Case-insensitive keyword matching
-   - Respect word boundaries (avoid partial word matches)
-   - First occurrence of keyword gets priority
+1.  **Path Matching**: Only process pages matching specified paths (`/ordbog/*`, `/blog/*`, `/mr-scanning`).
+2.  **Content Processing**:
+    - Only scan and modify content within `<p>` tags.
+    - Preserve existing HTML structure where possible.
+    - Skip processing content within existing `<a>` tags.
+3.  **Link Insertion**:
+    - Link the _first occurrence_ of each unique keyword found.
+    - Case-insensitive keyword matching (simple string comparison).
+    - No configurable limit on total links (determined by unique first occurrences).
+    - No prevention of duplicate _destinations_ if triggered by different keywords.
 
 ### Build Process Integration
 
-The internal linking system will integrate with Next.js's build process in the following ways:
+- The core transformation function integrates into the `next build` process.
+- Links are generated and inserted into the static HTML output.
+- Configuration is loaded at build time.
+- Build fails if essential configuration is invalid or missing.
 
-1. **Transform Function**
+### Performance Considerations (MVP)
 
-   ```typescript
-   // Core transformation function
-   function processInternalLinks(content: string, config: LinkConfig): string {
-     // Process content and return transformed HTML
-   }
+- Build-time processing avoids runtime overhead.
+- Simple string matching is sufficient for initial keyword sets.
+- Monitor build times as part of general maintenance.
 
-   // Build pipeline integration
-   export async function processPage(html: string) {
-     return processInternalLinks(html, loadConfig());
-   }
-   ```
+## Implementation Approach (MVP)
 
-2. **Build-time Processing**
+Focus on delivering the core functionality rapidly.
 
-   - Transformer executes during `next build`
-   - Links are generated and inserted into the static HTML
-   - No additional JavaScript is sent to the client
-   - Configuration is loaded and validated at build time
+#### Core MVP Tasks
 
-3. **Caching and Optimization**
-
-   - Processed content becomes part of the static build output
-   - Rebuilds required when link configurations change
-   - Development mode supports configuration hot reloading
-
-4. **Error Handling**
-   - Build fails if configuration is invalid
-   - Warnings for potential issues (e.g., conflicting keywords)
-   - Detailed error messages for debugging
-   - Easy to trace transformation issues without component stack traces
-
-### Performance Considerations
-
-- Process pages at build time through Next.js build pipeline
-- Optimize keyword matching algorithm for build performance
-- Cache processed content as static HTML
-- No runtime JavaScript overhead
-- Monitor and optimize build times as configuration grows
-- Implement efficient keyword trie/tree structure for large keyword sets
-- Simple string manipulation instead of DOM operations where possible
-
-## Implementation Approach
-
-### Phase 1: Core Implementation
-
-#### 1. Project Setup
-
-- [x] Create project structure in `lib/internal-linking`
-- [x] Set up basic TypeScript types
-- [x] Create simple build pipeline integration
-
-#### 2. Core Transform
-
-- [x] Implement basic HTML parsing
-- [x] Create content transformation logic
-- [x] Implement simple keyword matching
-
-#### 3. Configuration
-
-- [x] Create configuration types
-- [x] Implement basic config loader
-- [x] Create initial keyword mappings
-
-#### 4. Link Processing
-
-- [x] Implement keyword matching
-  - [x] Case-insensitive matching
-  - [x] Basic word boundary detection
-- [x] Create link insertion logic
-  - [x] Max links per page limit
-  - [x] Duplicate prevention
-
-#### 5. Basic Testing
-
-- [x] Write unit tests for core functions
-- [x] Create simple integration test
-
-### Phase 2: Integration
-
-#### 1. Build Integration
-
-- [x] Create Next.js build hook
-- [x] Add basic path matching
-- [x] Test in Vercel environment
-
-#### 2. Documentation
-
-- [x] Write basic usage documentation
-- [x] Add configuration examples
+- [x] Set up basic project structure (e.g., `lib/internal-linking`).
+- [x] Define basic TypeScript types for configuration (`keywords`, `destination`).
+- [ ] Implement configuration loading (from file or hardcoded).
+- [ ] Create the core transformation function:
+  - [ ] Basic HTML content identification (find `<p>` tags, avoid `<a>` tags).
+  - [ ] Simple, case-insensitive keyword matching.
+  - [ ] Logic to insert `<a>` tags for the first unique keyword occurrences.
+- [ ] Integrate the transformation function into the Next.js build process for target paths.
+- [ ] Perform basic manual testing to verify functionality on target pages.
 
 ## Technical Constraints
 
-- Must integrate with Next.js build process
-- Will be implemented directly within the fysfinder-next project
-- Must work with Vercel deployment
+- Must integrate with Next.js build process.
+- Will be implemented directly within the fysfinder-next project.
+- Must work with Vercel deployment.
 
-## Success Metrics
+## Success Metrics (MVP)
 
-- Successful link insertion rate
-- Zero broken links introduced
-- Improved internal linking structure
+- Successful insertion of links for configured keywords on target pages.
+- Build completes successfully.
+- Basic verification shows links are correctly formed and placed.
 
-## Risks and Mitigations
+## Risks and Mitigations (MVP)
 
-| Risk                 | Mitigation                         |
-| -------------------- | ---------------------------------- |
-| Build time impact    | Efficient algorithms and caching   |
-| Over-linking content | Configurable limits and validation |
-| Invalid HTML output  | Basic HTML validation              |
-| Configuration errors | Simple schema validation           |
+| Risk                 | Mitigation                                     |
+| -------------------- | ---------------------------------------------- |
+| Build time impact    | Keep MVP logic simple; monitor build times.    |
+| Incorrect linking    | Basic manual testing; simple matching logic.   |
+| Invalid HTML output  | Minimal transformation; check output manually. |
+| Configuration errors | Fail build on load error; keep config simple.  |
 
 ## Dependencies
 
-- Access to HTML content at build time
-- Configuration file management
-- Basic HTML parsing capability
+- Access to HTML content at build time (via Next.js build process).
+- Simple configuration source.
 
-## Maintenance
+## Maintenance (MVP)
 
-- Regular configuration updates
-- Basic error logging
-- Periodic link validation
+- Update keyword mappings as needed.
+- Monitor build process for failures.
