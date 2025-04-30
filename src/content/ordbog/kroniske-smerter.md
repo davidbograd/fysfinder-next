@@ -51,7 +51,7 @@ For mange mennesker med kroniske smerter kan drømmen om fuldstændig smertefrih
 
 Gradvis fysisk aktivitet og sikre bevægelsesmønstre kan gøre smerterne lettere at håndtere og mindske deres påvirkning af hverdagen. Målet er at opbygge et aktivt, meningsfyldt liv, selvom smerterne måske stadig er til stede. Ved at rette opmærksomheden mod det, der er vigtigt for dig – som tid med familie, fritidsinteresser og fysisk aktivitet – kan du øge din følelse af kontrol og livsglæde. Det handler ikke altid om at fjerne smerten helt, men om at leve godt på trods af den.
 
-At [søge hjælp fra en fysioterapeut](https://www.fysfinder.dk/) kan være et vigtigt første skridt på denne rejse. En fysioterapeut kan hjælpe dig med at finde sikre måder at bevæge dig på, som passer til netop din situation. Smertelindring handler om små, fokuserede skridt mod bedre livskvalitet – ikke nødvendigvis smertefrihed.
+At søge hjælp fra en fysioterapeut kan være et vigtigt første skridt på denne rejse. En fysioterapeut kan hjælpe dig med at finde sikre måder at bevæge dig på, som passer til netop din situation. Smertelindring handler om små, fokuserede skridt mod bedre livskvalitet – ikke nødvendigvis smertefrihed.
 
 ## Referenceliste
 
