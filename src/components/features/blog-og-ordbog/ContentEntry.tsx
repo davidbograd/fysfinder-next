@@ -4,6 +4,10 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { slugify } from "@/app/utils/slugify";
 
+// Internal linking imports
+import { loadLinkConfig } from "lib/internal-linking/config";
+import rehypeInternalLinks from "lib/internal-linking/rehype-internal-links";
+
 interface ContentTerm {
   slug: string;
   title: string;
@@ -19,6 +23,16 @@ interface ContentEntryProps {
 }
 
 export function ContentEntry({ term, backLink }: ContentEntryProps) {
+  // Load link config
+  const linkConfig = loadLinkConfig();
+
+  // Determine current page path (inferring base from backLink)
+  // Ensure backLink.href ends with a slash if it's just the base path
+  const basePath = backLink.href.endsWith("/")
+    ? backLink.href
+    : `${backLink.href}/`;
+  const currentPagePath = `${basePath}${term.slug}`.replace(/\/+/g, "/"); // Ensure single slashes
+
   return (
     <article className="text-gray-800">
       <h1 className="text-4xl font-bold mb-6">{term.title}</h1>
@@ -66,6 +80,11 @@ export function ContentEntry({ term, backLink }: ContentEntryProps) {
           options={{
             mdxOptions: {
               remarkPlugins: [remarkGfm],
+              // --- Add Rehype plugin for internal linking ---
+              rehypePlugins: [
+                [rehypeInternalLinks, { linkConfig, currentPagePath }],
+              ] as any[], // Assert type to satisfy MDXRemote
+              // ---------------------------------------------
             },
           }}
         />
