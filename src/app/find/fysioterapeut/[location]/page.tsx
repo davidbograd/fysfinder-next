@@ -23,6 +23,10 @@ import { NoResultsFound } from "@/app/find/fysioterapeut/[location]/components/N
 import { NearbyClinicsList } from "@/app/find/fysioterapeut/[location]/components/NearbyClinicsList";
 import { LocationStructuredData } from "@/components/seo/LocationStructuredData";
 
+// Internal linking imports
+import { loadLinkConfig } from "lib/internal-linking/config";
+import rehypeInternalLinks from "lib/internal-linking/rehype-internal-links";
+
 // Create a Supabase client for static generation
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -360,6 +364,14 @@ export default async function LocationPage({ params }: LocationPageProps) {
   const data = await fetchLocationData(params.location, params.specialty);
   const specialties = data.specialties;
 
+  // --- Internal Linking Setup ---
+  const linkConfig = loadLinkConfig();
+  const basePagePath = `/find/fysioterapeut/${params.location}`;
+  const currentPagePath = params.specialty
+    ? `${basePagePath}/${params.specialty}`
+    : basePagePath;
+  // ----------------------------
+
   // Get specialty name if we're on a specialty page
   const specialty = params.specialty
     ? specialties.find(
@@ -450,7 +462,16 @@ export default async function LocationPage({ params }: LocationPageProps) {
                 [&>*:first-child]:mt-0
                 [&>*:last-child]:mb-0"
             >
-              <MDXRemote source={specialty.seo_tekst} />
+              <MDXRemote
+                source={specialty.seo_tekst}
+                options={{
+                  mdxOptions: {
+                    rehypePlugins: [
+                      [rehypeInternalLinks, { linkConfig, currentPagePath }],
+                    ] as any[],
+                  },
+                }}
+              />
             </div>
           )}
         </div>
@@ -613,7 +634,16 @@ export default async function LocationPage({ params }: LocationPageProps) {
              [&>*:first-child]:mt-0
              [&>*:last-child]:mb-0"
         >
-          <MDXRemote source={data.city.seo_tekst} />
+          <MDXRemote
+            source={data.city.seo_tekst}
+            options={{
+              mdxOptions: {
+                rehypePlugins: [
+                  [rehypeInternalLinks, { linkConfig, currentPagePath }],
+                ] as any[],
+              },
+            }}
+          />
         </div>
       )}
     </div>
