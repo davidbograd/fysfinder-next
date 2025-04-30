@@ -11,5 +11,5 @@ export interface ProcessResult {
  * MVP Implementation: Uses Regex for basic <p> tag targeting and avoids existing <a> tags.
  * Links only the first occurrence of each unique keyword found.
  */
-export declare function processInternalLinks(html: string, config: LinkConfig): ProcessResult;
+export declare function processInternalLinks(html: string, config: LinkConfig, currentPagePath: string): ProcessResult;
 //# sourceMappingURL=transform.d.ts.map

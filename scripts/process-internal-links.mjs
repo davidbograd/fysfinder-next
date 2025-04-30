@@ -19,6 +19,36 @@ const targetPaths = [
 const htmlFileExtension = '.html';
 // ---------------------
 
+// --- Helper function to derive canonical path ---
+function getCanonicalPathFromFile(absoluteFilePath, buildDir) {
+    let relativePath = path.relative(buildDir, absoluteFilePath);
+    let canonicalPath = '';
+
+    if (relativePath.startsWith('server/pages/')) {
+        canonicalPath = relativePath.substring('server/pages'.length);
+        if (canonicalPath.endsWith('/index.html')) {
+            canonicalPath = canonicalPath.slice(0, -'index.html'.length) || '/';
+        } else if (canonicalPath.endsWith('.html')) {
+            canonicalPath = canonicalPath.slice(0, -'.html'.length);
+        }
+    } else if (relativePath.startsWith('server/app/')) {
+        canonicalPath = relativePath.substring('server/app'.length);
+        if (canonicalPath.endsWith('/page.html')) {
+            canonicalPath = canonicalPath.slice(0, -'page.html'.length);
+        }
+        // Remove potential route groups like /(marketing)/ or /@(auth)/
+        canonicalPath = canonicalPath.replace(/\/\([^\)]+\)/g, '');
+        // Remove trailing slash if not root
+        if (canonicalPath.length > 1 && canonicalPath.endsWith('/')) {
+            canonicalPath = canonicalPath.slice(0, -1);
+        }
+    }
+
+    // Ensure leading slash
+    return canonicalPath.startsWith('/') ? canonicalPath : '/' + canonicalPath;
+}
+// -----------------------------------------------
+
 async function findHtmlFiles(dir) {
     let htmlFiles = [];
     try {
@@ -84,7 +114,10 @@ async function processFiles() {
         try {
             // console.log(`Processing file: ${file}`);
             const content = await fs.readFile(file, 'utf-8');
-            const result = processInternalLinks(content, config); // Get the result object
+            // --- Derive and pass current page path ---
+            const currentPagePath = getCanonicalPathFromFile(file, buildDir);
+            const result = processInternalLinks(content, config, currentPagePath);
+            // -----------------------------------------
 
             // Only write back if changes were made
             if (content !== result.processedHtml) {
@@ -96,8 +129,7 @@ async function processFiles() {
                 if (result.linkedKeywords.length > 0) {
                     console.log(`     Keywords linked: ${result.linkedKeywords.join(', ')}`);
                 } else {
-                    // This case shouldn't normally happen if content !== processedHtml, but good for debugging
-                    console.log(`     (No specific keywords reported linked, but content changed)`);
+                    console.log(`     (Content changed, but no keywords linked - likely self-link prevented)`); // Updated log
                 }
             }
         } catch (error) {

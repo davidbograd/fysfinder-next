@@ -16,7 +16,8 @@ const paths = [
   '/find/fysioterapeut/danmark',
   '/find/fysioterapeut/*', // This will revalidate all location pages
   '/klinik/*', // This will revalidate all clinic pages
-  '/fysioterapeut-artikler/*' // This will revalidate all article pages
+  '/blog/*', // This will revalidate all blog pages
+  '/ordbog/*' // This will revalidate all dictionary pages
 ];
 
 async function revalidatePaths() {

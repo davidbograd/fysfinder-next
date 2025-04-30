@@ -31,7 +31,8 @@ function prepareKeywordMap(config: LinkConfig): Map<string, LinkMapping> {
  */
 export function processInternalLinks(
   html: string,
-  config: LinkConfig
+  config: LinkConfig,
+  currentPagePath: string
 ): ProcessResult {
   const keywordMap = prepareKeywordMap(config);
   const linkedKeywordsSet = new Set<string>(); // Keep track of keywords linked *on this page*
@@ -95,6 +96,14 @@ export function processInternalLinks(
           if (!linkedKeywordsSet.has(lowerCaseKeyword)) {
             const mapping = keywordMap.get(lowerCaseKeyword);
             if (mapping) {
+              // --- !!! ADDED CHECK FOR SELF-LINKING !!! ---
+              if (mapping.destination === currentPagePath) {
+                // Skip linking if destination is the current page
+                currentPos = position + length;
+                continue; // Move to next potential match
+              }
+              // --- End of self-linking check ---
+
               const link = `<a href="${mapping.destination}">${originalText}</a>`;
               processedPContent =
                 processedPContent.substring(0, position) +
