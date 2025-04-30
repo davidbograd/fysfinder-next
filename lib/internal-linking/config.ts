@@ -9,20 +9,16 @@ export function loadLinkConfig(): LinkConfig {
   // Hardcoded configuration based on PRD example
   const config: LinkConfig = {
     linkMappings: {
-      anatomy: [
+      ordbog: [
         {
-          keywords: ["rygsøjle"],
-          destination: "/ordbog/rygsoejle",
+          keywords: ["ryg", "ryggen", "rygge"],
+          destination: "/ordbog/ryg",
         },
       ],
-      conditions: [
+      blog: [
         {
-          keywords: ["diskusprolaps", "prolaps"],
-          destination: "/ordbog/diskusprolaps",
-        },
-        {
-          keywords: ["slidgigt i ryggen", "facetledsartrose"],
-          destination: "/ordbog/facetledsartrose",
+          keywords: ["diskusprolaps"],
+          destination: "/blog/diskusprolaps-6-myter",
         },
       ],
     },

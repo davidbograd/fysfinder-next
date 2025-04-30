@@ -84,13 +84,21 @@ async function processFiles() {
         try {
             // console.log(`Processing file: ${file}`);
             const content = await fs.readFile(file, 'utf-8');
-            const processedContent = processInternalLinks(content, config);
+            const result = processInternalLinks(content, config); // Get the result object
 
             // Only write back if changes were made
-            if (content !== processedContent) {
-                await fs.writeFile(file, processedContent, 'utf-8');
+            if (content !== result.processedHtml) {
+                await fs.writeFile(file, result.processedHtml, 'utf-8');
                 processedCount++;
-                console.log(`  -> Updated links in: ${path.relative(process.cwd(), file)}`);
+                const relativePath = path.relative(process.cwd(), file);
+                // Log updated file path and the keywords linked within it
+                console.log(`  -> Updated links in: ${relativePath}`);
+                if (result.linkedKeywords.length > 0) {
+                    console.log(`     Keywords linked: ${result.linkedKeywords.join(', ')}`);
+                } else {
+                    // This case shouldn't normally happen if content !== processedHtml, but good for debugging
+                    console.log(`     (No specific keywords reported linked, but content changed)`);
+                }
             }
         } catch (error) {
             console.error(`Error processing file ${file}:`, error);

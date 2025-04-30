@@ -1,6 +1,14 @@
 import type { LinkConfig, LinkMapping } from "./types.js";
 
 /**
+ * Represents the result of processing internal links.
+ */
+export interface ProcessResult {
+  processedHtml: string;
+  linkedKeywords: string[]; // Keywords that were successfully turned into links
+}
+
+/**
  * Creates a mapping of all keywords (lowercase) to their LinkMapping object.
  */
 function prepareKeywordMap(config: LinkConfig): Map<string, LinkMapping> {
@@ -21,9 +29,13 @@ function prepareKeywordMap(config: LinkConfig): Map<string, LinkMapping> {
  * MVP Implementation: Uses Regex for basic <p> tag targeting and avoids existing <a> tags.
  * Links only the first occurrence of each unique keyword found.
  */
-export function processInternalLinks(html: string, config: LinkConfig): string {
+export function processInternalLinks(
+  html: string,
+  config: LinkConfig
+): ProcessResult {
   const keywordMap = prepareKeywordMap(config);
-  const linkedKeywords = new Set<string>(); // Track keywords already linked on this page
+  const linkedKeywordsSet = new Set<string>(); // Keep track of keywords linked *on this page*
+  const actuallyLinkedKeywords: string[] = []; // List of keywords we actually link
   let processedHtml = html;
 
   // Regex to find content within <p>...</p> tags
@@ -80,7 +92,7 @@ export function processInternalLinks(html: string, config: LinkConfig): string {
           const lowerCaseKeyword = keyword.toLowerCase(); // Ensure we use lowercase for map/set checks
 
           // Only link if this keyword hasn't been linked yet on this page
-          if (!linkedKeywords.has(lowerCaseKeyword)) {
+          if (!linkedKeywordsSet.has(lowerCaseKeyword)) {
             const mapping = keywordMap.get(lowerCaseKeyword);
             if (mapping) {
               const link = `<a href="${mapping.destination}">${originalText}</a>`;
@@ -89,7 +101,8 @@ export function processInternalLinks(html: string, config: LinkConfig): string {
                 link +
                 processedPContent.substring(position + length);
 
-              linkedKeywords.add(lowerCaseKeyword); // Mark as linked
+              linkedKeywordsSet.add(lowerCaseKeyword); // Mark as linked for this page
+              actuallyLinkedKeywords.push(originalText); // Record the keyword text we linked
               // Adjust currentPos to continue searching after the inserted link
               currentPos = position + link.length;
               continue; // Restart search from the new position
@@ -109,5 +122,5 @@ export function processInternalLinks(html: string, config: LinkConfig): string {
     }
   );
 
-  return processedHtml;
+  return { processedHtml, linkedKeywords: actuallyLinkedKeywords };
 }
