@@ -45,6 +45,20 @@ const rehypeInternalLinks: Plugin<[RehypeInternalLinksOptions], Root> = (
     }
   }
 
+  // Pre-compile regexes for keywords
+  const keywordRegexMap = new Map<string, RegExp>();
+  const keywords = Array.from(keywordMap.keys());
+  for (const keyword of keywords) {
+    const escapedKeyword = keyword.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&");
+    keywordRegexMap.set(
+      keyword,
+      new RegExp(
+        `(?<![a-zA-Z0-9_æøåÆØÅ])${escapedKeyword}(?![a-zA-Z0-9_æøåÆØÅ])`,
+        "i"
+      )
+    );
+  }
+
   // Sort keywords for matching (longer first)
   const sortedKeywords = Array.from(keywordMap.keys()).sort(
     (a, b) => b.length - a.length
@@ -57,6 +71,7 @@ const rehypeInternalLinks: Plugin<[RehypeInternalLinksOptions], Root> = (
   const MAX_LINKS_PER_PAGE = 15;
 
   return (tree: Root) => {
+    console.time(`rehype-internal-links: ${currentPagePath}`); // START TIMING
     // Visit potential text container elements
     visit(tree, "element", (containerNode: Element) => {
       // Target only <p> and <li> elements
@@ -85,20 +100,13 @@ const rehypeInternalLinks: Plugin<[RehypeInternalLinksOptions], Root> = (
           } | null = null;
 
           for (const keyword of sortedKeywords) {
-            // Use regex for whole word, case-insensitive matching within the combined text
-            // Using negative lookarounds with specific Danish chars for word boundary checking
-            const escapedKeyword = keyword.replace(
-              /[-\/\\^$*+?.()|[\]{}]/g,
-              "\\$&"
-            ); // Escape regex chars
-            const keywordRegex = new RegExp(
-              // Ensure character before/after is NOT a standard word char OR æøåÆØÅ
-              `(?<![a-zA-Z0-9_æøåÆØÅ])${escapedKeyword}(?![a-zA-Z0-9_æøåÆØÅ])`,
-              "i"
-            );
+            // Use pre-compiled regex
+            const keywordRegex = keywordRegexMap.get(keyword);
+            if (!keywordRegex) continue; // Should not happen, but safety check
+
             const matchResult = combinedText
               .substring(currentPos)
-              .match(keywordRegex);
+              .match(keywordRegex); // Use pre-compiled regex
 
             if (matchResult && matchResult.index !== undefined) {
               const matchIndex = currentPos + matchResult.index;
@@ -201,6 +209,7 @@ const rehypeInternalLinks: Plugin<[RehypeInternalLinksOptions], Root> = (
 
       return CONTINUE; // Continue visiting other elements
     });
+    console.timeEnd(`rehype-internal-links: ${currentPagePath}`); // END TIMING
   };
 };
 

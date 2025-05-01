@@ -782,7 +782,7 @@ export const ordbogMappings: LinkMapping[] = [
     destination: "/ordbog/ligamentskader",
   },
   {
-    keywords: ["Løb", "Løbet"],
+    keywords: ["Løb"],
     destination: "/ordbog/loeb",
   },
   {
