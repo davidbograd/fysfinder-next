@@ -1,5 +1,5 @@
 ---
-lastUpdated: 19/02/2024
+lastUpdated: 01/05/2025
 metaTitle: Migræne – Hvad er migræne? Symptomer og behandling
 datePublished: 19/02/2025
 ---
@@ -20,7 +20,7 @@ Omkring **500.000 danskere** lever med migræne, og kvinder rammes tre gange så
 
 Migræneanfald kan vare fra få timer til flere dage og påvirke ens evne til at klare dagligdagens opgaver. Mange oplever, at migrænen skaber uforudsigelighed, hvilket kan gøre det udfordrende at planlægge sociale og arbejdsmæssige aktiviteter. Denne usikkerhed kan føre til isolation og frustration, men med den rette viden og støtte kan hverdagen med migræne blive lettere at navigere.
 
-Det kan være en god idé at [finde en fysioterapeut med speciale i migræne](https://www.fysfinder.dk/specialer/migraene), som kan hjælpe dig med bedst muligt at håndtere det.
+Det kan være en god idé at [finde en fysioterapeut med speciale i migræne](/find/fysioterapeut/danmark/migraene), som kan hjælpe dig med bedst muligt at håndtere det.
 
 ![Illustration af migræne anfald](/images/articles/migraene_anfald.webp)
 
