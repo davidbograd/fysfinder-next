@@ -5,17 +5,49 @@ import { Shield, Clock } from "lucide-react";
 import Image from "next/image";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import WebAppStructuredData from "@/components/seo/VaerktoejerStructuredData";
+import { getPageContent } from "@/lib/pageContent";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import remarkGfm from "remark-gfm";
+import rehypeUnwrapImages from "rehype-unwrap-images";
+import rehypeInternalLinks from "lib/internal-linking/rehype-internal-links";
+import { loadLinkConfig } from "lib/internal-linking/config";
 
 export const metadata: Metadata = {
   title: "Komplet DEXA-scanning guide | Få svar på dine spørgsmål ✅",
   description: "Oversæt din DEXA-scanning rapport til letforståeligt dansk.",
 };
 
-export default function DEXAScanPage() {
+// Custom component for rendering images within MDX
+const MdxImage = (props: any) => {
+  // Attempt to replicate the 'fill' behavior with responsive layout
+  // You might need to adjust width/height or layout based on your specific image needs
+  return (
+    <div className="relative w-full aspect-[16/10] my-4 sm:my-6">
+      <Image
+        {...props}
+        fill
+        className="object-cover rounded-xl"
+        alt={props.alt || "Billede fra DEXA-scanning guide"} // Provide a default alt text
+      />
+    </div>
+  );
+};
+
+const mdxComponents = {
+  img: MdxImage,
+  // Add other custom components here if needed (e.g., for tables if prose styling isn't enough)
+  // table: (props: any) => <table className="custom-table-class" {...props} />,
+};
+
+export default async function DEXAScanPage() {
   const breadcrumbItems = [
     { text: "Værktøjer", link: "/vaerktoejer" },
     { text: "DEXA-scanning Oversætter" },
   ];
+
+  const pageContent = await getPageContent("dexa-scanning");
+  const linkConfig = loadLinkConfig();
+  const currentPagePath = "/dexa-scanning";
 
   return (
     <main className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-3xl">
@@ -91,51 +123,38 @@ export default function DEXAScanPage() {
             />
           </div>
 
-          {/* Remove or update the MR-specific content below */}
-          {/* I am commenting out the MR-specific tables and content sections */}
-          {/* Tabel afsnit
-          <div className="overflow-x-auto">
-            <h2 className="text-xl sm:text-2xl font-semibold mt-8 mb-2">
-              Oversættelse af latinske ord på MR scanningsrapport
-            </h2>
-            <table className="w-full border-collapse mt-4">
-              <thead>
-                <tr className="bg-logo-blue text-white">
-                  <th className="px-4 py-2 text-left border">
-                    Latinsk udtryk på MR-rapporten
-                  </th>
-                  <th className="px-4 py-2 text-left border">
-                    Betydning på almindeligt dansk
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="even:bg-gray-50">
-                  <td className="px-4 py-2 border">Abscess</td>
-                  <td className="px-4 py-2 border">Byld (pusansamling)</td>
-                </tr>
-                // ... many more table rows ...
-                <tr className="even:bg-gray-50">
-                  <td className="px-4 py-2 border">Tumor</td>
-                  <td className="px-4 py-2 border">Svulst eller knude</td>
-                </tr>
-              </tbody>
-            </table>
+          {/* SEO Content rendered from Markdown */}
+          <div
+            className="prose prose-slate max-w-none 
+                 prose-headings:text-gray-900
+                 prose-h2:text-xl prose-h2:sm:text-2xl prose-h2:font-semibold prose-h2:mt-12 prose-h2:mb-4
+                 prose-h3:text-lg prose-h3:sm:text-xl prose-h3:font-semibold prose-h3:mt-8 prose-h3:mb-2
+                 prose-p:text-gray-700 prose-p:mb-4 prose-p:leading-relaxed
+                 prose-ul:list-disc prose-ul:ml-6 prose-ul:mb-4 prose-ul:text-gray-700
+                 prose-ol:list-decimal prose-ol:ml-6 prose-ol:mb-4 prose-ol:text-gray-700
+                 prose-li:mb-2 prose-li:leading-relaxed
+                 prose-strong:font-semibold prose-strong:text-gray-900
+                 prose-a:text-logo-blue prose-a:no-underline hover:prose-a:underline
+                 prose-table:w-full prose-table:border-collapse prose-table:mt-4
+                 prose-th:bg-logo-blue prose-th:text-white prose-th:px-4 prose-th:py-2 prose-th:text-left prose-th:border
+                 prose-td:px-4 prose-td:py-2 prose-td:border
+                 [&>*:first-child]:mt-0
+                 [&>*:last-child]:mb-0"
+          >
+            <MDXRemote
+              source={pageContent}
+              components={mdxComponents}
+              options={{
+                mdxOptions: {
+                  remarkPlugins: [remarkGfm],
+                  rehypePlugins: [
+                    rehypeUnwrapImages,
+                    [rehypeInternalLinks, { linkConfig, currentPagePath }],
+                  ],
+                },
+              }}
+            />
           </div>
-          */}
-
-          {/* Content afsnit
-          <div className="overflow-x-auto">
-            <h2 className="text-xl sm:text-2xl font-semibold mt-8 mb-2">
-              Hvad er en MR scanning?
-            </h2>
-            <p>
-              En MR-scanning (magnetisk resonans-scanning) er en avanceret
-              // ... rest of MR content ...
-              del i dit eget behandlingsforløb.
-            </p>
-          </div>
-           */}
         </div>
       </div>
     </main>
