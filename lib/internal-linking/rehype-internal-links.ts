@@ -73,8 +73,8 @@ const rehypeInternalLinks: Plugin<[RehypeInternalLinksOptions], Root> = (
   return (tree: Root) => {
     // Visit potential text container elements
     visit(tree, "element", (containerNode: Element) => {
-      // Target only <p> and <li> elements
-      if (!["p", "li"].includes(containerNode.tagName)) {
+      // Target <p>, <li>, <td> and <th> elements
+      if (!["p", "li", "td", "th"].includes(containerNode.tagName)) {
         return CONTINUE; // Skip other elements
       }
 
