@@ -1,15 +1,13 @@
 ---
-title: Hvor meget protein har du egentlig brug for, hvis du vil bygge muskler?
+title: Hvor meget protein behøver du for at bygge muskler?
 metaTitle: Hvor meget protein har du egentlig brug for, hvis du vil bygge muskler?
 datePublished: 01-05-2025
-lastUpdated: 01-05-2025
+lastUpdated: 02-05-2025
 previewImage: /images/blog/protein_traening_intro.png
 previewImageAlt: Illustration af hvor meget protein man skal have for at bygge muskler
 ---
 
-
 ![Illustration af hvor meget protein man skal have for at bygge muskler](/images/blog/protein_traening_intro.png)
-
 
 "Jo mere protein, jo flere muskler." Det er et af de mest udbredte mantraer i fitnessverdenen. I træningscentre, på sociale medier og i mange kostplaner hører man ofte, at man bør spise 3 eller endda 4 gram protein per kilo kropsvægt – hvis man altså vil se resultater. Men er det faktisk nødvendigt? Og hvad siger forskningen egentlig?
 
@@ -17,17 +15,13 @@ Den videnskabelige evidens maler et andet og langt mere nuanceret billede. Det m
 
 Det betyder altså, at mange træningsentusiaster i dag bevidst eller ubevidst overdriver deres proteinbehov – ofte på bekostning af kulhydrater og fedt, som ellers kunne bidrage positivt til energiniveau og træningspræstation.
 
-
 ## Mere er ikke altid bedre
 
 Det er vigtigt at slå fast, at det ikke er farligt for raske mennesker at spise meget protein. Men det er heller ikke nødvendigvis gavnligt, og det kan være ineffektivt. Når kroppen får mere protein, end den kan bruge til muskelopbygning, anvendes det overskydende som energikilde – eller lagres som fedt, hvis kalorieindtaget overstiger behovet.
 
 I praksis kunne det betyde, at du mister muligheden for at have nok kulhydrater til at træne optimalt, fordi en unødigt høj andel af dine kalorier går til protein. Og uden tilstrækkelig energi vil din performance falde – hvilket igen går ud over resultaterne.
 
-
 ![Illustration af hvor meget protein man skal have for at bygge muskler](/images/blog/proteinindtag_oversigt.png)
-
-
 
 ## Fordelingen over dagen betyder noget
 
@@ -35,24 +29,18 @@ Derudover viser forskningen, at hvordan du indtager protein, er næsten lige så
 
 Hvis du spiser 150 gram protein i ét stort måltid, vil kroppen ganske vist kunne optage det hele – men kun en del af det vil blive brugt til muskelopbygning. Resten vil blive anvendt til energi eller lagret. I stedet bør du fordele dit proteinindtag jævnt over dagen – fx i 3-5 måltider – for at understøtte muskelopbygning mere effektivt.
 
-
 ## Praktisk tilgang: Hvad skal du gøre?
 
 Hvis du styrketræner regelmæssigt og ønsker at maksimere muskelvækst, kan du med fordel sigte efter følgende:
 
-
-
-* 1,6 gram protein per kilo kropsvægt om dagen – mere, hvis du er meget aktiv eller i kalorieunderskud
-* Fordel dit indtag over 3-5 måltider i løbet af dagen
-* Kombinér dit proteinindtag med nok kulhydrater til at kunne yde under træning
-* Vælg varierede proteinkilder (æg, kød, mejeriprodukter, bælgfrugter, soja, mv.)
+- 1,6 gram protein per kilo kropsvægt om dagen – mere, hvis du er meget aktiv eller i kalorieunderskud
+- Fordel dit indtag over 3-5 måltider i løbet af dagen
+- Kombinér dit proteinindtag med nok kulhydrater til at kunne yde under træning
+- Vælg varierede proteinkilder (æg, kød, mejeriprodukter, bælgfrugter, soja, mv.)
 
 Hvis du fx vejer 75 kg, svarer det til ca. 120 gram protein om dagen – som sagtens kan opnås gennem helt almindelig mad, uden nødvendigvis at ty til shakes og proteinbarer.
 
-
 ![Illustration af hvor meget protein man skal have for at bygge muskler](/images/blog/protein_traening_balance.png)
-
-
 
 ## Fokusér på helheden
 
