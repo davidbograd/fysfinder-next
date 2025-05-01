@@ -32,11 +32,11 @@ const tools: Tool[] = [
     type: "Forstå din scanning",
   },
   {
-    title: "[KOMMER SNART] DEXA-scan oversætter",
+    title: "DEXA-scan oversætter",
     description:
       "Få din DEXA-scanning oversat til letforståeligt dansk og forstå din knoglesundhed bedre.",
-    href: "#",
-    imageUrl: "/images/mr-scanning/mr-scanning.png",
+    href: "/dexa-scanning",
+    imageUrl: "/images/dexa-scanning/dexa-scanning.jpeg",
     imageAlt: "DEXA-scanning illustration",
     type: "Forstå din scanning",
   },
