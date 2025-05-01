@@ -1,68 +1,48 @@
-"use client";
-
-import React, { useState, useMemo } from "react";
-import { Answer } from "@/types/survey";
-import {
-  questions,
-  answerOptions,
-  calculateScore,
-  resultCategories,
-} from "@/lib/surveys/start-back-tool";
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
+import React from "react";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import VaerktoejerStructuredData from "@/components/seo/VaerktoejerStructuredData";
-import { Separator } from "@/components/ui/separator";
-import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation";
+import { getPageContent } from "@/lib/pageContent";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import remarkGfm from "remark-gfm";
+import rehypeUnwrapImages from "rehype-unwrap-images";
+import rehypeInternalLinks from "lib/internal-linking/rehype-internal-links";
+import { loadLinkConfig } from "lib/internal-linking/config";
+import Image from "next/image";
+import { StartBackToolClient } from "./components/StartBackToolClient";
+import { Metadata } from "next";
 
-export default function StartBackScreeningTool() {
-  const [answers, setAnswers] = useState<Answer[]>([]);
-  const router = useRouter();
+const MdxImage = (props: any) => {
+  return (
+    <div className="relative w-full aspect-[16/10] my-4 sm:my-6">
+      <Image
+        {...props}
+        fill
+        className="object-cover rounded-xl"
+        alt={props.alt || "Billede fra STarT Back guide"}
+      />
+    </div>
+  );
+};
 
-  const progress = useMemo(() => {
-    return (answers.length / questions.length) * 100;
-  }, [answers]);
+const mdxComponents = {
+  img: MdxImage,
+};
+
+export const metadata: Metadata = {
+  title: "STarT Back Screening – Opdag varige rygsmerter i tide",
+  description:
+    "Identificer om du er i risiko for varige rygsmerter med STarT Back Screening Tool. Svar på spørgsmålene og få en risikovurdering.",
+};
+
+export default async function StartBackScreeningToolPage() {
+  const pageContent = await getPageContent("start-back-screening-tool");
+  const linkConfig = loadLinkConfig();
+  const currentPagePath = "/start-back-screening-tool";
 
   const breadcrumbItems = [
     { text: "Værktøjer", link: "/vaerktoejer" },
     { text: "STarT Back Screening Tool" },
   ];
-
-  const handleAnswer = (
-    questionId: string,
-    answerId: string,
-    score: number
-  ) => {
-    setAnswers((prev) => {
-      const newAnswers = [...prev];
-      const existingIndex = newAnswers.findIndex(
-        (a) => a.questionId === questionId
-      );
-
-      const answer: Answer = {
-        questionId,
-        answer: answerId,
-        score,
-      };
-
-      if (existingIndex >= 0) {
-        newAnswers[existingIndex] = answer;
-      } else {
-        newAnswers.push(answer);
-      }
-
-      return newAnswers;
-    });
-  };
-
-  const handleSubmit = () => {
-    if (answers.length === questions.length) {
-      const score = calculateScore(answers);
-      const resultPath = resultCategories[score.riskLevel].path;
-      router.push(resultPath);
-    }
-  };
 
   return (
     <div className="container max-w-5xl mx-auto py-8 px-4">
@@ -73,100 +53,46 @@ export default function StartBackScreeningTool() {
         breadcrumbs={breadcrumbItems}
       />
       <Breadcrumbs items={breadcrumbItems} />
-      <h1 className="text-2xl font-bold mb-8">STarT Back Screening Tool</h1>
+      <h1 className="text-2xl sm:text-3xl font-bold mb-2">
+        STarT Back Screening – Vurder dine rygsmerter
+      </h1>
+      <p className="text-gray-600 text-sm sm:text-base mb-8">
+        Identificer om du er i risiko for varige rygsmerter. Svar på
+        spørgsmålene og få en risikovurdering.
+      </p>
 
-      <div className="sticky top-14 sm:top-16 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-40 py-4 border-b">
-        <Progress value={progress} className="w-full bg-gray-200" />
-        <p className="text-sm text-gray-500 mt-2">
-          {answers.length} af {questions.length} spørgsmål besvaret
-        </p>
-      </div>
+      <StartBackToolClient />
 
-      <div className="space-y-4 mt-8">
-        {/* Questions 1-8 */}
-        {questions.slice(0, 8).map((question, index) => {
-          const currentAnswer = answers.find(
-            (a) => a.questionId === question.id
-          )?.answer;
-          const options = answerOptions.standard;
-
-          return (
-            <div key={question.id}>
-              <div className="flex flex-col sm:flex-row sm:items-center gap-4 py-4">
-                <p className="flex-1">
-                  {index + 1}. {question.text}
-                </p>
-                <div className="flex gap-2 sm:min-w-[200px] justify-end">
-                  {options.map((option) => (
-                    <button
-                      key={option.id}
-                      onClick={() =>
-                        handleAnswer(question.id, option.id, option.score)
-                      }
-                      className={cn(
-                        "flex-1 sm:flex-initial inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors",
-                        "h-10 px-6",
-                        "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
-                        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-                        "disabled:pointer-events-none disabled:opacity-50",
-                        currentAnswer === option.id &&
-                          "bg-gray-800 text-white hover:bg-gray-800/90 hover:text-white"
-                      )}
-                    >
-                      {option.text}
-                    </button>
-                  ))}
-                </div>
-              </div>
-              <Separator />
-            </div>
-          );
-        })}
-
-        {/* Question 9 (special case) */}
-        {questions.slice(8, 9).map((question, index) => {
-          const currentAnswer = answers.find(
-            (a) => a.questionId === question.id
-          )?.answer;
-          const options = answerOptions.q9;
-
-          return (
-            <div key={question.id} className="mt-8 space-y-4">
-              <p>9. {question.text}</p>
-              <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
-                {options.map((option) => (
-                  <button
-                    key={option.id}
-                    onClick={() =>
-                      handleAnswer(question.id, option.id, option.score)
-                    }
-                    className={cn(
-                      "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors",
-                      "px-4 py-2",
-                      "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
-                      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-                      "disabled:pointer-events-none disabled:opacity-50",
-                      currentAnswer === option.id &&
-                        "bg-gray-800 text-white hover:bg-gray-800/90 hover:text-white"
-                    )}
-                  >
-                    {option.text}
-                  </button>
-                ))}
-              </div>
-            </div>
-          );
-        })}
-
-        <div>
-          <Button
-            onClick={handleSubmit}
-            disabled={answers.length !== questions.length}
-            className="w-full bg-logo-blue hover:bg-logo-blue/90 mt-8 h-14 text-lg"
-          >
-            Se resultat
-          </Button>
-        </div>
+      <div
+        className="prose prose-slate max-w-none mt-16 sm:mt-20
+                 prose-headings:text-gray-900
+                 prose-h2:text-xl prose-h2:sm:text-2xl prose-h2:font-semibold prose-h2:mt-12 prose-h2:mb-4
+                 prose-h3:text-lg prose-h3:sm:text-xl prose-h3:font-semibold prose-h3:mt-8 prose-h3:mb-2
+                 prose-p:text-gray-700 prose-p:mb-4 prose-p:leading-relaxed
+                 prose-ul:list-disc prose-ul:ml-6 prose-ul:mb-4 prose-ul:text-gray-700
+                 prose-ol:list-decimal prose-ol:ml-6 prose-ol:mb-4 prose-ol:text-gray-700
+                 prose-li:mb-2 prose-li:leading-relaxed
+                 prose-strong:font-semibold prose-strong:text-gray-900
+                 prose-a:text-logo-blue prose-a:no-underline hover:prose-a:underline
+                 prose-table:w-full prose-table:border-collapse prose-table:mt-4
+                 prose-th:bg-logo-blue prose-th:text-white prose-th:px-4 prose-th:py-2 prose-th:text-left prose-th:border
+                 prose-td:px-4 prose-td:py-2 prose-td:border
+                 [&>*:first-child]:mt-0
+                 [&>*:last-child]:mb-0"
+      >
+        <MDXRemote
+          source={pageContent}
+          components={mdxComponents}
+          options={{
+            mdxOptions: {
+              remarkPlugins: [remarkGfm],
+              rehypePlugins: [
+                rehypeUnwrapImages,
+                [rehypeInternalLinks, { linkConfig, currentPagePath }],
+              ],
+            },
+          }}
+        />
       </div>
     </div>
   );
