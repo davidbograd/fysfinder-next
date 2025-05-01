@@ -71,7 +71,6 @@ const rehypeInternalLinks: Plugin<[RehypeInternalLinksOptions], Root> = (
   const MAX_LINKS_PER_PAGE = 15;
 
   return (tree: Root) => {
-    console.time(`rehype-internal-links: ${currentPagePath}`); // START TIMING
     // Visit potential text container elements
     visit(tree, "element", (containerNode: Element) => {
       // Target only <p> and <li> elements
@@ -209,7 +208,6 @@ const rehypeInternalLinks: Plugin<[RehypeInternalLinksOptions], Root> = (
 
       return CONTINUE; // Continue visiting other elements
     });
-    console.timeEnd(`rehype-internal-links: ${currentPagePath}`); // END TIMING
   };
 };
 

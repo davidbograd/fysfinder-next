@@ -37,16 +37,22 @@ export default function Header() {
                 Ordbog
               </Link>
               <Link
-                href="/om-os"
+                href="/vaerktoejer"
                 className="text-base text-gray-600 hover:text-gray-900"
               >
-                Om os
+                Værktøjer
               </Link>
               <Link
                 href="/blog"
                 className="text-base text-gray-600 hover:text-gray-900"
               >
                 Blog
+              </Link>
+              <Link
+                href="/om-os"
+                className="text-base text-gray-600 hover:text-gray-900"
+              >
+                Om os
               </Link>
             </nav>
           </div>
@@ -115,11 +121,11 @@ export default function Header() {
                     Ordbog
                   </Link>
                   <Link
-                    href="/om-os"
+                    href="/vaerktoejer"
                     className="text-lg font-medium text-gray-900 py-2"
                     onClick={toggleMenu}
                   >
-                    Om os
+                    Værktøjer
                   </Link>
                   <Link
                     href="/blog"
@@ -127,6 +133,13 @@ export default function Header() {
                     onClick={toggleMenu}
                   >
                     Blog
+                  </Link>
+                  <Link
+                    href="/om-os"
+                    className="text-lg font-medium text-gray-900 py-2"
+                    onClick={toggleMenu}
+                  >
+                    Om os
                   </Link>
                 </div>
                 {/* Bottom buttons */}

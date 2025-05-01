@@ -14,15 +14,6 @@ interface Tool {
 
 const tools: Tool[] = [
   {
-    title: "Test dine rygsmerter",
-    description:
-      "Vurder din risiko for langvarige rygsmerter. Få indsigt og anbefalinger til behandling.",
-    href: "/start-back-screening-tool",
-    imageUrl: "/images/vaerktoejer/ryg-smerter-survey.jpg",
-    imageAlt: "STarT Back Screening Tool illustration",
-    type: "Kropdele og smerter",
-  },
-  {
     title: "MR-scanning oversætter",
     description:
       "Få din MR-scanning oversat til letforståeligt dansk og forstå din scanning bedre.",
@@ -39,6 +30,15 @@ const tools: Tool[] = [
     imageUrl: "/images/dexa-scanning/dexa-scanning.jpeg",
     imageAlt: "DEXA-scanning illustration",
     type: "Forstå din scanning",
+  },
+  {
+    title: "Test dine rygsmerter",
+    description:
+      "Vurder din risiko for langvarige rygsmerter. Få indsigt og anbefalinger til behandling.",
+    href: "/start-back-screening-tool",
+    imageUrl: "/images/vaerktoejer/ryg-smerter-survey.jpg",
+    imageAlt: "STarT Back Screening Tool illustration",
+    type: "Kropdele og smerter",
   },
 ];
 
