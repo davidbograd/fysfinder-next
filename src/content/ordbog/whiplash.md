@@ -156,7 +156,7 @@ Med støtte fra sundhedsprofessionelle som fysioterapeuter og en helhedsorienter
 3. Behandling af whiplash. [Whiplashforeningen.dk](https://www.whiplashforeningen.dk/generelt-om-whiplash/behandling/)
 4. Behandlingsmuligheder. Viden & vejledning. [whiplashguiden.dk](https://whiplashguiden.dk/nyskadet/behandlingsmuligheder/)
 5. Træningsintervention til voksne med kronisk whiplash. [Fysio.dk](https://www.fysio.dk/fafo/faglige-anbefalinger/critically-appraised-topics/traningsintervention-til-voksne-med-kronisk-whiplash)
-6. Symptomer efter piskesmæld. [UlykkesPatient.dk](https://www.ulykkespatient.dk/fakta-om-skader/diagnoser/piskesmaeld/symptomer)
+6. Symptomer efter piskesmæld. [UlykkesPatient.dk](https://www.ulykkespatient.dk/fakta-om-skader/diagnoser/piskesmaeld/symptomer/)
 7. Whiplash. Neurokirurgisk Smerteklinik. Tilgængelig fra:[ https://www.nksk.dk/smerteomraader/whiplash/](https://www.nksk.dk/smerteomraader/whiplash/)
 8. Systematisk diagnostik og dokumentation ved whiplash. [Ugeskriftet.dk](https://ugeskriftet.dk/videnskab/systematisk-diagnostik-og-dokumentation-ved-whiplash)
 9. Whiplash. [Sundhed.dk](https://www.sundhed.dk/sundhedsfaglig/information-til-praksis/midtjylland/almen-praksis/patientbehandling/patientforloeb/forloebsbeskrivelser-icpc/l-muskel-skelet-system/whiplash/)
