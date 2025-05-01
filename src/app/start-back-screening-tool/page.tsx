@@ -63,6 +63,7 @@ export default async function StartBackScreeningToolPage() {
 
       <StartBackToolClient />
 
+      <hr className="my-16" />
       <div
         className="prose prose-slate max-w-none mt-16 sm:mt-20
                  prose-headings:text-gray-900
