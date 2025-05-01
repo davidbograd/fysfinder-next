@@ -25,7 +25,7 @@ Det er vigtigt at slå fast, at det ikke er farligt for raske mennesker at spise
 I praksis kunne det betyde, at du mister muligheden for at have nok kulhydrater til at træne optimalt, fordi en unødigt høj andel af dine kalorier går til protein. Og uden tilstrækkelig energi vil din performance falde – hvilket igen går ud over resultaterne.
 
 
-![Illustration af hvor meget protein man skal have for at bygge muskler](/images/blog/protein_traening_oversigt.png)
+![Illustration af hvor meget protein man skal have for at bygge muskler](/images/blog/proteinindtag_oversigt.png)
 
 
 
