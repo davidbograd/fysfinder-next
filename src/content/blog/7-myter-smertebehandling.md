@@ -1,6 +1,6 @@
 ---
-title: 7 myter om smertebehandling
-metaTitle: 7 myter om smertebehandling
+title: 7 myter om smerter
+metaTitle: 7 myter om smerter
 datePublished: 30-04-2025
 lastUpdated: 30-04-2025
 previewImage: /images/blog/smertebehandling_myter_intro.png
@@ -8,7 +8,7 @@ previewImageAlt: Illustration af myter om smertebehandling
 ---
 
 
-![Illustration af myter om smertebehandling](/images/blog/smertebehandling_myter_intro.png)
+![Illustration af myter om smerter](/images/blog/smertebehandling_myter_intro.png)
 
 
 Mange mennesker går rundt med ondt i kroppen – og lige så mange går rundt med misforståelser om, *hvorfor* det gør ondt, og *hvordan* man bedst slipper af med det.
@@ -40,7 +40,7 @@ Det handler ikke kun om, *hvad* vi gør – men om *hvordan* vi gør det, og hvo
 
 
 
-![Illustration af en oversigt over myter om smertebehandling](/images/blog/smertebehandling_myter_oversigt.png)
+![Illustration af en oversigt over myter om smerter](/images/blog/smertebehandling_myter_oversigt.png)
 
 
 
