@@ -13,8 +13,9 @@ import rehypeInternalLinks from "lib/internal-linking/rehype-internal-links";
 import { loadLinkConfig } from "lib/internal-linking/config";
 
 export const metadata: Metadata = {
-  title: "Komplet DEXA-scanning guide | Få svar på dine spørgsmål ✅",
-  description: "Oversæt din DEXA-scanning rapport til letforståeligt dansk.",
+  title: "Komplet DEXA-scanning guide | Forstå alt om DEXA-scan ✅",
+  description:
+    "Oversæt din DEXA-scanning rapport til letforståeligt dansk og forstå alt om DEXA-scan.",
 };
 
 // Custom component for rendering images within MDX
@@ -65,7 +66,10 @@ export default async function DEXAScanPage() {
             oversætter
           </h1>
           <p className="text-gray-600 text-sm sm:text-base">
-            Få din DEXA-scanning rapport oversat til letforståeligt dansk.
+            En DEXA-scanning giver indblik i din knoglemasse og risiko for
+            knogleskørhed. Rapporten fra scanningen kan være svær at forstå på
+            grund af medicinske og latinske udtryk. Forstå dine resultater bedre
+            med vores DEXA-scanningsrapport oversætter.
           </p>
         </div>
 
