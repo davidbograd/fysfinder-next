@@ -214,11 +214,6 @@ async function generateSitemaps() {
         priority: 0.8,
       },
       {
-        loc: `${DOMAIN}/mr-scanning`,
-        priority: 0.8,
-      },
-      {
-        // Add blog overview page
         loc: `${DOMAIN}/blog`,
         priority: 0.8,
       },
@@ -259,6 +254,22 @@ async function generateSitemaps() {
       priority: 0.6, // Assign appropriate priority
     }));
 
+    // Define tool URLs
+    const toolUrls = [
+      {
+        loc: `${DOMAIN}/mr-scanning`,
+        priority: 0.8,
+      },
+      {
+        loc: `${DOMAIN}/dexa-scanning`,
+        priority: 0.8,
+      },
+      {
+        loc: `${DOMAIN}/start-back-screening-tool`,
+        priority: 0.8,
+      },
+    ];
+
     // Generate sitemap files
     await fsPromises.writeFile(
       "public/sitemap-static.xml",
@@ -296,6 +307,12 @@ async function generateSitemaps() {
       await generateSitemapXML(blogPostUrls)
     );
 
+    // Generate sitemap for tools
+    await fsPromises.writeFile(
+      "public/sitemap-vaerktoejer.xml",
+      await generateSitemapXML(toolUrls)
+    );
+
     // Update sitemap index
     const sitemapFiles = [
       "sitemap-static.xml",
@@ -305,6 +322,7 @@ async function generateSitemaps() {
       "sitemap-clinics.xml",
       "sitemap-ordbog.xml",
       "sitemap-blog-posts.xml", // Add blog posts sitemap to index
+      "sitemap-vaerktoejer.xml", // Add tools sitemap to index
     ];
 
     await fsPromises.writeFile(
