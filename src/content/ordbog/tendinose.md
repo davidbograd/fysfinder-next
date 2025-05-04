@@ -1,42 +1,65 @@
 ---
 title: Tendinose
-lastUpdated: 24/02/2024
+lastUpdated: 04/05/2024
 metaTitle: Tendinose – Hvad er tendinose? Symptomer og behandling
 datePublished: 19/02/2025
 ---
 
-Tendinose er en degenerativ tilstand, der påvirker senerne i kroppen. Det opstår typisk som følge af overbelastning eller gentagne bevægelser, hvilket fører til smerte og nedsat funktion i det berørte område. I modsætning til tendinitis, som er en betændelsestilstand, er tendinose karakteriseret ved en nedbrydning af senestrukturen uden den akutte inflammation.
+![Illustration af tendinose](/images/articles/tendinose_intro.png)
 
-## Hvad er symptomerne på tendinose?
+Tendinose er en degenerativ tilstand, der påvirker senerne i kroppen. Det opstår typisk som følge af overbelastning eller gentagne bevægelser, hvilket fører til smerte, tendinoseforandringer og nedsat funktion i det berørte område. I modsætning til tendinitis, som er en betændelsestilstand, er tendinose karakteriseret ved en nedbrydning af selve senestrukturen uden akut inflammation. Nogle omtaler det fejlagtigt som tendiose, men den korrekte betegnelse er tendinose.
 
-Symptomerne på tendinose kan variere afhængigt af det berørte område, men de mest almindelige inkluderer vedvarende smerte, stivhed, hævelse og nedsat bevægelighed. Smerterne kan forværres ved aktivitet og forbedres ved hvile. Det er vigtigt at være opmærksom på disse symptomer, da tidlig behandling kan forhindre yderligere skader.
+## Hvad er tendinose?
 
-## Hvordan diagnosticeres tendinose?
+Tendinose er en langsom nedbrydning af senens struktur uden betændelse. Tilstanden opstår typisk som følge af gentagne belastninger over tid – for eksempel gennem sport, ensformige bevægelser eller fysisk arbejde. I modsætning til tendinitis er tendinose ikke en betændelsestilstand, men en degenerativ forandring i senen.
+
+
+## Symptomer på tendinose
+
+Symptomerne på tendinose varierer afhængigt af det område, der er ramt, men typiske tegn inkluderer vedvarende smerte, stivhed, hævelse og nedsat bevægelighed. Smerterne ved tendinose forværres ofte under aktivitet og lindres i hvile. Det er vigtigt at tage symptomerne alvorligt, da tidlig tendinose behandling kan forebygge forværring.
+
+## Diagnostik: Sådan opdages tendinose
 
 Diagnosen af tendinose stilles typisk gennem en kombination af klinisk vurdering og billeddiagnostik. En fysioterapeut eller læge vil vurdere symptomerne, udføre en fysisk undersøgelse og kan anbefale ultralyd eller MR-scanning for at få et klart billede af senens tilstand. Det er vigtigt at få en korrekt diagnose for at kunne vælge den mest effektive behandlingsmetode.
 
-## Hvilke behandlingsmuligheder findes der for tendinose?
 
-Behandlingen af tendinose fokuserer på at lindre smerte, forbedre funktion og fremme heling af senen. Fysioterapi er en central del af behandlingen og kan inkludere øvelser til at styrke musklerne omkring senen, manuel terapi og elektroterapi. I nogle tilfælde kan injektioner med kortikosteroider eller PRP (plasma beriget med blodplader) også overvejes. Kirurgi er sjældent nødvendigt, men kan være en mulighed i svære tilfælde.
+## Tendinose behandling – hvad virker?
 
-## Hvordan kan man forebygge tendinose?
+Effektiv tendinose behandling fokuserer på at reducere smerte, genoprette funktion og støtte heling af senen. Fysioterapi spiller en central rolle og kan bestå af øvelser, der styrker de omkringliggende muskler, manuel behandling og teknologier som elektroterapi. I nogle tilfælde kan injektioner med PRP (blodpladerigt plasma) eller kortikosteroider overvejes. I sjældne tilfælde kan kirurgi være nødvendig.
 
-Forebyggelse af tendinose involverer at tage hensyn til kroppens signaler og undgå overbelastning. Det er vigtigt at varme op før fysisk aktivitet, variere træningsrutiner og inkludere styrke- og fleksibilitetsøvelser i ens program. At lytte til kroppen og give tilstrækkelig hvile mellem træningssessioner kan også hjælpe med at reducere risikoen for udvikling af tendinose.
+![Illustration af tendinose behandlinger](/images/articles/tendinose_behandling.png)
 
-## Hvornår skal man søge hjælp fra en fysioterapeut?
 
-Hvis du oplever vedvarende smerte eller ubehag i en sene, er det vigtigt at søge hjælp fra en fysioterapeut. Tidlig intervention kan være afgørende for at forhindre tilstanden i at forværres. En fysioterapeut kan hjælpe med at vurdere din tilstand, udvikle en skræddersyet behandlingsplan og guide dig gennem rehabiliteringsprocessen.
+## Forebyggelse af tendinose
+
+For at forebygge tendinose er det vigtigt at undgå overbelastning og lytte til kroppens signaler. Sørg for at varme grundigt op, varier dine bevægelser og inkorporér både styrke- og smidighedsøvelser i din træning. Tilstrækkelig restitution er også en væsentlig faktor.
+
+## Hvornår skal du søge hjælp ved tendinose?
+
+Hvis du har vedvarende smerter i en sene, bør du opsøge en fysioterapeut med erfaring i behandling af tendinose og tendinitis. Tidlig vurdering kan gøre en stor forskel og mindske risikoen for længerevarende funktionsnedsættelse. En professionel kan skræddersy et genoptræningsprogram, der passer til dine behov.
+
+## Tendinose og tendinitis – hvad er forskellen?
+
+Selvom tendinose og tendinitis ofte forveksles, er der væsentlige forskelle. Tendinitis er en akut betændelsestilstand, mens tendinose er en kronisk degenerativ forandring. Behandlingsstrategierne kan derfor være forskellige, og det er vigtigt med en korrekt diagnosticering for at vælge den rette tilgang.
+
+![Illustration af traening med tendinose](/images/articles/tendinose_træning.png)
+
+## Tendinitis behandling – når senen er betændt
+
+Ved tendinitis behandling fokuserer man på at reducere inflammation og smerte. Det kan indebære hvile, is, antiinflammatorisk medicin og gradvis genoptræning. Fysioterapi er ofte en vigtig del af forløbet, særligt hvis tendinitissymptomerne opstår igen og igen. Skelnen mellem tendinose og tendinitis er vigtig for at vælge den rette behandling.
 
 ## Ofte stillede spørgsmål om tendinose
 
-### Hvad er forskellen mellem tendinose og tendinitis?
+
+### Hvad er forskellen mellem tendinose og tendinitis? \
+
 
 Tendinose er en degenerativ tilstand uden inflammation, mens tendinitis involverer betændelse i senen. Tendinose opstår ofte som følge af langvarig overbelastning, mens tendinitis kan være forårsaget af en akut skade.
 
-### Kan tendinose helbredes helt?
+### Kan tendinose helbredes helt? \
 
 Ja, mange mennesker oplever betydelig forbedring og kan vende tilbage til deres normale aktiviteter med korrekt behandling og rehabilitering. Det er dog vigtigt at følge en behandlingsplan og undgå aktiviteter, der kan forværre tilstanden.
 
-### Hvor lang tid tager det at komme sig over tendinose?
+### Hvor lang tid tager det at komme sig over tendinose? \
 
 Helingstiden for tendinose varierer afhængigt af sværhedsgraden af tilstanden og den valgte behandlingsmetode. Det kan tage alt fra flere uger til flere måneder at komme sig, så det er vigtigt at være tålmodig og følge anbefalingerne fra din fysioterapeut.
