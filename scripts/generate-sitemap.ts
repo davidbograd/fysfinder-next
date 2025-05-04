@@ -7,6 +7,7 @@ import { createClient } from "@supabase/supabase-js";
 import { promises as fsPromises } from "fs";
 import * as pathModule from "path";
 import glob from "glob-promise";
+import { getBlogPosts } from "../src/lib/blog"; // Import getBlogPosts
 
 config({ path: ".env.local" });
 
@@ -31,6 +32,37 @@ interface Specialty {
 
 interface Clinic {
   klinikNavnSlug: string;
+}
+
+// Helper function to fetch all rows with pagination
+async function fetchAllClinics() {
+  let allClinics: Clinic[] = [];
+  let rangeStart = 0;
+  const rangeSize = 1000; // Supabase default limit
+
+  while (true) {
+    const { data: clinicsChunk, error } = await supabaseDb
+      .from("clinics")
+      .select("klinikNavnSlug") // Only select the needed column
+      .range(rangeStart, rangeStart + rangeSize - 1);
+
+    if (error) {
+      console.error("Error fetching clinics chunk:", error);
+      throw error; // Stop execution if there's an error
+    }
+
+    if (clinicsChunk) {
+      allClinics = allClinics.concat(clinicsChunk);
+    }
+
+    if (!clinicsChunk || clinicsChunk.length < rangeSize) {
+      break; // Exit loop if last chunk was fetched or an error occurred
+    }
+
+    rangeStart += rangeSize;
+  }
+  console.log(`Fetched a total of ${allClinics.length} clinics.`);
+  return allClinics;
 }
 
 async function generateSitemapXML(
@@ -77,7 +109,7 @@ async function generateSitemaps() {
     const { data: specialties } = await supabaseDb
       .from("specialties")
       .select("*");
-    const { data: clinics } = await supabaseDb.from("clinics").select("*");
+    const clinics = await fetchAllClinics();
 
     // Fetch clinic-specialty relationships with city information
     const { data: clinicSpecialties } = await supabaseDb.from(
@@ -185,6 +217,16 @@ async function generateSitemaps() {
         loc: `${DOMAIN}/mr-scanning`,
         priority: 0.8,
       },
+      {
+        // Add blog overview page
+        loc: `${DOMAIN}/blog`,
+        priority: 0.8,
+      },
+      {
+        // Add tools overview page
+        loc: `${DOMAIN}/vaerktoejer`,
+        priority: 0.8,
+      },
     ];
 
     const cityUrls =
@@ -208,6 +250,13 @@ async function generateSitemaps() {
     const articleUrls = articles.map((article: string) => ({
       loc: `${DOMAIN}/ordbog/${article}`,
       priority: 0.6,
+    }));
+
+    // Fetch blog post slugs
+    const blogPosts = await getBlogPosts();
+    const blogPostUrls = blogPosts.map((post) => ({
+      loc: `${DOMAIN}/blog/${post.slug}`,
+      priority: 0.6, // Assign appropriate priority
     }));
 
     // Generate sitemap files
@@ -241,6 +290,12 @@ async function generateSitemaps() {
       await generateSitemapXML(articleUrls)
     );
 
+    // Generate sitemap for blog posts
+    await fsPromises.writeFile(
+      "public/sitemap-blog-posts.xml",
+      await generateSitemapXML(blogPostUrls)
+    );
+
     // Update sitemap index
     const sitemapFiles = [
       "sitemap-static.xml",
@@ -249,6 +304,7 @@ async function generateSitemaps() {
       "sitemap-specialties-cities.xml",
       "sitemap-clinics.xml",
       "sitemap-ordbog.xml",
+      "sitemap-blog-posts.xml", // Add blog posts sitemap to index
     ];
 
     await fsPromises.writeFile(
