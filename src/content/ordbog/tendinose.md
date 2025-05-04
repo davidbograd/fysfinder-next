@@ -51,15 +51,15 @@ Ved tendinitis behandling fokuserer man på at reducere inflammation og smerte. 
 ## Ofte stillede spørgsmål om tendinose
 
 
-### Hvad er forskellen mellem tendinose og tendinitis? \
+### Hvad er forskellen mellem tendinose og tendinitis?
 
 
 Tendinose er en degenerativ tilstand uden inflammation, mens tendinitis involverer betændelse i senen. Tendinose opstår ofte som følge af langvarig overbelastning, mens tendinitis kan være forårsaget af en akut skade.
 
-### Kan tendinose helbredes helt? \
+### Kan tendinose helbredes helt?
 
 Ja, mange mennesker oplever betydelig forbedring og kan vende tilbage til deres normale aktiviteter med korrekt behandling og rehabilitering. Det er dog vigtigt at følge en behandlingsplan og undgå aktiviteter, der kan forværre tilstanden.
 
-### Hvor lang tid tager det at komme sig over tendinose? \
+### Hvor lang tid tager det at komme sig over tendinose?
 
 Helingstiden for tendinose varierer afhængigt af sværhedsgraden af tilstanden og den valgte behandlingsmetode. Det kan tage alt fra flere uger til flere måneder at komme sig, så det er vigtigt at være tålmodig og følge anbefalingerne fra din fysioterapeut.
