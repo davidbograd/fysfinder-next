@@ -27,6 +27,9 @@ import { LocationStructuredData } from "@/components/seo/LocationStructuredData"
 import { loadLinkConfig } from "lib/internal-linking/config";
 import rehypeInternalLinks from "lib/internal-linking/rehype-internal-links";
 
+// MDX Plugins
+import remarkGfm from "remark-gfm";
+
 // Create a Supabase client for static generation
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -186,6 +189,30 @@ export async function fetchLocationData(
 
     // Special handling for "online" location
     if (locationSlug === "online") {
+      let cityForOnline: City | null = null;
+      try {
+        const cityData = await fetchWithRetry(
+          `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/cities?bynavn_slug=eq.online&select=*`,
+          fetchOptions
+        );
+        cityForOnline = cityData[0] || null;
+      } catch (error) {
+        console.warn("Could not fetch city data for 'online' location:", error);
+        // Proceed without DB city data for online
+      }
+
+      // Use fetched city data if available, otherwise create minimal object
+      const finalCityObject = cityForOnline || {
+        id: "online",
+        bynavn: "Online",
+        bynavn_slug: "online",
+        latitude: 0,
+        longitude: 0,
+        postal_codes: [],
+        betegnelse: "Online fysioterapi",
+        seo_tekst: undefined, // Explicitly undefined in fallback
+      };
+
       let clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order),premium_listings(id,start_date,end_date,booking_link)`;
 
       // Add specialty filter if needed
@@ -208,19 +235,19 @@ export async function fetchLocationData(
       const clinics = validClinics.map(mapDBClinicToClinic);
 
       // For online location, we create a minimal city object
-      const onlineCity: City = {
-        id: "online",
-        bynavn: "Online",
-        bynavn_slug: "online",
-        latitude: 0,
-        longitude: 0,
-        postal_codes: [],
-        betegnelse: "Online fysioterapi",
-        seo_tekst: undefined,
-      };
+      // const onlineCity: City = {
+      //   id: "online",
+      //   bynavn: "Online",
+      //   bynavn_slug: "online",
+      //   latitude: 0,
+      //   longitude: 0,
+      //   postal_codes: [],
+      //   betegnelse: "Online fysioterapi",
+      //   seo_tekst: undefined,
+      // }; // <-- Removed this minimal object creation
 
       return {
-        city: onlineCity,
+        city: finalCityObject, // Use the potentially fetched or minimal city object
         clinics: sortClinicsByRating(clinics),
         nearbyClinicsList: [],
         specialties,
@@ -459,6 +486,9 @@ export default async function LocationPage({ params }: LocationPageProps) {
                 prose-li:mb-2 prose-li:leading-relaxed
                 prose-strong:font-semibold prose-strong:text-gray-900
                 prose-a:text-logo-blue prose-a:no-underline hover:prose-a:underline
+                prose-table:w-full prose-table:border-collapse prose-table:mt-4
+                prose-th:bg-logo-blue prose-th:text-white prose-th:px-4 prose-th:py-2 prose-th:text-left prose-th:border
+                prose-td:px-4 prose-td:py-2 prose-td:border
                 [&>*:first-child]:mt-0
                 [&>*:last-child]:mb-0"
             >
@@ -466,6 +496,7 @@ export default async function LocationPage({ params }: LocationPageProps) {
                 source={specialty.seo_tekst}
                 options={{
                   mdxOptions: {
+                    remarkPlugins: [remarkGfm],
                     rehypePlugins: [
                       [rehypeInternalLinks, { linkConfig, currentPagePath }],
                     ] as any[],
@@ -631,6 +662,9 @@ export default async function LocationPage({ params }: LocationPageProps) {
              prose-li:mb-2 prose-li:leading-relaxed
              prose-strong:font-semibold prose-strong:text-gray-900
              prose-a:text-logo-blue prose-a:no-underline hover:prose-a:underline
+             prose-table:w-full prose-table:border-collapse prose-table:mt-4
+             prose-th:bg-logo-blue prose-th:text-white prose-th:px-4 prose-th:py-2 prose-th:text-left prose-th:border
+             prose-td:px-4 prose-td:py-2 prose-td:border
              [&>*:first-child]:mt-0
              [&>*:last-child]:mb-0"
         >
@@ -638,6 +672,7 @@ export default async function LocationPage({ params }: LocationPageProps) {
             source={data.city.seo_tekst}
             options={{
               mdxOptions: {
+                remarkPlugins: [remarkGfm],
                 rehypePlugins: [
                   [rehypeInternalLinks, { linkConfig, currentPagePath }],
                 ] as any[],
