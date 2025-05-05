@@ -45,7 +45,6 @@ Vedvarende smerter, som varer længere end tre måneder. Dette sker for omkring 
 
 Når en diskus i rygsøjlen presser på en nerve, opstår diskusprolaps, der kan medføre udstrålende smerter og føleforstyrrelser i benene.
 
-
 ### Spinal stenose
 
 En forsnævring af rygmarvskanalen, der især hos ældre kan give smerter og stivhed i lænden.
@@ -187,8 +186,6 @@ Forskningen peger i stedet på, at en mere balanceret tilgang med fokus på vide
 ## Referenceliste
 
 Macquarie University. "Walking brings huge benefits for low back pain." ScienceDaily.[ https://www.sciencedaily.com/releases/2024/06/240620152321.htm](https://www.sciencedaily.com/releases/2024/06/240620152321.htm)
-
-The Lighthouse. "Walking to combat back pain: world-first study shows dramatic improvement." [https://lighthouse.mq.edu.au/article/2024/walking-to-combat-back-pain](https://lighthouse.mq.edu.au/article/2024/walking-to-combat-back-pain)
 
 International Association for the Study of Pain (IASP). "The far reach of disabling health care."[ https://www.iasp-pain.org](https://www.iasp-pain.org)
 
