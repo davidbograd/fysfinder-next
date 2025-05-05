@@ -13,9 +13,11 @@ Når du har taget testen, kan du hurtigt identificere risikoen for varige rygsme
 ## Hvem bør bruge STarT Back Screening Tool?
 
 STarT Back Screening Tool er relevant for:
-Dig som har akutte eller tilbagevendende rygsmerter
-Dig der ønsker en hurtig vurdering inden opstart af fysioterapi
-Fysioterapeuter der vil tilpasse deres behandling baseret på patienters risikoprofil
+
+- Dig som har akutte eller tilbagevendende rygsmerter
+- Dig der ønsker en hurtig vurdering inden opstart af fysioterapi
+- Fysioterapeuter der vil tilpasse deres behandling baseret på patienters risikoprofil
+
 Hvis du oplever rygsmerter nu, anbefaler vi, at du udfylder spørgeskemaet, så du kan tage hånd om dine symptomer i tide og undgå varige mén.
 
 ## Hvordan bruges resultatet af STarT Back Screening Tool?
@@ -33,10 +35,12 @@ Resultatet kan hjælpe din fysioterapeut med at skræddersy et individuelt behan
 ## Hvor kan jeg finde fysioterapeuter, der bruger STarT Back Screening Tool?
 
 På FysFinder.dk kan du nemt finde fysioterapeuter i hele Danmark, som anvender STarT Back Screening Tool som en del af deres vurdering og behandling. Brug vores platform til at:
-Sammenligne klinikker
-Læse anmeldelser
-Se priser og specialer
-Booke tid direkte
+
+- Sammenligne klinikker
+- Læse anmeldelser
+- Se priser og specialer
+- Booke tid direkte
+
 Find en fysioterapeut nær dig og tag det første skridt mod en ryg uden smerter.
 
 ## Ofte stillede spørgsmål om STarT Back Screening Tool
