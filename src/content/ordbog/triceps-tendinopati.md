@@ -1,9 +1,11 @@
 ---
 title: Triceps tendinopati
-lastUpdated: 24/02/2024
+lastUpdated: 12/05/2024
 metaTitle: Triceps tendinopati – Hvad er triceps tendinopati? Læs mere
 datePublished: 19/02/2025
 ---
+
+![Illustration af at triceps tendinopati](/images/articles/triceps_tendinopati_intro.png)
 
 Triceps tendinopati er en tilstand, der påvirker tricepssenen, som forbinder tricepsmusklen til albueleddet. Denne tilstand kan forårsage smerte og ubehag, især under aktiviteter, der involverer strækning eller belastning af armen. Det er vigtigt at forstå årsagerne, symptomerne og behandlingsmulighederne for at kunne håndtere denne tilstand effektivt.
 
@@ -14,6 +16,8 @@ Triceps tendinopati opstår ofte som følge af overbelastning eller gentagne bev
 ## Hvilke symptomer er forbundet med triceps tendinopati?
 
 De mest almindelige symptomer på triceps tendinopati inkluderer smerte bag på armen, især ved bevægelse af albuen. Der kan også være hævelse og stivhed i området, samt en følelse af svaghed, når man forsøger at strække armen eller løfte genstande. Symptomerne kan variere i intensitet og kan forværres ved aktivitet.
+
+![Illustration af at triceps tendinopati symptomer](/images/articles/triceps_tendinopati_oversigt.png)
 
 ## Hvordan diagnosticeres triceps tendinopati?
 
@@ -30,6 +34,8 @@ Fysioterapi spiller en central rolle i rehabiliteringen af triceps tendinopati. 
 ## Hvad er prognosen for personer med triceps tendinopati?
 
 Prognosen for triceps tendinopati er generelt god, især hvis tilstanden diagnosticeres tidligt og behandles korrekt. De fleste personer kan forvente at vende tilbage til deres normale aktiviteter inden for få uger til måneder, afhængigt af sværhedsgraden af tilstanden og overholdelse af behandlingsplanen.
+
+![Illustration af at traening med triceps tendinopati](/images/articles/triceps_tendinopati_traening.png)
 
 ## Hvordan kan man forebygge triceps tendinopati?
 
