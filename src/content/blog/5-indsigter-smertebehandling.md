@@ -1,6 +1,6 @@
 ---
-title: 5 indsiger i opdateret smertebehandling
-metaTitle: 5 indsiger i opdateret smertebehandling
+title: 5 indsigter i opdateret smertebehandling
+metaTitle: 5 indsigter i opdateret smertebehandling
 datePublished: 30-04-2025
 lastUpdated: 30-04-2025
 previewImage: /images/blog/smertebehandling_indsigt_intro.png

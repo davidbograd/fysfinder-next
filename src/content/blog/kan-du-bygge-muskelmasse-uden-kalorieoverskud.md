@@ -27,6 +27,8 @@ En gennemgang af flere studier fra 2022 undersøgte styrketræning og muskelopby
 
 Resultaterne er illustreret i figuren nedenfor, hvor graf (B) er fremhævet med gult. Den viser ændringer i muskelmasse hos personer, der trænede uden at være i kalorieunderskud. Næsten alle studier i denne kategori viste en stigning i muskelmasse – på trods af at deltagerne ikke spiste mere end de forbrændte.
 
+![Illustration af graf der giver oversigt over muskelopbygning med eller uden kalorieoverskud](/images/blog/muskelmasse_opbygning_graf.png)
+
 Det understreger, at muskelopbygning uden bulk er muligt. Faktisk foregår størstedelen af den forskningsbaserede styrketræning netop under forhold med vedligeholdelsesindtag – ikke kalorieoverskud.
 
 
