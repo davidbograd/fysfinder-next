@@ -34,8 +34,6 @@ Air squats (kropsvægt squats) er en simpel, men effektiv øvelse, der kan udfø
 
 Variér ved at tilføje tempo, holde pause i bunden eller lave jump squats.
 
-![Illustration af udholdenhedstraening roning](/images/blog/udholdenhed_oevelser_roning.png)
-
 ## 4. Mountain climbers – core og puls i ét
 
 Mountain climbers træner både core, skuldre og kredsløb. Når du udfører øvelsen hurtigt, bliver det en intens helkropsøvelse med høj kalorieforbrænding. Brug den i blokke på 30-60 sek. og fokuser på at holde god teknik hele vejen.
@@ -49,6 +47,7 @@ Har du adgang til en romaskine, er den et af de bedste redskaber til udholdenhed
 
 Bonus: Også effektivt til restitution og tekniktræning.
 
+![Illustration af udholdenhedstraening roning](/images/blog/udholdenhed_oevelser_roning.png)
 
 ## Sådan bruger du øvelserne i praksis
 
