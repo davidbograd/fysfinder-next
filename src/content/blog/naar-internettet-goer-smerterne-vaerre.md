@@ -58,6 +58,8 @@ Derfor er det helt afgørende at være kritisk, når du læser online råd. Kig 
 
 Der findes heldigvis masser af solid, evidensbaseret viden derude. Artikler, videoer og behandlere, der tager højde for hele mennesket. Og som ikke kun fokuserer på strukturer, men også på funktion, håb og fremgang.
 
-På FysFinder kan du finde behandlere, der forstår det. Som hjælper dig med at finde ro i en kaotisk situation. Som ikke lover mirakelkure, men som tør sige, at det bliver bedre – selv når det hele ser sort ud.
+På FysFinder kan du finde behandlere, der forstår det. Som hjælper dig med at finde ro i en kaotisk situation. Som ikke lover mirakelkure, men som tør sige, at det bliver bedre – selv når det hele ser sort ud. 
+
+-> [Find fysioterapeut med speciale i kroniske smerter](https://www.fysfinder.dk/find/fysioterapeut/danmark/kroniske-smerter)
 
 For ja, du har ondt. Men nej, du er ikke ødelagt. Og du fortjener hjælp, der ser dig som mere end en scanning.
