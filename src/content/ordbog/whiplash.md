@@ -1,5 +1,5 @@
 ---
-lastUpdated: 19/02/2024
+lastUpdated: 27/05/2025
 metaTitle: Whiplash – Hvad er piskesmæld? Symptomer og behandling
 datePublished: 19/02/2025
 ---
@@ -121,7 +121,7 @@ Fokusér på det, der giver glæde i hverdagen, som sociale aktiviteter eller ti
 
 ## Myter og fakta om Whiplash
 
-#### **5 myter om Whiplash**
+#### 5 myter om Whiplash
 
 1. Man skal undgå at bevæge nakken efter en whiplash-skade.
 2. Hvis scanninger ikke viser skade, er der intet galt.
@@ -129,7 +129,7 @@ Fokusér på det, der giver glæde i hverdagen, som sociale aktiviteter eller ti
 4. Whiplash skyldes altid trafikulykker.
 5. Smerterne skyldes altid fysisk skade.
 
-#### **5 facts om Whiplash**
+#### 5 facts om Whiplash
 
 1. Whiplash er en klinisk diagnose.
 2. De fleste kommer sig.

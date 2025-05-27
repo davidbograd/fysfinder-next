@@ -1,5 +1,5 @@
 ---
-lastUpdated: 04/03/2025
+lastUpdated: 27/05/2025
 metaTitle: Sportsskader – Hvad er en sportsskade? Læs om forebyggelse
 datePublished: 19/02/2025
 ---
@@ -58,7 +58,7 @@ Genoptræningstiden for en sportsskade varierer afhængigt af skadens type og om
 
 Specifikke øvelser kan være effektive til at forebygge sportsskader. Styrketræning, der fokuserer på stabilitet og eksplosiv kraft, samt fleksibilitets- og balancetræning har vist sig at reducere risikoen for skader. Øvelsesprogrammer som FIFA 11+ har i flere studier vist sig at være effektive til at mindske skadesrisikoen hos idrætsudøvere, særligt i sportsgrene med mange retningsskift og høj belastning på knæ og ankler.
 
-### **Referenceliste**
+### Referenceliste
 
 1. Ardern, C. L., et al. – _Return to sport after injury: Evidence-based guidelines._ _British Journal of Sports Medicine._ [www.bjsm.bmj.com](https://www.bjsm.bmj.com)
 2. Bleakley, C. M., et al. – _Early mobilization versus immobilization after acute musculoskeletal injury._ _Journal of Orthopaedic Research._[ www.orthoresearch.org](http://www.orthoresearch.org)

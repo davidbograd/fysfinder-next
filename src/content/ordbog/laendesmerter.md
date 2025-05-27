@@ -1,5 +1,5 @@
 ---
-lastUpdated: 21/03/2025
+lastUpdated: 27/05/2025
 datePublished: 19/02/2025
 ---
 
@@ -153,17 +153,17 @@ Kirurgisk indgreb er kun sjældent nødvendigt, men kan komme på tale ved mere 
 
 Forebyggelse af lændesmerter bygger på regelmæssig bevægelse, fysisk styrke og undgåelse af længerevarende inaktivitet. Forskning viser, at daglige aktiviteter som gåture har en markant forebyggende effekt.
 
-### **Daglige gåture**
+### Daglige gåture
 
 Et nyere studie har vist, at man kan halvere risikoen for tilbagevendende lændesmerter ved at gå dagligt i op til 30 minutter, fem gange om ugen. Det forbedrer blodcirkulationen og frigiver endorfiner, som dæmper smerteoplevelsen.
 
 ![Illustration af behandling af lændesmerter](/images/articles/Lændesmerter_gåture.webp)
 
-### **Styrketræning**
+### Styrketræning
 
 Ved at styrketræne regelmæssigt øges kroppens modstandsdygtighed over for belastninger, hvilket kan mindske risikoen for lændesmerter. Træning af hele kroppen har vist sig effektiv til både at forbedre funktion og reducere smerter over tid.
 
-### **Undgå langvarig inaktivitet**
+### Undgå langvarig inaktivitet
 
 Langvarig stillesiddende adfærd er en kendt risikofaktor for smerter i lænden. Selvom hvile kan være gavnlig i akutte tilfælde, er det vigtigt at vende tilbage til aktivitet så hurtigt som muligt i takt med smerten tillader det.
 

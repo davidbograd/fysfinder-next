@@ -1,5 +1,5 @@
 ---
-lastUpdated: 01/05/2025
+lastUpdated: 27/05/2025
 metaTitle: Migræne – Hvad er migræne? Symptomer og behandling
 datePublished: 19/02/2025
 ---
@@ -45,7 +45,7 @@ Migræne kan inddeles i forskellige typer, som hjælper med at beskrive de indiv
 
 ![Illustration af migræne typer](/images/articles/migraene_type.png)
 
-#### **Migræne uden aura**
+#### Migræne uden aura
 
 Den mest almindelige form, kendetegnet ved moderat til stærk hovedpine og de klassiske ledsagesymptomer.
 
@@ -141,17 +141,17 @@ Migræne påvirker ikke kun kroppen, men kan også have betydelig indvirkning p�
 
 ![Illustration af at få støtte med migræne](/images/articles/migraene_stoette.webp)
 
-#### **Hvordan migræne påvirker relationer og livskvalitet**
+#### Hvordan migræne påvirker relationer og livskvalitet
 
 Migræneanfald kan skabe uforudsigelighed, der gør det svært at planlægge sociale aktiviteter eller passe et arbejde. Dette kan føre til en følelse af isolation eller frustration over ikke at kunne leve op til egne eller andres forventninger. Samtidig kan misforståelser omkring migræne – fx at det "bare er en hovedpine" – gøre det sværere at få støtte fra omgivelserne.
 
 At tale åbent om migræne med familie, venner og kolleger kan hjælpe med at skabe forståelse og reducere følelsen af at stå alene. For mange er det en lettelse at få forklaret, hvordan migræne påvirker dem, og hvad de har brug for i svære perioder. En åben dialog kan også være med til at forebygge konflikter eller misforståelser.
 
-#### **Find fællesskab og støtte**
+#### Find fællesskab og støtte
 
 At finde ligesindede, der forstår udfordringerne ved at leve med migræne, kan være en stor hjælp. [Migræne- og Hovedpineforeningen](https://www.hovedpineforeningen.dk/behandlingssteder.html) og [migræne Danmark](https://www.migraenedanmark.dk/) tilbyder både information og adgang til netværk, hvor man kan dele erfaringer og finde støtte. Deres arbejde er en vigtig ressource for både migræneramte og deres pårørende.
 
-### **Konklusion: Vejen til bedre livskvalitet med migræne**
+### Konklusion: Vejen til bedre livskvalitet med migræne
 
 Migræne er en kompleks og ofte udfordrende lidelse, der påvirker både kroppen og livet omkring den enkelte. Ved at forstå symptomerne, identificere triggere og implementere strategier som livsstilsændringer, medicinsk behandling og selvomsorg kan man tage vigtige skridt mod en bedre håndtering af migrænen.
 
