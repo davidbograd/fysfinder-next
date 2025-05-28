@@ -3,7 +3,7 @@ title: "5 gode øvelser til hold i nakken"
 metaTitle: "5 gode øvelser til hold i nakken"
 datePublished: 21-05-2025
 lastUpdated: 21-05-2025
-previewImage: /images/blog/hold_nakken_oevelser_intro.png)
+previewImage: /images/blog/hold_nakken_oevelser_intro.png
 previewImageAlt: Illustration af hold i nakken
 ---
 

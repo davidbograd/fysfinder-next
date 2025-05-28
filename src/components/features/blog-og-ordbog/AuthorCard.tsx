@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export function AuthorCard() {
   return (
@@ -15,7 +16,11 @@ export function AuthorCard() {
         />
       </div>
       <div>
-        <div className="font-medium">Joachim Bograd</div>
+        <div className="font-medium">
+          <Link href="/forfatter/joachim-bograd" className="hover:underline">
+            Joachim Bograd
+          </Link>
+        </div>
         <div className="text-sm text-gray-600">
           Bachelor i fysioterapi fra Københavns Professionshøjskole
         </div>

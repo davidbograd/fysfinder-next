@@ -60,6 +60,12 @@ export async function getBlogPost(slug: string): Promise<BlogPost> {
   const fileContents = readFileSync(filePath, "utf8");
   const { data, content } = matter(fileContents);
 
+  // Pre-process the markdown content to ensure images are not wrapped in p tags and have rounded corners
+  const processedContent = content.replace(
+    /^\s*!\[([^\]]*)\]\(([^)]+)\)\s*$/gm,
+    '<Image src="$2" alt="$1" width={1200} height={800} layout="responsive" className="rounded-lg my-4" />'
+  );
+
   return {
     slug,
     title: data.title,
@@ -67,7 +73,7 @@ export async function getBlogPost(slug: string): Promise<BlogPost> {
     description: data.description,
     datePublished: data.datePublished,
     lastUpdated: data.lastUpdated,
-    content,
+    content: processedContent,
     previewImage: data.previewImage || "/images/articles/default-preview.webp",
     previewImageAlt: data.previewImageAlt || data.title,
   };
