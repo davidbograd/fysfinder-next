@@ -7,17 +7,17 @@
     "build": "NODE_NO_WARNINGS=1 next build",
     "start": "next start",
     "lint": "next lint",
-    "generate:sitemap": "ts-node scripts/generate-sitemap.ts",
+    "generate:sitemap": "tsx scripts/generate-sitemap.ts",
     "test": "NODE_NO_WARNINGS=1 jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "import:clinics": "ts-node scripts/import-clinics.ts",
-    "import:specialties": "ts-node scripts/import-specialties.ts",
+    "import:clinics": "tsx scripts/import-clinics.ts",
+    "import:specialties": "tsx scripts/import-specialties.ts",
     "ingest:articles": "node scripts/ingest-ordbog-articles.mjs",
-    "fetch:physio": "ts-node scripts/fetch-physiotherapists-google-maps.ts",
+    "fetch:physio": "tsx scripts/fetch-physiotherapists-google-maps.ts",
     "update:imports": "node scripts/update-imports.mjs",
     "revalidate": "node scripts/revalidate.js",
-    "populate:postal": "ts-node scripts/populate-postal-codes.ts"
+    "populate:postal": "tsx scripts/populate-postal-codes.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0",
@@ -90,6 +90,7 @@
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "ts-node": "^10.9.2",
+    "tsx": "^4.7.0",
     "typescript": "^5.6.3"
   },
   "type": "module"
