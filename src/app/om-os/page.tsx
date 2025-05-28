@@ -1,8 +1,8 @@
 import { Metadata } from "next";
-import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import Link from "next/link";
-import { FounderCard } from '@/components/features/team/FounderCard';
-import { AboutUsStructuredData } from '@/components/seo/AboutUsStructuredData';
+import { FounderCard } from "@/components/features/team/FounderCard";
+import { AboutUsStructuredData } from "@/components/seo/AboutUsStructuredData";
 import Image from "next/image";
 
 export const metadata: Metadata = {
@@ -50,7 +50,7 @@ export default function OmOsPage() {
               FysFinder er skabt som din go-to platform til at{" "}
               <Link
                 href="/find/fysioterapeut/danmark"
-                className="text-blue-600 hover:underline"
+                className="text-logo-blue hover:underline"
               >
                 finde fysioterapeuter i hele Danmark
               </Link>
@@ -167,7 +167,7 @@ export default function OmOsPage() {
                 href="https://www.verdensmaalene.dk/maal/3"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-600 hover:underline"
+                className="text-logo-blue hover:underline"
               >
                 FN&apos;s verdensmål #3 for sundhed og trivsel
               </a>

@@ -5,37 +5,183 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
-const faqItems = [
+interface TableData {
+  headers: string[];
+  rows: string[][];
+}
+
+interface FAQItem {
+  question: string;
+  answer?: string;
+  table?: TableData;
+  list?: string[];
+}
+
+const faqItems: FAQItem[] = [
   {
     question: "Hvad er fysioterapi?",
     answer:
-      "Fysioterapi er en sundhedsfaglig behandlingsform, der fokuserer på at forbedre bevægelighed, lindre smerter og genoprette fysisk funktion gennem øvelser, manuel behandling og rådgivning.",
+      "Fysioterapi er en sundhedsfaglig behandlingsform, der har til formål at genoprette eller forbedre kroppens funktionsevne og bevægelighed. Det anvendes ofte ved skader, smerter, nedsat bevægelsesfunktion eller som forebyggelse mod fremtidige gener. Behandlingen kan bestå af øvelser, manuelle teknikker, massage og rådgivning.",
   },
   {
-    question: "Hvordan vælger jeg den rigtige fysioterapeut?",
+    question: "Hvad gør en fysioterapeut?",
     answer:
-      "Vælg en fysioterapeut baseret på deres specialer, erfaring, anmeldelser og beliggenhed. FysFinder hjælper dig med at sammenligne og finde den bedste match til dine behov.",
+      "En fysioterapeut undersøger, diagnosticerer og behandler problemer i muskler, led og nervesystemet. De arbejder med at forbedre patienters fysiske funktion og reducere smerte gennem øvelser, manuel behandling og vejledning i livsstil og ergonomi.",
   },
   {
-    question: "Har jeg brug for en henvisning for at se en fysioterapeut?",
+    question: "Er det billigere at gå til fysioterapi med henvisning?",
     answer:
-      "I Danmark kan du oftest gå direkte til en fysioterapeut uden henvisning. Dog kan en lægehenvisning give dig adgang til tilskud fra den offentlige sygesikring.",
+      "Ja, du kan få tilskud fra det offentlige, hvis du har en henvisning fra din læge. Det dækker cirka 40% af behandlingsprisen.",
+    table: {
+      headers: ["Med eller uden henvisning", "Typisk egenbetaling"],
+      rows: [
+        ["Med henvisning", "180-230 kr."],
+        ["Uden henvisning", "300-700 kr."],
+      ],
+    },
   },
   {
-    question:
-      "Hvad kan jeg forvente ved mit første besøg hos en fysioterapeut?",
+    question: "Hvem kan få gratis fysioterapi?",
     answer:
-      "Ved dit første besøg vil fysioterapeuten typisk gennemgå din sygehistorie, foretage en fysisk undersøgelse og udarbejde en behandlingsplan tilpasset dine behov.",
+      "Gratis (vederlagsfri) fysioterapi gives til personer med visse kroniske sygdomme, handicap eller funktionsnedsættelser. Det kræver en henvisning fra lægen og en godkendelse fra kommunen eller regionen.",
   },
   {
-    question: "Dækker min forsikring fysioterapi?",
+    question: "Hvornår skal man gå til fysioterapeut?",
+    answer: "Du bør overveje at gå til en fysioterapeut ved:",
+    list: [
+      "Vedvarende smerter i muskler og led",
+      "Genoptræning efter operation eller skade",
+      "Nedsat bevægelighed eller styrke",
+      "Forebyggelse af arbejdsrelaterede skader",
+      "Kroniske sygdomme som gigt, sclerose eller parkinson",
+    ],
+  },
+  {
+    question: "Kan pensionister få tilskud til fysioterapi?",
     answer:
-      "Mange sundhedsforsikringer dækker fysioterapi. Tjek din police eller kontakt dit forsikringsselskab for at få specifik information om din dækning.",
+      'Ja, pensionister har ret til tilskud via det offentlige, og hvis de opfylder kriterierne, kan de også få vederlagsfri fysioterapi. Sygeforsikringen "danmark" giver også tilskud.',
+  },
+  {
+    question: "Hvad er forskellen på fysioterapeut og fysioterapi?",
+    answer:
+      "**Fysioterapi** er selve behandlingen og metoden. **Fysioterapeut** er den fagperson, der udfører behandlingen.",
+    table: {
+      headers: ["Begreb", "Betydning"],
+      rows: [
+        ["Fysioterapi", "Behandlingsmetoder og teknikker"],
+        ["Fysioterapeut", "Uddannet sundhedsperson, der udfører terapien"],
+      ],
+    },
+  },
+  {
+    question: "Hvilke diagnoser giver ret til vederlagsfri fysioterapi?",
+    answer: "Eksempler på diagnoser:",
+    list: [
+      "Multipel sklerose (MS)",
+      "Parkinsons sygdom",
+      "Apopleksi (blodprop i hjernen)",
+      "Rygmarvsskade",
+      "Medfødt cerebral parese",
+      "Svær gigt",
+    ],
+  },
+  {
+    question: "Hvad skal man medbringe til fysioterapi?",
+    answer: "Det er en god idé at medbringe:",
+    list: [
+      "Sundhedskort (sygesikringsbevis)",
+      "Henvisning fra lægen (hvis du har en)",
+      "Behageligt tøj og evt. sportssko",
+      "Information om din skade/historik",
+    ],
+  },
+  {
+    question: "Kan egen læge henvise til fysioterapi?",
+    answer:
+      "Ja, din egen praktiserende læge kan udstede en henvisning til fysioterapi, hvis der er sundhedsfaglig begrundelse. Henvisningen giver dig adgang til tilskud fra det offentlige.",
+  },
+  {
+    question: "Hvor mange gange kan man få tilskud til fysioterapi?",
+    answer:
+      "Der er som udgangspunkt ikke et fast loft på antal behandlinger med tilskud. Det afhænger af behov og lægens vurdering. Ved vederlagsfri fysioterapi er der typisk længere behandlingsforløb.",
+  },
+  {
+    question: "Er fysioterapeut gratis med henvisning?",
+    answer:
+      "Nej, men du får tilskud fra det offentlige. Du betaler typisk 60% af prisen selv, medmindre du er berettiget til vederlagsfri fysioterapi.",
+  },
+  {
+    question: "Hvor lang tid tager en fys behandling?",
+    answer: "Behandlingstiden varierer, men typisk:",
+    list: [
+      "Førstegangskonsultation: 45-60 minutter",
+      "Opfølgende behandling: 25-40 minutter",
+    ],
+  },
+  {
+    question: "Kan en fysioterapeut give massage?",
+    answer:
+      'Ja, mange fysioterapeuter bruger massage som en del af behandlingen. Det kaldes ofte "manuel behandling" og bruges til at løsne spændinger og forbedre blodcirkulationen.',
+    table: {
+      headers: ["Behandlingstype", "Inkluderer massage?"],
+      rows: [
+        ["Manuel terapi", "Ja"],
+        ["Fysioterapi med øvelser", "Delvist"],
+        ["Sportsfysioterapi", "Ja"],
+      ],
+    },
   },
 ];
 
 export function FAQ() {
+  const renderContent = (item: FAQItem) => {
+    return (
+      <div className="space-y-4">
+        {item.answer && (
+          <p className="text-gray-700 text-base">{item.answer}</p>
+        )}
+
+        {item.list && (
+          <ul className="list-disc ml-6 text-gray-700 text-base space-y-1">
+            {item.list.map((listItem, index) => (
+              <li key={index}>{listItem}</li>
+            ))}
+          </ul>
+        )}
+
+        {item.table && (
+          <Table>
+            <TableHeader>
+              <TableRow>
+                {item.table.headers.map((header, index) => (
+                  <TableHead key={index}>{header}</TableHead>
+                ))}
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {item.table.rows.map((row, rowIndex) => (
+                <TableRow key={rowIndex}>
+                  {row.map((cell, cellIndex) => (
+                    <TableCell key={cellIndex}>{cell}</TableCell>
+                  ))}
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        )}
+      </div>
+    );
+  };
+
   return (
     <section className="mb-12 mt-16">
       <h2 className="text-2xl font-bold mb-4">
@@ -48,7 +194,7 @@ export function FAQ() {
               {item.question}
             </AccordionTrigger>
             <AccordionContent className="text-left">
-              <p className="text-gray-700 text-base">{item.answer}</p>
+              {renderContent(item)}
             </AccordionContent>
           </AccordionItem>
         ))}
