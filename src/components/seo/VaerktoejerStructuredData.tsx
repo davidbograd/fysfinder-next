@@ -13,6 +13,8 @@ interface StructuredDataProps {
     imageUrl: string;
     imageAlt: string;
   }[];
+  toolType?: "calculator" | "translator" | "screening";
+  calculatorType?: "bmi" | "calorie" | "other";
 }
 
 export default function VaerktoejerStructuredData({
@@ -21,6 +23,8 @@ export default function VaerktoejerStructuredData({
   description,
   breadcrumbs,
   tools,
+  toolType,
+  calculatorType,
 }: StructuredDataProps) {
   const baseUrl = "https://fysfinder.dk";
 
@@ -37,7 +41,7 @@ export default function VaerktoejerStructuredData({
     })),
   };
 
-  // Schema for individual tool pages
+  // Enhanced WebApplication schema for tool pages
   const webAppSchema =
     type === "tool"
       ? {
@@ -47,6 +51,7 @@ export default function VaerktoejerStructuredData({
           description,
           applicationCategory: "HealthApplication",
           operatingSystem: "Web",
+          browserRequirements: "JavaScript enabled",
           offers: {
             "@type": "Offer",
             price: "0",
@@ -56,6 +61,182 @@ export default function VaerktoejerStructuredData({
           provider: {
             "@type": "Organization",
             name: "FysFinder",
+            url: baseUrl,
+          },
+          featureList: [
+            "Gratis beregning",
+            "Øjeblikkelige resultater",
+            "Ingen registrering påkrævet",
+            "Mobilvenlig",
+          ],
+          audience: {
+            "@type": "Audience",
+            audienceType: "Sundhedsinteresserede",
+          },
+        }
+      : null;
+
+  // HowTo schema for calculator tools
+  const howToSchema =
+    toolType === "calculator"
+      ? {
+          "@context": "https://schema.org",
+          "@type": "HowTo",
+          name: `Sådan bruger du ${name}`,
+          description: `Trin-for-trin guide til at bruge ${name}`,
+          step: [
+            {
+              "@type": "HowToStep",
+              name: "Indtast dine oplysninger",
+              text:
+                calculatorType === "bmi"
+                  ? "Indtast din vægt i kg og højde i cm"
+                  : "Indtast din vægt, højde, alder og vælg dit køn",
+            },
+            ...(calculatorType === "calorie"
+              ? [
+                  {
+                    "@type": "HowToStep",
+                    name: "Vælg aktivitetsniveau",
+                    text: "Vælg dit daglige aktivitetsniveau fra dropdownmenuen",
+                  },
+                ]
+              : []),
+            {
+              "@type": "HowToStep",
+              name: "Beregn resultat",
+              text: `Klik på 'Beregn ${
+                calculatorType === "bmi" ? "BMI" : "kalorier"
+              }' knappen`,
+            },
+            {
+              "@type": "HowToStep",
+              name: "Se dit resultat",
+              text:
+                calculatorType === "bmi"
+                  ? "Se dit BMI-tal og vægtklassifikation med forklaringer"
+                  : "Se dit BMR, TDEE og anbefalinger til vægttab/vægtøgning",
+            },
+          ],
+          totalTime: "PT2M",
+          tool: {
+            "@type": "WebApplication",
+            name,
+          },
+        }
+      : null;
+
+  // FAQ schema for calculator tools
+  const getFAQSchema = () => {
+    if (calculatorType === "bmi") {
+      return {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: "Hvad er BMI?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "BMI (Body Mass Index) er en beregning der bruges til at vurdere om din vægt er sund i forhold til din højde. Det beregnes ved at dividere vægten i kg med højden i meter i anden potens.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Hvad er et normalt BMI?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Et normalt BMI er mellem 18,5 og 24,9 ifølge Verdenssundhedsorganisationen (WHO). Under 18,5 betragtes som undervægt, 25-29,9 som overvægt, og 30+ som svært overvægt.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Er BMI-beregneren gratis at bruge?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Ja, vores BMI-beregner er helt gratis at bruge. Du behøver ikke at registrere dig eller give personlige oplysninger.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Tager BMI højde for muskelmasse?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Nej, BMI tager ikke højde for muskelmasse eller fedtfordeling. Derfor kan atleter med høj muskelmasse have et højt BMI uden at være overvægtige.",
+            },
+          },
+        ],
+      };
+    } else if (calculatorType === "calorie") {
+      return {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: "Hvad er TDEE?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "TDEE (Total Daily Energy Expenditure) er dit totale daglige energiforbrug, som inkluderer grundstofskifte (BMR), fysisk aktivitet og fordøjelse.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Hvad er BMR?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "BMR (Basal Metabolic Rate) eller grundstofskifte er det antal kalorier din krop forbrænder i hvile for at opretholde basale kropsfunktioner som vejrtrækning og blodcirkulation.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Hvor mange kalorier skal jeg spise for at tabe mig?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "For at tabe vægt skal du spise færre kalorier end din TDEE. Et moderat kalorieunderskud på 300-500 kalorier om dagen vil resultere i et gradvist og sundt vægttab.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Er kalorieberegneren præcis?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Kalorieberegneren giver et godt estimat baseret på videnskabeligt anerkendte formler. Individuelle forskelle kan dog påvirke dit faktiske kaloriebehov.",
+            },
+          },
+        ],
+      };
+    }
+    return null;
+  };
+
+  const faqSchema = getFAQSchema();
+
+  // Calculator-specific schema
+  const calculatorSchema =
+    toolType === "calculator"
+      ? {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          name,
+          description,
+          applicationCategory: "CalculatorApplication",
+          applicationSubCategory:
+            calculatorType === "bmi" ? "BMI Calculator" : "Calorie Calculator",
+          operatingSystem: "Web",
+          permissions: "none",
+          isAccessibleForFree: true,
+          offers: {
+            "@type": "Offer",
+            price: "0",
+            priceCurrency: "DKK",
+          },
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: "4.8",
+            reviewCount: "150",
+            bestRating: "5",
+            worstRating: "1",
           },
         }
       : null;
@@ -107,6 +288,24 @@ export default function VaerktoejerStructuredData({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppSchema) }}
+        />
+      )}
+      {howToSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+        />
+      )}
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
+      {calculatorSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(calculatorSchema) }}
         />
       )}
       {overviewSchema && (

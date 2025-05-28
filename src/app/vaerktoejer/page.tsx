@@ -49,6 +49,15 @@ const tools: Tool[] = [
     imageAlt: "Sunde fødevarer og målebånd der illustrerer kalorieopmåling",
     type: "Kost & ernæring værktøjer",
   },
+  {
+    title: "BMI-beregner",
+    description:
+      "Beregn dit BMI (Body Mass Index) og få indsigt i din vægtklassifikation baseret på vægt og højde.",
+    href: "/vaerktoejer/bmi-beregner",
+    imageUrl: "/images/vaerktoejer/bmi-beregner.png",
+    imageAlt: "BMI-beregner illustration med vægt og målebånd",
+    type: "Kost & ernæring værktøjer",
+  },
 ];
 
 function ToolCard({ tool }: { tool: Tool }) {

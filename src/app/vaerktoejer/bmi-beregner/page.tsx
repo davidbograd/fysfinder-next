@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { CalorieCalculator } from "./components/CalorieCalculator";
+import { BMICalculator } from "./components/BMICalculator";
 import { Calculator, Shield, Clock } from "lucide-react";
 import Image from "next/image";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
@@ -12,9 +12,9 @@ import rehypeInternalLinks from "lib/internal-linking/rehype-internal-links";
 import { loadLinkConfig } from "lib/internal-linking/config";
 
 export const metadata: Metadata = {
-  title: "Kalorieberegner: Beregn dit kaloriebehov (ligevægtsindtag)",
+  title: "BMI-beregner: Beregn og forstå dit Body Mass Index tal ✅",
   description:
-    "Beregn dit daglige kaloriebehov med vores gratis kalorieberegner. Få dit BMR, TDEE og anbefalinger til vægttab og vægtøgning.",
+    "Beregn dit BMI (Body Mass Index) med vores gratis BMI-beregner. Få din vægtklassifikation og sundhedsrådgivning.",
 };
 
 // Custom component for rendering images within MDX
@@ -25,7 +25,7 @@ const MdxImage = (props: any) => {
         {...props}
         fill
         className="object-cover rounded-xl"
-        alt={props.alt || "Billede fra kalorieberegner guide"}
+        alt={props.alt || "Billede fra BMI-beregner guide"}
       />
     </div>
   );
@@ -35,52 +35,55 @@ const mdxComponents = {
   img: MdxImage,
 };
 
-export default async function CalorieCalculatorPage() {
+export default async function BMICalculatorPage() {
   const breadcrumbItems = [
     { text: "Værktøjer", link: "/vaerktoejer" },
-    { text: "Kalorieberegner" },
+    { text: "BMI-beregner" },
   ];
 
-  const pageContent = await getPageContent("kalorieberegner");
+  const pageContent = await getPageContent("bmi-beregner");
   const linkConfig = loadLinkConfig();
-  const currentPagePath = "/vaerktoejer/kalorieberegner";
+  const currentPagePath = "/vaerktoejer/bmi-beregner";
 
   return (
     <main className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-3xl">
       <WebAppStructuredData
         type="tool"
-        name="Kalorieberegner"
-        description="Beregn dit daglige kaloriebehov med vores gratis kalorieberegner"
+        name="BMI-beregner"
+        description="Beregn dit BMI (Body Mass Index) med vores gratis BMI-beregner"
         breadcrumbs={breadcrumbItems}
         toolType="calculator"
-        calculatorType="calorie"
+        calculatorType="bmi"
       />
       <div className="space-y-6 sm:space-y-8">
         <Breadcrumbs items={breadcrumbItems} />
         <div className="space-y-4">
           <h1 className="text-2xl sm:text-3xl font-bold">
-            Kalorieberegner - Beregn dit daglige kaloriebehov
+            BMI-beregner: Beregn og forstå dit Body Mass Index tal
           </h1>
           <p className="text-gray-600 text-sm sm:text-base">
-            Hvor mange kalorier du bør indtage for at opretholde din nuværende
-            vægt? Vores kalorieberegner hjælper dig med at finde ud af, hvor
-            mange kalorier du skal indtage dagligt for at holde din vægt stabil,
-            tabe dig eller tage på.
+            BMI (Body Mass Index) er en enkel metode til at vurdere, om du har
+            en sund vægt i forhold til din højde. Det er et nyttigt værktøj til
+            at få et overblik over din generelle sundhed og kan hjælpe dig med
+            at forstå, om du er i risiko for vægtrelaterede helbredsproblemer.
+          </p>
+          <p className="text-gray-600 text-sm sm:text-base">
+            På denne side kan du nemt beregne dit BMI-tal og få indsigt i, hvad
+            det betyder for din sundhed.
           </p>
         </div>
 
         <div className="pb-8">
-          <CalorieCalculator />
+          <BMICalculator />
         </div>
 
         <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-8">
           <p className="text-sm text-gray-700">
             <strong>OBS</strong>:{" "}
             <em>
-              Hvis du ønsker et større og længerevarende vægttab, så husk at
-              genberegne dit daglige kaloriebehov i takt med at du taber dig. Fx
-              hver gang du har tabt 5 kg. Så får du løbende justeret dit
-              kalorieindtag til din nye og lavere vægt.
+              BMI er kun en indikator og tager ikke højde for muskelmasse,
+              knogletæthed eller fedtfordeling. Konsulter altid en
+              sundhedsprofessionel for en komplet sundhedsvurdering.
             </em>
           </p>
         </div>
@@ -88,8 +91,8 @@ export default async function CalorieCalculatorPage() {
         <div className="space-y-12">
           <div className="relative w-full aspect-[16/10] mt-8">
             <Image
-              src="/images/vaerktoejer/kalorieberegner.png"
-              alt="Sunde fødevarer og målebånd der illustrerer kalorieopmåling og sund kost"
+              src="/images/vaerktoejer/bmi-beregner.png"
+              alt="BMI-beregner illustration med vægt og målebånd"
               fill
               className="object-cover rounded-xl"
               priority
