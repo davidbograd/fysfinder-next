@@ -91,9 +91,7 @@ export default function VaerktoejerStructuredData({
               text:
                 calculatorType === "bmi"
                   ? "Indtast din vægt i kg og højde i cm"
-                  : calculatorType === "calorie"
-                  ? "Indtast din vægt, højde, alder og vælg dit køn"
-                  : "Besvar spørgsmålene om din alder, stress, søvn, kost og motion",
+                  : "Indtast din vægt, højde, alder og vælg dit køn",
             },
             ...(calculatorType === "calorie"
               ? [
@@ -108,11 +106,7 @@ export default function VaerktoejerStructuredData({
               "@type": "HowToStep",
               name: "Beregn resultat",
               text: `Klik på 'Beregn ${
-                calculatorType === "bmi"
-                  ? "BMI"
-                  : calculatorType === "calorie"
-                  ? "kalorier"
-                  : "hormonbalance"
+                calculatorType === "bmi" ? "BMI" : "kalorier"
               }' knappen`,
             },
             {
@@ -121,9 +115,7 @@ export default function VaerktoejerStructuredData({
               text:
                 calculatorType === "bmi"
                   ? "Se dit BMI-tal og vægtklassifikation med forklaringer"
-                  : calculatorType === "calorie"
-                  ? "Se dit BMR, TDEE og anbefalinger til vægttab/vægtøgning"
-                  : "Se din hormonbalance score og få personlige anbefalinger til forbedring",
+                  : "Se dit BMR, TDEE og anbefalinger til vægttab/vægtøgning",
             },
           ],
           totalTime: "PT2M",
@@ -214,45 +206,6 @@ export default function VaerktoejerStructuredData({
           },
         ],
       };
-    } else if (calculatorType === "other" && name.includes("Hormonbalance")) {
-      return {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        mainEntity: [
-          {
-            "@type": "Question",
-            name: "Hvad er hormonbalance?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Hormonbalance er en tilstand, hvor kroppens hormoner som østrogen, progesteron, kortisol og skjoldbruskkirtelhormoner er i den rette mængde og fungerer optimalt sammen.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "Hvad er symptomer på hormonel ubalance?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Typiske symptomer inkluderer uregelmæssig menstruation, træthed, humørsvingninger, vægtøgning, søvnproblemer, hårtab og uren hud.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "Er hormonbalance beregneren præcis?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Beregneren giver en indikation baseret på livsstilsfaktorer og symptomer, men erstatter ikke professionel medicinsk rådgivning. Konsulter altid en læge ved mistanke om hormonelle problemer.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "Hvordan kan jeg forbedre min hormonbalance?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Du kan påvirke din hormonbalance positivt med tilstrækkelig søvn (7-8 timer), stressreduktion, balanceret kost, regelmæssig motion og ved at undgå for meget koffein og sukker.",
-            },
-          },
-        ],
-      };
     }
     return null;
   };
@@ -269,11 +222,7 @@ export default function VaerktoejerStructuredData({
           description,
           applicationCategory: "CalculatorApplication",
           applicationSubCategory:
-            calculatorType === "bmi"
-              ? "BMI Calculator"
-              : calculatorType === "calorie"
-              ? "Calorie Calculator"
-              : "Hormone Balance Calculator",
+            calculatorType === "bmi" ? "BMI Calculator" : "Calorie Calculator",
           operatingSystem: "Web",
           permissions: "none",
           isAccessibleForFree: true,
