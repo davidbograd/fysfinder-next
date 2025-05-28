@@ -7,9 +7,129 @@ export const metadata: Metadata = {
     "Lær mere om Joachim Bograd, fysioterapeut og forfatter hos FysFinder. Uddannet fra Københavns Professionshøjskole med specialer i smertevidenskab og muskuloskeletal fysioterapi.",
 };
 
+function JoachimBogradStructuredData() {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Joachim Bograd",
+    givenName: "Joachim",
+    familyName: "Bograd",
+    jobTitle: ["Fysioterapeut", "Founder", "Forfatter"],
+    description:
+      "Fysioterapeut, forfatter og stifter af FysFinder. Specialist i muskuloskeletal fysioterapi, smertevidenskab og træning.",
+    url: "https://fysfinder.dk/forfatter/joachim-bograd",
+    image: "https://fysfinder.dk/images/om-os/joachimbograd-fysfinder.png",
+    sameAs: ["https://www.linkedin.com/in/joachim-bograd-43b0a120a/"],
+    alumniOf: {
+      "@type": "EducationalOrganization",
+      name: "Københavns Professionshøjskole",
+      url: "https://www.kp.dk",
+    },
+    hasCredential: [
+      {
+        "@type": "EducationalOccupationalCredential",
+        name: "Bachelor i fysioterapi",
+        credentialCategory: "degree",
+        educationalLevel: "Bachelor",
+        recognizedBy: {
+          "@type": "EducationalOrganization",
+          name: "Københavns Professionshøjskole",
+        },
+      },
+    ],
+    knowsAbout: [
+      "Fysioterapi",
+      "Muskuloskeletal fysioterapi",
+      "Smertevidenskab",
+      "Træning",
+      "Skadesforebyggelse",
+      "Bevægelse",
+      "Neurofysiologi",
+      "Ryg- og nakkeproblemer",
+      "Komplekse smerteproblematikker",
+    ],
+    expertise: [
+      {
+        "@type": "Thing",
+        name: "Muskuloskeletal fysioterapi",
+      },
+      {
+        "@type": "Thing",
+        name: "Smertevidenskab",
+      },
+      {
+        "@type": "Thing",
+        name: "Træning og bevægelse",
+      },
+    ],
+    affiliation: [
+      {
+        "@type": "MedicalOrganization",
+        name: "FysFinder",
+        url: "https://fysfinder.dk",
+        description: "Danmarks platform til at finde fysioterapeuter",
+      },
+      {
+        "@type": "Organization",
+        name: "Smertelinjen",
+        description: "Frivillig rådgiver",
+      },
+    ],
+    founder: {
+      "@type": "MedicalOrganization",
+      name: "FysFinder",
+      url: "https://fysfinder.dk",
+    },
+    hasOccupation: {
+      "@type": "Occupation",
+      name: "Fysioterapeut",
+      occupationLocation: {
+        "@type": "Country",
+        name: "Danmark",
+      },
+      skills: [
+        "Muskuloskeletal fysioterapi",
+        "Smertebehandling",
+        "Træning",
+        "Patientkommunikation",
+        "Sundhedsfaglig skrivning",
+      ],
+    },
+    workExample: [
+      {
+        "@type": "CreativeWork",
+        name: "FysFinder Blog",
+        url: "https://fysfinder.dk/blog",
+        description: "Faglige artikler om fysioterapi og sundhed",
+      },
+      {
+        "@type": "CreativeWork",
+        name: "FysFinder Ordbog",
+        url: "https://fysfinder.dk/ordbog",
+        description:
+          "Faglig ordbog med fysioterapeutiske termer og forklaringer",
+      },
+    ],
+    memberOf: {
+      "@type": "ProfessionalService",
+      name: "Danske Fysioterapeuter",
+      description: "Professionel organisation for fysioterapeuter i Danmark",
+    },
+    award: "Stifter af Danmarks førende platform for fysioterapisøgning",
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+    />
+  );
+}
+
 export default function JoachimBogradPage() {
   return (
     <main className="container mx-auto px-4 py-8 max-w-4xl">
+      <JoachimBogradStructuredData />
       <div className="space-y-8 mt-6">
         <header>
           <div className="mb-6">
@@ -26,6 +146,9 @@ export default function JoachimBogradPage() {
             <h1 className="text-3xl font-bold mb-2">Om Joachim Bograd</h1>
             <p className="text-xl text-gray-600 mb-4">
               Founder af FysFinder & Fysioterapeut
+            </p>
+            <p className="text-xl text-gray-600 mb-4">
+              Bachelor i fysioterapi fra Københavns Professionshøjskole
             </p>
           </div>
         </header>
