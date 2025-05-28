@@ -40,6 +40,15 @@ const tools: Tool[] = [
     imageAlt: "STarT Back Screening Tool illustration",
     type: "Kropdele og smerter",
   },
+  {
+    title: "Kalorieberegner",
+    description:
+      "Beregn dit daglige kaloriebehov baseret på din alder, vægt, højde og aktivitetsniveau.",
+    href: "/vaerktoejer/kalorieberegner",
+    imageUrl: "/images/vaerktoejer/kalorieberegner.png",
+    imageAlt: "Sunde fødevarer og målebånd der illustrerer kalorieopmåling",
+    type: "Kost & ernæring værktøjer",
+  },
 ];
 
 function ToolCard({ tool }: { tool: Tool }) {
