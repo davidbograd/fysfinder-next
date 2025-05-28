@@ -58,6 +58,15 @@ const tools: Tool[] = [
     imageAlt: "BMI-beregner illustration med vægt og målebånd",
     type: "Kost & ernæring værktøjer",
   },
+  {
+    title: "Hormonbalance beregner",
+    description:
+      "Få indsigt i din hormonelle balance og lær at genkende symptomer på ubalance",
+    href: "/vaerktoejer/hormonbalance-beregner",
+    imageUrl: "/images/vaerktoejer/hormon-balance.png",
+    imageAlt: "Hormonbalance-beregner illustration med sundhedssymboler",
+    type: "Sundhed & velvære værktøjer",
+  },
 ];
 
 function ToolCard({ tool }: { tool: Tool }) {
