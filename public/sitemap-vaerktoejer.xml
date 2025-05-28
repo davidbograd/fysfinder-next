@@ -2,18 +2,33 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://www.fysfinder.dk/mr-scanning</loc>
-    <lastmod>2025-05-04T07:03:00.071Z</lastmod>
+    <loc>https://www.fysfinder.dk/vaerktoejer</loc>
+    <lastmod>2025-05-28T09:38:47.651Z</lastmod>
     <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.fysfinder.dk/vaerktoejer/bmi-beregner</loc>
+    <lastmod>2025-05-28T09:38:47.651Z</lastmod>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.fysfinder.dk/vaerktoejer/kalorieberegner</loc>
+    <lastmod>2025-05-28T09:38:47.651Z</lastmod>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.fysfinder.dk/mr-scanning</loc>
+    <lastmod>2025-05-28T09:38:47.651Z</lastmod>
+    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.fysfinder.dk/dexa-scanning</loc>
-    <lastmod>2025-05-04T07:03:00.071Z</lastmod>
-    <priority>0.80</priority>
+    <lastmod>2025-05-28T09:38:47.651Z</lastmod>
+    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.fysfinder.dk/start-back-screening-tool</loc>
-    <lastmod>2025-05-04T07:03:00.071Z</lastmod>
-    <priority>0.80</priority>
+    <lastmod>2025-05-28T09:38:47.651Z</lastmod>
+    <priority>0.70</priority>
   </url>
 </urlset>

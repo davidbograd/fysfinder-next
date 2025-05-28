@@ -217,11 +217,6 @@ async function generateSitemaps() {
         loc: `${DOMAIN}/blog`,
         priority: 0.8,
       },
-      {
-        // Add tools overview page
-        loc: `${DOMAIN}/vaerktoejer`,
-        priority: 0.8,
-      },
     ];
 
     const cityUrls =
@@ -254,21 +249,78 @@ async function generateSitemaps() {
       priority: 0.6, // Assign appropriate priority
     }));
 
-    // Define tool URLs
-    const toolUrls = [
-      {
-        loc: `${DOMAIN}/mr-scanning`,
-        priority: 0.8,
-      },
-      {
-        loc: `${DOMAIN}/dexa-scanning`,
-        priority: 0.8,
-      },
-      {
-        loc: `${DOMAIN}/start-back-screening-tool`,
-        priority: 0.8,
-      },
+    // Dynamically discover tool URLs
+    const toolUrls: Array<{ loc: string; priority: number }> = [];
+
+    // Add main tools overview page
+    toolUrls.push({
+      loc: `${DOMAIN}/vaerktoejer`,
+      priority: 0.8, // Keep main overview page at higher priority
+    });
+
+    // Discover tool subpages under /vaerktoejer/
+    try {
+      const vaerktoejerPath = pathModule.join(
+        process.cwd(),
+        "src/app/vaerktoejer"
+      );
+      const vaerktoejerItems = await fsPromises.readdir(vaerktoejerPath, {
+        withFileTypes: true,
+      });
+
+      for (const item of vaerktoejerItems) {
+        if (item.isDirectory()) {
+          // Check if the directory has a page.tsx file
+          const pagePath = pathModule.join(
+            vaerktoejerPath,
+            item.name,
+            "page.tsx"
+          );
+          try {
+            await fsPromises.access(pagePath);
+            toolUrls.push({
+              loc: `${DOMAIN}/vaerktoejer/${item.name}`,
+              priority: 0.7,
+            });
+          } catch {
+            // Directory doesn't have a page.tsx, skip it
+          }
+        }
+      }
+    } catch (error) {
+      console.error("Error scanning vaerktoejer directory:", error);
+    }
+
+    // Discover standalone tool pages (pages that contain tool-related content)
+    const standaloneToolPages = [
+      "mr-scanning",
+      "dexa-scanning",
+      "start-back-screening-tool",
     ];
+
+    for (const toolPage of standaloneToolPages) {
+      try {
+        const pagePath = pathModule.join(
+          process.cwd(),
+          "src/app",
+          toolPage,
+          "page.tsx"
+        );
+        await fsPromises.access(pagePath);
+        toolUrls.push({
+          loc: `${DOMAIN}/${toolPage}`,
+          priority: 0.7,
+        });
+      } catch {
+        // Page doesn't exist, skip it
+        console.warn(`Standalone tool page ${toolPage} not found, skipping`);
+      }
+    }
+
+    console.log(
+      `Found ${toolUrls.length} tool pages:`,
+      toolUrls.map((url) => url.loc)
+    );
 
     // Generate sitemap files
     await fsPromises.writeFile(
