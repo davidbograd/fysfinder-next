@@ -2,7 +2,7 @@ name: Generate Sitemap
 
 on:
   schedule:
-    - cron: "0 0 * * 0" # Run weekly at midnight on Sunday
+    - cron: "0 2 * * *" # Run daily at 2 AM UTC
   workflow_dispatch: # Allow manual trigger
 
 jobs:
@@ -10,23 +10,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: "18"
+          cache: "npm"
 
       - name: Install dependencies
         run: npm ci
 
       - name: Generate sitemap
-        run: npm run generate-sitemap
+        run: npm run generate:sitemap
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
 
       - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "chore: update sitemap"
+          commit_message: "🤖 Auto-update sitemap - $(date +'%Y-%m-%d %H:%M:%S')"
+          file_pattern: "public/sitemap*.xml"
