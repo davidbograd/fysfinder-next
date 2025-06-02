@@ -54,7 +54,7 @@ Du kan styrke din gangfunktion ved at være fysisk aktiv hver dag og udføre enk
 
 Du bør undgå øvelser, der fremkalder smerter, eller som føles utrygge. Hvis du oplever ubehag, når du træner, er det en god idé at justere øvelsen eller tage en pause. Nogle gange kan en lille ændring i teknik eller intensitet gøre øvelsen mere behagelig og effektiv. Det sikreste er at få en fysioterapeut til at vejlede dig, så du træner på en måde, der er tilpasset netop din krop og dine behov.
 
-### Hvordan kan fysioterapeuter hjælpe med gangfunktio
+### Hvordan kan fysioterapeuter hjælpe med gangfunktion
 
 Fysioterapeuter har specialviden om bevægelse og funktion og kan hjælpe dig med at analysere og forbedre din gang. De ser på hele bevægemønstret og finder de områder, der kan styrkes eller justeres. De lægger derefter en målrettet plan, som typisk kombinerer øvelser med funktionel træning og strategier til at genopbygge selvtillid og tryghed. Målet er altid at støtte dig i at kunne bevæge dig mere frit, sikkert og med færre begrænsninger i hverdagen.
 
