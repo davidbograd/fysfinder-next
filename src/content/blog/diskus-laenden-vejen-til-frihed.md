@@ -54,22 +54,19 @@ Og i sidste ende er det netop det, det handler om: At genvinde tilliden. Ikke ba
 
 
 1. Diskusprolaps i lænderyggen – Patienthåndbogen.  
- www.sundhed.dk/borger/patienthaandbogen/hjerne-og-nerver/sygdomme/ryg-og-nakke-sygdomme/diskusprolaps-i-laenderyggen
+ [www.sundhed.dk](www.sundhed.dk/borger/patienthaandbogen/hjerne-og-nerver/sygdomme/ryg-og-nakke-sygdomme/diskusprolaps-i-laenderyggen)
 
 2. Tegn på diskusprolaps: Sådan undersøger lægen dig.  
- www.gigtforeningen.dk/viden-om-gigt/diagnoser/diskusprolaps/saadan-undersoeger-laegen-for-diskusprolaps
+ [www.gigtforeningen.dk](www.gigtforeningen.dk/viden-om-gigt/diagnoser/diskusprolaps/saadan-undersoeger-laegen-for-diskusprolaps)
 
 3. Diagnostik og behandling af lændesmerter – DSAM.  
- www.dsam.dk/vejledninger/laendesmerter/behandling-af-laenderygproblemer
+ [www.dsam.dk](www.dsam.dk/vejledninger/laendesmerter/behandling-af-laenderygproblemer)
 
 4. Pludselig gav det et smæld i ryggen – Danske Fysioterapeuter.  
- www.fysio.dk/globalassets/epi6/pludselig20gav20det20et20smc3a6ld20i20ryggen.pdf
+ [www.fysio.dk](www.fysio.dk/globalassets/epi6/pludselig20gav20det20et20smc3a6ld20i20ryggen.pdf)
 
-5. Diskusprolaps: En ny forståelse – Smertefri Bevægelse.  
- www.smertefribevaegelse.dk/diskusprolaps
-
-6. Behandling af lumbal diskusprolaps – Ugeskrift for Læger.  
- www.ugeskriftet.dk/debat/behandling-af-lumbal-diskusprolaps-0
+5. Behandling af lumbal diskusprolaps – Ugeskrift for Læger.  
+ [www.ugeskriftet.dk](www.ugeskriftet.dk/debat/behandling-af-lumbal-diskusprolaps-0)
 
 7. Diskusprolaps – Netdoktor.  
- www.netdoktor.dk/muskler-led-og-knogler/sygdomme/diskusprolaps
+ [www.netdoktor.dk](www.netdoktor.dk/muskler-led-og-knogler/sygdomme/diskusprolaps)
