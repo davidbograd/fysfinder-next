@@ -37,7 +37,7 @@ export function BMICalculator() {
       return {
         category: "Overvægtig",
         description:
-          "Dit BMI er over normalområdet. Overværr en sundere kost og mere motion.",
+          "Dit BMI er over normalområdet. Overvej en sundere kost og mere motion.",
         color: "orange",
       };
     } else {
