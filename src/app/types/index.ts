@@ -15,6 +15,8 @@ export interface Clinic {
   email: string;
   førsteKons: number;
   opfølgning: number;
+  første_kons_minutter: number;
+  opfølgning_minutter: number;
   mandag: string;
   tirsdag: string;
   onsdag: string;
@@ -129,6 +131,8 @@ export interface DBClinicResponse {
   email: string;
   førsteKons: number;
   opfølgning: number;
+  første_kons_minutter: number;
+  opfølgning_minutter: number;
   mandag: string;
   tirsdag: string;
   onsdag: string;

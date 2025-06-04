@@ -50,11 +50,15 @@ export function ClinicPricing({ clinic }: ClinicPricingProps) {
       ) : clinic.førsteKons && clinic.opfølgning ? (
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <span>Første konsult (60 min)</span>
+            <span>
+              Første konsult ({clinic.første_kons_minutter || 60} min)
+            </span>
             <span className="font-semibold">{clinic.førsteKons} kr</span>
           </div>
           <div className="flex items-center justify-between">
-            <span>Standard konsult (30 min)</span>
+            <span>
+              Standard konsult ({clinic.opfølgning_minutter || 30} min)
+            </span>
             <span className="font-semibold">{clinic.opfølgning} kr</span>
           </div>
         </div>
