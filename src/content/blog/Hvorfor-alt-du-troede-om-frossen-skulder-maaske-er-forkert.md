@@ -7,21 +7,17 @@ previewImage: /images/blog/frossen_skulder_am_intro.png
 previewImageAlt: Illustration af frossen skulder
 ---
 
-
 ![Illustration af frossen skulder](/images/blog/frossen_skulder_am_intro.png)
-
 
 Frossen skulder. Bare navnet alene kan skabe bekymring hos dem, der har oplevet den intense smerte og voldsomme stivhed, der ofte følger med. Men hvad nu hvis mange af de ting, du tror, du ved om frossen skulder, faktisk ikke passer? Hvad nu hvis det hverken er så simpelt – eller så håbløst – som mange gør det til?
 
 Frossen skulder, også kendt som "adhesiv kapsulitis", er en af de mest misforståede tilstande inden for skulderproblematikker. Ikke fordi det er en sjælden tilstand, men fordi navnet, historikken og behandlingskulturen omkring den er præget af gamle antagelser og upræcis terminologi.
-
 
 ## Hvad er en frossen skulder egentlig?
 
 I dagligt sprog bruges begrebet "frossen skulder" som en paraplybetegnelse for en skulder, der både er smertefuld og markant nedsat i bevægelighed – både aktivt og passivt. Men det er netop her, misforståelsen starter. For selvom mange bliver stemplet med denne diagnose, er det langt fra alle, der faktisk har det, vi kalder en kapsulitis – altså en inflammatorisk proces i selve ledkapslen.
 
 Reelt findes der mange årsager til en stiv og smertefuld skulder. Nogle skyldes inflammation og strukturelle forandringer i kapslen, mens andre er resultatet af overbeskyttelse, frygt og psykosociale faktorer. Det kan være svært – nogle gange næsten umuligt – at skelne de to i de tidlige stadier.
-
 
 ## Kapsulitis: Den klassiske synder
 
@@ -31,55 +27,43 @@ Nogle har såkaldt primær kapsulitis – uden kendt årsag – mens andre har e
 
 Men her stopper det ikke.
 
-
 ## Frossen hjerne – en overset årsag til stivhed
 
 Ikke alle med frossen skulder har kapsulitis. Faktisk viser studier, at en del patienter, der er diagnosticeret med kapsulitis, har fuld bevægelighed, når de bedøves – altså når hjernen ikke længere styrer bevægelsen. Det tyder på, at årsagen i disse tilfælde ikke er en strukturel forandring, men snarere en neurologisk og psykologisk beskyttelsesmekanisme.
 
 Disse patienter har, hvad man med rette kan kalde en "frossen hjerne". Her er det frygt, katastrofetanker og lav tillid til egen krop, der holder skulderen stiv – ikke kapslen. Og hvis vi behandler dem, som om de har kapsulitis, risikerer vi at gøre mere skade end gavn.
 
-
 ![Illustration af oversigt over ny behandlingstilgang af frossen skulder](/images/blog/frossen_skulder_AM_oversigt.png)
-
-
 
 ## Myter om frossen skulder, der ikke holder vand
 
-
-
 1. "Det går over af sig selv."
- Mange har hørt, at en frossen skulder spontant forsvinder efter 12-18 måneder. Men nyere studier viser, at det gennemsnitlige forløb ofte varer op mod 30 måneder – og i enkelte tilfælde op til syv år. For nogle sker der aldrig fuld restitution uden behandling.
+   Mange har hørt, at en frossen skulder spontant forsvinder efter 12-18 måneder. Men nyere studier viser, at det gennemsnitlige forløb ofte varer op mod 30 måneder – og i enkelte tilfælde op til syv år. For nogle sker der aldrig fuld restitution uden behandling.
 
 2. "Det kræver passiv udspænding og manuel terapi."
- Der er stadig behandlere, der forsøger at "strække kapslen op" eller manipulere skulderen fri. Men forskningen viser, at de kræfter, der kræves for at ændre strukturen i kapslen, langt overstiger det, man opnår med manuel behandling. Bevægelsesforbedring efter udspænding skyldes ofte neurologisk tilvænning – ikke strukturel ændring.
+   Der er stadig behandlere, der forsøger at "strække kapslen op" eller manipulere skulderen fri. Men forskningen viser, at de kræfter, der kræves for at ændre strukturen i kapslen, langt overstiger det, man opnår med manuel behandling. Bevægelsesforbedring efter udspænding skyldes ofte neurologisk tilvænning – ikke strukturel ændring.
 
 3. "Adhesionerne skal løsnes."
- Selvom begrebet “adhesiv kapsulitis” antyder, at der er sammenvoksninger i skulderen, viser moderne billeddiagnostik og kirurgiske observationer, at der sjældent er egentlige adhesioner. Begrebet er et levn fra 1940'erne og skaber ofte unødvendig frygt.
-
-
+   Selvom begrebet “adhesiv kapsulitis” antyder, at der er sammenvoksninger i skulderen, viser moderne billeddiagnostik og kirurgiske observationer, at der sjældent er egentlige adhesioner. Begrebet er et levn fra 1940'erne og skaber ofte unødvendig frygt.
 
 ## Moderne tilgang: Aktiv behandling med realistisk optimisme
 
 Når vi møder patienter med frossen skulder, er det vigtigt at balancere ærlighed med håb. Forløbet kan være langt og hårdt, men det kan forbedres betydeligt med den rette tilgang. Behandling bør tilpasses den enkelte og inkludere:
 
+- Grundig information og forventningsafstemning
+  Viden er første skridt til at mindske frygt og fremme selvforståelse.
 
+- Gradueret eksponering for bevægelse
+  Ved at udsætte skulderen gradvist og kontrolleret for bevægelse, kan frygt reduceres og funktion genopbygges.
 
-* Grundig information og forventningsafstemning
-Viden er første skridt til at mindske frygt og fremme selvforståelse.
+- "Strength stretching"
+  Tung, langsom excentrisk træning har vist sig effektiv til at øge bevægelighed og styrke uden at overbelaste vævet.
 
-* Gradueret eksponering for bevægelse
-Ved at udsætte skulderen gradvist og kontrolleret for bevægelse, kan frygt reduceres og funktion genopbygges.
+- Støtte til livsstilsændringer
+  Ved sekundær kapsulitis kan faktorer som fysisk inaktivitet, stress, dårlig søvn og kost spille en rolle. Det er vigtigt at adressere disse i behandlingsplanen.
 
-* "Strength stretching"
-Tung, langsom excentrisk træning har vist sig effektiv til at øge bevægelighed og styrke uden at overbelaste vævet.
-
-* Støtte til livsstilsændringer
-Ved sekundær kapsulitis kan faktorer som fysisk inaktivitet, stress, dårlig søvn og kost spille en rolle. Det er vigtigt at adressere disse i behandlingsplanen.
-
-* Steroidinjektioner
-Kan give midlertidig smertelindring i de mest irritable faser, men bør ikke stå alene som behandling.
-
-
+- Steroidinjektioner
+  Kan give midlertidig smertelindring i de mest irritable faser, men bør ikke stå alene som behandling.
 
 ## Hvorfor vi skal være skarpere i vores diagnostik
 
