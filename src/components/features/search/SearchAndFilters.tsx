@@ -123,7 +123,9 @@ export function SearchAndFilters({
             <>
               {searchResult.exact_match && (
                 <Link
-                  href={`/find/fysioterapeut/${searchResult.exact_match.bynavn_slug}`}
+                  href={`/find/fysioterapeut/${
+                    searchResult.exact_match.bynavn_slug
+                  }${currentSpecialty ? `/${currentSpecialty}` : ""}`}
                   className="block p-4 hover:bg-gray-50 border-b"
                 >
                   <div className="font-medium flex items-center gap-2">
@@ -137,7 +139,9 @@ export function SearchAndFilters({
               {searchResult.nearby_cities.slice(0, 4).map((city) => (
                 <Link
                   key={city.id}
-                  href={`/find/fysioterapeut/${city.bynavn_slug}`}
+                  href={`/find/fysioterapeut/${city.bynavn_slug}${
+                    currentSpecialty ? `/${currentSpecialty}` : ""
+                  }`}
                   className="block p-4 hover:bg-gray-50 border-b last:border-b-0"
                 >
                   <div className="font-medium flex items-center gap-2">
