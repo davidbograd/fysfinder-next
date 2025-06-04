@@ -20,7 +20,7 @@ const tools: Tool[] = [
     href: "/mr-scanning",
     imageUrl: "/images/mr-scanning/mr-scanning.png",
     imageAlt: "MR-scanning maskine i et hospital miljø",
-    type: "Forstå din scanning",
+    type: "Forstå din MR og DEXA scanning",
   },
   {
     title: "DEXA-scan oversætter",
@@ -29,7 +29,7 @@ const tools: Tool[] = [
     href: "/dexa-scanning",
     imageUrl: "/images/dexa-scanning/dexa-scanning.jpeg",
     imageAlt: "DEXA-scanning illustration",
-    type: "Forstå din scanning",
+    type: "Forstå din MR og DEXA scanning",
   },
   {
     title: "Test dine rygsmerter",
@@ -121,6 +121,30 @@ export default function ToolsPage() {
           {Object.entries(groupedTools).map(([type, tools]) => (
             <div key={type}>
               <h2 className="text-2xl font-semibold mb-4">{type}</h2>
+              {type === "Kost & ernæring værktøjer" && (
+                <p className="text-gray-600 mb-6">
+                  Få kontrol over din kost og ernæring med vores brugervenlige
+                  værktøjer og beregnere. Beregn dine kalorier, lav kostplaner,
+                  planlæg dine sunde måltider og find den rette balance til at
+                  opnå dine mål.
+                </p>
+              )}
+              {type === "Kropdele og smerter" && (
+                <p className="text-gray-600 mb-6">
+                  Få hjælp til din genoptræning med vores fysioterapi-værktøjer.
+                  Fra skadesvurdering til genoptræningsplaner – udnyt vores
+                  værktøjer, der støtter dig mod bedring og styrkelse.
+                </p>
+              )}
+              {type === "Forstå din MR og DEXA scanning" && (
+                <div className="mb-6">
+                  <p className="text-gray-600">
+                    Medicinske scanningsresultater kan være svære at forstå. Få
+                    dine MR- og DEXA-scanninger forklaret i letforståeligt
+                    dansk, og forstå din sundhedstilstand bedre.
+                  </p>
+                </div>
+              )}
               <div className="grid md:grid-cols-2 gap-8">
                 {tools.map((tool) => (
                   <ToolCard key={tool.href + tool.title} tool={tool} />
@@ -130,16 +154,6 @@ export default function ToolsPage() {
           ))}
         </div>
         <div className="space-y-8 mt-16 max-w-prose mx-auto">
-          <div>
-            <h2 className="text-xl sm:text-2xl font-semibold mb-2">
-              Fysioterapi & genoptræning værktøjer
-            </h2>
-            <p className="text-gray-600">
-              Få hjælp til din genoptræning med vores fysioterapi-værktøjer. Fra
-              skadesvurdering til genoptræningsplaner – udnyt vores værktøjer,
-              der støtter dig mod bedring og styrkelse.
-            </p>
-          </div>
           <div>
             <h2 className="text-xl sm:text-2xl font-semibold mb-2">
               Træning & bevægelse værktøjer
@@ -152,33 +166,12 @@ export default function ToolsPage() {
           </div>
           <div>
             <h2 className="text-xl sm:text-2xl font-semibold mb-2">
-              Kost & ernæring værktøjer
-            </h2>
-            <p className="text-gray-600">
-              Få kontrol over din kost og ernæring med vores brugervenlige
-              værktøjer og beregnere. Beregn dine kalorier, lav kostplaner,
-              planlæg dine sunde måltider og find den rette balance til at opnå
-              dine mål.
-            </p>
-          </div>
-          <div>
-            <h2 className="text-xl sm:text-2xl font-semibold mb-2">
               Sundhed & velvære værktøjer
             </h2>
             <p className="text-gray-600">
               Opnå et sundere liv med vores værktøjer, der støtter dig med dit
               generelle velvære. Fra holdningsanalyse til livsstilsændringer,
               guider værktøjerne dig med at nå dit sundhedspotentiale.
-            </p>
-          </div>
-          <div>
-            <h2 className="text-xl sm:text-2xl font-semibold mb-2">
-              Øvrige værktøjer og beregnere
-            </h2>
-            <p className="text-gray-600">
-              Udforsk vores øvrige værktøjer og beregnere, der guider og hjælper
-              dig med træning, sundhed og dit velvære. Prøv vores gratis
-              værktøjer og beregnere til at optimere din livsstil.
             </p>
           </div>
         </div>
