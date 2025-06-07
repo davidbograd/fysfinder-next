@@ -13,6 +13,7 @@ export interface BlogPost {
   content: string;
   previewImage: string;
   previewImageAlt: string;
+  author?: string; // Author slug, defaults to joachim-bograd
 }
 
 function parseDanishDate(dateStr: string): Date {
@@ -43,6 +44,7 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
         previewImage:
           data.previewImage || "/images/articles/default-preview.webp",
         previewImageAlt: data.previewImageAlt || data.title,
+        author: data.author || "joachim-bograd", // Default to joachim-bograd
       } as BlogPost;
     })
     // Sort by date, newest first
@@ -76,5 +78,6 @@ export async function getBlogPost(slug: string): Promise<BlogPost> {
     content: processedContent,
     previewImage: data.previewImage || "/images/articles/default-preview.webp",
     previewImageAlt: data.previewImageAlt || data.title,
+    author: data.author || "joachim-bograd", // Default to joachim-bograd
   };
 }

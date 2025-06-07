@@ -1,5 +1,6 @@
 import { BlogList } from "@/components/features/blog-og-ordbog/BlogList";
 import { getBlogPosts } from "@/lib/blog";
+import { getAuthorForStructuredData } from "@/lib/authors";
 import type { BlogPost } from "@/lib/blog";
 
 interface BlogStructuredDataProps {
@@ -35,18 +36,21 @@ function BlogStructuredData({ posts }: BlogStructuredDataProps) {
     },
     specialty: "Fysioterapi",
     medicalAudience: "Patienter og sundhedsprofessionelle",
-    blogPosts: posts.map((post) => ({
-      "@type": "BlogPosting",
-      name: post.title,
-      description: post.description,
-      datePublished: post.datePublished,
-      url: `https://fysfinder.dk/blog/${post.slug}`,
-      author: {
-        "@type": "Person",
-        name: "Joachim Bograd",
-        jobTitle: "Fysioterapeut",
-      },
-    })),
+    blogPosts: posts.map((post) => {
+      const authorData = getAuthorForStructuredData(post.author);
+      return {
+        "@type": "BlogPosting",
+        name: post.title,
+        description: post.description,
+        datePublished: post.datePublished,
+        url: `https://fysfinder.dk/blog/${post.slug}`,
+        author: authorData || {
+          "@type": "Person",
+          name: "Joachim Bograd",
+          jobTitle: "Fysioterapeut",
+        },
+      };
+    }),
   };
 
   return (

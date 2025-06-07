@@ -2,6 +2,7 @@ import { ContentEntry } from "@/components/features/blog-og-ordbog/ContentEntry"
 import { getBlogPost, getBlogPosts } from "@/lib/blog";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { AuthorCard } from "@/components/features/blog-og-ordbog/AuthorCard";
+import { getAuthorForStructuredData } from "@/lib/authors";
 import { Metadata } from "next";
 
 interface BlogPostStructuredDataProps {
@@ -12,10 +13,13 @@ interface BlogPostStructuredDataProps {
     slug: string;
     datePublished: string;
     lastUpdated: string;
+    author?: string;
   };
 }
 
 function BlogPostStructuredData({ term }: BlogPostStructuredDataProps) {
+  const authorData = getAuthorForStructuredData(term.author);
+
   const structuredData = {
     "@context": "https://schema.org",
     "@type": ["WebPage", "BlogPosting"],
@@ -24,7 +28,7 @@ function BlogPostStructuredData({ term }: BlogPostStructuredDataProps) {
     description: term.description || term.title,
     datePublished: term.datePublished,
     dateModified: term.lastUpdated,
-    author: {
+    author: authorData || {
       "@type": "Person",
       name: "Joachim Bograd",
       jobTitle: "Fysioterapeut",
@@ -103,7 +107,7 @@ export default async function BlogPostPage({
       <BlogPostStructuredData term={post} />
       <div className="max-w-2xl mx-auto">
         <Breadcrumbs items={breadcrumbItems} />
-        <AuthorCard />
+        <AuthorCard authorSlug={post.author} />
         <ContentEntry
           term={post}
           backLink={{

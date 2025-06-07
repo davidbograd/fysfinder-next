@@ -5,6 +5,7 @@ datePublished: 01-05-2025
 lastUpdated: 02-05-2025
 previewImage: /images/blog/protein_traening_intro.png
 previewImageAlt: Illustration af hvor meget protein man skal have for at bygge muskler
+author: anders-hammer
 ---
 
 ![Illustration af hvor meget protein man skal have for at bygge muskler](/images/blog/protein_traening_intro.png)
