@@ -4,6 +4,7 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { AuthorCard } from "@/components/features/blog-og-ordbog/AuthorCard";
 import { getAuthorForStructuredData } from "@/lib/authors";
 import { Metadata } from "next";
+import { Calendar, Clock } from "lucide-react";
 
 interface BlogPostStructuredDataProps {
   term: {
@@ -71,6 +72,25 @@ function BlogPostStructuredData({ term }: BlogPostStructuredDataProps) {
   );
 }
 
+function formatDanishDate(dateStr: string): string {
+  const [day, month, year] = dateStr.split("-");
+  const months = [
+    "januar",
+    "februar",
+    "marts",
+    "april",
+    "maj",
+    "juni",
+    "juli",
+    "august",
+    "september",
+    "oktober",
+    "november",
+    "december",
+  ];
+  return `${day}. ${months[parseInt(month) - 1]} ${year}`;
+}
+
 export async function generateStaticParams() {
   const posts = await getBlogPosts();
   return posts.map((post) => ({
@@ -102,11 +122,22 @@ export default async function BlogPostPage({
     { text: post.title },
   ];
 
+  // Determine which date to show and the appropriate label
+  const isUpdated = post.datePublished !== post.lastUpdated;
+  const dateToShow = isUpdated ? post.lastUpdated : post.datePublished;
+  const dateLabel = isUpdated ? "Sidst opdateret" : "Udgivet";
+
   return (
     <div className="container mx-auto px-4 py-8">
       <BlogPostStructuredData term={post} />
       <div className="max-w-2xl mx-auto">
         <Breadcrumbs items={breadcrumbItems} />
+        <div className="flex items-center gap-2 text-sm text-gray-500 mb-6">
+          <Calendar className="h-4 w-4" />
+          <span>
+            {dateLabel} {formatDanishDate(dateToShow)}
+          </span>
+        </div>
         <AuthorCard authorSlug={post.author} />
         <ContentEntry
           term={post}
