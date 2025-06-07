@@ -31,7 +31,7 @@ export async function generateMetadata({
     : author.jobTitle[0].toLowerCase();
 
   return {
-    title: `${author.name} | Forfatter og ${primaryTitle} hos FysFinder`,
+    title: `${author.name} | ${primaryTitle}`,
     description: `Lær mere om ${author.name}, ${author.jobTitle
       .join(", ")
       .toLowerCase()} hos FysFinder. ${author.education.degree} fra ${
