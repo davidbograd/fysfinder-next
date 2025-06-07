@@ -8,6 +8,7 @@ import { promises as fsPromises } from "fs";
 import * as pathModule from "path";
 import glob from "glob-promise";
 import { getBlogPosts } from "../src/lib/blog"; // Import getBlogPosts
+import { getAllAuthors } from "../src/lib/authors"; // Import getAllAuthors
 
 config({ path: ".env.local" });
 
@@ -217,6 +218,11 @@ async function generateSitemaps() {
         loc: `${DOMAIN}/blog`,
         priority: 0.8,
       },
+      // Add author pages
+      ...getAllAuthors().map((author) => ({
+        loc: `${DOMAIN}/forfatter/${author.slug}`,
+        priority: 0.7,
+      })),
     ];
 
     const cityUrls =
