@@ -188,15 +188,17 @@ export default function OmOsPage() {
                   samarbejde?
                 </p>
 
-                <p className="text-lg">
-                  Har du en klinik, der endnu ikke er på Fysfinder, eller ønsker
-                  du at få opdateret dine oplysninger?
-                </p>
-
                 <p className="text-lg">Kontakt os, så tager vi en snak på:</p>
+                <p className="text-lg font-medium">kontakt@fysfinder.dk</p>
               </div>
 
-              <div className="text-lg font-medium">kontakt@fysfinder.dk</div>
+              <p className="text-lg">
+                Har du en klinik, der endnu ikke er på Fysfinder, eller ønsker
+                du at få opdateret dine oplysninger?{" "}
+                <a href="/tilmeld" className="text-logo-blue hover:underline">
+                  Verificer eller tilmeld din klinik
+                </a>
+              </p>
             </div>
           </section>
         </div>
