@@ -15,7 +15,7 @@ export function NoResultsFound({
     <div className="text-center py-16">
       <h2 className="text-xl font-semibold mb-4">
         {specialtyName
-          ? `Ingen fysioterapeuter med speciale i ${specialtyName} i ${cityName}`
+          ? `Ingen fysioterapeuter med speciale i ${specialtyName.toLowerCase()} i ${cityName}`
           : `Ingen klinikker fundet i ${cityName}`}
       </h2>
       <p className="text-gray-600 mb-8">
