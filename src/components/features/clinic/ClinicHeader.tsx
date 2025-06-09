@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Clinic } from "@/app/types";
 import VerifiedCheck from "@/assets/icons/verified-check.svg";
 import Image from "next/image";
+import { FaWheelchair } from "react-icons/fa";
 import {
   Tooltip,
   TooltipContent,
@@ -40,6 +41,7 @@ export function ClinicHeader({ clinic }: ClinicHeaderProps) {
       </h1>
 
       <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
+        {/* Review Section */}
         <div className="flex items-center">
           <StarIcon className="h-6 w-6 text-amber-500 mr-2" />
           <span className="font-semibold mr-2">
@@ -50,9 +52,45 @@ export function ClinicHeader({ clinic }: ClinicHeaderProps) {
           </span>
         </div>
 
+        {/* Address Section */}
         <p className="text-gray-500">
           {clinic.adresse}, {clinic.postnummer} {clinic.lokation}
         </p>
+
+        {/* Icons Section */}
+        {(clinic.handicapadgang || clinic.god_adgang_verificeret) && (
+          <div className="flex items-center gap-2">
+            {clinic.handicapadgang && (
+              <TooltipProvider delayDuration={50}>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <FaWheelchair className="w-4 h-4 text-logo-blue" />
+                  </TooltipTrigger>
+                  <TooltipContent side="bottom" className="font-normal">
+                    <p>Kørestolsvenlig indgang</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            )}
+
+            {clinic.god_adgang_verificeret && (
+              <TooltipProvider delayDuration={50}>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <img
+                      src="/images/klinik/god-adgang-badge.png"
+                      alt="God Adgang badge"
+                      className="w-4 h-4 cursor-pointer"
+                    />
+                  </TooltipTrigger>
+                  <TooltipContent side="bottom" className="font-normal">
+                    <p>God Adgang medlem</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

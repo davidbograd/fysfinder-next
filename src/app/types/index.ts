@@ -25,7 +25,8 @@ export interface Clinic {
   lørdag: string;
   søndag: string;
   parkering: string;
-  handicapadgang: string;
+  handicapadgang: boolean | null;
+  god_adgang_verificeret: boolean;
   holdtræning: string;
   hjemmetræning: string;
   northstar: boolean;
@@ -141,7 +142,8 @@ export interface DBClinicResponse {
   lørdag: string;
   søndag: string;
   parkering: string;
-  handicapadgang: string;
+  handicapadgang: boolean | null;
+  god_adgang_verificeret: boolean;
   holdtræning: string;
   hjemmetræning: string;
   northstar: boolean;
