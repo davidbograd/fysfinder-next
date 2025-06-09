@@ -185,11 +185,9 @@ export default function OmOsPage() {
               <div className="space-y-4 mb-6">
                 <p className="text-lg">
                   Er du interesseret i at høre mere om mulighederne for
-                  samarbejde?
+                  samarbejde? Kontakt os, så tager vi en snak på{" "}
+                  <span className="font-medium">kontakt@fysfinder.dk</span>.
                 </p>
-
-                <p className="text-lg">Kontakt os, så tager vi en snak på:</p>
-                <p className="text-lg font-medium">kontakt@fysfinder.dk</p>
               </div>
 
               <p className="text-lg">
