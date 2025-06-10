@@ -84,7 +84,7 @@ export function ClinicHeader({ clinic }: ClinicHeaderProps) {
                     />
                   </TooltipTrigger>
                   <TooltipContent side="bottom" className="font-normal">
-                    <p>God Adgang medlem</p>
+                    <p>Klinik er registret hos God Adgang</p>
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>

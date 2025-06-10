@@ -108,12 +108,12 @@ export function ClinicHours({ clinic }: ClinicHoursProps) {
                             className="w-4 h-4"
                           />
                         </span>
-                        <span className="font-semibold">Ja, medlem</span>
+                        <span className="font-semibold">Ja, registeret</span>
                       </div>
                     </TooltipTrigger>
                     <TooltipContent side="bottom" className="font-normal">
                       <p>
-                        Adgangsforholdene er verificeret af organisation God
+                        Klinikens forhold er registret af organisation God
                         Adgang
                       </p>
                     </TooltipContent>
