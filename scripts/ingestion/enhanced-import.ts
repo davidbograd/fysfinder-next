@@ -851,17 +851,9 @@ async function processApprovedRecordInline(
     );
   }
 
-  // Set configured fields (only if they don't overwrite existing data)
+  // Set configured fields (always overwrite existing values)
   if (config.actions?.set_fields) {
-    for (const [field, value] of Object.entries(config.actions.set_fields)) {
-      const currentValue = currentClinic[field];
-      if (
-        !currentValue ||
-        (typeof currentValue === "string" && currentValue.trim() === "")
-      ) {
-        updateData[field] = value;
-      }
-    }
+    Object.assign(updateData, config.actions.set_fields);
   }
 
   // Only update if we have fields to update

@@ -140,7 +140,7 @@ async function processApprovedRecord(record: any, config: any): Promise<void> {
     updateData.specialer = newSpecialties;
   }
 
-  // Set configured fields
+  // Set configured fields (always overwrite existing values)
   if (config.actions?.set_fields) {
     Object.assign(updateData, config.actions.set_fields);
   }
