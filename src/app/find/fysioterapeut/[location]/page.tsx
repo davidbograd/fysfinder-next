@@ -658,6 +658,7 @@ export default async function LocationPage({ params }: LocationPageProps) {
                       specialties={orderedSpecialties}
                       team_members={clinic.team_members}
                       premium_listing={clinic.premium_listing}
+                      handicapadgang={clinic.handicapadgang}
                     />
                   </Link>
                 );

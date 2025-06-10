@@ -7,6 +7,13 @@ import Image from "next/image";
 import { TeamMember, PremiumListing } from "@/app/types";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { FaWheelchair } from "react-icons/fa";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface Props {
   klinikNavn: string;
@@ -23,6 +30,7 @@ interface Props {
   }[];
   team_members?: TeamMember[];
   premium_listing?: PremiumListing | null;
+  handicapadgang?: boolean | null;
 }
 
 function isPremiumActive(
@@ -48,6 +56,7 @@ const ClinicCard: React.FC<Props> = ({
   specialties = [],
   team_members = [],
   premium_listing,
+  handicapadgang,
 }) => {
   const MAX_VISIBLE_MEMBERS = 5;
   const hasMoreMembers = team_members.length > MAX_VISIBLE_MEMBERS;
@@ -98,6 +107,13 @@ const ClinicCard: React.FC<Props> = ({
                 </>
               )}
             </div>
+
+            {/* Accessibility Icons */}
+            {handicapadgang && (
+              <div className="flex items-center gap-2 ml-2">
+                <FaWheelchair className="w-4 h-4 text-logo-blue" />
+              </div>
+            )}
           </div>
 
           {specialties.length > 0 && (
