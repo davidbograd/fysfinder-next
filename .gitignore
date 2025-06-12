@@ -35,6 +35,14 @@ next-env.d.ts
 # data
 data/*.csv
 
+# ingestion data and reports (potentially sensitive)
+scripts/ingestion/csv-ingestion-data/
+scripts/ingestion/reports/
+
+# source configurations (business logic)
+scripts/config/sources/*.json
+!scripts/config/sources/template.json
+
 # Environment files
 .env
 .env.local

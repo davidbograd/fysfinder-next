@@ -329,7 +329,32 @@ export async function fetchLocationData(
       ),
     ];
 
-    const nearbyClinicsList = Array.isArray(nearbyData) ? nearbyData : [];
+    let nearbyClinicsList = Array.isArray(nearbyData) ? nearbyData : [];
+
+    // Filter nearby clinics by specialty if a specialty is specified
+    if (specialtySlug && nearbyClinicsList.length > 0) {
+      // Create a mapping of specialty names to slugs for quick lookup
+      const specialtyNameToSlug = new Map(
+        specialties.map((s) => [s.specialty_name, s.specialty_name_slug])
+      );
+
+      nearbyClinicsList = nearbyClinicsList.filter((clinic: any) => {
+        // Check if clinic has the required specialty
+        if (
+          !clinic.clinic_specialties ||
+          !Array.isArray(clinic.clinic_specialties)
+        ) {
+          return false;
+        }
+
+        return clinic.clinic_specialties.some((cs: any) => {
+          const specialtySlugFromName = specialtyNameToSlug.get(
+            cs.specialty_name
+          );
+          return specialtySlugFromName === specialtySlug;
+        });
+      });
+    }
 
     return {
       city,
@@ -433,7 +458,7 @@ export default async function LocationPage({ params }: LocationPageProps) {
 
           <h1 className="text-3xl font-bold mb-2">
             {specialtyName
-              ? `Find fysioterapeuter specialiseret i ${specialtyName}`
+              ? `Find fysioterapeuter specialiseret i ${specialtyName.toLowerCase()}`
               : "Find og sammenlign fysioterapeuter i Danmark"}
           </h1>
 
@@ -537,10 +562,12 @@ export default async function LocationPage({ params }: LocationPageProps) {
         <h1 className="text-3xl font-bold mb-2">
           {isOnline
             ? specialtyName
-              ? `Find online fysioterapeuter specialiseret i ${specialtyName}`
+              ? `Find online fysioterapeuter specialiseret i ${specialtyName.toLowerCase()}`
               : "Find og sammenlign online fysioterapeuter"
             : specialtyName
-            ? `Find fysioterapeuter ${data.city.bynavn} specialiseret i ${specialtyName}`
+            ? `Find fysioterapeuter ${
+                data.city.bynavn
+              } specialiseret i ${specialtyName.toLowerCase()}`
             : `Find og sammenlign fysioterapeuter ${data.city.bynavn}`}
         </h1>
 
@@ -631,6 +658,7 @@ export default async function LocationPage({ params }: LocationPageProps) {
                       specialties={orderedSpecialties}
                       team_members={clinic.team_members}
                       premium_listing={clinic.premium_listing}
+                      handicapadgang={clinic.handicapadgang}
                     />
                   </Link>
                 );
@@ -645,6 +673,7 @@ export default async function LocationPage({ params }: LocationPageProps) {
             clinics={data.nearbyClinicsList}
             cityName={data.city.bynavn}
             specialtySlug={params.specialty}
+            specialtyName={specialtyName}
           />
         )}
       </div>

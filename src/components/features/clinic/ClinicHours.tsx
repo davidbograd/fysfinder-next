@@ -1,4 +1,11 @@
 import { Clinic } from "@/app/types";
+import { FaWheelchair } from "react-icons/fa";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface ClinicHoursProps {
   clinic: Clinic;
@@ -17,7 +24,29 @@ function hasAnyOpeningHours(clinic: Clinic): boolean {
 }
 
 function hasAccessInfo(clinic: Clinic): boolean {
-  return clinic.parkering !== null || clinic.handicapadgang !== null;
+  return clinic.parkering !== null || clinic.handicapadgang !== undefined;
+}
+
+function renderHandicapAccess(handicapadgang: boolean | null | undefined) {
+  if (handicapadgang === null || handicapadgang === undefined) {
+    return "?";
+  }
+
+  if (handicapadgang === false) {
+    return "Nej";
+  }
+
+  if (handicapadgang === true) {
+    return (
+      <span className="flex items-center gap-1">
+        Ja
+        <FaWheelchair
+          className="w-4 h-4 text-logo-blue"
+          aria-label="Wheelchair accessible"
+        />
+      </span>
+    );
+  }
 }
 
 export function ClinicHours({ clinic }: ClinicHoursProps) {
@@ -58,11 +87,38 @@ export function ClinicHours({ clinic }: ClinicHoursProps) {
                   <span className="font-semibold">{clinic.parkering}</span>
                 </div>
               )}
-              {clinic.handicapadgang !== null && (
+              {clinic.handicapadgang !== undefined && (
                 <div className="flex justify-between">
                   <span>Handicap adgang</span>
-                  <span className="font-semibold">{clinic.handicapadgang}</span>
+                  <span className="font-semibold">
+                    {renderHandicapAccess(clinic.handicapadgang)}
+                  </span>
                 </div>
+              )}
+              {clinic.god_adgang_verificeret && (
+                <TooltipProvider delayDuration={50}>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <div className="flex justify-between cursor-help">
+                        <span className="inline-flex items-center gap-1">
+                          God Adgang
+                          <img
+                            src="/images/klinik/god-adgang-badge.png"
+                            alt="God Adgang badge"
+                            className="w-4 h-4"
+                          />
+                        </span>
+                        <span className="font-semibold">Ja, registeret</span>
+                      </div>
+                    </TooltipTrigger>
+                    <TooltipContent side="bottom" className="font-normal">
+                      <p>
+                        Klinikens forhold er registret af organisation God
+                        Adgang
+                      </p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
               )}
             </div>
           </div>

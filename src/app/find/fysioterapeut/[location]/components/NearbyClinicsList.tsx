@@ -6,19 +6,23 @@ interface NearbysClinicsListProps {
   clinics: ClinicWithDistance[];
   cityName: string;
   specialtySlug?: string;
+  specialtyName?: string;
 }
 
 export function NearbyClinicsList({
   clinics,
   cityName,
   specialtySlug,
+  specialtyName,
 }: NearbysClinicsListProps) {
   if (clinics.length === 0) return null;
 
   return (
     <div className="mt-12">
       <h2 className="text-xl font-semibold mb-6">
-        Andre klinikker i nærheden af {cityName}
+        {specialtyName
+          ? `Andre ${specialtyName.toLowerCase()} klinikker i nærheden af ${cityName}`
+          : `Andre klinikker i nærheden af ${cityName}`}
       </h2>
       <div className="space-y-4">
         {clinics.map((clinic) => {

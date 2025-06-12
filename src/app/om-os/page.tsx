@@ -182,21 +182,25 @@ export default function OmOsPage() {
             <h2 className="text-3xl font-semibold mb-6">Kontakt os</h2>
 
             <div>
-              <div className="space-y-4 mb-6">
-                <p className="text-lg">
+              <div className="space-y-4 mb-6 text-lg">
+                <p>
                   Er du interesseret i at høre mere om mulighederne for
                   samarbejde?
                 </p>
 
-                <p className="text-lg">
-                  Har du en klinik, der endnu ikke er på Fysfinder, eller ønsker
-                  du at få opdateret dine oplysninger?
+                <p>
+                  Kontakt os, så tager vi en snak på{" "}
+                  <span className="font-medium">kontakt@fysfinder.dk</span>.
                 </p>
 
-                <p className="text-lg">Kontakt os, så tager vi en snak på:</p>
+                <p className="pt-4">
+                  Har du en klinik, der endnu ikke er på Fysfinder, eller ønsker
+                  du at få opdateret dine oplysninger?{" "}
+                  <a href="/tilmeld" className="text-logo-blue hover:underline">
+                    Verificer eller tilmeld din klinik
+                  </a>
+                </p>
               </div>
-
-              <div className="text-lg font-medium">kontakt@fysfinder.dk</div>
             </div>
           </section>
         </div>

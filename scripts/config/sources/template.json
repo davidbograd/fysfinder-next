@@ -1,0 +1,41 @@
+{
+  "source_name": "example_organization",
+  "source_type": "specialty_list",
+  "description": "Template configuration for new data sources",
+  
+  "expected_columns": [
+    "klinikNavn",
+    "adresse", 
+    "postnummer",
+    "tlf"
+  ],
+  
+  "required_columns": [
+    "klinikNavn"
+  ],
+  
+  "matching_strategy": {
+    "primary": "exact_name_postal",
+    "confidence_threshold": 0.8,
+    "review_threshold": 0.4
+  },
+  
+  "actions": {
+    "add_specialties": [
+      "Example Specialty"
+    ],
+    "set_fields": {
+      "handicapadgang": "Ukendt"
+    },
+    "tags": [
+      "example_import_2025"
+    ]
+  },
+  
+  "validation_rules": {
+    "postnummer_format": "^\\d{4}$",
+    "required_if_present": ["adresse"]
+  },
+  
+  "notes": "This is a template - copy and modify for new data sources"
+} 
