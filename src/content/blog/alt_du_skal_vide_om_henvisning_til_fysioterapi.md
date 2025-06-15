@@ -23,7 +23,7 @@ Hvis du ikke har en henvisning, betaler du selv hele beløbet.
 
 ## Hvad koster fysioterapi med henvisning?
 
-Med en henvisning får du dækket en del af prisen via den offentlige sygesikring, hvis du finder en fysioterapeut med ydernummer
+Med en henvisning får du dækket en del af prisen via den offentlige sygesikring, hvis du finder en fysioterapeut med ydernummer.
 
 Tilskuddet fra det offentlige dækker en del af prisen, men ikke det hele. Ved første konsultation betaler du som udgangspunkt **311,82 kr.**, og ved efterfølgende behandlinger ligger egenbetalingen på **198,26 kr.**
 (Du kan se en samlet oversigt i billedet nedenfor.)
