@@ -61,6 +61,15 @@ export class MatchingEngine {
 
     // Return the best match (highest confidence)
     if (results.length === 0) {
+      // Fallback: try fuzzy name and address match across all clinics if postnummer is missing
+      if (!record.postnummer) {
+        const fallbackFuzzy = await this.findFuzzyMatchNoPostnummer(record);
+        if (fallbackFuzzy) results.push(fallbackFuzzy);
+        const fallbackAddress = await this.findAddressMatchNoPostnummer(record);
+        if (fallbackAddress) results.push(fallbackAddress);
+      }
+    }
+    if (results.length === 0) {
       return {
         clinicId: null,
         confidence: 0.0,
@@ -68,7 +77,6 @@ export class MatchingEngine {
         reasons: ["No potential matches found"],
       };
     }
-
     return results.reduce((best, current) =>
       current.confidence > best.confidence ? current : best
     );
@@ -322,5 +330,93 @@ export class MatchingEngine {
     }
 
     return matrix[str2.length][str1.length];
+  }
+
+  /**
+   * Fuzzy name match across all clinics if no postnummer
+   */
+  private async findFuzzyMatchNoPostnummer(
+    record: ClinicRecord
+  ): Promise<MatchResult | null> {
+    const { data: clinics, error } = await supabase
+      .from("clinics")
+      .select("clinics_id, klinikNavn, adresse, postnummer");
+    if (error || !clinics || clinics.length === 0) {
+      return null;
+    }
+    let bestMatch: any = null;
+    let bestSimilarity = 0;
+    for (const clinic of clinics) {
+      const similarity = this.calculateNameSimilarity(
+        record.klinikNavn,
+        clinic.klinikNavn
+      );
+      if (similarity > bestSimilarity && similarity >= 0.7) {
+        bestMatch = clinic;
+        bestSimilarity = similarity;
+      }
+    }
+    if (!bestMatch) {
+      return null;
+    }
+    return {
+      clinicId: bestMatch.clinics_id,
+      confidence: bestSimilarity * 0.6, // Lower cap for no postnummer
+      matchType: "fuzzy",
+      reasons: [
+        `Fuzzy name match (no postnummer): ${(bestSimilarity * 100).toFixed(
+          1
+        )}% similarity`,
+      ],
+    };
+  }
+
+  /**
+   * Address-based match across all clinics if no postnummer
+   */
+  private async findAddressMatchNoPostnummer(
+    record: ClinicRecord
+  ): Promise<MatchResult | null> {
+    if (!record.adresse) {
+      return null;
+    }
+    const { data: clinics, error } = await supabase
+      .from("clinics")
+      .select("clinics_id, klinikNavn, adresse, postnummer");
+    if (error || !clinics || clinics.length === 0) {
+      return null;
+    }
+    let bestMatch: any = null;
+    let bestScore = 0;
+    for (const clinic of clinics) {
+      if (!clinic.adresse) continue;
+      const addressSimilarity = this.calculateAddressSimilarity(
+        record.adresse,
+        clinic.adresse
+      );
+      const nameSimilarity = this.calculateNameSimilarity(
+        record.klinikNavn,
+        clinic.klinikNavn
+      );
+      // Combined score: 60% address, 40% name
+      const combinedScore = addressSimilarity * 0.6 + nameSimilarity * 0.4;
+      if (combinedScore > bestScore && combinedScore >= 0.6) {
+        bestMatch = clinic;
+        bestScore = combinedScore;
+      }
+    }
+    if (!bestMatch) {
+      return null;
+    }
+    return {
+      clinicId: bestMatch.clinics_id,
+      confidence: bestScore * 0.5, // Lower cap for no postnummer
+      matchType: "fuzzy",
+      reasons: [
+        `Address-based match (no postnummer): ${(bestScore * 100).toFixed(
+          1
+        )}% combined similarity`,
+      ],
+    };
   }
 }
