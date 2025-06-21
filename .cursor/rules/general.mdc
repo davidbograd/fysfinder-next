@@ -12,6 +12,7 @@ You are an expert in TypeScript, Node.js, Next.js App Router, React, Shadcn UI, 
 
 Code Style and Structure
 
+- Our project uses the src/app/ structure. Please make sure to follow it.
 - Write concise, technical TypeScript code with accurate examples.
 - Use functional and declarative programming patterns; avoid classes.
 - Prefer iteration and modularization over code duplication.

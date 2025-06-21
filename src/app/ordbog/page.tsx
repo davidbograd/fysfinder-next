@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 import { ContentList } from "@/components/features/blog-og-ordbog/ContentList";
+=======
+import { GlossaryList } from "@/components/features/content/GlossaryList";
+>>>>>>> Stashed changes
 import { getDictionaryTerms } from "@/lib/dictionary";
 
 interface DictionaryStructuredDataProps {
