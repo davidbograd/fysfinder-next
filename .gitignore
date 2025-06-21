@@ -38,6 +38,7 @@ data/*.csv
 # ingestion data and reports (potentially sensitive)
 scripts/ingestion/csv-ingestion-data/
 scripts/ingestion/reports/
+scripts/ordbog/ordbog-ingest-data/
 
 # source configurations (business logic)
 scripts/config/sources/*.json

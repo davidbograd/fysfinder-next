@@ -1,8 +1,8 @@
 // HOW TO USE
 // 1. Update the CSV file with the new articles
-const CSV_FILENAME = "ordbog-materiale.csv"; // Update this to the new CSV filename
+const CSV_FILENAME = "ordbog-ingest-20250621.csv"; // Update this to the new CSV filename
 // 2. Update the date below to current date
-const CURRENT_DATE = "20/04/2025"; // Update this date when running the script
+const CURRENT_DATE = "21/06/2025"; // Update this date when running the script
 // 3. Run the script
 
 
@@ -54,7 +54,7 @@ async function processArticles() {
     // Read the CSV file
     const csvPath = path.join(
       process.cwd(),
-      "public",
+      "scripts/ordbog/ordbog-ingest-data",
       CSV_FILENAME
     );
     const csvContent = fs.readFileSync(csvPath, "utf-8");
@@ -100,9 +100,9 @@ async function processArticles() {
 
         // Create frontmatter and content
         const fileContent = `---
-title: "${title}"
+title: "${title.replace(/"/g, '\\"')}"
 lastUpdated: "${CURRENT_DATE}"
-metaTitle: "${record["Meta title"]}"
+metaTitle: "${record["Meta title"].replace(/"/g, '\\"')}"
 datePublished: "${CURRENT_DATE}"
 ---
 
