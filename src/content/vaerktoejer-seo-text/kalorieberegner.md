@@ -105,3 +105,17 @@ Ammende kvinder har også et øget kaloriebehov. Det anbefales, at ammende kvind
 | 65+ år | 1.800 - 2.200 kalorier          |
 
 For at få en præcis beregning af dit daglige kaloriebehov, kan du bruge vores TDEE-beregner.
+
+## TDEE beregner – Beregn dit kaloriebehov for vægttab og genoptræning
+
+En TDEE beregner (Total Daily Energy Expenditure) er et effektivt værktøj til at finde ud af, hvor mange kalorier din krop forbrænder dagligt – både i hvile og under aktivitet. Det er især relevant i forbindelse med vægttab, livsstilsændringer eller som støtte til fysioterapeutisk genoptræning.
+
+Ved at kende dit daglige kaloriebehov kan du nemt tilpasse din kost og aktivitetsniveau, så du opnår dine mål – uanset om du ønsker at tabe dig, øge muskelmasse eller opretholde en sund vægt.
+
+### Hvad er inkluderet i TDEE beregningen?
+
+TDEE beregningen tager højde for individuelle faktorer som køn, alder, vægt, højde og fysisk aktivitetsniveau, hvilket gør den særligt nyttig for dig, der er i gang med genoptræning efter skade, har nedsat mobilitet eller følger et træningsprogram udarbejdet af en fysioterapeut. Mange overser betydningen af energibalance i forbindelse med genoptræning, men et passende kalorieindtag kan være afgørende for en effektiv og sikker rehabilitering.
+
+## Prøv FysFinder's gratis online TDEE beregner
+
+Brug vores gratis TDEE beregner og få et skræddersyet estimat af dit daglige kaloriebehov – et vigtigt skridt, hvis du vil kombinere kost, træning og fysioterapi på en måde, der støtter både vægttab og sund genopbygning af kroppen.

@@ -59,7 +59,7 @@ export default async function CalorieCalculatorPage() {
         <Breadcrumbs items={breadcrumbItems} />
         <div className="space-y-4">
           <h1 className="text-2xl sm:text-3xl font-bold">
-            Kalorieberegner - Beregn dit daglige kaloriebehov
+            Kalorieberegner - Beregn dit daglige kaloriebehov (ligevægtsindtag)
           </h1>
           <p className="text-gray-600 text-sm sm:text-base">
             Hvor mange kalorier du bør indtage for at opretholde din nuværende
