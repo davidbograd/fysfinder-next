@@ -58,41 +58,63 @@ This PRD outlines the redesign of FysFinder's search functionality to create a m
 
 ## Functional Requirements
 
-### 1. Search Capabilities
+### 1. Two-Stage Search Architecture
 
-#### 1.1 Location Search
+Following the HotDoc model, search functionality is split into two distinct phases:
+
+#### 1.1 Stage 1: Homepage Search (Simple)
+
+- **Location-only search** on the main homepage
+- **Optional specialty selection** via dropdown
+- **Minimal interface** focusing on getting users to results quickly
+- **Direct navigation** to search results page
+
+#### 1.2 Stage 2: Search Results Page (Advanced)
+
+- **Advanced filtering panel** available on search results page
+- **Refinement capabilities** without losing initial search context
+- **Filter persistence** in URL parameters
+- **Progressive disclosure** of filter options
+
+### 2. Homepage Search Capabilities
+
+#### 2.1 Location Search
 
 - **Autocomplete search** with debounced input (300ms)
 - **Support multiple input types**:
   - City names (København, Aarhus)
   - Postal codes (2100, 8000)
-  - "Near me" geolocation
 - **Fuzzy matching** for typos and partial matches
-- **Search suggestions** with distance indicators
 
-#### 1.2 Specialty Search
+#### 2.2 Specialty Search (Optional)
 
 - **Dropdown with search** functionality
 - **Popular specialties** shown first
+- **"All specialties" default option**
 
-#### 1.3 Advanced Filters
+#### 2.3 Homepage Search Execution
+
+- **Simple search button**: "Find Physiotherapists"
+- **Required location**: Cannot search without location
+- **Direct navigation**: Takes users to `/find/fysioterapeut/{location}` or `/find/fysioterapeut/{location}/{specialty}`
+
+### 3. Search Results Page Capabilities
+
+#### 3.1 Advanced Filters (Available only on results page)
 
 - **Ydernummer** (Yes/No toggle)
 - **Handicap Access** (Yes/No toggle)
-- **Online Consultation** (Yes/No toggle)
-- **Parking Available** (Yes/No toggle)
-- **Distance radius** (5km, 10km, 25km, 50km)
 
-#### 1.4 Search Execution
+#### 3.2 Search Refinement
 
-- **Explicit search button**: Users must click "SEARCH" to execute the search
-- **Parameter setting**: Users can set multiple parameters before searching
-- **Search state indication**: Clear visual feedback when parameters are set but search hasn't been executed
-- **Search button states**: Disabled when no parameters set, enabled when parameters are ready
+- **Instant filtering**: Filters apply immediately (no search button needed)
+- **URL updates**: All filters reflected in query parameters
+- **Filter chips**: Show active filters with remove option
+- **Clear all filters** option
 
-### 2. URL Structure & SEO Strategy
+### 4. URL Structure & SEO Strategy
 
-#### 2.1 Primary URLs (Indexable)
+#### 4.1 Primary URLs (Indexable)
 
 ```
 /find/fysioterapeut/{location}                    # Location only
@@ -101,14 +123,14 @@ This PRD outlines the redesign of FysFinder's search functionality to create a m
 /find/fysioterapeut/danmark/{specialty}           # Denmark + Specialty
 ```
 
-#### 2.2 Filtered URLs (Non-indexable, with noindex)
+#### 4.2 Filtered URLs (Non-indexable, with noindex)
 
 ```
-/find/fysioterapeut/{location}?ydernummer=true&handicap=true&distance=25
-/find/fysioterapeut/{location}/{specialty}?online=true&parking=true
+/find/fysioterapeut/{location}?ydernummer=true&handicap=true
+/find/fysioterapeut/{location}/{specialty}?ydernummer=true
 ```
 
-#### 2.3 Filter Encoding Strategy
+#### 4.3 Filter Encoding Strategy
 
 - **Human-readable query params** for all filters (prioritized approach)
 - **Canonical URLs** pointing to primary URLs without filters
@@ -117,15 +139,15 @@ Example:
 
 ```
 # All filters use human-readable params
-/find/fysioterapeut/kobenhavn?ydernummer=true&handicap=true&distance=25&online=true&parking=true
+/find/fysioterapeut/kobenhavn?ydernummer=true&handicap=true
 
 # Specialty + filters
 /find/fysioterapeut/kobenhavn/sportsskader?ydernummer=true&handicap=true
 ```
 
-### 3. Component Architecture
+### 5. Component Architecture
 
-#### 3.1 New Component Structure
+#### 5.1 New Component Structure
 
 ```
 SearchContainer/
@@ -145,7 +167,7 @@ SearchContainer/
 └── SearchProvider.tsx (Context)
 ```
 
-#### 3.2 State Management
+#### 5.2 State Management
 
 ```typescript
 interface SearchState {
@@ -157,9 +179,6 @@ interface SearchState {
   filters: {
     ydernummer?: boolean;
     handicapAccess?: boolean;
-    onlineConsultation?: boolean;
-    parking?: boolean;
-    maxDistance?: number;
   };
 
   // UI State
@@ -171,9 +190,9 @@ interface SearchState {
 }
 ```
 
-### 4. Search Logic & Performance
+### 6. Search Logic & Performance
 
-#### 4.1 Search Flow
+#### 6.1 Search Flow
 
 1. **Parameter setting**: Users set location, specialty, and filters without triggering search
 2. **Search button click**: Explicit user action to execute search
@@ -181,7 +200,7 @@ interface SearchState {
 4. **API call**: Execute search with all parameters
 5. **Results display**: Show results and update UI state
 
-#### 4.2 Database Queries
+#### 6.2 Database Queries
 
 ```sql
 -- Base query with location
@@ -194,8 +213,6 @@ WHERE ST_DWithin(c.coordinates, $location, $radius)
 -- With filters
 AND ($ydernummer IS NULL OR c.ydernummer = $ydernummer)
 AND ($handicap IS NULL OR c.handicap_access = $handicap)
-AND ($online IS NULL OR c.online_consultation = $online)
-AND ($parking IS NULL OR c.parking_available = $parking)
 
 ORDER BY
   CASE WHEN c.premium_listing IS NOT NULL THEN 0 ELSE 1 END,
@@ -241,8 +258,7 @@ ORDER BY
 ┌─────────────────────────────────────────────────┐
 │ [Location Input] [Specialty Dropdown]           │
 │ ┌─ Filters (collapsible) ──────────────────────┐ │
-│ │ [Ydernummer] [Handicap] [Online] [Parking]   │ │
-│ │ [Distance: ●────○ 25km]                      │ │
+│ │ [Ydernummer] [Handicap Access]               │ │
 │ └─────────────────────────────────────────────┘ │
 │                                                 │
 │ ┌─ Active Filters ─────────────────────────────┐ │
@@ -272,42 +288,244 @@ ORDER BY
 - **Loading state**: During search execution
 - **Visual feedback**: Clear indication when parameters have changed but search hasn't been executed
 
-## Implementation Plan
+## Implementation Strategy
 
-### Phase 1: Foundation (Week 1-2)
+### Isolated Development Approach
 
-- [ ] Create new component architecture
-- [ ] Implement SearchProvider context
-- [ ] Build basic LocationSearch component
-- [ ] Set up URL parameter handling with human-readable params
+To ensure zero risk to the current user experience, we'll build the new search functionality completely isolated from the existing implementation:
 
-### Phase 2: Core Search (Week 3-4)
+#### Isolated Routes Structure
 
-- [ ] Implement SpecialtySearch component
-- [ ] Build search suggestions system
-- [ ] Create SearchButton component with proper state management
-- [ ] Add explicit search execution flow
+```
+/search-v2                           # New homepage search testing
+/search-v2/find/{location}           # New location results page
+/search-v2/find/{location}/{specialty} # New location + specialty results
+```
 
-### Phase 3: Advanced Filters (Week 5-6)
+#### Isolated Components Structure
 
-- [ ] Implement all filter types (ydernummer, handicap, online, parking, distance)
-- [ ] Add filter persistence in URL
-- [ ] Build filter chips UI
-- [ ] Optimize database queries
+```
+src/components/search-v2/
+├── SearchContainer/
+├── SearchInput/
+├── FilterPanel/
+├── SearchResults/
+└── SearchProvider.tsx
 
-### Phase 4: SEO & Performance (Week 7-8)
+src/app/search-v2/
+├── page.tsx                        # New homepage search
+├── find/
+│   └── [location]/
+│       ├── page.tsx                # New location results
+│       └── [specialty]/
+│           └── page.tsx            # New location + specialty results
+```
 
-- [ ] Implement human-readable URL encoding/decoding
-- [ ] Add canonical URLs and meta tags
-- [ ] Optimize bundle size
-- [ ] Add structured data
+### Migration Strategy
 
-### Phase 5: Testing & Polish (Week 9-10)
+1. **Isolated Development**: Build completely separate from existing search
+2. **Internal Testing**: Team can test new functionality without affecting users
+3. **A/B Testing**: Gradual rollout to subset of users (optional)
+4. **Full Migration**: Replace existing search when confident in new implementation
 
-- [ ] Accessibility testing and fixes
-- [ ] Performance optimization
-- [ ] Cross-browser testing
-- [ ] User acceptance testing
+## 🚀 Implementation Checklist
+
+### 📊 Progress Overview
+
+- **Phase 1**: 0/11 tasks completed
+- **Phase 2**: 0/13 tasks completed
+- **Phase 3**: 0/15 tasks completed
+- **Phase 4**: 0/8 tasks completed
+- **Phase 5**: 0/10 tasks completed
+- **Phase 6**: 0/8 tasks completed
+- **Total Progress**: 0/65 tasks completed (0%)
+
+---
+
+### 🏗️ Phase 1: Isolated Foundation (Week 1-2)
+
+#### Route Structure Setup
+
+- [ ] Create `src/app/search-v2/page.tsx` (new homepage search)
+- [ ] Create `src/app/search-v2/find/[location]/page.tsx` (location results)
+- [ ] Create `src/app/search-v2/find/[location]/[specialty]/page.tsx` (location + specialty results)
+- [ ] Add basic page layouts and routing tests
+- [ ] Verify isolated routes work independently
+
+#### Component Architecture
+
+- [ ] Create `src/components/search-v2/` folder structure
+- [ ] Create `SearchProvider.tsx` with React Context
+- [ ] Create `SearchContainer/index.tsx` wrapper component
+- [ ] Create `SearchInput/LocationSearch.tsx` component
+- [ ] Create `SearchInput/SpecialtySearch.tsx` component
+- [ ] Create `SearchButton/SearchButton.tsx` component
+
+**Phase 1 Completion**: 0/11 ✅
+
+---
+
+### 🔍 Phase 2: Isolated Core Search (Week 3-4)
+
+#### Search Input Components
+
+- [ ] Implement location autocomplete with debounced input (300ms)
+- [ ] Add support for city names and postal codes in location search
+- [ ] Implement fuzzy matching for location input
+- [ ] Build specialty dropdown with search functionality
+- [ ] Add "All specialties" default option to specialty dropdown
+- [ ] Create search suggestions UI component
+
+#### Search State Management
+
+- [ ] Implement SearchState interface in context
+- [ ] Add location and specialty state management
+- [ ] Add hasUnsearchedChanges tracking
+- [ ] Create search execution logic
+- [ ] Add URL parameter encoding/decoding utility functions
+
+#### Homepage Implementation
+
+- [ ] Build isolated homepage UI at `/search-v2`
+- [ ] Implement "Find Physiotherapists" search button
+- [ ] Add form validation (require location)
+- [ ] Test navigation to results pages
+
+**Phase 2 Completion**: 0/13 ✅
+
+---
+
+### 🎛️ Phase 3: Isolated Advanced Filters (Week 5-6)
+
+#### Filter Components
+
+- [ ] Create `FilterPanel/FilterToggle.tsx` component
+- [ ] Create `FilterPanel/FilterChips.tsx` component
+- [ ] Create `FilterPanel/index.tsx` main panel
+- [ ] Implement Ydernummer toggle filter
+- [ ] Implement Handicap Access toggle filter
+
+#### Filter State Management
+
+- [ ] Add filter state to SearchProvider context
+- [ ] Implement instant filter application (no search button needed)
+- [ ] Add filter persistence in URL query parameters
+- [ ] Create "Clear all filters" functionality
+- [ ] Add active filter chips with remove options
+
+#### Search Results Pages
+
+- [ ] Build location results page UI
+- [ ] Build location + specialty results page UI
+- [ ] Implement results list component
+- [ ] Add filter panel to results pages
+- [ ] Create "No results found" state
+
+#### Database Integration
+
+- [ ] Update search API to support new filters
+- [ ] Optimize database queries for filter combinations
+- [ ] Add pagination support
+- [ ] Test filter performance with large datasets
+- [ ] Add loading states for search results
+
+**Phase 3 Completion**: 0/15 ✅
+
+---
+
+### 🎨 Phase 4: SEO & Performance (Week 7-8)
+
+#### SEO Implementation
+
+- [ ] Add dynamic meta titles for isolated routes
+- [ ] Add dynamic meta descriptions for isolated routes
+- [ ] Implement structured data for LocalBusiness
+- [ ] Add canonical URLs for filtered pages
+- [ ] Add noindex meta tag for filtered URLs
+
+#### Performance Optimization
+
+- [ ] Optimize bundle size for new components
+- [ ] Implement code splitting for search components
+- [ ] Add search response caching
+- [ ] Optimize database query performance
+
+**Phase 4 Completion**: 0/8 ✅
+
+---
+
+### 🧪 Phase 5: Testing & Polish (Week 9-10)
+
+#### Accessibility Testing
+
+- [ ] Add ARIA labels to all search components
+- [ ] Implement keyboard navigation for search interface
+- [ ] Test with screen readers
+- [ ] Ensure focus management works correctly
+- [ ] Verify 44px+ touch targets on mobile
+
+#### Performance Testing
+
+- [ ] Test search response times (<500ms requirement)
+- [ ] Test mobile performance (60fps scrolling)
+- [ ] Run Lighthouse accessibility audit (>90 score target)
+- [ ] Test memory usage (<10MB requirement)
+
+#### Cross-browser Testing
+
+- [ ] Test in Chrome 90+, Firefox 88+, Safari 14+, Edge 90+
+- [ ] Test mobile browsers (iOS Safari 14+, Chrome Mobile 90+)
+- [ ] Test progressive enhancement without JavaScript
+
+#### User Testing
+
+- [ ] Internal team testing on `/search-v2` routes
+- [ ] Document any bugs or UX issues found
+- [ ] User acceptance testing with stakeholders
+
+**Phase 5 Completion**: 0/10 ✅
+
+---
+
+### 🚀 Phase 6: Migration (Week 11-12)
+
+#### Frontend Migration
+
+- [ ] Replace homepage search component with new version
+- [ ] Update existing location pages to use new search results components
+- [ ] Ensure all existing URLs continue to work
+- [ ] Set up redirects if URL structure changes
+
+#### Cleanup & Monitoring
+
+- [ ] Remove old search components
+- [ ] Remove isolated `/search-v2` routes
+- [ ] Set up monitoring for new search performance
+- [ ] Monitor user behavior and conversion rates post-migration
+
+**Phase 6 Completion**: 0/8 ✅
+
+---
+
+## 📝 Development Notes
+
+**Current Status**: Not Started  
+**Started Date**: _[Update when starting]_  
+**Current Phase**: Phase 1  
+**Blockers**: _[List any blockers encountered]_  
+**Next Steps**: Set up isolated route structure
+
+### 🐛 Issues Log
+
+_[Add any issues encountered during development]_
+
+### 💡 Ideas & Improvements
+
+_[Add any ideas or improvements discovered during development]_
+
+### 📋 Testing Checklist
+
+_[Add specific test cases as you build them]_
 
 ## Risk Assessment
 
@@ -342,8 +560,7 @@ ORDER BY
 -- Clinics table
 clinics (
   id, klinikNavn, lokationSlug, city_id,
-  ydernummer, handicap_access, online_consultation,
-  parking_available, avg_rating, coordinates
+  ydernummer, handicap_access, avg_rating, coordinates
 )
 
 -- Specialties table
@@ -364,14 +581,11 @@ clinic_specialties (
 const filterParams = {
   ydernummer: "true", // ?ydernummer=true
   handicap: "true", // ?handicap=true
-  online: "true", // ?online=true
-  parking: "true", // ?parking=true
-  distance: "25", // ?distance=25
 };
 
 // Example URLs
-// /find/fysioterapeut/kobenhavn?ydernummer=true&handicap=true&distance=25
-// /find/fysioterapeut/aarhus/sportsskader?online=true&parking=true
+// /find/fysioterapeut/kobenhavn?ydernummer=true&handicap=true
+// /find/fysioterapeut/aarhus/sportsskader?ydernummer=true
 ```
 
 ### C. SEO Meta Template
