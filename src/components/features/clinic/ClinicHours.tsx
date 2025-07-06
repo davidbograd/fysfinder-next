@@ -1,5 +1,6 @@
 import { Clinic } from "@/app/types";
 import { FaWheelchair } from "react-icons/fa";
+import Image from "next/image";
 import {
   Tooltip,
   TooltipContent,
@@ -102,9 +103,11 @@ export function ClinicHours({ clinic }: ClinicHoursProps) {
                       <div className="flex justify-between cursor-help">
                         <span className="inline-flex items-center gap-1">
                           God Adgang
-                          <img
+                          <Image
                             src="/images/klinik/god-adgang-badge.png"
                             alt="God Adgang badge"
+                            width={16}
+                            height={16}
                             className="w-4 h-4"
                           />
                         </span>

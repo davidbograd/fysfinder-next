@@ -73,7 +73,7 @@ const faqItems: FAQItem[] = [
   {
     question: "Hvad er forskellen på fysioterapeut og fysioterapi?",
     answer:
-      "**Fysioterapi** er selve behandlingen og metoden. **Fysioterapeut** er den fagperson, der udfører behandlingen.",
+      "Fysioterapi er selve behandlingen og metoden. Fysioterapeut er den fagperson, der udfører behandlingen.",
     table: {
       headers: ["Begreb", "Betydning"],
       rows: [

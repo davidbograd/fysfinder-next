@@ -34,6 +34,18 @@ Verdenssundhedsorganisationen (WHO) definerer følgende BMI-kategorier:
 
 For at opnå et "normalt" BMI bør din vægt være mellem 18,5 og 24,9, afhængigt af din højde.
 
+### Normal bmi for mænd
+
+Et normal BMI for mænd skal ligge i intervallet 18,5 til 24,9, som anses for at være sundt og forbundet med lavere risiko for sygdomme som hjerte-kar-sygdomme og diabetes. Dog er det vigtigt at huske, at BMI ikke tager højde for muskelmasse eller andre individuelle faktorer, så det kan være en god idé at bruge BMI sammen med andre sundhedsindikatorer.
+
+Mænd har ofte større muskelmasse end kvinder, som kan påvirke mænds BMI-tal.
+
+### Normal bmi for kvinder
+
+Et normal BMI for kvinder ligger mellem 18,5 og 24,9. Ligesom for mænd indikerer et BMI i intervallet 18,5 til 24,9 en sund vægt for kvinder, som er forbundet med en lavere risiko for en række sundhedsproblemer. Dog er det vigtigt at bemærke, at BMI ikke tager højde for faktorer som muskelmasse, fedtfordeling og knoglestruktur.
+
+Kvinder har ofte større fedtprocent end mænd, som kan påvirke mænds BMI-tal.
+
 ## Hvad betyder dit BMI og BMI-tal?
 
 Når du har beregnet dit BMI-tal, kan du bruge det til at finde ud af, om du er i risikozonen for vægtrelaterede sundhedsproblemer. Her er hvad BMI-kategorierne betyder:

@@ -77,9 +77,11 @@ export function ClinicHeader({ clinic }: ClinicHeaderProps) {
               <TooltipProvider delayDuration={50}>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <img
+                    <Image
                       src="/images/klinik/god-adgang-badge.png"
                       alt="God Adgang badge"
+                      width={16}
+                      height={16}
                       className="w-4 h-4 cursor-pointer"
                     />
                   </TooltipTrigger>

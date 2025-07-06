@@ -2,7 +2,9 @@ import { ContentEntry } from "@/components/features/blog-og-ordbog/ContentEntry"
 import { getBlogPost, getBlogPosts } from "@/lib/blog";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { AuthorCard } from "@/components/features/blog-og-ordbog/AuthorCard";
+import { TableOfContents } from "@/components/features/blog-og-ordbog/TableOfContents";
 import { getAuthorForStructuredData } from "@/lib/authors";
+import { calculateReadingTime, extractTableOfContents } from "@/lib/utils";
 import { Metadata } from "next";
 import { Calendar, Clock } from "lucide-react";
 
@@ -116,6 +118,8 @@ export default async function BlogPostPage({
   params: { term: string };
 }) {
   const post = await getBlogPost(params.term);
+  const headings = extractTableOfContents(post.content);
+  const readingTime = calculateReadingTime(post.content);
 
   const breadcrumbItems = [
     { text: "Blog", link: "/blog" },
@@ -130,22 +134,31 @@ export default async function BlogPostPage({
   return (
     <div className="container mx-auto px-4 py-8">
       <BlogPostStructuredData term={post} />
-      <div className="max-w-2xl mx-auto">
-        <Breadcrumbs items={breadcrumbItems} />
-        <div className="flex items-center gap-2 text-sm text-gray-500 mb-6">
-          <Calendar className="h-4 w-4" />
-          <span>
-            {dateLabel} {formatDanishDate(dateToShow)}
-          </span>
+      <div className="flex flex-col lg:flex-row lg:gap-8">
+        <TableOfContents headings={headings} />
+        <div className="flex-1 max-w-2xl">
+          <Breadcrumbs items={breadcrumbItems} />
+          <div className="flex items-center gap-8 text-sm text-gray-500 mb-6">
+            <div className="flex items-center gap-2">
+              <Calendar className="h-4 w-4" />
+              <span>
+                {dateLabel} {formatDanishDate(dateToShow)}
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Clock className="h-4 w-4" />
+              <span>{readingTime}</span>
+            </div>
+          </div>
+          <AuthorCard authorSlug={post.author} />
+          <ContentEntry
+            term={post}
+            backLink={{
+              href: "/blog",
+              text: "Tilbage til blog",
+            }}
+          />
         </div>
-        <AuthorCard authorSlug={post.author} />
-        <ContentEntry
-          term={post}
-          backLink={{
-            href: "/blog",
-            text: "Tilbage til blog",
-          }}
-        />
       </div>
     </div>
   );
