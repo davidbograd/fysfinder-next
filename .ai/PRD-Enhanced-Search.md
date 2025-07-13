@@ -37,11 +37,9 @@ This PRD outlines the redesign of FysFinder's search functionality to create a m
 
 ### Success Metrics
 
-- **User Engagement**: 25% increase in search interactions
 - **SEO Performance**: Maintain current organic traffic while improving long-tail keyword rankings
 - **Conversion Rate**: 15% improvement in clinic profile visits from search results
 - **Page Load Speed**: Sub-200ms search response times
-- **Accessibility Score**: 95+ Lighthouse accessibility score
 
 ## Target Users
 
@@ -83,8 +81,9 @@ Following the HotDoc model, search functionality is split into two distinct phas
 - **Autocomplete search** with debounced input (300ms)
 - **Support multiple input types**:
   - City names (København, Aarhus)
-  - Postal codes (2100, 8000)
+  - Postal codes (2100, 8000) - automatically mapped to city names
 - **Fuzzy matching** for typos and partial matches
+- **URL normalization**: All URLs use city names, never postal codes
 
 #### 2.2 Specialty Search (Optional)
 
@@ -123,26 +122,68 @@ Following the HotDoc model, search functionality is split into two distinct phas
 /find/fysioterapeut/danmark/{specialty}           # Denmark + Specialty
 ```
 
-#### 4.2 Filtered URLs (Non-indexable, with noindex)
+#### 4.2 Filtered URLs (Selectively indexable with canonical strategy)
 
 ```
 /find/fysioterapeut/{location}?ydernummer=true&handicap=true
-/find/fysioterapeut/{location}/{specialty}?ydernummer=true
+/find/fysioterapeut/{location}/{specialty}?ydernummer=true&handicap=true
 ```
 
-#### 4.3 Filter Encoding Strategy
+#### 4.3 Parameter Normalization Strategy
 
-- **Human-readable query params** for all filters (prioritized approach)
-- **Canonical URLs** pointing to primary URLs without filters
+To prevent duplicate content issues, all URL parameters must be normalized:
 
-Example:
+**Parameter Order**: Always sort parameters alphabetically
+
+- ✅ `?handicap=true&ydernummer=true` (canonical)
+- ❌ `?ydernummer=true&handicap=true` (redirects to canonical)
+
+**Implementation**:
+
+```typescript
+// Parameter normalization utility
+export function normalizeSearchParams(params: URLSearchParams): string {
+  const normalized = new URLSearchParams();
+  const paramOrder = ["handicap", "ydernummer"]; // Alphabetical order
+
+  paramOrder.forEach((key) => {
+    const value = params.get(key);
+    if (value !== null) normalized.set(key, value);
+  });
+
+  return normalized.toString();
+}
+```
+
+**Middleware Redirect**: 301 redirect non-canonical parameter orders to canonical URLs
+
+#### 4.4 SEO Strategy for Filtered Pages
+
+```typescript
+// SEO strategy based on filter complexity
+const seoStrategy = {
+  // Simple filters (1-2 parameters): indexable with canonical
+  simpleFilters: {
+    robots: "index, follow",
+    canonical: "/find/fysioterapeut/{location}", // Points to base page
+  },
+
+  // Complex filters (3+ parameters): noindex with canonical
+  complexFilters: {
+    robots: "noindex, follow",
+    canonical: "/find/fysioterapeut/{location}",
+  },
+};
+```
+
+Example URLs:
 
 ```
-# All filters use human-readable params
-/find/fysioterapeut/kobenhavn?ydernummer=true&handicap=true
+# Canonical URLs (indexable)
+/find/fysioterapeut/kobenhavn?handicap=true&ydernummer=true
 
-# Specialty + filters
-/find/fysioterapeut/kobenhavn/sportsskader?ydernummer=true&handicap=true
+# Non-canonical URLs (301 redirect)
+/find/fysioterapeut/kobenhavn?ydernummer=true&handicap=true → redirects to canonical
 ```
 
 ### 5. Component Architecture
@@ -333,12 +374,12 @@ src/app/search-v2/
 ### 📊 Progress Overview
 
 - **Phase 1**: 0/11 tasks completed
-- **Phase 2**: 0/13 tasks completed
+- **Phase 2**: 0/16 tasks completed
 - **Phase 3**: 0/15 tasks completed
 - **Phase 4**: 0/8 tasks completed
 - **Phase 5**: 0/10 tasks completed
 - **Phase 6**: 0/8 tasks completed
-- **Total Progress**: 0/65 tasks completed (0%)
+- **Total Progress**: 0/68 tasks completed (0%)
 
 ---
 
@@ -371,6 +412,7 @@ src/app/search-v2/
 
 - [ ] Implement location autocomplete with debounced input (300ms)
 - [ ] Add support for city names and postal codes in location search
+- [ ] Implement postal code to city name mapping using cities table lookup
 - [ ] Implement fuzzy matching for location input
 - [ ] Build specialty dropdown with search functionality
 - [ ] Add "All specialties" default option to specialty dropdown
@@ -383,6 +425,10 @@ src/app/search-v2/
 - [ ] Add hasUnsearchedChanges tracking
 - [ ] Create search execution logic
 - [ ] Add URL parameter encoding/decoding utility functions
+- [ ] Implement parameter normalization utility to prevent duplicate content
+- [ ] Create middleware for 301 redirects of non-canonical parameter orders
+- [ ] Implement location slug normalization (postal codes → city names)
+- [ ] Create database utility functions for postal code/city lookup
 
 #### Homepage Implementation
 
@@ -391,7 +437,7 @@ src/app/search-v2/
 - [ ] Add form validation (require location)
 - [ ] Test navigation to results pages
 
-**Phase 2 Completion**: 0/13 ✅
+**Phase 2 Completion**: 0/16 ✅
 
 ---
 
@@ -440,8 +486,9 @@ src/app/search-v2/
 - [ ] Add dynamic meta titles for isolated routes
 - [ ] Add dynamic meta descriptions for isolated routes
 - [ ] Implement structured data for LocalBusiness
-- [ ] Add canonical URLs for filtered pages
-- [ ] Add noindex meta tag for filtered URLs
+- [ ] Add canonical URLs for filtered pages (pointing to base pages)
+- [ ] Implement selective indexing strategy for filtered pages
+- [ ] Add filter context to meta titles/descriptions for better UX
 
 #### Performance Optimization
 
@@ -588,7 +635,59 @@ const filterParams = {
 // /find/fysioterapeut/aarhus/sportsskader?ydernummer=true
 ```
 
-### C. SEO Meta Template
+### C. Database Schema Integration
+
+#### Cities Table Structure
+
+```sql
+-- Supabase cities table schema
+cities (
+  id uuid PRIMARY KEY,
+  bynavn text NOT NULL,           -- "Østerbro", "Aarhus C", "København K"
+  bynavn_slug text,               -- "oesterbro", "aarhus-c", "koebenhavn-k"
+  postal_codes text[] NOT NULL,   -- ["2100"], ["8000"], ["1050","1051"...]
+  latitude float8 NOT NULL,
+  longitude float8 NOT NULL,
+  location_point geography,
+  betegnelse text,
+  seo_tekst text,
+  updated_at timestamptz DEFAULT now()
+)
+```
+
+#### Key Implementation Functions
+
+```typescript
+// Postal code to city mapping
+async function findCityByPostalCode(postalCode: string) {
+  const { data } = await supabase
+    .from("cities")
+    .select("bynavn, bynavn_slug, postal_codes")
+    .contains("postal_codes", [postalCode])
+    .single();
+
+  return data;
+}
+
+// City name search with fuzzy matching
+async function findCitiesByName(searchTerm: string) {
+  const { data } = await supabase
+    .from("cities")
+    .select("bynavn, bynavn_slug")
+    .ilike("bynavn", `%${searchTerm}%`)
+    .limit(10);
+
+  return data;
+}
+```
+
+#### Statistics
+
+- **604 cities** with single postal code (most municipalities)
+- **3 major cities** with 50+ postal codes (København K: 232, Vesterbro: 150, Frederiksberg C: 105)
+- **100% coverage** of all Danish postal codes
+
+### D. SEO Meta Template
 
 ```html
 <!-- Location only -->
@@ -607,7 +706,50 @@ const filterParams = {
   content="Find {specialty} fysioterapeuter i {location}. Se anmeldelser, priser og book tid online. Specialiserede behandlere."
 />
 
-<!-- Filtered pages (noindex) -->
-<meta name="robots" content="noindex, follow" />
+<!-- Filtered pages (selective indexing) -->
+<title>
+  Fysioterapeuter i {location} {filterContext} | Find fysioterapeuter |
+  FysFinder
+</title>
+<meta name="robots" content="index, follow" />
 <link rel="canonical" href="/find/fysioterapeut/{location}" />
+```
+
+### E. Parameter Normalization Examples
+
+```typescript
+// Canonical parameter order (alphabetical)
+const CANONICAL_PARAM_ORDER = ["handicap", "ydernummer"];
+
+// URL normalization examples
+const examples = {
+  // Input URLs (various orders)
+  input: [
+    "?ydernummer=true&handicap=true",
+    "?handicap=true&ydernummer=true",
+    "?ydernummer=true",
+    "?handicap=true",
+  ],
+
+  // Canonical output (normalized)
+  canonical: [
+    "?handicap=true&ydernummer=true",
+    "?handicap=true&ydernummer=true", // Already canonical
+    "?ydernummer=true",
+    "?handicap=true",
+  ],
+
+  // SEO strategy per URL
+  seo: {
+    "?handicap=true&ydernummer=true": { robots: "index, follow" },
+    "?handicap=true": { robots: "index, follow" },
+    "?ydernummer=true": { robots: "index, follow" },
+  },
+};
+
+// Filter context for meta tags
+const filterContextMap = {
+  handicap: "med handicapadgang",
+  ydernummer: "med ydernummer",
+};
 ```
