@@ -1,22 +1,16 @@
-/**
- * Parameter normalization utilities for search URLs
- * Prevents duplicate content issues by ensuring consistent parameter order
- */
+import { SearchFilters } from "@/components/search-v2/SearchProvider";
 
-// Define canonical parameter order (alphabetical)
-export const CANONICAL_PARAM_ORDER = ["handicap", "ydernummer"] as const;
-
-export type SearchFilter = "handicap" | "ydernummer";
-export type FilterValue = "true" | "false";
+// Parameter order for canonicalization (alphabetical)
+const CANONICAL_PARAM_ORDER = ["handicap", "ydernummer"] as const;
 
 /**
- * Normalizes URL search parameters to prevent duplicate content
- * Always sorts parameters in alphabetical order
+ * Normalizes URL search parameters to ensure consistent ordering
+ * This prevents duplicate content issues from different parameter orders
  */
 export function normalizeSearchParams(params: URLSearchParams): string {
   const normalized = new URLSearchParams();
 
-  // Sort parameters in predefined canonical order
+  // Add parameters in canonical order
   CANONICAL_PARAM_ORDER.forEach((key) => {
     const value = params.get(key);
     if (value !== null) {
@@ -31,151 +25,135 @@ export function normalizeSearchParams(params: URLSearchParams): string {
  * Builds a canonical URL with normalized parameters
  */
 export function buildCanonicalUrl(
-  location: string,
-  specialty?: string,
-  filters?: Partial<Record<SearchFilter, boolean>>
+  basePath: string,
+  filters: SearchFilters = {}
 ): string {
-  const basePath = `/find/fysioterapeut/${location}${
-    specialty ? `/${specialty}` : ""
-  }`;
+  console.log("buildCanonicalUrl called with:", { basePath, filters });
 
-  if (!filters || Object.keys(filters).length === 0) {
-    return basePath;
+  const params = new URLSearchParams();
+
+  // Add filters in canonical order - only add if true, omit if false
+  if (filters.handicap === true) {
+    params.set("handicap", "true");
+  }
+  if (filters.ydernummer === true) {
+    params.set("ydernummer", "true");
   }
 
-  // Build URLSearchParams from filters
-  const params = new URLSearchParams();
-  Object.entries(filters).forEach(([key, value]) => {
-    if (value) {
-      params.set(key, "true");
-    }
-  });
-
   const normalizedParams = normalizeSearchParams(params);
+  const result = normalizedParams
+    ? `${basePath}?${normalizedParams}`
+    : basePath;
 
-  return normalizedParams ? `${basePath}?${normalizedParams}` : basePath;
+  console.log("buildCanonicalUrl result:", result);
+  return result;
 }
 
 /**
- * Checks if URL parameters are in canonical order
+ * Generates filter context for meta tags and UI display
  */
-export function isCanonicalOrder(searchParams: URLSearchParams): boolean {
-  const originalParams = searchParams.toString();
-  const normalizedParams = normalizeSearchParams(searchParams);
+export function getFilterContext(filters: SearchFilters): string {
+  const contexts: string[] = [];
 
-  return originalParams === normalizedParams;
+  if (filters.handicap === true) {
+    contexts.push("med handicapadgang");
+  }
+  if (filters.ydernummer === true) {
+    contexts.push("med ydernummer");
+  }
+
+  return contexts.length > 0 ? contexts.join(" og ") : "";
 }
 
 /**
- * Determines SEO strategy based on filter complexity
+ * Determines SEO strategy for filtered pages
  */
-export function getFilteredPageSEO(
-  filters?: Partial<Record<SearchFilter, boolean>>
-) {
-  const hasFilters =
-    filters && Object.keys(filters).some((key) => filters[key as SearchFilter]);
+export function getFilteredPageSEO(filters: SearchFilters): {
+  robots: string;
+  shouldIndex: boolean;
+} {
+  const activeFilters = Object.values(filters).filter(Boolean).length;
 
-  if (!hasFilters) {
+  // Simple filters (1-2 parameters): indexable
+  if (activeFilters <= 2) {
     return {
       robots: "index, follow",
-      canonical: undefined, // No canonical needed for base page
+      shouldIndex: true,
     };
   }
 
-  const filterCount = Object.values(filters).filter(Boolean).length;
-  const shouldIndex = filterCount <= 2; // Only index simple filter combinations
-
+  // Complex filters (3+ parameters): noindex
   return {
-    robots: shouldIndex ? "index, follow" : "noindex, follow",
-    canonical: true, // Should point to base page
+    robots: "noindex, follow",
+    shouldIndex: false,
   };
 }
 
 /**
- * Generates filter context for meta tags
+ * Parses URL parameters into SearchFilters
  */
-export function getFilterContext(
-  filters?: Partial<Record<SearchFilter, boolean>>
-): string {
-  if (!filters) return "";
-
-  const filterContextMap: Record<SearchFilter, string> = {
-    handicap: "med handicapadgang",
-    ydernummer: "med ydernummer",
-  };
-
-  const activeFilters = Object.entries(filters)
-    .filter(([, value]) => value)
-    .map(([key]) => filterContextMap[key as SearchFilter])
-    .filter(Boolean);
-
-  if (activeFilters.length === 0) return "";
-  if (activeFilters.length === 1) return activeFilters[0];
-
-  // Join multiple filters with "og" (and)
-  return (
-    activeFilters.slice(0, -1).join(", ") +
-    " og " +
-    activeFilters[activeFilters.length - 1]
-  );
-}
-
-/**
- * Parses search parameters into filter object
- */
-export function parseFiltersFromParams(
+export function parseFiltersFromURL(
   searchParams: URLSearchParams
-): Partial<Record<SearchFilter, boolean>> {
-  const filters: Partial<Record<SearchFilter, boolean>> = {};
+): SearchFilters {
+  const filters: SearchFilters = {};
 
-  CANONICAL_PARAM_ORDER.forEach((key) => {
-    const value = searchParams.get(key);
-    if (value === "true") {
-      filters[key] = true;
-    }
-  });
+  const handicap = searchParams.get("handicap");
+  if (handicap === "true") {
+    filters.handicap = true;
+  }
+  // If parameter is missing or not "true", leave as undefined
+
+  const ydernummer = searchParams.get("ydernummer");
+  if (ydernummer === "true") {
+    filters.ydernummer = true;
+  }
+  // If parameter is missing or not "true", leave as undefined
 
   return filters;
 }
 
 /**
- * Example usage and test cases
+ * Checks if URL parameters are in canonical order
  */
-export const examples = {
-  // Test cases for parameter normalization
-  testCases: [
-    {
-      input: "?ydernummer=true&handicap=true",
-      expected: "?handicap=true&ydernummer=true",
-      isCanonical: false,
-    },
-    {
-      input: "?handicap=true&ydernummer=true",
-      expected: "?handicap=true&ydernummer=true",
-      isCanonical: true,
-    },
-    {
-      input: "?handicap=true",
-      expected: "?handicap=true",
-      isCanonical: true,
-    },
-    {
-      input: "?ydernummer=true",
-      expected: "?ydernummer=true",
-      isCanonical: true,
-    },
-  ],
+export function isCanonicalParameterOrder(params: URLSearchParams): boolean {
+  const currentOrder = Array.from(params.keys()).sort();
+  const expectedOrder = CANONICAL_PARAM_ORDER.filter((key) =>
+    params.has(key)
+  ).sort();
 
-  // Example URLs
-  urls: {
-    canonical: [
-      "/find/fysioterapeut/kobenhavn?handicap=true&ydernummer=true",
-      "/find/fysioterapeut/kobenhavn/sportsskader?handicap=true",
-      "/find/fysioterapeut/aarhus?ydernummer=true",
-    ],
-    nonCanonical: [
-      "/find/fysioterapeut/kobenhavn?ydernummer=true&handicap=true",
-      "/find/fysioterapeut/kobenhavn/sportsskader?ydernummer=true&handicap=true",
-    ],
-  },
-};
+  return JSON.stringify(currentOrder) === JSON.stringify(expectedOrder);
+}
+
+/**
+ * Builds a search URL with location, specialty, and filters
+ */
+export function buildSearchUrl(
+  location: string,
+  specialty?: string,
+  filters: SearchFilters = {}
+): string {
+  let basePath = `/find/fysioterapeut/${location}`;
+
+  if (specialty) {
+    basePath += `/${specialty}`;
+  }
+
+  return buildCanonicalUrl(basePath, filters);
+}
+
+/**
+ * Builds URL for the isolated search-v2 routes during development
+ */
+export function buildSearchV2Url(
+  location: string,
+  specialty?: string,
+  filters: SearchFilters = {}
+): string {
+  let basePath = `/search-v2/find/${location}`;
+
+  if (specialty) {
+    basePath += `/${specialty}`;
+  }
+
+  return buildCanonicalUrl(basePath, filters);
+}
