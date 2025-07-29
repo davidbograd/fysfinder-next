@@ -11,7 +11,7 @@ interface LocationSearchProps {
 }
 
 export const LocationSearch: React.FC<LocationSearchProps> = ({
-  placeholder = "Enter city or postal code",
+  placeholder = "By eller postnummer",
   className = "",
 }) => {
   const { state, dispatch } = useSearch();
@@ -147,9 +147,9 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
   const formatSuggestionText = (city: City, isExactMatch: boolean) => {
     const postalCodesText =
       city.postal_codes.length > 0
-        ? ` (${city.postal_codes.slice(0, 3).join(", ")}${
+        ? `${city.postal_codes.slice(0, 3).join(", ")}${
             city.postal_codes.length > 3 ? "..." : ""
-          })`
+          }`
         : "";
 
     return (
@@ -183,7 +183,7 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
           onBlur={handleBlur}
           onFocus={handleFocus}
           placeholder={placeholder}
-          className={`w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none ${className}`}
+          className={`w-full py-4 pr-4 bg-transparent outline-none text-gray-900 placeholder-gray-500 ${className}`}
           aria-label="Search for location"
           aria-autocomplete="list"
           aria-expanded={showDropdown}
@@ -201,7 +201,15 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
       {showDropdown && suggestions && (
         <div
           ref={dropdownRef}
-          className="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto"
+          className="absolute z-[9999] mt-1 bg-white border border-gray-200 rounded-lg shadow-xl max-h-60 overflow-y-auto"
+          style={{
+            position: "absolute",
+            top: "100%",
+            left: "-1rem", // Align with the icon (pl-4)
+            right: 0,
+            width: "calc(100% + 1rem)", // Extend to match the full input area
+            zIndex: 9999,
+          }}
           role="listbox"
         >
           {suggestions.exact_match && (
@@ -245,7 +253,7 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
           {suggestions.exact_match === null &&
             suggestions.nearby_cities.length === 0 && (
               <div className="px-4 py-3 text-gray-500 text-sm">
-                No locations found
+                {suggestions.prompt_message || "Ingen resultater fundet"}
               </div>
             )}
         </div>

@@ -16,17 +16,41 @@ export async function searchCities(query: string): Promise<SearchResult> {
   }
 
   try {
-    // Search for both exact and partial matches
-    const { data: matches } = await supabase
-      .from("cities")
-      .select("*")
-      .or(
-        `postal_codes.cs.{${cleanQuery}},` +
-          `bynavn_slug.eq.${cleanQuery},` +
-          `bynavn.ilike.${cleanQuery}%` // Added % for prefix matching
-      )
-      .order("bynavn")
-      .limit(10);
+    let matches: any[] = [];
+
+    // Check if query is a full 4-digit postal code
+    const isFullPostalCode = /^\d{4}$/.test(cleanQuery);
+    // Check if query is a partial postal code (1-3 digits)
+    const isPartialPostalCode = /^\d{1,3}$/.test(cleanQuery);
+
+    if (isFullPostalCode) {
+      // For full postal codes, use efficient exact match query
+      const { data: postalMatches } = await supabase
+        .from("cities")
+        .select("*")
+        .contains("postal_codes", [cleanQuery])
+        .order("bynavn")
+        .limit(10);
+
+      matches = postalMatches || [];
+    } else if (isPartialPostalCode) {
+      // For partial postal codes, return a helpful prompt instead of searching
+      return {
+        exact_match: null,
+        nearby_cities: [],
+        prompt_message: `Skriv det fulde 4-cifrede postnummer (f.eks. 2100)`,
+      };
+    } else {
+      // For city names, search by city name
+      const { data: cityMatches } = await supabase
+        .from("cities")
+        .select("*")
+        .or(`bynavn_slug.eq.${cleanQuery},` + `bynavn.ilike.${cleanQuery}%`)
+        .order("bynavn")
+        .limit(10);
+
+      matches = cityMatches || [];
+    }
 
     if (!matches || matches.length === 0) {
       return {

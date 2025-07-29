@@ -22,6 +22,7 @@ import { ClinicsList } from "@/components/features/clinic/ClinicsList";
 import { NoResultsFound } from "@/app/find/fysioterapeut/[location]/components/NoResultsFound";
 import { NearbyClinicsList } from "@/app/find/fysioterapeut/[location]/components/NearbyClinicsList";
 import { LocationStructuredData } from "@/components/seo/LocationStructuredData";
+import { MigrationWrapper } from "@/components/search-v2/MigrationWrapper";
 
 // Internal linking imports
 import { loadLinkConfig } from "lib/internal-linking/config";
@@ -29,6 +30,45 @@ import rehypeInternalLinks from "lib/internal-linking/rehype-internal-links";
 
 // MDX Plugins
 import remarkGfm from "remark-gfm";
+
+// Add this helper function after the imports and before the main component functions
+
+/**
+ * Generate dynamic H1 and H2 text based on location, specialty, and filters
+ */
+function generateHeadings(
+  locationName: string,
+  specialtyName?: string,
+  filters?: { ydernummer?: boolean; handicap?: boolean }
+) {
+  const hasYdernummer = filters?.ydernummer;
+  const hasHandicap = filters?.handicap;
+
+  // Generate H1
+  let h1: string;
+  if (specialtyName && hasYdernummer) {
+    h1 = `Find fysioterapeuter ${locationName} specialiseret i ${specialtyName.toLowerCase()} med ydernummer`;
+  } else if (specialtyName) {
+    h1 = `Find fysioterapeuter ${locationName} specialiseret i ${specialtyName.toLowerCase()}`;
+  } else if (hasYdernummer) {
+    h1 = `Find og sammenlign fysioterapeuter ${locationName} med ydernummer`;
+  } else {
+    h1 = `Find og sammenlign fysioterapeuter ${locationName}`;
+  }
+
+  // Generate H2
+  let h2: string | null = null;
+  if (hasYdernummer && hasHandicap) {
+    h2 =
+      "Tager lægehenvisninger · Tilbyder vedlagsfri behandling · Handicapvenlig adgang";
+  } else if (hasYdernummer) {
+    h2 = "Tager lægehenvisninger · Tilbyder vedlagsfri behandling";
+  } else if (hasHandicap) {
+    h2 = "Handicapvenlig adgang";
+  }
+
+  return { h1, h2 };
+}
 
 // Create a Supabase client for static generation
 const supabase = createClient(
@@ -146,7 +186,8 @@ function sortClinicsByRatingDanmark<
  */
 export async function fetchLocationData(
   locationSlug: string,
-  specialtySlug?: string
+  specialtySlug?: string,
+  filters?: { ydernummer?: boolean; handicap?: boolean }
 ): Promise<LocationPageData> {
   const headers = {
     apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -171,6 +212,14 @@ export async function fetchLocationData(
 
       if (specialtySlug) {
         clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),premium_listings(id,start_date,end_date,booking_link),filtered_specialties:clinic_specialties!inner(specialty:specialties!inner(specialty_name_slug))&filtered_specialties.specialties.specialty_name_slug=eq.${specialtySlug}`;
+      }
+
+      // Apply filters
+      if (filters?.ydernummer) {
+        clinicsUrl += `&ydernummer=eq.true`;
+      }
+      if (filters?.handicap) {
+        clinicsUrl += `&handicapadgang=eq.true`;
       }
 
       const clinicsData = await fetchWithRetry(clinicsUrl, fetchOptions);
@@ -227,6 +276,14 @@ export async function fetchLocationData(
 
       // Add the OR condition for online clinics
       clinicsUrl += `&or=(lokationSlug.eq.online,online_fysioterapeut.eq.true)`;
+
+      // Apply filters
+      if (filters?.ydernummer) {
+        clinicsUrl += `&ydernummer=eq.true`;
+      }
+      if (filters?.handicap) {
+        clinicsUrl += `&handicapadgang=eq.true`;
+      }
 
       const clinicsData = await fetchWithRetry(clinicsUrl, fetchOptions);
       const validClinics = (clinicsData as unknown[]).filter(
@@ -290,6 +347,16 @@ export async function fetchLocationData(
 
     if (specialtySlug) {
       premiumClinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order),premium_listings!inner(id,start_date,end_date,booking_link,premium_listing_locations!inner(city_id)),filtered_specialties:clinic_specialties!inner(specialty:specialties!inner(specialty_name_slug))&premium_listings.premium_listing_locations.city_id=eq.${city.id}&filtered_specialties.specialties.specialty_name_slug=eq.${specialtySlug}`;
+    }
+
+    // Apply filters to both clinic queries
+    if (filters?.ydernummer) {
+      clinicsUrl += `&ydernummer=eq.true`;
+      premiumClinicsUrl += `&ydernummer=eq.true`;
+    }
+    if (filters?.handicap) {
+      clinicsUrl += `&handicapadgang=eq.true`;
+      premiumClinicsUrl += `&handicapadgang=eq.true`;
     }
 
     // Fetch clinics, premium clinics, and nearby clinics in parallel with retry
@@ -414,10 +481,23 @@ interface LocationPageProps {
     location: string;
     specialty?: string;
   };
+  searchParams: { [key: string]: string | string[] | undefined };
 }
 
-export default async function LocationPage({ params }: LocationPageProps) {
-  const data = await fetchLocationData(params.location, params.specialty);
+export default async function LocationPage({
+  params,
+  searchParams,
+}: LocationPageProps) {
+  // Parse filter parameters from URL (with safety check)
+  const filters: { ydernummer?: boolean; handicap?: boolean } = {};
+  if (searchParams?.ydernummer === "true") filters.ydernummer = true;
+  if (searchParams?.handicap === "true") filters.handicap = true;
+
+  const data = await fetchLocationData(
+    params.location,
+    params.specialty,
+    filters
+  );
   const specialties = data.specialties;
 
   // --- Internal Linking Setup ---
@@ -444,6 +524,8 @@ export default async function LocationPage({ params }: LocationPageProps) {
 
   // Special handling for "danmark" page
   if (params.location === "danmark") {
+    const { h1, h2 } = generateHeadings("Danmark", specialtyName, filters);
+
     return (
       <div className="container mx-auto px-4">
         <LocationStructuredData
@@ -460,12 +542,10 @@ export default async function LocationPage({ params }: LocationPageProps) {
             ]}
           />
 
-          <h1 className="text-3xl font-bold mb-2">
-            {specialtyName
-              ? `Find fysioterapeuter specialiseret i ${specialtyName.toLowerCase()}`
-              : "Find og sammenlign fysioterapeuter i Danmark"}
-          </h1>
+          <h1 className="text-3xl font-bold mb-2">{h1}</h1>
+          {h2 && <h2 className="text-lg text-gray-600 mb-4">{h2}</h2>}
 
+          {/* Always show description */}
           <p className="text-gray-600 mb-8">
             Fysfinder hjælper dig med at finde den bedste fysioterapeut i
             Danmark. Se anmeldelser, specialer, priser og find den perfekte
@@ -553,6 +633,12 @@ export default async function LocationPage({ params }: LocationPageProps) {
     ...(specialtyName ? [{ text: specialtyName }] : []),
   ];
 
+  const { h1, h2 } = generateHeadings(
+    isOnline ? "online" : data.city.bynavn,
+    specialtyName,
+    filters
+  );
+
   return (
     <div className="container mx-auto px-4">
       <LocationStructuredData
@@ -563,23 +649,15 @@ export default async function LocationPage({ params }: LocationPageProps) {
       <div className="max-w-[800px] mx-auto">
         <Breadcrumbs items={breadcrumbItems} />
 
-        <h1 className="text-3xl font-bold mb-2">
-          {isOnline
-            ? specialtyName
-              ? `Find online fysioterapeuter specialiseret i ${specialtyName.toLowerCase()}`
-              : "Find og sammenlign online fysioterapeuter"
-            : specialtyName
-            ? `Find fysioterapeuter ${
-                data.city.bynavn
-              } specialiseret i ${specialtyName.toLowerCase()}`
-            : `Find og sammenlign fysioterapeuter ${data.city.bynavn}`}
-        </h1>
+        <h1 className="text-3xl font-bold mb-2">{h1}</h1>
+        {h2 && <h2 className="text-lg text-gray-600 mb-4">{h2}</h2>}
 
         {/* Only show betegnelse if not online */}
         {!isOnline && data.city.betegnelse && (
           <p className="text-gray-600 mb-4">{data.city.betegnelse}</p>
         )}
 
+        {/* Always show description */}
         <p className="text-gray-600 mb-8">
           {isOnline
             ? "Find den bedste online fysioterapi. Se anmeldelser, specialer, priser og find den perfekte fysioterapeut."
@@ -608,6 +686,21 @@ export default async function LocationPage({ params }: LocationPageProps) {
           citySlug={params.location}
           defaultSearchValue={isOnline ? "Online" : data.city.bynavn}
         />
+
+        {/* New Search (Testing) */}
+        <div className="mt-8 p-4 border-2 border-dashed border-green-300 rounded-lg bg-green-50">
+          <div className="text-sm text-green-600 mb-2 font-medium">
+            🚧 New Search Interface (Testing) - Location Page
+          </div>
+          <MigrationWrapper
+            specialties={specialties}
+            currentSpecialty={params.specialty}
+            citySlug={params.location}
+            defaultSearchValue={isOnline ? "Online" : data.city.bynavn}
+            showFilters={true}
+            initialFilters={filters}
+          />
+        </div>
 
         {/* Specialties section */}
         {!params.specialty && data.clinics.length > 0 && data.city && (

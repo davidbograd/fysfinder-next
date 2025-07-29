@@ -192,9 +192,29 @@ export interface SearchContextType {
 // Create context
 const SearchContext = createContext<SearchContextType | undefined>(undefined);
 
-// Provider component
-export function SearchProvider({ children }: { children: ReactNode }) {
-  const [state, dispatch] = useReducer(searchReducer, initialState);
+// Provider component props
+interface SearchProviderProps {
+  children: ReactNode;
+  initialLocation?: LocationQuery | null;
+  initialSpecialty?: SpecialtyQuery | null;
+  initialFilters?: SearchFilters;
+}
+
+export function SearchProvider({
+  children,
+  initialLocation = null,
+  initialSpecialty = null,
+  initialFilters = {},
+}: SearchProviderProps) {
+  // Create initial state with provided values
+  const initState: SearchState = {
+    ...initialState,
+    location: initialLocation,
+    specialty: initialSpecialty,
+    filters: initialFilters,
+  };
+
+  const [state, dispatch] = useReducer(searchReducer, initState);
   const router = useRouter();
   const searchParams = useSearchParams();
 

@@ -81,6 +81,7 @@ export interface City {
 export interface SearchResult {
   exact_match: City | null;
   nearby_cities: Array<City & { distance: number }>;
+  prompt_message?: string;
 }
 
 export interface CityRow {

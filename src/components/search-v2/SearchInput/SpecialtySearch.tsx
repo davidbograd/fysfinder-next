@@ -37,7 +37,7 @@ async function fetchSpecialties(): Promise<Specialty[]> {
 }
 
 export const SpecialtySearch: React.FC<SpecialtySearchProps> = ({
-  placeholder = "Select specialty (optional)",
+  placeholder = "Alle specialer",
   className = "",
 }) => {
   const { state, dispatch } = useSearch();
@@ -101,6 +101,11 @@ export const SpecialtySearch: React.FC<SpecialtySearchProps> = ({
     // Clear current specialty if user is typing something new
     if (state.specialty && value !== state.specialty.name) {
       dispatch({ type: "SET_SPECIALTY", payload: null });
+      dispatch({ type: "SET_UNSEARCHED_CHANGES", payload: true });
+    }
+
+    // Mark unsearched changes when user starts typing and no specialty is selected
+    if (!state.specialty) {
       dispatch({ type: "SET_UNSEARCHED_CHANGES", payload: true });
     }
 
@@ -206,7 +211,7 @@ export const SpecialtySearch: React.FC<SpecialtySearchProps> = ({
           onFocus={handleFocus}
           onBlur={handleBlur}
           placeholder={placeholder}
-          className={`w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none ${className}`}
+          className={`w-full py-4 pr-10 bg-transparent outline-none text-gray-900 placeholder-gray-500 ${className}`}
           aria-label="Search for specialty"
           aria-autocomplete="list"
           aria-expanded={showDropdown}
@@ -220,46 +225,49 @@ export const SpecialtySearch: React.FC<SpecialtySearchProps> = ({
           </div>
         )}
 
-        {!isLoading && (searchTerm || state.specialty) && (
-          <button
-            type="button"
-            onClick={handleClear}
-            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
-            aria-label="Clear specialty selection"
-          >
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+        {!isLoading &&
+          (state.specialty || (searchTerm && searchTerm.length > 0)) && (
+            <button
+              type="button"
+              onClick={handleClear}
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+              aria-label="Clear specialty selection"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
-        )}
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          )}
 
-        {!isLoading && !searchTerm && !state.specialty && (
-          <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none">
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
-          </div>
-        )}
+        {!isLoading &&
+          !state.specialty &&
+          (!searchTerm || searchTerm.length === 0) && (
+            <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none">
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </div>
+          )}
       </div>
 
       {showDropdown && (
@@ -279,8 +287,8 @@ export const SpecialtySearch: React.FC<SpecialtySearchProps> = ({
             aria-selected={selectedIndex === 0}
           >
             <div className="flex items-center">
-              <span className="font-medium text-gray-900">All specialties</span>
-              <span className="ml-2 text-xs text-gray-500">(no filter)</span>
+              <span className="font-medium text-gray-900">Alle specialer</span>
+              <span className="ml-2 text-xs text-gray-500">(ingen filter)</span>
             </div>
           </button>
 
@@ -310,14 +318,14 @@ export const SpecialtySearch: React.FC<SpecialtySearchProps> = ({
 
           {filteredSpecialties.length === 0 && searchTerm && (
             <div className="px-4 py-3 text-gray-500 text-sm">
-              No specialties found matching "{searchTerm}"
+              Ingen specialer fundet for "{searchTerm}"
             </div>
           )}
         </div>
       )}
 
       <div id="specialty-search-help" className="sr-only">
-        Search for a specialty or select "All specialties" to search without
+        Søg efter et speciale eller vælg "Alle specialer" for at søge uden
         filter
       </div>
     </div>
