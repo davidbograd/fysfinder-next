@@ -1,8 +1,7 @@
 import React from "react";
 import { Metadata } from "next";
 import { FAQ } from "@/components/features/blog-og-ordbog/FAQ";
-import { SearchAndFilters } from "@/components/features/search/SearchAndFilters";
-import { MigrationWrapper } from "@/components/search-v2/MigrationWrapper";
+import { SearchInterface } from "@/components/search/SearchInterface";
 import { RegionList } from "@/components/features/search/RegionList";
 import { BenefitsSection } from "@/components/features/blog-og-ordbog/BenefitsSection";
 import { StarIcon } from "@heroicons/react/24/solid";
@@ -60,26 +59,14 @@ function Header({
           </div>
 
           <div className="max-w-2xl mx-auto w-full">
-            {/* Original Search */}
-            <SearchAndFilters
+            {/* Search Interface */}
+            <SearchInterface
               specialties={specialties}
               defaultSearchValue=""
               citySlug="danmark"
+              showFilters={false}
+              initialFilters={{}}
             />
-
-            {/* New Search (Testing) */}
-            <div className="mt-8 p-4 border-2 border-dashed border-blue-300 rounded-lg bg-blue-50">
-              <div className="text-sm text-blue-600 mb-2 font-medium">
-                🚧 New Search Interface (Testing)
-              </div>
-              <MigrationWrapper
-                specialties={specialties}
-                defaultSearchValue=""
-                citySlug="danmark"
-                showFilters={false}
-                initialFilters={{}}
-              />
-            </div>
           </div>
         </div>
       </div>

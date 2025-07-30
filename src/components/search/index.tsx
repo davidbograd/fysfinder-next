@@ -1,8 +1,9 @@
-// Main exports for search-v2 components
+// Main exports for search components
 export { SearchProvider, useSearch } from "./SearchProvider";
 export { SearchContainer } from "./SearchContainer";
 export { LocationSearch, SpecialtySearch } from "./SearchInput";
-export { SearchButton } from "./SearchButton/SearchButton";
+export { SearchButton } from "./SearchButton";
+export { SearchInterface } from "./SearchInterface";
 export { FilterPanel, FilterToggle, FilterChips } from "./FilterPanel";
 export {
   ResultsContainer,

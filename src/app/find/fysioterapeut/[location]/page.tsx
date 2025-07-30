@@ -15,14 +15,14 @@ import {
   SpecialtyWithSeo,
 } from "@/app/types/index";
 import { notFound, redirect } from "next/navigation";
-import { SearchAndFilters } from "@/components/features/search/SearchAndFilters";
+
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { SpecialtiesList } from "@/components/features/specialty/SpecialtiesList";
 import { ClinicsList } from "@/components/features/clinic/ClinicsList";
 import { NoResultsFound } from "@/app/find/fysioterapeut/[location]/components/NoResultsFound";
 import { NearbyClinicsList } from "@/app/find/fysioterapeut/[location]/components/NearbyClinicsList";
 import { LocationStructuredData } from "@/components/seo/LocationStructuredData";
-import { MigrationWrapper } from "@/components/search-v2/MigrationWrapper";
+import { SearchInterface } from "@/components/search/SearchInterface";
 
 // Internal linking imports
 import { loadLinkConfig } from "lib/internal-linking/config";
@@ -31,44 +31,11 @@ import rehypeInternalLinks from "lib/internal-linking/rehype-internal-links";
 // MDX Plugins
 import remarkGfm from "remark-gfm";
 
-// Add this helper function after the imports and before the main component functions
-
-/**
- * Generate dynamic H1 and H2 text based on location, specialty, and filters
- */
-function generateHeadings(
-  locationName: string,
-  specialtyName?: string,
-  filters?: { ydernummer?: boolean; handicap?: boolean }
-) {
-  const hasYdernummer = filters?.ydernummer;
-  const hasHandicap = filters?.handicap;
-
-  // Generate H1
-  let h1: string;
-  if (specialtyName && hasYdernummer) {
-    h1 = `Find fysioterapeuter ${locationName} specialiseret i ${specialtyName.toLowerCase()} med ydernummer`;
-  } else if (specialtyName) {
-    h1 = `Find fysioterapeuter ${locationName} specialiseret i ${specialtyName.toLowerCase()}`;
-  } else if (hasYdernummer) {
-    h1 = `Find og sammenlign fysioterapeuter ${locationName} med ydernummer`;
-  } else {
-    h1 = `Find og sammenlign fysioterapeuter ${locationName}`;
-  }
-
-  // Generate H2
-  let h2: string | null = null;
-  if (hasYdernummer && hasHandicap) {
-    h2 =
-      "Tager lægehenvisninger · Tilbyder vedlagsfri behandling · Handicapvenlig adgang";
-  } else if (hasYdernummer) {
-    h2 = "Tager lægehenvisninger · Tilbyder vedlagsfri behandling";
-  } else if (hasHandicap) {
-    h2 = "Handicapvenlig adgang";
-  }
-
-  return { h1, h2 };
-}
+// Heading generation utility
+import {
+  generateHeadings,
+  generateMetaTitle,
+} from "@/lib/headers-and-metatitles";
 
 // Create a Supabase client for static generation
 const supabase = createClient(
@@ -452,14 +419,34 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({
   params,
+  searchParams,
 }: {
   params: { location: string; specialty?: string };
+  searchParams: { [key: string]: string | string[] | undefined };
 }): Promise<Metadata> {
-  const data = await fetchLocationData(params.location);
+  // Parse filter parameters from URL
+  const filters: { ydernummer?: boolean; handicap?: boolean } = {};
+  if (searchParams?.ydernummer === "true") filters.ydernummer = true;
+  if (searchParams?.handicap === "true") filters.handicap = true;
+
+  const data = await fetchLocationData(
+    params.location,
+    params.specialty,
+    filters
+  );
   const cityName = data.city?.bynavn || deslugify(params.location);
 
+  // Get specialty name if present
+  const specialtyName = params.specialty
+    ? data.specialties?.find((s) => s.specialty_name_slug === params.specialty)
+        ?.specialty_name
+    : undefined;
+
+  // Generate dynamic meta title using our new utility
+  const title = generateMetaTitle(cityName, specialtyName, filters);
+
   return {
-    title: `Fysioterapi klinikker ${cityName} | Find fysioterapeuter ›`,
+    title,
     description: `Find og sammenlign ${cityName} fysioterapeuter. Se anbefalinger, fysioterapi specialer, priser, åbningstider og mere. Start her →`,
   };
 }
@@ -569,11 +556,13 @@ export default async function LocationPage({
             </div>
           )}
 
-          <SearchAndFilters
+          <SearchInterface
             specialties={specialties}
             currentSpecialty={params.specialty}
             citySlug={params.location}
             defaultSearchValue="Danmark"
+            showFilters={true}
+            initialFilters={filters}
           />
 
           <ClinicsList
@@ -680,27 +669,15 @@ export default async function LocationPage({
           </div>
         )}
 
-        <SearchAndFilters
+        {/* Search Interface */}
+        <SearchInterface
           specialties={specialties}
           currentSpecialty={params.specialty}
           citySlug={params.location}
           defaultSearchValue={isOnline ? "Online" : data.city.bynavn}
+          showFilters={true}
+          initialFilters={filters}
         />
-
-        {/* New Search (Testing) */}
-        <div className="mt-8 p-4 border-2 border-dashed border-green-300 rounded-lg bg-green-50">
-          <div className="text-sm text-green-600 mb-2 font-medium">
-            🚧 New Search Interface (Testing) - Location Page
-          </div>
-          <MigrationWrapper
-            specialties={specialties}
-            currentSpecialty={params.specialty}
-            citySlug={params.location}
-            defaultSearchValue={isOnline ? "Online" : data.city.bynavn}
-            showFilters={true}
-            initialFilters={filters}
-          />
-        </div>
 
         {/* Specialties section */}
         {!params.specialty && data.clinics.length > 0 && data.city && (

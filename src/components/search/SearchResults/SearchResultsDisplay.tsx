@@ -1,11 +1,11 @@
 "use client";
 
 import React from "react";
-import { useSearch } from "@/components/search-v2";
+import { useSearch } from "@/components/search";
 import {
   LocationSearch,
   SpecialtySearch,
-} from "@/components/search-v2/SearchInput";
+} from "@/components/search/SearchInput";
 import { ResultsList } from "./ResultsList";
 
 export const SearchResultsDisplay: React.FC = () => {
@@ -76,7 +76,7 @@ export const SearchResultsDisplay: React.FC = () => {
               Ydernummer: {state.filters.ydernummer ? "Active" : "Inactive"}
             </li>
             <li>
-              Handicap Access: {state.filters.handicap ? "Active" : "Inactive"}
+              Handicapadgang: {state.filters.handicap ? "Active" : "Inactive"}
             </li>
           </ul>
           <p>

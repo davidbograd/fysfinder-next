@@ -318,15 +318,15 @@ export const SpecialtySearch: React.FC<SpecialtySearchProps> = ({
 
           {filteredSpecialties.length === 0 && searchTerm && (
             <div className="px-4 py-3 text-gray-500 text-sm">
-              Ingen specialer fundet for "{searchTerm}"
+              Ingen specialer fundet for &quot;{searchTerm}&quot;
             </div>
           )}
         </div>
       )}
 
       <div id="specialty-search-help" className="sr-only">
-        Søg efter et speciale eller vælg "Alle specialer" for at søge uden
-        filter
+        Søg efter et speciale eller vælg &quot;Alle specialer&quot; for at søge
+        uden filter
       </div>
     </div>
   );

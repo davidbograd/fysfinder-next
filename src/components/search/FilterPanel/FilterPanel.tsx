@@ -55,7 +55,7 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
   if (handicapAccess) {
     activeFilters.push({
       id: "handicap",
-      label: "Handicap Access",
+      label: "Handicapadgang",
       value: "true",
       onRemove: () => onHandicapAccessChange(false),
     });
@@ -114,7 +114,7 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
 
             <FilterToggle
               id="handicap-access"
-              label="Handicap Access"
+              label="Handicapadgang"
               description="Show only clinics with wheelchair accessibility"
               value={handicapAccess}
               onChange={onHandicapAccessChange}

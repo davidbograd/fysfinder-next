@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import LocationPage, { fetchSpecialties, fetchLocationData } from "../page";
 import { SpecialtyWithSeo } from "@/app/types";
+import { generateMetaTitle } from "@/lib/headers-and-metatitles";
 
 export async function generateMetadata({
   params,
@@ -27,29 +28,28 @@ export async function generateMetadata({
 
   if (!specialty) return notFound();
 
-  // Build filter context for titles
+  // Generate location name
+  const locationName =
+    params.location === "danmark" ? "Danmark" : data.city?.bynavn;
+  if (!locationName) return notFound();
+
+  // Generate dynamic meta title using our new utility
+  const title = generateMetaTitle(
+    locationName,
+    specialty.specialty_name,
+    filters
+  );
+
+  // Build filter context for description
   const filterContext = [];
   if (filters.ydernummer) filterContext.push("med ydernummer");
   if (filters.handicap) filterContext.push("med handicapadgang");
   const filterSuffix =
     filterContext.length > 0 ? ` (${filterContext.join(" og ")})` : "";
 
-  // For danmark pages
-  if (params.location === "danmark") {
-    return {
-      title: `${specialty.specialty_name} fysioterapi i Danmark${filterSuffix} | Find fysioterapeuter ›`,
-      description: `Find ${specialty.specialty_name.toLowerCase()} fysioterapeuter i Danmark${filterSuffix.toLowerCase()}. Se anmeldelser, priser og book tid online. Start her →`,
-    };
-  }
-
-  // For city pages
-  if (!data.city) return notFound();
-
   return {
-    title: `${specialty.specialty_name} fysioterapi i ${data.city.bynavn}${filterSuffix} | Find fysioterapeuter ›`,
-    description: `Find ${specialty.specialty_name.toLowerCase()} fysioterapeuter i ${
-      data.city.bynavn
-    }${filterSuffix.toLowerCase()}. Se anmeldelser, priser og book tid online. Start her →`,
+    title,
+    description: `Find ${specialty.specialty_name.toLowerCase()} fysioterapeuter i ${locationName}${filterSuffix.toLowerCase()}. Se anmeldelser, priser og book tid online. Start her →`,
   };
 }
 

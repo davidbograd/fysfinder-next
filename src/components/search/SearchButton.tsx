@@ -4,13 +4,13 @@ import React, { useState, useContext } from "react";
 import { useRouter } from "next/navigation";
 import { useSearch } from "./SearchProvider";
 
-interface RealSearchButtonProps {
+interface SearchButtonProps {
   text?: string;
   className?: string;
   onSearchExecuted?: (results: any) => void;
 }
 
-export const RealSearchButton: React.FC<RealSearchButtonProps> = ({
+export const SearchButton: React.FC<SearchButtonProps> = ({
   text = "Find Physiotherapists",
   className = "",
   onSearchExecuted,

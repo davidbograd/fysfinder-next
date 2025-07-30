@@ -1,4 +1,4 @@
-import { SearchFilters } from "@/components/search-v2/SearchProvider";
+import { SearchFilters } from "@/components/search/SearchProvider";
 
 // Parameter order for canonicalization (alphabetical)
 const CANONICAL_PARAM_ORDER = ["handicap", "ydernummer"] as const;

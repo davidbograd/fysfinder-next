@@ -9,12 +9,12 @@ import {
 } from "./SearchProvider";
 import { LocationSearch } from "./SearchInput/LocationSearch";
 import { SpecialtySearch } from "./SearchInput/SpecialtySearch";
-import { RealSearchButton } from "./RealSearchButton";
+import { SearchButton } from "./SearchButton";
 import { Checkbox } from "@/components/ui/checkbox";
 import { BookHeart, Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-interface MigrationWrapperProps {
+interface SearchInterfaceProps {
   specialties: {
     specialty_name: string;
     specialty_name_slug: string;
@@ -135,7 +135,7 @@ function SimpleFilters() {
           htmlFor="handicap"
           className="text-sm text-gray-700 cursor-pointer"
         >
-          Handicap Access
+          Handicapadgang
         </label>
       </div>
     </>
@@ -206,20 +206,20 @@ function MigrationContent({ showFilters }: { showFilters: boolean }) {
 
           {/* Search Button (Mobile Only - Desktop uses inline button) */}
           <div className="flex sm:hidden">
-            <RealSearchButton
+            <SearchButton
               text="Søg"
-              className="bg-logo-blue hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200 shadow-sm hover:shadow-md"
+              className="bg-logo-blue text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200 shadow-sm hover:shadow-md"
             />
           </div>
         </div>
       )}
 
-      {/* Search Button for pages without filters */}
+      {/* Mobile Search Button for Homepage (when no filters) */}
       {!showFilters && (
-        <div className="flex justify-center">
-          <RealSearchButton
+        <div className="flex sm:hidden justify-center mt-4">
+          <SearchButton
             text="Søg"
-            className="bg-logo-blue hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200 shadow-sm hover:shadow-md"
+            className="bg-logo-blue text-white px-8 py-3 rounded-lg font-medium shadow-sm w-full"
           />
         </div>
       )}
@@ -228,17 +228,17 @@ function MigrationContent({ showFilters }: { showFilters: boolean }) {
 }
 
 /**
- * Migration wrapper that provides new search functionality
- * while integrating with existing page structure
+ * Main search interface component that provides location, specialty, and filter functionality
+ * Integrates with existing page structure and supports both homepage and location pages
  */
-export function MigrationWrapper({
+export function SearchInterface({
   specialties,
   currentSpecialty,
   citySlug,
   defaultSearchValue,
   showFilters = false,
   initialFilters = {},
-}: MigrationWrapperProps) {
+}: SearchInterfaceProps) {
   // Transform props to SearchProvider format
   const initialLocation: LocationQuery | null = defaultSearchValue
     ? {

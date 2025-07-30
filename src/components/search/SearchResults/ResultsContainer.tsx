@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { SearchProvider, useSearch, FilterPanel } from "@/components/search-v2";
+import { SearchProvider, useSearch, FilterPanel } from "@/components/search";
 import { parseFiltersFromURL } from "@/utils/parameter-normalization";
 
 interface ResultsContainerProps {
