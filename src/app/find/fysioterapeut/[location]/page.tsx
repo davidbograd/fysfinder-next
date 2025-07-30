@@ -529,14 +529,18 @@ export default async function LocationPage({
             ]}
           />
 
-          <h1 className="text-3xl font-bold mb-2">{h1}</h1>
-          {h2 && <h2 className="text-lg text-gray-600 mb-4">{h2}</h2>}
+          <h1 className="text-2xl md:text-3xl font-bold mb-2">{h1}</h1>
+          {h2 && (
+            <h2 className="text-base md:text-lg text-gray-600 mb-4">{h2}</h2>
+          )}
 
           {/* Always show description */}
           <p className="text-gray-600 mb-8">
-            Fysfinder hjælper dig med at finde den bedste fysioterapeut i
-            Danmark. Se anmeldelser, specialer, priser og find den perfekte
-            fysioterapeut.
+            {data.clinics.length} fysioterapi klinikker i Danmark.
+            <span className="hidden md:inline">
+              {" "}
+              Sammenlign anmeldelser, specialer og mere.
+            </span>
           </p>
 
           {/* Kroniske smerter samarbejde med FAKS */}
@@ -638,8 +642,10 @@ export default async function LocationPage({
       <div className="max-w-[800px] mx-auto">
         <Breadcrumbs items={breadcrumbItems} />
 
-        <h1 className="text-3xl font-bold mb-2">{h1}</h1>
-        {h2 && <h2 className="text-lg text-gray-600 mb-4">{h2}</h2>}
+        <h1 className="text-2xl md:text-3xl font-bold mb-2">{h1}</h1>
+        {h2 && (
+          <h2 className="text-base md:text-lg text-gray-600 mb-4">{h2}</h2>
+        )}
 
         {/* Only show betegnelse if not online */}
         {!isOnline && data.city.betegnelse && (
@@ -649,8 +655,12 @@ export default async function LocationPage({
         {/* Always show description */}
         <p className="text-gray-600 mb-8">
           {isOnline
-            ? "Find den bedste online fysioterapi. Se anmeldelser, specialer, priser og find den perfekte fysioterapeut."
-            : `Find den bedste fysioterapi i ${data.city.bynavn}. Se anmeldelser, specialer, priser og find den perfekte fysioterapeut.`}
+            ? `${data.clinics.length} online fysioterapi klinikker.`
+            : `${data.clinics.length} fysioterapi klinikker i ${data.city.bynavn}.`}
+          <span className="hidden md:inline">
+            {" "}
+            Sammenlign anmeldelser, specialer og mere.
+          </span>
         </p>
 
         {params.specialty === "kroniske-smerter" && !isOnline && (
@@ -695,50 +705,44 @@ export default async function LocationPage({
             locationSlug={params.location}
           />
         ) : (
-          <>
-            <h3 className="text-sm text-gray-500 mb-4">
-              {data.clinics.length} fysioterapi klinikker fundet
-            </h3>
+          <div className="space-y-4">
+            {data.clinics.map((clinic: Clinic) => {
+              // If we're on a specialty page, reorder the specialties array to show the current specialty first
+              let orderedSpecialties = clinic.specialties;
+              if (params.specialty && clinic.specialties) {
+                orderedSpecialties = [
+                  ...clinic.specialties.filter(
+                    (s) => s.specialty_name_slug === params.specialty
+                  ),
+                  ...clinic.specialties.filter(
+                    (s) => s.specialty_name_slug !== params.specialty
+                  ),
+                ];
+              }
 
-            <div className="space-y-4">
-              {data.clinics.map((clinic: Clinic) => {
-                // If we're on a specialty page, reorder the specialties array to show the current specialty first
-                let orderedSpecialties = clinic.specialties;
-                if (params.specialty && clinic.specialties) {
-                  orderedSpecialties = [
-                    ...clinic.specialties.filter(
-                      (s) => s.specialty_name_slug === params.specialty
-                    ),
-                    ...clinic.specialties.filter(
-                      (s) => s.specialty_name_slug !== params.specialty
-                    ),
-                  ];
-                }
-
-                return (
-                  <Link
-                    key={clinic.clinics_id}
-                    href={`/klinik/${clinic.klinikNavnSlug}`}
-                    className="block"
-                  >
-                    <ClinicCard
-                      klinikNavn={clinic.klinikNavn}
-                      ydernummer={clinic.ydernummer}
-                      avgRating={clinic.avgRating}
-                      ratingCount={clinic.ratingCount}
-                      adresse={clinic.adresse}
-                      postnummer={clinic.postnummer}
-                      lokation={clinic.lokation}
-                      specialties={orderedSpecialties}
-                      team_members={clinic.team_members}
-                      premium_listing={clinic.premium_listing}
-                      handicapadgang={clinic.handicapadgang}
-                    />
-                  </Link>
-                );
-              })}
-            </div>
-          </>
+              return (
+                <Link
+                  key={clinic.clinics_id}
+                  href={`/klinik/${clinic.klinikNavnSlug}`}
+                  className="block"
+                >
+                  <ClinicCard
+                    klinikNavn={clinic.klinikNavn}
+                    ydernummer={clinic.ydernummer}
+                    avgRating={clinic.avgRating}
+                    ratingCount={clinic.ratingCount}
+                    adresse={clinic.adresse}
+                    postnummer={clinic.postnummer}
+                    lokation={clinic.lokation}
+                    specialties={orderedSpecialties}
+                    team_members={clinic.team_members}
+                    premium_listing={clinic.premium_listing}
+                    handicapadgang={clinic.handicapadgang}
+                  />
+                </Link>
+              );
+            })}
+          </div>
         )}
 
         {/* Hide NearbyClinicsList for Online location */}
