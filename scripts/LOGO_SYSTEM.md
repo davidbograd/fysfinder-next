@@ -1,13 +1,13 @@
 # Logo Caching System
 
-This system fetches and caches clinic logos at build time to optimize performance and reduce API usage.
+This system fetches and caches clinic logos manually to optimize performance and reduce API usage.
 
 ## How it Works
 
-### 1. Build-Time Logo Fetching
+### 1. Manual Logo Fetching
 
 - **Script**: `scripts/fetch-clinic-logos.ts`
-- **Trigger**: Runs automatically before each build (`prebuild` npm script)
+- **Trigger**: Run manually when needed (`npm run fetch:logos`)
 - **Process**:
   - Fetches all clinics with website URLs from Supabase
   - Extracts unique domains
@@ -63,13 +63,13 @@ src/lib/
 
 ## Usage
 
-### Manual Logo Fetch
+### Fetch All Logos
 
 ```bash
 npm run fetch:logos
 ```
 
-### Build (includes logo fetch)
+### Build (logos served from cache)
 
 ```bash
 npm run build

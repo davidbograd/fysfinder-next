@@ -125,7 +125,10 @@ async function fetchLogo(
 
     return { success: false };
   } catch (error) {
-    console.warn(`Failed to fetch logo for ${domain}:`, error.message);
+    console.warn(
+      `Failed to fetch logo for ${domain}:`,
+      error instanceof Error ? error.message : String(error)
+    );
     return { success: false };
   }
 }
@@ -266,7 +269,10 @@ async function main(): Promise<void> {
     console.log(`❌ Failed: ${failedCount} domains`);
     console.log(`📁 Cache file: ${CACHE_FILE}`);
   } catch (error) {
-    console.error("💥 Error during logo fetch:", error);
+    console.error(
+      "💥 Error during logo fetch:",
+      error instanceof Error ? error.message : String(error)
+    );
     process.exit(1);
   }
 }

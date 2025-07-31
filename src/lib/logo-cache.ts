@@ -33,7 +33,7 @@ function extractDomain(url: string): string | null {
  */
 async function loadLogoCache(): Promise<LogoCache> {
   if (logoCache !== null) {
-    return logoCache;
+    return logoCache as LogoCache;
   }
 
   try {
@@ -41,8 +41,9 @@ async function loadLogoCache(): Promise<LogoCache> {
     if (typeof window !== "undefined") {
       const response = await fetch("/logos/cache.json");
       if (response.ok) {
-        logoCache = await response.json();
-        return logoCache;
+        const data = await response.json();
+        logoCache = data || {};
+        return logoCache as LogoCache;
       }
     } else {
       // In Node.js/build time, read from file system
@@ -51,8 +52,9 @@ async function loadLogoCache(): Promise<LogoCache> {
 
       const cacheFile = path.join(process.cwd(), "public/logos/cache.json");
       const cacheData = await fs.readFile(cacheFile, "utf-8");
-      logoCache = JSON.parse(cacheData);
-      return logoCache;
+      const data = JSON.parse(cacheData);
+      logoCache = data || {};
+      return logoCache as LogoCache;
     }
   } catch (error) {
     console.warn("Failed to load logo cache:", error);
@@ -60,7 +62,7 @@ async function loadLogoCache(): Promise<LogoCache> {
 
   // Return empty cache if loading fails
   logoCache = {};
-  return logoCache;
+  return logoCache as LogoCache;
 }
 
 /**

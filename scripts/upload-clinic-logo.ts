@@ -163,7 +163,10 @@ Supported formats: PNG, JPG, JPEG, SVG, WEBP
     console.log(`🔗 Logo path: /logos/${targetFilename}`);
     console.log(`📊 Cache updated`);
   } catch (error) {
-    console.error("💥 Error uploading logo:", error);
+    console.error(
+      "💥 Error uploading logo:",
+      error instanceof Error ? error.message : String(error)
+    );
     process.exit(1);
   }
 }

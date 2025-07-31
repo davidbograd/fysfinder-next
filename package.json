@@ -6,7 +6,6 @@
     "dev": "cross-env NODE_NO_WARNINGS=1 next dev",
     "fetch:logos": "tsx scripts/fetch-clinic-logos.ts",
     "upload:logo": "tsx scripts/upload-clinic-logo.ts",
-    "prebuild": "npm run fetch:logos",
     "build": "NODE_NO_WARNINGS=1 next build",
     "start": "next start",
     "lint": "next lint",
