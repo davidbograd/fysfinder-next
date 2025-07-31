@@ -721,25 +721,23 @@ export default async function LocationPage({
               }
 
               return (
-                <Link
+                <ClinicCard
                   key={clinic.clinics_id}
-                  href={`/klinik/${clinic.klinikNavnSlug}`}
-                  className="block"
-                >
-                  <ClinicCard
-                    klinikNavn={clinic.klinikNavn}
-                    ydernummer={clinic.ydernummer}
-                    avgRating={clinic.avgRating}
-                    ratingCount={clinic.ratingCount}
-                    adresse={clinic.adresse}
-                    postnummer={clinic.postnummer}
-                    lokation={clinic.lokation}
-                    specialties={orderedSpecialties}
-                    team_members={clinic.team_members}
-                    premium_listing={clinic.premium_listing}
-                    handicapadgang={clinic.handicapadgang}
-                  />
-                </Link>
+                  klinikNavn={clinic.klinikNavn}
+                  klinikNavnSlug={clinic.klinikNavnSlug}
+                  ydernummer={clinic.ydernummer}
+                  avgRating={clinic.avgRating}
+                  ratingCount={clinic.ratingCount}
+                  adresse={clinic.adresse}
+                  postnummer={clinic.postnummer}
+                  lokation={clinic.lokation}
+                  website={clinic.website}
+                  tlf={clinic.tlf}
+                  specialties={orderedSpecialties}
+                  team_members={clinic.team_members}
+                  premium_listing={clinic.premium_listing}
+                  handicapadgang={clinic.handicapadgang}
+                />
               );
             })}
           </div>

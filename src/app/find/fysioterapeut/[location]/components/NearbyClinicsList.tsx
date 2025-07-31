@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { ClinicWithDistance } from "@/app/types";
 import ClinicCard from "../../../../../components/features/clinic/ClinicCard";
 
@@ -40,25 +39,24 @@ export function NearbyClinicsList({
           }
 
           return (
-            <Link
+            <ClinicCard
               key={clinic.clinics_id}
-              href={`/klinik/${clinic.klinikNavnSlug}`}
-              className="block"
-            >
-              <ClinicCard
-                klinikNavn={clinic.klinikNavn}
-                ydernummer={clinic.ydernummer}
-                avgRating={clinic.avgRating}
-                ratingCount={clinic.ratingCount}
-                adresse={clinic.adresse}
-                postnummer={clinic.postnummer}
-                lokation={clinic.lokation}
-                distance={clinic.distance}
-                specialties={orderedSpecialties}
-                team_members={clinic.team_members}
-                premium_listing={clinic.premium_listing}
-              />
-            </Link>
+              klinikNavn={clinic.klinikNavn}
+              klinikNavnSlug={clinic.klinikNavnSlug}
+              ydernummer={clinic.ydernummer}
+              avgRating={clinic.avgRating}
+              ratingCount={clinic.ratingCount}
+              adresse={clinic.adresse}
+              postnummer={clinic.postnummer}
+              lokation={clinic.lokation}
+              website={clinic.website}
+              tlf={clinic.tlf}
+              distance={clinic.distance}
+              specialties={orderedSpecialties}
+              team_members={clinic.team_members}
+              premium_listing={clinic.premium_listing}
+              handicapadgang={clinic.handicapadgang}
+            />
           );
         })}
       </div>

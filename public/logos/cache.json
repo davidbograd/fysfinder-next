@@ -1,0 +1,4415 @@
+{
+  "copenhagenphysio.dk": {
+    "status": "success",
+    "logoPath": "/logos/copenhagenphysio.dk.png",
+    "lastChecked": 1753933890386,
+    "attempts": 1
+  },
+  "fysioterapi.fitogsund.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysioterapi.fitogsund.dk.png",
+    "lastChecked": 1753933890389,
+    "attempts": 1
+  },
+  "fyshuset.dk": {
+    "status": "success",
+    "logoPath": "/logos/fyshuset.dk.png",
+    "lastChecked": 1753933890390,
+    "attempts": 1
+  },
+  "thorosgym.dk": {
+    "status": "success",
+    "logoPath": "/logos/thorosgym.dk.png",
+    "lastChecked": 1753933890392,
+    "attempts": 1
+  },
+  "boernefysioterapeut.dk": {
+    "status": "success",
+    "logoPath": "/logos/boernefysioterapeut.dk.png",
+    "lastChecked": 1753933890392,
+    "attempts": 1
+  },
+  "effx.dk": {
+    "status": "success",
+    "logoPath": "/logos/effx.dk.png",
+    "lastChecked": 1753933893073,
+    "attempts": 1
+  },
+  "greve.dk": {
+    "status": "success",
+    "logoPath": "/logos/greve.dk.png",
+    "lastChecked": 1753933893074,
+    "attempts": 1
+  },
+  "bevaegeakademiet.dk": {
+    "status": "success",
+    "logoPath": "/logos/bevaegeakademiet.dk.png",
+    "lastChecked": 1753933893074,
+    "attempts": 1
+  },
+  "hedenstedcentret.dk": {
+    "status": "success",
+    "logoPath": "/logos/hedenstedcentret.dk.png",
+    "lastChecked": 1753933893074,
+    "attempts": 1
+  },
+  "manipfysio.dk": {
+    "status": "success",
+    "logoPath": "/logos/manipfysio.dk.png",
+    "lastChecked": 1753933893075,
+    "attempts": 1
+  },
+  "ryfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/ryfys.dk.png",
+    "lastChecked": 1753933894624,
+    "attempts": 1
+  },
+  "varde-fysio.dk": {
+    "status": "success",
+    "logoPath": "/logos/varde-fysio.dk.png",
+    "lastChecked": 1753933894624,
+    "attempts": 1
+  },
+  "fysiodanmarkkolding.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiodanmarkkolding.dk.png",
+    "lastChecked": 1753933894623,
+    "attempts": 1
+  },
+  "stfysiocenter.dk": {
+    "status": "success",
+    "logoPath": "/logos/stfysiocenter.dk.png",
+    "lastChecked": 1753933894623,
+    "attempts": 1
+  },
+  "aalokkens-fysioterapi-odense.dk": {
+    "status": "success",
+    "logoPath": "/logos/aalokkens-fysioterapi-odense.dk.png",
+    "lastChecked": 1753933894624,
+    "attempts": 1
+  },
+  "fredfys.dk": {
+    "status": "failed",
+    "lastChecked": 1753933896788,
+    "attempts": 1
+  },
+  "nordthyfys.dk": {
+    "status": "failed",
+    "lastChecked": 1753933896788,
+    "attempts": 1
+  },
+  "klinikschoeler.dk": {
+    "status": "success",
+    "logoPath": "/logos/klinikschoeler.dk.png",
+    "lastChecked": 1753933896789,
+    "attempts": 1
+  },
+  "aarupfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/aarupfysioterapi.dk.png",
+    "lastChecked": 1753933896787,
+    "attempts": 1
+  },
+  "skodsborgfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753933896789,
+    "attempts": 1
+  },
+  "fysiq.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiq.dk.png",
+    "lastChecked": 1753933901223,
+    "attempts": 1
+  },
+  "fitogsund.dk": {
+    "status": "success",
+    "logoPath": "/logos/fitogsund.dk.png",
+    "lastChecked": 1753933901222,
+    "attempts": 1
+  },
+  "benefit.dk": {
+    "status": "success",
+    "logoPath": "/logos/benefit.dk.png",
+    "lastChecked": 1753933901223,
+    "attempts": 1
+  },
+  "fysionova.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysionova.dk.png",
+    "lastChecked": 1753933901222,
+    "attempts": 1
+  },
+  "snowfunklinik.dk": {
+    "status": "success",
+    "logoPath": "/logos/snowfunklinik.dk.png",
+    "lastChecked": 1753933901222,
+    "attempts": 1
+  },
+  "fysiospecialistteam.dk": {
+    "status": "failed",
+    "lastChecked": 1753933902632,
+    "attempts": 1
+  },
+  "fysioklinikken.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysioklinikken.dk.png",
+    "lastChecked": 1753933902632,
+    "attempts": 1
+  },
+  "vb24.dk": {
+    "status": "failed",
+    "lastChecked": 1753933902633,
+    "attempts": 1
+  },
+  "bio-fys.dk": {
+    "status": "failed",
+    "lastChecked": 1753933902632,
+    "attempts": 1
+  },
+  "odensefys.dk": {
+    "status": "success",
+    "logoPath": "/logos/odensefys.dk.png",
+    "lastChecked": 1753933902632,
+    "attempts": 1
+  },
+  "langelands-fys.dk": {
+    "status": "failed",
+    "lastChecked": 1753933904031,
+    "attempts": 1
+  },
+  "furesofysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753933904031,
+    "attempts": 1
+  },
+  "nibefysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753933904030,
+    "attempts": 1
+  },
+  "gild-fys.dk": {
+    "status": "success",
+    "logoPath": "/logos/gild-fys.dk.png",
+    "lastChecked": 1753933904031,
+    "attempts": 1
+  },
+  "fysiodanmarkkalundborg.dk": {
+    "status": "failed",
+    "lastChecked": 1753933904031,
+    "attempts": 1
+  },
+  "fredensborgsundhedscenter.dk": {
+    "status": "failed",
+    "lastChecked": 1753933909233,
+    "attempts": 1
+  },
+  "bulowsvejfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/bulowsvejfys.dk.png",
+    "lastChecked": 1753933909233,
+    "attempts": 1
+  },
+  "klatreskader.dk": {
+    "status": "success",
+    "logoPath": "/logos/klatreskader.dk.png",
+    "lastChecked": 1753933909232,
+    "attempts": 1
+  },
+  "plfysio.dk": {
+    "status": "success",
+    "logoPath": "/logos/plfysio.dk.png",
+    "lastChecked": 1753933909232,
+    "attempts": 1
+  },
+  "jeanetchortsen.dk": {
+    "status": "success",
+    "logoPath": "/logos/jeanetchortsen.dk.png",
+    "lastChecked": 1753933909232,
+    "attempts": 1
+  },
+  "buddingevejfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/buddingevejfysioterapi.dk.png",
+    "lastChecked": 1753933911758,
+    "attempts": 1
+  },
+  "spechealth.dk": {
+    "status": "failed",
+    "lastChecked": 1753933911758,
+    "attempts": 1
+  },
+  "dengamleavlsgaard.dk": {
+    "status": "success",
+    "logoPath": "/logos/dengamleavlsgaard.dk.png",
+    "lastChecked": 1753933911757,
+    "attempts": 1
+  },
+  "henrikfalsvig.dk": {
+    "status": "success",
+    "logoPath": "/logos/henrikfalsvig.dk.png",
+    "lastChecked": 1753933911757,
+    "attempts": 1
+  },
+  "sktannefysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/sktannefysioterapi.dk.png",
+    "lastChecked": 1753933911757,
+    "attempts": 1
+  },
+  "elitefys.dk": {
+    "status": "success",
+    "logoPath": "/logos/elitefys.dk.png",
+    "lastChecked": 1753933914378,
+    "attempts": 1
+  },
+  "asfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753933914378,
+    "attempts": 1
+  },
+  "klinikforfysio.dk": {
+    "status": "failed",
+    "lastChecked": 1753933914378,
+    "attempts": 1
+  },
+  "bramming-fysio.dk": {
+    "status": "success",
+    "logoPath": "/logos/bramming-fysio.dk.png",
+    "lastChecked": 1753933914378,
+    "attempts": 1
+  },
+  "jpfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/jpfysioterapi.dk.png",
+    "lastChecked": 1753933914378,
+    "attempts": 1
+  },
+  "fysio360.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysio360.dk.png",
+    "lastChecked": 1753933917171,
+    "attempts": 1
+  },
+  "fysion-specialklinik.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysion-specialklinik.dk.png",
+    "lastChecked": 1753933917172,
+    "attempts": 1
+  },
+  "fysium.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysium.dk.png",
+    "lastChecked": 1753933917171,
+    "attempts": 1
+  },
+  "stengadeklinikken.dk": {
+    "status": "success",
+    "logoPath": "/logos/stengadeklinikken.dk.png",
+    "lastChecked": 1753933917171,
+    "attempts": 1
+  },
+  "profundus.dk": {
+    "status": "success",
+    "logoPath": "/logos/profundus.dk.png",
+    "lastChecked": 1753933917172,
+    "attempts": 1
+  },
+  "fysiopuls.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiopuls.dk.png",
+    "lastChecked": 1753933919661,
+    "attempts": 1
+  },
+  "protreatment.dk": {
+    "status": "success",
+    "logoPath": "/logos/protreatment.dk.png",
+    "lastChecked": 1753933919662,
+    "attempts": 1
+  },
+  "winkelmanns.com": {
+    "status": "failed",
+    "lastChecked": 1753933919662,
+    "attempts": 1
+  },
+  "hvalsoefysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/hvalsoefysioterapi.dk.png",
+    "lastChecked": 1753933919661,
+    "attempts": 1
+  },
+  "sydkystensosteopati.dk": {
+    "status": "success",
+    "logoPath": "/logos/sydkystensosteopati.dk.png",
+    "lastChecked": 1753933919660,
+    "attempts": 1
+  },
+  "ribe-fysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/ribe-fysioterapi.dk.png",
+    "lastChecked": 1753933922878,
+    "attempts": 1
+  },
+  "birkerødfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753933922878,
+    "attempts": 1
+  },
+  "vivofysioterapi.com": {
+    "status": "success",
+    "logoPath": "/logos/vivofysioterapi.com.png",
+    "lastChecked": 1753933922878,
+    "attempts": 1
+  },
+  "kvindekroppen.dk": {
+    "status": "success",
+    "logoPath": "/logos/kvindekroppen.dk.png",
+    "lastChecked": 1753933922878,
+    "attempts": 1
+  },
+  "gtfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/gtfys.dk.png",
+    "lastChecked": 1753933922879,
+    "attempts": 1
+  },
+  "bene-fit.dk": {
+    "status": "success",
+    "logoPath": "/logos/bene-fit.dk.png",
+    "lastChecked": 1753933925212,
+    "attempts": 1
+  },
+  "postur.dk": {
+    "status": "success",
+    "logoPath": "/logos/postur.dk.png",
+    "lastChecked": 1753933925212,
+    "attempts": 1
+  },
+  "ebeltoftfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753933925212,
+    "attempts": 1
+  },
+  "odenserygklinik.dk": {
+    "status": "success",
+    "logoPath": "/logos/odenserygklinik.dk.png",
+    "lastChecked": 1753933925212,
+    "attempts": 1
+  },
+  "rygogsport.dk": {
+    "status": "failed",
+    "lastChecked": 1753933925212,
+    "attempts": 1
+  },
+  "csj-fysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/csj-fysioterapi.dk.png",
+    "lastChecked": 1753933928031,
+    "attempts": 1
+  },
+  "fysiodanmarkvejle.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiodanmarkvejle.dk.png",
+    "lastChecked": 1753933928031,
+    "attempts": 1
+  },
+  "move2peak.dk": {
+    "status": "success",
+    "logoPath": "/logos/move2peak.dk.png",
+    "lastChecked": 1753933928031,
+    "attempts": 1
+  },
+  "manuelmedicinsklinik.dk": {
+    "status": "failed",
+    "lastChecked": 1753933928031,
+    "attempts": 1
+  },
+  "breviks.dk": {
+    "status": "failed",
+    "lastChecked": 1753933928031,
+    "attempts": 1
+  },
+  "centerforsundhed.dk": {
+    "status": "success",
+    "logoPath": "/logos/centerforsundhed.dk.png",
+    "lastChecked": 1753933930312,
+    "attempts": 1
+  },
+  "klinikboegen.dk": {
+    "status": "failed",
+    "lastChecked": 1753933930312,
+    "attempts": 1
+  },
+  "sportsfyssen.dk": {
+    "status": "success",
+    "logoPath": "/logos/sportsfyssen.dk.png",
+    "lastChecked": 1753933930312,
+    "attempts": 1
+  },
+  "vibyfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/vibyfysioterapi.dk.png",
+    "lastChecked": 1753933930312,
+    "attempts": 1
+  },
+  "bredballefys.dk": {
+    "status": "success",
+    "logoPath": "/logos/bredballefys.dk.png",
+    "lastChecked": 1753933930312,
+    "attempts": 1
+  },
+  "skanderborg-fys.dk": {
+    "status": "success",
+    "logoPath": "/logos/skanderborg-fys.dk.png",
+    "lastChecked": 1753933932733,
+    "attempts": 1
+  },
+  "fysioterapeuternekongensgade.dk": {
+    "status": "failed",
+    "lastChecked": 1753933932732,
+    "attempts": 1
+  },
+  "faaborg-fysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753933932733,
+    "attempts": 1
+  },
+  "fredericiafysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/fredericiafysioterapi.dk.png",
+    "lastChecked": 1753933932733,
+    "attempts": 1
+  },
+  "fysnu.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysnu.dk.png",
+    "lastChecked": 1753933932733,
+    "attempts": 1
+  },
+  "kiro-fys.dk": {
+    "status": "success",
+    "logoPath": "/logos/kiro-fys.dk.png",
+    "lastChecked": 1753933935706,
+    "attempts": 1
+  },
+  "gymnastikhuset.net": {
+    "status": "success",
+    "logoPath": "/logos/gymnastikhuset.net.png",
+    "lastChecked": 1753933935706,
+    "attempts": 1
+  },
+  "haslefysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/haslefysioterapi.dk.png",
+    "lastChecked": 1753933935706,
+    "attempts": 1
+  },
+  "fyshusetvalby.dk": {
+    "status": "success",
+    "logoPath": "/logos/fyshusetvalby.dk.png",
+    "lastChecked": 1753933935706,
+    "attempts": 1
+  },
+  "graastenfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/graastenfysioterapi.dk.png",
+    "lastChecked": 1753933935705,
+    "attempts": 1
+  },
+  "fysionygade.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysionygade.dk.png",
+    "lastChecked": 1753933940532,
+    "attempts": 1
+  },
+  "fysioterapien.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysioterapien.dk.png",
+    "lastChecked": 1753933940531,
+    "attempts": 1
+  },
+  "rmfys.dk": {
+    "status": "failed",
+    "lastChecked": 1753933940531,
+    "attempts": 1
+  },
+  "vallensbaek-fysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753933940531,
+    "attempts": 1
+  },
+  "rodovrefys.dk": {
+    "status": "success",
+    "logoPath": "/logos/rodovrefys.dk.png",
+    "lastChecked": 1753933940532,
+    "attempts": 1
+  },
+  "qure.nu": {
+    "status": "success",
+    "logoPath": "/logos/qure.nu.png",
+    "lastChecked": 1753933941854,
+    "attempts": 1
+  },
+  "fdaalborg.dk": {
+    "status": "success",
+    "logoPath": "/logos/fdaalborg.dk.png",
+    "lastChecked": 1753933941854,
+    "attempts": 1
+  },
+  "fixyou.dk": {
+    "status": "success",
+    "logoPath": "/logos/fixyou.dk.png",
+    "lastChecked": 1753933941854,
+    "attempts": 1
+  },
+  "parkallefys.dk": {
+    "status": "success",
+    "logoPath": "/logos/parkallefys.dk.png",
+    "lastChecked": 1753933941854,
+    "attempts": 1
+  },
+  "jlsportsklinik.dk": {
+    "status": "success",
+    "logoPath": "/logos/jlsportsklinik.dk.png",
+    "lastChecked": 1753933941854,
+    "attempts": 1
+  },
+  "klinikforlivoglindring.dk": {
+    "status": "failed",
+    "lastChecked": 1753933943911,
+    "attempts": 1
+  },
+  "farsofysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753933943911,
+    "attempts": 1
+  },
+  "loberlab.dk": {
+    "status": "success",
+    "logoPath": "/logos/loberlab.dk.png",
+    "lastChecked": 1753933943910,
+    "attempts": 1
+  },
+  "fysiolife.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiolife.dk.png",
+    "lastChecked": 1753933943911,
+    "attempts": 1
+  },
+  "fysiodanmarkaabenraa.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiodanmarkaabenraa.dk.png",
+    "lastChecked": 1753933943911,
+    "attempts": 1
+  },
+  "orogsund.dk": {
+    "status": "success",
+    "logoPath": "/logos/orogsund.dk.png",
+    "lastChecked": 1753933948347,
+    "attempts": 1
+  },
+  "seeberghealth.com": {
+    "status": "success",
+    "logoPath": "/logos/seeberghealth.com.png",
+    "lastChecked": 1753933948347,
+    "attempts": 1
+  },
+  "koldingosteopati.dk": {
+    "status": "failed",
+    "lastChecked": 1753933948346,
+    "attempts": 1
+  },
+  "valbyfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753933948347,
+    "attempts": 1
+  },
+  "fysioplus.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysioplus.dk.png",
+    "lastChecked": 1753933948347,
+    "attempts": 1
+  },
+  "wittcare.com": {
+    "status": "success",
+    "logoPath": "/logos/wittcare.com.png",
+    "lastChecked": 1753933950638,
+    "attempts": 1
+  },
+  "rygcentermidtvest.dk": {
+    "status": "success",
+    "logoPath": "/logos/rygcentermidtvest.dk.png",
+    "lastChecked": 1753933950638,
+    "attempts": 1
+  },
+  "cphosteopati.com": {
+    "status": "success",
+    "logoPath": "/logos/cphosteopati.com.png",
+    "lastChecked": 1753933950638,
+    "attempts": 1
+  },
+  "yogaspiren.dk": {
+    "status": "failed",
+    "lastChecked": 1753933950638,
+    "attempts": 1
+  },
+  "abenthfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/abenthfysioterapi.dk.png",
+    "lastChecked": 1753933950637,
+    "attempts": 1
+  },
+  "completefysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/completefysioterapi.dk.png",
+    "lastChecked": 1753933952213,
+    "attempts": 1
+  },
+  "fysogtraen.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysogtraen.dk.png",
+    "lastChecked": 1753933952213,
+    "attempts": 1
+  },
+  "esbjerg-fys.dk": {
+    "status": "failed",
+    "lastChecked": 1753933952213,
+    "attempts": 1
+  },
+  "fitliv.dk": {
+    "status": "failed",
+    "lastChecked": 1753933952213,
+    "attempts": 1
+  },
+  "fysio-fat.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysio-fat.dk.png",
+    "lastChecked": 1753933952213,
+    "attempts": 1
+  },
+  "fysiospecialisten.dk": {
+    "status": "failed",
+    "lastChecked": 1753933954601,
+    "attempts": 1
+  },
+  "denlillefys.dk": {
+    "status": "success",
+    "logoPath": "/logos/denlillefys.dk.png",
+    "lastChecked": 1753933954601,
+    "attempts": 1
+  },
+  "fysiocamp.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiocamp.dk.png",
+    "lastChecked": 1753933954601,
+    "attempts": 1
+  },
+  "a-fys.dk": {
+    "status": "success",
+    "logoPath": "/logos/a-fys.dk.png",
+    "lastChecked": 1753933954600,
+    "attempts": 1
+  },
+  "frankinstituteofsports.com": {
+    "status": "success",
+    "logoPath": "/logos/frankinstituteofsports.com.png",
+    "lastChecked": 1753933954600,
+    "attempts": 1
+  },
+  "fit-in.dk": {
+    "status": "success",
+    "logoPath": "/logos/fit-in.dk.png",
+    "lastChecked": 1753933956153,
+    "attempts": 1
+  },
+  "fysiokolding.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiokolding.dk.png",
+    "lastChecked": 1753933956154,
+    "attempts": 1
+  },
+  "bike4fit.dk": {
+    "status": "success",
+    "logoPath": "/logos/bike4fit.dk.png",
+    "lastChecked": 1753933956153,
+    "attempts": 1
+  },
+  "fabrikkensundhed.dk": {
+    "status": "success",
+    "logoPath": "/logos/fabrikkensundhed.dk.png",
+    "lastChecked": 1753933956152,
+    "attempts": 1
+  },
+  "aendringforlivet.dk": {
+    "status": "failed",
+    "lastChecked": 1753933956153,
+    "attempts": 1
+  },
+  "fysio-elite.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysio-elite.dk.png",
+    "lastChecked": 1753933958589,
+    "attempts": 1
+  },
+  "fysroskilde.dk": {
+    "status": "failed",
+    "lastChecked": 1753933958589,
+    "attempts": 1
+  },
+  "fysiosyd.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiosyd.dk.png",
+    "lastChecked": 1753933958589,
+    "attempts": 1
+  },
+  "dedicatio.dk": {
+    "status": "success",
+    "logoPath": "/logos/dedicatio.dk.png",
+    "lastChecked": 1753933958589,
+    "attempts": 1
+  },
+  "thyfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/thyfys.dk.png",
+    "lastChecked": 1753933958589,
+    "attempts": 1
+  },
+  "køgebugtrygogknæ.dk": {
+    "status": "failed",
+    "lastChecked": 1753933961385,
+    "attempts": 1
+  },
+  "rofi.dk": {
+    "status": "success",
+    "logoPath": "/logos/rofi.dk.png",
+    "lastChecked": 1753933961384,
+    "attempts": 1
+  },
+  "fysio.sundhedenshus.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysio.sundhedenshus.dk.png",
+    "lastChecked": 1753933961383,
+    "attempts": 1
+  },
+  "galtenfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/galtenfys.dk.png",
+    "lastChecked": 1753933961384,
+    "attempts": 1
+  },
+  "auningfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/auningfys.dk.png",
+    "lastChecked": 1753933961384,
+    "attempts": 1
+  },
+  "fysio.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysio.dk.png",
+    "lastChecked": 1753933964113,
+    "attempts": 1
+  },
+  "fysiocare.dk": {
+    "status": "failed",
+    "lastChecked": 1753933964113,
+    "attempts": 1
+  },
+  "loenbjergfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753933964113,
+    "attempts": 1
+  },
+  "rosepilates-healingogkst.dk": {
+    "status": "success",
+    "logoPath": "/logos/rosepilates-healingogkst.dk.png",
+    "lastChecked": 1753933964113,
+    "attempts": 1
+  },
+  "loeftfyspt.dk": {
+    "status": "success",
+    "logoPath": "/logos/loeftfyspt.dk.png",
+    "lastChecked": 1753933964113,
+    "attempts": 1
+  },
+  "amagerbrofysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/amagerbrofysioterapi.dk.png",
+    "lastChecked": 1753933966387,
+    "attempts": 1
+  },
+  "fysmassage-amager.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysmassage-amager.dk.png",
+    "lastChecked": 1753933966387,
+    "attempts": 1
+  },
+  "lymfehuset.dk": {
+    "status": "success",
+    "logoPath": "/logos/lymfehuset.dk.png",
+    "lastChecked": 1753933966387,
+    "attempts": 1
+  },
+  "linefysio.dk": {
+    "status": "success",
+    "logoPath": "/logos/linefysio.dk.png",
+    "lastChecked": 1753933966387,
+    "attempts": 1
+  },
+  "aktivfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/aktivfysioterapi.dk.png",
+    "lastChecked": 1753933966386,
+    "attempts": 1
+  },
+  "fysiodanmark-silkeborg.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiodanmark-silkeborg.dk.png",
+    "lastChecked": 1753933968859,
+    "attempts": 1
+  },
+  "aabenraa-fysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753933968859,
+    "attempts": 1
+  },
+  "virksundhed.dk": {
+    "status": "failed",
+    "lastChecked": 1753933968858,
+    "attempts": 1
+  },
+  "roskildeklinikken.dk": {
+    "status": "success",
+    "logoPath": "/logos/roskildeklinikken.dk.png",
+    "lastChecked": 1753933968859,
+    "attempts": 1
+  },
+  "kiropraktorgrenaa.dk": {
+    "status": "success",
+    "logoPath": "/logos/kiropraktorgrenaa.dk.png",
+    "lastChecked": 1753933968859,
+    "attempts": 1
+  },
+  "physical-movement.dk": {
+    "status": "success",
+    "logoPath": "/logos/physical-movement.dk.png",
+    "lastChecked": 1753933973805,
+    "attempts": 1
+  },
+  "fysiocompany.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiocompany.dk.png",
+    "lastChecked": 1753933973805,
+    "attempts": 1
+  },
+  "sandvedfys.dk": {
+    "status": "failed",
+    "lastChecked": 1753933973805,
+    "attempts": 1
+  },
+  "trivselsvaerkstedet.dk": {
+    "status": "success",
+    "logoPath": "/logos/trivselsvaerkstedet.dk.png",
+    "lastChecked": 1753933973805,
+    "attempts": 1
+  },
+  "osteocare.dk": {
+    "status": "success",
+    "logoPath": "/logos/osteocare.dk.png",
+    "lastChecked": 1753933973805,
+    "attempts": 1
+  },
+  "abfysio.dk": {
+    "status": "success",
+    "logoPath": "/logos/abfysio.dk.png",
+    "lastChecked": 1753933977887,
+    "attempts": 1
+  },
+  "roskilde-fysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/roskilde-fysioterapi.dk.png",
+    "lastChecked": 1753933977887,
+    "attempts": 1
+  },
+  "dansklymfodemklinik.dk": {
+    "status": "failed",
+    "lastChecked": 1753933977886,
+    "attempts": 1
+  },
+  "lejenfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/lejenfys.dk.png",
+    "lastChecked": 1753933977886,
+    "attempts": 1
+  },
+  "fysiocenterroskilde.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiocenterroskilde.dk.png",
+    "lastChecked": 1753933977887,
+    "attempts": 1
+  },
+  "smertefys.nu": {
+    "status": "success",
+    "logoPath": "/logos/smertefys.nu.png",
+    "lastChecked": 1753933980225,
+    "attempts": 1
+  },
+  "sofiendal-sundhedsteam.dk": {
+    "status": "failed",
+    "lastChecked": 1753933980226,
+    "attempts": 1
+  },
+  "fysogsmerte.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysogsmerte.dk.png",
+    "lastChecked": 1753933980225,
+    "attempts": 1
+  },
+  "aarhusrygklinik.dk": {
+    "status": "success",
+    "logoPath": "/logos/aarhusrygklinik.dk.png",
+    "lastChecked": 1753933980226,
+    "attempts": 1
+  },
+  "kropsvaerkstedet.dk": {
+    "status": "success",
+    "logoPath": "/logos/kropsvaerkstedet.dk.png",
+    "lastChecked": 1753933980226,
+    "attempts": 1
+  },
+  "tarm-laegehus.dk": {
+    "status": "failed",
+    "lastChecked": 1753933983517,
+    "attempts": 1
+  },
+  "lymfoedem.dk": {
+    "status": "failed",
+    "lastChecked": 1753933983518,
+    "attempts": 1
+  },
+  "silkeborgosteopati.dk": {
+    "status": "success",
+    "logoPath": "/logos/silkeborgosteopati.dk.png",
+    "lastChecked": 1753933983518,
+    "attempts": 1
+  },
+  "svendborgfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/svendborgfysioterapi.dk.png",
+    "lastChecked": 1753933983518,
+    "attempts": 1
+  },
+  "gug-fysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753933983517,
+    "attempts": 1
+  },
+  "trøjborgfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753933993806,
+    "attempts": 1
+  },
+  "naestvedfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753933993809,
+    "attempts": 1
+  },
+  "silkeborg-fysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/silkeborg-fysioterapi.dk.png",
+    "lastChecked": 1753933993808,
+    "attempts": 1
+  },
+  "sallingfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753933993807,
+    "attempts": 1
+  },
+  "fysioterapeuterne.nu": {
+    "status": "success",
+    "logoPath": "/logos/fysioterapeuterne.nu.png",
+    "lastChecked": 1753933993811,
+    "attempts": 1
+  },
+  "toender.dk": {
+    "status": "success",
+    "logoPath": "/logos/toender.dk.png",
+    "lastChecked": 1753933996620,
+    "attempts": 1
+  },
+  "profysionel.dk": {
+    "status": "success",
+    "logoPath": "/logos/profysionel.dk.png",
+    "lastChecked": 1753933996620,
+    "attempts": 1
+  },
+  "lcbodycare.dk": {
+    "status": "success",
+    "logoPath": "/logos/lcbodycare.dk.png",
+    "lastChecked": 1753933996620,
+    "attempts": 1
+  },
+  "fysogsund.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysogsund.dk.png",
+    "lastChecked": 1753933996620,
+    "attempts": 1
+  },
+  "finddinvej.nu": {
+    "status": "success",
+    "logoPath": "/logos/finddinvej.nu.png",
+    "lastChecked": 1753933996620,
+    "attempts": 1
+  },
+  "frederiksbjergfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/frederiksbjergfysioterapi.dk.png",
+    "lastChecked": 1753933999333,
+    "attempts": 1
+  },
+  "asnaesfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/asnaesfysioterapi.dk.png",
+    "lastChecked": 1753933999334,
+    "attempts": 1
+  },
+  "borupfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/borupfysioterapi.dk.png",
+    "lastChecked": 1753933999334,
+    "attempts": 1
+  },
+  "kst-fys.dk": {
+    "status": "failed",
+    "lastChecked": 1753933999333,
+    "attempts": 1
+  },
+  "howtobreathe.dk": {
+    "status": "success",
+    "logoPath": "/logos/howtobreathe.dk.png",
+    "lastChecked": 1753933999333,
+    "attempts": 1
+  },
+  "trorodfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934001965,
+    "attempts": 1
+  },
+  "fysioterapiengudme.dk": {
+    "status": "failed",
+    "lastChecked": 1753934001965,
+    "attempts": 1
+  },
+  "fysiocure.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiocure.dk.png",
+    "lastChecked": 1753934001964,
+    "attempts": 1
+  },
+  "aalborgfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/aalborgfysioterapi.dk.png",
+    "lastChecked": 1753934001965,
+    "attempts": 1
+  },
+  "gudenaadalens-fysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/gudenaadalens-fysioterapi.dk.png",
+    "lastChecked": 1753934001965,
+    "attempts": 1
+  },
+  "rygklinikkenbramming.dk": {
+    "status": "failed",
+    "lastChecked": 1753934004105,
+    "attempts": 1
+  },
+  "hildrum.dk": {
+    "status": "success",
+    "logoPath": "/logos/hildrum.dk.png",
+    "lastChecked": 1753934004105,
+    "attempts": 1
+  },
+  "lisebak.dk": {
+    "status": "success",
+    "logoPath": "/logos/lisebak.dk.png",
+    "lastChecked": 1753934004105,
+    "attempts": 1
+  },
+  "karinanikolajsen.dk": {
+    "status": "success",
+    "logoPath": "/logos/karinanikolajsen.dk.png",
+    "lastChecked": 1753934004104,
+    "attempts": 1
+  },
+  "parkensfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/parkensfysioterapi.dk.png",
+    "lastChecked": 1753934004105,
+    "attempts": 1
+  },
+  "rygcenterskjern.dk": {
+    "status": "failed",
+    "lastChecked": 1753934006234,
+    "attempts": 1
+  },
+  "fysioekmann.dk": {
+    "status": "failed",
+    "lastChecked": 1753934006235,
+    "attempts": 1
+  },
+  "womanhood.dk": {
+    "status": "success",
+    "logoPath": "/logos/womanhood.dk.png",
+    "lastChecked": 1753934006234,
+    "attempts": 1
+  },
+  "akutfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/akutfys.dk.png",
+    "lastChecked": 1753934006233,
+    "attempts": 1
+  },
+  "sos-fysio.dk": {
+    "status": "success",
+    "logoPath": "/logos/sos-fysio.dk.png",
+    "lastChecked": 1753934006234,
+    "attempts": 1
+  },
+  "lfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/lfys.dk.png",
+    "lastChecked": 1753934009400,
+    "attempts": 1
+  },
+  "klinikundervaerk.dk": {
+    "status": "success",
+    "logoPath": "/logos/klinikundervaerk.dk.png",
+    "lastChecked": 1753934009400,
+    "attempts": 1
+  },
+  "aulumfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/aulumfys.dk.png",
+    "lastChecked": 1753934009400,
+    "attempts": 1
+  },
+  "michagron.dk": {
+    "status": "success",
+    "logoPath": "/logos/michagron.dk.png",
+    "lastChecked": 1753934009399,
+    "attempts": 1
+  },
+  "brandefys.dk": {
+    "status": "success",
+    "logoPath": "/logos/brandefys.dk.png",
+    "lastChecked": 1753934009400,
+    "attempts": 1
+  },
+  "scoliofys.dk": {
+    "status": "success",
+    "logoPath": "/logos/scoliofys.dk.png",
+    "lastChecked": 1753934012602,
+    "attempts": 1
+  },
+  "bronshojfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/bronshojfys.dk.png",
+    "lastChecked": 1753934012601,
+    "attempts": 1
+  },
+  "loebeklinikken.dk": {
+    "status": "success",
+    "logoPath": "/logos/loebeklinikken.dk.png",
+    "lastChecked": 1753934012602,
+    "attempts": 1
+  },
+  "braedstrup-fys.dk": {
+    "status": "success",
+    "logoPath": "/logos/braedstrup-fys.dk.png",
+    "lastChecked": 1753934012601,
+    "attempts": 1
+  },
+  "ordrupfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/ordrupfysioterapi.dk.png",
+    "lastChecked": 1753934012602,
+    "attempts": 1
+  },
+  "myo.nu": {
+    "status": "success",
+    "logoPath": "/logos/myo.nu.png",
+    "lastChecked": 1753934014923,
+    "attempts": 1
+  },
+  "fysplus.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysplus.dk.png",
+    "lastChecked": 1753934014923,
+    "attempts": 1
+  },
+  "sundhedmedmening.dk": {
+    "status": "success",
+    "logoPath": "/logos/sundhedmedmening.dk.png",
+    "lastChecked": 1753934014923,
+    "attempts": 1
+  },
+  "dinfysioterapeut.dk": {
+    "status": "success",
+    "logoPath": "/logos/dinfysioterapeut.dk.png",
+    "lastChecked": 1753934014923,
+    "attempts": 1
+  },
+  "trilab.dk": {
+    "status": "success",
+    "logoPath": "/logos/trilab.dk.png",
+    "lastChecked": 1753934014922,
+    "attempts": 1
+  },
+  "cityfyswellness.dk": {
+    "status": "success",
+    "logoPath": "/logos/cityfyswellness.dk.png",
+    "lastChecked": 1753934017438,
+    "attempts": 1
+  },
+  "hovedstadenssportsklinik.dk": {
+    "status": "failed",
+    "lastChecked": 1753934017438,
+    "attempts": 1
+  },
+  "sund.frederiksberg.dk": {
+    "status": "success",
+    "logoPath": "/logos/sund.frederiksberg.dk.png",
+    "lastChecked": 1753934017437,
+    "attempts": 1
+  },
+  "fysjo.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysjo.dk.png",
+    "lastChecked": 1753934017438,
+    "attempts": 1
+  },
+  "qklinik.dk": {
+    "status": "success",
+    "logoPath": "/logos/qklinik.dk.png",
+    "lastChecked": 1753934017438,
+    "attempts": 1
+  },
+  "broenderslevfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/broenderslevfysioterapi.dk.png",
+    "lastChecked": 1753934019693,
+    "attempts": 1
+  },
+  "huskmor.dk": {
+    "status": "failed",
+    "lastChecked": 1753934019693,
+    "attempts": 1
+  },
+  "connectfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/connectfys.dk.png",
+    "lastChecked": 1753934019692,
+    "attempts": 1
+  },
+  "dinryg.dk": {
+    "status": "success",
+    "logoPath": "/logos/dinryg.dk.png",
+    "lastChecked": 1753934019693,
+    "attempts": 1
+  },
+  "vejgaardfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/vejgaardfys.dk.png",
+    "lastChecked": 1753934019693,
+    "attempts": 1
+  },
+  "lenesandal.dk": {
+    "status": "failed",
+    "lastChecked": 1753934021972,
+    "attempts": 1
+  },
+  "domusfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/domusfys.dk.png",
+    "lastChecked": 1753934021972,
+    "attempts": 1
+  },
+  "fysioaalborg.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysioaalborg.dk.png",
+    "lastChecked": 1753934021972,
+    "attempts": 1
+  },
+  "lenafys.nu": {
+    "status": "success",
+    "logoPath": "/logos/lenafys.nu.png",
+    "lastChecked": 1753934021971,
+    "attempts": 1
+  },
+  "piadamgaard.dk": {
+    "status": "success",
+    "logoPath": "/logos/piadamgaard.dk.png",
+    "lastChecked": 1753934021972,
+    "attempts": 1
+  },
+  "frederiksværk-fysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934024437,
+    "attempts": 1
+  },
+  "kildeskovfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/kildeskovfys.dk.png",
+    "lastChecked": 1753934024437,
+    "attempts": 1
+  },
+  "kompletfysio.dk": {
+    "status": "success",
+    "logoPath": "/logos/kompletfysio.dk.png",
+    "lastChecked": 1753934024436,
+    "attempts": 1
+  },
+  "wolff-fys.dk": {
+    "status": "success",
+    "logoPath": "/logos/wolff-fys.dk.png",
+    "lastChecked": 1753934024436,
+    "attempts": 1
+  },
+  "fokusfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/fokusfysioterapi.dk.png",
+    "lastChecked": 1753934024436,
+    "attempts": 1
+  },
+  "skaerbaekfys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934027745,
+    "attempts": 1
+  },
+  "neurofyssen.dk": {
+    "status": "success",
+    "logoPath": "/logos/neurofyssen.dk.png",
+    "lastChecked": 1753934027745,
+    "attempts": 1
+  },
+  "efys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934027744,
+    "attempts": 1
+  },
+  "fysionord.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysionord.dk.png",
+    "lastChecked": 1753934027745,
+    "attempts": 1
+  },
+  "fysioterapi-haderslev.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysioterapi-haderslev.dk.png",
+    "lastChecked": 1753934027745,
+    "attempts": 1
+  },
+  "smertefri.nu": {
+    "status": "failed",
+    "lastChecked": 1753934031583,
+    "attempts": 1
+  },
+  "mollebakkensfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934031583,
+    "attempts": 1
+  },
+  "fysio-favrskov.dk": {
+    "status": "failed",
+    "lastChecked": 1753934031583,
+    "attempts": 1
+  },
+  "familiefyssen.dk": {
+    "status": "success",
+    "logoPath": "/logos/familiefyssen.dk.png",
+    "lastChecked": 1753934031583,
+    "attempts": 1
+  },
+  "vanestaerk.dk": {
+    "status": "success",
+    "logoPath": "/logos/vanestaerk.dk.png",
+    "lastChecked": 1753934031583,
+    "attempts": 1
+  },
+  "gjern-fys.dk": {
+    "status": "success",
+    "logoPath": "/logos/gjern-fys.dk.png",
+    "lastChecked": 1753934035245,
+    "attempts": 1
+  },
+  "hasselagerfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/hasselagerfysioterapi.dk.png",
+    "lastChecked": 1753934035244,
+    "attempts": 1
+  },
+  "gilleleje-fysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/gilleleje-fysioterapi.dk.png",
+    "lastChecked": 1753934035245,
+    "attempts": 1
+  },
+  "ronnebaerallefysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/ronnebaerallefysioterapi.dk.png",
+    "lastChecked": 1753934035245,
+    "attempts": 1
+  },
+  "lift4life.dk": {
+    "status": "failed",
+    "lastChecked": 1753934035245,
+    "attempts": 1
+  },
+  "hadstenfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934039138,
+    "attempts": 1
+  },
+  "hhfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/hhfys.dk.png",
+    "lastChecked": 1753934039138,
+    "attempts": 1
+  },
+  "skulderognakke.dk": {
+    "status": "success",
+    "logoPath": "/logos/skulderognakke.dk.png",
+    "lastChecked": 1753934039138,
+    "attempts": 1
+  },
+  "gorlev-fys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934039138,
+    "attempts": 1
+  },
+  "fdhe.dk": {
+    "status": "success",
+    "logoPath": "/logos/fdhe.dk.png",
+    "lastChecked": 1753934039138,
+    "attempts": 1
+  },
+  "amagerhospital.dk": {
+    "status": "success",
+    "logoPath": "/logos/amagerhospital.dk.png",
+    "lastChecked": 1753934041662,
+    "attempts": 1
+  },
+  "plejehjemsoversigten.dk": {
+    "status": "failed",
+    "lastChecked": 1753934041662,
+    "attempts": 1
+  },
+  "mindfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/mindfys.dk.png",
+    "lastChecked": 1753934041662,
+    "attempts": 1
+  },
+  "tartarusgym.dk": {
+    "status": "success",
+    "logoPath": "/logos/tartarusgym.dk.png",
+    "lastChecked": 1753934041662,
+    "attempts": 1
+  },
+  "fysiostudio.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiostudio.dk.png",
+    "lastChecked": 1753934041662,
+    "attempts": 1
+  },
+  "vickybachnielsen.info": {
+    "status": "failed",
+    "lastChecked": 1753934044161,
+    "attempts": 1
+  },
+  "fysiovendia.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiovendia.dk.png",
+    "lastChecked": "2025-07-31T04:33:15.989Z",
+    "attempts": 1
+  },
+  "fysserneshus.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysserneshus.dk.png",
+    "lastChecked": 1753934044161,
+    "attempts": 1
+  },
+  "fysherning.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysherning.dk.png",
+    "lastChecked": 1753934044161,
+    "attempts": 1
+  },
+  "hjallerupfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934044161,
+    "attempts": 1
+  },
+  "fysiodanmarkherning.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiodanmarkherning.dk.png",
+    "lastChecked": 1753934045786,
+    "attempts": 1
+  },
+  "holbækrygklinik.dk": {
+    "status": "failed",
+    "lastChecked": 1753934045786,
+    "attempts": 1
+  },
+  "fyssam.dk": {
+    "status": "success",
+    "logoPath": "/logos/fyssam.dk.png",
+    "lastChecked": 1753934045786,
+    "attempts": 1
+  },
+  "cms.fensmarkfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934045786,
+    "attempts": 1
+  },
+  "tangsoecentret.dk": {
+    "status": "success",
+    "logoPath": "/logos/tangsoecentret.dk.png",
+    "lastChecked": 1753934045786,
+    "attempts": 1
+  },
+  "athleticstudio.dk": {
+    "status": "success",
+    "logoPath": "/logos/athleticstudio.dk.png",
+    "lastChecked": 1753934049814,
+    "attempts": 1
+  },
+  "smerteogsport.dk": {
+    "status": "success",
+    "logoPath": "/logos/smerteogsport.dk.png",
+    "lastChecked": 1753934049813,
+    "attempts": 1
+  },
+  "sportsfys-silkeborg.dk": {
+    "status": "success",
+    "logoPath": "/logos/sportsfys-silkeborg.dk.png",
+    "lastChecked": 1753934049814,
+    "attempts": 1
+  },
+  "noerrebrofysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/noerrebrofysioterapi.dk.png",
+    "lastChecked": 1753934049814,
+    "attempts": 1
+  },
+  "styrkditunderliv.dk": {
+    "status": "success",
+    "logoPath": "/logos/styrkditunderliv.dk.png",
+    "lastChecked": 1753934049814,
+    "attempts": 1
+  },
+  "staerk-fys.dk": {
+    "status": "success",
+    "logoPath": "/logos/staerk-fys.dk.png",
+    "lastChecked": 1753934051264,
+    "attempts": 1
+  },
+  "allerodfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/allerodfys.dk.png",
+    "lastChecked": 1753934051264,
+    "attempts": 1
+  },
+  "midtfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/midtfys.dk.png",
+    "lastChecked": 1753934051265,
+    "attempts": 1
+  },
+  "fysioterapien.hinnerupsundhedshus.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysioterapien.hinnerupsundhedshus.dk.png",
+    "lastChecked": 1753934051264,
+    "attempts": 1
+  },
+  "birkerodfys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934051264,
+    "attempts": 1
+  },
+  "roerdigfrit.dk": {
+    "status": "failed",
+    "lastChecked": 1753934055206,
+    "attempts": 1
+  },
+  "lundfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/lundfysioterapi.dk.png",
+    "lastChecked": 1753934055206,
+    "attempts": 1
+  },
+  "hinnerup-fys.dk": {
+    "status": "success",
+    "logoPath": "/logos/hinnerup-fys.dk.png",
+    "lastChecked": 1753934055206,
+    "attempts": 1
+  },
+  "fysiurgiskterapioglaserterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934055206,
+    "attempts": 1
+  },
+  "fysserne.dk": {
+    "status": "failed",
+    "lastChecked": 1753934055206,
+    "attempts": 1
+  },
+  "staerkhverdag.dk": {
+    "status": "success",
+    "logoPath": "/logos/staerkhverdag.dk.png",
+    "lastChecked": 1753934059605,
+    "attempts": 1
+  },
+  "nordiskosteopati.dk": {
+    "status": "success",
+    "logoPath": "/logos/nordiskosteopati.dk.png",
+    "lastChecked": 1753934059605,
+    "attempts": 1
+  },
+  "thommysminde.dk": {
+    "status": "success",
+    "logoPath": "/logos/thommysminde.dk.png",
+    "lastChecked": 1753934059606,
+    "attempts": 1
+  },
+  "katrinesrygklinik.dk": {
+    "status": "success",
+    "logoPath": "/logos/katrinesrygklinik.dk.png",
+    "lastChecked": 1753934059605,
+    "attempts": 1
+  },
+  "grenaafysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/grenaafysioterapi.dk.png",
+    "lastChecked": 1753934059605,
+    "attempts": 1
+  },
+  "fysiskform.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiskform.dk.png",
+    "lastChecked": 1753934062274,
+    "attempts": 1
+  },
+  "ishojbyfys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934062273,
+    "attempts": 1
+  },
+  "fysiodanmarkhorsens.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiodanmarkhorsens.dk.png",
+    "lastChecked": 1753934062274,
+    "attempts": 1
+  },
+  "hoerningfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/hoerningfys.dk.png",
+    "lastChecked": 1753934062274,
+    "attempts": 1
+  },
+  "fysioterapeuternehovedgaard.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysioterapeuternehovedgaard.dk.png",
+    "lastChecked": 1753934062274,
+    "attempts": 1
+  },
+  "ishojfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/ishojfysioterapi.dk.png",
+    "lastChecked": 1753934064114,
+    "attempts": 1
+  },
+  "fysiofitjelling.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiofitjelling.dk.png",
+    "lastChecked": 1753934064114,
+    "attempts": 1
+  },
+  "fysio7500.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysio7500.dk.png",
+    "lastChecked": 1753934064114,
+    "attempts": 1
+  },
+  "fysioterapiogfitness.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysioterapiogfitness.dk.png",
+    "lastChecked": 1753934064114,
+    "attempts": 1
+  },
+  "tunefysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/tunefysioterapi.dk.png",
+    "lastChecked": 1753934064114,
+    "attempts": 1
+  },
+  "fysmgh.dk": {
+    "status": "failed",
+    "lastChecked": 1753934065613,
+    "attempts": 1
+  },
+  "fys-langeskov.dk": {
+    "status": "failed",
+    "lastChecked": 1753934065613,
+    "attempts": 1
+  },
+  "corpuss.dk": {
+    "status": "success",
+    "logoPath": "/logos/corpuss.dk.png",
+    "lastChecked": 1753934065613,
+    "attempts": 1
+  },
+  "ofeldt.dk": {
+    "status": "success",
+    "logoPath": "/logos/ofeldt.dk.png",
+    "lastChecked": 1753934065613,
+    "attempts": 1
+  },
+  "christinapeick.dk": {
+    "status": "success",
+    "logoPath": "/logos/christinapeick.dk.png",
+    "lastChecked": 1753934065613,
+    "attempts": 1
+  },
+  "fysib.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysib.dk.png",
+    "lastChecked": 1753934068651,
+    "attempts": 1
+  },
+  "eliteklinikvejle.dk": {
+    "status": "success",
+    "logoPath": "/logos/eliteklinikvejle.dk.png",
+    "lastChecked": 1753934068652,
+    "attempts": 1
+  },
+  "dengodebehandling.dk": {
+    "status": "success",
+    "logoPath": "/logos/dengodebehandling.dk.png",
+    "lastChecked": 1753934068652,
+    "attempts": 1
+  },
+  "hundestedfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934068652,
+    "attempts": 1
+  },
+  "fysiok.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiok.dk.png",
+    "lastChecked": 1753934068652,
+    "attempts": 1
+  },
+  "ikastfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/ikastfys.dk.png",
+    "lastChecked": 1753934071008,
+    "attempts": 1
+  },
+  "nørresundbyfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934071008,
+    "attempts": 1
+  },
+  "traeningsklinikken.dk": {
+    "status": "failed",
+    "lastChecked": 1753934071008,
+    "attempts": 1
+  },
+  "otterupfysio.dk": {
+    "status": "success",
+    "logoPath": "/logos/otterupfysio.dk.png",
+    "lastChecked": 1753934071008,
+    "attempts": 1
+  },
+  "fysiodanmarkbagsvaerd.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiodanmarkbagsvaerd.dk.png",
+    "lastChecked": 1753934071008,
+    "attempts": 1
+  },
+  "stevnsfys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934073477,
+    "attempts": 1
+  },
+  "linktr.ee": {
+    "status": "success",
+    "logoPath": "/logos/linktr.ee.png",
+    "lastChecked": 1753934073477,
+    "attempts": 1
+  },
+  "justhealth.dk": {
+    "status": "success",
+    "logoPath": "/logos/justhealth.dk.png",
+    "lastChecked": 1753934073477,
+    "attempts": 1
+  },
+  "neuroklinikken.dk": {
+    "status": "failed",
+    "lastChecked": 1753934073477,
+    "attempts": 1
+  },
+  "kh-fys.dk": {
+    "status": "success",
+    "logoPath": "/logos/kh-fys.dk.png",
+    "lastChecked": 1753934073477,
+    "attempts": 1
+  },
+  "actiofys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934075104,
+    "attempts": 1
+  },
+  "kaisersport.dk": {
+    "status": "success",
+    "logoPath": "/logos/kaisersport.dk.png",
+    "lastChecked": 1753934075104,
+    "attempts": 1
+  },
+  "gisliakufys.com": {
+    "status": "success",
+    "logoPath": "/logos/gisliakufys.com.png",
+    "lastChecked": 1753934075104,
+    "attempts": 1
+  },
+  "koegefysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/koegefysioterapi.dk.png",
+    "lastChecked": 1753934075104,
+    "attempts": 1
+  },
+  "kliniksoesborg.dk": {
+    "status": "success",
+    "logoPath": "/logos/kliniksoesborg.dk.png",
+    "lastChecked": 1753934075104,
+    "attempts": 1
+  },
+  "axeltorvfys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934078530,
+    "attempts": 1
+  },
+  "sundhedshuset.com": {
+    "status": "success",
+    "logoPath": "/logos/sundhedshuset.com.png",
+    "lastChecked": 1753934078531,
+    "attempts": 1
+  },
+  "djursfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/djursfys.dk.png",
+    "lastChecked": 1753934078531,
+    "attempts": 1
+  },
+  "kjellerup-fys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934078531,
+    "attempts": 1
+  },
+  "tranbjergfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/tranbjergfys.dk.png",
+    "lastChecked": 1753934078531,
+    "attempts": 1
+  },
+  "htfys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934081166,
+    "attempts": 1
+  },
+  "fysiosmart.com": {
+    "status": "success",
+    "logoPath": "/logos/fysiosmart.com.png",
+    "lastChecked": 1753934081166,
+    "attempts": 1
+  },
+  "ejby-fys.dk": {
+    "status": "success",
+    "logoPath": "/logos/ejby-fys.dk.png",
+    "lastChecked": 1753934081166,
+    "attempts": 1
+  },
+  "langaasundhedscenter.dk": {
+    "status": "failed",
+    "lastChecked": 1753934081165,
+    "attempts": 1
+  },
+  "lnfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/lnfysioterapi.dk.png",
+    "lastChecked": 1753934081166,
+    "attempts": 1
+  },
+  "system.easypractice.net": {
+    "status": "success",
+    "logoPath": "/logos/system.easypractice.net.png",
+    "lastChecked": 1753934082983,
+    "attempts": 1
+  },
+  "cpfysiotreatment.dk": {
+    "status": "success",
+    "logoPath": "/logos/cpfysiotreatment.dk.png",
+    "lastChecked": 1753934082982,
+    "attempts": 1
+  },
+  "lymfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/lymfys.dk.png",
+    "lastChecked": 1753934082983,
+    "attempts": 1
+  },
+  "kvinde-min.dk": {
+    "status": "success",
+    "logoPath": "/logos/kvinde-min.dk.png",
+    "lastChecked": 1753934082983,
+    "attempts": 1
+  },
+  "naturfyssen.dk": {
+    "status": "success",
+    "logoPath": "/logos/naturfyssen.dk.png",
+    "lastChecked": 1753934082983,
+    "attempts": 1
+  },
+  "aarhusfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/aarhusfys.dk.png",
+    "lastChecked": 1753934085134,
+    "attempts": 1
+  },
+  "moldrupfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934085135,
+    "attempts": 1
+  },
+  "st-fys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934085135,
+    "attempts": 1
+  },
+  "mariagerfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/mariagerfysioterapi.dk.png",
+    "lastChecked": 1753934085135,
+    "attempts": 1
+  },
+  "fdmaribo.dk": {
+    "status": "success",
+    "logoPath": "/logos/fdmaribo.dk.png",
+    "lastChecked": 1753934085135,
+    "attempts": 1
+  },
+  "aarhusosteopati.dk": {
+    "status": "success",
+    "logoPath": "/logos/aarhusosteopati.dk.png",
+    "lastChecked": 1753934087303,
+    "attempts": 1
+  },
+  "lollandfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/lollandfysioterapi.dk.png",
+    "lastChecked": 1753934087303,
+    "attempts": 1
+  },
+  "fysio-nord.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysio-nord.dk.png",
+    "lastChecked": 1753934087303,
+    "attempts": 1
+  },
+  "klinik-fysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/klinik-fysioterapi.dk.png",
+    "lastChecked": 1753934087302,
+    "attempts": 1
+  },
+  "skyf.dk": {
+    "status": "success",
+    "logoPath": "/logos/skyf.dk.png",
+    "lastChecked": 1753934087303,
+    "attempts": 1
+  },
+  "skrillingefysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934091465,
+    "attempts": 1
+  },
+  "fysiodanmark-holbaek.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiodanmark-holbaek.dk.png",
+    "lastChecked": 1753934091466,
+    "attempts": 1
+  },
+  "fysio-on.dk": {
+    "status": "failed",
+    "lastChecked": 1753934091465,
+    "attempts": 1
+  },
+  "haapalo.com": {
+    "status": "success",
+    "logoPath": "/logos/haapalo.com.png",
+    "lastChecked": 1753934091465,
+    "attempts": 1
+  },
+  "charlottehoej-fysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/charlottehoej-fysioterapi.dk.png",
+    "lastChecked": 1753934091465,
+    "attempts": 1
+  },
+  "fysiokiss.dk": {
+    "status": "failed",
+    "lastChecked": 1753934093124,
+    "attempts": 1
+  },
+  "aeroefys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934093123,
+    "attempts": 1
+  },
+  "fysstoregade.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysstoregade.dk.png",
+    "lastChecked": 1753934093124,
+    "attempts": 1
+  },
+  "fitmedallan.dk": {
+    "status": "success",
+    "logoPath": "/logos/fitmedallan.dk.png",
+    "lastChecked": 1753934093124,
+    "attempts": 1
+  },
+  "lefysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/lefysioterapi.dk.png",
+    "lastChecked": 1753934093124,
+    "attempts": 1
+  },
+  "fysiodanmark.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiodanmark.dk.png",
+    "lastChecked": 1753934096009,
+    "attempts": 1
+  },
+  "anneschulz.dk": {
+    "status": "failed",
+    "lastChecked": 1753934096010,
+    "attempts": 1
+  },
+  "klinikbendix.dk": {
+    "status": "success",
+    "logoPath": "/logos/klinikbendix.dk.png",
+    "lastChecked": 1753934096010,
+    "attempts": 1
+  },
+  "fdnykoebing.dk": {
+    "status": "success",
+    "logoPath": "/logos/fdnykoebing.dk.png",
+    "lastChecked": 1753934096010,
+    "attempts": 1
+  },
+  "middelfartosteopati.dk": {
+    "status": "success",
+    "logoPath": "/logos/middelfartosteopati.dk.png",
+    "lastChecked": 1753934096009,
+    "attempts": 1
+  },
+  "jannikfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/jannikfys.dk.png",
+    "lastChecked": 1753934098662,
+    "attempts": 1
+  },
+  "adg-fysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/adg-fysioterapi.dk.png",
+    "lastChecked": 1753934098662,
+    "attempts": 1
+  },
+  "sundfysik.nu": {
+    "status": "success",
+    "logoPath": "/logos/sundfysik.nu.png",
+    "lastChecked": 1753934098662,
+    "attempts": 1
+  },
+  "momentumcph.dk": {
+    "status": "failed",
+    "lastChecked": 1753934098662,
+    "attempts": 1
+  },
+  "nyborgfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/nyborgfysioterapi.dk.png",
+    "lastChecked": 1753934098662,
+    "attempts": 1
+  },
+  "nordalsfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934100798,
+    "attempts": 1
+  },
+  "smertefribaekken.dk": {
+    "status": "failed",
+    "lastChecked": 1753934100798,
+    "attempts": 1
+  },
+  "trigalofys.dk": {
+    "status": "success",
+    "logoPath": "/logos/trigalofys.dk.png",
+    "lastChecked": 1753934100798,
+    "attempts": 1
+  },
+  "morskrop.dk": {
+    "status": "failed",
+    "lastChecked": 1753934100798,
+    "attempts": 1
+  },
+  "fysioterapi-silasandersen.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysioterapi-silasandersen.dk.png",
+    "lastChecked": 1753934100798,
+    "attempts": 1
+  },
+  "gynobs.dk": {
+    "status": "failed",
+    "lastChecked": 1753934103391,
+    "attempts": 1
+  },
+  "lindecare.dk": {
+    "status": "success",
+    "logoPath": "/logos/lindecare.dk.png",
+    "lastChecked": 1753934103391,
+    "attempts": 1
+  },
+  "tarupfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/tarupfys.dk.png",
+    "lastChecked": 1753934103391,
+    "attempts": 1
+  },
+  "topholmfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/topholmfys.dk.png",
+    "lastChecked": 1753934103390,
+    "attempts": 1
+  },
+  "hedehusene-fysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/hedehusene-fysioterapi.dk.png",
+    "lastChecked": 1753934103391,
+    "attempts": 1
+  },
+  "fysioterapi-akupunktur-odense.dk": {
+    "status": "failed",
+    "lastChecked": 1753934106514,
+    "attempts": 1
+  },
+  "specifikplus.dk": {
+    "status": "failed",
+    "lastChecked": 1753934106514,
+    "attempts": 1
+  },
+  "fyshoeng.dk": {
+    "status": "success",
+    "logoPath": "/logos/fyshoeng.dk.png",
+    "lastChecked": 1753934106514,
+    "attempts": 1
+  },
+  "denhvidelotus.dk": {
+    "status": "success",
+    "logoPath": "/logos/denhvidelotus.dk.png",
+    "lastChecked": 1753934106514,
+    "attempts": 1
+  },
+  "dinpersonligefys.dk": {
+    "status": "success",
+    "logoPath": "/logos/dinpersonligefys.dk.png",
+    "lastChecked": 1753934106514,
+    "attempts": 1
+  },
+  "johnson-instituttet.dk": {
+    "status": "success",
+    "logoPath": "/logos/johnson-instituttet.dk.png",
+    "lastChecked": 1753934108825,
+    "attempts": 1
+  },
+  "dalumfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/dalumfysioterapi.dk.png",
+    "lastChecked": 1753934108826,
+    "attempts": 1
+  },
+  "motoriskteam.dk": {
+    "status": "failed",
+    "lastChecked": 1753934108825,
+    "attempts": 1
+  },
+  "fysiopandrup.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiopandrup.dk.png",
+    "lastChecked": 1753934108826,
+    "attempts": 1
+  },
+  "mb-behandling.dk": {
+    "status": "success",
+    "logoPath": "/logos/mb-behandling.dk.png",
+    "lastChecked": 1753934108825,
+    "attempts": 1
+  },
+  "tonnicarlsen.dk": {
+    "status": "failed",
+    "lastChecked": 1753934111564,
+    "attempts": 1
+  },
+  "padborg-fysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934111564,
+    "attempts": 1
+  },
+  "hirtshalsfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934111564,
+    "attempts": 1
+  },
+  "fysiodanmarkolstykke.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiodanmarkolstykke.dk.png",
+    "lastChecked": 1753934111564,
+    "attempts": 1
+  },
+  "fysiocenterhaarby.dk": {
+    "status": "failed",
+    "lastChecked": 1753934111563,
+    "attempts": 1
+  },
+  "hammerum-fysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/hammerum-fysioterapi.dk.png",
+    "lastChecked": 1753934113394,
+    "attempts": 1
+  },
+  "faenoesundfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/faenoesundfysioterapi.dk.png",
+    "lastChecked": 1753934113394,
+    "attempts": 1
+  },
+  "fysioterapien.nu": {
+    "status": "success",
+    "logoPath": "/logos/fysioterapien.nu.png",
+    "lastChecked": 1753934113393,
+    "attempts": 1
+  },
+  "havnensfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/havnensfysioterapi.dk.png",
+    "lastChecked": 1753934113394,
+    "attempts": 1
+  },
+  "joanfabricius.dk": {
+    "status": "success",
+    "logoPath": "/logos/joanfabricius.dk.png",
+    "lastChecked": 1753934113394,
+    "attempts": 1
+  },
+  "praestoe-fysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934115828,
+    "attempts": 1
+  },
+  "lindevejfys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934115829,
+    "attempts": 1
+  },
+  "alleens-fysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934115828,
+    "attempts": 1
+  },
+  "muskelmekanikeren.dk": {
+    "status": "success",
+    "logoPath": "/logos/muskelmekanikeren.dk.png",
+    "lastChecked": 1753934115829,
+    "attempts": 1
+  },
+  "faxefys.dk": {
+    "status": "success",
+    "logoPath": "/logos/faxefys.dk.png",
+    "lastChecked": 1753934115828,
+    "attempts": 1
+  },
+  "traengodt.dk": {
+    "status": "failed",
+    "lastChecked": 1753934118091,
+    "attempts": 1
+  },
+  "bedrekrop.dk": {
+    "status": "success",
+    "logoPath": "/logos/bedrekrop.dk.png",
+    "lastChecked": 1753934118091,
+    "attempts": 1
+  },
+  "fysiodanmark-randers.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiodanmark-randers.dk.png",
+    "lastChecked": 1753934118091,
+    "attempts": 1
+  },
+  "lemvig-yoga.dk": {
+    "status": "success",
+    "logoPath": "/logos/lemvig-yoga.dk.png",
+    "lastChecked": 1753934118091,
+    "attempts": 1
+  },
+  "lilleklinik.dk": {
+    "status": "success",
+    "logoPath": "/logos/lilleklinik.dk.png",
+    "lastChecked": 1753934118091,
+    "attempts": 1
+  },
+  "vesterport-fysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934120373,
+    "attempts": 1
+  },
+  "zency.dk": {
+    "status": "success",
+    "logoPath": "/logos/zency.dk.png",
+    "lastChecked": 1753934120373,
+    "attempts": 1
+  },
+  "rygklinikken.dk": {
+    "status": "success",
+    "logoPath": "/logos/rygklinikken.dk.png",
+    "lastChecked": 1753934120373,
+    "attempts": 1
+  },
+  "fysiocenterkalundborg.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiocenterkalundborg.dk.png",
+    "lastChecked": 1753934120373,
+    "attempts": 1
+  },
+  "thomsen-fys.dk": {
+    "status": "success",
+    "logoPath": "/logos/thomsen-fys.dk.png",
+    "lastChecked": 1753934120373,
+    "attempts": 1
+  },
+  "halsnaes.dk": {
+    "status": "success",
+    "logoPath": "/logos/halsnaes.dk.png",
+    "lastChecked": 1753934121936,
+    "attempts": 1
+  },
+  "sarahsfys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934121936,
+    "attempts": 1
+  },
+  "aalestrupfys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934121935,
+    "attempts": 1
+  },
+  "matchfit.dk": {
+    "status": "success",
+    "logoPath": "/logos/matchfit.dk.png",
+    "lastChecked": 1753934121936,
+    "attempts": 1
+  },
+  "hvidovrefysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/hvidovrefysioterapi.dk.png",
+    "lastChecked": 1753934121935,
+    "attempts": 1
+  },
+  "fysioterapimedfokus.dk": {
+    "status": "failed",
+    "lastChecked": 1753934124594,
+    "attempts": 1
+  },
+  "urogyn-fysio.dk": {
+    "status": "success",
+    "logoPath": "/logos/urogyn-fysio.dk.png",
+    "lastChecked": 1753934124594,
+    "attempts": 1
+  },
+  "tilfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/tilfys.dk.png",
+    "lastChecked": 1753934124595,
+    "attempts": 1
+  },
+  "fysiodanmark-ringsted.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiodanmark-ringsted.dk.png",
+    "lastChecked": 1753934124595,
+    "attempts": 1
+  },
+  "ansagerfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/ansagerfys.dk.png",
+    "lastChecked": 1753934124594,
+    "attempts": 1
+  },
+  "kbfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/kbfys.dk.png",
+    "lastChecked": 1753934127233,
+    "attempts": 1
+  },
+  "fysioterapikbh.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysioterapikbh.dk.png",
+    "lastChecked": 1753934127233,
+    "attempts": 1
+  },
+  "klinikoptimus.dk": {
+    "status": "success",
+    "logoPath": "/logos/klinikoptimus.dk.png",
+    "lastChecked": 1753934127233,
+    "attempts": 1
+  },
+  "sidsefriis.dk": {
+    "status": "success",
+    "logoPath": "/logos/sidsefriis.dk.png",
+    "lastChecked": 1753934127233,
+    "attempts": 1
+  },
+  "superfys.com": {
+    "status": "success",
+    "logoPath": "/logos/superfys.com.png",
+    "lastChecked": 1753934127232,
+    "attempts": 1
+  },
+  "emcare.dk": {
+    "status": "success",
+    "logoPath": "/logos/emcare.dk.png",
+    "lastChecked": 1753934130727,
+    "attempts": 1
+  },
+  "molsfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934130728,
+    "attempts": 1
+  },
+  "ringsted-kropsterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934130728,
+    "attempts": 1
+  },
+  "manuelterapi.nu": {
+    "status": "success",
+    "logoPath": "/logos/manuelterapi.nu.png",
+    "lastChecked": 1753934130728,
+    "attempts": 1
+  },
+  "fysiopsyken.dk": {
+    "status": "failed",
+    "lastChecked": 1753934130728,
+    "attempts": 1
+  },
+  "fysioterapiogtræning-allansiglen.dk": {
+    "status": "failed",
+    "lastChecked": 1753934133283,
+    "attempts": 1
+  },
+  "neurofys.dk": {
+    "status": "success",
+    "logoPath": "/logos/neurofys.dk.png",
+    "lastChecked": 1753934133283,
+    "attempts": 1
+  },
+  "traeningshulen.dk": {
+    "status": "success",
+    "logoPath": "/logos/traeningshulen.dk.png",
+    "lastChecked": 1753934133284,
+    "attempts": 1
+  },
+  "vestervangfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/vestervangfysioterapi.dk.png",
+    "lastChecked": 1753934133284,
+    "attempts": 1
+  },
+  "fysiodanmark-ringkoebing.dk": {
+    "status": "failed",
+    "lastChecked": 1753934133283,
+    "attempts": 1
+  },
+  "favrskov.dk": {
+    "status": "success",
+    "logoPath": "/logos/favrskov.dk.png",
+    "lastChecked": 1753934139043,
+    "attempts": 1
+  },
+  "klinik.dk": {
+    "status": "success",
+    "logoPath": "/logos/klinik.dk.png",
+    "lastChecked": 1753934139043,
+    "attempts": 1
+  },
+  "frederikshavn.dk": {
+    "status": "success",
+    "logoPath": "/logos/frederikshavn.dk.png",
+    "lastChecked": 1753934139044,
+    "attempts": 1
+  },
+  "minosteopat.dk": {
+    "status": "success",
+    "logoPath": "/logos/minosteopat.dk.png",
+    "lastChecked": 1753934139044,
+    "attempts": 1
+  },
+  "munkebofysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/munkebofysioterapi.dk.png",
+    "lastChecked": 1753934139042,
+    "attempts": 1
+  },
+  "back2sport.dk": {
+    "status": "success",
+    "logoPath": "/logos/back2sport.dk.png",
+    "lastChecked": 1753934141229,
+    "attempts": 1
+  },
+  "risskov-fysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934141229,
+    "attempts": 1
+  },
+  "toerringfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/toerringfysioterapi.dk.png",
+    "lastChecked": 1753934141229,
+    "attempts": 1
+  },
+  "nh-fysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/nh-fysioterapi.dk.png",
+    "lastChecked": 1753934141229,
+    "attempts": 1
+  },
+  "skjernfys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934141229,
+    "attempts": 1
+  },
+  "stubmanden.dk": {
+    "status": "failed",
+    "lastChecked": 1753934147353,
+    "attempts": 1
+  },
+  "hjernerystelsesfyssen.dk": {
+    "status": "success",
+    "logoPath": "/logos/hjernerystelsesfyssen.dk.png",
+    "lastChecked": 1753934147352,
+    "attempts": 1
+  },
+  "osteopatiskcenter.dk": {
+    "status": "failed",
+    "lastChecked": 1753934147354,
+    "attempts": 1
+  },
+  "3byggetilbud.dk": {
+    "status": "success",
+    "logoPath": "/logos/3byggetilbud.dk.png",
+    "lastChecked": 1753934147353,
+    "attempts": 1
+  },
+  "sportogryg.dk": {
+    "status": "success",
+    "logoPath": "/logos/sportogryg.dk.png",
+    "lastChecked": 1753934147353,
+    "attempts": 1
+  },
+  "rehabmobility.dk": {
+    "status": "success",
+    "logoPath": "/logos/rehabmobility.dk.png",
+    "lastChecked": 1753934148819,
+    "attempts": 1
+  },
+  "rygklinikgladsaxe.dk": {
+    "status": "failed",
+    "lastChecked": 1753934148820,
+    "attempts": 1
+  },
+  "smerteogidraet.dk": {
+    "status": "success",
+    "logoPath": "/logos/smerteogidraet.dk.png",
+    "lastChecked": 1753934148820,
+    "attempts": 1
+  },
+  "barfodfysioterapi.com": {
+    "status": "success",
+    "logoPath": "/logos/barfodfysioterapi.com.png",
+    "lastChecked": 1753934148820,
+    "attempts": 1
+  },
+  "fysiosnedsted.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiosnedsted.dk.png",
+    "lastChecked": 1753934148821,
+    "attempts": 1
+  },
+  "kokkedalfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/kokkedalfys.dk.png",
+    "lastChecked": 1753934151518,
+    "attempts": 1
+  },
+  "alskiropraktor.dk": {
+    "status": "success",
+    "logoPath": "/logos/alskiropraktor.dk.png",
+    "lastChecked": 1753934151518,
+    "attempts": 1
+  },
+  "fysiodanmarkslagelse.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiodanmarkslagelse.dk.png",
+    "lastChecked": 1753934151518,
+    "attempts": 1
+  },
+  "hipkiropraktik.dk": {
+    "status": "success",
+    "logoPath": "/logos/hipkiropraktik.dk.png",
+    "lastChecked": 1753934151518,
+    "attempts": 1
+  },
+  "fysioterapichristianvandeurs.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysioterapichristianvandeurs.dk.png",
+    "lastChecked": 1753934151518,
+    "attempts": 1
+  },
+  "damsgaard-fys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934154191,
+    "attempts": 1
+  },
+  "svendborg-osteopati.dk": {
+    "status": "success",
+    "logoPath": "/logos/svendborg-osteopati.dk.png",
+    "lastChecked": 1753934154191,
+    "attempts": 1
+  },
+  "svendborgklinikken.dk": {
+    "status": "success",
+    "logoPath": "/logos/svendborgklinikken.dk.png",
+    "lastChecked": 1753934154191,
+    "attempts": 1
+  },
+  "skovlundefysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/skovlundefysioterapi.dk.png",
+    "lastChecked": 1753934154190,
+    "attempts": 1
+  },
+  "smerteguiden.dk": {
+    "status": "success",
+    "logoPath": "/logos/smerteguiden.dk.png",
+    "lastChecked": 1753934154191,
+    "attempts": 1
+  },
+  "themfys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934156598,
+    "attempts": 1
+  },
+  "sveboellefys.dk": {
+    "status": "success",
+    "logoPath": "/logos/sveboellefys.dk.png",
+    "lastChecked": 1753934156597,
+    "attempts": 1
+  },
+  "specialfys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934156598,
+    "attempts": 1
+  },
+  "svendborgsundfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/svendborgsundfysioterapi.dk.png",
+    "lastChecked": 1753934156598,
+    "attempts": 1
+  },
+  "fysiodanmark-spentrup.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiodanmark-spentrup.dk.png",
+    "lastChecked": 1753934156598,
+    "attempts": 1
+  },
+  "ullerslevfysio.dk": {
+    "status": "failed",
+    "lastChecked": 1753934159363,
+    "attempts": 1
+  },
+  "brøderupfitness.dk": {
+    "status": "failed",
+    "lastChecked": 1753934159363,
+    "attempts": 1
+  },
+  "naos-fys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934159364,
+    "attempts": 1
+  },
+  "lisanoreenmindful.dk": {
+    "status": "success",
+    "logoPath": "/logos/lisanoreenmindful.dk.png",
+    "lastChecked": 1753934159364,
+    "attempts": 1
+  },
+  "sydfyns-fysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934159364,
+    "attempts": 1
+  },
+  "fysioterapi-struer.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysioterapi-struer.dk.png",
+    "lastChecked": 1753934162060,
+    "attempts": 1
+  },
+  "cure4you.dk": {
+    "status": "success",
+    "logoPath": "/logos/cure4you.dk.png",
+    "lastChecked": 1753934162060,
+    "attempts": 1
+  },
+  "miefys.dk": {
+    "status": "success",
+    "logoPath": "/logos/miefys.dk.png",
+    "lastChecked": 1753934162061,
+    "attempts": 1
+  },
+  "fysiovejen.dk": {
+    "status": "failed",
+    "lastChecked": 1753934162061,
+    "attempts": 1
+  },
+  "orumfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/orumfys.dk.png",
+    "lastChecked": 1753934162061,
+    "attempts": 1
+  },
+  "gravida-of.dk": {
+    "status": "success",
+    "logoPath": "/logos/gravida-of.dk.png",
+    "lastChecked": 1753934164392,
+    "attempts": 1
+  },
+  "tommerup-fysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/tommerup-fysioterapi.dk.png",
+    "lastChecked": 1753934164391,
+    "attempts": 1
+  },
+  "manuelterapithisted.dk": {
+    "status": "success",
+    "logoPath": "/logos/manuelterapithisted.dk.png",
+    "lastChecked": 1753934164392,
+    "attempts": 1
+  },
+  "fysiodanmark-viborg.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiodanmark-viborg.dk.png",
+    "lastChecked": 1753934164392,
+    "attempts": 1
+  },
+  "thyholmfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/thyholmfysioterapi.dk.png",
+    "lastChecked": 1753934164392,
+    "attempts": 1
+  },
+  "vinding-fysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/vinding-fysioterapi.dk.png",
+    "lastChecked": 1753934168726,
+    "attempts": 1
+  },
+  "piafraefel.dk": {
+    "status": "success",
+    "logoPath": "/logos/piafraefel.dk.png",
+    "lastChecked": 1753934168726,
+    "attempts": 1
+  },
+  "hytteterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934168726,
+    "attempts": 1
+  },
+  "havnegadensfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/havnegadensfysioterapi.dk.png",
+    "lastChecked": 1753934168726,
+    "attempts": 1
+  },
+  "skovensfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/skovensfysioterapi.dk.png",
+    "lastChecked": 1753934168725,
+    "attempts": 1
+  },
+  "perollgaard.dk": {
+    "status": "success",
+    "logoPath": "/logos/perollgaard.dk.png",
+    "lastChecked": 1753934172009,
+    "attempts": 1
+  },
+  "juen.dk": {
+    "status": "success",
+    "logoPath": "/logos/juen.dk.png",
+    "lastChecked": 1753934172009,
+    "attempts": 1
+  },
+  "vejlerygklinik.dk": {
+    "status": "success",
+    "logoPath": "/logos/vejlerygklinik.dk.png",
+    "lastChecked": 1753934172008,
+    "attempts": 1
+  },
+  "fys-vojens.dk": {
+    "status": "success",
+    "logoPath": "/logos/fys-vojens.dk.png",
+    "lastChecked": 1753934172009,
+    "attempts": 1
+  },
+  "femo.dk": {
+    "status": "success",
+    "logoPath": "/logos/femo.dk.png",
+    "lastChecked": 1753934172008,
+    "attempts": 1
+  },
+  "højfynsfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934174307,
+    "attempts": 1
+  },
+  "dkic.dk": {
+    "status": "failed",
+    "lastChecked": 1753934174307,
+    "attempts": 1
+  },
+  "vordingborgfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934174307,
+    "attempts": 1
+  },
+  "fysiosana.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiosana.dk.png",
+    "lastChecked": 1753934174307,
+    "attempts": 1
+  },
+  "vejenfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/vejenfysioterapi.dk.png",
+    "lastChecked": 1753934174307,
+    "attempts": 1
+  },
+  "heartfit.dk": {
+    "status": "success",
+    "logoPath": "/logos/heartfit.dk.png",
+    "lastChecked": 1753934177704,
+    "attempts": 1
+  },
+  "ic-vendsyssel.dk": {
+    "status": "success",
+    "logoPath": "/logos/ic-vendsyssel.dk.png",
+    "lastChecked": 1753934177704,
+    "attempts": 1
+  },
+  "fysioformbornholm.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysioformbornholm.dk.png",
+    "lastChecked": 1753934177704,
+    "attempts": 1
+  },
+  "birgittehummelmose.dk": {
+    "status": "success",
+    "logoPath": "/logos/birgittehummelmose.dk.png",
+    "lastChecked": 1753934177704,
+    "attempts": 1
+  },
+  "bentholmbodyandmind.dk": {
+    "status": "success",
+    "logoPath": "/logos/bentholmbodyandmind.dk.png",
+    "lastChecked": 1753934177704,
+    "attempts": 1
+  },
+  "vejlebaekkenklinik.dk": {
+    "status": "success",
+    "logoPath": "/logos/vejlebaekkenklinik.dk.png",
+    "lastChecked": 1753934180384,
+    "attempts": 1
+  },
+  "bettermovefys.dk": {
+    "status": "success",
+    "logoPath": "/logos/bettermovefys.dk.png",
+    "lastChecked": 1753934180384,
+    "attempts": 1
+  },
+  "naturligbevaegelse.dk": {
+    "status": "success",
+    "logoPath": "/logos/naturligbevaegelse.dk.png",
+    "lastChecked": 1753934180384,
+    "attempts": 1
+  },
+  "vojens-fysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/vojens-fysioterapi.dk.png",
+    "lastChecked": 1753934180384,
+    "attempts": 1
+  },
+  "mst-nordic.dk": {
+    "status": "success",
+    "logoPath": "/logos/mst-nordic.dk.png",
+    "lastChecked": 1753934180384,
+    "attempts": 1
+  },
+  "min-behandler.dk": {
+    "status": "success",
+    "logoPath": "/logos/min-behandler.dk.png",
+    "lastChecked": 1753934182684,
+    "attempts": 1
+  },
+  "skovsport.dk": {
+    "status": "failed",
+    "lastChecked": 1753934182683,
+    "attempts": 1
+  },
+  "charlottenlund-fysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/charlottenlund-fysioterapi.dk.png",
+    "lastChecked": 1753934182684,
+    "attempts": 1
+  },
+  "fysioegaa.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysioegaa.dk.png",
+    "lastChecked": 1753934182684,
+    "attempts": 1
+  },
+  "zsfys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934182684,
+    "attempts": 1
+  },
+  "vanlose-fys.dk": {
+    "status": "success",
+    "logoPath": "/logos/vanlose-fys.dk.png",
+    "lastChecked": 1753934186948,
+    "attempts": 1
+  },
+  "bederfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934186948,
+    "attempts": 1
+  },
+  "sansemotorikakademiet.dk": {
+    "status": "success",
+    "logoPath": "/logos/sansemotorikakademiet.dk.png",
+    "lastChecked": 1753934186947,
+    "attempts": 1
+  },
+  "jammerbugtfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/jammerbugtfys.dk.png",
+    "lastChecked": 1753934186948,
+    "attempts": 1
+  },
+  "videbaek-fysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/videbaek-fysioterapi.dk.png",
+    "lastChecked": 1753934186948,
+    "attempts": 1
+  },
+  "fysesbjerg.dk": {
+    "status": "failed",
+    "lastChecked": 1753934189868,
+    "attempts": 1
+  },
+  "viborgosteopati.dk": {
+    "status": "success",
+    "logoPath": "/logos/viborgosteopati.dk.png",
+    "lastChecked": 1753934189868,
+    "attempts": 1
+  },
+  "fysioterapiforunderlivet.dk": {
+    "status": "failed",
+    "lastChecked": 1753934189868,
+    "attempts": 1
+  },
+  "fysiomania.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiomania.dk.png",
+    "lastChecked": 1753934189868,
+    "attempts": 1
+  },
+  "klinik-osterbye.dk": {
+    "status": "success",
+    "logoPath": "/logos/klinik-osterbye.dk.png",
+    "lastChecked": 1753934189868,
+    "attempts": 1
+  },
+  "roedding-fys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934192659,
+    "attempts": 1
+  },
+  "milton-fysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934192659,
+    "attempts": 1
+  },
+  "grindstedfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934192659,
+    "attempts": 1
+  },
+  "fyskolding.dk": {
+    "status": "success",
+    "logoPath": "/logos/fyskolding.dk.png",
+    "lastChecked": 1753934192659,
+    "attempts": 1
+  },
+  "torvetsfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/torvetsfys.dk.png",
+    "lastChecked": 1753934192659,
+    "attempts": 1
+  },
+  "virum-fysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934195324,
+    "attempts": 1
+  },
+  "andreasphysioblog.com": {
+    "status": "success",
+    "logoPath": "/logos/andreasphysioblog.com.png",
+    "lastChecked": 1753934195324,
+    "attempts": 1
+  },
+  "noragerfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934195324,
+    "attempts": 1
+  },
+  "egtvedfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/egtvedfys.dk.png",
+    "lastChecked": 1753934195324,
+    "attempts": 1
+  },
+  "morsfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/morsfys.dk.png",
+    "lastChecked": 1753934195324,
+    "attempts": 1
+  },
+  "facebook.com": {
+    "status": "success",
+    "logoPath": "/logos/facebook.com.png",
+    "lastChecked": 1753934198123,
+    "attempts": 1
+  },
+  "gisela-rau.dk": {
+    "status": "failed",
+    "lastChecked": 1753934198122,
+    "attempts": 1
+  },
+  "ringstedfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934198123,
+    "attempts": 1
+  },
+  "jsfame.dk": {
+    "status": "failed",
+    "lastChecked": 1753934198123,
+    "attempts": 1
+  },
+  "kaerbyfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/kaerbyfysioterapi.dk.png",
+    "lastChecked": 1753934198123,
+    "attempts": 1
+  },
+  "thunboharder.dk": {
+    "status": "failed",
+    "lastChecked": 1753934200641,
+    "attempts": 1
+  },
+  "smertefribevaegelse.dk": {
+    "status": "success",
+    "logoPath": "/logos/smertefribevaegelse.dk.png",
+    "lastChecked": 1753934200641,
+    "attempts": 1
+  },
+  "heidelbachfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934200641,
+    "attempts": 1
+  },
+  "skagenfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/skagenfysioterapi.dk.png",
+    "lastChecked": 1753934200641,
+    "attempts": 1
+  },
+  "aarhusskulderklinik.dk": {
+    "status": "success",
+    "logoPath": "/logos/aarhusskulderklinik.dk.png",
+    "lastChecked": 1753934200641,
+    "attempts": 1
+  },
+  "sansemotorik.net": {
+    "status": "success",
+    "logoPath": "/logos/sansemotorik.net.png",
+    "lastChecked": 1753934202773,
+    "attempts": 1
+  },
+  "hasserisfysogmotion.dk": {
+    "status": "success",
+    "logoPath": "/logos/hasserisfysogmotion.dk.png",
+    "lastChecked": 1753934202773,
+    "attempts": 1
+  },
+  "kongevejensfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/kongevejensfysioterapi.dk.png",
+    "lastChecked": 1753934202774,
+    "attempts": 1
+  },
+  "fysioform.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysioform.dk.png",
+    "lastChecked": 1753934202774,
+    "attempts": 1
+  },
+  "maarsletfys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934202772,
+    "attempts": 1
+  },
+  "fysioterapivinderup.dk": {
+    "status": "failed",
+    "lastChecked": 1753934205794,
+    "attempts": 1
+  },
+  "go-form.dk": {
+    "status": "failed",
+    "lastChecked": 1753934205795,
+    "attempts": 1
+  },
+  "klinikken-klintevej.dk": {
+    "status": "failed",
+    "lastChecked": 1753934205796,
+    "attempts": 1
+  },
+  "fysikken.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysikken.dk.png",
+    "lastChecked": 1753934205796,
+    "attempts": 1
+  },
+  "sundbf.dk": {
+    "status": "success",
+    "logoPath": "/logos/sundbf.dk.png",
+    "lastChecked": 1753934205794,
+    "attempts": 1
+  },
+  "osteo-nord.dk": {
+    "status": "success",
+    "logoPath": "/logos/osteo-nord.dk.png",
+    "lastChecked": 1753934207809,
+    "attempts": 1
+  },
+  "klinikdjurs.dk": {
+    "status": "success",
+    "logoPath": "/logos/klinikdjurs.dk.png",
+    "lastChecked": 1753934207809,
+    "attempts": 1
+  },
+  "lausaugman.dk": {
+    "status": "success",
+    "logoPath": "/logos/lausaugman.dk.png",
+    "lastChecked": 1753934207808,
+    "attempts": 1
+  },
+  "aku-fysio.dk": {
+    "status": "success",
+    "logoPath": "/logos/aku-fysio.dk.png",
+    "lastChecked": 1753934207809,
+    "attempts": 1
+  },
+  "klinikkropogfysik.dk": {
+    "status": "failed",
+    "lastChecked": 1753934207808,
+    "attempts": 1
+  },
+  "kibaekfysogsundhed.dk": {
+    "status": "failed",
+    "lastChecked": 1753934211530,
+    "attempts": 1
+  },
+  "stroegets-fysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/stroegets-fysioterapi.dk.png",
+    "lastChecked": 1753934211529,
+    "attempts": 1
+  },
+  "eva-fysio.dk": {
+    "status": "failed",
+    "lastChecked": 1753934211530,
+    "attempts": 1
+  },
+  "sonderborg-fysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/sonderborg-fysioterapi.dk.png",
+    "lastChecked": 1753934211530,
+    "attempts": 1
+  },
+  "loekkenfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/loekkenfys.dk.png",
+    "lastChecked": 1753934211530,
+    "attempts": 1
+  },
+  "mind-movement.dk": {
+    "status": "failed",
+    "lastChecked": 1753934213960,
+    "attempts": 1
+  },
+  "mortenfys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934213959,
+    "attempts": 1
+  },
+  "svanekefysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934213959,
+    "attempts": 1
+  },
+  "esbjergfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/esbjergfys.dk.png",
+    "lastChecked": 1753934213959,
+    "attempts": 1
+  },
+  "fysleg.dk": {
+    "status": "failed",
+    "lastChecked": 1753934213959,
+    "attempts": 1
+  },
+  "charlotteberg.dk": {
+    "status": "failed",
+    "lastChecked": 1753934215358,
+    "attempts": 1
+  },
+  "dt-sundhed.dk": {
+    "status": "failed",
+    "lastChecked": 1753934215358,
+    "attempts": 1
+  },
+  "funchfys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934215358,
+    "attempts": 1
+  },
+  "treatandbuild.dk": {
+    "status": "success",
+    "logoPath": "/logos/treatandbuild.dk.png",
+    "lastChecked": 1753934215357,
+    "attempts": 1
+  },
+  "equisund.dk": {
+    "status": "success",
+    "logoPath": "/logos/equisund.dk.png",
+    "lastChecked": 1753934215358,
+    "attempts": 1
+  },
+  "velvaereterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934217714,
+    "attempts": 1
+  },
+  "mariannebjerregaard.dk": {
+    "status": "failed",
+    "lastChecked": 1753934217714,
+    "attempts": 1
+  },
+  "fysvadestedet.dk": {
+    "status": "failed",
+    "lastChecked": 1753934217714,
+    "attempts": 1
+  },
+  "skanderborgfys-aku.dk": {
+    "status": "failed",
+    "lastChecked": 1753934217714,
+    "attempts": 1
+  },
+  "klinikduvier.dk": {
+    "status": "failed",
+    "lastChecked": 1753934217713,
+    "attempts": 1
+  },
+  "hjerteforbindelse.dk": {
+    "status": "success",
+    "logoPath": "/logos/hjerteforbindelse.dk.png",
+    "lastChecked": 1753934219201,
+    "attempts": 1
+  },
+  "csefysio.dk": {
+    "status": "success",
+    "logoPath": "/logos/csefysio.dk.png",
+    "lastChecked": 1753934219200,
+    "attempts": 1
+  },
+  "franziska-fysio.dk": {
+    "status": "failed",
+    "lastChecked": 1753934219201,
+    "attempts": 1
+  },
+  "fys-bassin.dk": {
+    "status": "success",
+    "logoPath": "/logos/fys-bassin.dk.png",
+    "lastChecked": 1753934219201,
+    "attempts": 1
+  },
+  "jpfysio.dk": {
+    "status": "success",
+    "logoPath": "/logos/jpfysio.dk.png",
+    "lastChecked": 1753934219201,
+    "attempts": 1
+  },
+  "nordsjællandsportsfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934221743,
+    "attempts": 1
+  },
+  "vejen.dk": {
+    "status": "success",
+    "logoPath": "/logos/vejen.dk.png",
+    "lastChecked": 1753934221744,
+    "attempts": 1
+  },
+  "svanemose-fysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934221744,
+    "attempts": 1
+  },
+  "fdhellerup.dk": {
+    "status": "success",
+    "logoPath": "/logos/fdhellerup.dk.png",
+    "lastChecked": 1753934221743,
+    "attempts": 1
+  },
+  "rikkefys.dk": {
+    "status": "success",
+    "logoPath": "/logos/rikkefys.dk.png",
+    "lastChecked": 1753934221744,
+    "attempts": 1
+  },
+  "fysiolab.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiolab.dk.png",
+    "lastChecked": 1753934224159,
+    "attempts": 1
+  },
+  "fysioterapiogsundhed.dk": {
+    "status": "failed",
+    "lastChecked": 1753934224159,
+    "attempts": 1
+  },
+  "holtefysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934224158,
+    "attempts": 1
+  },
+  "aalborgrygklinik.dk": {
+    "status": "success",
+    "logoPath": "/logos/aalborgrygklinik.dk.png",
+    "lastChecked": 1753934224158,
+    "attempts": 1
+  },
+  "osteopatiklinikken.dk": {
+    "status": "success",
+    "logoPath": "/logos/osteopatiklinikken.dk.png",
+    "lastChecked": 1753934224159,
+    "attempts": 1
+  },
+  "fysmo.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysmo.dk.png",
+    "lastChecked": 1753934227360,
+    "attempts": 1
+  },
+  "lisefrydenlund.dk": {
+    "status": "failed",
+    "lastChecked": 1753934227360,
+    "attempts": 1
+  },
+  "jensarndt.dk": {
+    "status": "success",
+    "logoPath": "/logos/jensarndt.dk.png",
+    "lastChecked": 1753934227359,
+    "attempts": 1
+  },
+  "fysiox.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiox.dk.png",
+    "lastChecked": 1753934227360,
+    "attempts": 1
+  },
+  "din-fysioterapeut.dk": {
+    "status": "success",
+    "logoPath": "/logos/din-fysioterapeut.dk.png",
+    "lastChecked": 1753934227360,
+    "attempts": 1
+  },
+  "boxlife.dk": {
+    "status": "success",
+    "logoPath": "/logos/boxlife.dk.png",
+    "lastChecked": 1753934232688,
+    "attempts": 1
+  },
+  "hjernestaerk.dk": {
+    "status": "failed",
+    "lastChecked": 1753934232688,
+    "attempts": 1
+  },
+  "naturligbalance.nu": {
+    "status": "success",
+    "logoPath": "/logos/naturligbalance.nu.png",
+    "lastChecked": 1753934232688,
+    "attempts": 1
+  },
+  "velvaere.dk": {
+    "status": "success",
+    "logoPath": "/logos/velvaere.dk.png",
+    "lastChecked": 1753934232688,
+    "attempts": 1
+  },
+  "skibbyfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/skibbyfysioterapi.dk.png",
+    "lastChecked": 1753934232687,
+    "attempts": 1
+  },
+  "norresnedefysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934235663,
+    "attempts": 1
+  },
+  "osteo.dk": {
+    "status": "failed",
+    "lastChecked": 1753934235663,
+    "attempts": 1
+  },
+  "mfysio.dk": {
+    "status": "success",
+    "logoPath": "/logos/mfysio.dk.png",
+    "lastChecked": 1753934235662,
+    "attempts": 1
+  },
+  "fysiocentervarde.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiocentervarde.dk.png",
+    "lastChecked": 1753934235662,
+    "attempts": 1
+  },
+  "hvidesande-fys.dk": {
+    "status": "success",
+    "logoPath": "/logos/hvidesande-fys.dk.png",
+    "lastChecked": 1753934235663,
+    "attempts": 1
+  },
+  "ardenfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934238149,
+    "attempts": 1
+  },
+  "frijsbak.dk": {
+    "status": "failed",
+    "lastChecked": 1753934238148,
+    "attempts": 1
+  },
+  "lemvigfitness.dk": {
+    "status": "failed",
+    "lastChecked": 1753934238149,
+    "attempts": 1
+  },
+  "lykkefys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934238149,
+    "attempts": 1
+  },
+  "skulderklinikkenviborg.dk": {
+    "status": "success",
+    "logoPath": "/logos/skulderklinikkenviborg.dk.png",
+    "lastChecked": 1753934238149,
+    "attempts": 1
+  },
+  "jersiefys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934240509,
+    "attempts": 1
+  },
+  "fysiodanmarkishoj.dk": {
+    "status": "failed",
+    "lastChecked": 1753934240508,
+    "attempts": 1
+  },
+  "hunderupvejensfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/hunderupvejensfysioterapi.dk.png",
+    "lastChecked": 1753934240509,
+    "attempts": 1
+  },
+  "fysiodanmarkassens.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiodanmarkassens.dk.png",
+    "lastChecked": 1753934240509,
+    "attempts": 1
+  },
+  "bryggergaardenfys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934240509,
+    "attempts": 1
+  },
+  "oestervraafys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934243488,
+    "attempts": 1
+  },
+  "glostrupfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/glostrupfysioterapi.dk.png",
+    "lastChecked": 1753934243489,
+    "attempts": 1
+  },
+  "fyssentina.dk": {
+    "status": "failed",
+    "lastChecked": 1753934243489,
+    "attempts": 1
+  },
+  "oestfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/oestfys.dk.png",
+    "lastChecked": 1753934243489,
+    "attempts": 1
+  },
+  "bodyinline.dk": {
+    "status": "success",
+    "logoPath": "/logos/bodyinline.dk.png",
+    "lastChecked": 1753934243489,
+    "attempts": 1
+  },
+  "karlslundefysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934244932,
+    "attempts": 1
+  },
+  "vesterhassingfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934244932,
+    "attempts": 1
+  },
+  "stadionfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/stadionfysioterapi.dk.png",
+    "lastChecked": 1753934244932,
+    "attempts": 1
+  },
+  "kvindefysio.dk": {
+    "status": "failed",
+    "lastChecked": 1753934244932,
+    "attempts": 1
+  },
+  "helsingorfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/helsingorfysioterapi.dk.png",
+    "lastChecked": 1753934244931,
+    "attempts": 1
+  },
+  "sydthyfys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934246378,
+    "attempts": 1
+  },
+  "bevaegdig.dk": {
+    "status": "failed",
+    "lastChecked": 1753934246378,
+    "attempts": 1
+  },
+  "ditstaerkekvindeliv.dk": {
+    "status": "failed",
+    "lastChecked": 1753934246378,
+    "attempts": 1
+  },
+  "fysiodanmarkhillerod.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiodanmarkhillerod.dk.png",
+    "lastChecked": 1753934246377,
+    "attempts": 1
+  },
+  "fysio-pro.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysio-pro.dk.png",
+    "lastChecked": 1753934246377,
+    "attempts": 1
+  },
+  "fysio-helseklinikken.dk": {
+    "status": "failed",
+    "lastChecked": 1753934249851,
+    "attempts": 1
+  },
+  "brejningfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934249852,
+    "attempts": 1
+  },
+  "hundogfys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934249852,
+    "attempts": 1
+  },
+  "fysio-menta.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysio-menta.dk.png",
+    "lastChecked": 1753934249852,
+    "attempts": 1
+  },
+  "birtefys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934249852,
+    "attempts": 1
+  },
+  "fysiosense.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiosense.dk.png",
+    "lastChecked": 1753934251500,
+    "attempts": 1
+  },
+  "assentoftfysioterapi.wixsite.com": {
+    "status": "failed",
+    "lastChecked": 1753934251500,
+    "attempts": 1
+  },
+  "katrinesfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934251500,
+    "attempts": 1
+  },
+  "dinfysvorbasse.dk": {
+    "status": "success",
+    "logoPath": "/logos/dinfysvorbasse.dk.png",
+    "lastChecked": 1753934251499,
+    "attempts": 1
+  },
+  "dinkropicentrum.dk": {
+    "status": "success",
+    "logoPath": "/logos/dinkropicentrum.dk.png",
+    "lastChecked": 1753934251500,
+    "attempts": 1
+  },
+  "hanstholmfys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934255398,
+    "attempts": 1
+  },
+  "gedvedfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934255397,
+    "attempts": 1
+  },
+  "klinikcorydon.dk": {
+    "status": "success",
+    "logoPath": "/logos/klinikcorydon.dk.png",
+    "lastChecked": 1753934255398,
+    "attempts": 1
+  },
+  "kropibevaegelse.dk": {
+    "status": "success",
+    "logoPath": "/logos/kropibevaegelse.dk.png",
+    "lastChecked": 1753934255398,
+    "attempts": 1
+  },
+  "katrinefys.dk": {
+    "status": "success",
+    "logoPath": "/logos/katrinefys.dk.png",
+    "lastChecked": 1753934255398,
+    "attempts": 1
+  },
+  "mettegaarde.dk": {
+    "status": "failed",
+    "lastChecked": 1753934258420,
+    "attempts": 1
+  },
+  "stegefys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934258420,
+    "attempts": 1
+  },
+  "mariesfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/mariesfysioterapi.dk.png",
+    "lastChecked": 1753934258419,
+    "attempts": 1
+  },
+  "laesoetraening.dk": {
+    "status": "failed",
+    "lastChecked": 1753934258419,
+    "attempts": 1
+  },
+  "nrlyndelsefysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934258420,
+    "attempts": 1
+  },
+  "psykfys-klinikken.dk": {
+    "status": "success",
+    "logoPath": "/logos/psykfys-klinikken.dk.png",
+    "lastChecked": 1753934261451,
+    "attempts": 1
+  },
+  "osteopatklinikken.dk": {
+    "status": "failed",
+    "lastChecked": 1753934261451,
+    "attempts": 1
+  },
+  "optiperform.dk": {
+    "status": "failed",
+    "lastChecked": 1753934261451,
+    "attempts": 1
+  },
+  "rostfysstudio.dk": {
+    "status": "failed",
+    "lastChecked": 1753934261451,
+    "attempts": 1
+  },
+  "nannakrukowterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934261450,
+    "attempts": 1
+  },
+  "saradelaini.com": {
+    "status": "failed",
+    "lastChecked": 1753934262865,
+    "attempts": 1
+  },
+  "dengladekrop.dk": {
+    "status": "failed",
+    "lastChecked": 1753934262865,
+    "attempts": 1
+  },
+  "seestfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934262865,
+    "attempts": 1
+  },
+  "brittajuhl.dk": {
+    "status": "failed",
+    "lastChecked": 1753934262865,
+    "attempts": 1
+  },
+  "traeningogbehandling.dk": {
+    "status": "success",
+    "logoPath": "/logos/traeningogbehandling.dk.png",
+    "lastChecked": 1753934262865,
+    "attempts": 1
+  },
+  "fysiovang.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiovang.dk.png",
+    "lastChecked": 1753934265936,
+    "attempts": 1
+  },
+  "fysiohh.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiohh.dk.png",
+    "lastChecked": 1753934265935,
+    "attempts": 1
+  },
+  "sites.google.com": {
+    "status": "success",
+    "logoPath": "/logos/sites.google.com.png",
+    "lastChecked": 1753934265936,
+    "attempts": 1
+  },
+  "physioga.com": {
+    "status": "success",
+    "logoPath": "/logos/physioga.com.png",
+    "lastChecked": 1753934265936,
+    "attempts": 1
+  },
+  "fysioterapiogsmerteklinik.dk": {
+    "status": "failed",
+    "lastChecked": 1753934265936,
+    "attempts": 1
+  },
+  "theisbodytherapy.dk": {
+    "status": "success",
+    "logoPath": "/logos/theisbodytherapy.dk.png",
+    "lastChecked": 1753934267880,
+    "attempts": 1
+  },
+  "amj-fysio.dk": {
+    "status": "failed",
+    "lastChecked": 1753934267881,
+    "attempts": 1
+  },
+  "fokuspaadig.dk": {
+    "status": "failed",
+    "lastChecked": 1753934267881,
+    "attempts": 1
+  },
+  "erfys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934267881,
+    "attempts": 1
+  },
+  "kliniklasota.dk": {
+    "status": "success",
+    "logoPath": "/logos/kliniklasota.dk.png",
+    "lastChecked": 1753934267881,
+    "attempts": 1
+  },
+  "stenlillefysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934270597,
+    "attempts": 1
+  },
+  "rysmertebehandling.dk": {
+    "status": "success",
+    "logoPath": "/logos/rysmertebehandling.dk.png",
+    "lastChecked": 1753934270596,
+    "attempts": 1
+  },
+  "fysiodanmarkhedensted.dk": {
+    "status": "failed",
+    "lastChecked": 1753934270597,
+    "attempts": 1
+  },
+  "sebalosteopati.dk": {
+    "status": "success",
+    "logoPath": "/logos/sebalosteopati.dk.png",
+    "lastChecked": 1753934270596,
+    "attempts": 1
+  },
+  "vindtfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/vindtfysioterapi.dk.png",
+    "lastChecked": 1753934270597,
+    "attempts": 1
+  },
+  "løftforlivet.dk": {
+    "status": "failed",
+    "lastChecked": 1753934272734,
+    "attempts": 1
+  },
+  "falckhealthcare.dk": {
+    "status": "success",
+    "logoPath": "/logos/falckhealthcare.dk.png",
+    "lastChecked": 1753934272733,
+    "attempts": 1
+  },
+  "hellestrygerrasmussen.dk": {
+    "status": "failed",
+    "lastChecked": 1753934272734,
+    "attempts": 1
+  },
+  "lisbethgrud.dk": {
+    "status": "success",
+    "logoPath": "/logos/lisbethgrud.dk.png",
+    "lastChecked": 1753934272734,
+    "attempts": 1
+  },
+  "cgfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/cgfysioterapi.dk.png",
+    "lastChecked": 1753934272734,
+    "attempts": 1
+  },
+  "birkeroedcentrumfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934275473,
+    "attempts": 1
+  },
+  "mette-therkildsen.dk": {
+    "status": "failed",
+    "lastChecked": 1753934275471,
+    "attempts": 1
+  },
+  "nelsfys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934275472,
+    "attempts": 1
+  },
+  "ulfborg-fysio.dk": {
+    "status": "failed",
+    "lastChecked": 1753934275473,
+    "attempts": 1
+  },
+  "sidselsommer.dk": {
+    "status": "success",
+    "logoPath": "/logos/sidselsommer.dk.png",
+    "lastChecked": 1753934275472,
+    "attempts": 1
+  },
+  "bv-fysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934277303,
+    "attempts": 1
+  },
+  "faarvangfysioterapi.com": {
+    "status": "success",
+    "logoPath": "/logos/faarvangfysioterapi.com.png",
+    "lastChecked": 1753934277303,
+    "attempts": 1
+  },
+  "bodyinsights.dk": {
+    "status": "success",
+    "logoPath": "/logos/bodyinsights.dk.png",
+    "lastChecked": 1753934277302,
+    "attempts": 1
+  },
+  "den5.dk": {
+    "status": "success",
+    "logoPath": "/logos/den5.dk.png",
+    "lastChecked": 1753934277303,
+    "attempts": 1
+  },
+  "femicare.dk": {
+    "status": "success",
+    "logoPath": "/logos/femicare.dk.png",
+    "lastChecked": 1753934277303,
+    "attempts": 1
+  },
+  "holmsfys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934279609,
+    "attempts": 1
+  },
+  "fuglegaardsvejfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934279608,
+    "attempts": 1
+  },
+  "kostogfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934279610,
+    "attempts": 1
+  },
+  "kliniknorrbom.dk": {
+    "status": "success",
+    "logoPath": "/logos/kliniknorrbom.dk.png",
+    "lastChecked": 1753934279610,
+    "attempts": 1
+  },
+  "houfysio.dk": {
+    "status": "success",
+    "logoPath": "/logos/houfysio.dk.png",
+    "lastChecked": 1753934279610,
+    "attempts": 1
+  },
+  "rkhansen.net": {
+    "status": "success",
+    "logoPath": "/logos/rkhansen.net.png",
+    "lastChecked": 1753934281951,
+    "attempts": 1
+  },
+  "kregme-fodplejeklinik.dk": {
+    "status": "failed",
+    "lastChecked": 1753934281950,
+    "attempts": 1
+  },
+  "noefysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/noefysioterapi.dk.png",
+    "lastChecked": 1753934281951,
+    "attempts": 1
+  },
+  "kroppenerdin.dk": {
+    "status": "success",
+    "logoPath": "/logos/kroppenerdin.dk.png",
+    "lastChecked": 1753934281951,
+    "attempts": 1
+  },
+  "peakclinic.dk": {
+    "status": "success",
+    "logoPath": "/logos/peakclinic.dk.png",
+    "lastChecked": 1753934281951,
+    "attempts": 1
+  },
+  "irenefys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934284528,
+    "attempts": 1
+  },
+  "sportsklinikkengive.dk": {
+    "status": "failed",
+    "lastChecked": 1753934284528,
+    "attempts": 1
+  },
+  "trustrupfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/trustrupfysioterapi.dk.png",
+    "lastChecked": 1753934284528,
+    "attempts": 1
+  },
+  "dinfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/dinfysioterapi.dk.png",
+    "lastChecked": 1753934284528,
+    "attempts": 1
+  },
+  "fysioclub.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysioclub.dk.png",
+    "lastChecked": 1753934284528,
+    "attempts": 1
+  },
+  "klinikørbæk.dk": {
+    "status": "failed",
+    "lastChecked": 1753934287052,
+    "attempts": 1
+  },
+  "amandastaalsoe.com": {
+    "status": "failed",
+    "lastChecked": 1753934287052,
+    "attempts": 1
+  },
+  "balladen.dk": {
+    "status": "failed",
+    "lastChecked": 1753934287052,
+    "attempts": 1
+  },
+  "jordensbevægelser.dk": {
+    "status": "failed",
+    "lastChecked": 1753934287052,
+    "attempts": 1
+  },
+  "naerogkaer.dk": {
+    "status": "success",
+    "logoPath": "/logos/naerogkaer.dk.png",
+    "lastChecked": 1753934287052,
+    "attempts": 1
+  },
+  "pasgaard-skulderklinik.dk": {
+    "status": "failed",
+    "lastChecked": 1753934290422,
+    "attempts": 1
+  },
+  "bikeoptimize.dk": {
+    "status": "success",
+    "logoPath": "/logos/bikeoptimize.dk.png",
+    "lastChecked": 1753934290421,
+    "attempts": 1
+  },
+  "betiinalarsen.dk": {
+    "status": "success",
+    "logoPath": "/logos/betiinalarsen.dk.png",
+    "lastChecked": 1753934290421,
+    "attempts": 1
+  },
+  "eqphysio.dk": {
+    "status": "success",
+    "logoPath": "/logos/eqphysio.dk.png",
+    "lastChecked": 1753934290421,
+    "attempts": 1
+  },
+  "fysionorth.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysionorth.dk.png",
+    "lastChecked": 1753934290421,
+    "attempts": 1
+  },
+  "sundhedsbanken.dk": {
+    "status": "failed",
+    "lastChecked": 1753934292479,
+    "attempts": 1
+  },
+  "bogensefysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934292479,
+    "attempts": 1
+  },
+  "tonderfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934292479,
+    "attempts": 1
+  },
+  "raundahlperformance.dk": {
+    "status": "success",
+    "logoPath": "/logos/raundahlperformance.dk.png",
+    "lastChecked": 1753934292478,
+    "attempts": 1
+  },
+  "wintherfysio.dk": {
+    "status": "success",
+    "logoPath": "/logos/wintherfysio.dk.png",
+    "lastChecked": 1753934292479,
+    "attempts": 1
+  },
+  "bedreflow.dk": {
+    "status": "failed",
+    "lastChecked": 1753934294090,
+    "attempts": 1
+  },
+  "falkfys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934294090,
+    "attempts": 1
+  },
+  "emlhelse.dk": {
+    "status": "success",
+    "logoPath": "/logos/emlhelse.dk.png",
+    "lastChecked": 1753934294090,
+    "attempts": 1
+  },
+  "dynamik.one": {
+    "status": "success",
+    "logoPath": "/logos/dynamik.one.png",
+    "lastChecked": 1753934294090,
+    "attempts": 1
+  },
+  "christianolesen.dk": {
+    "status": "success",
+    "logoPath": "/logos/christianolesen.dk.png",
+    "lastChecked": 1753934294090,
+    "attempts": 1
+  },
+  "fitness-fys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934296128,
+    "attempts": 1
+  },
+  "funktionelfysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934296129,
+    "attempts": 1
+  },
+  "helhedspraksis.dk": {
+    "status": "success",
+    "logoPath": "/logos/helhedspraksis.dk.png",
+    "lastChecked": 1753934296129,
+    "attempts": 1
+  },
+  "fysioiversen.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysioiversen.dk.png",
+    "lastChecked": 1753934296129,
+    "attempts": 1
+  },
+  "fysiodanmark-skive.dk": {
+    "status": "success",
+    "logoPath": "/logos/fysiodanmark-skive.dk.png",
+    "lastChecked": 1753934296129,
+    "attempts": 1
+  },
+  "kirstentoersleff.dk": {
+    "status": "failed",
+    "lastChecked": 1753934300994,
+    "attempts": 1
+  },
+  "lf-consult.dk": {
+    "status": "failed",
+    "lastChecked": 1753934300995,
+    "attempts": 1
+  },
+  "knoglesund.dk": {
+    "status": "success",
+    "logoPath": "/logos/knoglesund.dk.png",
+    "lastChecked": 1753934300995,
+    "attempts": 1
+  },
+  "metafys.dk": {
+    "status": "success",
+    "logoPath": "/logos/metafys.dk.png",
+    "lastChecked": 1753934300995,
+    "attempts": 1
+  },
+  "holbaeksportsklinik.dk": {
+    "status": "failed",
+    "lastChecked": 1753934300994,
+    "attempts": 1
+  },
+  "minnaholm.dk": {
+    "status": "failed",
+    "lastChecked": 1753934305104,
+    "attempts": 1
+  },
+  "sensebørneterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934305105,
+    "attempts": 1
+  },
+  "sundhedhorsens.dk": {
+    "status": "success",
+    "logoPath": "/logos/sundhedhorsens.dk.png",
+    "lastChecked": 1753934305106,
+    "attempts": 1
+  },
+  "brondbyosterfysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/brondbyosterfysioterapi.dk.png",
+    "lastChecked": 1753934305106,
+    "attempts": 1
+  },
+  "sommers-fysioterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/sommers-fysioterapi.dk.png",
+    "lastChecked": 1753934305105,
+    "attempts": 1
+  },
+  "tvilum.net": {
+    "status": "failed",
+    "lastChecked": 1753934307956,
+    "attempts": 1
+  },
+  "trigefysio.dk": {
+    "status": "failed",
+    "lastChecked": 1753934307955,
+    "attempts": 1
+  },
+  "allerødfys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934307956,
+    "attempts": 1
+  },
+  "tumlefys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934307955,
+    "attempts": 1
+  },
+  "sundhedogmassage.dk": {
+    "status": "success",
+    "logoPath": "/logos/sundhedogmassage.dk.png",
+    "lastChecked": 1753934307954,
+    "attempts": 1
+  },
+  "apexfysio.dk": {
+    "status": "success",
+    "logoPath": "/logos/apexfysio.dk.png",
+    "lastChecked": 1753934311035,
+    "attempts": 1
+  },
+  "din-fys.dk": {
+    "status": "failed",
+    "lastChecked": 1753934311036,
+    "attempts": 1
+  },
+  "axis-fysioterapi.dk": {
+    "status": "failed",
+    "lastChecked": 1753934311036,
+    "attempts": 1
+  },
+  "cortsenfys.dk": {
+    "status": "success",
+    "logoPath": "/logos/cortsenfys.dk.png",
+    "lastChecked": 1753934311036,
+    "attempts": 1
+  },
+  "bodymindterapi.dk": {
+    "status": "success",
+    "logoPath": "/logos/bodymindterapi.dk.png",
+    "lastChecked": 1753934311036,
+    "attempts": 1
+  },
+  "firma-fyssen.dk": {
+    "status": "failed",
+    "lastChecked": 1753934313367,
+    "attempts": 1
+  },
+  "fyserhverv.dk": {
+    "status": "failed",
+    "lastChecked": 1753934313368,
+    "attempts": 1
+  },
+  "feetback.dk": {
+    "status": "success",
+    "logoPath": "/logos/feetback.dk.png",
+    "lastChecked": 1753934313367,
+    "attempts": 1
+  },
+  "fysica.dk": {
+    "status": "failed",
+    "lastChecked": 1753934313368,
+    "attempts": 1
+  },
+  "diskusklinik.dk": {
+    "status": "success",
+    "logoPath": "/logos/diskusklinik.dk.png",
+    "lastChecked": 1753934313367,
+    "attempts": 1
+  },
+  "fysogmotorik.dk": {
+    "status": "failed",
+    "lastChecked": 1753934315696,
+    "attempts": 1
+  },
+  "fysionordic.dk": {
+    "status": "failed",
+    "lastChecked": 1753934315695,
+    "attempts": 1
+  },
+  "fys-dortepihl.dk": {
+    "status": "failed",
+    "lastChecked": 1753934315696,
+    "attempts": 1
+  },
+  "kertemindefys.dk": {
+    "status": "success",
+    "logoPath": "/logos/kertemindefys.dk.png",
+    "lastChecked": 1753934315696,
+    "attempts": 1
+  },
+  "kjellstromfysio.dk": {
+    "status": "success",
+    "logoPath": "/logos/kjellstromfysio.dk.png",
+    "lastChecked": 1753934315696,
+    "attempts": 1
+  },
+  "inbalancefysio.dk": {
+    "status": "success",
+    "logoPath": "/logos/inbalancefysio.dk.png",
+    "lastChecked": 1753934318032,
+    "attempts": 1
+  },
+  "fysserne-give.dk": {
+    "status": "failed",
+    "lastChecked": 1753934318031,
+    "attempts": 1
+  },
+  "healthsupport.dk": {
+    "status": "failed",
+    "lastChecked": 1753934318031,
+    "attempts": 1
+  },
+  "guldhammerfysio.dk": {
+    "status": "failed",
+    "lastChecked": 1753934318031,
+    "attempts": 1
+  },
+  "klinik-hogenhof.dk": {
+    "status": "success",
+    "logoPath": "/logos/klinik-hogenhof.dk.png",
+    "lastChecked": 1753934318032,
+    "attempts": 1
+  }
+}

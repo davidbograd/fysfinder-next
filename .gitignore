@@ -55,3 +55,9 @@ scripts/config/sources/*.json
 
 # Cursor
 .cursor/
+
+# Generated logo cache (created at build time)
+public/logos/*.png
+public/logos/*.jpg
+public/logos/*.jpeg
+public/logos/*.webp

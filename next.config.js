@@ -1,7 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['dbqnutjbrxydltkeftnv.supabase.co'], // Replace with your Supabase project URL
+    domains: [
+      'dbqnutjbrxydltkeftnv.supabase.co', // Replace with your Supabase project URL
+      'img.logo.dev', // Logo.dev API for clinic logos
+    ],
   },
   webpack: (config, { isServer }) => {
     // Suppress the punycode warning
