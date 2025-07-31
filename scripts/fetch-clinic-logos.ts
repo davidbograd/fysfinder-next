@@ -143,8 +143,20 @@ async function processLogo(domain: string, cache: LogoCache): Promise<void> {
       (now - cacheEntry.lastChecked) / (1000 * 60 * 60 * 24);
 
     if (cacheEntry.status === "success") {
-      console.log(`✓ Skipping ${domain} (already cached)`);
-      return;
+      // Verify the actual image file exists
+      const filename = `${sanitizeFilename(domain)}.png`;
+      const logoPath = path.join(LOGO_DIR, filename);
+
+      try {
+        await fs.access(logoPath);
+        console.log(`✓ Skipping ${domain} (already cached)`);
+        return;
+      } catch {
+        console.log(
+          `🔄 Re-fetching ${domain} (cache says success but file missing)`
+        );
+        // Continue to fetch since file is missing
+      }
     }
 
     if (
