@@ -65,6 +65,7 @@ function ResultsContent({
     setSpecialty,
     setFilters,
     isInitialized,
+    searchParams,
   ]);
 
   // Execute search when initialized (only once)
@@ -80,7 +81,14 @@ function ResultsContent({
       updateURL();
       executeSearch();
     }
-  }, [state.filters, isInitialized, state.location, updateURL, executeSearch]); // Removed state.isLoading from dependencies to prevent infinite loop
+  }, [
+    state.filters,
+    isInitialized,
+    state.location,
+    state.isLoading,
+    updateURL,
+    executeSearch,
+  ]);
 
   // Handle filter changes with instant application
   const handleYdernummerChange = (value: boolean) => {

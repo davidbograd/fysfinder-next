@@ -286,6 +286,7 @@ export function SearchProvider({
   };
 
   // Search execution
+  const filtersString = JSON.stringify(state.filters);
   const executeSearch = useCallback(async () => {
     if (!state.location) return;
 
@@ -333,7 +334,9 @@ export function SearchProvider({
   }, [
     state.location?.slug,
     state.specialty?.slug,
-    JSON.stringify(state.filters),
+    state.filters,
+    state.isLoading,
+    filtersString,
   ]); // Use stable dependencies
 
   // URL management with parameter normalization
@@ -358,7 +361,8 @@ export function SearchProvider({
   }, [
     state.location?.slug,
     state.specialty?.slug,
-    JSON.stringify(state.filters),
+    state.filters,
+    filtersString,
     router,
   ]); // Use stable dependencies
 

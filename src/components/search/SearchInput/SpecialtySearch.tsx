@@ -215,6 +215,7 @@ export const SpecialtySearch: React.FC<SpecialtySearchProps> = ({
           aria-label="Search for specialty"
           aria-autocomplete="list"
           aria-expanded={showDropdown}
+          aria-controls="specialty-dropdown"
           aria-describedby="specialty-search-help"
           role="combobox"
         />
@@ -273,6 +274,7 @@ export const SpecialtySearch: React.FC<SpecialtySearchProps> = ({
       {showDropdown && (
         <div
           ref={dropdownRef}
+          id="specialty-dropdown"
           className="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto"
           role="listbox"
         >

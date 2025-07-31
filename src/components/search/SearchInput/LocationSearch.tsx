@@ -187,6 +187,7 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
           aria-label="Search for location"
           aria-autocomplete="list"
           aria-expanded={showDropdown}
+          aria-controls="location-dropdown"
           aria-describedby="location-search-help"
           role="combobox"
         />
@@ -201,6 +202,7 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
       {showDropdown && suggestions && (
         <div
           ref={dropdownRef}
+          id="location-dropdown"
           className="absolute z-[9999] mt-1 bg-white border border-gray-200 rounded-lg shadow-xl max-h-60 overflow-y-auto"
           style={{
             position: "absolute",
