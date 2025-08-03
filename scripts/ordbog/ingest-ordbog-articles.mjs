@@ -1,10 +1,10 @@
 // HOW TO USE
 // 1. Update the CSV file with the new articles
-const CSV_FILENAME = "ordbog-ingest-20250621.csv"; // Update this to the new CSV filename
+const CSV_FILENAME = "ordbog-ingest-20250803.csv"; // Update this to the new CSV filename
 // 2. Update the date below to current date
-const CURRENT_DATE = "21/06/2025"; // Update this date when running the script
+const CURRENT_DATE = "03/08/2025"; // Update this date when running the script
 // 3. Run the script
-
+// node scripts/ordbog/ingest-ordbog-articles.mjs
 
 
 import fs from "node:fs";
