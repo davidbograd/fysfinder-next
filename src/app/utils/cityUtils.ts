@@ -30,7 +30,7 @@ export const regions: {
 };
 
 export async function fetchSpecialties(): Promise<Specialty[]> {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data, error } = await supabase
     .from("specialties")
     .select("specialty_id, specialty_name, specialty_name_slug");
@@ -44,7 +44,7 @@ export async function fetchSpecialties(): Promise<Specialty[]> {
 }
 
 export async function fetchCitiesWithCounts() {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const { data, error } = await supabase.from("cities").select(`
       id,

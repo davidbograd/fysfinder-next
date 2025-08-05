@@ -4,15 +4,16 @@ import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 
 interface ExercisePageProps {
-  params: {
+  params: Promise<{
     category: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({
   params,
 }: ExercisePageProps): Promise<Metadata> {
-  const exercise = getExerciseBySlug(params.category);
+  const { category } = await params;
+  const exercise = getExerciseBySlug(category);
 
   if (!exercise) {
     return {
@@ -26,8 +27,9 @@ export async function generateMetadata({
   };
 }
 
-export default function ExercisePage({ params }: ExercisePageProps) {
-  const exercise = getExerciseBySlug(params.category);
+export default async function ExercisePage({ params }: ExercisePageProps) {
+  const { category } = await params;
+  const exercise = getExerciseBySlug(category);
 
   if (!exercise) {
     notFound();

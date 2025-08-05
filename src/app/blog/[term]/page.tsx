@@ -103,9 +103,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { term: string };
+  params: Promise<{ term: string }>;
 }): Promise<Metadata> {
-  const post = await getBlogPost(params.term);
+  const { term } = await params;
+  const post = await getBlogPost(term);
   return {
     title: post.metaTitle || `${post.title} | FysFinder Blog`,
     description: post.description,
@@ -115,9 +116,10 @@ export async function generateMetadata({
 export default async function BlogPostPage({
   params,
 }: {
-  params: { term: string };
+  params: Promise<{ term: string }>;
 }) {
-  const post = await getBlogPost(params.term);
+  const { term } = await params;
+  const post = await getBlogPost(term);
   const headings = extractTableOfContents(post.content);
   const readingTime = calculateReadingTime(post.content);
 

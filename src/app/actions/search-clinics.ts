@@ -10,7 +10,7 @@ export interface Clinic {
 }
 
 export async function searchClinics(searchTerm: string): Promise<Clinic[]> {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data, error } = await supabase
     .from("clinics")
     .select("clinics_id, klinikNavn, lokationSlug, klinikNavnSlug")

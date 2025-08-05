@@ -42,7 +42,7 @@ export async function rateLimit(ip: string): Promise<{
 }
 
 export async function rateLimitMiddleware() {
-  const headersList = headers();
+  const headersList = await headers();
   const ip = headersList.get("x-forwarded-for") || "unknown";
 
   const result = await rateLimit(ip);

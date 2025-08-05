@@ -86,9 +86,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { term: string };
+  params: Promise<{ term: string }>;
 }): Promise<Metadata> {
-  const term = await getDictionaryTerm(params.term);
+  const { term: termSlug } = await params;
+  const term = await getDictionaryTerm(termSlug);
   return {
     title:
       term.metaTitle || `${term.title} - hvad er ${term.title.toLowerCase()}?`,
@@ -99,9 +100,10 @@ export async function generateMetadata({
 export default async function DictionaryTermPage({
   params,
 }: {
-  params: { term: string };
+  params: Promise<{ term: string }>;
 }) {
-  const term = await getDictionaryTerm(params.term);
+  const { term: termSlug } = await params;
+  const term = await getDictionaryTerm(termSlug);
   const headings = extractTableOfContents(term.content);
   const readingTime = calculateReadingTime(term.content);
   const lastUpdated = term.lastUpdated;

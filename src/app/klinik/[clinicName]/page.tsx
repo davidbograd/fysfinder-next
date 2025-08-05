@@ -16,7 +16,7 @@ import { ClinicLocation } from "@/components/features/clinic/ClinicLocation";
 import { ClinicAbout } from "@/components/features/clinic/ClinicAbout";
 
 async function fetchClinicBySlug(clinicSlug: string): Promise<Clinic | null> {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   try {
     const requestUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?klinikNavnSlug=eq.${clinicSlug}&select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order),clinic_insurances(insurance:insurance_companies(insurance_id,insurance_name,insurance_name_slug)),clinic_services(service:extra_services(service_id,service_name,service_name_slug)),premium_listings(id,start_date,end_date,booking_link)`;
@@ -98,9 +98,10 @@ async function fetchClinicBySlug(clinicSlug: string): Promise<Clinic | null> {
 export async function generateMetadata({
   params,
 }: {
-  params: { clinicName: string };
+  params: Promise<{ clinicName: string }>;
 }): Promise<Metadata> {
-  const clinic = await fetchClinicBySlug(params.clinicName);
+  const { clinicName } = await params;
+  const clinic = await fetchClinicBySlug(clinicName);
 
   if (!clinic) {
     redirect("/");
@@ -344,10 +345,11 @@ function BreadcrumbStructuredData({
 export default async function ClinicPage({
   params,
 }: {
-  params: { clinicName: string };
+  params: Promise<{ clinicName: string }>;
 }) {
   try {
-    const clinic = await fetchClinicBySlug(params.clinicName);
+    const { clinicName } = await params;
+    const clinic = await fetchClinicBySlug(clinicName);
 
     if (!clinic) {
       redirect("/");

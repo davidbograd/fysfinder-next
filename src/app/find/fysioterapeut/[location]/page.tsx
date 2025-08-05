@@ -421,25 +421,30 @@ export async function generateMetadata({
   params,
   searchParams,
 }: {
-  params: { location: string; specialty?: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<{ location: string; specialty?: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }): Promise<Metadata> {
+  // Resolve params and searchParams
+  const resolvedParams = await params;
+  const resolvedSearchParams = await searchParams;
+
   // Parse filter parameters from URL
   const filters: { ydernummer?: boolean; handicap?: boolean } = {};
-  if (searchParams?.ydernummer === "true") filters.ydernummer = true;
-  if (searchParams?.handicap === "true") filters.handicap = true;
+  if (resolvedSearchParams?.ydernummer === "true") filters.ydernummer = true;
+  if (resolvedSearchParams?.handicap === "true") filters.handicap = true;
 
   const data = await fetchLocationData(
-    params.location,
-    params.specialty,
+    resolvedParams.location,
+    resolvedParams.specialty,
     filters
   );
-  const cityName = data.city?.bynavn || deslugify(params.location);
+  const cityName = data.city?.bynavn || deslugify(resolvedParams.location);
 
   // Get specialty name if present
-  const specialtyName = params.specialty
-    ? data.specialties?.find((s) => s.specialty_name_slug === params.specialty)
-        ?.specialty_name
+  const specialtyName = resolvedParams.specialty
+    ? data.specialties?.find(
+        (s) => s.specialty_name_slug === resolvedParams.specialty
+      )?.specialty_name
     : undefined;
 
   // Generate dynamic meta title using our new utility
@@ -454,7 +459,7 @@ export async function generateMetadata({
 // Keep your existing seoContent array here...
 
 export async function fetchSpecialties() {
-  const supabase = createServerClient();
+  const supabase = await createServerClient();
   const { data, error } = await supabase
     .from("specialties")
     .select("specialty_id, specialty_name, specialty_name_slug, seo_tekst");
@@ -464,53 +469,58 @@ export async function fetchSpecialties() {
 }
 
 interface LocationPageProps {
-  params: {
+  params: Promise<{
     location: string;
     specialty?: string;
-  };
-  searchParams: { [key: string]: string | string[] | undefined };
+  }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 export default async function LocationPage({
   params,
   searchParams,
 }: LocationPageProps) {
+  // Resolve params and searchParams
+  const resolvedParams = await params;
+  const resolvedSearchParams = await searchParams;
+
   // Parse filter parameters from URL (with safety check)
   const filters: { ydernummer?: boolean; handicap?: boolean } = {};
-  if (searchParams?.ydernummer === "true") filters.ydernummer = true;
-  if (searchParams?.handicap === "true") filters.handicap = true;
+  if (resolvedSearchParams?.ydernummer === "true") filters.ydernummer = true;
+  if (resolvedSearchParams?.handicap === "true") filters.handicap = true;
 
   const data = await fetchLocationData(
-    params.location,
-    params.specialty,
+    resolvedParams.location,
+    resolvedParams.specialty,
     filters
   );
   const specialties = data.specialties;
 
   // --- Internal Linking Setup ---
   const linkConfig = loadLinkConfig();
-  const basePagePath = `/find/fysioterapeut/${params.location}`;
-  const currentPagePath = params.specialty
-    ? `${basePagePath}/${params.specialty}`
+  const basePagePath = `/find/fysioterapeut/${resolvedParams.location}`;
+  const currentPagePath = resolvedParams.specialty
+    ? `${basePagePath}/${resolvedParams.specialty}`
     : basePagePath;
   // ----------------------------
 
   // Get specialty name if we're on a specialty page
-  const specialty = params.specialty
+  const specialty = resolvedParams.specialty
     ? specialties.find(
-        (s: SpecialtyWithSeo) => s.specialty_name_slug === params.specialty
+        (s: SpecialtyWithSeo) =>
+          s.specialty_name_slug === resolvedParams.specialty
       )
     : null;
 
   // Redirect to location page if specialty doesn't exist but was specified
-  if (params.specialty && !specialty) {
-    redirect(`/find/fysioterapeut/${params.location}`);
+  if (resolvedParams.specialty && !specialty) {
+    redirect(`/find/fysioterapeut/${resolvedParams.location}`);
   }
 
   const specialtyName = specialty?.specialty_name;
 
   // Special handling for "danmark" page
-  if (params.location === "danmark") {
+  if (resolvedParams.location === "danmark") {
     const { h1, h2 } = generateHeadings("Danmark", specialtyName, filters);
 
     return (
@@ -544,7 +554,7 @@ export default async function LocationPage({
           </p>
 
           {/* Kroniske smerter samarbejde med FAKS */}
-          {params.specialty === "kroniske-smerter" && (
+          {resolvedParams.specialty === "kroniske-smerter" && (
             <div className="mb-4 flex flex-wrap items-center gap-4 sm:gap-8">
               <Image
                 src="/images/samarbejdspartnere/FAKS-smertelinjen-logo.png"
@@ -562,8 +572,8 @@ export default async function LocationPage({
 
           <SearchInterface
             specialties={specialties}
-            currentSpecialty={params.specialty}
-            citySlug={params.location}
+            currentSpecialty={resolvedParams.specialty}
+            citySlug={resolvedParams.location}
             defaultSearchValue="Danmark"
             showFilters={true}
             initialFilters={filters}
@@ -572,11 +582,11 @@ export default async function LocationPage({
           <ClinicsList
             clinics={data.clinics}
             totalClinics={data.clinics.length}
-            specialtySlug={params.specialty}
+            specialtySlug={resolvedParams.specialty}
           />
 
           {/* Add SEO text for specialty when on danmark page */}
-          {params.specialty && specialty?.seo_tekst && (
+          {resolvedParams.specialty && specialty?.seo_tekst && (
             <div
               className="mt-12 prose prose-slate max-w-none
                 prose-headings:text-gray-900
@@ -615,13 +625,13 @@ export default async function LocationPage({
   // For all other locations, we require city data
   if (!data.city) return notFound();
 
-  const isOnline = params.location.toLowerCase() === "online";
+  const isOnline = resolvedParams.location.toLowerCase() === "online";
 
   const breadcrumbItems = [
     { text: "Forside", link: "/" },
     {
       text: isOnline ? "Online" : data.city.bynavn,
-      link: `/find/fysioterapeut/${params.location}`,
+      link: `/find/fysioterapeut/${resolvedParams.location}`,
     },
     ...(specialtyName ? [{ text: specialtyName }] : []),
   ];
@@ -663,7 +673,7 @@ export default async function LocationPage({
           </span>
         </p>
 
-        {params.specialty === "kroniske-smerter" && !isOnline && (
+        {resolvedParams.specialty === "kroniske-smerter" && !isOnline && (
           <div className="mb-4 flex flex-wrap items-center gap-4 sm:gap-8">
             <Image
               src="/images/samarbejdspartnere/FAKS-smertelinjen-logo.png"
@@ -682,15 +692,15 @@ export default async function LocationPage({
         {/* Search Interface */}
         <SearchInterface
           specialties={specialties}
-          currentSpecialty={params.specialty}
-          citySlug={params.location}
+          currentSpecialty={resolvedParams.specialty}
+          citySlug={resolvedParams.location}
           defaultSearchValue={isOnline ? "Online" : data.city.bynavn}
           showFilters={true}
           initialFilters={filters}
         />
 
         {/* Specialties section */}
-        {!params.specialty && data.clinics.length > 0 && data.city && (
+        {!resolvedParams.specialty && data.clinics.length > 0 && data.city && (
           <SpecialtiesList
             city={data.city}
             clinics={data.clinics}
@@ -702,20 +712,20 @@ export default async function LocationPage({
           <NoResultsFound
             cityName={isOnline ? "Online" : data.city.bynavn}
             specialtyName={specialtyName}
-            locationSlug={params.location}
+            locationSlug={resolvedParams.location}
           />
         ) : (
           <div className="space-y-4">
             {data.clinics.map((clinic: Clinic) => {
               // If we're on a specialty page, reorder the specialties array to show the current specialty first
               let orderedSpecialties = clinic.specialties;
-              if (params.specialty && clinic.specialties) {
+              if (resolvedParams.specialty && clinic.specialties) {
                 orderedSpecialties = [
                   ...clinic.specialties.filter(
-                    (s) => s.specialty_name_slug === params.specialty
+                    (s) => s.specialty_name_slug === resolvedParams.specialty
                   ),
                   ...clinic.specialties.filter(
-                    (s) => s.specialty_name_slug !== params.specialty
+                    (s) => s.specialty_name_slug !== resolvedParams.specialty
                   ),
                 ];
               }
@@ -748,14 +758,14 @@ export default async function LocationPage({
           <NearbyClinicsList
             clinics={data.nearbyClinicsList}
             cityName={data.city.bynavn}
-            specialtySlug={params.specialty}
+            specialtySlug={resolvedParams.specialty}
             specialtyName={specialtyName}
           />
         )}
       </div>
 
       {/* Only show SEO text if we're not on a specialty page */}
-      {data.city.seo_tekst && !params.specialty && (
+      {data.city.seo_tekst && !resolvedParams.specialty && (
         <div
           className="mt-12 prose prose-slate max-w-none
              prose-headings:text-gray-900

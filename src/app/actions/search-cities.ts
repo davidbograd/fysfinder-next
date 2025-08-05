@@ -4,7 +4,7 @@ import { createClient } from "@/app/utils/supabase/server";
 import { SearchResult } from "@/app/types";
 
 export async function searchCities(query: string): Promise<SearchResult> {
-  const supabase = createClient();
+  const supabase = await createClient();
   const cleanQuery = query.trim().toLowerCase();
 
   // Return early if query is too short

@@ -39,7 +39,7 @@ export async function POST(request: Request) {
     if (rateLimitResult) return rateLimitResult;
 
     const { text } = await request.json();
-    const headersList = headers();
+    const headersList = await headers();
     const ip = headersList.get("x-forwarded-for") || "unknown";
 
     if (!text) {
@@ -101,7 +101,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ translation });
   } catch (error) {
-    const headersList = headers();
+    const headersList = await headers();
     const ip = headersList.get("x-forwarded-for") || "unknown";
 
     const errorMessage =

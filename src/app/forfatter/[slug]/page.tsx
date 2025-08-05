@@ -4,7 +4,7 @@ import { getAuthor, getAllAuthors } from "@/lib/authors";
 import { AuthorPage } from "@/components/features/authors/AuthorPage";
 
 interface AuthorPageParams {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
@@ -17,7 +17,8 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: AuthorPageParams): Promise<Metadata> {
-  const author = getAuthor(params.slug);
+  const { slug } = await params;
+  const author = getAuthor(slug);
 
   if (!author) {
     return {
@@ -44,8 +45,9 @@ export async function generateMetadata({
   };
 }
 
-export default function AuthorPageRoute({ params }: AuthorPageParams) {
-  const author = getAuthor(params.slug);
+export default async function AuthorPageRoute({ params }: AuthorPageParams) {
+  const { slug } = await params;
+  const author = getAuthor(slug);
 
   if (!author) {
     notFound();

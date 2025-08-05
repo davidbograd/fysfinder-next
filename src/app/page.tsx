@@ -175,7 +175,7 @@ export default async function HomePage() {
     const cities = await fetchCitiesWithCounts();
     const regions = processCities(cities);
     const totalClinics = cities.reduce(
-      (sum, city) => sum + city.clinic_count,
+      (sum: number, city: { clinic_count: number }) => sum + city.clinic_count,
       0
     );
 

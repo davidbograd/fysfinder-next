@@ -8,29 +8,33 @@ export async function generateMetadata({
   params,
   searchParams,
 }: {
-  params: { location: string; specialty: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<{ location: string; specialty: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }): Promise<Metadata> {
+  // Resolve params and searchParams
+  const resolvedParams = await params;
+  const resolvedSearchParams = await searchParams;
+
   // Parse filter parameters for metadata (with safety check)
   const filters: { ydernummer?: boolean; handicap?: boolean } = {};
-  if (searchParams?.ydernummer === "true") filters.ydernummer = true;
-  if (searchParams?.handicap === "true") filters.handicap = true;
+  if (resolvedSearchParams?.ydernummer === "true") filters.ydernummer = true;
+  if (resolvedSearchParams?.handicap === "true") filters.handicap = true;
 
   const data = await fetchLocationData(
-    params.location,
-    params.specialty,
+    resolvedParams.location,
+    resolvedParams.specialty,
     filters
   );
   const specialties = data.specialties;
   const specialty = specialties.find(
-    (s: SpecialtyWithSeo) => s.specialty_name_slug === params.specialty
+    (s: SpecialtyWithSeo) => s.specialty_name_slug === resolvedParams.specialty
   );
 
   if (!specialty) return notFound();
 
   // Generate location name
   const locationName =
-    params.location === "danmark" ? "Danmark" : data.city?.bynavn;
+    resolvedParams.location === "danmark" ? "Danmark" : data.city?.bynavn;
   if (!locationName) return notFound();
 
   // Generate dynamic meta title using our new utility
@@ -53,12 +57,12 @@ export async function generateMetadata({
   };
 }
 
-export default function SpecialtyPage({
+export default async function SpecialtyPage({
   params,
   searchParams,
 }: {
-  params: { location: string; specialty: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<{ location: string; specialty: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   return <LocationPage params={params} searchParams={searchParams} />;
 }

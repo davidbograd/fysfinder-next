@@ -19,7 +19,7 @@ interface Clinic {
 }
 
 async function searchClinics(searchTerm: string): Promise<Clinic[]> {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data, error } = await supabase
     .from("clinics")
     .select("clinics_id, klinikNavn, lokationSlug, klinikNavnSlug")
@@ -37,9 +37,10 @@ async function searchClinics(searchTerm: string): Promise<Clinic[]> {
 export default async function SearchPage({
   searchParams,
 }: {
-  searchParams: { q?: string };
+  searchParams: Promise<{ q?: string }>;
 }) {
-  const searchTerm = searchParams.q || "";
+  const resolvedSearchParams = await searchParams;
+  const searchTerm = resolvedSearchParams.q || "";
   let clinics: Clinic[] = [];
   let errorMessage: string | null = null;
 

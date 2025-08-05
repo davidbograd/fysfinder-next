@@ -23,7 +23,7 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
 
   const inputRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const debounceRef = useRef<NodeJS.Timeout>();
+  const debounceRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
   // Initialize input value from state
   useEffect(() => {

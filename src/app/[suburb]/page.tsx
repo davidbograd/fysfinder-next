@@ -3,7 +3,8 @@ import { permanentRedirect } from "next/navigation";
 export default async function SuburbPage({
   params,
 }: {
-  params: { suburb: string };
+  params: Promise<{ suburb: string }>;
 }) {
-  permanentRedirect(`/find/fysioterapeut/${params.suburb}`);
+  const { suburb } = await params;
+  permanentRedirect(`/find/fysioterapeut/${suburb}`);
 }
