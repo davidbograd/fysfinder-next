@@ -46,8 +46,16 @@ export const SearchButton: React.FC<SearchButtonProps> = ({
         if (queryString) {
           targetUrl += `?${queryString}`;
         }
+      } else if (state.specialty?.slug) {
+        // Allow specialty-only search across Denmark
+        targetUrl = `/find/fysioterapeut/danmark/${state.specialty.slug}`;
+
+        // Add filter parameters
+        if (queryString) {
+          targetUrl += `?${queryString}`;
+        }
       } else {
-        // No location selected - just apply filters to current page
+        // Neither location nor specialty selected - stay on current page
         const currentUrl = window.location.pathname;
         targetUrl = queryString ? `${currentUrl}?${queryString}` : currentUrl;
       }
@@ -69,8 +77,8 @@ export const SearchButton: React.FC<SearchButtonProps> = ({
     }
   };
 
-  // Button is disabled if no location is selected
-  const isDisabled = !state.location || isSearching;
+  // Button is disabled if neither location nor specialty is selected
+  const isDisabled = (!state.location && !state.specialty) || isSearching;
 
   return (
     <button

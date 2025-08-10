@@ -25,6 +25,16 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
   const dropdownRef = useRef<HTMLDivElement>(null);
   const debounceRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
+  // Utility: place caret at end of input
+  const moveCaretToEnd = () => {
+    const el = inputRef.current;
+    if (!el) return;
+    const len = el.value.length;
+    try {
+      el.setSelectionRange(len, len);
+    } catch {}
+  };
+
   // Initialize input value from state
   useEffect(() => {
     if (state.location) {
@@ -59,6 +69,13 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setInputValue(value);
+
+    // If a location is currently selected and the user edits the input to a different value,
+    // clear the selected location to allow specialty-only searches (e.g., Danmark pages)
+    if (state.location && value !== state.location.name) {
+      dispatch({ type: "SET_LOCATION", payload: null });
+      dispatch({ type: "SET_UNSEARCHED_CHANGES", payload: true });
+    }
 
     // Clear previous timeout
     if (debounceRef.current) {
@@ -138,6 +155,10 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
 
   // Handle input focus
   const handleFocus = () => {
+    // Ensure caret starts at end on focus
+    requestAnimationFrame(() => moveCaretToEnd());
+    setTimeout(() => moveCaretToEnd(), 0);
+
     if (suggestions && inputValue.length >= 2) {
       setShowDropdown(true);
     }
@@ -183,7 +204,7 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
           onBlur={handleBlur}
           onFocus={handleFocus}
           placeholder={placeholder}
-          className={`w-full py-4 pr-4 bg-transparent outline-none text-gray-900 placeholder-gray-500 ${className}`}
+          className={`w-full py-4 pr-10 bg-transparent outline-none text-gray-900 placeholder-gray-500 ${className}`}
           aria-label="Search for location"
           aria-autocomplete="list"
           aria-expanded={showDropdown}
@@ -197,6 +218,42 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
             <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-500"></div>
           </div>
         )}
+
+        {!isLoading &&
+          (state.location || (inputValue && inputValue.length > 0)) && (
+            <button
+              type="button"
+              onClick={() => {
+                // Clear selected location and input
+                if (state.location) {
+                  dispatch({ type: "SET_LOCATION", payload: null });
+                }
+                setInputValue("");
+                setSuggestions(null);
+                setShowDropdown(false);
+                setSelectedIndex(-1);
+                dispatch({ type: "SET_UNSEARCHED_CHANGES", payload: true });
+                // Refocus input for quick re-entry
+                inputRef.current?.focus();
+              }}
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+              aria-label="Clear location selection"
+            >
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          )}
       </div>
 
       {showDropdown && suggestions && (

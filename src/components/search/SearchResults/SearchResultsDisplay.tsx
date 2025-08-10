@@ -41,7 +41,7 @@ export const SearchResultsDisplay: React.FC = () => {
         <div className="mt-4 flex justify-center">
           <button
             onClick={executeSearch}
-            disabled={!state.location || state.isLoading}
+            disabled={(!state.location && !state.specialty) || state.isLoading}
             className="px-6 py-2 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
           >
             {state.isLoading ? "Søger..." : "Søg"}

@@ -20,26 +20,41 @@ export const SearchButton: React.FC<SearchButtonProps> = ({
   const pathname = usePathname();
 
   const handleClick = async () => {
-    if (!state.location || state.isLoading) return;
+    if (state.isLoading) return;
 
     // Check if we're on the homepage (/search-v2)
     const isHomepage = pathname === "/search-v2";
 
     if (isHomepage) {
-      // On homepage: Navigate to location page
+      // On homepage: Navigate to results page
+      const locationSlug =
+        state.location?.slug || (state.specialty ? "danmark" : "");
+      if (!locationSlug) return;
+
       const targetUrl = buildSearchV2Url(
-        state.location.slug,
+        locationSlug,
         state.specialty?.slug,
         state.filters
       );
       router.push(targetUrl);
     } else {
-      // On results page: Execute search
-      await executeSearch();
+      // On results page: Execute search only if we have a concrete location
+      if (state.location) {
+        await executeSearch();
+      } else if (state.specialty) {
+        // Navigate to country-wide specialty in V2 dev space
+        const targetUrl = buildSearchV2Url(
+          "danmark",
+          state.specialty.slug,
+          state.filters
+        );
+        router.push(targetUrl);
+      }
     }
   };
 
-  const isDisabled = disabled || !state.location || state.isLoading;
+  const isDisabled =
+    disabled || (!state.location && !state.specialty) || state.isLoading;
 
   return (
     <button

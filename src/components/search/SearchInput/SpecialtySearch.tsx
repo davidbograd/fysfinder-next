@@ -52,6 +52,12 @@ export const SpecialtySearch: React.FC<SpecialtySearchProps> = ({
 
   const inputRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  // Tracks the latest selected specialty to avoid stale closures in timeouts
+  const latestSpecialtyRef = useRef(state.specialty);
+
+  useEffect(() => {
+    latestSpecialtyRef.current = state.specialty;
+  }, [state.specialty]);
 
   // Load specialties on component mount
   useEffect(() => {
@@ -171,6 +177,11 @@ export const SpecialtySearch: React.FC<SpecialtySearchProps> = ({
   const handleFocus = () => {
     setShowDropdown(true);
     setSelectedIndex(-1);
+
+    // If a specialty is currently selected, clear the input to improve discovery
+    if (state.specialty) {
+      setSearchTerm("");
+    }
   };
 
   // Handle input blur
@@ -180,9 +191,15 @@ export const SpecialtySearch: React.FC<SpecialtySearchProps> = ({
       setShowDropdown(false);
       setSelectedIndex(-1);
 
+      // If a specialty is selected, restore its name in the input
+      if (latestSpecialtyRef.current) {
+        setSearchTerm(latestSpecialtyRef.current.name);
+        return;
+      }
+
       // If no specialty is selected and search term doesn't match any specialty exactly,
       // clear the search term
-      if (!state.specialty && searchTerm) {
+      if (!latestSpecialtyRef.current && searchTerm) {
         const exactMatch = specialties.find(
           (s) => s.specialty_name.toLowerCase() === searchTerm.toLowerCase()
         );

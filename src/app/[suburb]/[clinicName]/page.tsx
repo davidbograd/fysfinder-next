@@ -8,7 +8,7 @@ export default async function ClinicPage({
 }) {
   // Resolve params
   const { suburb, clinicName } = await params;
-  
+
   // Fetch the clinic to get its slug
   const supabase = await createClient();
   const { data: clinic } = await supabase
