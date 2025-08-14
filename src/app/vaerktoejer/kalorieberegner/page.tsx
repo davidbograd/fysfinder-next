@@ -12,7 +12,7 @@ import rehypeInternalLinks from "lib/internal-linking/rehype-internal-links";
 import { loadLinkConfig } from "lib/internal-linking/config";
 
 export const metadata: Metadata = {
-  title: "Kalorieberegner: Beregn dit kaloriebehov (ligevægtsindtag)",
+  title: "Kalorieberegner: Beregn dit kaloriebehov (ligevægtsindtag, TDEE)",
   description:
     "Beregn dit daglige kaloriebehov med vores gratis kalorieberegner. Få dit BMR, TDEE og anbefalinger til vægttab og vægtøgning.",
 };
@@ -59,7 +59,8 @@ export default async function CalorieCalculatorPage() {
         <Breadcrumbs items={breadcrumbItems} />
         <div className="space-y-4">
           <h1 className="text-2xl sm:text-3xl font-bold">
-            Kalorieberegner - Beregn dit daglige kaloriebehov (ligevægtsindtag)
+            Kalorieberegner - Beregn dit daglige kaloriebehov (ligevægtsindtag,
+            TDEE)
           </h1>
           <p className="text-gray-600 text-sm sm:text-base">
             Hvor mange kalorier du bør indtage for at opretholde din nuværende
