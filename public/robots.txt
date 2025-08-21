@@ -3,7 +3,6 @@ User-agent: *
 Allow: /
 Disallow: /search
 Disallow: /postnumre
-Disallow: /*?*  # Disallow URL parameters to prevent duplicate content crawling
 Crawl-delay: 1
 
 # **** Ahrefs Bot Settings ****
@@ -11,7 +10,6 @@ User-agent: AhrefsBot
 Allow: /
 Disallow: /search
 Disallow: /postnumre
-Disallow: /*?*
 Crawl-delay: 2
 Request-rate: 1/2
 
@@ -26,7 +24,6 @@ User-agent: PerplexityBot
 Allow: /
 Disallow: /search
 Disallow: /postnumre
-Disallow: /*?*
 Crawl-delay: 2
 
 # **** Google Bot Family ****
