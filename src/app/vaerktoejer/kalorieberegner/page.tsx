@@ -12,7 +12,7 @@ import rehypeInternalLinks from "lib/internal-linking/rehype-internal-links";
 import { loadLinkConfig } from "lib/internal-linking/config";
 
 export const metadata: Metadata = {
-  title: "Kalorieberegner: Beregn dit kaloriebehov (Ligevægtsindtag)",
+  title: "Kalorieberegner (TDEE): Beregn dit daglige kaloriebehov ✅",
   description:
     "Beregn dit daglige kaloriebehov med vores gratis kalorieberegner. Få dit BMR, TDEE og anbefalinger til vægttab og vægtøgning.",
 };
