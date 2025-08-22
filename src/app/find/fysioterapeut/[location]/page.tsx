@@ -448,7 +448,15 @@ export async function generateMetadata({
     : undefined;
 
   // Generate dynamic meta title using our new utility
-  const title = generateMetaTitle(cityName, specialtyName, filters);
+  const title = generateMetaTitle(
+    cityName,
+    specialtyName,
+    filters,
+    // Only pass clinic count when no filters and no specialty (simple location page)
+    !filters.ydernummer && !filters.handicap && !specialtyName
+      ? data.clinics.length
+      : undefined
+  );
 
   return {
     title,

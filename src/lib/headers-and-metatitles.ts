@@ -67,11 +67,17 @@ export function generateHeadings(
 /**
  * Generate meta title for location and specialty pages with filters
  * Uses optimized strategy for SEO and character count
+ *
+ * @param locationName - The name of the location (city, region, etc.)
+ * @param specialtyName - Optional specialty name for specialty pages
+ * @param filters - Optional filters (ydernummer, handicap)
+ * @param clinicCount - Optional number of clinics (used for location-only pages with 2+ clinics)
  */
 export function generateMetaTitle(
   locationName: string,
   specialtyName?: string,
-  filters?: HeadingFilters
+  filters?: HeadingFilters,
+  clinicCount?: number
 ): string {
   const hasYdernummer = filters?.ydernummer;
   const hasHandicap = filters?.handicap;
@@ -85,7 +91,13 @@ export function generateMetaTitle(
     if (specialtyName) {
       return `${specialtyPrefix}fysioterapi i ${locationName} | Find fysioterapeuter ›`;
     } else {
-      return `Fysioterapi klinikker i ${locationName} | Find fysioterapeuter ›`;
+      // Add clinic count to title when 2+ clinics and no filters/specialty
+      // This creates titles like "15 fysioterapi klinikker i København | Find fysioterapeuter"
+      if (clinicCount && clinicCount >= 2) {
+        return `${clinicCount} fysioterapi klinikker i ${locationName} | Find fysioterapeuter`;
+      } else {
+        return `Fysioterapi klinikker i ${locationName} | Find fysioterapeuter ›`;
+      }
     }
   } else if (filterCount === 1) {
     // Single filter
@@ -139,9 +151,10 @@ export function generateSpecialtyHeading(
  */
 export function generateLocationMetaTitle(
   locationName: string,
-  filters?: HeadingFilters
+  filters?: HeadingFilters,
+  clinicCount?: number
 ): string {
-  return generateMetaTitle(locationName, undefined, filters);
+  return generateMetaTitle(locationName, undefined, filters, clinicCount);
 }
 
 /**
@@ -150,7 +163,8 @@ export function generateLocationMetaTitle(
 export function generateSpecialtyMetaTitle(
   locationName: string,
   specialtyName: string,
-  filters?: HeadingFilters
+  filters?: HeadingFilters,
+  clinicCount?: number
 ): string {
-  return generateMetaTitle(locationName, specialtyName, filters);
+  return generateMetaTitle(locationName, specialtyName, filters, clinicCount);
 }
