@@ -542,7 +542,13 @@ export default async function LocationPage({
           <Breadcrumbs
             items={[
               { text: "Forside", link: "/" },
-              { text: "Danmark", link: "/find/fysioterapeut/danmark" },
+              {
+                text: "Danmark",
+                // Only make it a link if we're on a specialty page
+                ...(resolvedParams.specialty && {
+                  link: "/find/fysioterapeut/danmark",
+                }),
+              },
               ...(specialtyName ? [{ text: specialtyName }] : []),
             ]}
           />
@@ -639,7 +645,10 @@ export default async function LocationPage({
     { text: "Forside", link: "/" },
     {
       text: isOnline ? "Online" : data.city.bynavn,
-      link: `/find/fysioterapeut/${resolvedParams.location}`,
+      // Only make it a link if we're on a specialty page
+      ...(resolvedParams.specialty && {
+        link: `/find/fysioterapeut/${resolvedParams.location}`,
+      }),
     },
     ...(specialtyName ? [{ text: specialtyName }] : []),
   ];
