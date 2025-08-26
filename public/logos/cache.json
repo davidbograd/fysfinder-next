@@ -4539,5 +4539,11 @@
     "logoPath": "/logos/klinik-hogenhof.dk.png",
     "lastChecked": 1753934318032,
     "attempts": 1
+  },
+  "bornholm-rehab.dk": {
+    "status": "success",
+    "logoPath": "/logos/bornholm-rehab.dk.png",
+    "lastChecked": 1754829247653,
+    "attempts": 1
   }
 }

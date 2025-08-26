@@ -560,7 +560,8 @@ export default async function LocationPage({
 
           {/* Always show description */}
           <p className="text-gray-600 mb-8">
-            {data.clinics.length} fysioterapi klinikker i Danmark.
+            {data.clinics.length >= 1000 ? "1000+" : data.clinics.length}{" "}
+            fysioterapi klinikker i Danmark.
             <span className="hidden md:inline">
               {" "}
               Sammenlign anmeldelser, specialer og mere.

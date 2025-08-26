@@ -94,7 +94,12 @@ export function generateMetaTitle(
       // Add clinic count to title when 2+ clinics and no filters/specialty
       // This creates titles like "15 fysioterapi klinikker i København | Find fysioterapeuter"
       if (clinicCount && clinicCount >= 2) {
-        return `${clinicCount} fysioterapi klinikker i ${locationName} | Find fysioterapeuter`;
+        // For Danmark page, show "1000+" when we hit the limit
+        const countDisplay =
+          locationName.toLowerCase() === "danmark" && clinicCount >= 1000
+            ? "1000+"
+            : clinicCount.toString();
+        return `${countDisplay} fysioterapi klinikker i ${locationName} | Find fysioterapeuter`;
       } else {
         return `Fysioterapi klinikker i ${locationName} | Find fysioterapeuter ›`;
       }

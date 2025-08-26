@@ -75,6 +75,7 @@ const ClinicCard: React.FC<Props> = ({
   const [cachedLogoPath, setCachedLogoPath] = useState<string | null>(null);
   const [logoLoaded, setLogoLoaded] = useState(false);
   const isPremium = isPremiumActive(premium_listing);
+  const hasLogo = logoLoaded && Boolean(cachedLogoPath);
 
   // Load cached logo path on mount
   useEffect(() => {
@@ -100,9 +101,14 @@ const ClinicCard: React.FC<Props> = ({
       <div className="flex flex-col sm:flex-row sm:justify-between">
         <div className="flex flex-col sm:flex-row sm:gap-4 flex-grow">
           {/* Logo */}
-          <div className="flex-shrink-0 mb-3 sm:mb-0">
+          <div
+            className={cn(
+              "flex-shrink-0",
+              hasLogo ? "mb-3 sm:mb-0" : "hidden sm:block sm:mb-0"
+            )}
+          >
             <Link href={`/klinik/${klinikNavnSlug}`} className="block">
-              {logoLoaded && cachedLogoPath ? (
+              {hasLogo && cachedLogoPath ? (
                 <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center">
                   <Image
                     src={cachedLogoPath}
