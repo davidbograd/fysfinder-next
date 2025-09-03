@@ -10,6 +10,7 @@ import { loadLinkConfig } from "lib/internal-linking/config";
 import Image from "next/image";
 import { StartBackToolClient } from "./components/StartBackToolClient";
 import { Metadata } from "next";
+import RelatedToolsSection from "@/components/features/RelatedToolsSection";
 
 const MdxImage = (props: any) => {
   return (
@@ -95,6 +96,8 @@ export default async function StartBackScreeningToolPage() {
           }}
         />
       </div>
+      
+      <RelatedToolsSection currentToolHref="/start-back-screening-tool" />
     </div>
   );
 }

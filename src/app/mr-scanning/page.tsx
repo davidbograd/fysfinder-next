@@ -11,6 +11,7 @@ import remarkGfm from "remark-gfm";
 import rehypeUnwrapImages from "rehype-unwrap-images";
 import rehypeInternalLinks from "lib/internal-linking/rehype-internal-links";
 import { loadLinkConfig } from "lib/internal-linking/config";
+import RelatedToolsSection from "@/components/features/RelatedToolsSection";
 
 export const metadata: Metadata = {
   title: "Komplet MR-scanning guide | Få svar på dine spørgsmål ✅",
@@ -156,6 +157,8 @@ export default async function MRScanPage() {
             />
           </div>
         </div>
+        
+        <RelatedToolsSection currentToolHref="/mr-scanning" />
       </div>
     </main>
   );

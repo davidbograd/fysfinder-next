@@ -10,6 +10,7 @@ import remarkGfm from "remark-gfm";
 import rehypeUnwrapImages from "rehype-unwrap-images";
 import rehypeInternalLinks from "lib/internal-linking/rehype-internal-links";
 import { loadLinkConfig } from "lib/internal-linking/config";
+import RelatedToolsSection from "@/components/features/RelatedToolsSection";
 
 export const metadata: Metadata = {
   title: "Kalorieberegner (TDEE): Beregn dit daglige kaloriebehov ✅",
@@ -130,6 +131,8 @@ export default async function CalorieCalculatorPage() {
             />
           </div>
         </div>
+        
+        <RelatedToolsSection currentToolHref="/vaerktoejer/kalorieberegner" />
       </div>
     </main>
   );

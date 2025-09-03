@@ -10,6 +10,7 @@ import remarkGfm from "remark-gfm";
 import rehypeUnwrapImages from "rehype-unwrap-images";
 import rehypeInternalLinks from "lib/internal-linking/rehype-internal-links";
 import { loadLinkConfig } from "lib/internal-linking/config";
+import RelatedToolsSection from "@/components/features/RelatedToolsSection";
 
 export const metadata: Metadata = {
   title: "BMI-beregner: Beregn og forstå dit Body Mass Index tal ✅",
@@ -132,6 +133,8 @@ export default async function BMICalculatorPage() {
             />
           </div>
         </div>
+        
+        <RelatedToolsSection currentToolHref="/vaerktoejer/bmi-beregner" />
       </div>
     </main>
   );

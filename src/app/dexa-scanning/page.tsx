@@ -11,6 +11,7 @@ import remarkGfm from "remark-gfm";
 import rehypeUnwrapImages from "rehype-unwrap-images";
 import rehypeInternalLinks from "lib/internal-linking/rehype-internal-links";
 import { loadLinkConfig } from "lib/internal-linking/config";
+import RelatedToolsSection from "@/components/features/RelatedToolsSection";
 
 export const metadata: Metadata = {
   title: "Komplet DEXA-scanning guide | Forstå alt om DEXA-scan ✅",
@@ -160,6 +161,8 @@ export default async function DEXAScanPage() {
             />
           </div>
         </div>
+        
+        <RelatedToolsSection currentToolHref="/dexa-scanning" />
       </div>
     </main>
   );
