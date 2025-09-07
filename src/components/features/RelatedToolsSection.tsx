@@ -62,6 +62,15 @@ const allTools: Tool[] = [
     imageAlt: "BMI-beregner illustration med vægt og målebånd",
     type: "Kost & ernæring værktøjer",
   },
+  {
+    title: "Fedtprocent beregner",
+    description:
+      "Beregn din fedtprocent med Navy metoden baseret på simple målinger af krop. Få indsigt i din kropssammensætning.",
+    href: "/vaerktoejer/fedtprocent-beregner",
+    imageUrl: "/images/vaerktoejer/fedtprocent-beregner.jpg",
+    imageAlt: "Fedtprocent beregner illustration med målebånd og sundhedsudstyr",
+    type: "Kost & ernæring værktøjer",
+  },
 ];
 
 const RelatedToolsSection = ({ 
@@ -71,8 +80,9 @@ const RelatedToolsSection = ({
 }: RelatedToolsSectionProps) => {
   // Define related tool pairs
   const relatedPairs: { [key: string]: string } = {
-    "/vaerktoejer/bmi-beregner": "/vaerktoejer/kalorieberegner",
+    "/vaerktoejer/bmi-beregner": "/vaerktoejer/fedtprocent-beregner",
     "/vaerktoejer/kalorieberegner": "/vaerktoejer/bmi-beregner",
+    "/vaerktoejer/fedtprocent-beregner": "/vaerktoejer/bmi-beregner",
     "/mr-scanning": "/dexa-scanning",
     "/dexa-scanning": "/mr-scanning",
   };

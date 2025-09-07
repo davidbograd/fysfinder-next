@@ -58,6 +58,15 @@ const tools: Tool[] = [
     imageAlt: "BMI-beregner illustration med vægt og målebånd",
     type: "Kost & ernæring værktøjer",
   },
+  {
+    title: "Fedtprocent beregner",
+    description:
+      "Beregn din fedtprocent med Navy metoden baseret på simple målinger af krop. Få indsigt i din kropssammensætning.",
+    href: "/vaerktoejer/fedtprocent-beregner",
+    imageUrl: "/images/vaerktoejer/fedtprocent-beregner.jpg",
+    imageAlt: "Fedtprocent beregner illustration med målebånd og sundhedsudstyr",
+    type: "Kost & ernæring værktøjer",
+  },
 ];
 
 function ToolCard({ tool }: { tool: Tool }) {
