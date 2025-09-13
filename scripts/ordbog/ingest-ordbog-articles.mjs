@@ -1,8 +1,8 @@
 // HOW TO USE
 // 1. Update the CSV file with the new articles
-const CSV_FILENAME = "ordbog-ingest-20250803.csv"; // Update this to the new CSV filename
+const CSV_FILENAME = "ordbog-ingest-20250913.csv"; // Update this to the new CSV filename
 // 2. Update the date below to current date
-const CURRENT_DATE = "03/08/2025"; // Update this date when running the script
+const CURRENT_DATE = "13/09/2025"; // Update this date when running the script
 // 3. Run the script
 // node scripts/ordbog/ingest-ordbog-articles.mjs
 
@@ -86,7 +86,7 @@ async function processArticles() {
 
         // Extract H1 and clean content
         const { title, remainingContent } = extractH1FromContent(
-          record.Content
+          record["SEO artikel"]
         );
 
         // Validate H1 exists
