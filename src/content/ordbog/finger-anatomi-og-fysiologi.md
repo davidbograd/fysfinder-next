@@ -20,7 +20,7 @@ Fingermusklerne er ansvarlige for bevægelsen og styrken i fingrene. De fleste a
 | Flexor digitorum superficialis | Overfladisk fingerbøjer | Bøjer de midterste led i fingrene |
 | Flexor digitorum profundus | Dyb fingerbøjer | Bøjer de yderste led i fingrene |
 | Extensor digitorum | Fingerstrækker | Strækker fingrene |
-| Lumbricales | _Dansk oversættelse mangler_ | Bøjer de proximale led og strækker de distale led i fingrene |
+| Lumbricales | Lumbricalmusklerne | Bøjer de proximale led og strækker de distale led i fingrene |
 
 ## Finger knogler
 

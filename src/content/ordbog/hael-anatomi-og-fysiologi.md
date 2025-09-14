@@ -19,7 +19,6 @@ Hælen indeholder flere muskler, der bidrager til bevægelse og stabilitet. Her 
 |----------------|--------------------|----------|
 | Gastrocnemius  | Tvillingelægmuskel | Hjælper med at bøje foden og knæet |
 | Soleus        | Flyndermuskel      | Arbejder med gastrocnemius for at bøje foden |
-| Plantaris     | _Dansk oversættelse mangler_ | Hjælper med at bøje foden og knæet |
 
 ## Hæl knogler
 

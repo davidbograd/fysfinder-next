@@ -54,8 +54,8 @@ Senerne i lænden forbinder musklerne med knoglerne og spiller en vigtig rolle i
 
 | Sene | Dansk oversættelse | Funktion |
 |------|---------------------|----------|
-| Tendo iliopsoas | _Dansk oversættelse mangler_ | Forbinder psoas major med lårbenet |
-| Tendo erector spinae | _Dansk oversættelse mangler_ | Forbinder rygstrækkerne med rygsøjlen |
+| Tendo iliopsoas | Iliopsoas senen | Forbinder psoas major med lårbenet |
+| Tendo erector spinae | Erector spinae senen | Forbinder rygstrækkerne med rygsøjlen |
 
 ## Ofte stillede spørgsmål om lænd
 

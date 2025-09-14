@@ -37,8 +37,8 @@ Nerverne i brystet er ansvarlige for at sende signaler mellem hjernen og brystet
 
 | Nerve | Dansk oversættelse | Funktion |
 |-------|---------------------|----------|
-| N. pectoralis medialis | _Dansk oversættelse mangler_ | Innerverer pectoralis major og minor. |
-| N. pectoralis lateralis | _Dansk oversættelse mangler_ | Innerverer pectoralis major. |
+| N. pectoralis medialis | Pectoralis medialis nerven | Innerverer pectoralis major og minor. |
+| N. pectoralis lateralis | Pectoralis lateralis nerven | Innerverer pectoralis major. |
 
 ## Brystled
 
@@ -55,7 +55,7 @@ Senerne i brystet forbinder musklerne til knoglerne og er afgørende for bevæge
 
 | Sene | Dansk oversættelse | Funktion |
 |------|---------------------|----------|
-| Tendo pectoralis major | _Dansk oversættelse mangler_ | Forbinder pectoralis major til humerus og muliggør armens bevægelse. |
+| Tendo pectoralis major | Den store brystmuskelsene | Forbinder pectoralis major til humerus og muliggør armens bevægelse. |
 
 ## Ofte stillede spørgsmål om bryst
 

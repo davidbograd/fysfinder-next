@@ -18,7 +18,7 @@ Rygsøjlens muskler spiller en vigtig rolle i at støtte og bevæge rygsøjlen. 
 | Muskel (latin) | Dansk oversættelse | Funktion |
 |----------------|---------------------|----------|
 | Erector spinae | Rygstrækker | Stabiliserer og retter rygsøjlen |
-| Multifidus | _Dansk oversættelse mangler_ | Stabiliserer ryghvirvlerne |
+| Multifidus | Multifidus | Stabiliserer ryghvirvlerne |
 | Quadratus lumborum | Firkantet lændemuskel | Lateral fleksion af rygsøjlen |
 | Latissimus dorsi | Den brede rygmuskel | Adduktion og indadrotation af armen |
 

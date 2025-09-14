@@ -53,7 +53,7 @@ datePublished: "03/08/2025"
 
 | Led | Dansk oversættelse | Funktion |
 |-----|---------------------|----------|
-| Orbital led | _Dansk oversættelse mangler_ | Tillader øjets rotation og bevægelse |
+| Orbital led | Orbitale led | Tillader øjets rotation og bevægelse |
 
 ## Øje sener
 
@@ -61,8 +61,8 @@ datePublished: "03/08/2025"
 
 | Sene | Dansk oversættelse | Funktion |
 |------|---------------------|----------|
-| Tendon of superior oblique | _Dansk oversættelse mangler_ | Forbinder den øvre skrå muskel til øjet |
-| Tendon of inferior oblique | _Dansk oversættelse mangler_ | Forbinder den nedre skrå muskel til øjet |
+| Tendon superior oblique | Superior oblique senen | Forbinder den øvre skrå muskel til øjet |
+| Tendon inferior oblique | Inferior oblique senen | Forbinder den nedre skrå muskel til øjet |
 
 ## Ofte stillede spørgsmål om øje
 

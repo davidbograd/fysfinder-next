@@ -49,14 +49,6 @@ Leddene i munden, især kæbeleddet, muliggør bevægelse af kæberne.
 |-----|--------------------|----------|
 | Articulatio temporomandibularis | Kæbeled | Tillader bevægelse af underkæben, hvilket er essentielt for tygning og tale. |
 
-## Mundens sener
-
-Senerne i munden forbinder musklerne til knoglerne og muliggør bevægelse.
-
-| Sene | Dansk oversættelse | Funktion |
-|------|--------------------|----------|
-| _Dansk oversættelse mangler_ | _Dansk oversættelse mangler_ | Forbinder musklerne til kæbeknoglerne og muliggør bevægelse af kæberne. |
-
 ## Ofte stillede spørgsmål om mund
 
 ### Hvad er mundens primære funktioner?

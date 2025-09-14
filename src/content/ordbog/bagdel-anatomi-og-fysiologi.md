@@ -20,7 +20,7 @@ Bagdelens muskler er ansvarlige for bevægelse og stabilitet i hofte- og benomr�
 | Gluteus maximus | Den store sædemuskel | Ansvarlig for hofteekstension og udadrotation. |
 | Gluteus medius | Den mellemste sædemuskel | Stabiliserer bækkenet og muliggør hofteabduktion. |
 | Gluteus minimus | Den lille sædemuskel | Hjælper med hofteabduktion og indadrotation. |
-| Piriformis | _Dansk oversættelse mangler_ | Udadrotation af hoften. |
+| Piriformis | Piriformis | Udadrotation af hoften. |
 
 ## Bagdel knogler
 

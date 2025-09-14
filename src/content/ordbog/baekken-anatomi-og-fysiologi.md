@@ -19,7 +19,7 @@ Bækkenet er omgivet af flere muskler, der spiller en vigtig rolle i bevægelse 
 |----------------|--------------------|----------|
 | Iliopsoas      | Hoftebøjer         | Fleksion af hoften |
 | Gluteus maximus| Store sædemuskel   | Ekstension og udadrotation af hoften |
-| Piriformis     | _Dansk oversættelse mangler_ | Udadrotation af hoften |
+| Piriformis     | Piriformis         | Udadrotation af hoften |
 | Obturator internus | Indre lukkemuskel | Udadrotation af hoften |
 
 ## Bækken knogler
@@ -40,7 +40,7 @@ Nerverne i bækkenet er ansvarlige for at sende signaler mellem hjernen og de ne
 | Nerve | Dansk oversættelse | Funktion |
 |-------|--------------------|----------|
 | N. ischiadicus | Iskiasnerven | Sensorisk og motorisk funktion i benet |
-| N. pudendus   | _Dansk oversættelse mangler_ | Sensorisk og motorisk funktion i bækkenområdet |
+| N. pudendus   | Pudendusnerven | Sensorisk og motorisk funktion i bækkenområdet |
 
 ## Bækken led
 
@@ -58,7 +58,7 @@ Senerne i bækkenet forbinder muskler til knogler og er afgørende for bevægels
 | Sene | Dansk oversættelse | Funktion |
 |------|--------------------|----------|
 | Ligamentum inguinale | Lyskebånd | Støtte og stabilitet i lysken |
-| Ligamentum sacrotuberale | _Dansk oversættelse mangler_ | Stabilitet i bækkenet |
+| Ligamentum sacrotuberale | Sacrotuberale ledbånd | Stabilitet i bækkenet |
 
 ## Ofte stillede spørgsmål om bækken
 

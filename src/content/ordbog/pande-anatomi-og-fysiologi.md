@@ -33,7 +33,7 @@ Nerverne i panden er ansvarlige for sensorisk information og motorisk kontrol.
 
 | Nerve | Dansk oversættelse | Funktion |
 |-------|--------------------|----------|
-| Nervus supraorbitalis | _Dansk oversættelse mangler_ | Forsyner panden med sensorisk information |
+| Nervus supraorbitalis | Supraorbitalis nerven | Forsyner panden med sensorisk information |
 
 ## Pande led
 
@@ -49,7 +49,7 @@ Sener i panden forbinder muskler til knogler og hjælper med bevægelse.
 
 | Sene | Dansk oversættelse | Funktion |
 |------|--------------------|----------|
-| Galea aponeurotica | _Dansk oversættelse mangler_ | Forbinder pande- og nakkemusklerne |
+| Galea aponeurotica | Kraniets seneplade | Forbinder pande- og nakkemusklerne |
 
 ## Ofte stillede spørgsmål om pande
 

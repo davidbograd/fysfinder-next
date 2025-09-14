@@ -47,14 +47,6 @@ Kæbens led, især det temporomandibulære led, er afgørende for kæbens bevæg
 |----------------|---------------------|----------|
 | Articulatio temporomandibularis | Kæbeleddet | Tillader bevægelse af underkæben i flere retninger. |
 
-## Kæbens sener
-
-Senerne i kæben forbinder musklerne til knoglerne og hjælper med at overføre kraften, der er nødvendig for bevægelse.
-
-| Sene           | Dansk oversættelse | Funktion |
-|----------------|---------------------|----------|
-| _Dansk oversættelse mangler_ | _Dansk oversættelse mangler_ | Forbinder muskler til knogler og muliggør bevægelse. |
-
 ## Ofte stillede spørgsmål om kæbe
 
 ### Hvad er symptomerne på kæbeledsproblemer?

@@ -46,14 +46,6 @@ Næseleddene er små og tillader minimal bevægelse, men de er vigtige for næse
 |-----|--------------------|----------|
 | Articulatio nasalis | Næseled | Tillader små bevægelser i næsen. |
 
-## Næse sener
-
-Senerne i næsen forbinder musklerne til knoglerne og hjælper med at kontrollere næsens bevægelser.
-
-| Sene | Dansk oversættelse | Funktion |
-|------|--------------------|----------|
-| _Dansk oversættelse mangler_ | _Dansk oversættelse mangler_ | Forbinder næsemusklerne til næseknoglerne. |
-
 ## Ofte stillede spørgsmål om næse
 
 ### Hvad er næsens primære funktioner?

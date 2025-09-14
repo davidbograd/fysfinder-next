@@ -38,8 +38,8 @@ Nerverne omkring navlen spiller en rolle i sensorisk og motorisk funktion i mave
 
 | Nerve | Dansk oversættelse | Funktion |
 |-------|--------------------|----------|
-| N. iliohypogastricus | _Dansk oversættelse mangler_ | Forsyner huden over den nedre del af maven og nogle af de dybe mavemuskler. |
-| N. ilioinguinalis | _Dansk oversættelse mangler_ | Forsyner huden i lyskeområdet og nogle af de dybe mavemuskler. |
+| N. iliohypogastricus | Iliohypogastricus nerven | Forsyner huden over den nedre del af maven og nogle af de dybe mavemuskler. |
+| N. ilioinguinalis | Ilioinguinalis nerven | Forsyner huden i lyskeområdet og nogle af de dybe mavemuskler. |
 
 ## Navle led
 

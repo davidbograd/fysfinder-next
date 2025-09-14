@@ -35,7 +35,7 @@ Kravebenet beskytter flere vigtige nerver, der passerer gennem skulderområdet.
 
 | Nerve | Dansk oversættelse | Funktion |
 |-------|---------------------|----------|
-| N. supraclavicularis | _Dansk oversættelse mangler_ | Innerverer huden over skulderen og øvre bryst. |
+| N. supraclavicularis | Supraclaviculare nerve | Innerverer huden over skulderen og øvre bryst. |
 
 ## Kraveben led
 
@@ -52,7 +52,7 @@ Kravebenet er forbundet med flere sener, der hjælper med at overføre muskelkra
 
 | Sene | Dansk oversættelse | Funktion |
 |------|---------------------|----------|
-| Ligamentum coracoclaviculare | _Dansk oversættelse mangler_ | Stabiliserer kravebenet ved skulderbladet. |
+| Ligamentum coracoclaviculare | Coracoclaviculare ledbånd | Stabiliserer kravebenet ved skulderbladet. |
 
 ## Ofte stillede spørgsmål om kraveben
 

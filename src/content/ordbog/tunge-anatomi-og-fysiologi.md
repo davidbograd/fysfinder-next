@@ -44,18 +44,6 @@ Tungen er innerveret af flere nerver, der giver den følsomhed og motorisk kontr
 
 Tungen har ingen egentlige led, men dens bevægelser er afhængige af de muskler og nerver, der styrer den.
 
-| Led            | Dansk oversættelse | Funktion |
-|----------------|---------------------|----------|
-| _Ingen egentlige led_ | _Dansk oversættelse mangler_ | Tungen bevæger sig gennem muskelaktioner. |
-
-## Tunge sener
-
-Tungens sener forbinder musklerne til knoglerne og hjælper med at overføre kraften fra musklerne til tungens bevægelser.
-
-| Sene (latin)   | Dansk oversættelse | Funktion |
-|----------------|---------------------|----------|
-| _Ingen specifikke sener_ | _Dansk oversættelse mangler_ | Tungen bevæger sig gennem muskelaktioner. |
-
 ## Ofte stillede spørgsmål om tunge
 
 ### Hvad er tungens primære funktioner?

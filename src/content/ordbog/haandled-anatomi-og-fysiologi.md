@@ -62,8 +62,8 @@ Senerne i håndleddet forbinder musklerne til knoglerne og muliggør bevægelse.
 
 | Sene | Dansk oversættelse | Funktion |
 |------|---------------------|----------|
-| Flexor retinaculum | _Dansk oversættelse mangler_ | Holder flexorsenerne på plads |
-| Extensor retinaculum | _Dansk oversættelse mangler_ | Holder extensorsenerne på plads |
+| Flexor retinaculum | Flexor retinaklet | Holder flexorsenerne på plads |
+| Extensor retinaculum | Extensor retinaklet | Holder extensorsenerne på plads |
 
 ## Ofte stillede spørgsmål om håndled
 

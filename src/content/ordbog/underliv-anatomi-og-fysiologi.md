@@ -37,8 +37,8 @@ Nerverne i underlivet er ansvarlige for at sende signaler mellem hjernen og de f
 
 | Nerve | Dansk oversættelse | Funktion |
 |-------|--------------------|----------|
-| Nervus pudendus | _Dansk oversættelse mangler_ | Kontrollerer bækkenbundens muskler |
-| Nervus ilioinguinalis | _Dansk oversættelse mangler_ | Forsyner huden i lysken og kønsorganerne |
+| Nervus pudendus | Pudendus nerven | Kontrollerer bækkenbundens muskler |
+| Nervus ilioinguinalis | Ilioinguinalis nerven | Forsyner huden i lysken og kønsorganerne |
 
 ## Underliv led
 
@@ -56,7 +56,7 @@ Senerne i underlivet forbinder muskler til knogler og hjælper med at overføre 
 | Sene | Dansk oversættelse | Funktion |
 |------|--------------------|----------|
 | Ligamentum inguinale | Lyskebånd | Støtter lysken og hjælper med at holde organerne på plads |
-| Ligamentum sacrotuberale | _Dansk oversættelse mangler_ | Stabiliserer bækkenet |
+| Ligamentum sacrotuberale | Sacrotuberale ledbånd | Stabiliserer bækkenet |
 
 ## Ofte stillede spørgsmål om underliv
 

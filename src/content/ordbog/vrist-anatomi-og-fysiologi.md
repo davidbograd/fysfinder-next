@@ -61,8 +61,8 @@ Senerne i vristen forbinder muskler til knogler og er afgørende for bevægelse 
 | Sene | Dansk oversættelse | Funktion |
 |------|--------------------|----------|
 | Tendo Achillis | Akillessene | Overfører kraft fra lægmuskler til hælben |
-| Tendo tibialis posterior | _Dansk oversættelse mangler_ | Støtte til fodens bue |
-| Tendo peroneus longus | _Dansk oversættelse mangler_ | Støtte og eversion af foden |
+| Tendo tibialis posterior | Tibialis posterior senen | Støtte til fodens bue |
+| Tendo peroneus longus | Peroneus longus senen | Støtte og eversion af foden |
 
 ## Ofte stillede spørgsmål om vrist
 

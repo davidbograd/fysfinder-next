@@ -60,7 +60,6 @@ Senerne i albuen forbinder musklerne til knoglerne og muliggør bevægelse. Her 
 |------|---------------------|----------|
 | Biceps brachii sene | Bicepssene | Forbinder biceps til radius og muliggør fleksion |
 | Triceps brachii sene | Tricepssene | Forbinder triceps til olecranon og muliggør ekstension |
-| _Dansk oversættelse mangler_ | _Dansk oversættelse mangler_ | Stabiliserer albueleddet |
 
 ## Ofte stillede spørgsmål om albue
 

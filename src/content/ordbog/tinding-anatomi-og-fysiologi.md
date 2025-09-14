@@ -33,7 +33,7 @@ Nerverne i tindingen er vigtige for sensorisk og motorisk funktion i ansigtet. H
 
 | Nerve          | Dansk oversættelse | Funktion |
 |----------------|---------------------|----------|
-| Nervus auriculotemporalis | _Dansk oversættelse mangler_ | Forsyner sensorisk information til tindingen og øret. |
+| Nervus auriculotemporalis | Auriculotemporalis nerven | Forsyner sensorisk information til tindingen og øret. |
 
 ## Tindingens led
 
@@ -42,14 +42,6 @@ Leddene i tindingen muliggør bevægelse af kæben og bidrager til tyggefunktion
 | Led            | Dansk oversættelse | Funktion |
 |----------------|---------------------|----------|
 | Articulatio temporomandibularis | Kæbeleddet | Muliggør bevægelse af underkæben. |
-
-## Tindingens sener
-
-Senerne i tindingen forbinder muskler til knogler og er afgørende for bevægelse og stabilitet. Her er en oversigt over de vigtigste sener i tindingen:
-
-| Sene           | Dansk oversættelse | Funktion |
-|----------------|---------------------|----------|
-| _Ingen specifikke sener_ | _Dansk oversættelse mangler_ | _Ingen specifik funktion_ |
 
 ## Ofte stillede spørgsmål om tinding
 

@@ -46,14 +46,6 @@ Næseborene har ikke egentlige led, men de er forbundet til næsens struktur gen
 |-----|---------------------|----------|
 | Cartilago alaris major | Større alarbrusk | Giver form og fleksibilitet til næseborene. |
 
-## Næsebor sener
-
-Der er ingen specifikke sener i næseborene, men de omkringliggende muskler er forbundet til næsens struktur gennem små sener.
-
-| Sene | Dansk oversættelse | Funktion |
-|------|---------------------|----------|
-| _Dansk oversættelse mangler_ | _Dansk oversættelse mangler_ | Forbinder muskler til næsens struktur. |
-
 ## Ofte stillede spørgsmål om næsebor
 
 ### Hvad er næseborenes primære funktion?

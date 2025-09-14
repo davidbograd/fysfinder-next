@@ -24,10 +24,6 @@ Penis indeholder ikke muskler i traditionel forstand, men der er muskler i det o
 
 Penis indeholder ingen knogler, men er understøttet af bækkenstrukturen.
 
-| Knogle (latin) | Dansk oversættelse | Funktion |
-|----------------|--------------------|----------|
-| _Ingen knogler i penis_ | _Dansk oversættelse mangler_ | _Dansk oversættelse mangler_ |
-
 ## Penis nerver
 
 Nerverne i penis er afgørende for sensorisk opfattelse og erektil funktion.
@@ -40,10 +36,6 @@ Nerverne i penis er afgørende for sensorisk opfattelse og erektil funktion.
 ## Penis led
 
 Penis har ingen egentlige led, men er forbundet til bækkenet via ligamenter.
-
-| Led | Dansk oversættelse | Funktion |
-|-----|--------------------|----------|
-| _Ingen led i penis_ | _Dansk oversættelse mangler_ | _Dansk oversættelse mangler_ |
 
 ## Penis sener
 

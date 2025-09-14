@@ -54,8 +54,8 @@ datePublished: "03/08/2025"
 
 | Sene | Dansk oversættelse | Funktion |
 |------|---------------------|----------|
-| Tendo musculi tensoris tympani | _Dansk oversættelse mangler_ | Forbinder trommehinde spændemusklen til trommehinden |
-| Tendo musculi stapedius | _Dansk oversættelse mangler_ | Forbinder stigbøjlemusklen til stigbøjlen |
+| Tendo musculi tensoris tympani | Tensoris tympani Senen | Forbinder trommehinde spændemusklen til trommehinden |
+| Tendo musculi stapedius | Stapedius senen | Forbinder stigbøjlemusklen til stigbøjlen |
 
 ## Ofte stillede spørgsmål om øre
 

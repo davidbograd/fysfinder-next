@@ -23,10 +23,6 @@ Selvom testiklerne ikke har muskler i sig selv, er de omgivet af muskler, der hj
 
 Testiklerne er ikke direkte forbundet med knogler, men de er beskyttet af bækkenstrukturen.
 
-| Knogle (latin) | Dansk oversættelse | Funktion |
-|----------------|--------------------|----------|
-| _Ingen direkte knogler_ | _Dansk oversættelse mangler_ | Testiklerne er beskyttet af bækkenet. |
-
 ## Testikel nerver
 
 Nerverne omkring testiklerne er vigtige for sensorisk og motorisk funktion.
@@ -40,17 +36,9 @@ Nerverne omkring testiklerne er vigtige for sensorisk og motorisk funktion.
 
 Der er ingen led direkte forbundet med testiklerne.
 
-| Led | Dansk oversættelse | Funktion |
-|-----|--------------------|----------|
-| _Ingen direkte led_ | _Dansk oversættelse mangler_ | Testiklerne har ingen led. |
-
 ## Testikel sener
 
 Testiklerne har ikke sener, men de er forbundet til kroppen via strukturer, der understøtter deres position.
-
-| Sene | Dansk oversættelse | Funktion |
-|------|--------------------|----------|
-| _Ingen direkte sener_ | _Dansk oversættelse mangler_ | Testiklerne er ophængt i pungen. |
 
 ## Ofte stillede spørgsmål om testikel
 

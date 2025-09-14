@@ -20,7 +20,7 @@ Benets muskler er ansvarlige for bevægelse og stabilitet. De arbejder sammen fo
 | Quadriceps femoris | Lårmuskel | Strækker knæet og bøjer hoften |
 | Hamstrings | Hasemuskler | Bøjer knæet og strækker hoften |
 | Gastrocnemius | Lægmuskel | Bøjer foden og hjælper med at strække knæet |
-| Soleus | _Dansk oversættelse mangler_ | Bøjer foden og stabiliserer anklen |
+| Soleus | Indre lægmuskel | Bøjer foden og stabiliserer anklen |
 
 ## Benets knogler
 
@@ -41,7 +41,7 @@ Nerverne i benet er ansvarlige for at sende signaler mellem hjernen og benets mu
 |-------|---------------------|----------|
 | Nervus ischiadicus | Iskiasnerven | Kontrollerer de fleste af benets muskler og giver følelse til benet |
 | Nervus femoralis | Lårbensnerven | Kontrollerer quadriceps og giver følelse til forsiden af låret |
-| Nervus tibialis | _Dansk oversættelse mangler_ | Kontrollerer musklerne i underbenet og foden |
+| Nervus tibialis | Tibialisnerven | Kontrollerer musklerne i underbenet og foden |
 
 ## Benets led
 

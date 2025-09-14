@@ -39,7 +39,7 @@ Nerverne i maven er ansvarlige for at kontrollere fordøjelsesprocesserne og kom
 | Nerve | Dansk oversættelse | Funktion |
 |-------|---------------------|----------|
 | Nervus vagus | Vagusnerven | Regulerer mavesyreproduktion og tarmbevægelser. |
-| Plexus coeliacus | _Dansk oversættelse mangler_ | Kontrollerer blodtilførsel og fordøjelsesfunktioner i maven. |
+| Plexus coeliacus | Solar plexus | Kontrollerer blodtilførsel og fordøjelsesfunktioner i maven. |
 
 ## Mave led
 
@@ -47,8 +47,8 @@ Maven har ikke egentlige led, men den er forbundet med andre dele af fordøjelse
 
 | Led | Dansk oversættelse | Funktion |
 |-----|---------------------|----------|
-| Cardia | _Dansk oversættelse mangler_ | Forbinder spiserøret med maven og forhindrer tilbageløb af mad. |
-| Pylorus | _Dansk oversættelse mangler_ | Regulerer frigivelsen af maveindhold til tyndtarmen. |
+| Cardia | Cardia | Forbinder spiserøret med maven og forhindrer tilbageløb af mad. |
+| Pylorus | Pylorus | Regulerer frigivelsen af maveindhold til tyndtarmen. |
 
 ## Mave sener
 
@@ -56,8 +56,8 @@ Maven indeholder ikke sener i traditionel forstand, men den er forbundet med and
 
 | Sene | Dansk oversættelse | Funktion |
 |------|---------------------|----------|
-| Ligamentum gastrocolicum | _Dansk oversættelse mangler_ | Forbinder maven med tyktarmen. |
-| Ligamentum hepatogastricum | _Dansk oversættelse mangler_ | Forbinder maven med leveren. |
+| Ligamentum gastrocolicum | Gastrocolicum senen | Forbinder maven med tyktarmen. |
+| Ligamentum hepatogastricum | Hepatogastricum senen | Forbinder maven med leveren. |
 
 ## Ofte stillede spørgsmål om mave
 

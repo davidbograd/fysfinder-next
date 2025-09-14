@@ -44,14 +44,6 @@ Hagen har ingen egentlige led, men er forbundet til resten af kraniet gennem kæ
 |-----|---------------------|----------|
 | Articulatio temporomandibularis | Kæbeled | Muliggør bevægelse af underkæben for at tygge og tale. |
 
-## Hage sener
-
-Senerne i hagen forbinder musklerne til knoglerne og muliggør bevægelse.
-
-| Sene | Dansk oversættelse | Funktion |
-|------|---------------------|----------|
-| _Dansk oversættelse mangler_ | _Dansk oversættelse mangler_ | Forbinder hagemusklerne til underkæbebenet. |
-
 ## Ofte stillede spørgsmål om hage
 
 ### Hvad er funktionen af hagen?

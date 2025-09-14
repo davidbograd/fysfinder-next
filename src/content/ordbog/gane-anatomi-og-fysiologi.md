@@ -17,11 +17,11 @@ Ganen indeholder flere muskler, der hjælper med at kontrollere dens bevægelser
 
 | Muskel (latin) | Dansk oversættelse | Funktion |
 |----------------|---------------------|----------|
-| Musculus levator veli palatini | _Dansk oversættelse mangler_ | Løfter den bløde gane for at lukke næsehulen under synkning. |
-| Musculus tensor veli palatini | _Dansk oversættelse mangler_ | Strammer den bløde gane og åbner det eustakiske rør. |
-| Musculus palatoglossus | _Dansk oversættelse mangler_ | Sænker den bløde gane og hæver tungen. |
-| Musculus palatopharyngeus | _Dansk oversættelse mangler_ | Sænker den bløde gane og hjælper med at løfte svælget. |
-| Musculus uvulae | _Dansk oversættelse mangler_ | Forkorter og løfter drøblen. |
+| Musculus levator veli palatini | Levator veli palatini musklen | Løfter den bløde gane for at lukke næsehulen under synkning. |
+| Musculus tensor veli palatini | Tensor veli palatini musklen | Strammer den bløde gane og åbner det eustakiske rør. |
+| Musculus palatoglossus | Palatoglossus musklen | Sænker den bløde gane og hæver tungen. |
+| Musculus palatopharyngeus | Palatopharyngeus musklen | Sænker den bløde gane og hjælper med at løfte svælget. |
+| Musculus uvulae | Uvulae musklen | Forkorter og løfter drøblen. |
 
 ## Gane knogler
 
@@ -46,17 +46,13 @@ Nerverne i ganen er ansvarlige for sensorisk og motorisk innervation, hvilket er
 
 Ganen har ikke egentlige led, men den bløde gane kan bevæge sig i forhold til den hårde gane, hvilket er vigtigt for dens funktion.
 
-| Led | Dansk oversættelse | Funktion |
-|-----|---------------------|----------|
-| Ingen egentlige led | _Dansk oversættelse mangler_ | Bevægelighed af den bløde gane i forhold til den hårde gane. |
-
 ## Gane sener
 
 Senerne i ganen forbinder musklerne til knoglerne og hjælper med at overføre muskelkraften.
 
 | Sene | Dansk oversættelse | Funktion |
 |------|---------------------|----------|
-| Aponeurosis palatina | _Dansk oversættelse mangler_ | Forbinder musklerne i den bløde gane til knoglerne i den hårde gane. |
+| Aponeurosis palatina | Bindevævslag i ganen | Forbinder musklerne i den bløde gane til knoglerne i den hårde gane. |
 
 ## Ofte stillede spørgsmål om gane
 

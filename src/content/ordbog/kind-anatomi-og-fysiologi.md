@@ -44,14 +44,6 @@ Kindens led er afgørende for bevægelse og stabilitet i ansigtet. Her er en tab
 |-----|--------------------|----------|
 | Articulatio temporomandibularis | Kæbeled | Tillader bevægelse af underkæben for tygning og tale. |
 
-## Kind sener
-
-Senerne i kinden forbinder muskler til knogler og er essentielle for bevægelse. Tabellen nedenfor viser kindens sener, deres navne, danske oversættelser og funktioner.
-
-| Sene | Dansk oversættelse | Funktion |
-|------|--------------------|----------|
-| _Dansk oversættelse mangler_ | _Dansk oversættelse mangler_ | Forbinder muskler til kindbenet og muliggør bevægelse. |
-
 ## Ofte stillede spørgsmål om kind
 
 ### Hvad er funktionen af kindbenet?

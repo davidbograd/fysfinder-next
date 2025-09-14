@@ -57,8 +57,8 @@ Senerne i halsen forbinder musklerne til knoglerne og muliggør bevægelse.
 
 | Sene | Dansk oversættelse | Funktion |
 |------|--------------------|----------|
-| Tendon sternocleidomastoideus | _Dansk oversættelse mangler_ | Forbinder sternocleidomastoideus til knoglerne |
-| Tendon trapezius | _Dansk oversættelse mangler_ | Forbinder trapezius til knoglerne |
+| Tendon sternocleidomastoideus | Sternocleidomastoideus senen | Forbinder sternocleidomastoideus til knoglerne |
+| Tendon trapezius | Trapezius senen | Forbinder trapezius til knoglerne |
 
 ## Ofte stillede spørgsmål om hals
 

@@ -55,7 +55,7 @@ Senerne i låret forbinder musklerne til knoglerne og er afgørende for bevægel
 | Sene | Dansk oversættelse | Funktion |
 |------|--------------------|----------|
 | Patellarsenen | Knæskalsenen | Forbinder quadriceps til skinnebenet og hjælper med at strække knæet |
-| Hamstringsener | _Dansk oversættelse mangler_ | Forbinder hasemusklerne til bækkenet og skinnebenet |
+| Hamstringsener | Baglårmuskelsenen | Forbinder hasemusklerne til bækkenet og skinnebenet |
 
 ## Ofte stillede spørgsmål om lår
 

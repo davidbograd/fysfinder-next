@@ -20,7 +20,7 @@ Musklerne omkring knæet spiller en afgørende rolle i bevægelse og stabilitet.
 | Quadriceps femoris | Lårmuskel | Strækker knæet |
 | Hamstrings | Baglårsmuskel | Bøjer knæet |
 | Gastrocnemius | Lægmuskel | Bøjer knæet og strækker anklen |
-| Popliteus | _Dansk oversættelse mangler_ | Hjælper med at låse knæet op fra en strakt position |
+| Popliteus | Popliteus | Hjælper med at låse knæet op fra en strakt position |
 
 ## Knæ knogler
 

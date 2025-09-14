@@ -18,9 +18,9 @@ Fodens muskler spiller en vigtig rolle i at opretholde balance og muliggøre bev
 | Muskel (latin) | Dansk oversættelse | Funktion |
 |----------------|---------------------|----------|
 | Flexor digitorum brevis | Kort tåbøjer | Bøjer de midterste tæer |
-| Abductor hallucis | Storetåens bortfører | Bortfører storetåen |
+| Abductor hallucis | Storetåens spreder | spreder storetåen |
 | Flexor hallucis brevis | Kort storetåbøjer | Bøjer storetåen |
-| Abductor digiti minimi | Lille tåens bortfører | Bortfører lille tåen |
+| Abductor digiti minimi | Lilletåens spreder | Spreder lilletåen |
 
 ## Fodens knogler
 
@@ -39,8 +39,8 @@ Nerverne i foden er ansvarlige for at sende signaler mellem foden og hjernen, hv
 
 | Nerve | Dansk oversættelse | Funktion |
 |-------|---------------------|----------|
-| N. tibialis | _Dansk oversættelse mangler_ | Innerverer musklerne i foden |
-| N. peroneus | _Dansk oversættelse mangler_ | Kontrollerer bevægelse og følelse i foden |
+| N. tibialis | Tibialis nerven | Innerverer musklerne i foden |
+| N. peroneus | Peroneus nerven | Kontrollerer bevægelse og følelse i foden |
 
 ## Fodens led
 

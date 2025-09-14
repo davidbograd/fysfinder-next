@@ -18,9 +18,9 @@ Forfoden indeholder flere muskler, der er afgørende for dens bevægelighed og f
 | Muskel (latin) | Dansk oversættelse | Funktion |
 |----------------|--------------------|----------|
 | Flexor digitorum brevis | Kort tåbøjer | Bøjer de midterste tæer |
-| Abductor hallucis | Storetåens bortfører | Bortfører storetåen |
+| Abductor hallucis | Storetåens spreder | Spreder storetåen |
 | Flexor hallucis brevis | Kort storetåbøjer | Bøjer storetåen |
-| Abductor digiti minimi | Lille tåens bortfører | Bortfører lilletåen |
+| Abductor digiti minimi | Lilletåens spreder | Spreder lilletåen |
 
 ## Forfod knogler
 

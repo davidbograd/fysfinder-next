@@ -40,8 +40,8 @@ Nerverne i anklen er ansvarlige for at sende signaler mellem hjernen og musklern
 
 | Nerve | Dansk oversættelse | Funktion |
 |-------|---------------------|----------|
-| N. tibialis | _Dansk oversættelse mangler_ | Innerverer bageste muskler i underbenet |
-| N. peroneus communis | _Dansk oversættelse mangler_ | Innerverer laterale og forreste muskler i underbenet |
+| N. tibialis | Tibialis nerven | Innerverer bageste muskler i underbenet |
+| N. peroneus communis | Peroneus comminus nerven | Innerverer laterale og forreste muskler i underbenet |
 
 ## Ankel led
 
@@ -59,7 +59,7 @@ Senerne i anklen forbinder musklerne til knoglerne og er afgørende for bevægel
 | Sene | Dansk oversættelse | Funktion |
 |------|---------------------|----------|
 | Achilles tendon | Akillessene | Overfører kraft fra lægmusklerne til hælbenet |
-| Tibialis posterior tendon | _Dansk oversættelse mangler_ | Støtter fodbuen og inversion af foden |
+| Tibialis posterior tendon | Tibialis posterior sene | Støtter fodbuen og inversion af foden |
 
 ## Ofte stillede spørgsmål om ankel
 

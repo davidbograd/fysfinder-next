@@ -18,8 +18,8 @@ Fodsålen indeholder flere muskler, der hjælper med at bevæge og stabilisere f
 | Muskel (latin) | Dansk oversættelse | Funktion |
 |----------------|---------------------|----------|
 | Flexor digitorum brevis | Kort tåbøjer | Bøjer de midterste tæer |
-| Abductor hallucis | Storetåens bortfører | Bortfører storetåen |
-| Abductor digiti minimi | Lille tåens bortfører | Bortfører lilletåen |
+| Abductor hallucis | Storetåens spreder | Bortfører storetåen |
+| Abductor digiti minimi | Lilletåens spreder| Bortfører lilletåen |
 | Quadratus plantae | Firkantet fodsålsmuskel | Assisterer i tåbøjning |
 | Lumbricales | Ormemuskler | Bøjer tæernes grundled og strækker de yderste led |
 
@@ -43,7 +43,7 @@ Nerverne i fodsålen er ansvarlige for at sende signaler mellem foden og hjernen
 |-------|---------------------|----------|
 | N. plantaris medialis | Medial fodsålsnerve | Innerverer mediale del af fodsålen |
 | N. plantaris lateralis | Lateral fodsålsnerve | Innerverer laterale del af fodsålen |
-| N. suralis | _Dansk oversættelse mangler_ | Innerverer hælområdet |
+| N. suralis | Suralisnerven | Innerverer hælområdet |
 
 ## Fodsål led
 

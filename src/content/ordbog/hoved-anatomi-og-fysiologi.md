@@ -53,14 +53,6 @@ Leddene i hovedet muliggør bevægelse og fleksibilitet. Her er en oversigt over
 |-----|---------------------|----------|
 | Articulatio temporomandibularis | Kæbeled | Muliggør bevægelse af kæben under tygning og tale. |
 
-## Hoved sener
-
-Senerne i hovedet forbinder muskler til knogler og muliggør bevægelse. Her er en oversigt over de vigtigste sener i hovedet:
-
-| Sene | Dansk oversættelse | Funktion |
-|------|---------------------|----------|
-| _Dansk oversættelse mangler_ | _Dansk oversættelse mangler_ | Forbinder muskler til knogler i hovedet. |
-
 ## Ofte stillede spørgsmål om hoved
 
 ### Hvad er hovedets primære funktioner?

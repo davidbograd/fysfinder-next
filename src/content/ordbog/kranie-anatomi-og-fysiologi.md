@@ -59,7 +59,7 @@ Kraniet har flere sener, der forbinder muskler til knogler. Her er en oversigt o
 
 | Sene | Dansk oversættelse | Funktion |
 |------|---------------------|----------|
-| Galea aponeurotica | _Dansk oversættelse mangler_ | Forbinder pande- og nakkemusklerne |
+| Galea aponeurotica | Kraniets seneplade | Forbinder pande- og nakkemusklerne |
 
 ## Ofte stillede spørgsmål om kranie
 
