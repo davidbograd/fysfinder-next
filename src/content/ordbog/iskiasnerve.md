@@ -1,6 +1,6 @@
 ---
-title: "Iskiasnerve – årsager til smerte og tryk"
-lastUpdated: "13/09/2025"
+title: "Iskiasnerve"
+lastUpdated: "12/10/2025"
 metaTitle: "Iskiasnerve → årsager til smerte og tryk"
 datePublished: "13/09/2025"
 ---

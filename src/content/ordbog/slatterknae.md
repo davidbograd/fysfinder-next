@@ -1,6 +1,6 @@
 ---
-title: "Slatterknæ – symptomer og behandling"
-lastUpdated: "13/09/2025"
+title: "Slatterknæ"
+lastUpdated: "12/10/2025"
 metaTitle: "Slatterknæ → symptomer og behandling"
 datePublished: "13/09/2025"
 ---

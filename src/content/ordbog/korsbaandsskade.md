@@ -1,6 +1,6 @@
 ---
-title: "Korsbåndsskade – typer, behandling og genoptræning"
-lastUpdated: "13/09/2025"
+title: "Korsbåndsskade"
+lastUpdated: "12/10/2025"
 metaTitle: "Korsbåndsskade → typer, behandling og genoptræning"
 datePublished: "13/09/2025"
 ---

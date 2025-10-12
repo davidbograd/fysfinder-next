@@ -1,6 +1,6 @@
 ---
-title: "Krampe i læggen – årsager og lindring"
-lastUpdated: "13/09/2025"
+title: "Krampe i læggen"
+lastUpdated: "12/10/2025"
 metaTitle: "Krampe i læggen → årsager og lindring"
 datePublished: "13/09/2025"
 ---

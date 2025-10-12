@@ -1,6 +1,6 @@
 ---
-title: "Vagusnerven – funktion og betydning for kroppen"
-lastUpdated: "13/09/2025"
+title: "Vagusnerven"
+lastUpdated: "12/10/2025"
 metaTitle: "Vagusnerven → funktion og betydning for kroppen"
 datePublished: "13/09/2025"
 ---

@@ -1,6 +1,6 @@
 ---
-title: "Nerver – anatomi og funktion"
-lastUpdated: "13/09/2025"
+title: "Nerver"
+lastUpdated: "12/10/2025"
 metaTitle: "Nerver → anatomi og funktion"
 datePublished: "13/09/2025"
 ---

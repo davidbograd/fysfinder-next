@@ -1,6 +1,6 @@
 ---
-title: "Hoftebøjer – anatomi og øvelser"
-lastUpdated: "13/09/2025"
+title: "Hoftebøjer"
+lastUpdated: "12/10/2025"
 metaTitle: "Hoftebøjer → anatomi og øvelser"
 datePublished: "13/09/2025"
 ---

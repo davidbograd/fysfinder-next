@@ -1,6 +1,6 @@
 ---
-title: "Smerter i ballen og ned i benet – årsager og behandling"
-lastUpdated: "13/09/2025"
+title: "Smerter i ballen og ned i benet"
+lastUpdated: "12/10/2025"
 metaTitle: "Smerter i ballen og ned i benet → årsager og behandling"
 datePublished: "13/09/2025"
 ---

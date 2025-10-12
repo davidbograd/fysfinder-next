@@ -1,6 +1,6 @@
 ---
-title: "Sympatiske nervesystem – funktion og betydning"
-lastUpdated: "13/09/2025"
+title: "Sympatiske nervesystem"
+lastUpdated: "12/10/2025"
 metaTitle: "Sympatiske nervesystem → funktion og betydning"
 datePublished: "13/09/2025"
 ---

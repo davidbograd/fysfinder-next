@@ -1,6 +1,6 @@
 ---
-title: "Ømme fødder – årsager og forebyggelse"
-lastUpdated: "13/09/2025"
+title: "Ømme fødder"
+lastUpdated: "12/10/2025"
 metaTitle: "Ømme fødder → årsager og forebyggelse"
 datePublished: "13/09/2025"
 ---

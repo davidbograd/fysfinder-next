@@ -1,6 +1,6 @@
 ---
-title: "Iskiasøvelser Øvelser mod iskias – smertelindring og styrketræning"
-lastUpdated: "13/09/2025"
+title: "Iskiasøvelser Øvelser mod iskias"
+lastUpdated: "12/10/2025"
 metaTitle: "Øvelser mod iskias → smertelindring og styrketræning"
 datePublished: "13/09/2025"
 ---

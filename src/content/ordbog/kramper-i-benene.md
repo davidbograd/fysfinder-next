@@ -1,6 +1,6 @@
 ---
-title: "Kramper i benene – årsager og forebyggelse"
-lastUpdated: "13/09/2025"
+title: "Kramper i benene"
+lastUpdated: "12/10/2025"
 metaTitle: "Kramper i benene → årsager og forebyggelse"
 datePublished: "13/09/2025"
 ---

@@ -1,6 +1,6 @@
 ---
-title: "Krampe i foden – årsager og lindring"
-lastUpdated: "13/09/2025"
+title: "Krampe i foden"
+lastUpdated: "12/10/2025"
 metaTitle: "Krampe i foden → årsager og lindring"
 datePublished: "13/09/2025"
 ---

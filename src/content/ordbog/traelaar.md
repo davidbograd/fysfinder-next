@@ -1,6 +1,6 @@
 ---
-title: "Trælår – symptomer og behandling"
-lastUpdated: "13/09/2025"
+title: "Trælår"
+lastUpdated: "12/10/2025"
 metaTitle: "Trælår → symptomer og behandling"
 datePublished: "13/09/2025"
 ---

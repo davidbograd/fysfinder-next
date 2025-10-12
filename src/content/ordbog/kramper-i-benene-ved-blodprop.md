@@ -1,6 +1,6 @@
 ---
-title: "Kramper i benene ved blodprop – advarselstegn"
-lastUpdated: "13/09/2025"
+title: "Kramper i benene ved blodprop"
+lastUpdated: "12/10/2025"
 metaTitle: "Kramper i benene ved blodprop → advarselstegn"
 datePublished: "13/09/2025"
 ---

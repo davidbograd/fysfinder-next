@@ -1,6 +1,6 @@
 ---
-title: "Tragtbryst – symptomer og behandling"
-lastUpdated: "13/09/2025"
+title: "Tragtbryst"
+lastUpdated: "12/10/2025"
 metaTitle: "Tragtbryst → symptomer og behandling"
 datePublished: "13/09/2025"
 ---

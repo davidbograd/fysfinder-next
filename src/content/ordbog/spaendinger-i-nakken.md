@@ -1,6 +1,6 @@
 ---
-title: "Spændinger i nakken – årsager og øvelser"
-lastUpdated: "13/09/2025"
+title: "Spændinger i nakken"
+lastUpdated: "12/10/2025"
 metaTitle: "Spændinger i nakken → årsager og øvelser"
 datePublished: "13/09/2025"
 ---

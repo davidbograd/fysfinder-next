@@ -1,6 +1,6 @@
 ---
-title: "Hævet ankel – årsager og behandling"
-lastUpdated: "13/09/2025"
+title: "Hævet ankel"
+lastUpdated: "12/10/2025"
 metaTitle: "Hævet ankel → årsager og behandling"
 datePublished: "13/09/2025"
 ---

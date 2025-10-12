@@ -1,6 +1,6 @@
 ---
-title: "Forstrækning i baglåret – symptomer og genoptræning"
-lastUpdated: "13/09/2025"
+title: "Forstrækning i baglåret"
+lastUpdated: "12/10/2025"
 metaTitle: "Forstrækning i baglåret → symptomer og genoptræning"
 datePublished: "13/09/2025"
 ---

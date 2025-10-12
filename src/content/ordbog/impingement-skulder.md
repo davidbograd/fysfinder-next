@@ -1,6 +1,6 @@
 ---
-title: "Impingement i skulder – symptomer og øvelser"
-lastUpdated: "13/09/2025"
+title: "Impingement i skulder"
+lastUpdated: "12/10/2025"
 metaTitle: "Impingement i skulder → symptomer og øvelser"
 datePublished: "13/09/2025"
 ---

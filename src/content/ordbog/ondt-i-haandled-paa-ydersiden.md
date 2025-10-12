@@ -1,6 +1,6 @@
 ---
-title: "Ondt i håndled på ydersiden – årsager og behandling"
-lastUpdated: "13/09/2025"
+title: "Ondt i håndled på ydersiden"
+lastUpdated: "12/10/2025"
 metaTitle: "Ondt i håndled på ydersiden → årsager og behandling"
 datePublished: "13/09/2025"
 ---

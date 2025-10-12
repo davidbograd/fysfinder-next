@@ -1,6 +1,6 @@
 ---
-title: "Muskelgigt – hvordan det påvirker kroppen"
-lastUpdated: "13/09/2025"
+title: "Muskelgigt"
+lastUpdated: "12/10/2025"
 metaTitle: "Muskelgigt → hvordan det påvirker kroppen"
 datePublished: "13/09/2025"
 ---

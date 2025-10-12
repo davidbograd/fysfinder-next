@@ -1,6 +1,6 @@
 ---
-title: "Vagusnerven øvelser – styrk og berolig kroppen"
-lastUpdated: "13/09/2025"
+title: "Vagusnerven øvelser"
+lastUpdated: "12/10/2025"
 metaTitle: "Vagusnerven øvelser → styrk og berolig kroppen"
 datePublished: "13/09/2025"
 ---
