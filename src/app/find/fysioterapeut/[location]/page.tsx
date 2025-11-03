@@ -585,6 +585,27 @@ export default async function LocationPage({
             </div>
           )}
 
+          {/* Hovedpine/Migræne samarbejde med Hovedpine Foreningen */}
+          {(["hovedpine", "migraene"].includes(
+            (resolvedParams.specialty as string) || ""
+          )) && (
+            <div className="mb-4 flex flex-wrap items-center gap-4 sm:gap-8">
+              <Image
+                src="/images/samarbejdspartnere/hovedpine-foreningen.png"
+                alt="Hovedpine Foreningen"
+                width={640}
+                height={400}
+                className="w-full sm:max-w-[240px] h-auto"
+              />
+              <p className="text-gray-600 w-full sm:w-auto sm:flex-1">
+                I samarbejde med Hovedpine Foreningen.
+                <span className="block">
+                  Samarbejdet indebærer ikke en faglig vurdering eller godkendelse af de nævnte klinikker.
+                </span>
+              </p>
+            </div>
+          )}
+
           <SearchInterface
             specialties={specialties}
             currentSpecialty={resolvedParams.specialty}
@@ -703,6 +724,27 @@ export default async function LocationPage({
             <p className="text-gray-600 w-full sm:w-auto sm:flex-1">
               I samarbejde med FAKS, Foreningen af kroniske smerteramte og
               pårørende.
+            </p>
+          </div>
+        )}
+
+        {/* Hovedpine/Migræne samarbejde med Hovedpine Foreningen (ikke online) */}
+        {(["hovedpine", "migraene"].includes(
+          (resolvedParams.specialty as string) || ""
+        )) && !isOnline && (
+          <div className="mb-4 flex flex-wrap items-center gap-4 sm:gap-8">
+            <Image
+              src="/images/samarbejdspartnere/FAKS-smertelinjen-logo.png"
+              alt="Hovedpine Foreningen"
+              width={640}
+              height={400}
+              className="w-full sm:max-w-[320px] h-auto"
+            />
+            <p className="text-gray-600 w-full sm:w-auto sm:flex-1">
+              I samarbejde med Hovedpine Foreningen.
+              <span className="block">
+                Samarbejdet indebærer ikke en faglig vurdering eller godkendelse af de nævnte klinikker.
+              </span>
             </p>
           </div>
         )}
