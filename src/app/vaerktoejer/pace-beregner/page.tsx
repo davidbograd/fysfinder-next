@@ -4,6 +4,8 @@ import { PaceCalculator } from "./components/PaceCalculator";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import WebAppStructuredData from "@/components/seo/VaerktoejerStructuredData";
 import RelatedToolsSection from "@/components/features/RelatedToolsSection";
+import { TableOfContents } from "@/components/features/blog-og-ordbog/TableOfContents";
+import { slugify } from "@/app/utils/slugify";
 
 export const metadata: Metadata = {
   title: "Pace beregner → Beregn din løbehastighed i min/km ✅",
@@ -31,16 +33,33 @@ export default async function PaceBeregnerPage() {
     { text: "Pace beregner" },
   ];
 
+  // Extract headings from the content
+  const headings = [
+    { text: "Hvad betyder pace?", id: slugify("Hvad betyder pace?") },
+    { text: "Hvordan udregner man pace?", id: slugify("Hvordan udregner man pace?") },
+    { text: "Hvad er forskellen på pace og hastighed?", id: slugify("Hvad er forskellen på pace og hastighed?") },
+    { text: "Hvorfor bruger løbere pace i stedet for km/t?", id: slugify("Hvorfor bruger løbere pace i stedet for km/t?") },
+    { text: "Beregn din løbehastighed (min/km) med FysFinder's pace beregner", id: slugify("Beregn din løbehastighed (min/km) med FysFinder's pace beregner") },
+    { text: "Pace beregner til halvmarathon og marathon", id: slugify("Pace beregner til halvmarathon og marathon") },
+    { text: "Hvordan træner du op til at ramme en bestemt pace?", id: slugify("Hvordan træner du op til at ramme en bestemt pace?") },
+    { text: "Tempo-beregner og løbehastighed beregner – hvad kan du bruge dem til?", id: slugify("Tempo-beregner og løbehastighed beregner – hvad kan du bruge dem til?") },
+    { text: "Online pace beregner – nemt og gratis", id: slugify("Online pace beregner – nemt og gratis") },
+    { text: "Find fysioterapeuter, der hjælper dig med din løbetræning", id: slugify("Find fysioterapeuter, der hjælper dig med din løbetræning") },
+  ];
+
   return (
-    <main className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-3xl">
-      <WebAppStructuredData
-        type="tool"
-        name="Pace beregner"
-        description="Beregn din løbehastighed (pace) i min/km og hastighed i km/t"
-        breadcrumbs={breadcrumbItems}
-        toolType="calculator"
-      />
-      <div className="space-y-6 sm:space-y-8">
+    <main className="container mx-auto px-4 sm:px-6 py-6 sm:py-8">
+      <div className="flex flex-col lg:flex-row lg:gap-8">
+        <TableOfContents headings={headings} />
+        <div className="flex-1 max-w-3xl">
+          <WebAppStructuredData
+            type="tool"
+            name="Pace beregner"
+            description="Beregn din løbehastighed (pace) i min/km og hastighed i km/t"
+            breadcrumbs={breadcrumbItems}
+            toolType="calculator"
+          />
+          <div className="space-y-6 sm:space-y-8">
         <Breadcrumbs items={breadcrumbItems} />
         <div className="space-y-4">
           <h1 className="text-2xl sm:text-3xl font-bold">
@@ -88,7 +107,7 @@ export default async function PaceBeregnerPage() {
                  [&>*:first-child]:mt-0
                  [&>*:last-child]:mb-0"
           >
-            <h2>Hvad betyder pace?</h2>
+            <h2 id={slugify("Hvad betyder pace?")}>Hvad betyder pace?</h2>
             <p>
               Pace er et udtryk for, hvor hurtigt du løber en given distance –
               målt i minutter pr. kilometer (min/km). Det betyder, at hvis din
@@ -101,7 +120,7 @@ export default async function PaceBeregnerPage() {
               med at planlægge træningspas og løb.
             </p>
 
-            <h2>Hvordan udregner man pace?</h2>
+            <h2 id={slugify("Hvordan udregner man pace?")}>Hvordan udregner man pace?</h2>
             <p>
               At udregne pace er faktisk ret simpelt. Du tager din samlede tid
               og dividerer den med den distance, du har løbet.
@@ -121,7 +140,7 @@ export default async function PaceBeregnerPage() {
               gennemsnitlige løbehastighed og pace.
             </p>
 
-            <h2>Hvad er forskellen på pace og hastighed?</h2>
+            <h2 id={slugify("Hvad er forskellen på pace og hastighed?")}>Hvad er forskellen på pace og hastighed?</h2>
             <p>
               Selvom pace og hastighed begge beskriver, hvor hurtigt du bevæger
               dig, måles de forskelligt:
@@ -145,7 +164,7 @@ export default async function PaceBeregnerPage() {
               tempo til næste løb.
             </p>
 
-            <h2>Hvorfor bruger løbere pace i stedet for km/t?</h2>
+            <h2 id={slugify("Hvorfor bruger løbere pace i stedet for km/t?")}>Hvorfor bruger løbere pace i stedet for km/t?</h2>
             <p>
               De fleste løbere foretrækker at bruge pace frem for km/t, fordi
               det er lettere at forholde sig til under træning og konkurrence.
@@ -159,7 +178,7 @@ export default async function PaceBeregnerPage() {
               direkte fortæller dig, hvor lang tid hver kilometer bør tage.
             </p>
 
-            <h2>Beregn din løbehastighed (min/km) med FysFinder&apos;s pace beregner</h2>
+            <h2 id={slugify("Beregn din løbehastighed (min/km) med FysFinder's pace beregner")}>Beregn din løbehastighed (min/km) med FysFinder&apos;s pace beregner</h2>
             <p>
               Med FysFinder&apos;s online pace beregner kan du hurtigt finde ud af,
               hvor hurtigt du løber. Indtast din distance og tid, og se:
@@ -174,7 +193,7 @@ export default async function PaceBeregnerPage() {
               træning eller finde det rigtige tempo til dit næste løb.
             </p>
 
-            <h2>Pace beregner til halvmarathon og marathon</h2>
+            <h2 id={slugify("Pace beregner til halvmarathon og marathon")}>Pace beregner til halvmarathon og marathon</h2>
             <p>
               Skal du løbe halvmarathon (21,1 km) eller marathon (42,2 km), kan
               du bruge vores pace beregner til at planlægge dit tempo.
@@ -195,7 +214,7 @@ export default async function PaceBeregnerPage() {
               nå dit mål.
             </p>
 
-            <h2>Hvordan træner du op til at ramme en bestemt pace?</h2>
+            <h2 id={slugify("Hvordan træner du op til at ramme en bestemt pace?")}>Hvordan træner du op til at ramme en bestemt pace?</h2>
             <p>
               At ramme en bestemt pace kræver både kontrol, udholdenhed og
               erfaring. Her er nogle tips:
@@ -223,7 +242,7 @@ export default async function PaceBeregnerPage() {
               klar til at tage det næste skridt – fx fra 10 km til halvmarathon.
             </p>
 
-            <h2>Tempo-beregner og løbehastighed beregner – hvad kan du bruge dem til?</h2>
+            <h2 id={slugify("Tempo-beregner og løbehastighed beregner – hvad kan du bruge dem til?")}>Tempo-beregner og løbehastighed beregner – hvad kan du bruge dem til?</h2>
             <p>
               En tempo-beregner eller løbehastigheds beregner kan bruges til
               meget mere end blot at regne tal. Den hjælper dig med at:
@@ -239,7 +258,7 @@ export default async function PaceBeregnerPage() {
               struktureret træningsplan og optimere dine resultater.
             </p>
 
-            <h2>Online pace beregner – nemt og gratis</h2>
+            <h2 id={slugify("Online pace beregner – nemt og gratis")}>Online pace beregner – nemt og gratis</h2>
             <p>
               FysFinder&apos;s online pace beregner er gratis at bruge og kræver
               ingen login.
@@ -253,7 +272,7 @@ export default async function PaceBeregnerPage() {
               deres træning.
             </p>
 
-            <h2>Find fysioterapeuter, der hjælper dig med din løbetræning</h2>
+            <h2 id={slugify("Find fysioterapeuter, der hjælper dig med din løbetræning")}>Find fysioterapeuter, der hjælper dig med din løbetræning</h2>
             <p>
               Mange fysioterapeuter specialiserer sig i løberelaterede skader,
               løbestil og optimering af præstation.
@@ -269,7 +288,9 @@ export default async function PaceBeregnerPage() {
           </div>
         </div>
 
-        <RelatedToolsSection currentToolHref="/vaerktoejer/pace-beregner" />
+            <RelatedToolsSection currentToolHref="/vaerktoejer/pace-beregner" />
+          </div>
+        </div>
       </div>
     </main>
   );
