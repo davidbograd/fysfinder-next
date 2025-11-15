@@ -206,6 +206,22 @@ export function PaceCalculator() {
     setTablePaceSec(s.toString());
   };
 
+  // Handler to limit min/sec inputs to max 2 digits
+  const handleTimeInputChange = (
+    value: string,
+    setter: (value: string) => void
+  ) => {
+    // Remove any non-digit characters
+    const cleaned = value.replace(/\D/g, "");
+    // Limit to 2 digits
+    if (cleaned.length <= 2) {
+      setter(cleaned);
+    } else {
+      // If more than 2 digits, only take the first 2
+      setter(cleaned.slice(0, 2));
+    }
+  };
+
   return (
     <div className="bg-white rounded-lg shadow-lg p-6 space-y-12">
       <div className="flex items-center gap-3 mb-6">
@@ -271,7 +287,7 @@ export function PaceCalculator() {
                   maxLength={2}
                   className="w-full px-3 py-2 pr-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-logo-blue focus:border-transparent [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                   value={mm}
-                  onChange={(e) => setMm(e.target.value)}
+                  onChange={(e) => handleTimeInputChange(e.target.value, setMm)}
                 />
                 <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none text-sm">
                   min
@@ -285,7 +301,7 @@ export function PaceCalculator() {
                   maxLength={2}
                   className="w-full px-3 py-2 pr-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-logo-blue focus:border-transparent [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                   value={ss}
-                  onChange={(e) => setSs(e.target.value)}
+                  onChange={(e) => handleTimeInputChange(e.target.value, setSs)}
                 />
                 <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none text-sm">
                   sek
@@ -357,7 +373,7 @@ export function PaceCalculator() {
                   maxLength={2}
                   className="w-full px-3 py-2 pr-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-logo-blue focus:border-transparent [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                   value={paceMin}
-                  onChange={(e) => setPaceMin(e.target.value)}
+                  onChange={(e) => handleTimeInputChange(e.target.value, setPaceMin)}
                 />
                 <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none text-sm">
                   min
@@ -371,7 +387,7 @@ export function PaceCalculator() {
                   maxLength={2}
                   className="w-full px-3 py-2 pr-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-logo-blue focus:border-transparent [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                   value={paceSec}
-                  onChange={(e) => setPaceSec(e.target.value)}
+                  onChange={(e) => handleTimeInputChange(e.target.value, setPaceSec)}
                 />
                 <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none text-sm">
                   sek
@@ -460,7 +476,7 @@ export function PaceCalculator() {
                   maxLength={2}
                   className="w-full px-3 py-2 pr-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-logo-blue focus:border-transparent [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                   value={tablePaceMin}
-                  onChange={(e) => setTablePaceMin(e.target.value)}
+                  onChange={(e) => handleTimeInputChange(e.target.value, setTablePaceMin)}
                 />
                 <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none text-sm">
                   min
@@ -474,7 +490,7 @@ export function PaceCalculator() {
                   maxLength={2}
                   className="w-full px-3 py-2 pr-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-logo-blue focus:border-transparent [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                   value={tablePaceSec}
-                  onChange={(e) => setTablePaceSec(e.target.value)}
+                  onChange={(e) => handleTimeInputChange(e.target.value, setTablePaceSec)}
                 />
                 <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none text-sm">
                   sek
