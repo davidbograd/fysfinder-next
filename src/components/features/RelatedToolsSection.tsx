@@ -71,6 +71,15 @@ const allTools: Tool[] = [
     imageAlt: "Fedtprocent beregner illustration med målebånd og sundhedsudstyr",
     type: "Kost & ernæring værktøjer",
   },
+  {
+    title: "Pace beregner",
+    description:
+      "Beregn din løbehastighed (pace) i min/km og hastighed i km/t. Find din forventede sluttid på populære distancer.",
+    href: "/vaerktoejer/pace-beregner",
+    imageUrl: "/images/vaerktoejer/pace-beregner.png",
+    imageAlt: "Pace beregner illustration med løber og stopur",
+    type: "Træning & bevægelse værktøjer",
+  },
 ];
 
 const RelatedToolsSection = ({ 

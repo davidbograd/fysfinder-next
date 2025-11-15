@@ -67,6 +67,15 @@ const tools: Tool[] = [
     imageAlt: "Fedtprocent beregner illustration med målebånd og sundhedsudstyr",
     type: "Kost & ernæring værktøjer",
   },
+  {
+    title: "Pace beregner",
+    description:
+      "Beregn din løbehastighed (pace) i min/km og hastighed i km/t. Find din forventede sluttid på populære distancer.",
+    href: "/vaerktoejer/pace-beregner",
+    imageUrl: "/images/vaerktoejer/pace-beregner.png",
+    imageAlt: "Pace beregner illustration med løber og stopur",
+    type: "Træning & bevægelse værktøjer",
+  },
 ];
 
 function ToolCard({ tool }: { tool: Tool }) {
@@ -154,6 +163,13 @@ export default function ToolsPage() {
                   </p>
                 </div>
               )}
+              {type === "Træning & bevægelse værktøjer" && (
+                <p className="text-gray-600 mb-6">
+                  Optimer din træning og bevægelse med vores værktøjer, der hjælper
+                  dig med at blive stærkere og mere fleksibel. Uanset om du er
+                  nybegynder eller erfaren.
+                </p>
+              )}
               <div className="grid md:grid-cols-2 gap-8">
                 {tools.map((tool) => (
                   <ToolCard key={tool.href + tool.title} tool={tool} />
@@ -163,16 +179,6 @@ export default function ToolsPage() {
           ))}
         </div>
         <div className="space-y-8 mt-16 max-w-prose mx-auto">
-          <div>
-            <h2 className="text-xl sm:text-2xl font-semibold mb-2">
-              Træning & bevægelse værktøjer
-            </h2>
-            <p className="text-gray-600">
-              Optimer din træning og bevægelse med vores værktøjer, der hjælper
-              dig med at blive stærkere og mere fleksibel. Uanset om du er
-              nybegynder eller erfaren.
-            </p>
-          </div>
           <div>
             <h2 className="text-xl sm:text-2xl font-semibold mb-2">
               Sundhed & velvære værktøjer
