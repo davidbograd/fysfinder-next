@@ -83,7 +83,7 @@ export default async function BodyFatCalculatorPage() {
                 Fedtprocent beregner - Beregn din kropsfedt med Navy metoden
               </h1>
               <p className="text-gray-600 text-sm sm:text-base">
-                Vil du gerne kende din fedtprocent uden avanceret udstyr? Med FysFinder's gratis fedtprocent beregner kan du nemt og hurtigt få et estimat på din kropsfedtprocent. Beregningen bygger på <strong>Navy-metoden</strong>, som er en af de mest anvendte og pålidelige måder at beregne fedtprocent på uden professionelt måleudstyr.
+                Vil du gerne kende din fedtprocent uden avanceret udstyr? Med FysFinder&apos;s gratis fedtprocent beregner kan du nemt og hurtigt få et estimat på din kropsfedtprocent. Beregningen bygger på <strong>Navy-metoden</strong>, som er en af de mest anvendte og pålidelige måder at beregne fedtprocent på uden professionelt måleudstyr.
               </p>
               <p className="text-gray-600 text-sm sm:text-base">
                 Indtast dine mål nedenfor for at få et <em>estimat</em> af din fedtprocent.

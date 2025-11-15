@@ -10,11 +10,11 @@ import { slugify } from "@/app/utils/slugify";
 export const metadata: Metadata = {
   title: "Pace beregner → Beregn din løbehastighed i min/km ✅",
   description:
-    "Med FysFinder's online pace beregner kan du nemt beregne din løbehastighed i min/km. Uanset om du træner til 5 km, halvmarathon eller et helt marathon.",
+    "Med FysFinder&apos;s online pace beregner kan du nemt beregne din løbehastighed i min/km. Uanset om du træner til 5 km, halvmarathon eller et helt marathon.",
   openGraph: {
     title: "Pace beregner → Beregn din løbehastighed i min/km ✅",
     description:
-      "Med FysFinder's online pace beregner kan du nemt beregne din løbehastighed i min/km. Uanset om du træner til 5 km, halvmarathon eller et helt marathon.",
+      "Med FysFinder&apos;s online pace beregner kan du nemt beregne din løbehastighed i min/km. Uanset om du træner til 5 km, halvmarathon eller et helt marathon.",
     images: [
       {
         url: "/images/vaerktoejer/pace-beregner.png",
@@ -39,7 +39,7 @@ export default async function PaceBeregnerPage() {
     { text: "Hvordan udregner man pace?", id: slugify("Hvordan udregner man pace?") },
     { text: "Hvad er forskellen på pace og hastighed?", id: slugify("Hvad er forskellen på pace og hastighed?") },
     { text: "Hvorfor bruger løbere pace i stedet for km/t?", id: slugify("Hvorfor bruger løbere pace i stedet for km/t?") },
-    { text: "Beregn din løbehastighed (min/km) med FysFinder's pace beregner", id: slugify("Beregn din løbehastighed (min/km) med FysFinder's pace beregner") },
+    { text: "Beregn din løbehastighed (min/km) med FysFinder&apos;s pace beregner", id: slugify("Beregn din løbehastighed (min/km) med FysFinder's pace beregner") },
     { text: "Pace beregner til halvmarathon og marathon", id: slugify("Pace beregner til halvmarathon og marathon") },
     { text: "Hvordan træner du op til at ramme en bestemt pace?", id: slugify("Hvordan træner du op til at ramme en bestemt pace?") },
     { text: "Tempo-beregner og løbehastighed beregner – hvad kan du bruge dem til?", id: slugify("Tempo-beregner og løbehastighed beregner – hvad kan du bruge dem til?") },
