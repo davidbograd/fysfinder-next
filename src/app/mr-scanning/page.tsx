@@ -16,6 +16,19 @@ import RelatedToolsSection from "@/components/features/RelatedToolsSection";
 export const metadata: Metadata = {
   title: "Komplet MR-scanning guide | Få svar på dine spørgsmål ✅",
   description: "Oversæt din MR-scanning rapport til letforståeligt dansk.",
+  openGraph: {
+    title: "Komplet MR-scanning guide | Få svar på dine spørgsmål ✅",
+    description: "Oversæt din MR-scanning rapport til letforståeligt dansk.",
+    images: [
+      {
+        url: "/images/mr-scanning/mr-scanning.png",
+        width: 1200,
+        height: 630,
+        alt: "MR-scanning maskine i et hospital miljø",
+      },
+    ],
+    type: "website",
+  },
 };
 
 // Custom component for rendering images within MDX

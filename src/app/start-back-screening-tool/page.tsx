@@ -33,6 +33,20 @@ export const metadata: Metadata = {
   title: "STarT Back Screening – Opdag varige rygsmerter i tide",
   description:
     "Identificer om du er i risiko for varige rygsmerter med STarT Back Screening Tool. Svar på spørgsmålene og få en risikovurdering.",
+  openGraph: {
+    title: "STarT Back Screening – Opdag varige rygsmerter i tide",
+    description:
+      "Identificer om du er i risiko for varige rygsmerter med STarT Back Screening Tool. Svar på spørgsmålene og få en risikovurdering.",
+    images: [
+      {
+        url: "/images/vaerktoejer/ryg-smerter-survey.jpg",
+        width: 1200,
+        height: 630,
+        alt: "STarT Back Screening Tool illustration",
+      },
+    ],
+    type: "website",
+  },
 };
 
 export default async function StartBackScreeningToolPage() {

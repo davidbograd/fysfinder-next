@@ -9,6 +9,20 @@ export const metadata: Metadata = {
   title: "Pace beregner → Beregn din løbehastighed i min/km ✅",
   description:
     "Med FysFinder's online pace beregner kan du nemt beregne din løbehastighed i min/km. Uanset om du træner til 5 km, halvmarathon eller et helt marathon.",
+  openGraph: {
+    title: "Pace beregner → Beregn din løbehastighed i min/km ✅",
+    description:
+      "Med FysFinder's online pace beregner kan du nemt beregne din løbehastighed i min/km. Uanset om du træner til 5 km, halvmarathon eller et helt marathon.",
+    images: [
+      {
+        url: "/images/vaerktoejer/pace-beregner.png",
+        width: 1200,
+        height: 630,
+        alt: "Pace beregner illustration med løber og stopur",
+      },
+    ],
+    type: "website",
+  },
 };
 
 export default async function PaceBeregnerPage() {

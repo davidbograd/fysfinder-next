@@ -17,6 +17,20 @@ export const metadata: Metadata = {
   title: "Komplet DEXA-scanning guide | Forstå alt om DEXA-scan ✅",
   description:
     "Oversæt din DEXA-scanning rapport til letforståeligt dansk og forstå alt om DEXA-scan.",
+  openGraph: {
+    title: "Komplet DEXA-scanning guide | Forstå alt om DEXA-scan ✅",
+    description:
+      "Oversæt din DEXA-scanning rapport til letforståeligt dansk og forstå alt om DEXA-scan.",
+    images: [
+      {
+        url: "/images/dexa-scanning/dexa-scanning.jpeg",
+        width: 1200,
+        height: 630,
+        alt: "DEXA-scanning illustration",
+      },
+    ],
+    type: "website",
+  },
 };
 
 // Custom component for rendering images within MDX

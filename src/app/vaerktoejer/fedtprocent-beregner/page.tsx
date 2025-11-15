@@ -16,6 +16,20 @@ export const metadata: Metadata = {
   title: "Fedtprocent beregner: Beregn din kropsfedt med Navy metoden ✅",
   description:
     "Beregn din fedtprocent med vores gratis fedtprocent beregner baseret på Navy metoden. Få indsigt i din kropssammensætning og sundhed.",
+  openGraph: {
+    title: "Fedtprocent beregner: Beregn din kropsfedt med Navy metoden ✅",
+    description:
+      "Beregn din fedtprocent med vores gratis fedtprocent beregner baseret på Navy metoden. Få indsigt i din kropssammensætning og sundhed.",
+    images: [
+      {
+        url: "/images/vaerktoejer/fedtprocent-beregner.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Fedtprocent beregner illustration med målebånd og sundhedsudstyr",
+      },
+    ],
+    type: "website",
+  },
 };
 
 // Custom component for rendering images within MDX

@@ -16,6 +16,20 @@ export const metadata: Metadata = {
   title: "BMI-beregner: Beregn og forstå dit Body Mass Index tal ✅",
   description:
     "Beregn dit BMI (Body Mass Index) med vores gratis BMI-beregner. Få din vægtklassifikation og sundhedsrådgivning.",
+  openGraph: {
+    title: "BMI-beregner: Beregn og forstå dit Body Mass Index tal ✅",
+    description:
+      "Beregn dit BMI (Body Mass Index) med vores gratis BMI-beregner. Få din vægtklassifikation og sundhedsrådgivning.",
+    images: [
+      {
+        url: "/images/vaerktoejer/bmi-beregner.png",
+        width: 1200,
+        height: 630,
+        alt: "BMI-beregner illustration med vægt og målebånd",
+      },
+    ],
+    type: "website",
+  },
 };
 
 // Custom component for rendering images within MDX

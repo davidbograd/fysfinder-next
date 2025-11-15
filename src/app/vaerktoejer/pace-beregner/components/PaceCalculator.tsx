@@ -180,8 +180,10 @@ export function PaceCalculator() {
   };
 
   const handleDistanceChange = (value: string) => {
+    // Convert dot to comma for Danish format
+    const withComma = value.replace(/\./g, ",");
     // Allow only numbers, comma, and empty string
-    const cleaned = value.replace(/[^\d,]/g, "");
+    const cleaned = withComma.replace(/[^\d,]/g, "");
     // Ensure only one comma
     const parts = cleaned.split(",");
     if (parts.length > 2) return;
@@ -189,8 +191,10 @@ export function PaceCalculator() {
   };
 
   const handlePaceDistanceChange = (value: string) => {
+    // Convert dot to comma for Danish format
+    const withComma = value.replace(/\./g, ",");
     // Allow only numbers, comma, and empty string
-    const cleaned = value.replace(/[^\d,]/g, "");
+    const cleaned = withComma.replace(/[^\d,]/g, "");
     // Ensure only one comma
     const parts = cleaned.split(",");
     if (parts.length > 2) return;
@@ -337,7 +341,7 @@ export function PaceCalculator() {
           id="mode2-title"
           className="text-lg md:text-xl font-semibold text-gray-900"
         >
-          Beregn forventet sluttid ud fra pace
+          Beregn sluttid ud fra pace
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Pace */}
@@ -446,7 +450,7 @@ export function PaceCalculator() {
         <div className="mb-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Pace
+              Pace per km
             </label>
             <div className="grid grid-cols-2 gap-2 max-w-xs">
               <div className="relative">

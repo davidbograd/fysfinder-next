@@ -16,6 +16,20 @@ export const metadata: Metadata = {
   title: "Kalorieberegner (TDEE): Beregn dit daglige kaloriebehov ✅",
   description:
     "Beregn dit daglige kaloriebehov med vores gratis kalorieberegner. Få dit BMR, TDEE og anbefalinger til vægttab og vægtøgning.",
+  openGraph: {
+    title: "Kalorieberegner (TDEE): Beregn dit daglige kaloriebehov ✅",
+    description:
+      "Beregn dit daglige kaloriebehov med vores gratis kalorieberegner. Få dit BMR, TDEE og anbefalinger til vægttab og vægtøgning.",
+    images: [
+      {
+        url: "/images/vaerktoejer/kalorieberegner.png",
+        width: 1200,
+        height: 630,
+        alt: "Sunde fødevarer og målebånd der illustrerer kalorieopmåling",
+      },
+    ],
+    type: "website",
+  },
 };
 
 // Custom component for rendering images within MDX
