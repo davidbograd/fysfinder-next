@@ -33,7 +33,7 @@ export default async function PaceBeregnerPage() {
             Pace beregner – Beregn nemt din løbehastighed (min/km)
           </h1>
           <p className="text-gray-600 text-sm sm:text-base">
-            Med FysFinder's pace beregner kan du nemt beregne din løbehastighed i
+            Med FysFinder&apos;s pace beregner kan du nemt beregne din løbehastighed i
             antal minutter pr. kilometer (løbe pace). Bliv klogere på dine
             løbetider og find din optimale pacing strategi – uanset om du træner
             til 5 km, halvmarathon eller et helt marathon.
@@ -137,17 +137,17 @@ export default async function PaceBeregnerPage() {
               det er lettere at forholde sig til under træning og konkurrence.
             </p>
             <p>
-              Når du løber, tænker du typisk: "Jeg skal holde 5:00 min/km for at
-              nå mit mål" – i stedet for "Jeg skal løbe 12 km/t".
+              Når du løber, tænker du typisk: &quot;Jeg skal holde 5:00 min/km for at
+              nå mit mål&quot; – i stedet for &quot;Jeg skal løbe 12 km/t&quot;.
             </p>
             <p>
               Pace gør det mere intuitivt at styre tempoet undervejs, fordi det
               direkte fortæller dig, hvor lang tid hver kilometer bør tage.
             </p>
 
-            <h2>Beregn din løbehastighed (min/km) med FysFinder's pace beregner</h2>
+            <h2>Beregn din løbehastighed (min/km) med FysFinder&apos;s pace beregner</h2>
             <p>
-              Med FysFinder's online pace beregner kan du hurtigt finde ud af,
+              Med FysFinder&apos;s online pace beregner kan du hurtigt finde ud af,
               hvor hurtigt du løber. Indtast din distance og tid, og se:
             </p>
             <ul>
@@ -197,7 +197,7 @@ export default async function PaceBeregnerPage() {
               </li>
               <li>
                 <strong>Løb efter fornemmelse</strong> – Lær at mærke forskel på
-                "komfortabelt" og "hurtigt" tempo.
+                &quot;komfortabelt&quot; og &quot;hurtigt&quot; tempo.
               </li>
               <li>
                 <strong>Test din form</strong> – Brug beregneren jævnligt for at
@@ -227,7 +227,7 @@ export default async function PaceBeregnerPage() {
 
             <h2>Online pace beregner – nemt og gratis</h2>
             <p>
-              FysFinder's online pace beregner er gratis at bruge og kræver
+              FysFinder&apos;s online pace beregner er gratis at bruge og kræver
               ingen login.
             </p>
             <p>
