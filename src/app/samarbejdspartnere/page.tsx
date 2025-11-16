@@ -71,7 +71,7 @@ export default function PartnersPage() {
       <p className="text-gray-600 mb-12 max-w-2xl">
         Vi samarbejder med førende organisationer inden for sundhedssektoren for
         at sikre, at vi kan tilbyde den bedste og mest pålidelige service til
-        vores brugere.
+        den danske befolkning.
       </p>
 
       <div className="space-y-16">
