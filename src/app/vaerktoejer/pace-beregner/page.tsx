@@ -79,9 +79,8 @@ export default async function PaceBeregnerPage() {
 
         <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-8">
           <p className="text-sm text-gray-700">
-            <strong>OBS</strong>:{" "}
             <em>
-              🏃‍♂️ Træningstip: Brug din beregnede pace som motivation og
+              🏃‍♂️ <strong>Træningstip:</strong> Brug din beregnede pace som motivation og
               pejlemærke – men lyt altid til kroppen undervejs. Små justeringer
               gør en stor forskel på længere distancer.
             </em>
