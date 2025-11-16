@@ -42,6 +42,19 @@ export default function PartnersPage() {
       ],
       website: "https://faks.dk",
     },
+    {
+      id: "hovedpine-foreningen",
+      name: "Hovedpine Foreningen",
+      logo: "/images/samarbejdspartnere/hovedpine-foreningen.png",
+      description: [
+        "Hovedpine Foreningen er en landsdækkende forening, der arbejder for at støtte og hjælpe mennesker med hovedpine og migræne. Foreningen har fokus på at skabe bedre forståelse og opmærksomhed omkring disse tilstande, samt at tilbyde vejledning og støtte til dem, der er berørt.",
+
+        "Gennem vores samarbejde med Hovedpine Foreningen kan vi tilbyde brugere med hovedpine eller migræne nem adgang til at finde fysioterapeuter, der har specialiseret sig i behandling af disse tilstande.",
+
+        "Samarbejdet indebærer ikke en faglig vurdering eller godkendelse af de nævnte klinikker.",
+      ],
+      website: "https://www.hovedpineforeningen.dk",
+    },
   ];
 
   const breadcrumbItems = [
