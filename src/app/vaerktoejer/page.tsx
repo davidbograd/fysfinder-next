@@ -76,6 +76,15 @@ const tools: Tool[] = [
     imageAlt: "Pace beregner illustration med løber og stopur",
     type: "Træning & bevægelse værktøjer",
   },
+  {
+    title: "RM beregner",
+    description:
+      "Beregn din 1RM (one repetition maximum) og se anbefalet vægt til 1–10 repetitionsmaksimum. Optimer din styrketræning.",
+    href: "/vaerktoejer/rm-beregner",
+    imageUrl: "/images/vaerktoejer/1rm-beregner.jpg",
+    imageAlt: "RM beregner illustration med vægtstang og løfter",
+    type: "Træning & bevægelse værktøjer",
+  },
 ];
 
 function ToolCard({ tool }: { tool: Tool }) {

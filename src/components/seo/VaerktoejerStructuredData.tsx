@@ -14,7 +14,7 @@ interface StructuredDataProps {
     imageAlt: string;
   }[];
   toolType?: "calculator" | "translator" | "screening";
-  calculatorType?: "bmi" | "calorie" | "other";
+  calculatorType?: "bmi" | "calorie" | "rm" | "other";
 }
 
 export default function VaerktoejerStructuredData({
@@ -76,55 +76,7 @@ export default function VaerktoejerStructuredData({
         }
       : null;
 
-  // HowTo schema for calculator tools
-  const howToSchema =
-    toolType === "calculator"
-      ? {
-          "@context": "https://schema.org",
-          "@type": "HowTo",
-          name: `Sådan bruger du ${name}`,
-          description: `Trin-for-trin guide til at bruge ${name}`,
-          step: [
-            {
-              "@type": "HowToStep",
-              name: "Indtast dine oplysninger",
-              text:
-                calculatorType === "bmi"
-                  ? "Indtast din vægt i kg og højde i cm"
-                  : "Indtast din vægt, højde, alder og vælg dit køn",
-            },
-            ...(calculatorType === "calorie"
-              ? [
-                  {
-                    "@type": "HowToStep",
-                    name: "Vælg aktivitetsniveau",
-                    text: "Vælg dit daglige aktivitetsniveau fra dropdownmenuen",
-                  },
-                ]
-              : []),
-            {
-              "@type": "HowToStep",
-              name: "Beregn resultat",
-              text: `Klik på 'Beregn ${
-                calculatorType === "bmi" ? "BMI" : "kalorier"
-              }' knappen`,
-            },
-            {
-              "@type": "HowToStep",
-              name: "Se dit resultat",
-              text:
-                calculatorType === "bmi"
-                  ? "Se dit BMI-tal og vægtklassifikation med forklaringer"
-                  : "Se dit BMR, TDEE og anbefalinger til vægttab/vægtøgning",
-            },
-          ],
-          totalTime: "PT2M",
-          tool: {
-            "@type": "WebApplication",
-            name,
-          },
-        }
-      : null;
+  // HowTo schema removed - no steps needed
 
   // FAQ schema for calculator tools
   const getFAQSchema = () => {
@@ -206,6 +158,61 @@ export default function VaerktoejerStructuredData({
           },
         ],
       };
+    } else if (calculatorType === "rm") {
+      return {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: "Hvorfor er det en fordel at kende sin 1RM?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "At kende sin 1RM gør det nemmere at planlægge træning, vælge passende belastning og undgå både under- og overtræning. Det giver dig et objektivt udgangspunkt, så du kan strukturere progression og måle forbedringer over tid.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Hvor ofte bør jeg opdatere min 1RM i træningen?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "For de fleste er det passende at opdatere sin 1RM hver 6.–10. uge. Hvis du er ny i styrketræning, kan du opleve hurtigere fremgang og derfor justere lidt oftere. Brug FysFinders RM beregner, når du vil opdatere dit estimat.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Er min 1RM den samme i alle øvelser?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Nej. Din 1RM afhænger af øvelsens kompleksitet, muskelgruppernes størrelse og din teknik i øvelsen. Mange har fx en højere 1RM i dødløft end i squat eller bænkpres. Brug FysFinders RM beregner til at beregne 1RM for hver enkelt øvelse.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Hvor præcis er en beregnet 1RM sammenlignet med en testet 1RM?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "En beregnet 1RM ligger typisk meget tæt på den reelle værdi, især hvis du bruger et moderat antal gentagelser (3–8 reps). Variation kan dog opstå pga. teknik, dagsform, søvn og erfaring. FysFinders RM beregner giver et stabilt estimat, du trygt kan planlægge efter.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Kan jeg beregne min 1RM uden at løfte tungt?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Ja. Det er netop fordelen ved en RM beregner. Du kan bruge en vægt, du kan løfte flere gange (fx 5–10 reps), og lade FysFinders RM beregner omregne det til et sikkert 1RM-estimat.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Er 1RM kun relevant for styrkeløftere?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Nej. Alle der styrketræner kan have gavn af at kende deres 1RM, uanset om målet er muskelopbygning, vægttab, sportspræstation, genoptræning eller skadesforebyggelse. Det giver bedre træningskontrol og et tydeligt mål for udvikling.",
+            },
+          },
+        ],
+      };
     }
     return null;
   };
@@ -222,7 +229,13 @@ export default function VaerktoejerStructuredData({
           description,
           applicationCategory: "CalculatorApplication",
           applicationSubCategory:
-            calculatorType === "bmi" ? "BMI Calculator" : "Calorie Calculator",
+            calculatorType === "bmi"
+              ? "BMI Calculator"
+              : calculatorType === "calorie"
+              ? "Calorie Calculator"
+              : calculatorType === "rm"
+              ? "RM Calculator"
+              : "Calculator",
           operatingSystem: "Web",
           permissions: "none",
           isAccessibleForFree: true,
@@ -288,12 +301,6 @@ export default function VaerktoejerStructuredData({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppSchema) }}
-        />
-      )}
-      {howToSchema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
         />
       )}
       {faqSchema && (
