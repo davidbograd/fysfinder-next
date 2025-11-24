@@ -43,29 +43,21 @@ export async function fetchSpecialties(): Promise<Specialty[]> {
   return data;
 }
 
-export async function fetchCitiesWithCounts() {
+export async function fetchCitiesWithCounts(): Promise<CityWithCount[]> {
   const supabase = await createClient();
 
-  const { data, error } = await supabase.from("cities").select(`
-      id,
-      bynavn,
-      bynavn_slug,
-      postal_codes,
-      clinics:clinics(count)
-    `);
+  // Use the city_clinic_counts view for fast, pre-computed aggregates
+  // This avoids expensive nested queries and prevents timeouts
+  const { data, error } = await supabase
+    .from("city_clinic_counts")
+    .select("id, bynavn, bynavn_slug, postal_codes, clinic_count");
 
   if (error) {
     console.error("Supabase error:", error);
     throw new Error(`Failed to fetch cities: ${error.message}`);
   }
 
-  return (data || []).map((city) => ({
-    id: city.id,
-    bynavn: city.bynavn,
-    bynavn_slug: city.bynavn_slug,
-    postal_codes: city.postal_codes,
-    clinic_count: city.clinics?.[0]?.count || 0,
-  }));
+  return data || [];
 }
 
 export function processCities(cities: CityWithCount[]): RegionData[] {

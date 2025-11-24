@@ -1,6 +1,6 @@
 import { fetchCitiesWithCounts } from "../utils/cityUtils";
 
-// Mock Supabase client
+// Mock Supabase client - now using city_clinic_counts view
 jest.mock("@/app/utils/supabase/server", () => ({
   createClient: () => ({
     from: () => ({
@@ -11,21 +11,21 @@ jest.mock("@/app/utils/supabase/server", () => ({
             bynavn: "København",
             bynavn_slug: "kobenhavn",
             postal_codes: ["1000", "1050"],
-            clinics: [{ count: 42 }],
+            clinic_count: 42,
           },
           {
             id: "2",
             bynavn: "Aarhus",
             bynavn_slug: "aarhus",
             postal_codes: ["8000"],
-            clinics: [{ count: 25 }],
+            clinic_count: 25,
           },
           {
             id: "3",
             bynavn: "Odense",
             bynavn_slug: "odense",
             postal_codes: ["5000"],
-            clinics: null,
+            clinic_count: 0,
           },
         ],
         error: null,
