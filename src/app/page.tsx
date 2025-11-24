@@ -1,3 +1,7 @@
+// Homepage component with graceful error handling
+// Updated: 2025-01-24 - Added ErrorFallback component to handle data fetch failures gracefully
+// Instead of showing red error text, users see a friendly message with the page structure intact
+
 import React from "react";
 import { Metadata } from "next";
 import { FAQ } from "@/components/features/blog-og-ordbog/FAQ";
@@ -170,6 +174,83 @@ export const metadata: Metadata = {
     "Find din næste fysioterapeut med FysFinder. Få et fuldt overblik over klinikker nær dig og book din behandling i dag.",
 };
 
+function ErrorFallback() {
+  return (
+    <div className="mb-8 sm:mb-12 w-full">
+      {/* Hero section with background image */}
+      <div className="relative py-16 sm:py-28 px-4 min-h-[65vh] flex flex-col justify-center w-full mb-16">
+        {/* Background image container with overflow hidden */}
+        <div className="absolute inset-0 z-0 rounded-lg overflow-hidden">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage:
+                "url('/images/homepage/hero-background-image.jpg')",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 max-w-4xl mx-auto w-full space-y-12">
+          <div className="text-center space-y-2">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl text-slate-900 font-normal">
+              Find den bedste
+              <br />
+              <span className="font-bold">fysioterapeut</span>
+            </h1>
+          </div>
+
+          <div className="max-w-2xl mx-auto w-full">
+            {/* Fallback message */}
+            <div className="bg-white/95 backdrop-blur-sm rounded-lg p-6 shadow-lg border border-slate-200">
+              <div className="text-center space-y-4">
+                <p className="text-slate-700 text-lg">
+                  Vi har midlertidigt problemer med at hente data.
+                </p>
+                <p className="text-slate-600">
+                  Prøv venligst at genindlæse siden om et øjeblik.
+                </p>
+                <a
+                  href="/"
+                  className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
+                >
+                  Genindlæs siden
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Stats section with fallback */}
+      <div className="max-w-4xl mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+          <div className="space-y-2">
+            <p className="text-4xl font-bold text-slate-300">---</p>
+            <p className="text-slate-600">danske fysioterapi klinikker</p>
+          </div>
+          <div className="space-y-2">
+            <p className="text-4xl font-bold text-slate-300">---</p>
+            <p className="text-slate-600">forskellige specialer</p>
+          </div>
+          <div className="space-y-2">
+            <div className="text-4xl font-bold flex justify-center">
+              <div className="flex">
+                {[...Array(5)].map((_, i) => (
+                  <StarIcon key={i} className="h-8 w-8 text-amber-500" />
+                ))}
+              </div>
+            </div>
+            <p className="text-slate-600">Den bedste oplevelse</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default async function HomePage() {
   try {
     const cities = await fetchCitiesWithCounts();
@@ -193,10 +274,20 @@ export default async function HomePage() {
       </div>
     );
   } catch (error) {
-    console.error("Unexpected error:", error);
+    console.error("Homepage data fetch error:", error);
+    // Return a graceful fallback UI instead of breaking the page
     return (
-      <div className="text-red-500 font-bold text-center py-10">
-        Error loading cities: {(error as Error).message}
+      <div>
+        <ErrorFallback />
+        <BenefitsSection />
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="bg-slate-50 rounded-lg p-8 text-center">
+            <p className="text-slate-600">
+              Data kunne ikke indlæses. Prøv venligst igen senere.
+            </p>
+          </div>
+          <FAQ />
+        </div>
       </div>
     );
   }
