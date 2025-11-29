@@ -2,8 +2,8 @@
 const nextConfig = {
   images: {
     domains: [
-      'dbqnutjbrxydltkeftnv.supabase.co', // Replace with your Supabase project URL
-      'img.logo.dev', // Logo.dev API for clinic logos
+      'dbqnutjbrxydltkeftnv.supabase.co', // Supabase storage for images
+      // Logo.dev removed - logos are served from local /public/logos/ directory
     ],
   },
   webpack: (config, { isServer }) => {

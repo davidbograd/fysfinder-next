@@ -18,7 +18,7 @@ import {
   type Specialty,
 } from "./utils/cityUtils";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 21600; // Revalidate every 6 hours
 
 const regions: { [key: string]: { name: string; range: [number, number] } } = {
   hovedstaden: { name: "Hovedstaden", range: [1000, 2999] },
