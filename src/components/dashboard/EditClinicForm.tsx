@@ -685,7 +685,7 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
                 onChange={(e) => handleInputChange("parkering", e.target.value)}
               />
               <p className="text-xs text-gray-500">
-                Beskriv parkeringsmuligheder, f.eks. "Gratis i baggården", "Betalt, men massere af muligheder"
+                Beskriv parkeringsmuligheder, f.eks. &quot;Gratis i baggården&quot;, &quot;Betalt, men masser af muligheder&quot;
               </p>
             </div>
           </div>

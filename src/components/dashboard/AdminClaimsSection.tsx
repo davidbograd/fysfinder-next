@@ -28,7 +28,7 @@ interface Claim {
     verified_klinik: boolean;
     email: string | null;
     tlf: string | null;
-  } | null;
+  }[] | null;
 }
 
 export const AdminClaimsSection = () => {
@@ -161,7 +161,7 @@ export const AdminClaimsSection = () => {
         ) : (
           <div className="space-y-6">
             {claims.map((claim) => {
-              const clinic = claim.clinics;
+              const clinic = Array.isArray(claim.clinics) ? claim.clinics[0] : claim.clinics;
               const originalAddress = clinic
                 ? [
                     clinic.adresse,

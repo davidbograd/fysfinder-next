@@ -89,7 +89,7 @@ export const SignInForm = () => {
       await new Promise(resolve => setTimeout(resolve, 100));
 
       // Success - redirect to dashboard or the redirect URL if provided
-      const redirectTo = searchParams.get("redirect") || "/dashboard";
+      const redirectTo = searchParams?.get("redirect") || "/dashboard";
       toast({
         title: "Logget ind",
         description: "Velkommen tilbage!",
