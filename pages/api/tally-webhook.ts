@@ -106,10 +106,9 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResponseData>
 ) {
-  // Log all incoming requests
+  // Log incoming webhook (without sensitive headers)
   console.log("Webhook received:", {
     method: req.method,
-    headers: req.headers,
   });
 
   // Only allow POST requests
@@ -127,7 +126,8 @@ export default async function handler(
 
   try {
     const tallyData = req.body;
-    console.log("Tally data received:", JSON.stringify(tallyData, null, 2));
+    // Log submission ID only (not full data which may contain PII)
+    console.log("Tally submission received:", tallyData.eventId);
 
     if (!tallyData?.data?.fields) {
       console.log("Invalid request body:", tallyData);

@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 const paths = [
   "/",
@@ -8,7 +8,14 @@ const paths = [
   "/fysioterapeut-artikler/*", // This will revalidate all article pages
 ];
 
-export async function POST() {
+export async function POST(request: NextRequest) {
+  // Security check - require valid token
+  const authHeader = request.headers.get("authorization");
+  const token = authHeader?.replace("Bearer ", "");
+
+  if (!process.env.REVALIDATE_TOKEN || token !== process.env.REVALIDATE_TOKEN) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
   try {
     const results = [];
 

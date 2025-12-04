@@ -1,61 +1,99 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { createServerClient } from "@supabase/ssr";
 
-export function middleware(request: NextRequest) {
-  console.log("🔥 MIDDLEWARE EXECUTED for:", request.nextUrl.pathname);
+export async function middleware(request: NextRequest) {
+  // Handle Supabase auth session refresh for all routes
+  let response = NextResponse.next({
+    request: {
+      headers: request.headers,
+    },
+  });
 
-  // Only handle search-v2 find routes
-  if (!request.nextUrl.pathname.startsWith("/search-v2/find/")) {
-    console.log("❌ Not a search-v2 route, skipping");
-    return NextResponse.next();
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return request.cookies.getAll();
+        },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value, options }) =>
+            request.cookies.set(name, value)
+          );
+          response = NextResponse.next({
+            request,
+          });
+          cookiesToSet.forEach(({ name, value, options }) =>
+            response.cookies.set(name, value, options)
+          );
+        },
+      },
+    }
+  );
+
+  // Refresh session if expired
+  await supabase.auth.getUser();
+
+  // Handle search-v2 find routes (existing logic)
+  if (request.nextUrl.pathname.startsWith("/search-v2/find/")) {
+    const searchParams = request.nextUrl.searchParams;
+    const handicap = searchParams.get("handicap");
+    const ydernummer = searchParams.get("ydernummer");
+
+    if (handicap || ydernummer) {
+      const canonicalParams = new URLSearchParams();
+      if (handicap) {
+        canonicalParams.set("handicap", handicap);
+      }
+      if (ydernummer) {
+        canonicalParams.set("ydernummer", ydernummer);
+      }
+
+      const currentParamString = searchParams.toString();
+      const canonicalParamString = canonicalParams.toString();
+
+      if (currentParamString !== canonicalParamString) {
+        const redirectUrl = new URL(request.url);
+        redirectUrl.search = canonicalParamString;
+        return NextResponse.redirect(redirectUrl, 301);
+      }
+    }
   }
 
-  console.log("✅ Processing search-v2 route");
+  // Protect dashboard route - require authentication
+  if (request.nextUrl.pathname.startsWith("/dashboard")) {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
 
-  const searchParams = request.nextUrl.searchParams;
-
-  // Only process if we have both parameters
-  const handicap = searchParams.get("handicap");
-  const ydernummer = searchParams.get("ydernummer");
-
-  console.log("Parameters:", { handicap, ydernummer });
-
-  if (!handicap && !ydernummer) {
-    console.log("❌ No parameters to process");
-    return NextResponse.next();
+    if (!user) {
+      const redirectUrl = new URL("/auth/signin", request.url);
+      redirectUrl.searchParams.set("redirect", request.nextUrl.pathname);
+      return NextResponse.redirect(redirectUrl);
+    }
   }
 
-  // Build canonical parameter string
-  const canonicalParams = new URLSearchParams();
+  // Redirect authenticated users away from auth pages
+  if (
+    request.nextUrl.pathname.startsWith("/auth/signin") ||
+    request.nextUrl.pathname.startsWith("/auth/signup")
+  ) {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
 
-  // Add in alphabetical order
-  if (handicap) {
-    canonicalParams.set("handicap", handicap);
-  }
-  if (ydernummer) {
-    canonicalParams.set("ydernummer", ydernummer);
-  }
-
-  const currentParamString = searchParams.toString();
-  const canonicalParamString = canonicalParams.toString();
-
-  console.log("Current params:", currentParamString);
-  console.log("Canonical params:", canonicalParamString);
-
-  // Check if redirect is needed
-  if (currentParamString !== canonicalParamString) {
-    const redirectUrl = new URL(request.url);
-    redirectUrl.search = canonicalParamString;
-
-    console.log(`🔄 Redirecting: ${request.url} → ${redirectUrl.toString()}`);
-
-    return NextResponse.redirect(redirectUrl, 301);
+    if (user) {
+      return NextResponse.redirect(new URL("/dashboard", request.url));
+    }
   }
 
-  console.log("✅ Parameters already canonical");
-  return NextResponse.next();
+  return response;
 }
 
 export const config = {
-  matcher: "/search-v2/find/:path*",
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+  ],
 };

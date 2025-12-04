@@ -29,7 +29,7 @@ export function HeroSection() {
                 className="bg-logo-blue text-white hover:bg-logo-blue/90"
                 asChild
               >
-                <Link href="#clinic-search">Kom gratis i gang</Link>
+                <Link href="/auth/signup">Kom gratis i gang</Link>
               </Button>
             </div>
 

@@ -4,10 +4,55 @@ import Link from "next/link";
 import SiteLogo from "@/components/ui/Icons/SiteLogo";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { UserMenu } from "@/components/auth/UserMenu";
+import { createClient } from "@/app/utils/supabase/client";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const supabase = createClient();
+
+    // Check initial auth state
+    const checkAuth = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      setIsLoggedIn(!!user);
+    };
+
+    checkAuth();
+
+    // Listen for auth changes
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      setIsLoggedIn(!!session?.user);
+      
+      // Force a re-check after state change to ensure sync
+      if (event === 'SIGNED_IN' || event === 'SIGNED_OUT') {
+        setTimeout(() => {
+          checkAuth();
+        }, 100);
+      }
+    });
+
+    // Also check auth when page becomes visible (handles tab switching)
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        checkAuth();
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      subscription.unsubscribe();
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -24,61 +69,84 @@ export default function Header() {
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-row justify-between items-center h-14 sm:h-16">
           <div className="flex items-center space-x-6">
-            <Link href="/" className="inline-block">
+            <Link href={isLoggedIn ? "/dashboard" : "/"} className="inline-block">
               <SiteLogo />
             </Link>
 
             {/* Left side navigation */}
             <nav className="hidden md:flex items-center space-x-6">
-              <Link
-                href="/ordbog"
-                className="text-base text-gray-600 hover:text-gray-900"
-              >
-                Ordbog
-              </Link>
-              <Link
-                href="/vaerktoejer"
-                className="text-base text-gray-600 hover:text-gray-900"
-              >
-                Værktøjer
-              </Link>
-              <Link
-                href="/blog"
-                className="text-base text-gray-600 hover:text-gray-900"
-              >
-                Blog
-              </Link>
-              <Link
-                href="/om-os"
-                className="text-base text-gray-600 hover:text-gray-900"
-              >
-                Om os
-              </Link>
+              {isLoggedIn ? (
+                <Link
+                  href="/dashboard"
+                  className="text-base text-gray-600 hover:text-gray-900"
+                >
+                  Dashboard
+                </Link>
+              ) : (
+                <>
+                  <Link
+                    href="/ordbog"
+                    className="text-base text-gray-600 hover:text-gray-900"
+                  >
+                    Ordbog
+                  </Link>
+                  <Link
+                    href="/vaerktoejer"
+                    className="text-base text-gray-600 hover:text-gray-900"
+                  >
+                    Værktøjer
+                  </Link>
+                  <Link
+                    href="/blog"
+                    className="text-base text-gray-600 hover:text-gray-900"
+                  >
+                    Blog
+                  </Link>
+                  <Link
+                    href="/om-os"
+                    className="text-base text-gray-600 hover:text-gray-900"
+                  >
+                    Om os
+                  </Link>
+                </>
+              )}
             </nav>
           </div>
 
           {/* Desktop Navigation - Right side CTAs */}
           <nav className="hidden sm:flex items-center space-x-4">
-            <Button
-              asChild
-              className="bg-logo-blue hover:bg-logo-blue/90 text-white font-normal"
-            >
-              <Link href="/find/fysioterapeut/danmark">Find fysioterapeut</Link>
-            </Button>
-            <Button asChild variant="outline" className="font-normal">
-              <Link href="/tilmeld">For klinikker</Link>
-            </Button>
+            {isLoggedIn ? (
+              <UserMenu />
+            ) : (
+              <>
+                <Button
+                  asChild
+                  className="bg-logo-blue hover:bg-logo-blue/90 text-white font-normal"
+                >
+                  <Link href="/find/fysioterapeut/danmark">Find fysioterapeut</Link>
+                </Button>
+                <Button asChild variant="outline" className="font-normal">
+                  <Link href="/tilmeld">For klinikker</Link>
+                </Button>
+                <UserMenu />
+              </>
+            )}
           </nav>
 
           {/* Mobile Navigation */}
           <nav className="flex sm:hidden items-center space-x-3">
-            <Button
-              asChild
-              size="sm"
-              className="bg-logo-blue hover:bg-logo-blue/90 text-white font-normal"
-            >
-              <Link href="/find/fysioterapeut/danmark">Find fysioterapeut</Link>
-            </Button>
+            {!isLoggedIn && (
+              <Button
+                asChild
+                size="sm"
+                className="bg-logo-blue hover:bg-logo-blue/90 text-white font-normal"
+              >
+                <Link href="/find/fysioterapeut/danmark">Find fysioterapeut</Link>
+              </Button>
+            )}
+            <div className="sm:hidden">
+              <UserMenu />
+            </div>
             <button
               onClick={toggleMenu}
               className="p-2 text-gray-600 hover:text-gray-900"
@@ -98,69 +166,91 @@ export default function Header() {
 
           {/* Menu content */}
           <div className="relative h-full bg-white">
-            <div className="flex flex-col h-full">
-              <div className="flex justify-between items-center px-4 py-2 border-b">
-                <Link href="/" className="inline-block" onClick={toggleMenu}>
-                  <SiteLogo />
-                </Link>
-                <button
-                  onClick={toggleMenu}
-                  className="p-2 text-gray-600 hover:text-gray-900"
-                  aria-label="Close menu"
-                >
-                  <X className="h-6 w-6" />
-                </button>
-              </div>
-              <div className="flex flex-col flex-1">
-                <div className="flex flex-col space-y-4 p-4">
-                  <Link
-                    href="/ordbog"
-                    className="text-lg font-medium text-gray-900 py-2"
-                    onClick={toggleMenu}
-                  >
-                    Ordbog
+              <div className="flex flex-col h-full">
+                <div className="flex justify-between items-center px-4 py-2 border-b">
+                  <Link href={isLoggedIn ? "/dashboard" : "/"} className="inline-block" onClick={toggleMenu}>
+                    <SiteLogo />
                   </Link>
-                  <Link
-                    href="/vaerktoejer"
-                    className="text-lg font-medium text-gray-900 py-2"
+                  <button
                     onClick={toggleMenu}
+                    className="p-2 text-gray-600 hover:text-gray-900"
+                    aria-label="Close menu"
                   >
-                    Værktøjer
-                  </Link>
-                  <Link
-                    href="/blog"
-                    className="text-lg font-medium text-gray-900 py-2"
-                    onClick={toggleMenu}
-                  >
-                    Blog
-                  </Link>
-                  <Link
-                    href="/om-os"
-                    className="text-lg font-medium text-gray-900 py-2"
-                    onClick={toggleMenu}
-                  >
-                    Om os
-                  </Link>
+                    <X className="h-6 w-6" />
+                  </button>
                 </div>
+                <div className="flex flex-col flex-1">
+                  {!isLoggedIn && (
+                    <div className="flex flex-col space-y-4 p-4">
+                      <Link
+                        href="/ordbog"
+                        className="text-lg font-medium text-gray-900 py-2"
+                        onClick={toggleMenu}
+                      >
+                        Ordbog
+                      </Link>
+                      <Link
+                        href="/vaerktoejer"
+                        className="text-lg font-medium text-gray-900 py-2"
+                        onClick={toggleMenu}
+                      >
+                        Værktøjer
+                      </Link>
+                      <Link
+                        href="/blog"
+                        className="text-lg font-medium text-gray-900 py-2"
+                        onClick={toggleMenu}
+                      >
+                        Blog
+                      </Link>
+                      <Link
+                        href="/om-os"
+                        className="text-lg font-medium text-gray-900 py-2"
+                        onClick={toggleMenu}
+                      >
+                        Om os
+                      </Link>
+                    </div>
+                  )}
                 {/* Bottom buttons */}
                 <div className="mt-auto p-4 space-y-3 border-t">
-                  <Button
-                    asChild
-                    className="w-full bg-logo-blue hover:bg-logo-blue/90 text-white font-normal"
-                    onClick={toggleMenu}
-                  >
-                    <Link href="/find/fysioterapeut/danmark">
-                      Find fysioterapeut
-                    </Link>
-                  </Button>
-                  <Button
-                    asChild
-                    variant="outline"
-                    className="w-full font-normal"
-                    onClick={toggleMenu}
-                  >
-                    <Link href="/tilmeld">For klinikker</Link>
-                  </Button>
+                  {isLoggedIn ? (
+                    <>
+                      <Button
+                        asChild
+                        className="w-full bg-logo-blue hover:bg-logo-blue/90 text-white font-normal"
+                        onClick={toggleMenu}
+                      >
+                        <Link href="/dashboard">Dashboard</Link>
+                      </Button>
+                      <div onClick={toggleMenu}>
+                        <UserMenu />
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <Button
+                        asChild
+                        className="w-full bg-logo-blue hover:bg-logo-blue/90 text-white font-normal"
+                        onClick={toggleMenu}
+                      >
+                        <Link href="/find/fysioterapeut/danmark">
+                          Find fysioterapeut
+                        </Link>
+                      </Button>
+                      <Button
+                        asChild
+                        variant="outline"
+                        className="w-full font-normal"
+                        onClick={toggleMenu}
+                      >
+                        <Link href="/tilmeld">For klinikker</Link>
+                      </Button>
+                      <div onClick={toggleMenu}>
+                        <UserMenu />
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             </div>

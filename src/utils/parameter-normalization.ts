@@ -28,7 +28,7 @@ export function buildCanonicalUrl(
   basePath: string,
   filters: SearchFilters = {}
 ): string {
-  console.log("buildCanonicalUrl called with:", { basePath, filters });
+  // Debug: buildCanonicalUrl called with basePath and filters
 
   const params = new URLSearchParams();
 
@@ -45,7 +45,7 @@ export function buildCanonicalUrl(
     ? `${basePath}?${normalizedParams}`
     : basePath;
 
-  console.log("buildCanonicalUrl result:", result);
+  // Debug: buildCanonicalUrl completed
   return result;
 }
 

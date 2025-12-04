@@ -37,28 +37,20 @@ export function ClinicSearch() {
                 <Search className="h-6 w-6" />
               </div>
               <h3 className="text-xl font-semibold">
-                Find og verificer din klinik
+                Få en gratis bruger og claim din klinik
               </h3>
             </div>
             <p className="mb-6 text-gray-600">
-              Vi har tusindvis af klinikker på FysFinder. Tjek om din klinik
-              allerede eksisterer. Søg her.
+              Opret en gratis konto på FysFinder og få adgang til at claim og opdatere din klinikprofil.
             </p>
 
             <div className="space-y-4">
-              <div className="flex flex-col-reverse sm:flex-row gap-4">
-                <div className="flex-1">
-                  <SearchInput />
-                </div>
-                <a
-                  href="https://tally.so/r/wdk75r"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-logo-blue rounded-lg hover:bg-logo-blue/90 transition-colors whitespace-nowrap sm:w-auto w-full"
-                >
-                  Verificer eller tilføj klinik
-                </a>
-              </div>
+              <Link
+                href="/auth/signup"
+                className="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-logo-blue rounded-lg hover:bg-logo-blue/90 transition-colors w-full sm:w-auto"
+              >
+                Opret gratis bruger
+              </Link>
             </div>
           </div>
 

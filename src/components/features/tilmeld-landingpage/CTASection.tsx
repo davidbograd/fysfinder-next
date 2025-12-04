@@ -21,7 +21,7 @@ export function CTASection() {
               className="bg-white text-logo-blue hover:bg-white/90"
               asChild
             >
-              <Link href="#clinic-search">Tilmeld din klinik</Link>
+              <Link href="/auth/signup">Tilmeld din klinik</Link>
             </Button>
             <Button
               size="lg"

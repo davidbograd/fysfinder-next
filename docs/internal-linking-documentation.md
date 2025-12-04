@@ -31,10 +31,15 @@ This approach replaced a previous method that used a post-build script to modify
 
 ## Scope
 
-- **Affected Pages:** The internal linking currently runs only on pages rendered using the `ContentEntry.tsx` component, which includes:
-  - `/ordbog/*`
-  - `/blog/*`
-- **Excluded Pages:** Pages not using this MDX rendering pipeline (e.g., `/mr-scanning/page.tsx`) are **not** processed by this internal linking plugin.
+- **Affected Pages:** The internal linking currently runs on pages that use the MDX rendering pipeline with the `rehype-internal-links` plugin:
+  - `/ordbog/*` - uses `ContentEntry.tsx` component
+  - `/blog/*` - uses `ContentEntry.tsx` component
+  - `/vaerktoejer/bmi-beregner`
+  - `/vaerktoejer/kalorieberegner`
+  - `/vaerktoejer/fedtprocent-beregner`
+  - `/vaerktoejer/rm-beregner`
+  - `/vaerktoejer/pace-beregner`
+- **Excluded Pages:** Pages not using this MDX rendering pipeline (e.g., `/mr-scanning/page.tsx`, `/dexa-scanning/page.tsx`) are **not** processed by this internal linking plugin.
 - **Content Target:** The plugin specifically targets text content within `<p>` tags.
 
 ## Configuration & Maintenance
