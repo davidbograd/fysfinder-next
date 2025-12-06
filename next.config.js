@@ -1,23 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: [
-      'dbqnutjbrxydltkeftnv.supabase.co', // Supabase storage for images
-      // Logo.dev removed - logos are served from local /public/logos/ directory
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'dbqnutjbrxydltkeftnv.supabase.co',
+        pathname: '/**',
+      },
     ],
+    // Logo.dev removed - logos are served from local /public/logos/ directory
   },
-  webpack: (config, { isServer }) => {
-    // Suppress the punycode warning
-    config.resolve = {
-      ...config.resolve,
-      fallback: {
-        ...config.resolve.fallback,
-        "punycode": false, // Disable punycode polyfill as it's not needed in modern environments
-      }
-    };
-    
-    return config;
-  },
+  // Turbopack configuration (empty = use defaults)
+  turbopack: {},
   redirects: async () => {
     return [
       {
