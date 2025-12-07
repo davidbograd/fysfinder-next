@@ -144,9 +144,6 @@ export default function Header() {
                 <Link href="/find/fysioterapeut/danmark">Find fysioterapeut</Link>
               </Button>
             )}
-            <div className="sm:hidden">
-              <UserMenu />
-            </div>
             <button
               onClick={toggleMenu}
               className="p-2 text-gray-600 hover:text-gray-900"
@@ -224,7 +221,7 @@ export default function Header() {
                         <Link href="/dashboard">Dashboard</Link>
                       </Button>
                       <div onClick={toggleMenu}>
-                        <UserMenu />
+                        <UserMenu fullWidth />
                       </div>
                     </>
                   ) : (
@@ -247,7 +244,7 @@ export default function Header() {
                         <Link href="/tilmeld">For klinikker</Link>
                       </Button>
                       <div onClick={toggleMenu}>
-                        <UserMenu />
+                        <UserMenu fullWidth />
                       </div>
                     </>
                   )}

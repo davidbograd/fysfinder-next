@@ -12,7 +12,11 @@ type UserProfile = {
   full_name: string;
 };
 
-export const UserMenu = () => {
+type UserMenuProps = {
+  fullWidth?: boolean;
+};
+
+export const UserMenu = ({ fullWidth = false }: UserMenuProps) => {
   const router = useRouter();
   const { toast } = useToast();
   const [isOpen, setIsOpen] = useState(false);
@@ -76,17 +80,17 @@ export const UserMenu = () => {
 
   if (!user) {
     return (
-      <Button asChild variant="outline" className="font-normal">
+      <Button asChild variant="outline" className={`font-normal ${fullWidth ? "w-full" : ""}`}>
         <Link href="/auth/signin">Log ind</Link>
       </Button>
     );
   }
 
   return (
-    <div className="relative" ref={menuRef}>
+    <div className={`relative ${fullWidth ? "w-full" : ""}`} ref={menuRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+        className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary ${fullWidth ? "w-full justify-center border border-input" : ""}`}
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
