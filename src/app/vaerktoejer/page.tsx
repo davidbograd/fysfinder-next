@@ -61,7 +61,7 @@ const tools: Tool[] = [
   {
     title: "Fedtprocent beregner",
     description:
-      "Beregn din fedtprocent med Navy metoden baseret på simple målinger af krop. Få indsigt i din kropssammensætning.",
+      "Beregn din fedtprocent med Navy metoden baseret på simple målinger af din krop. Få indsigt i din kropssammensætning.",
     href: "/vaerktoejer/fedtprocent-beregner",
     imageUrl: "/images/vaerktoejer/fedtprocent-beregner.jpg",
     imageAlt: "Fedtprocent beregner illustration med målebånd og sundhedsudstyr",
@@ -129,7 +129,7 @@ export default function ToolsPage() {
     "Kost & ernæring værktøjer",
     "Træning & bevægelse værktøjer",
     "Forstå din MR og DEXA scanning",
-    "Kropdele og smerter",
+    "Kropsdele og smerter",
   ];
 
   return (
