@@ -8,24 +8,30 @@ export const createUserProfile = async (data: {
   email: string;
   full_name: string;
 }) => {
-  // Use service role key to bypass RLS for initial profile creation
-  // This is safe because we only call this right after signup with the user's own ID
-  const supabase = createServiceClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  );
+  try {
+    // Use service role key to bypass RLS for initial profile creation
+    // This is safe because we only call this right after signup with the user's own ID
+    const supabase = createServiceClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    );
 
-  const { error } = await supabase.from("user_profiles").insert({
-    id: data.id,
-    email: data.email,
-    full_name: data.full_name,
-  });
+    const { error } = await supabase.from("user_profiles").insert({
+      id: data.id,
+      email: data.email,
+      full_name: data.full_name,
+    });
 
-  if (error) {
-    return { error: error.message };
+    if (error) {
+      console.error("Error creating user profile:", error);
+      return { error: error.message };
+    }
+
+    return { success: true };
+  } catch (err) {
+    console.error("Unexpected error in createUserProfile:", err);
+    return { error: "Failed to create profile" };
   }
-
-  return { success: true };
 };
 
 /**

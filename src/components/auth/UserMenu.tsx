@@ -26,24 +26,30 @@ export const UserMenu = ({ fullWidth = false }: UserMenuProps) => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const supabase = createClient();
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
+      try {
+        const supabase = createClient();
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
 
-      if (user) {
-        setUser(user);
+        if (user) {
+          setUser(user);
 
-        // Fetch profile
-        const { data } = await supabase
-          .from("user_profiles")
-          .select("full_name")
-          .eq("id", user.id)
-          .single();
+          // Fetch profile
+          const { data, error } = await supabase
+            .from("user_profiles")
+            .select("full_name")
+            .eq("id", user.id)
+            .single();
 
-        if (data) {
-          setProfile(data);
+          if (error) {
+            // Profile will be null, component will fall back to email
+          } else if (data) {
+            setProfile(data);
+          }
         }
+      } catch (error) {
+        console.error("Error fetching user in UserMenu:", error);
       }
     };
 

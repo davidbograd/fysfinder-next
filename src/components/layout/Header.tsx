@@ -22,21 +22,33 @@ export default function Header() {
 
     // Check initial auth state and fetch profile
     const checkAuth = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      setIsLoggedIn(!!user);
+      try {
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+        setIsLoggedIn(!!user);
 
-      if (user) {
-        // Fetch profile for display name
-        const { data } = await supabase
-          .from("user_profiles")
-          .select("full_name")
-          .eq("id", user.id)
-          .single();
-        
-        setUserDisplayName(data?.full_name || user.email?.split("@")[0] || "Bruger");
-      } else {
+        if (user) {
+          // Fetch profile for display name
+          const { data, error } = await supabase
+            .from("user_profiles")
+            .select("full_name")
+            .eq("id", user.id)
+            .single();
+          
+          if (error) {
+            // Profile might not exist yet or temporary issue - use email as fallback
+            setUserDisplayName(user.email?.split("@")[0] || "Bruger");
+          } else {
+            setUserDisplayName(data?.full_name || user.email?.split("@")[0] || "Bruger");
+          }
+        } else {
+          setUserDisplayName(null);
+        }
+      } catch (error) {
+        console.error("Error checking auth:", error);
+        // Fail gracefully
+        setIsLoggedIn(false);
         setUserDisplayName(null);
       }
     };

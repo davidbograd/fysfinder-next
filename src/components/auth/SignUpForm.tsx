@@ -109,30 +109,51 @@ export const SignUpForm = () => {
         return;
       }
 
-      // Create user profile using server action
-      const profileResult = await createUserProfile({
-        id: authData.user.id,
-        email: formData.email,
-        full_name: formData.fullName,
-      });
-
-      if (profileResult.error) {
+      // Check if we have a session
+      if (!authData.session) {
         toast({
-          title: "Fejl ved oprettelse af profil",
-          description: profileResult.error,
+          title: "Email bekræftelse påkrævet",
+          description: "Tjek din email for at bekræfte din konto.",
           variant: "destructive",
         });
         setIsLoading(false);
+        router.push("/auth/verify");
         return;
       }
 
-      // Success - redirect to dashboard
+      // Create user profile using server action
+      try {
+        const profileResult = await createUserProfile({
+          id: authData.user.id,
+          email: formData.email,
+          full_name: formData.fullName,
+        });
+
+        if (profileResult?.error) {
+          toast({
+            title: "Fejl ved oprettelse af profil",
+            description: profileResult.error,
+            variant: "destructive",
+          });
+          setIsLoading(false);
+          return;
+        }
+      } catch (profileError) {
+        // Profile creation failed, but user is already created and logged in
+        // Continue to dashboard anyway - profile might already exist or temporary issue
+        console.warn("Profile creation error:", profileError);
+      }
+
+      // Success - show message and redirect
       toast({
-        title: "Konto oprettet",
-        description: "Din konto er blevet oprettet. Velkommen!",
+        title: "Konto oprettet!",
+        description: "Velkommen til FysFinder!",
       });
-      router.push("/dashboard");
-      router.refresh();
+      
+      setIsLoading(false);
+      
+      // Use window.location for a clean page load with the new session
+      window.location.href = "/dashboard";
     } catch (error) {
       const parsedError = parseAuthError(error);
       toast({
