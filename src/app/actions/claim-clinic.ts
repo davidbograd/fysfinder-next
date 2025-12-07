@@ -2,6 +2,7 @@
 
 import { createClient } from "@/app/utils/supabase/server";
 import { createClient as createServiceClient } from "@supabase/supabase-js";
+import { sendClaimNotificationToAdmins } from "@/lib/email";
 
 // Search clinics by city
 export async function searchClinicsByCity(citySlug: string) {
@@ -118,6 +119,17 @@ export async function submitClinicClaim(data: {
     console.error("Claim submission error:", claimError);
     return { error: "Fejl ved indsendelse af claim" };
   }
+
+  // Send email notification to admins (don't block on failure)
+  sendClaimNotificationToAdmins({
+    klinik_navn: data.klinik_navn,
+    fulde_navn: data.fulde_navn,
+    email: data.email,
+    telefon: data.telefon,
+    job_titel: data.job_titel,
+  }).catch((error) => {
+    console.error("Failed to send admin notification:", error);
+  });
 
   return { success: true };
 }
