@@ -2,6 +2,7 @@
 
 import { createClient as createServiceClient } from "@supabase/supabase-js";
 import { createClient } from "@/app/utils/supabase/server";
+import { sendNewUserSignupNotificationToAdmins } from "@/lib/email";
 
 export const createUserProfile = async (data: {
   id: string;
@@ -26,6 +27,14 @@ export const createUserProfile = async (data: {
       console.error("Error creating user profile:", error);
       return { error: error.message };
     }
+
+    // Send email notification to admins (don't block on failure)
+    sendNewUserSignupNotificationToAdmins({
+      full_name: data.full_name,
+      email: data.email,
+    }).catch((error) => {
+      console.error("Failed to send admin notification:", error);
+    });
 
     return { success: true };
   } catch (err) {

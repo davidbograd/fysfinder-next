@@ -15,6 +15,11 @@ interface ClaimNotificationData {
   job_titel: string;
 }
 
+interface NewUserSignupData {
+  full_name: string;
+  email: string;
+}
+
 /**
  * Send email notification to admins when a new clinic claim is submitted
  */
@@ -69,6 +74,62 @@ export async function sendClaimNotificationToAdmins(
     return { success: true };
   } catch (error) {
     console.error("Error sending claim notification:", error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Unknown error",
+    };
+  }
+}
+
+/**
+ * Send email notification to admins when a new user signs up
+ */
+export async function sendNewUserSignupNotificationToAdmins(
+  data: NewUserSignupData
+): Promise<{ success: boolean; error?: string }> {
+  const adminEmails = getAdminEmails();
+
+  if (adminEmails.length === 0) {
+    console.warn("No admin emails configured - skipping signup notification");
+    return { success: true };
+  }
+
+  try {
+    const { error } = await resend.emails.send({
+      from: "FysFinder <noreply@fysfinder.dk>",
+      to: adminEmails,
+      subject: `🎉 Ny bruger tilmelding: ${data.email}`,
+      html: `
+        <h2>🎉 Ny bruger har tilmeldt sig!</h2>
+        <p>En ny bruger har oprettet en konto på FysFinder.</p>
+        
+        <h3>Bruger detaljer</h3>
+        <ul>
+          <li><strong>Navn:</strong> ${data.full_name}</li>
+          <li><strong>Email:</strong> ${data.email}</li>
+        </ul>
+        
+        <p style="margin-top: 24px;">
+          <a href="https://fysfinder.dk/dashboard" style="background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;">
+            Se Dashboard
+          </a>
+        </p>
+        
+        <hr style="margin-top: 32px; border: none; border-top: 1px solid #e5e7eb;" />
+        <p style="color: #6b7280; font-size: 12px;">
+          Denne email er sendt automatisk fra FysFinder.
+        </p>
+      `,
+    });
+
+    if (error) {
+      console.error("Failed to send signup notification email:", error);
+      return { success: false, error: error.message };
+    }
+
+    return { success: true };
+  } catch (error) {
+    console.error("Error sending signup notification:", error);
     return {
       success: false,
       error: error instanceof Error ? error.message : "Unknown error",
