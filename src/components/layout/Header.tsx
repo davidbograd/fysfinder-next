@@ -1,26 +1,44 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import SiteLogo from "@/components/ui/Icons/SiteLogo";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User, LogOut } from "lucide-react";
 import { useState, useEffect } from "react";
 import { UserMenu } from "@/components/auth/UserMenu";
 import { createClient } from "@/app/utils/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Header() {
+  const router = useRouter();
+  const { toast } = useToast();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userDisplayName, setUserDisplayName] = useState<string | null>(null);
 
   useEffect(() => {
     const supabase = createClient();
 
-    // Check initial auth state
+    // Check initial auth state and fetch profile
     const checkAuth = async () => {
       const {
         data: { user },
       } = await supabase.auth.getUser();
       setIsLoggedIn(!!user);
+
+      if (user) {
+        // Fetch profile for display name
+        const { data } = await supabase
+          .from("user_profiles")
+          .select("full_name")
+          .eq("id", user.id)
+          .single();
+        
+        setUserDisplayName(data?.full_name || user.email?.split("@")[0] || "Bruger");
+      } else {
+        setUserDisplayName(null);
+      }
     };
 
     checkAuth();
@@ -53,6 +71,23 @@ export default function Header() {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, []);
+
+  const handleSignOut = async () => {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    
+    // Wait a moment for auth state to propagate
+    await new Promise(resolve => setTimeout(resolve, 100));
+    
+    toast({
+      title: "Logget ud",
+      description: "Du er nu logget ud.",
+    });
+    
+    toggleMenu();
+    router.push("/");
+    router.refresh();
+  };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -114,7 +149,7 @@ export default function Header() {
           </div>
 
           {/* Desktop Navigation - Right side CTAs */}
-          <nav className="hidden sm:flex items-center space-x-4">
+          <nav className="hidden md:flex items-center space-x-4">
             {isLoggedIn ? (
               <UserMenu />
             ) : (
@@ -134,7 +169,7 @@ export default function Header() {
           </nav>
 
           {/* Mobile Navigation */}
-          <nav className="flex sm:hidden items-center space-x-3">
+          <nav className="flex md:hidden items-center space-x-3">
             {!isLoggedIn && (
               <Button
                 asChild
@@ -177,7 +212,17 @@ export default function Header() {
                   </button>
                 </div>
                 <div className="flex flex-col flex-1">
-                  {!isLoggedIn && (
+                  {isLoggedIn ? (
+                    <div className="flex flex-col space-y-4 p-4">
+                      <Link
+                        href="/dashboard"
+                        className="text-lg font-medium text-gray-900 py-2"
+                        onClick={toggleMenu}
+                      >
+                        Dashboard
+                      </Link>
+                    </div>
+                  ) : (
                     <div className="flex flex-col space-y-4 p-4">
                       <Link
                         href="/ordbog"
@@ -213,16 +258,22 @@ export default function Header() {
                 <div className="mt-auto p-4 space-y-3 border-t">
                   {isLoggedIn ? (
                     <>
-                      <Button
-                        asChild
-                        className="w-full bg-logo-blue hover:bg-logo-blue/90 text-white font-normal"
-                        onClick={toggleMenu}
-                      >
-                        <Link href="/dashboard">Dashboard</Link>
-                      </Button>
-                      <div onClick={toggleMenu}>
-                        <UserMenu fullWidth />
+                      {/* User info display */}
+                      <div className="flex items-center space-x-3 py-2">
+                        <User className="h-5 w-5 text-gray-600" />
+                        <span className="text-base font-medium text-gray-900">
+                          {userDisplayName}
+                        </span>
                       </div>
+                      {/* Direct logout button */}
+                      <Button
+                        variant="outline"
+                        className="w-full font-normal"
+                        onClick={handleSignOut}
+                      >
+                        <LogOut className="h-4 w-4 mr-2" />
+                        Log ud
+                      </Button>
                     </>
                   ) : (
                     <>
