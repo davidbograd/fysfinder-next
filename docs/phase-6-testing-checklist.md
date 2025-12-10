@@ -19,24 +19,24 @@
 
 ### **Signup Flow**
 
-- [ ] **Valid Signup**
+- [x] **Valid Signup**
   1. Go to http://localhost:3000/auth/signup
   2. Enter: Name, Clinic, Email, Password (8+ chars)
   3. Click "Opret konto"
   4. ✅ Should redirect to `/dashboard`
   5. ✅ Should show success toast
 
-- [ ] **Duplicate Email**
+- [x] **Duplicate Email**
   1. Try to sign up with same email again
   2. ✅ Should show error: "Denne email er allerede i brug..."
   3. ✅ Email field should have red border
 
-- [ ] **Weak Password**
+- [x] **Weak Password**
   1. Try password with only 5 characters
   2. ✅ Should show: "Adgangskoden skal være mindst 8 tegn"
   3. ✅ Password field should have red border
 
-- [ ] **Invalid Email**
+- [x] **Invalid Email**
   1. Try email without @ symbol
   2. ✅ Should show: "Ugyldig email-adresse"
   3. ✅ Email field should have red border
@@ -45,18 +45,18 @@
 
 ### **Signin Flow**
 
-- [ ] **Valid Signin**
+- [x] **Valid Signin**
   1. Go to http://localhost:3000/auth/signin
   2. Enter correct email & password
   3. Click "Log ind"
   4. ✅ Should redirect to `/dashboard`
   5. ✅ Should show success toast
 
-- [ ] **Wrong Password**
+- [x] **Wrong Password**
   1. Enter correct email, wrong password
   2. ✅ Should show: "Forkert email eller adgangskode"
 
-- [ ] **Wrong Email**
+- [x] **Wrong Email**
   1. Enter non-existent email
   2. ✅ Should show: "Forkert email eller adgangskode"
   3. ✅ Same message (don't reveal which is wrong)
@@ -65,13 +65,13 @@
 
 ### **Session Persistence**
 
-- [ ] **Browser Refresh**
+- [x] **Browser Refresh**
   1. Sign in
   2. Go to dashboard
   3. Refresh page (F5 or Cmd+R)
   4. ✅ Should stay logged in
 
-- [ ] **Multiple Tabs**
+- [x] **Multiple Tabs**
   1. Sign in on Tab 1
   2. Open Tab 2 → Go to dashboard
   3. ✅ Should be logged in on both tabs
@@ -83,7 +83,7 @@
 
 ### **Signout**
 
-- [ ] **Basic Signout**
+- [x] **Basic Signout**
   1. Click user menu (top right)
   2. Click "Log ud"
   3. ✅ Should redirect to homepage
@@ -96,20 +96,20 @@
 
 ### **Dashboard Protection**
 
-- [ ] **Not Logged In**
+- [x] **Not Logged In**
   1. Sign out
   2. Try to visit `/dashboard`
   3. ✅ Should redirect to `/auth/signin?redirect=/dashboard`
   4. After signin
   5. ✅ Should redirect back to `/dashboard`
 
-- [ ] **Admin Routes (Non-Admin)**
+- [x] **Admin Routes (Non-Admin)**
   1. Sign in as regular user (non-admin email)
   2. Try to visit `/dashboard/admin/clinics`
   3. ✅ Should redirect to `/dashboard`
   4. ✅ Should NOT see admin sections on dashboard
 
-- [ ] **Admin Routes (Admin)**
+- [x] **Admin Routes (Admin)**
   1. Sign in as admin (email in ADMIN_EMAILS)
   2. Visit `/dashboard`
   3. ✅ Should see purple admin banner
@@ -121,14 +121,14 @@
 
 ### **Owner Can Only Edit Own Clinics**
 
-- [ ] **Cannot Access Others' Clinics**
+- [x] **Cannot Access Others' Clinics**
   1. Sign in as User A (with owned clinic)
   2. Copy clinic ID of clinic you don't own
   3. Try to visit `/dashboard/clinic/[other-clinic-id]/edit`
   4. ✅ Should show error or redirect
   5. ✅ Should NOT be able to edit
 
-- [ ] **Admin Can Edit Any Clinic**
+- [] **Admin Can Edit Any Clinic**
   1. Sign in as admin
   2. Go to `/dashboard/admin/clinics`
   3. Click "Rediger" on any clinic
@@ -182,7 +182,7 @@
 
 ### **Claiming a Clinic**
 
-- [ ] **Submit Claim (User)**
+- [x] **Submit Claim (User)**
   1. Sign in as regular user
   2. Go to `/dashboard/claim`
   3. Search for a clinic
@@ -202,7 +202,7 @@
 
 ### **Approving Claims (Admin)**
 
-- [ ] **Approve Claim**
+- [x] **Approve Claim**
   1. Sign in as admin
   2. Go to dashboard → "Ventende anmodninger"
   3. Click "Godkend anmodning" on a claim
@@ -210,7 +210,7 @@
   5. ✅ Should show success toast
   6. ✅ Claim should disappear from pending list
 
-- [ ] **Reject Claim**
+- [x] **Reject Claim**
   1. Click "Afvis anmodning"
   2. ✅ Should show confirmation dialog
   3. Confirm rejection
@@ -221,7 +221,7 @@
 
 ### **Editing Owned Clinic**
 
-- [ ] **Access Own Clinic**
+- [x] **Access Own Clinic**
   1. Sign in as clinic owner
   2. Go to dashboard
   3. Under "Dine klinikker"
@@ -229,7 +229,7 @@
   5. Click "Rediger"
   6. ✅ Should go to `/dashboard/clinic/[id]/edit`
 
-- [ ] **Update Clinic Info**
+- [x **Update Clinic Info**
   1. Change clinic address
   2. Change phone number
   3. Click "Gem ændringer"

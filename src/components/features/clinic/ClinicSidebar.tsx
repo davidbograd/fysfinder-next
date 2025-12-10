@@ -9,6 +9,7 @@ import { WebsiteButton } from "@/components/WebsiteButton";
 import { BookingButton } from "@/components/BookingButton";
 import { useClinicAnalytics } from "@/app/hooks/useClinicAnalytics";
 import { getDisplayUrl } from "./utils";
+import { VerifyClinicModal } from "./VerifyClinicModal";
 
 interface ClinicSidebarProps {
   clinic: {
@@ -133,20 +134,15 @@ export function ClinicSidebar({ clinic }: ClinicSidebarProps) {
         {!clinic.verified_klinik && (
           <div className="mt-6 flex items-center justify-between gap-4">
             <p className="text-sm text-gray-600">Ejer du denne klinik?</p>
-            <Button
-              variant="outline"
-              size="sm"
-              className="whitespace-nowrap"
-              asChild
-            >
-              <a
-                href="https://tally.so/r/wdk75r"
-                target="_blank"
-                rel="noopener noreferrer"
+            <VerifyClinicModal>
+              <Button
+                variant="outline"
+                size="sm"
+                className="whitespace-nowrap"
               >
                 Verificer klinik
-              </a>
-            </Button>
+              </Button>
+            </VerifyClinicModal>
           </div>
         )}
       </div>
