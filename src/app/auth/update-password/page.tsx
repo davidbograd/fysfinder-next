@@ -1,3 +1,12 @@
+/**
+ * Update Password Page
+ * 
+ * Destination page after user clicks password reset link from email.
+ * Allows users to set a new password after successful password reset request.
+ * Validates password strength and confirmation, then updates via Supabase Auth.
+ * Redirects to dashboard after successful password update.
+ */
+
 "use client";
 
 import { useState } from "react";

@@ -1,3 +1,12 @@
+/**
+ * Password Reset Page
+ * 
+ * Allows users to request a password reset email.
+ * Uses Supabase Auth resetPasswordForEmail() to send reset link via email (Resend integration).
+ * After successful submission, displays confirmation with instructions.
+ * User will receive email with link to /auth/update-password page.
+ */
+
 "use client";
 
 import { useState } from "react";
@@ -84,11 +93,19 @@ export default function ResetPasswordPage() {
             <div className="space-y-2 text-sm text-gray-600">
               <p>For at nulstille din adgangskode:</p>
               <ol className="list-decimal list-inside space-y-1 ml-2">
-                <li>Tjek din indbakke</li>
+                <li>Tjek din indbakke (og spam-mappe)</li>
                 <li>Åbn email fra FysFinder</li>
                 <li>Klik på nulstillingslinket</li>
                 <li>Indtast din nye adgangskode</li>
               </ol>
+            </div>
+            
+            <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-md">
+              <p className="text-xs text-blue-800">
+                <strong>Modtog du ikke email?</strong><br/>
+                Tjek din spam-mappe. Emailen kommer fra Supabase eller FysFinder.
+                Linket udløber efter 1 time.
+              </p>
             </div>
             
             <div className="pt-4 border-t">
