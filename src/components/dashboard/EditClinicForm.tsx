@@ -588,21 +588,23 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 max-h-96 overflow-y-auto p-2">
-            {specialties.map((specialty) => (
-              <div key={specialty.specialty_id} className="flex items-center space-x-2">
-                <Checkbox
-                  id={`specialty-${specialty.specialty_id}`}
-                  checked={selectedSpecialties.includes(specialty.specialty_id)}
-                  onCheckedChange={() => handleSpecialtyToggle(specialty.specialty_id)}
-                />
-                <Label
-                  htmlFor={`specialty-${specialty.specialty_id}`}
-                  className="cursor-pointer text-sm"
-                >
-                  {specialty.specialty_name}
-                </Label>
-              </div>
-            ))}
+            {specialties
+              .filter((specialty) => !["Skoliose"].includes(specialty.specialty_name))
+              .map((specialty) => (
+                <div key={specialty.specialty_id} className="flex items-center space-x-2">
+                  <Checkbox
+                    id={`specialty-${specialty.specialty_id}`}
+                    checked={selectedSpecialties.includes(specialty.specialty_id)}
+                    onCheckedChange={() => handleSpecialtyToggle(specialty.specialty_id)}
+                  />
+                  <Label
+                    htmlFor={`specialty-${specialty.specialty_id}`}
+                    className="cursor-pointer text-sm"
+                  >
+                    {specialty.specialty_name}
+                  </Label>
+                </div>
+              ))}
           </div>
         </CardContent>
       </Card>
