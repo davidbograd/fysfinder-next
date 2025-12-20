@@ -56,6 +56,7 @@ export function NearbyClinicsList({
               team_members={clinic.team_members}
               premium_listing={clinic.premium_listing}
               handicapadgang={clinic.handicapadgang}
+              verified_klinik={clinic.verified_klinik}
             />
           );
         })}

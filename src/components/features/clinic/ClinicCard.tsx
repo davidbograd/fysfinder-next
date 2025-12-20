@@ -18,6 +18,7 @@ import { WebsiteButton } from "@/components/WebsiteButton";
 import { PhoneButton } from "@/components/PhoneButton";
 import Link from "next/link";
 import { getCachedLogoPath } from "@/lib/logo-cache";
+import VerifiedCheck from "@/assets/icons/verified-check.svg";
 
 interface Props {
   klinikNavn: string;
@@ -38,6 +39,7 @@ interface Props {
   team_members?: TeamMember[];
   premium_listing?: PremiumListing | null;
   handicapadgang?: boolean | null;
+  verified_klinik?: boolean | null;
 }
 
 function isPremiumActive(
@@ -67,6 +69,7 @@ const ClinicCard: React.FC<Props> = ({
   team_members = [],
   premium_listing,
   handicapadgang,
+  verified_klinik,
 }) => {
   const MAX_VISIBLE_MEMBERS = 5;
   const hasMoreMembers = team_members.length > MAX_VISIBLE_MEMBERS;
@@ -142,6 +145,25 @@ const ClinicCard: React.FC<Props> = ({
                   {klinikNavn}
                 </h3>
               </Link>
+              {/* Verified Icon */}
+              {verified_klinik && (
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <Image
+                        src={VerifiedCheck}
+                        alt="Verified clinic"
+                        width={20}
+                        height={20}
+                        className="w-5 h-5 mt-1"
+                      />
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Denne klinik er verificeret af Fysfinder.</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              )}
               {/* Accessibility Icon */}
               {handicapadgang && (
                 <TooltipProvider>
