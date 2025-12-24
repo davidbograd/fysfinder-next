@@ -14,6 +14,7 @@ import { ClinicServices } from "@/components/features/clinic/ClinicServices";
 import { ClinicHours } from "@/components/features/clinic/ClinicHours";
 import { ClinicLocation } from "@/components/features/clinic/ClinicLocation";
 import { ClinicAbout } from "@/components/features/clinic/ClinicAbout";
+import { CACHE_TAGS, CACHE_TIMES } from "@/lib/cache-config";
 
 async function fetchClinicBySlug(clinicSlug: string): Promise<Clinic | null> {
   const supabase = await createClient();
@@ -28,7 +29,8 @@ async function fetchClinicBySlug(clinicSlug: string): Promise<Clinic | null> {
         "Content-Type": "application/json",
       },
       next: {
-        revalidate: 86400, // Cache for 24 hours
+        revalidate: CACHE_TIMES.CLINIC_PAGE, // Cache for 24 hours
+        tags: [CACHE_TAGS.ALL_CLINICS, CACHE_TAGS.clinicBySlug(clinicSlug)],
       },
     });
 

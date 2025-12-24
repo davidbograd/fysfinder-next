@@ -2,6 +2,8 @@
 
 import { createClient } from "@/app/utils/supabase/server";
 import { createClient as createServiceClient } from "@supabase/supabase-js";
+import { updateTag } from "next/cache";
+import { CACHE_TAGS } from "@/lib/cache-config";
 
 /**
  * Get all clinics owned by the current user
@@ -219,6 +221,25 @@ export async function updateClinic(
     return { error: "Fejl ved opdatering af klinik" };
   }
 
+  // Fetch clinic slug for cache invalidation
+  const { data: clinicData } = await serviceSupabase
+    .from("clinics")
+    .select("klinikNavnSlug")
+    .eq("clinics_id", clinicId)
+    .single();
+
+  // Revalidate cache tags (runs server-side, no token needed!)
+  try {
+    updateTag(CACHE_TAGS.clinic(clinicId));
+    if (clinicData?.klinikNavnSlug) {
+      updateTag(CACHE_TAGS.clinicBySlug(clinicData.klinikNavnSlug));
+    }
+    updateTag(CACHE_TAGS.ALL_CLINICS);
+  } catch (revalidateError) {
+    // Log but don't fail the operation
+    console.error("Cache revalidation failed:", revalidateError);
+  }
+
   return { success: true };
 }
 
@@ -291,6 +312,24 @@ export async function updateClinicSpecialties(
     }
   }
 
+  // Fetch clinic slug for cache invalidation
+  const { data: clinicData } = await serviceSupabase
+    .from("clinics")
+    .select("klinikNavnSlug")
+    .eq("clinics_id", clinicId)
+    .single();
+
+  // Immediately expire cache tags (read-your-own-writes)
+  try {
+    updateTag(CACHE_TAGS.clinic(clinicId));
+    if (clinicData?.klinikNavnSlug) {
+      updateTag(CACHE_TAGS.clinicBySlug(clinicData.klinikNavnSlug));
+    }
+    updateTag(CACHE_TAGS.ALL_CLINICS);
+  } catch (revalidateError) {
+    console.error("Cache revalidation failed:", revalidateError);
+  }
+
   return { success: true };
 }
 
@@ -356,6 +395,24 @@ export async function updateClinicInsurances(
       console.error("Error inserting insurances:", insertError);
       return { error: "Fejl ved opdatering af forsikringer" };
     }
+  }
+
+  // Fetch clinic slug for cache invalidation
+  const { data: clinicData } = await serviceSupabase
+    .from("clinics")
+    .select("klinikNavnSlug")
+    .eq("clinics_id", clinicId)
+    .single();
+
+  // Immediately expire cache tags (read-your-own-writes)
+  try {
+    updateTag(CACHE_TAGS.clinic(clinicId));
+    if (clinicData?.klinikNavnSlug) {
+      updateTag(CACHE_TAGS.clinicBySlug(clinicData.klinikNavnSlug));
+    }
+    updateTag(CACHE_TAGS.ALL_CLINICS);
+  } catch (revalidateError) {
+    console.error("Cache revalidation failed:", revalidateError);
   }
 
   return { success: true };
@@ -512,6 +569,24 @@ export async function updateClinicTeamMembers(
       console.error("Error inserting team members:", insertError);
       return { error: "Fejl ved opdatering af behandlere" };
     }
+  }
+
+  // Fetch clinic slug for cache invalidation
+  const { data: clinicData } = await serviceSupabase
+    .from("clinics")
+    .select("klinikNavnSlug")
+    .eq("clinics_id", clinicId)
+    .single();
+
+  // Immediately expire cache tags (read-your-own-writes)
+  try {
+    updateTag(CACHE_TAGS.clinic(clinicId));
+    if (clinicData?.klinikNavnSlug) {
+      updateTag(CACHE_TAGS.clinicBySlug(clinicData.klinikNavnSlug));
+    }
+    updateTag(CACHE_TAGS.ALL_CLINICS);
+  } catch (revalidateError) {
+    console.error("Cache revalidation failed:", revalidateError);
   }
 
   return { success: true };
