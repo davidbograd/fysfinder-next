@@ -9,9 +9,12 @@ import { getPageContent } from "@/lib/pageContent";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import rehypeUnwrapImages from "rehype-unwrap-images";
+import rehypeSlug from "rehype-slug";
 import rehypeInternalLinks from "lib/internal-linking/rehype-internal-links";
 import { loadLinkConfig } from "lib/internal-linking/config";
 import RelatedToolsSection from "@/components/features/RelatedToolsSection";
+import { TableOfContents } from "@/components/features/blog-og-ordbog/TableOfContents";
+import { extractTableOfContents } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Komplet DEXA-scanning guide | Forstå alt om DEXA-scan ✅",
@@ -64,16 +67,20 @@ export default async function DEXAScanPage() {
   const pageContent = await getPageContent("dexa-scanning");
   const linkConfig = loadLinkConfig();
   const currentPagePath = "/dexa-scanning";
+  const headings = extractTableOfContents(pageContent);
 
   return (
-    <main className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-3xl">
-      <WebAppStructuredData
-        type="tool"
-        name="DEXA-scanning Oversætter"
-        description="Oversæt din DEXA-scanning rapport til letforståeligt dansk"
-        breadcrumbs={breadcrumbItems}
-      />
-      <div className="space-y-6 sm:space-y-8">
+    <main className="container mx-auto px-4 sm:px-6 py-6 sm:py-8">
+      <div className="flex flex-col lg:flex-row lg:gap-8">
+        <TableOfContents headings={headings} />
+        <div className="flex-1 max-w-3xl">
+          <WebAppStructuredData
+            type="tool"
+            name="DEXA-scanning Oversætter"
+            description="Oversæt din DEXA-scanning rapport til letforståeligt dansk"
+            breadcrumbs={breadcrumbItems}
+          />
+          <div className="space-y-6 sm:space-y-8">
         <Breadcrumbs items={breadcrumbItems} />
         <div className="space-y-4">
           <h1 className="text-2xl sm:text-3xl font-bold">
@@ -167,6 +174,7 @@ export default async function DEXAScanPage() {
                 mdxOptions: {
                   remarkPlugins: [remarkGfm],
                   rehypePlugins: [
+                    rehypeSlug,
                     rehypeUnwrapImages,
                     [rehypeInternalLinks, { linkConfig, currentPagePath }],
                   ],
@@ -176,7 +184,9 @@ export default async function DEXAScanPage() {
           </div>
         </div>
         
-        <RelatedToolsSection currentToolHref="/dexa-scanning" />
+            <RelatedToolsSection currentToolHref="/dexa-scanning" />
+          </div>
+        </div>
       </div>
     </main>
   );
