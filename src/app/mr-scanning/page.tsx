@@ -14,11 +14,11 @@ import { loadLinkConfig } from "lib/internal-linking/config";
 import RelatedToolsSection from "@/components/features/RelatedToolsSection";
 
 export const metadata: Metadata = {
-  title: "Komplet MR-scanning guide | Få svar på dine spørgsmål ✅",
-  description: "Oversæt din MR-scanning rapport til letforståeligt dansk.",
+  title: "Forstå dit MR-resultat ✓",
+  description: "Forstå din MR-scanning uden lægesprog. Oversæt din MR-scanning rapport og få en klar forklaring på fund, begreber og konklusioner – hurtigt og gratis.",
   openGraph: {
-    title: "Komplet MR-scanning guide | Få svar på dine spørgsmål ✅",
-    description: "Oversæt din MR-scanning rapport til letforståeligt dansk.",
+    title: "Forstå dit MR-resultat ✓",
+    description: "Forstå din MR-scanning uden lægesprog. Oversæt din MR-scanning rapport og få en klar forklaring på fund, begreber og konklusioner – hurtigt og gratis.",
     images: [
       {
         url: "/images/mr-scanning/mr-scanning.png",
@@ -75,8 +75,7 @@ export default async function MRScanPage() {
         <Breadcrumbs items={breadcrumbItems} />
         <div className="space-y-4">
           <h1 className="text-2xl sm:text-3xl font-bold">
-            Hvad betyder din MR-scanning? Prøv vores MR-scanningsrapport
-            oversætter
+            Hvad betyder din MR-scanning? Oversæt din MR-rapport til letforståeligt dansk
           </h1>
           <p className="text-gray-600 text-sm sm:text-base">
             Få din MR-scanning rapport oversat til letforståeligt dansk.
@@ -92,7 +91,7 @@ export default async function MRScanPage() {
         <div className="space-y-12">
           <div className="space-y-4">
             <h2 className="text-xl sm:text-2xl font-semibold">
-              Hvordan det virker
+              MR-scanning resultat oversætter: Sådan gør du
             </h2>
             <ol className="list-decimal list-inside space-y-2 text-gray-700">
               <li>
