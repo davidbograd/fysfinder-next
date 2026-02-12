@@ -1,0 +1,36 @@
+# Fetch clinic logos monthly and commit new ones to the repo.
+# Logos are served from public/logos/ at runtime — no build-time fetching needed.
+
+name: Fetch Clinic Logos
+
+on:
+  schedule:
+    - cron: "0 3 1 * *" # Run on the 1st of every month at 3am UTC
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  fetch-logos:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Fetch new clinic logos
+        run: npm run fetch:logos
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          LOGO_DEV_API_TOKEN: ${{ secrets.LOGO_DEV_API_TOKEN }}
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "chore: update clinic logos"
