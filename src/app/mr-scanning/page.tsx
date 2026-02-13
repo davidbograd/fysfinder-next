@@ -17,10 +17,10 @@ import { TableOfContents } from "@/components/features/blog-og-ordbog/TableOfCon
 import { extractTableOfContents } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Forstå dit MR-resultat ✓",
+  title: "Oversæt MR-scanning rapport → Forstå dit MR-resultat ✓",
   description: "Forstå din MR-scanning uden lægesprog. Oversæt din MR-scanning rapport og få en klar forklaring på fund, begreber og konklusioner – hurtigt og gratis.",
   openGraph: {
-    title: "Forstå dit MR-resultat ✓",
+    title: "Oversæt MR-scanning rapport → Forstå dit MR-resultat ✓",
     description: "Forstå din MR-scanning uden lægesprog. Oversæt din MR-scanning rapport og få en klar forklaring på fund, begreber og konklusioner – hurtigt og gratis.",
     images: [
       {
