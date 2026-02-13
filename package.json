@@ -61,7 +61,7 @@
     "hastscript": "^9.0.1",
     "lucide-react": "^0.436.0",
     "next": "^16.0.7",
-    "next-mdx-remote": "^5.0.0",
+    "next-mdx-remote": "^6.0.0",
     "nuqs": "^2.3.1",
     "openai": "^4.90.0",
     "papaparse": "^5.4.1",
