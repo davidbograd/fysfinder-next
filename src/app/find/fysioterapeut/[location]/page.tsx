@@ -36,7 +36,7 @@ import {
 import { CACHE_TIMES } from "@/lib/cache-config";
 import { createStaticClient } from "@/app/utils/supabase/static";
 
-export const revalidate = CACHE_TIMES.LOCATION_PAGE; // 24 hours ISR
+export const revalidate = 86400; // 24 hours ISR (must be a literal for Next.js segment config)
 
 // Supabase client for static generation (no cookies, safe for ISR)
 const supabase = createStaticClient();

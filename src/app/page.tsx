@@ -17,9 +17,7 @@ import {
   type RegionData,
   type Specialty,
 } from "./utils/cityUtils";
-import { CACHE_TIMES } from "@/lib/cache-config";
-
-export const revalidate = CACHE_TIMES.HOMEPAGE; // 6 hours ISR
+export const revalidate = 21600; // 6 hours ISR (must be a literal for Next.js segment config)
 
 const regions: { [key: string]: { name: string; range: [number, number] } } = {
   hovedstaden: { name: "Hovedstaden", range: [1000, 2999] },
