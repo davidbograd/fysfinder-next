@@ -17,13 +17,13 @@ import { TableOfContents } from "@/components/features/blog-og-ordbog/TableOfCon
 import { extractTableOfContents } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Komplet DEXA-scanning guide | Forstå alt om DEXA-scan ✅",
+  title: "Oversæt DEXA-scanning rapport → Forstå dit DXA-resultat ✓",
   description:
-    "Oversæt din DEXA-scanning rapport til letforståeligt dansk og forstå alt om DEXA-scan.",
+    "Få din DEXA-scanning forklaret i letforståeligt dansk. Oversæt din DXA-rapport og forstå værdier, målinger og konklusioner – hurtigt og gratis.",
   openGraph: {
-    title: "Komplet DEXA-scanning guide | Forstå alt om DEXA-scan ✅",
+    title: "Oversæt DEXA-scanning rapport → Forstå dit DXA-resultat ✓",
     description:
-      "Oversæt din DEXA-scanning rapport til letforståeligt dansk og forstå alt om DEXA-scan.",
+      "Få din DEXA-scanning forklaret i letforståeligt dansk. Oversæt din DXA-rapport og forstå værdier, målinger og konklusioner – hurtigt og gratis.",
     images: [
       {
         url: "/images/dexa-scanning/dexa-scanning.jpeg",
@@ -84,8 +84,7 @@ export default async function DEXAScanPage() {
         <Breadcrumbs items={breadcrumbItems} />
         <div className="space-y-4">
           <h1 className="text-2xl sm:text-3xl font-bold">
-            Hvad betyder din DEXA-scanning? Prøv vores DEXA-scanningsrapport
-            oversætter
+            Hvad betyder din DEXA-scanning? Oversæt din DXA-rapport til letforståeligt dansk
           </h1>
           <p className="text-gray-600 text-sm sm:text-base">
             En DEXA-scanning giver indblik i din knoglemasse og risiko for
@@ -104,7 +103,7 @@ export default async function DEXAScanPage() {
         <div className="space-y-12">
           <div className="space-y-4">
             <h2 className="text-xl sm:text-2xl font-semibold">
-              Hvordan det virker
+              DEXA-scanning resultat oversætter: Sådan gør du
             </h2>
             <ol className="list-decimal list-inside space-y-2 text-gray-700">
               <li>
