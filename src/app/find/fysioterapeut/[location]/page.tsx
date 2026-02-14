@@ -1,5 +1,5 @@
 // Location page - refactored to extract shared components and utilities
-// PartnershipBanner, SeoContent, orderSpecialties, and parseFilters extracted to reduce duplication
+// Updated: server-side logo resolution, parallelized data fetches, reduced initial render count
 
 import React from "react";
 import ClinicCard from "@/components/features/clinic/ClinicCard";
@@ -24,6 +24,7 @@ import { SearchInterface } from "@/components/search/SearchInterface";
 import { PartnershipBanner } from "@/components/features/partnership/PartnershipBanner";
 import { SeoContent } from "@/components/seo/SeoContent";
 import { orderSpecialties } from "@/lib/clinic-utils";
+import { resolveLogoPathMap } from "@/lib/logo-cache";
 
 // Heading generation utility
 import {
@@ -145,13 +146,9 @@ export async function fetchLocationData(
   };
 
   try {
-    // Fetch specialties first as we need them for both cases
-    const specialties = (await fetchWithRetry(
-      `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/specialties?select=specialty_id,specialty_name,specialty_name_slug,seo_tekst`,
-      fetchOptions
-    )) as SpecialtyWithSeo[];
+    const specialtiesUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/specialties?select=specialty_id,specialty_name,specialty_name_slug,seo_tekst`;
 
-    // Special handling for "danmark" location
+    // Special handling for "danmark" location - fetch specialties and clinics in parallel
     if (locationSlug === "danmark") {
       let clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),premium_listings(id,start_date,end_date,booking_link)`;
 
@@ -167,7 +164,12 @@ export async function fetchLocationData(
         clinicsUrl += `&handicapadgang=eq.true`;
       }
 
-      const clinicsData = await fetchWithRetry(clinicsUrl, fetchOptions);
+      // Parallel: fetch specialties and clinics at the same time
+      const [specialties, clinicsData] = await Promise.all([
+        fetchWithRetry(specialtiesUrl, fetchOptions) as Promise<SpecialtyWithSeo[]>,
+        fetchWithRetry(clinicsUrl, fetchOptions),
+      ]);
+
       const validClinics = (clinicsData as unknown[]).filter(
         isValidClinicResponse
       );
@@ -181,32 +183,8 @@ export async function fetchLocationData(
       };
     }
 
-    // Special handling for "online" location
+    // Special handling for "online" location - fetch specialties, city, and clinics in parallel
     if (locationSlug === "online") {
-      let cityForOnline: City | null = null;
-      try {
-        const cityData = await fetchWithRetry(
-          `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/cities?bynavn_slug=eq.online&select=*`,
-          fetchOptions
-        );
-        cityForOnline = cityData[0] || null;
-      } catch (error) {
-        console.warn("Could not fetch city data for 'online' location:", error);
-        // Proceed without DB city data for online
-      }
-
-      // Use fetched city data if available, otherwise create minimal object
-      const finalCityObject = cityForOnline || {
-        id: "online",
-        bynavn: "Online",
-        bynavn_slug: "online",
-        latitude: 0,
-        longitude: 0,
-        postal_codes: [],
-        betegnelse: "Online fysioterapi",
-        seo_tekst: undefined, // Explicitly undefined in fallback
-      };
-
       let clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order),premium_listings(id,start_date,end_date,booking_link)`;
 
       // Add specialty filter if needed
@@ -230,7 +208,33 @@ export async function fetchLocationData(
         clinicsUrl += `&handicapadgang=eq.true`;
       }
 
-      const clinicsData = await fetchWithRetry(clinicsUrl, fetchOptions);
+      // Parallel: fetch specialties, city data, and clinics at the same time
+      const [specialties, cityDataResult, clinicsData] = await Promise.all([
+        fetchWithRetry(specialtiesUrl, fetchOptions) as Promise<SpecialtyWithSeo[]>,
+        fetchWithRetry(
+          `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/cities?bynavn_slug=eq.online&select=*`,
+          fetchOptions
+        ).catch((error: unknown) => {
+          console.warn("Could not fetch city data for 'online' location:", error);
+          return null;
+        }),
+        fetchWithRetry(clinicsUrl, fetchOptions),
+      ]);
+
+      const cityForOnline = cityDataResult?.[0] || null;
+
+      // Use fetched city data if available, otherwise create minimal object
+      const finalCityObject = cityForOnline || {
+        id: "online",
+        bynavn: "Online",
+        bynavn_slug: "online",
+        latitude: 0,
+        longitude: 0,
+        postal_codes: [],
+        betegnelse: "Online fysioterapi",
+        seo_tekst: undefined,
+      };
+
       const validClinics = (clinicsData as unknown[]).filter(
         isValidClinicResponse
       );
@@ -244,11 +248,14 @@ export async function fetchLocationData(
       };
     }
 
-    // For specific city locations
-    const cityData = await fetchWithRetry(
-      `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/cities?bynavn_slug=eq.${locationSlug}&select=*`,
-      fetchOptions
-    );
+    // For specific city locations - Phase 1: fetch specialties and city in parallel
+    const [specialties, cityData] = await Promise.all([
+      fetchWithRetry(specialtiesUrl, fetchOptions) as Promise<SpecialtyWithSeo[]>,
+      fetchWithRetry(
+        `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/cities?bynavn_slug=eq.${locationSlug}&select=*`,
+        fetchOptions
+      ),
+    ]);
 
     const city = cityData[0] || null;
 
@@ -260,13 +267,6 @@ export async function fetchLocationData(
         specialties,
       };
     }
-
-    // Check for premium listings in this city
-    const premiumListingsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/premium_listing_locations?select=premium_listings(id,clinic_id,start_date,end_date,booking_link,clinics(klinikNavn))&city_id=eq.${city.id}`;
-    const premiumListingsData = await fetchWithRetry(
-      premiumListingsUrl,
-      fetchOptions
-    );
 
     // Build the clinics query for city
     let clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order),premium_listings(id,start_date,end_date,booking_link)&city_id=eq.${city.id}`;
@@ -292,7 +292,7 @@ export async function fetchLocationData(
       premiumClinicsUrl += `&handicapadgang=eq.true`;
     }
 
-    // Fetch clinics, premium clinics, and nearby clinics in parallel with retry
+    // Phase 2: fetch clinics, premium clinics, and nearby clinics in parallel
     const [clinicsData, premiumClinicsData, nearbyData] = await Promise.all([
       fetchWithRetry(clinicsUrl, fetchOptions),
       fetchWithRetry(premiumClinicsUrl, fetchOptions),
@@ -462,6 +462,12 @@ export default async function LocationPage({
   );
   const specialties = data.specialties;
 
+  // Resolve logo paths server-side to eliminate client-side flash/CLS
+  const logoPathMap = await resolveLogoPathMap([
+    ...data.clinics,
+    ...data.nearbyClinicsList,
+  ]);
+
   const currentPagePath = resolvedParams.specialty
     ? `/find/fysioterapeut/${resolvedParams.location}/${resolvedParams.specialty}`
     : `/find/fysioterapeut/${resolvedParams.location}`;
@@ -537,6 +543,7 @@ export default async function LocationPage({
             clinics={data.clinics}
             totalClinics={data.clinics.length}
             specialtySlug={resolvedParams.specialty}
+            logoPathMap={logoPathMap}
           />
 
           {resolvedParams.specialty && specialty?.seo_tekst && (
@@ -653,6 +660,7 @@ export default async function LocationPage({
                 premium_listing={clinic.premium_listing}
                 handicapadgang={clinic.handicapadgang}
                 verified_klinik={clinic.verified_klinik}
+                logoPath={logoPathMap[clinic.clinics_id] ?? null}
               />
             ))}
           </div>
@@ -665,6 +673,7 @@ export default async function LocationPage({
             cityName={data.city.bynavn}
             specialtySlug={resolvedParams.specialty}
             specialtyName={specialtyName}
+            logoPathMap={logoPathMap}
           />
         )}
       </div>

@@ -1,3 +1,6 @@
+// ClinicCard - Displays a single clinic in the listing
+// Updated: logo paths now resolved server-side via logoPath prop to eliminate CLS
+
 "use client";
 
 import { StarIcon } from "@heroicons/react/24/solid";
@@ -5,7 +8,7 @@ import { MapPin, Check } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import { TeamMember, PremiumListing } from "@/app/types";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { FaWheelchair } from "react-icons/fa";
 import {
@@ -17,7 +20,6 @@ import {
 import { WebsiteButton } from "@/components/WebsiteButton";
 import { PhoneButton } from "@/components/PhoneButton";
 import Link from "next/link";
-import { getCachedLogoPath } from "@/lib/logo-cache";
 import VerifiedCheck from "@/assets/icons/verified-check.svg";
 
 interface Props {
@@ -40,6 +42,7 @@ interface Props {
   premium_listing?: PremiumListing | null;
   handicapadgang?: boolean | null;
   verified_klinik?: boolean | null;
+  logoPath?: string | null;
 }
 
 function isPremiumActive(
@@ -70,27 +73,14 @@ const ClinicCard: React.FC<Props> = ({
   premium_listing,
   handicapadgang,
   verified_klinik,
+  logoPath,
 }) => {
   const MAX_VISIBLE_MEMBERS = 5;
   const hasMoreMembers = team_members.length > MAX_VISIBLE_MEMBERS;
   const visibleMembers = team_members.slice(0, MAX_VISIBLE_MEMBERS);
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
-  const [cachedLogoPath, setCachedLogoPath] = useState<string | null>(null);
-  const [logoLoaded, setLogoLoaded] = useState(false);
   const isPremium = isPremiumActive(premium_listing);
-  const hasLogo = logoLoaded && Boolean(cachedLogoPath);
-
-  // Load cached logo path on mount
-  useEffect(() => {
-    if (website) {
-      getCachedLogoPath(website).then((logoPath) => {
-        setCachedLogoPath(logoPath);
-        setLogoLoaded(true);
-      });
-    } else {
-      setLogoLoaded(true);
-    }
-  }, [website]);
+  const hasLogo = Boolean(logoPath);
 
   return (
     <div
@@ -111,10 +101,10 @@ const ClinicCard: React.FC<Props> = ({
             )}
           >
             <Link href={`/klinik/${klinikNavnSlug}`} className="block">
-              {hasLogo && cachedLogoPath ? (
+              {hasLogo && logoPath ? (
                 <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center">
                   <Image
-                    src={cachedLogoPath}
+                    src={logoPath}
                     alt={`${klinikNavn} logo`}
                     width={64}
                     height={64}

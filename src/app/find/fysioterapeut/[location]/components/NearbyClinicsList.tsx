@@ -1,5 +1,5 @@
 // NearbyClinicsList component - Renders nearby clinics with distance
-// Updated to use shared orderSpecialties utility
+// Updated: accepts logoPathMap for server-resolved logos
 
 import { ClinicWithDistance } from "@/app/types";
 import ClinicCard from "../../../../../components/features/clinic/ClinicCard";
@@ -10,6 +10,7 @@ interface NearbyClinicsListProps {
   cityName: string;
   specialtySlug?: string;
   specialtyName?: string;
+  logoPathMap?: Record<string, string | null>;
 }
 
 export function NearbyClinicsList({
@@ -17,6 +18,7 @@ export function NearbyClinicsList({
   cityName,
   specialtySlug,
   specialtyName,
+  logoPathMap,
 }: NearbyClinicsListProps) {
   if (clinics.length === 0) return null;
 
@@ -47,6 +49,7 @@ export function NearbyClinicsList({
             premium_listing={clinic.premium_listing}
             handicapadgang={clinic.handicapadgang}
             verified_klinik={clinic.verified_klinik}
+            logoPath={logoPathMap?.[clinic.clinics_id] ?? null}
           />
         ))}
       </div>

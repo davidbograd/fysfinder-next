@@ -1,5 +1,5 @@
 // ClinicsList component - Renders a paginated list of clinic cards
-// Updated to use shared orderSpecialties utility
+// Updated: accepts logoPathMap for server-resolved logos, reduced default page size to 10
 
 "use client";
 
@@ -14,13 +14,15 @@ interface ClinicsListProps {
   totalClinics: number;
   specialtySlug?: string;
   itemsPerPage?: number;
+  logoPathMap?: Record<string, string | null>;
 }
 
 export function ClinicsList({
   clinics,
   totalClinics,
   specialtySlug,
-  itemsPerPage = 100,
+  itemsPerPage = 10,
+  logoPathMap,
 }: ClinicsListProps) {
   const [displayCount, setDisplayCount] = useState(itemsPerPage);
 
@@ -58,6 +60,7 @@ export function ClinicsList({
             premium_listing={clinic.premium_listing}
             handicapadgang={clinic.handicapadgang}
             verified_klinik={clinic.verified_klinik}
+            logoPath={logoPathMap?.[clinic.clinics_id] ?? null}
           />
         ))}
       </div>
