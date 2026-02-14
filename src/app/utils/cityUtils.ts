@@ -1,8 +1,9 @@
 // City utilities for fetching and processing city data with clinic counts
-// Updated: 2025-01-24 - Migrated from nested aggregate query to city_clinic_counts view
-// This improves performance from ~800ms to ~480ms and eliminates timeout risks
+// Updated: 2025-02-14 - Switched to static Supabase client to avoid cookies() usage
+// This allows pages using these utilities to be statically rendered (ISR/SSG)
+// Previously used the cookie-based server client which forced dynamic rendering
 
-import { createClient } from "@/app/utils/supabase/server";
+import { createStaticClient } from "@/app/utils/supabase/static";
 
 export interface CityWithCount {
   id: string;
@@ -34,7 +35,7 @@ export const regions: {
 };
 
 export async function fetchSpecialties(): Promise<Specialty[]> {
-  const supabase = await createClient();
+  const supabase = createStaticClient();
   const { data, error } = await supabase
     .from("specialties")
     .select("specialty_id, specialty_name, specialty_name_slug");
@@ -48,7 +49,7 @@ export async function fetchSpecialties(): Promise<Specialty[]> {
 }
 
 export async function fetchCitiesWithCounts(): Promise<CityWithCount[]> {
-  const supabase = await createClient();
+  const supabase = createStaticClient();
 
   // Use the city_clinic_counts view for fast, pre-computed aggregates
   // This avoids expensive nested queries and prevents timeouts

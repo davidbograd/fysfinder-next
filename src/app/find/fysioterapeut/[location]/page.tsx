@@ -1,8 +1,5 @@
 import React from "react";
-import Link from "next/link";
 import Image from "next/image";
-import { createClient } from "@supabase/supabase-js";
-import { createClient as createServerClient } from "@/app/utils/supabase/server";
 import ClinicCard from "@/components/features/clinic/ClinicCard";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { deslugify, slugify } from "@/app/utils/slugify";
@@ -36,14 +33,14 @@ import {
   generateHeadings,
   generateMetaTitle,
 } from "@/lib/headers-and-metatitles";
+import { CACHE_TIMES } from "@/lib/cache-config";
+import { createStaticClient } from "@/app/utils/supabase/static";
 
-// Create a Supabase client for static generation
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+export const revalidate = CACHE_TIMES.LOCATION_PAGE; // 24 hours ISR
 
-// Add this utility function at the top of the file
+// Supabase client for static generation (no cookies, safe for ISR)
+const supabase = createStaticClient();
+
 async function fetchWithRetry(
   url: string,
   options: any,
@@ -163,7 +160,7 @@ export async function fetchLocationData(
 
   const fetchOptions = {
     headers,
-    next: { revalidate: 86400 },
+    next: { revalidate: CACHE_TIMES.LOCATION_PAGE },
   };
 
   try {
@@ -462,18 +459,6 @@ export async function generateMetadata({
     title,
     description: `Find og sammenlign ${cityName} fysioterapeuter. Se anbefalinger, fysioterapi specialer, priser, åbningstider og mere. Start her →`,
   };
-}
-
-// Keep your existing seoContent array here...
-
-export async function fetchSpecialties() {
-  const supabase = await createServerClient();
-  const { data, error } = await supabase
-    .from("specialties")
-    .select("specialty_id, specialty_name, specialty_name_slug, seo_tekst");
-
-  if (error) throw error;
-  return data;
 }
 
 interface LocationPageProps {

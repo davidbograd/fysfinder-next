@@ -1,6 +1,5 @@
 import React from "react";
 import { MeetTheTeam } from "@/components/features/team/MeetTheTeam";
-import { createClient } from "@/app/utils/supabase/server";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { Metadata } from "next";
 import { ClinicSidebar } from "@/components/features/clinic/ClinicSidebar";
@@ -17,8 +16,6 @@ import { ClinicAbout } from "@/components/features/clinic/ClinicAbout";
 import { CACHE_TAGS, CACHE_TIMES } from "@/lib/cache-config";
 
 async function fetchClinicBySlug(clinicSlug: string): Promise<Clinic | null> {
-  const supabase = await createClient();
-
   try {
     const requestUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?klinikNavnSlug=eq.${clinicSlug}&select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order),clinic_insurances(insurance:insurance_companies(insurance_id,insurance_name,insurance_name_slug)),clinic_services(service:extra_services(service_id,service_name,service_name_slug)),premium_listings(id,start_date,end_date,booking_link)`;
 

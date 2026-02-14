@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import LocationPage, { fetchSpecialties, fetchLocationData } from "../page";
+import LocationPage, { fetchLocationData } from "../page";
 import { SpecialtyWithSeo } from "@/app/types";
 import { generateMetaTitle } from "@/lib/headers-and-metatitles";
 
