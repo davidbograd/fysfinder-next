@@ -1,6 +1,6 @@
 // Homepage component with graceful error handling
-// Updated: 2025-01-24 - Added ErrorFallback component to handle data fetch failures gracefully
-// Instead of showing red error text, users see a friendly message with the page structure intact
+// Updated: 2025-02-14 - Switched to static Supabase client and centralized CACHE_TIMES for ISR
+// Uses ErrorFallback component to handle data fetch failures gracefully
 
 import React from "react";
 import { Metadata } from "next";
@@ -17,8 +17,9 @@ import {
   type RegionData,
   type Specialty,
 } from "./utils/cityUtils";
+import { CACHE_TIMES } from "@/lib/cache-config";
 
-export const revalidate = 21600; // Revalidate every 6 hours
+export const revalidate = CACHE_TIMES.HOMEPAGE; // 6 hours ISR
 
 const regions: { [key: string]: { name: string; range: [number, number] } } = {
   hovedstaden: { name: "Hovedstaden", range: [1000, 2999] },
