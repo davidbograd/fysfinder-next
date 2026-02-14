@@ -172,7 +172,7 @@ const fetchClinicsWithoutPlaceId = async (
     if (error) throw error;
     if (!data || data.length === 0) break;
 
-    all.push(...(data as Clinic[]));
+    all.push(...(data as unknown as Clinic[]));
 
     if (limit !== undefined && all.length >= limit) break;
     if (data.length < PAGE_SIZE) break;
