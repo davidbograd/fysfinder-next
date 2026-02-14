@@ -1,6 +1,9 @@
+// Specialty page - delegates rendering to LocationPage, provides specialty-specific metadata
+// Updated to use shared parseFilters utility
+
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import LocationPage, { fetchLocationData } from "../page";
+import LocationPage, { fetchLocationData, parseFilters } from "../page";
 import { SpecialtyWithSeo } from "@/app/types";
 import { generateMetaTitle } from "@/lib/headers-and-metatitles";
 
@@ -14,11 +17,7 @@ export async function generateMetadata({
   // Resolve params and searchParams
   const resolvedParams = await params;
   const resolvedSearchParams = await searchParams;
-
-  // Parse filter parameters for metadata (with safety check)
-  const filters: { ydernummer?: boolean; handicap?: boolean } = {};
-  if (resolvedSearchParams?.ydernummer === "true") filters.ydernummer = true;
-  if (resolvedSearchParams?.handicap === "true") filters.handicap = true;
+  const filters = parseFilters(resolvedSearchParams);
 
   const data = await fetchLocationData(
     resolvedParams.location,
