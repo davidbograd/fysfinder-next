@@ -25,6 +25,8 @@
     "config:test": "tsx scripts/config/test-config.ts",
     "ingest:articles": "node scripts/ingest-ordbog-articles.mjs",
     "fetch:physio": "tsx scripts/fetch-physiotherapists-google-maps.ts",
+    "google:backfill": "tsx scripts/backfill-google-place-ids.ts",
+    "google:update": "tsx scripts/update-clinic-google-data.ts",
     "update:imports": "node scripts/update-imports.mjs",
     "revalidate": "node scripts/revalidate.js",
     "populate:postal": "tsx scripts/populate-postal-codes.ts"
