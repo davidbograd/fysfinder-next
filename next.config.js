@@ -11,8 +11,6 @@ const nextConfig = {
     ],
     // Logo.dev removed - logos are served from local /public/logos/ directory
   },
-  // Turbopack configuration (empty = use defaults)
-  turbopack: {},
   redirects: async () => {
     return [
       {

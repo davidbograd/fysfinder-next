@@ -3,8 +3,6 @@ import { NextResponse } from "next/server";
 import { rateLimitMiddleware } from "./rate-limit";
 import { headers } from "next/headers";
 
-export const runtime = "edge";
-
 if (!process.env.ANTHROPIC_API_KEY) {
   throw new Error("ANTHROPIC_API_KEY is not set");
 }
