@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import {
   SearchProvider,
   LocationQuery,
@@ -270,12 +270,14 @@ export function SearchInterface({
     : null;
 
   return (
-    <SearchProvider
-      initialLocation={initialLocation}
-      initialSpecialty={initialSpecialty}
-      initialFilters={initialFilters}
-    >
-      <MigrationContent showFilters={showFilters} />
-    </SearchProvider>
+    <Suspense>
+      <SearchProvider
+        initialLocation={initialLocation}
+        initialSpecialty={initialSpecialty}
+        initialFilters={initialFilters}
+      >
+        <MigrationContent showFilters={showFilters} />
+      </SearchProvider>
+    </Suspense>
   );
 }

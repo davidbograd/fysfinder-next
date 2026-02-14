@@ -1,19 +1,37 @@
+// Client-side email verification banner
+// Updated: 2025-02-14 - Made self-contained with client-side auth check
+// Previously required server-side auth in root layout, which forced all pages dynamic
+
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AlertCircle, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { resendVerificationEmail } from "@/app/actions/auth";
 import { useToast } from "@/hooks/use-toast";
+import { createClient } from "@/app/utils/supabase/client";
 
-interface EmailVerificationBannerProps {
-  email: string;
-}
-
-export const EmailVerificationBanner = ({ email }: EmailVerificationBannerProps) => {
-  const [isVisible, setIsVisible] = useState(true);
+export const EmailVerificationBanner = () => {
+  const [isVisible, setIsVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState<string | null>(null);
   const { toast } = useToast();
+
+  useEffect(() => {
+    const checkVerification = async () => {
+      const supabase = createClient();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (user && user.email && user.email_confirmed_at === null) {
+        setEmail(user.email);
+        setIsVisible(true);
+      }
+    };
+
+    checkVerification();
+  }, []);
 
   const handleResend = async () => {
     setIsLoading(true);
@@ -40,7 +58,7 @@ export const EmailVerificationBanner = ({ email }: EmailVerificationBannerProps)
     setIsVisible(false);
   };
 
-  if (!isVisible) return null;
+  if (!isVisible || !email) return null;
 
   return (
     <div className="bg-yellow-50 border-b border-yellow-200">
@@ -81,4 +99,3 @@ export const EmailVerificationBanner = ({ email }: EmailVerificationBannerProps)
     </div>
   );
 };
-

@@ -1,3 +1,7 @@
+// Root layout
+// Updated: 2025-02-14 - Removed server-side cookies() auth check to allow static/cached page rendering
+// EmailVerificationBanner now handles its own auth check client-side
+
 import type { Metadata } from "next";
 import "./globals.css";
 import { GeistSans } from "geist/font/sans";
@@ -8,7 +12,6 @@ import { CookieConsentBanner } from "@/components/layout/CookieConsent";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Toaster } from "@/components/ui/toaster";
 import { EmailVerificationBanner } from "@/components/layout/EmailVerificationBanner";
-import { createClient } from "@/app/utils/supabase/server";
 
 export const metadata: Metadata = {
   title: "FysFinder",
@@ -48,25 +51,16 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Check if user is logged in and email is not verified
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  const showVerificationBanner =
-    user && user.email && user.email_confirmed_at === null;
-
   return (
     <html lang="da" className={GeistSans.className}>
       <body className="flex flex-col min-h-screen">
         <Header />
-        {showVerificationBanner && <EmailVerificationBanner email={user.email!} />}
+        <EmailVerificationBanner />
         <main className="flex-grow pt-6 sm:pt-8">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {children}

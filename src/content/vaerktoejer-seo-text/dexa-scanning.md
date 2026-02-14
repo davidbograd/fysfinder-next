@@ -24,7 +24,7 @@ En DEXA-scanning måler din knogletæthed og sammenligner dine resultater med re
 
 | DEXA-værdi                 | Forklaring                                                           | Fortolkning                                                                                                                         |
 | -------------------------- | -------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| T-score (DEXA)             | Sammenligner din knogletæthed med en rask, ung voksen                | ≥ −1: Normal knogletæthed<br>−1 til −2,5: Osteopeni (nedsat knoglestyrke)<br>≤ −2,5: Osteoporose                                   |
+| T-score (DEXA)             | Sammenligner din knogletæthed med en rask, ung voksen                | ≥ −1: Normal knogletæthed. −1 til −2,5: Osteopeni (nedsat knoglestyrke). ≤ −2,5: Osteoporose                                   |
 | Z-score (DEXA)             | Sammenligner din knogletæthed med personer på samme alder og køn     | ≤ −2 kan indikere unormalt lav knogletæthed                                                                                         |
 | BMD – Bone Mineral Density | Måler mængden af mineral i knoglerne                                 | Bruges til at beregne T-score og Z-score                                                                                            |
 

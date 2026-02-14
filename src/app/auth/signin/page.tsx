@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { SignInForm } from "@/components/auth/SignInForm";
 
 export default function SignInPage() {
@@ -12,7 +13,9 @@ export default function SignInPage() {
             Log ind på din konto for at få adgang til dit dashboard
           </p>
         </div>
-        <SignInForm />
+        <Suspense>
+          <SignInForm />
+        </Suspense>
       </div>
     </div>
   );
