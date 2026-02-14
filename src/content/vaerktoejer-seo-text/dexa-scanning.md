@@ -18,45 +18,15 @@ Resultaterne fra målingen viser din knogletæthed sammenlignet med en sund refe
 
 En DEXA-scanning bruges ikke til at diagnosticere bløddelsproblemer eller andre sygdomme, men er specialiseret i at måle knoglernes styrke og tæthed.
 
-## Hvor lang tid tager en DEXA-scanning?
+## Forstå dine DEXA-værdier
 
-En typisk DEXA-scanning tager mellem 10 og 30 minutter afhængigt af hvilke områder, der skal måles. Hvis scanningen kun dækker hofterne og rygsøjlen, går det hurtigere. Skal hele kroppen scannes, tager det lidt længere tid. Scanningen er dog langt mindre tidskrævende end mange andre billeddiagnostiske undersøgelser.
+En DEXA-scanning måler din knogletæthed og sammenligner dine resultater med referenceværdier. Nedenfor kan du se de vigtigste værdier, du typisk møder i en DXA-rapport – og hvad de betyder.
 
-| Kropsdel     | Varighed        |
-| ------------ | --------------- |
-| Hofte        | 10-15 minutter  |
-| Ryg          | 10-15 minutter  |
-| Hele kroppen | ca. 30 minutter |
-
-Selve processen er enkel: Du ligger stille på en scanner, mens apparatet passerer hen over din krop og registrerer målingerne.
-
-## Forberedelse til DEXA-scanning – Sådan forbereder du dig
-
-Det er nemt at forberede sig til en DEXA-scanning, men enkelte trin sikrer, at dine resultater bliver så præcise som muligt. Følg disse skridt:
-
-### Trin 1: Undgå calciumtilskud
-
-Mindst 24 timer før din scanning bør du undgå at tage calciumtabletter eller andre kosttilskud med calcium. De kan påvirke scanningen og give forkerte målinger.
-
-### Trin 2: Vælg tøj uden metal
-
-På scanningsdagen skal du tage tøj på uden metaldele. Lynlåse, knapper, bæltespænder eller bh'er med metal kan forstyrre røntgenbillederne.
-
-### Trin 3: Informer om tidligere undersøgelser
-
-Hvis du for nylig har fået foretaget en anden undersøgelse med kontrastmiddel eller radioaktive stoffer (fx CT eller MR), skal du fortælle det til klinikken. Det kan være nødvendigt at udskyde din DEXA-scanning.
-
-### Trin 4: Ingen faste nødvendige
-
-Du behøver ikke faste før undersøgelsen. Du kan spise og drikke som normalt.
-
-### Trin 5: Mød op i god tid
-
-Planlæg at møde op i god tid, så du kan udfylde eventuelle formularer og få en grundig introduktion til, hvordan undersøgelsen foregår.
-
-### Trin 6: Følg personalets anvisninger
-
-Når du ankommer til klinikken, vil personalet guide dig. Du skal blot lægge dig ned på scanningsbordet og forblive stille under undersøgelsen.
+| DEXA-værdi                 | Forklaring                                                           | Fortolkning                                                                                                                         |
+| -------------------------- | -------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| T-score (DEXA)             | Sammenligner din knogletæthed med en rask, ung voksen                | ≥ −1: Normal knogletæthed<br>−1 til −2,5: Osteopeni (nedsat knoglestyrke)<br>≤ −2,5: Osteoporose                                   |
+| Z-score (DEXA)             | Sammenligner din knogletæthed med personer på samme alder og køn     | ≤ −2 kan indikere unormalt lav knogletæthed                                                                                         |
+| BMD – Bone Mineral Density | Måler mængden af mineral i knoglerne                                 | Bruges til at beregne T-score og Z-score                                                                                            |
 
 ## Oversættelse af latinske ord på DEXA scanningsrapport
 
@@ -98,6 +68,46 @@ Det kan være forvirrende at læse en DEXA-scanningsrapport med mange latinske o
 | Calibration                    | Justering og kontrol af scanneren for nøjagtighed     |
 
 Med vores DEXA-scanningsrapport oversætter kan du nemt forstå disse udtryk og få indsigt i, hvad din scanning siger om din knoglesundhed.
+
+## Hvor lang tid tager en DEXA-scanning?
+
+En typisk DEXA-scanning tager mellem 10 og 30 minutter afhængigt af hvilke områder, der skal måles. Hvis scanningen kun dækker hofterne og rygsøjlen, går det hurtigere. Skal hele kroppen scannes, tager det lidt længere tid. Scanningen er dog langt mindre tidskrævende end mange andre billeddiagnostiske undersøgelser.
+
+| Kropsdel     | Varighed        |
+| ------------ | --------------- |
+| Hofte        | 10-15 minutter  |
+| Ryg          | 10-15 minutter  |
+| Hele kroppen | ca. 30 minutter |
+
+Selve processen er enkel: Du ligger stille på en scanner, mens apparatet passerer hen over din krop og registrerer målingerne.
+
+## Forberedelse til DEXA-scanning – Sådan forbereder du dig
+
+Det er nemt at forberede sig til en DEXA-scanning, men enkelte trin sikrer, at dine resultater bliver så præcise som muligt. Følg disse skridt:
+
+### Trin 1: Undgå calciumtilskud
+
+Mindst 24 timer før din scanning bør du undgå at tage calciumtabletter eller andre kosttilskud med calcium. De kan påvirke scanningen og give forkerte målinger.
+
+### Trin 2: Vælg tøj uden metal
+
+På scanningsdagen skal du tage tøj på uden metaldele. Lynlåse, knapper, bæltespænder eller bh'er med metal kan forstyrre røntgenbillederne.
+
+### Trin 3: Informer om tidligere undersøgelser
+
+Hvis du for nylig har fået foretaget en anden undersøgelse med kontrastmiddel eller radioaktive stoffer (fx CT eller MR), skal du fortælle det til klinikken. Det kan være nødvendigt at udskyde din DEXA-scanning.
+
+### Trin 4: Ingen faste nødvendige
+
+Du behøver ikke faste før undersøgelsen. Du kan spise og drikke som normalt.
+
+### Trin 5: Mød op i god tid
+
+Planlæg at møde op i god tid, så du kan udfylde eventuelle formularer og få en grundig introduktion til, hvordan undersøgelsen foregår.
+
+### Trin 6: Følg personalets anvisninger
+
+Når du ankommer til klinikken, vil personalet guide dig. Du skal blot lægge dig ned på scanningsbordet og forblive stille under undersøgelsen.
 
 ## Kan en DEXA scanning måle fedtprocent?
 
