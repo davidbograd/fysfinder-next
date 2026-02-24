@@ -7,6 +7,7 @@ import Link from "next/link";
 import { isAdminEmail } from "@/lib/admin";
 import { AdminClaimsSection } from "@/components/dashboard/AdminClaimsSection";
 import { AdminStatsSection } from "@/components/dashboard/AdminStatsSection";
+import { AdminAnalyticsSection } from "@/components/dashboard/AdminAnalyticsSection";
 import { UserClaimsSection } from "@/components/dashboard/UserClaimsSection";
 import { getOwnedClinics } from "@/app/actions/clinic-management";
 import { ClinicCard } from "@/components/dashboard/ClinicCard";
@@ -88,6 +89,13 @@ export default async function DashboardPage() {
         {isAdmin && (
           <div className="md:col-span-2 lg:col-span-3">
             <AdminStatsSection />
+          </div>
+        )}
+
+        {/* Admin Analytics Section - Full Width for Admins */}
+        {isAdmin && (
+          <div className="md:col-span-2 lg:col-span-3">
+            <AdminAnalyticsSection />
           </div>
         )}
 

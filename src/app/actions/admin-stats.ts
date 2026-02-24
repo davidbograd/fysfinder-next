@@ -117,3 +117,72 @@ export async function getVerifiedClinics(limit: number = 10, offset: number = 0)
   return { clinics: clinics || [] };
 }
 
+export interface AggregateAnalytics {
+  profileViews: number;
+  listImpressions: number;
+  phoneClicks: number;
+  websiteClicks: number;
+  emailClicks: number;
+  bookingClicks: number;
+  totalEvents: number;
+  uniqueClinicsWithEvents: number;
+}
+
+/**
+ * Get aggregate analytics across all clinics (admin only)
+ */
+export async function getAggregateAnalytics(
+  days: number = 30
+): Promise<{ stats?: AggregateAnalytics; error?: string }> {
+  const supabase = await createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return { error: "Ikke logget ind" };
+  }
+
+  if (!isAdminEmail(user.email)) {
+    return { error: "Ingen adgang - kun administratorer" };
+  }
+
+  const serviceSupabase = createServiceClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+
+  const startDate = new Date();
+  startDate.setDate(startDate.getDate() - days);
+
+  const { data, error } = await serviceSupabase
+    .from("clinic_events")
+    .select("event_type, clinic_id")
+    .gte("created_at", startDate.toISOString());
+
+  if (error) {
+    console.error("Error fetching aggregate analytics:", error);
+    return { error: "Fejl ved hentning af analytics" };
+  }
+
+  const events = data || [];
+  const uniqueClinics = new Set(events.map((e) => e.clinic_id));
+
+  const countByType = (type: string) =>
+    events.filter((e) => e.event_type === type).length;
+
+  return {
+    stats: {
+      profileViews: countByType("profile_view"),
+      listImpressions: countByType("list_impression"),
+      phoneClicks: countByType("phone_click"),
+      websiteClicks: countByType("website_click"),
+      emailClicks: countByType("email_click"),
+      bookingClicks: countByType("booking_click"),
+      totalEvents: events.length,
+      uniqueClinicsWithEvents: uniqueClinics.size,
+    },
+  };
+}
+
