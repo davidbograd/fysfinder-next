@@ -10,6 +10,7 @@ import { AdminStatsSection } from "@/components/dashboard/AdminStatsSection";
 import { UserClaimsSection } from "@/components/dashboard/UserClaimsSection";
 import { getOwnedClinics } from "@/app/actions/clinic-management";
 import { ClinicCard } from "@/components/dashboard/ClinicCard";
+import { ClinicStatsCard } from "@/components/dashboard/ClinicStatsCard";
 import { getUserClaims } from "@/app/actions/user-claims";
 
 export default async function DashboardPage() {
@@ -117,9 +118,12 @@ export default async function DashboardPage() {
           <CardContent className="space-y-4">
             {hasAnyClinics ? (
               <>
-                {/* Owned Clinics */}
+                {/* Owned Clinics with Stats */}
                 {ownedClinics.map((clinic: any) => (
-                  <ClinicCard key={clinic.clinics_id} clinic={clinic} />
+                  <div key={clinic.clinics_id} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <ClinicCard clinic={clinic} />
+                    <ClinicStatsCard clinicId={clinic.clinics_id} />
+                  </div>
                 ))}
                 {/* Pending Claims - displayed like clinic cards */}
                 <UserClaimsSection claims={userClaims} />

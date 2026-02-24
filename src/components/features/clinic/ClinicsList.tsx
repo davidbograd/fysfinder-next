@@ -1,5 +1,5 @@
 // ClinicsList component - Renders a paginated list of clinic cards
-// Updated: accepts logoPathMap for server-resolved logos, reduced default page size to 10
+// Updated: passes clinicId to ClinicCard for analytics tracking
 
 "use client";
 
@@ -45,6 +45,7 @@ export function ClinicsList({
         {visibleClinics.map((clinic: Clinic) => (
           <ClinicCard
             key={clinic.clinics_id}
+            clinicId={clinic.clinics_id}
             klinikNavn={clinic.klinikNavn}
             klinikNavnSlug={clinic.klinikNavnSlug}
             ydernummer={clinic.ydernummer}

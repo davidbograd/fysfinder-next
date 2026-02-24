@@ -13,6 +13,7 @@ import { ClinicServices } from "@/components/features/clinic/ClinicServices";
 import { ClinicHours } from "@/components/features/clinic/ClinicHours";
 import { ClinicLocation } from "@/components/features/clinic/ClinicLocation";
 import { ClinicAbout } from "@/components/features/clinic/ClinicAbout";
+import { TrackProfileView } from "@/components/tracking/TrackProfileView";
 import { CACHE_TAGS, CACHE_TIMES } from "@/lib/cache-config";
 
 async function fetchClinicBySlug(clinicSlug: string): Promise<Clinic | null> {
@@ -365,6 +366,7 @@ export default async function ClinicPage({
 
     return (
       <div className="container mx-auto px-4 py-8">
+        <TrackProfileView clinicId={clinic.clinics_id} />
         <ClinicStructuredData clinic={clinic} />
         <BreadcrumbStructuredData items={breadcrumbItems} />
 

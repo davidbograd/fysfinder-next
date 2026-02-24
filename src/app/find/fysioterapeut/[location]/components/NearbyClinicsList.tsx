@@ -1,5 +1,5 @@
 // NearbyClinicsList component - Renders nearby clinics with distance
-// Updated: accepts logoPathMap for server-resolved logos
+// Updated: passes clinicId to ClinicCard for analytics tracking
 
 import { ClinicWithDistance } from "@/app/types";
 import ClinicCard from "../../../../../components/features/clinic/ClinicCard";
@@ -33,6 +33,7 @@ export function NearbyClinicsList({
         {clinics.map((clinic) => (
           <ClinicCard
             key={clinic.clinics_id}
+            clinicId={clinic.clinics_id}
             klinikNavn={clinic.klinikNavn}
             klinikNavnSlug={clinic.klinikNavnSlug}
             ydernummer={clinic.ydernummer}

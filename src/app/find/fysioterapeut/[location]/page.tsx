@@ -1,5 +1,5 @@
 // Location page - refactored to extract shared components and utilities
-// Updated: server-side logo resolution, parallelized data fetches, reduced initial render count
+// Updated: passes clinicId to ClinicCard for analytics tracking
 
 import React from "react";
 import ClinicCard from "@/components/features/clinic/ClinicCard";
@@ -645,6 +645,7 @@ export default async function LocationPage({
             {data.clinics.map((clinic: Clinic) => (
               <ClinicCard
                 key={clinic.clinics_id}
+                clinicId={clinic.clinics_id}
                 klinikNavn={clinic.klinikNavn}
                 klinikNavnSlug={clinic.klinikNavnSlug}
                 ydernummer={clinic.ydernummer}

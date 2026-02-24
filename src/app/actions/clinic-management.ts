@@ -29,6 +29,7 @@ export async function getOwnedClinics() {
       clinics:clinic_id (
         clinics_id,
         klinikNavn,
+        klinikNavnSlug,
         lokation,
         adresse,
         postnummer,

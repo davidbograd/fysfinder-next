@@ -1,5 +1,5 @@
 // ClinicCard - Displays a single clinic in the listing
-// Updated: logo paths now resolved server-side via logoPath prop to eliminate CLS
+// Updated: added clinicId prop, IntersectionObserver for list impression tracking, contact click tracking
 
 "use client";
 
@@ -8,7 +8,7 @@ import { MapPin, Check } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import { TeamMember, PremiumListing } from "@/app/types";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { FaWheelchair } from "react-icons/fa";
 import {
@@ -21,8 +21,10 @@ import { WebsiteButton } from "@/components/WebsiteButton";
 import { PhoneButton } from "@/components/PhoneButton";
 import Link from "next/link";
 import VerifiedCheck from "@/assets/icons/verified-check.svg";
+import { trackClinicEvent } from "@/lib/tracking";
 
 interface Props {
+  clinicId?: string;
   klinikNavn: string;
   klinikNavnSlug: string;
   ydernummer: boolean;
@@ -57,6 +59,7 @@ function isPremiumActive(
 }
 
 const ClinicCard: React.FC<Props> = ({
+  clinicId,
   klinikNavn,
   klinikNavnSlug,
   ydernummer,
@@ -81,9 +84,30 @@ const ClinicCard: React.FC<Props> = ({
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
   const isPremium = isPremiumActive(premium_listing);
   const hasLogo = Boolean(logoPath);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const hasTrackedImpression = useRef(false);
+
+  useEffect(() => {
+    if (!clinicId || hasTrackedImpression.current || !cardRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasTrackedImpression.current) {
+          hasTrackedImpression.current = true;
+          trackClinicEvent({ clinicId, eventType: "list_impression" });
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(cardRef.current);
+    return () => observer.disconnect();
+  }, [clinicId]);
 
   return (
     <div
+      ref={cardRef}
       className={cn(
         "p-6 rounded-lg bg-white w-full",
         isPremium
@@ -289,8 +313,18 @@ const ClinicCard: React.FC<Props> = ({
             {/* Contact buttons */}
             {(website || tlf) && (
               <div className="flex flex-col sm:flex-row gap-2 mt-4">
-                {website && <WebsiteButton website={website} />}
-                {tlf && <PhoneButton phoneNumber={tlf} />}
+                {website && (
+                  <WebsiteButton
+                    website={website}
+                    onClick={clinicId ? () => trackClinicEvent({ clinicId, eventType: "website_click", metadata: { source: "list_view" } }) : undefined}
+                  />
+                )}
+                {tlf && (
+                  <PhoneButton
+                    phoneNumber={tlf}
+                    onClick={clinicId ? () => trackClinicEvent({ clinicId, eventType: "phone_click", metadata: { source: "list_view" } }) : undefined}
+                  />
+                )}
               </div>
             )}
           </div>
