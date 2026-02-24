@@ -3,7 +3,10 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Globe } from "lucide-react";
-import { getDisplayUrl } from "@/components/features/clinic/utils";
+import {
+  getDisplayUrl,
+  ensureAbsoluteUrl,
+} from "@/components/features/clinic/utils";
 
 export interface WebsiteButtonProps {
   website: string;
@@ -11,6 +14,8 @@ export interface WebsiteButtonProps {
 }
 
 export function WebsiteButton({ website, onClick }: WebsiteButtonProps) {
+  const absoluteUrl = ensureAbsoluteUrl(website);
+
   const addUtmParameters = (url: string): string => {
     try {
       const urlObj = new URL(url);
@@ -29,7 +34,7 @@ export function WebsiteButton({ website, onClick }: WebsiteButtonProps) {
       asChild
     >
       <a
-        href={addUtmParameters(website)}
+        href={addUtmParameters(absoluteUrl)}
         target="_blank"
         rel="noopener nofollow"
         onClick={onClick}

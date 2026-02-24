@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
+import { ensureAbsoluteUrl } from "@/components/features/clinic/utils";
 
 export interface BookingButtonProps {
   bookingLink: string;
@@ -9,6 +10,8 @@ export interface BookingButtonProps {
 }
 
 export function BookingButton({ bookingLink, onClick }: BookingButtonProps) {
+  const absoluteUrl = ensureAbsoluteUrl(bookingLink);
+
   const addUtmParameters = (url: string): string => {
     try {
       const urlObj = new URL(url);
@@ -27,7 +30,7 @@ export function BookingButton({ bookingLink, onClick }: BookingButtonProps) {
       asChild
     >
       <a
-        href={addUtmParameters(bookingLink)}
+        href={addUtmParameters(absoluteUrl)}
         target="_blank"
         rel="noopener"
         onClick={onClick}
