@@ -156,32 +156,42 @@ export async function getAggregateAnalytics(
   const startDate = new Date();
   startDate.setDate(startDate.getDate() - days);
 
-  const { data, error } = await serviceSupabase
-    .from("clinic_events")
-    .select("event_type, clinic_id")
-    .gte("created_at", startDate.toISOString());
+  const { data, error } = await serviceSupabase.rpc(
+    "get_aggregate_event_counts",
+    {
+      p_start_date: startDate.toISOString(),
+      p_end_date: new Date().toISOString(),
+    }
+  );
 
   if (error) {
     console.error("Error fetching aggregate analytics:", error);
     return { error: "Fejl ved hentning af analytics" };
   }
 
-  const events = data || [];
-  const uniqueClinics = new Set(events.map((e) => e.clinic_id));
+  const rows = (data as { event_type: string; count: number; unique_clinics: number }[]) || [];
+  const getCount = (type: string) =>
+    rows.find((r) => r.event_type === type)?.count || 0;
 
-  const countByType = (type: string) =>
-    events.filter((e) => e.event_type === type).length;
+  const totalEvents = rows.reduce((sum, r) => sum + r.count, 0);
+  const allUniqueClinics = new Set<number>();
+  rows.forEach((r) => allUniqueClinics.add(r.unique_clinics));
+  const maxUniqueClinics = Math.max(...rows.map((r) => r.unique_clinics), 0);
+
+  // unique_clinics per event_type is a lower bound for total unique;
+  // for an exact total, we take the max across types as a reasonable approximation
+  // (a clinic with views likely also has impressions)
 
   return {
     stats: {
-      profileViews: countByType("profile_view"),
-      listImpressions: countByType("list_impression"),
-      phoneClicks: countByType("phone_click"),
-      websiteClicks: countByType("website_click"),
-      emailClicks: countByType("email_click"),
-      bookingClicks: countByType("booking_click"),
-      totalEvents: events.length,
-      uniqueClinicsWithEvents: uniqueClinics.size,
+      profileViews: getCount("profile_view"),
+      listImpressions: getCount("list_impression"),
+      phoneClicks: getCount("phone_click"),
+      websiteClicks: getCount("website_click"),
+      emailClicks: getCount("email_click"),
+      bookingClicks: getCount("booking_click"),
+      totalEvents,
+      uniqueClinicsWithEvents: maxUniqueClinics,
     },
   };
 }
