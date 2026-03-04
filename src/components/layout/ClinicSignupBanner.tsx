@@ -1,5 +1,5 @@
 // Public top banner for clinic acquisition messaging.
-// Updated: 2026-03-01 - Only shows to logged-out users and hides on /tilmeld.
+// Updated: 2026-03-04 - Centered text and CTA inline while preserving auth/path visibility rules.
 "use client";
 
 import { useEffect, useState } from "react";
@@ -33,7 +33,7 @@ export function ClinicSignupBanner() {
 
   return (
     <div className="border-b border-logo-blue/30 bg-logo-blue">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-1.5 sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-3 px-4 py-1.5 text-center sm:px-6 lg:px-8">
         <p className="text-xs font-normal text-white sm:text-sm">
           Er du klinikejer? Bliv fundet af patienter, der aktivt søger
           fysioterapi.
