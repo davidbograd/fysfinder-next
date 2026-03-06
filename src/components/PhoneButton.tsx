@@ -1,3 +1,4 @@
+// Updated phone masking to preserve country code formatting when truncated.
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -30,13 +31,20 @@ export function PhoneButton({ phoneNumber, onClick }: PhoneButtonProps) {
   }, []);
 
   const maskPhoneNumber = (number: string) => {
-    // Show first 6 digits, mask only the last 2 with XX
-    const cleanNumber = number.replace(/\s/g, ""); // Remove any spaces
-    const visiblePart = cleanNumber
-      .slice(0, 6)
-      .replace(/(.{2})/g, "$1 ")
-      .trim(); // Add space after every 2 digits
-    return `${visiblePart} XX...`;
+    const cleanNumber = number.replace(/[^\d+]/g, "");
+    const hasCountryCode = cleanNumber.startsWith("+45");
+    const localNumber = hasCountryCode
+      ? cleanNumber.slice(3)
+      : cleanNumber.replace(/\D/g, "");
+
+    const visibleLocalPart = localNumber
+      .slice(0, 4)
+      .replace(/(\d{2})(?=\d)/g, "$1 ");
+
+    if (hasCountryCode)
+      return `+45 ${visibleLocalPart} XX...`;
+
+    return `${visibleLocalPart} XX...`;
   };
 
   const handlePhoneAction = async () => {
