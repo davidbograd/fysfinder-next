@@ -42,6 +42,16 @@ https://console.developers.google.com/apis/api/places.googleapis.com/overview
   ```
 - **Cost**: Text Search Pro – free for first 5,000 calls/month (all ~1,916 clinics = $0)
 
+### `backfill-clinic-coordinates.ts`
+
+- **Purpose**: One-time backfill to store clinic `latitude` + `longitude` from existing `google_place_id` values.
+- **Usage**: `npm run google:coords` or with options:
+  ```bash
+  npm run google:coords -- --dry-run
+  npm run google:coords -- --limit 100
+  ```
+- **When to run**: After `google:backfill`, and before enabling marker-based map views on location pages.
+
 ### `update-clinic-google-data.ts`
 
 - **Purpose**: Monthly update – refreshes ratings, opening hours, phone, website, and Google Maps URL for all clinics that have a Place ID. Respects verified clinics (only updates ratings + Maps URL for those).

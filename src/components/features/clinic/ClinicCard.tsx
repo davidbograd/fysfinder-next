@@ -86,6 +86,7 @@ const ClinicCard: React.FC<Props> = ({
   const hasLogo = Boolean(logoPath);
   const cardRef = useRef<HTMLDivElement>(null);
   const hasTrackedImpression = useRef(false);
+  const [isMapHighlighted, setIsMapHighlighted] = useState(false);
 
   useEffect(() => {
     if (!clinicId || hasTrackedImpression.current || !cardRef.current) return;
@@ -105,14 +106,58 @@ const ClinicCard: React.FC<Props> = ({
     return () => observer.disconnect();
   }, [clinicId]);
 
+  useEffect(() => {
+    if (!clinicId) return;
+
+    const handleMarkerHover = (event: Event) => {
+      const customEvent = event as CustomEvent<{ clinicId: string | null }>;
+      const highlightedClinicId = customEvent.detail?.clinicId ?? null;
+      setIsMapHighlighted(highlightedClinicId === clinicId);
+    };
+
+    window.addEventListener(
+      "fysfinder:map-marker-hover",
+      handleMarkerHover as EventListener
+    );
+
+    return () => {
+      window.removeEventListener(
+        "fysfinder:map-marker-hover",
+        handleMarkerHover as EventListener
+      );
+    };
+  }, [clinicId]);
+
+  const handleCardMouseEnter = () => {
+    if (!clinicId) return;
+    window.dispatchEvent(
+      new CustomEvent("fysfinder:clinic-card-hover", {
+        detail: { clinicId },
+      })
+    );
+  };
+
+  const handleCardMouseLeave = () => {
+    if (!clinicId) return;
+    window.dispatchEvent(
+      new CustomEvent("fysfinder:clinic-card-hover", {
+        detail: { clinicId: null },
+      })
+    );
+  };
+
   return (
     <div
       ref={cardRef}
+      id={clinicId ? `clinic-card-${clinicId}` : undefined}
+      onMouseEnter={handleCardMouseEnter}
+      onMouseLeave={handleCardMouseLeave}
       className={cn(
-        "p-6 rounded-lg bg-white w-full",
+        "p-6 rounded-lg bg-white w-full transition-shadow",
         isPremium
           ? "border-2 border-logo-blue/30 shadow-md scale-[1.02] bg-gradient-to-r from-logo-blue/5 to-white"
-          : "border border-gray-200"
+          : "border border-gray-200",
+        isMapHighlighted && "ring-2 ring-logo-blue/60 shadow-md"
       )}
     >
       <div className="flex flex-col sm:flex-row sm:justify-between">

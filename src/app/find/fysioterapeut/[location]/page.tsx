@@ -1,5 +1,5 @@
 // Location page - refactored to extract shared components and utilities
-// Updated: passes clinicId to ClinicCard for analytics tracking
+// Updated: adds SEO-safe split view with contextual map for city pages
 
 import React from "react";
 import ClinicCard from "@/components/features/clinic/ClinicCard";
@@ -8,7 +8,6 @@ import { deslugify, slugify } from "@/app/utils/slugify";
 import { Metadata } from "next";
 import {
   Clinic,
-  City,
   DBClinicResponse,
   LocationPageData,
   SpecialtyWithSeo,
@@ -19,6 +18,7 @@ import { SpecialtiesList } from "@/components/features/specialty/SpecialtiesList
 import { ClinicsList } from "@/components/features/clinic/ClinicsList";
 import { NoResultsFound } from "@/app/find/fysioterapeut/[location]/components/NoResultsFound";
 import { NearbyClinicsList } from "@/app/find/fysioterapeut/[location]/components/NearbyClinicsList";
+import { LocationClinicsMap } from "@/app/find/fysioterapeut/[location]/components/LocationClinicsMap";
 import { LocationStructuredData } from "@/components/seo/LocationStructuredData";
 import { SearchInterface } from "@/components/search/SearchInterface";
 import { PartnershipBanner } from "@/components/features/partnership/PartnershipBanner";
@@ -633,14 +633,22 @@ export default async function LocationPage({
             specialties={specialties}
           />
         )}
+      </div>
 
-        {data.clinics.length === 0 ? (
+      {data.clinics.length === 0 ? (
+        <div className="max-w-[800px] mx-auto">
           <NoResultsFound
             cityName={isOnline ? "Online" : data.city.bynavn}
             specialtyName={specialtyName}
             locationSlug={resolvedParams.location}
           />
-        ) : (
+        </div>
+      ) : (
+        <div
+          className={`mt-6 grid gap-6 ${
+            isOnline ? "" : "xl:grid-cols-[minmax(0,1fr)_420px]"
+          }`}
+        >
           <div className="space-y-4">
             {data.clinics.map((clinic: Clinic) => (
               <ClinicCard
@@ -656,7 +664,10 @@ export default async function LocationPage({
                 lokation={clinic.lokation}
                 website={clinic.website}
                 tlf={clinic.tlf}
-                specialties={orderSpecialties(clinic.specialties, resolvedParams.specialty)}
+                specialties={orderSpecialties(
+                  clinic.specialties,
+                  resolvedParams.specialty
+                )}
                 team_members={clinic.team_members}
                 premium_listing={clinic.premium_listing}
                 handicapadgang={clinic.handicapadgang}
@@ -665,19 +676,24 @@ export default async function LocationPage({
               />
             ))}
           </div>
-        )}
 
-        {/* Hide NearbyClinicsList for Online location */}
-        {!isOnline && (
-          <NearbyClinicsList
-            clinics={data.nearbyClinicsList}
-            cityName={data.city.bynavn}
-            specialtySlug={resolvedParams.specialty}
-            specialtyName={specialtyName}
-            logoPathMap={logoPathMap}
-          />
-        )}
-      </div>
+          {!isOnline && (
+            <div className="self-start xl:sticky xl:top-24">
+              <LocationClinicsMap clinics={data.clinics} city={data.city} />
+            </div>
+          )}
+        </div>
+      )}
+
+      {!isOnline && data.clinics.length > 0 && (
+        <NearbyClinicsList
+          clinics={data.nearbyClinicsList}
+          cityName={data.city.bynavn}
+          specialtySlug={resolvedParams.specialty}
+          specialtyName={specialtyName}
+          logoPathMap={logoPathMap}
+        />
+      )}
 
       {data.city.seo_tekst && !resolvedParams.specialty && (
         <SeoContent
