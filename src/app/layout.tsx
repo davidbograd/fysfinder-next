@@ -1,5 +1,5 @@
 // Root layout
-// Updated: 2026-03-01 - Added public-only clinic signup banner above header
+// Updated: Removed clinic signup top banner
 // EmailVerificationBanner handles its own auth check client-side
 
 import type { Metadata } from "next";
@@ -12,7 +12,6 @@ import { CookieConsentBanner } from "@/components/layout/CookieConsent";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Toaster } from "@/components/ui/toaster";
 import { EmailVerificationBanner } from "@/components/layout/EmailVerificationBanner";
-import { ClinicSignupBanner } from "@/components/layout/ClinicSignupBanner";
 
 export const metadata: Metadata = {
   title: "FysFinder",
@@ -60,7 +59,6 @@ export default function RootLayout({
   return (
     <html lang="da" className={GeistSans.className}>
       <body className="flex flex-col min-h-screen">
-        <ClinicSignupBanner />
         <Header />
         <EmailVerificationBanner />
         <main className="flex-grow pt-6 sm:pt-8">
