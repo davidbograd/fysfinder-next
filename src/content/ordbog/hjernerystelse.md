@@ -16,7 +16,7 @@ Diagnosen af hjernerystelse stilles typisk gennem en grundig medicinsk vurdering
 
 ## Hvad er behandlingen for hjernerystelse?
 
-Behandlingen af hjernerystelse fokuserer på hvile og gradvis genoptagelse af normale aktiviteter. Det anbefales at undgå fysisk og mental anstrengelse i de første dage efter skaden. I nogle tilfælde kan fysioterapi være gavnligt for at genoprette balance og styrke. Det er vigtigt at følge lægens råd og ikke skynde sig tilbage til sport eller andre aktiviteter.
+Behandlingen af hjernerystelse fokuserer på hvile og gradvis genoptagelse af normale aktiviteter. Det anbefales at undgå fysisk og mental anstrengelse i de første 24-48 timer. Efter de første 48 timer, er der ikke noget du ikke længere må. Nu handler det om gradvis genoptræning, og eksponering for de aktiviteter der provokerer dine symptomer. Derudover, så er konditionstræning meget vigtigt. Det kan være cykling, roning, eller andre former for træning, hvor din puls stiger.
 
 ## Hvornår skal man søge lægehjælp ved hjernerystelse?
 
