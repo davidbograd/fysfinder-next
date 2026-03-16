@@ -1,6 +1,6 @@
 ---
-title: "Iskiasnerve i klemme – symptomer og lindring"
-lastUpdated: "13/09/2025"
+title: "Iskiasnerve i klemme"
+lastUpdated: "12/10/2025"
 metaTitle: "Iskiasnerve i klemme → symptomer og lindring"
 datePublished: "13/09/2025"
 ---

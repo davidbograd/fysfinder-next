@@ -1,6 +1,6 @@
 ---
-title: "Hvorfor får man krampe? – årsager og forebyggelse"
-lastUpdated: "13/09/2025"
+title: "Hvorfor får man krampe?"
+lastUpdated: "12/10/2025"
 metaTitle: "Hvorfor får man krampe? → årsager og forebyggelse"
 datePublished: "13/09/2025"
 ---

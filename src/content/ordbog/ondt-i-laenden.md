@@ -1,6 +1,6 @@
 ---
-title: "Ondt i lænden – årsager og lindrende øvelser"
-lastUpdated: "13/09/2025"
+title: "Ondt i lænden"
+lastUpdated: "12/10/2025"
 metaTitle: "Ondt i lænden → årsager og lindrende øvelser"
 datePublished: "13/09/2025"
 ---

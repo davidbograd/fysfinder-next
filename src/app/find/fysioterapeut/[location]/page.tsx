@@ -1,49 +1,44 @@
-import React, { useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { createClient } from "@supabase/supabase-js";
-import { createClient as createServerClient } from "@/app/utils/supabase/server";
+// Location page - refactored to extract shared components and utilities
+// Updated: adds SEO-safe split view with contextual map for city pages
+
+import React from "react";
 import ClinicCard from "@/components/features/clinic/ClinicCard";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { deslugify, slugify } from "@/app/utils/slugify";
 import { Metadata } from "next";
 import {
   Clinic,
-  City,
   DBClinicResponse,
   LocationPageData,
   SpecialtyWithSeo,
 } from "@/app/types/index";
 import { notFound, redirect } from "next/navigation";
 
-import { MDXRemote } from "next-mdx-remote/rsc";
 import { SpecialtiesList } from "@/components/features/specialty/SpecialtiesList";
 import { ClinicsList } from "@/components/features/clinic/ClinicsList";
 import { NoResultsFound } from "@/app/find/fysioterapeut/[location]/components/NoResultsFound";
 import { NearbyClinicsList } from "@/app/find/fysioterapeut/[location]/components/NearbyClinicsList";
+import { LocationClinicsMap } from "@/app/find/fysioterapeut/[location]/components/LocationClinicsMap";
 import { LocationStructuredData } from "@/components/seo/LocationStructuredData";
 import { SearchInterface } from "@/components/search/SearchInterface";
-
-// Internal linking imports
-import { loadLinkConfig } from "lib/internal-linking/config";
-import rehypeInternalLinks from "lib/internal-linking/rehype-internal-links";
-
-// MDX Plugins
-import remarkGfm from "remark-gfm";
+import { PartnershipBanner } from "@/components/features/partnership/PartnershipBanner";
+import { SeoContent } from "@/components/seo/SeoContent";
+import { orderSpecialties } from "@/lib/clinic-utils";
+import { resolveLogoPathMap } from "@/lib/logo-cache";
 
 // Heading generation utility
 import {
   generateHeadings,
   generateMetaTitle,
 } from "@/lib/headers-and-metatitles";
+import { CACHE_TIMES } from "@/lib/cache-config";
+import { createStaticClient } from "@/app/utils/supabase/static";
 
-// Create a Supabase client for static generation
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+export const revalidate = 86400; // 24 hours ISR (must be a literal for Next.js segment config)
 
-// Add this utility function at the top of the file
+// Supabase client for static generation (no cookies, safe for ISR)
+const supabase = createStaticClient();
+
 async function fetchWithRetry(
   url: string,
   options: any,
@@ -106,16 +101,19 @@ function mapDBClinicToClinic(dbClinic: DBClinicResponse): Clinic {
 }
 
 /**
- * Utility function to sort clinics by rating
+ * Utility function to sort clinics by rating, optionally considering premium status
  */
 function sortClinicsByRating<
   T extends { avgRating: number | null; ratingCount: number | null }
->(clinics: T[]): T[] {
+>(clinics: T[], options: { includePremium?: boolean } = {}): T[] {
+  const { includePremium = true } = options;
   return [...clinics].sort((a, b) => {
-    // First sort by premium status
-    const aPremium = isPremiumActive(a as unknown as Clinic);
-    const bPremium = isPremiumActive(b as unknown as Clinic);
-    if (aPremium !== bPremium) return bPremium ? 1 : -1;
+    // Optionally sort by premium status first
+    if (includePremium) {
+      const aPremium = isPremiumActive(a as unknown as Clinic);
+      const bPremium = isPremiumActive(b as unknown as Clinic);
+      if (aPremium !== bPremium) return bPremium ? 1 : -1;
+    }
 
     // Then sort by rating
     const ratingA = a.avgRating || 0;
@@ -123,25 +121,6 @@ function sortClinicsByRating<
     if (ratingA !== ratingB) return ratingB - ratingA;
 
     // Finally sort by review count
-    const countA = a.ratingCount || 0;
-    const countB = b.ratingCount || 0;
-    return countB - countA;
-  });
-}
-
-/**
- * Utility function to sort clinics by rating for Danmark page (ignores premium status)
- */
-function sortClinicsByRatingDanmark<
-  T extends { avgRating: number | null; ratingCount: number | null }
->(clinics: T[]): T[] {
-  return [...clinics].sort((a, b) => {
-    // Sort by rating first
-    const ratingA = a.avgRating || 0;
-    const ratingB = b.avgRating || 0;
-    if (ratingA !== ratingB) return ratingB - ratingA;
-
-    // Then sort by review count
     const countA = a.ratingCount || 0;
     const countB = b.ratingCount || 0;
     return countB - countA;
@@ -163,17 +142,13 @@ export async function fetchLocationData(
 
   const fetchOptions = {
     headers,
-    next: { revalidate: 86400 },
+    next: { revalidate: CACHE_TIMES.LOCATION_PAGE },
   };
 
   try {
-    // Fetch specialties first as we need them for both cases
-    const specialties = (await fetchWithRetry(
-      `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/specialties?select=specialty_id,specialty_name,specialty_name_slug,seo_tekst`,
-      fetchOptions
-    )) as SpecialtyWithSeo[];
+    const specialtiesUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/specialties?select=specialty_id,specialty_name,specialty_name_slug,seo_tekst`;
 
-    // Special handling for "danmark" location
+    // Special handling for "danmark" location - fetch specialties and clinics in parallel
     if (locationSlug === "danmark") {
       let clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),premium_listings(id,start_date,end_date,booking_link)`;
 
@@ -189,7 +164,12 @@ export async function fetchLocationData(
         clinicsUrl += `&handicapadgang=eq.true`;
       }
 
-      const clinicsData = await fetchWithRetry(clinicsUrl, fetchOptions);
+      // Parallel: fetch specialties and clinics at the same time
+      const [specialties, clinicsData] = await Promise.all([
+        fetchWithRetry(specialtiesUrl, fetchOptions) as Promise<SpecialtyWithSeo[]>,
+        fetchWithRetry(clinicsUrl, fetchOptions),
+      ]);
+
       const validClinics = (clinicsData as unknown[]).filter(
         isValidClinicResponse
       );
@@ -197,38 +177,14 @@ export async function fetchLocationData(
 
       return {
         city: null,
-        clinics: sortClinicsByRatingDanmark(clinics),
+        clinics: sortClinicsByRating(clinics, { includePremium: false }),
         nearbyClinicsList: [],
         specialties,
       };
     }
 
-    // Special handling for "online" location
+    // Special handling for "online" location - fetch specialties, city, and clinics in parallel
     if (locationSlug === "online") {
-      let cityForOnline: City | null = null;
-      try {
-        const cityData = await fetchWithRetry(
-          `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/cities?bynavn_slug=eq.online&select=*`,
-          fetchOptions
-        );
-        cityForOnline = cityData[0] || null;
-      } catch (error) {
-        console.warn("Could not fetch city data for 'online' location:", error);
-        // Proceed without DB city data for online
-      }
-
-      // Use fetched city data if available, otherwise create minimal object
-      const finalCityObject = cityForOnline || {
-        id: "online",
-        bynavn: "Online",
-        bynavn_slug: "online",
-        latitude: 0,
-        longitude: 0,
-        postal_codes: [],
-        betegnelse: "Online fysioterapi",
-        seo_tekst: undefined, // Explicitly undefined in fallback
-      };
-
       let clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order),premium_listings(id,start_date,end_date,booking_link)`;
 
       // Add specialty filter if needed
@@ -252,37 +208,54 @@ export async function fetchLocationData(
         clinicsUrl += `&handicapadgang=eq.true`;
       }
 
-      const clinicsData = await fetchWithRetry(clinicsUrl, fetchOptions);
+      // Parallel: fetch specialties, city data, and clinics at the same time
+      const [specialties, cityDataResult, clinicsData] = await Promise.all([
+        fetchWithRetry(specialtiesUrl, fetchOptions) as Promise<SpecialtyWithSeo[]>,
+        fetchWithRetry(
+          `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/cities?bynavn_slug=eq.online&select=*`,
+          fetchOptions
+        ).catch((error: unknown) => {
+          console.warn("Could not fetch city data for 'online' location:", error);
+          return null;
+        }),
+        fetchWithRetry(clinicsUrl, fetchOptions),
+      ]);
+
+      const cityForOnline = cityDataResult?.[0] || null;
+
+      // Use fetched city data if available, otherwise create minimal object
+      const finalCityObject = cityForOnline || {
+        id: "online",
+        bynavn: "Online",
+        bynavn_slug: "online",
+        latitude: 0,
+        longitude: 0,
+        postal_codes: [],
+        betegnelse: "Online fysioterapi",
+        seo_tekst: undefined,
+      };
+
       const validClinics = (clinicsData as unknown[]).filter(
         isValidClinicResponse
       );
       const clinics = validClinics.map(mapDBClinicToClinic);
 
-      // For online location, we create a minimal city object
-      // const onlineCity: City = {
-      //   id: "online",
-      //   bynavn: "Online",
-      //   bynavn_slug: "online",
-      //   latitude: 0,
-      //   longitude: 0,
-      //   postal_codes: [],
-      //   betegnelse: "Online fysioterapi",
-      //   seo_tekst: undefined,
-      // }; // <-- Removed this minimal object creation
-
       return {
-        city: finalCityObject, // Use the potentially fetched or minimal city object
+        city: finalCityObject,
         clinics: sortClinicsByRating(clinics),
         nearbyClinicsList: [],
         specialties,
       };
     }
 
-    // For specific city locations
-    const cityData = await fetchWithRetry(
-      `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/cities?bynavn_slug=eq.${locationSlug}&select=*`,
-      fetchOptions
-    );
+    // For specific city locations - Phase 1: fetch specialties and city in parallel
+    const [specialties, cityData] = await Promise.all([
+      fetchWithRetry(specialtiesUrl, fetchOptions) as Promise<SpecialtyWithSeo[]>,
+      fetchWithRetry(
+        `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/cities?bynavn_slug=eq.${locationSlug}&select=*`,
+        fetchOptions
+      ),
+    ]);
 
     const city = cityData[0] || null;
 
@@ -294,13 +267,6 @@ export async function fetchLocationData(
         specialties,
       };
     }
-
-    // Check for premium listings in this city
-    const premiumListingsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/premium_listing_locations?select=premium_listings(id,clinic_id,start_date,end_date,booking_link,clinics(klinikNavn))&city_id=eq.${city.id}`;
-    const premiumListingsData = await fetchWithRetry(
-      premiumListingsUrl,
-      fetchOptions
-    );
 
     // Build the clinics query for city
     let clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order),premium_listings(id,start_date,end_date,booking_link)&city_id=eq.${city.id}`;
@@ -326,7 +292,7 @@ export async function fetchLocationData(
       premiumClinicsUrl += `&handicapadgang=eq.true`;
     }
 
-    // Fetch clinics, premium clinics, and nearby clinics in parallel with retry
+    // Phase 2: fetch clinics, premium clinics, and nearby clinics in parallel
     const [clinicsData, premiumClinicsData, nearbyData] = await Promise.all([
       fetchWithRetry(clinicsUrl, fetchOptions),
       fetchWithRetry(premiumClinicsUrl, fetchOptions),
@@ -417,6 +383,18 @@ export async function generateStaticParams() {
   return cities?.map((city) => ({ location: slugify(city.bynavn) })) || [];
 }
 
+/**
+ * Parses filter parameters from URL search params
+ */
+export function parseFilters(
+  searchParams: { [key: string]: string | string[] | undefined } | undefined
+): { ydernummer?: boolean; handicap?: boolean } {
+  const filters: { ydernummer?: boolean; handicap?: boolean } = {};
+  if (searchParams?.ydernummer === "true") filters.ydernummer = true;
+  if (searchParams?.handicap === "true") filters.handicap = true;
+  return filters;
+}
+
 export async function generateMetadata({
   params,
   searchParams,
@@ -427,11 +405,7 @@ export async function generateMetadata({
   // Resolve params and searchParams
   const resolvedParams = await params;
   const resolvedSearchParams = await searchParams;
-
-  // Parse filter parameters from URL
-  const filters: { ydernummer?: boolean; handicap?: boolean } = {};
-  if (resolvedSearchParams?.ydernummer === "true") filters.ydernummer = true;
-  if (resolvedSearchParams?.handicap === "true") filters.handicap = true;
+  const filters = parseFilters(resolvedSearchParams);
 
   const data = await fetchLocationData(
     resolvedParams.location,
@@ -464,18 +438,6 @@ export async function generateMetadata({
   };
 }
 
-// Keep your existing seoContent array here...
-
-export async function fetchSpecialties() {
-  const supabase = await createServerClient();
-  const { data, error } = await supabase
-    .from("specialties")
-    .select("specialty_id, specialty_name, specialty_name_slug, seo_tekst");
-
-  if (error) throw error;
-  return data;
-}
-
 interface LocationPageProps {
   params: Promise<{
     location: string;
@@ -491,11 +453,7 @@ export default async function LocationPage({
   // Resolve params and searchParams
   const resolvedParams = await params;
   const resolvedSearchParams = await searchParams;
-
-  // Parse filter parameters from URL (with safety check)
-  const filters: { ydernummer?: boolean; handicap?: boolean } = {};
-  if (resolvedSearchParams?.ydernummer === "true") filters.ydernummer = true;
-  if (resolvedSearchParams?.handicap === "true") filters.handicap = true;
+  const filters = parseFilters(resolvedSearchParams);
 
   const data = await fetchLocationData(
     resolvedParams.location,
@@ -504,13 +462,15 @@ export default async function LocationPage({
   );
   const specialties = data.specialties;
 
-  // --- Internal Linking Setup ---
-  const linkConfig = loadLinkConfig();
-  const basePagePath = `/find/fysioterapeut/${resolvedParams.location}`;
+  // Resolve logo paths server-side to eliminate client-side flash/CLS
+  const logoPathMap = await resolveLogoPathMap([
+    ...data.clinics,
+    ...data.nearbyClinicsList,
+  ]);
+
   const currentPagePath = resolvedParams.specialty
-    ? `${basePagePath}/${resolvedParams.specialty}`
-    : basePagePath;
-  // ----------------------------
+    ? `/find/fysioterapeut/${resolvedParams.location}/${resolvedParams.specialty}`
+    : `/find/fysioterapeut/${resolvedParams.location}`;
 
   // Get specialty name if we're on a specialty page
   const specialty = resolvedParams.specialty
@@ -568,22 +528,7 @@ export default async function LocationPage({
             </span>
           </p>
 
-          {/* Kroniske smerter samarbejde med FAKS */}
-          {resolvedParams.specialty === "kroniske-smerter" && (
-            <div className="mb-4 flex flex-wrap items-center gap-4 sm:gap-8">
-              <Image
-                src="/images/samarbejdspartnere/FAKS-smertelinjen-logo.png"
-                alt="FAKS - Foreningen af kroniske smerteramte og pårørende"
-                width={640}
-                height={400}
-                className="w-full sm:max-w-[400px] h-auto"
-              />
-              <p className="text-gray-600 w-full sm:w-auto sm:flex-1">
-                I samarbejde med FAKS, Foreningen af kroniske smerteramte og
-                pårørende.
-              </p>
-            </div>
-          )}
+          <PartnershipBanner specialtySlug={resolvedParams.specialty} />
 
           <SearchInterface
             specialties={specialties}
@@ -598,39 +543,14 @@ export default async function LocationPage({
             clinics={data.clinics}
             totalClinics={data.clinics.length}
             specialtySlug={resolvedParams.specialty}
+            logoPathMap={logoPathMap}
           />
 
-          {/* Add SEO text for specialty when on danmark page */}
           {resolvedParams.specialty && specialty?.seo_tekst && (
-            <div
-              className="mt-12 prose prose-slate max-w-none
-                prose-headings:text-gray-900
-                prose-h2:text-2xl prose-h2:font-semibold prose-h2:mb-4 prose-h2:mt-8
-                prose-h3:text-xl prose-h3:font-medium prose-h3:mb-3 prose-h3:mt-6
-                prose-p:text-gray-600 prose-p:mb-4 prose-p:leading-relaxed
-                prose-ul:list-disc prose-ul:ml-6 prose-ul:mb-4 prose-ul:text-gray-600
-                prose-ol:list-decimal prose-ol:ml-6 prose-ol:mb-4 prose-ol:text-gray-600
-                prose-li:mb-2 prose-li:leading-relaxed
-                prose-strong:font-semibold prose-strong:text-gray-900
-                prose-a:text-logo-blue prose-a:no-underline hover:prose-a:underline
-                prose-table:w-full prose-table:border-collapse prose-table:mt-4
-                prose-th:bg-logo-blue prose-th:text-white prose-th:px-4 prose-th:py-2 prose-th:text-left prose-th:border
-                prose-td:px-4 prose-td:py-2 prose-td:border
-                [&>*:first-child]:mt-0
-                [&>*:last-child]:mb-0"
-            >
-              <MDXRemote
-                source={specialty.seo_tekst}
-                options={{
-                  mdxOptions: {
-                    remarkPlugins: [remarkGfm],
-                    rehypePlugins: [
-                      [rehypeInternalLinks, { linkConfig, currentPagePath }],
-                    ] as any[],
-                  },
-                }}
-              />
-            </div>
+            <SeoContent
+              source={specialty.seo_tekst}
+              currentPagePath={currentPagePath}
+            />
           )}
         </div>
       </div>
@@ -691,20 +611,8 @@ export default async function LocationPage({
           </span>
         </p>
 
-        {resolvedParams.specialty === "kroniske-smerter" && !isOnline && (
-          <div className="mb-4 flex flex-wrap items-center gap-4 sm:gap-8">
-            <Image
-              src="/images/samarbejdspartnere/FAKS-smertelinjen-logo.png"
-              alt="FAKS - Foreningen af kroniske smerteramte og pårørende"
-              width={640}
-              height={400}
-              className="w-full sm:max-w-[400px] h-auto"
-            />
-            <p className="text-gray-600 w-full sm:w-auto sm:flex-1">
-              I samarbejde med FAKS, Foreningen af kroniske smerteramte og
-              pårørende.
-            </p>
-          </div>
+        {!isOnline && (
+          <PartnershipBanner specialtySlug={resolvedParams.specialty} />
         )}
 
         {/* Search Interface */}
@@ -725,94 +633,73 @@ export default async function LocationPage({
             specialties={specialties}
           />
         )}
+      </div>
 
-        {data.clinics.length === 0 ? (
+      {data.clinics.length === 0 ? (
+        <div className="max-w-[800px] mx-auto">
           <NoResultsFound
             cityName={isOnline ? "Online" : data.city.bynavn}
             specialtyName={specialtyName}
             locationSlug={resolvedParams.location}
           />
-        ) : (
-          <div className="space-y-4">
-            {data.clinics.map((clinic: Clinic) => {
-              // If we're on a specialty page, reorder the specialties array to show the current specialty first
-              let orderedSpecialties = clinic.specialties;
-              if (resolvedParams.specialty && clinic.specialties) {
-                orderedSpecialties = [
-                  ...clinic.specialties.filter(
-                    (s) => s.specialty_name_slug === resolvedParams.specialty
-                  ),
-                  ...clinic.specialties.filter(
-                    (s) => s.specialty_name_slug !== resolvedParams.specialty
-                  ),
-                ];
-              }
-
-              return (
-                <ClinicCard
-                  key={clinic.clinics_id}
-                  klinikNavn={clinic.klinikNavn}
-                  klinikNavnSlug={clinic.klinikNavnSlug}
-                  ydernummer={clinic.ydernummer}
-                  avgRating={clinic.avgRating}
-                  ratingCount={clinic.ratingCount}
-                  adresse={clinic.adresse}
-                  postnummer={clinic.postnummer}
-                  lokation={clinic.lokation}
-                  website={clinic.website}
-                  tlf={clinic.tlf}
-                  specialties={orderedSpecialties}
-                  team_members={clinic.team_members}
-                  premium_listing={clinic.premium_listing}
-                  handicapadgang={clinic.handicapadgang}
-                />
-              );
-            })}
-          </div>
-        )}
-
-        {/* Hide NearbyClinicsList for Online location */}
-        {!isOnline && (
-          <NearbyClinicsList
-            clinics={data.nearbyClinicsList}
-            cityName={data.city.bynavn}
-            specialtySlug={resolvedParams.specialty}
-            specialtyName={specialtyName}
-          />
-        )}
-      </div>
-
-      {/* Only show SEO text if we're not on a specialty page */}
-      {data.city.seo_tekst && !resolvedParams.specialty && (
-        <div
-          className="mt-12 prose prose-slate max-w-none
-             prose-headings:text-gray-900
-             prose-h2:text-2xl prose-h2:font-semibold prose-h2:mb-4 prose-h2:mt-8
-             prose-h3:text-xl prose-h3:font-medium prose-h3:mb-3 prose-h3:mt-6
-             prose-p:text-gray-600 prose-p:mb-4 prose-p:leading-relaxed
-             prose-ul:list-disc prose-ul:ml-6 prose-ul:mb-4 prose-ul:text-gray-600
-             prose-ol:list-decimal prose-ol:ml-6 prose-ol:mb-4 prose-ol:text-gray-600
-             prose-li:mb-2 prose-li:leading-relaxed
-             prose-strong:font-semibold prose-strong:text-gray-900
-             prose-a:text-logo-blue prose-a:no-underline hover:prose-a:underline
-             prose-table:w-full prose-table:border-collapse prose-table:mt-4
-             prose-th:bg-logo-blue prose-th:text-white prose-th:px-4 prose-th:py-2 prose-th:text-left prose-th:border
-             prose-td:px-4 prose-td:py-2 prose-td:border
-             [&>*:first-child]:mt-0
-             [&>*:last-child]:mb-0"
-        >
-          <MDXRemote
-            source={data.city.seo_tekst}
-            options={{
-              mdxOptions: {
-                remarkPlugins: [remarkGfm],
-                rehypePlugins: [
-                  [rehypeInternalLinks, { linkConfig, currentPagePath }],
-                ] as any[],
-              },
-            }}
-          />
         </div>
+      ) : (
+        <div
+          className={`mt-6 grid gap-6 ${
+            isOnline ? "" : "xl:grid-cols-[minmax(0,1fr)_420px]"
+          }`}
+        >
+          <div className="space-y-4">
+            {data.clinics.map((clinic: Clinic) => (
+              <ClinicCard
+                key={clinic.clinics_id}
+                clinicId={clinic.clinics_id}
+                klinikNavn={clinic.klinikNavn}
+                klinikNavnSlug={clinic.klinikNavnSlug}
+                ydernummer={clinic.ydernummer}
+                avgRating={clinic.avgRating}
+                ratingCount={clinic.ratingCount}
+                adresse={clinic.adresse}
+                postnummer={clinic.postnummer}
+                lokation={clinic.lokation}
+                website={clinic.website}
+                tlf={clinic.tlf}
+                specialties={orderSpecialties(
+                  clinic.specialties,
+                  resolvedParams.specialty
+                )}
+                team_members={clinic.team_members}
+                premium_listing={clinic.premium_listing}
+                handicapadgang={clinic.handicapadgang}
+                verified_klinik={clinic.verified_klinik}
+                logoPath={logoPathMap[clinic.clinics_id] ?? null}
+              />
+            ))}
+          </div>
+
+          {!isOnline && (
+            <div className="self-start xl:sticky xl:top-24">
+              <LocationClinicsMap clinics={data.clinics} city={data.city} />
+            </div>
+          )}
+        </div>
+      )}
+
+      {!isOnline && data.clinics.length > 0 && (
+        <NearbyClinicsList
+          clinics={data.nearbyClinicsList}
+          cityName={data.city.bynavn}
+          specialtySlug={resolvedParams.specialty}
+          specialtyName={specialtyName}
+          logoPathMap={logoPathMap}
+        />
+      )}
+
+      {data.city.seo_tekst && !resolvedParams.specialty && (
+        <SeoContent
+          source={data.city.seo_tekst}
+          currentPagePath={currentPagePath}
+        />
       )}
     </div>
   );

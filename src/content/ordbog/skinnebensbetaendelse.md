@@ -1,6 +1,6 @@
 ---
-title: "Skinnebensbetændelse – årsager, symptomer og behandling"
-lastUpdated: "13/09/2025"
+title: "Skinnebensbetændelse"
+lastUpdated: "12/10/2025"
 metaTitle: "Skinnebensbetændelse → årsager, symptomer og behandling"
 datePublished: "13/09/2025"
 ---

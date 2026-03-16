@@ -1,6 +1,6 @@
 ---
-title: "Fibersprængning i baglår – symptomer og genoptræning"
-lastUpdated: "13/09/2025"
+title: "Fibersprængning i baglår"
+lastUpdated: "12/10/2025"
 metaTitle: "Fibersprængning i baglår → symptomer og genoptræning"
 datePublished: "13/09/2025"
 ---

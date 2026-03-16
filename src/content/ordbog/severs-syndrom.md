@@ -1,6 +1,6 @@
 ---
-title: "Severs syndrom – årsager og behandling"
-lastUpdated: "13/09/2025"
+title: "Severs syndrom"
+lastUpdated: "12/10/2025"
 metaTitle: "Severs syndrom → årsager og behandling"
 datePublished: "13/09/2025"
 ---

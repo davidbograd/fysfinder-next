@@ -48,8 +48,6 @@ export function SpecialtiesList({
     return null;
   }
 
-  const displayedSpecialties = showAll ? sortedSpecialties : sortedSpecialties;
-
   return (
     <div className="mt-6 mb-8 hidden md:block">
       <h2 className="text-lg font-semibold mb-2">

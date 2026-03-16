@@ -1,14 +1,13 @@
 "use client";
 
 import { StarIcon } from "@heroicons/react/24/solid";
-import { Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { EmailButton } from "@/components/EmailButton";
 import { PhoneButton } from "@/components/PhoneButton";
 import { WebsiteButton } from "@/components/WebsiteButton";
 import { BookingButton } from "@/components/BookingButton";
 import { useClinicAnalytics } from "@/app/hooks/useClinicAnalytics";
-import { getDisplayUrl } from "./utils";
+import { VerifyClinicModal } from "./VerifyClinicModal";
 
 interface ClinicSidebarProps {
   clinic: {
@@ -58,19 +57,6 @@ export function ClinicSidebar({ clinic }: ClinicSidebarProps) {
     isPremium &&
     clinic.premium_listing?.booking_link &&
     hasValue(clinic.premium_listing.booking_link);
-
-  // Helper function to add UTM parameters to URLs
-  const addUtmParameters = (url: string): string => {
-    try {
-      const urlObj = new URL(url);
-      urlObj.searchParams.set("utm_source", "fysfinder-dk");
-      urlObj.searchParams.set("utm_medium", "referral");
-      return urlObj.toString();
-    } catch (e) {
-      // If URL parsing fails, return original URL
-      return url;
-    }
-  };
 
   return (
     <div className="order-first lg:order-none lg:w-2/5">
@@ -133,20 +119,15 @@ export function ClinicSidebar({ clinic }: ClinicSidebarProps) {
         {!clinic.verified_klinik && (
           <div className="mt-6 flex items-center justify-between gap-4">
             <p className="text-sm text-gray-600">Ejer du denne klinik?</p>
-            <Button
-              variant="outline"
-              size="sm"
-              className="whitespace-nowrap"
-              asChild
-            >
-              <a
-                href="https://tally.so/r/wdk75r"
-                target="_blank"
-                rel="noopener noreferrer"
+            <VerifyClinicModal>
+              <Button
+                variant="outline"
+                size="sm"
+                className="whitespace-nowrap"
               >
                 Verificer klinik
-              </a>
-            </Button>
+              </Button>
+            </VerifyClinicModal>
           </div>
         )}
       </div>

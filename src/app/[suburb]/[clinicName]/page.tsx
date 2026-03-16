@@ -1,5 +1,5 @@
 import { permanentRedirect } from "next/navigation";
-import { createClient } from "@/app/utils/supabase/server";
+import { createStaticClient } from "@/app/utils/supabase/static";
 
 export default async function ClinicPage({
   params,
@@ -9,8 +9,8 @@ export default async function ClinicPage({
   // Resolve params
   const { suburb, clinicName } = await params;
 
-  // Fetch the clinic to get its slug
-  const supabase = await createClient();
+  // Fetch the clinic to get its slug (using static client to avoid cookies() / dynamic rendering)
+  const supabase = createStaticClient();
   const { data: clinic } = await supabase
     .from("clinics")
     .select("klinikNavnSlug")

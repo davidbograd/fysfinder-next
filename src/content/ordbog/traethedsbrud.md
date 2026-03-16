@@ -1,6 +1,6 @@
 ---
-title: "Træthedsbrud – årsager og behandling"
-lastUpdated: "13/09/2025"
+title: "Træthedsbrud"
+lastUpdated: "12/10/2025"
 metaTitle: "Træthedsbrud → årsager og behandling"
 datePublished: "13/09/2025"
 ---

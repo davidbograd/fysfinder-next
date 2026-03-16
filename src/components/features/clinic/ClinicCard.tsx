@@ -1,3 +1,6 @@
+// ClinicCard - Displays a single clinic in the listing
+// Updated: added clinicId prop, IntersectionObserver for list impression tracking, contact click tracking
+
 "use client";
 
 import { StarIcon } from "@heroicons/react/24/solid";
@@ -5,7 +8,7 @@ import { MapPin, Check } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import { TeamMember, PremiumListing } from "@/app/types";
-import { useState, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { FaWheelchair } from "react-icons/fa";
 import {
@@ -17,9 +20,11 @@ import {
 import { WebsiteButton } from "@/components/WebsiteButton";
 import { PhoneButton } from "@/components/PhoneButton";
 import Link from "next/link";
-import { getCachedLogoPath } from "@/lib/logo-cache";
+import VerifiedCheck from "@/assets/icons/verified-check.svg";
+import { trackClinicEvent } from "@/lib/tracking";
 
 interface Props {
+  clinicId?: string;
   klinikNavn: string;
   klinikNavnSlug: string;
   ydernummer: boolean;
@@ -38,6 +43,8 @@ interface Props {
   team_members?: TeamMember[];
   premium_listing?: PremiumListing | null;
   handicapadgang?: boolean | null;
+  verified_klinik?: boolean | null;
+  logoPath?: string | null;
 }
 
 function isPremiumActive(
@@ -52,6 +59,7 @@ function isPremiumActive(
 }
 
 const ClinicCard: React.FC<Props> = ({
+  clinicId,
   klinikNavn,
   klinikNavnSlug,
   ydernummer,
@@ -67,35 +75,89 @@ const ClinicCard: React.FC<Props> = ({
   team_members = [],
   premium_listing,
   handicapadgang,
+  verified_klinik,
+  logoPath,
 }) => {
   const MAX_VISIBLE_MEMBERS = 5;
   const hasMoreMembers = team_members.length > MAX_VISIBLE_MEMBERS;
   const visibleMembers = team_members.slice(0, MAX_VISIBLE_MEMBERS);
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
-  const [cachedLogoPath, setCachedLogoPath] = useState<string | null>(null);
-  const [logoLoaded, setLogoLoaded] = useState(false);
   const isPremium = isPremiumActive(premium_listing);
-  const hasLogo = logoLoaded && Boolean(cachedLogoPath);
+  const hasLogo = Boolean(logoPath);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const hasTrackedImpression = useRef(false);
+  const [isMapHighlighted, setIsMapHighlighted] = useState(false);
 
-  // Load cached logo path on mount
   useEffect(() => {
-    if (website) {
-      getCachedLogoPath(website).then((logoPath) => {
-        setCachedLogoPath(logoPath);
-        setLogoLoaded(true);
-      });
-    } else {
-      setLogoLoaded(true);
-    }
-  }, [website]);
+    if (!clinicId || hasTrackedImpression.current || !cardRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasTrackedImpression.current) {
+          hasTrackedImpression.current = true;
+          trackClinicEvent({ clinicId, eventType: "list_impression" });
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(cardRef.current);
+    return () => observer.disconnect();
+  }, [clinicId]);
+
+  useEffect(() => {
+    if (!clinicId) return;
+
+    const handleMarkerHover = (event: Event) => {
+      const customEvent = event as CustomEvent<{ clinicId: string | null }>;
+      const highlightedClinicId = customEvent.detail?.clinicId ?? null;
+      setIsMapHighlighted(highlightedClinicId === clinicId);
+    };
+
+    window.addEventListener(
+      "fysfinder:map-marker-hover",
+      handleMarkerHover as EventListener
+    );
+
+    return () => {
+      window.removeEventListener(
+        "fysfinder:map-marker-hover",
+        handleMarkerHover as EventListener
+      );
+    };
+  }, [clinicId]);
+
+  const handleCardMouseEnter = () => {
+    if (!clinicId) return;
+    window.dispatchEvent(
+      new CustomEvent("fysfinder:clinic-card-hover", {
+        detail: { clinicId },
+      })
+    );
+  };
+
+  const handleCardMouseLeave = () => {
+    if (!clinicId) return;
+    window.dispatchEvent(
+      new CustomEvent("fysfinder:clinic-card-hover", {
+        detail: { clinicId: null },
+      })
+    );
+  };
 
   return (
     <div
+      ref={cardRef}
+      id={clinicId ? `clinic-card-${clinicId}` : undefined}
+      onMouseEnter={handleCardMouseEnter}
+      onMouseLeave={handleCardMouseLeave}
       className={cn(
-        "p-6 rounded-lg bg-white w-full",
+        "p-6 rounded-lg bg-white w-full transition-shadow",
         isPremium
           ? "border-2 border-logo-blue/30 shadow-md scale-[1.02] bg-gradient-to-r from-logo-blue/5 to-white"
-          : "border border-gray-200"
+          : "border border-gray-200",
+        isMapHighlighted && "ring-2 ring-logo-blue/60 shadow-md"
       )}
     >
       <div className="flex flex-col sm:flex-row sm:justify-between">
@@ -108,10 +170,10 @@ const ClinicCard: React.FC<Props> = ({
             )}
           >
             <Link href={`/klinik/${klinikNavnSlug}`} className="block">
-              {hasLogo && cachedLogoPath ? (
+              {hasLogo && logoPath ? (
                 <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center">
                   <Image
-                    src={cachedLogoPath}
+                    src={logoPath}
                     alt={`${klinikNavn} logo`}
                     width={64}
                     height={64}
@@ -142,6 +204,25 @@ const ClinicCard: React.FC<Props> = ({
                   {klinikNavn}
                 </h3>
               </Link>
+              {/* Verified Icon */}
+              {verified_klinik && (
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <Image
+                        src={VerifiedCheck}
+                        alt="Verified clinic"
+                        width={20}
+                        height={20}
+                        className="w-5 h-5 mt-1"
+                      />
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Denne klinik er verificeret af Fysfinder.</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              )}
               {/* Accessibility Icon */}
               {handicapadgang && (
                 <TooltipProvider>
@@ -277,8 +358,18 @@ const ClinicCard: React.FC<Props> = ({
             {/* Contact buttons */}
             {(website || tlf) && (
               <div className="flex flex-col sm:flex-row gap-2 mt-4">
-                {website && <WebsiteButton website={website} />}
-                {tlf && <PhoneButton phoneNumber={tlf} />}
+                {website && (
+                  <WebsiteButton
+                    website={website}
+                    onClick={clinicId ? () => trackClinicEvent({ clinicId, eventType: "website_click", metadata: { source: "list_view" } }) : undefined}
+                  />
+                )}
+                {tlf && (
+                  <PhoneButton
+                    phoneNumber={tlf}
+                    onClick={clinicId ? () => trackClinicEvent({ clinicId, eventType: "phone_click", metadata: { source: "list_view" } }) : undefined}
+                  />
+                )}
               </div>
             )}
           </div>

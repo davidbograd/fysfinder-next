@@ -8,14 +8,31 @@ import { getPageContent } from "@/lib/pageContent";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import rehypeUnwrapImages from "rehype-unwrap-images";
+import rehypeSlug from "rehype-slug";
 import rehypeInternalLinks from "lib/internal-linking/rehype-internal-links";
 import { loadLinkConfig } from "lib/internal-linking/config";
 import RelatedToolsSection from "@/components/features/RelatedToolsSection";
+import { TableOfContents } from "@/components/features/blog-og-ordbog/TableOfContents";
+import { extractTableOfContents } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Kalorieberegner (TDEE): Beregn dit daglige kaloriebehov ✅",
   description:
     "Beregn dit daglige kaloriebehov med vores gratis kalorieberegner. Få dit BMR, TDEE og anbefalinger til vægttab og vægtøgning.",
+  openGraph: {
+    title: "Kalorieberegner (TDEE): Beregn dit daglige kaloriebehov ✅",
+    description:
+      "Beregn dit daglige kaloriebehov med vores gratis kalorieberegner. Få dit BMR, TDEE og anbefalinger til vægttab og vægtøgning.",
+    images: [
+      {
+        url: "/images/vaerktoejer/kalorieberegner.png",
+        width: 1200,
+        height: 630,
+        alt: "Sunde fødevarer og målebånd der illustrerer kalorieopmåling",
+      },
+    ],
+    type: "website",
+  },
 };
 
 // Custom component for rendering images within MDX
@@ -45,18 +62,22 @@ export default async function CalorieCalculatorPage() {
   const pageContent = await getPageContent("kalorieberegner");
   const linkConfig = loadLinkConfig();
   const currentPagePath = "/vaerktoejer/kalorieberegner";
+  const headings = extractTableOfContents(pageContent);
 
   return (
-    <main className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-3xl">
-      <WebAppStructuredData
-        type="tool"
-        name="Kalorieberegner"
-        description="Beregn dit daglige kaloriebehov med vores gratis kalorieberegner"
-        breadcrumbs={breadcrumbItems}
-        toolType="calculator"
-        calculatorType="calorie"
-      />
-      <div className="space-y-6 sm:space-y-8">
+    <main className="container mx-auto px-4 sm:px-6 py-6 sm:py-8">
+      <div className="flex flex-col lg:flex-row lg:gap-8">
+        <TableOfContents headings={headings} />
+        <div className="flex-1 max-w-3xl">
+          <WebAppStructuredData
+            type="tool"
+            name="Kalorieberegner"
+            description="Beregn dit daglige kaloriebehov med vores gratis kalorieberegner"
+            breadcrumbs={breadcrumbItems}
+            toolType="calculator"
+            calculatorType="calorie"
+          />
+          <div className="space-y-6 sm:space-y-8">
         <Breadcrumbs items={breadcrumbItems} />
         <div className="space-y-4">
           <h1 className="text-2xl sm:text-3xl font-bold">
@@ -123,6 +144,7 @@ export default async function CalorieCalculatorPage() {
                 mdxOptions: {
                   remarkPlugins: [remarkGfm],
                   rehypePlugins: [
+                    rehypeSlug,
                     rehypeUnwrapImages,
                     [rehypeInternalLinks, { linkConfig, currentPagePath }],
                   ],
@@ -131,8 +153,9 @@ export default async function CalorieCalculatorPage() {
             />
           </div>
         </div>
-        
-        <RelatedToolsSection currentToolHref="/vaerktoejer/kalorieberegner" />
+            <RelatedToolsSection currentToolHref="/vaerktoejer/kalorieberegner" />
+          </div>
+        </div>
       </div>
     </main>
   );

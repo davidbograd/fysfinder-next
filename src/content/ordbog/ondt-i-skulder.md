@@ -1,6 +1,6 @@
 ---
-title: "Ondt i skulder – årsager og behandling"
-lastUpdated: "13/09/2025"
+title: "Ondt i skulder"
+lastUpdated: "12/10/2025"
 metaTitle: "Ondt i skulder → årsager og behandling"
 datePublished: "13/09/2025"
 ---

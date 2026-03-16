@@ -1,6 +1,5 @@
 import React from "react";
 import { MeetTheTeam } from "@/components/features/team/MeetTheTeam";
-import { createClient } from "@/app/utils/supabase/server";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { Metadata } from "next";
 import { ClinicSidebar } from "@/components/features/clinic/ClinicSidebar";
@@ -14,10 +13,10 @@ import { ClinicServices } from "@/components/features/clinic/ClinicServices";
 import { ClinicHours } from "@/components/features/clinic/ClinicHours";
 import { ClinicLocation } from "@/components/features/clinic/ClinicLocation";
 import { ClinicAbout } from "@/components/features/clinic/ClinicAbout";
+import { TrackProfileView } from "@/components/tracking/TrackProfileView";
+import { CACHE_TAGS, CACHE_TIMES } from "@/lib/cache-config";
 
 async function fetchClinicBySlug(clinicSlug: string): Promise<Clinic | null> {
-  const supabase = await createClient();
-
   try {
     const requestUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?klinikNavnSlug=eq.${clinicSlug}&select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order),clinic_insurances(insurance:insurance_companies(insurance_id,insurance_name,insurance_name_slug)),clinic_services(service:extra_services(service_id,service_name,service_name_slug)),premium_listings(id,start_date,end_date,booking_link)`;
 
@@ -28,7 +27,8 @@ async function fetchClinicBySlug(clinicSlug: string): Promise<Clinic | null> {
         "Content-Type": "application/json",
       },
       next: {
-        revalidate: 86400, // Cache for 24 hours
+        revalidate: CACHE_TIMES.CLINIC_PAGE, // Cache for 24 hours
+        tags: [CACHE_TAGS.ALL_CLINICS, CACHE_TAGS.clinicBySlug(clinicSlug)],
       },
     });
 
@@ -366,6 +366,7 @@ export default async function ClinicPage({
 
     return (
       <div className="container mx-auto px-4 py-8">
+        <TrackProfileView clinicId={clinic.clinics_id} />
         <ClinicStructuredData clinic={clinic} />
         <BreadcrumbStructuredData items={breadcrumbItems} />
 

@@ -1,6 +1,6 @@
 ---
-title: "Skinneben – anatomi, funktion og skader"
-lastUpdated: "13/09/2025"
+title: "Skinneben"
+lastUpdated: "12/10/2025"
 metaTitle: "Skinneben → anatomi, funktion og skader"
 datePublished: "13/09/2025"
 ---

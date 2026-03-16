@@ -1,6 +1,6 @@
 ---
-title: "Ondt i kæben ved øret – årsager og behandling"
-lastUpdated: "13/09/2025"
+title: "Ondt i kæben ved øret"
+lastUpdated: "12/10/2025"
 metaTitle: "Ondt i kæben ved øret → årsager og behandling"
 datePublished: "13/09/2025"
 ---

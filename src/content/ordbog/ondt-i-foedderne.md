@@ -1,6 +1,6 @@
 ---
-title: "Ondt i fødderne – årsager og forebyggelse"
-lastUpdated: "13/09/2025"
+title: "Ondt i fødderne"
+lastUpdated: "12/10/2025"
 metaTitle: "Ondt i fødderne → årsager og forebyggelse"
 datePublished: "13/09/2025"
 ---

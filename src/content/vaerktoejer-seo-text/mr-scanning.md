@@ -1,3 +1,17 @@
+## MR-scanning begreber og fund – sådan læser du dit MR-resultat
+
+En MR-scanning indeholder sjældent talværdier som ved blodprøver eller DEXA-scanninger. I stedet beskriver radiologen dine MR-billeder med faste begreber og graderinger, som fortæller noget om væv, signalforandringer og mulige fund.
+
+Nedenfor forklares de mest almindelige udtryk, så du nemt kan forstå, hvad der står i dit MR-svar – uden lægesprog.
+
+| MR-begreb               | Hvad betyder det?                                | Typisk fortolkning                            |
+| ----------------------- | ------------------------------------------------ | --------------------------------------------- |
+| Signalforandring        | Et område der ser anderledes ud på MR-billedet   | Kan indikere irritation, inflammation eller skade |
+| Hypointens              | Området fremstår mørkt på MR-billedet            | Ofte arvæv, forkalkning eller kronisk forandring |
+| Hyperintens             | Området fremstår lyst på MR-billedet             | Ofte væske, inflammation eller akut skade     |
+| Ødem                    | Væskeophobning i væv eller knogle                | Tegn på overbelastning, irritation eller skade |
+| Degenerative forandringer | Slid- eller aldersrelaterede ændringer         | Almindeligt og ikke altid årsag til smerter   |
+
 ## Oversættelse af latinske ord på MR scanningsrapport
 
 | Latinsk udtryk på MR-rapporten | Betydning på almindeligt dansk                 |

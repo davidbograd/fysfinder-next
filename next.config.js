@@ -1,22 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  transpilePackages: ['next-mdx-remote'],
   images: {
-    domains: [
-      'dbqnutjbrxydltkeftnv.supabase.co', // Replace with your Supabase project URL
-      'img.logo.dev', // Logo.dev API for clinic logos
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'dbqnutjbrxydltkeftnv.supabase.co',
+        pathname: '/**',
+      },
     ],
-  },
-  webpack: (config, { isServer }) => {
-    // Suppress the punycode warning
-    config.resolve = {
-      ...config.resolve,
-      fallback: {
-        ...config.resolve.fallback,
-        "punycode": false, // Disable punycode polyfill as it's not needed in modern environments
-      }
-    };
-    
-    return config;
+    // Logo.dev removed - logos are served from local /public/logos/ directory
   },
   redirects: async () => {
     return [

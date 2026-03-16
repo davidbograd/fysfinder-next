@@ -61,11 +61,29 @@ const tools: Tool[] = [
   {
     title: "Fedtprocent beregner",
     description:
-      "Beregn din fedtprocent med Navy metoden baseret på simple målinger af krop. Få indsigt i din kropssammensætning.",
+      "Beregn din fedtprocent med Navy metoden baseret på simple målinger af din krop. Få indsigt i din kropssammensætning.",
     href: "/vaerktoejer/fedtprocent-beregner",
     imageUrl: "/images/vaerktoejer/fedtprocent-beregner.jpg",
     imageAlt: "Fedtprocent beregner illustration med målebånd og sundhedsudstyr",
     type: "Kost & ernæring værktøjer",
+  },
+  {
+    title: "Pace beregner",
+    description:
+      "Beregn din løbehastighed (pace) i min/km og hastighed i km/t. Find din forventede sluttid på populære distancer.",
+    href: "/vaerktoejer/pace-beregner",
+    imageUrl: "/images/vaerktoejer/pace-beregner.png",
+    imageAlt: "Pace beregner illustration med løber og stopur",
+    type: "Træning & bevægelse værktøjer",
+  },
+  {
+    title: "RM beregner",
+    description:
+      "Beregn din 1RM (one repetition maximum) og se anbefalet vægt til 1–10 repetitionsmaksimum. Optimer din styrketræning.",
+    href: "/vaerktoejer/rm-beregner",
+    imageUrl: "/images/vaerktoejer/1rm-beregner.jpg",
+    imageAlt: "RM beregner illustration med vægtstang og løfter",
+    type: "Træning & bevægelse værktøjer",
   },
 ];
 
@@ -106,6 +124,14 @@ export default function ToolsPage() {
     return acc;
   }, {});
 
+  // Define the order of sections
+  const sectionOrder = [
+    "Kost & ernæring værktøjer",
+    "Træning & bevægelse værktøjer",
+    "Forstå din MR og DEXA scanning",
+    "Kropsdele og smerter",
+  ];
+
   return (
     <div className="container mx-auto py-8">
       <VaerktoejerStructuredData
@@ -125,54 +151,56 @@ export default function ToolsPage() {
             træning, kost og sundhed.
           </p>
         </div>
-        {/* Render tools grouped by type */}
+        {/* Render tools grouped by type in specified order */}
         <div className="space-y-12 mb-16">
-          {Object.entries(groupedTools).map(([type, tools]) => (
-            <div key={type}>
-              <h2 className="text-2xl font-semibold mb-4">{type}</h2>
-              {type === "Kost & ernæring værktøjer" && (
-                <p className="text-gray-600 mb-6">
-                  Få kontrol over din kost og ernæring med vores brugervenlige
-                  værktøjer og beregnere. Beregn dine kalorier, lav kostplaner,
-                  planlæg dine sunde måltider og find den rette balance til at
-                  opnå dine mål.
-                </p>
-              )}
-              {type === "Kropdele og smerter" && (
-                <p className="text-gray-600 mb-6">
-                  Få hjælp til din genoptræning med vores fysioterapi-værktøjer.
-                  Fra skadesvurdering til genoptræningsplaner – udnyt vores
-                  værktøjer, der støtter dig mod bedring og styrkelse.
-                </p>
-              )}
-              {type === "Forstå din MR og DEXA scanning" && (
-                <div className="mb-6">
-                  <p className="text-gray-600">
-                    Medicinske scanningsresultater kan være svære at forstå. Få
-                    dine MR- og DEXA-scanninger forklaret i letforståeligt
-                    dansk, og forstå din sundhedstilstand bedre.
+          {sectionOrder.map((type) => {
+            const toolsInSection = groupedTools[type];
+            if (!toolsInSection || toolsInSection.length === 0) return null;
+
+            return (
+              <div key={type}>
+                <h2 className="text-2xl font-semibold mb-4">{type}</h2>
+                {type === "Kost & ernæring værktøjer" && (
+                  <p className="text-gray-600 mb-6">
+                    Få kontrol over din kost og ernæring med vores brugervenlige
+                    værktøjer og beregnere. Beregn dine kalorier, lav kostplaner,
+                    planlæg dine sunde måltider og find den rette balance til at
+                    opnå dine mål.
                   </p>
+                )}
+                {type === "Kropdele og smerter" && (
+                  <p className="text-gray-600 mb-6">
+                    Få hjælp til din genoptræning med vores fysioterapi-værktøjer.
+                    Fra skadesvurdering til genoptræningsplaner – udnyt vores
+                    værktøjer, der støtter dig mod bedring og styrkelse.
+                  </p>
+                )}
+                {type === "Forstå din MR og DEXA scanning" && (
+                  <div className="mb-6">
+                    <p className="text-gray-600">
+                      Medicinske scanningsresultater kan være svære at forstå. Få
+                      dine MR- og DEXA-scanninger forklaret i letforståeligt
+                      dansk, og forstå din sundhedstilstand bedre.
+                    </p>
+                  </div>
+                )}
+                {type === "Træning & bevægelse værktøjer" && (
+                  <p className="text-gray-600 mb-6">
+                    Optimer din træning og bevægelse med vores værktøjer, der hjælper
+                    dig med at blive stærkere og mere fleksibel. Uanset om du er
+                    nybegynder eller erfaren.
+                  </p>
+                )}
+                <div className="grid md:grid-cols-2 gap-8">
+                  {toolsInSection.map((tool) => (
+                    <ToolCard key={tool.href + tool.title} tool={tool} />
+                  ))}
                 </div>
-              )}
-              <div className="grid md:grid-cols-2 gap-8">
-                {tools.map((tool) => (
-                  <ToolCard key={tool.href + tool.title} tool={tool} />
-                ))}
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
         <div className="space-y-8 mt-16 max-w-prose mx-auto">
-          <div>
-            <h2 className="text-xl sm:text-2xl font-semibold mb-2">
-              Træning & bevægelse værktøjer
-            </h2>
-            <p className="text-gray-600">
-              Optimer din træning og bevægelse med vores værktøjer, der hjælper
-              dig med at blive stærkere og mere fleksibel. Uanset om du er
-              nybegynder eller erfaren.
-            </p>
-          </div>
           <div>
             <h2 className="text-xl sm:text-2xl font-semibold mb-2">
               Sundhed & velvære værktøjer

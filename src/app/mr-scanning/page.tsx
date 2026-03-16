@@ -9,13 +9,29 @@ import { getPageContent } from "@/lib/pageContent";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import rehypeUnwrapImages from "rehype-unwrap-images";
+import rehypeSlug from "rehype-slug";
 import rehypeInternalLinks from "lib/internal-linking/rehype-internal-links";
 import { loadLinkConfig } from "lib/internal-linking/config";
 import RelatedToolsSection from "@/components/features/RelatedToolsSection";
+import { TableOfContents } from "@/components/features/blog-og-ordbog/TableOfContents";
+import { extractTableOfContents } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Komplet MR-scanning guide | Få svar på dine spørgsmål ✅",
-  description: "Oversæt din MR-scanning rapport til letforståeligt dansk.",
+  title: "Oversæt MR-scanning rapport → Forstå dit MR-resultat ✓",
+  description: "Forstå din MR-scanning uden lægesprog. Oversæt din MR-scanning rapport og få en klar forklaring på fund, begreber og konklusioner – hurtigt og gratis.",
+  openGraph: {
+    title: "Oversæt MR-scanning rapport → Forstå dit MR-resultat ✓",
+    description: "Forstå din MR-scanning uden lægesprog. Oversæt din MR-scanning rapport og få en klar forklaring på fund, begreber og konklusioner – hurtigt og gratis.",
+    images: [
+      {
+        url: "/images/mr-scanning/mr-scanning.png",
+        width: 1200,
+        height: 630,
+        alt: "MR-scanning maskine i et hospital miljø",
+      },
+    ],
+    type: "website",
+  },
 };
 
 // Custom component for rendering images within MDX
@@ -49,21 +65,24 @@ export default async function MRScanPage() {
   const pageContent = await getPageContent("mr-scanning");
   const linkConfig = loadLinkConfig();
   const currentPagePath = "/mr-scanning";
+  const headings = extractTableOfContents(pageContent);
 
   return (
-    <main className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-3xl">
-      <WebAppStructuredData
-        type="tool"
-        name="MR-scanning Oversætter"
-        description="Oversæt din MR-scanning rapport til letforståeligt dansk"
-        breadcrumbs={breadcrumbItems}
-      />
-      <div className="space-y-6 sm:space-y-8">
+    <main className="container mx-auto px-4 sm:px-6 py-6 sm:py-8">
+      <div className="flex flex-col lg:flex-row lg:gap-8">
+        <TableOfContents headings={headings} />
+        <div className="flex-1 max-w-3xl">
+          <WebAppStructuredData
+            type="tool"
+            name="MR-scanning Oversætter"
+            description="Oversæt din MR-scanning rapport til letforståeligt dansk"
+            breadcrumbs={breadcrumbItems}
+          />
+          <div className="space-y-6 sm:space-y-8">
         <Breadcrumbs items={breadcrumbItems} />
         <div className="space-y-4">
           <h1 className="text-2xl sm:text-3xl font-bold">
-            Hvad betyder din MR-scanning? Prøv vores MR-scanningsrapport
-            oversætter
+            Hvad betyder din MR-scanning? Oversæt din MR-rapport til letforståeligt dansk
           </h1>
           <p className="text-gray-600 text-sm sm:text-base">
             Få din MR-scanning rapport oversat til letforståeligt dansk.
@@ -79,7 +98,7 @@ export default async function MRScanPage() {
         <div className="space-y-12">
           <div className="space-y-4">
             <h2 className="text-xl sm:text-2xl font-semibold">
-              Hvordan det virker
+              MR-scanning resultat oversætter: Sådan gør du
             </h2>
             <ol className="list-decimal list-inside space-y-2 text-gray-700">
               <li>
@@ -149,6 +168,7 @@ export default async function MRScanPage() {
                 mdxOptions: {
                   remarkPlugins: [remarkGfm],
                   rehypePlugins: [
+                    rehypeSlug,
                     rehypeUnwrapImages,
                     [rehypeInternalLinks, { linkConfig, currentPagePath }],
                   ],
@@ -158,7 +178,9 @@ export default async function MRScanPage() {
           </div>
         </div>
         
-        <RelatedToolsSection currentToolHref="/mr-scanning" />
+            <RelatedToolsSection currentToolHref="/mr-scanning" />
+          </div>
+        </div>
       </div>
     </main>
   );

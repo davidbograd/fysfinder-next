@@ -115,6 +115,25 @@ export async function getLogoCacheStats(): Promise<{
 }
 
 /**
+ * Batch resolve logo paths for multiple clinics (server-side).
+ * Returns a map of clinics_id -> logoPath.
+ * The cache is loaded once and memoized, so subsequent lookups are instant.
+ */
+export async function resolveLogoPathMap(
+  clinics: { clinics_id: string; website?: string }[]
+): Promise<Record<string, string | null>> {
+  const map: Record<string, string | null> = {};
+  for (const clinic of clinics) {
+    if (clinic.website) {
+      map[clinic.clinics_id] = await getCachedLogoPath(clinic.website);
+    } else {
+      map[clinic.clinics_id] = null;
+    }
+  }
+  return map;
+}
+
+/**
  * Synchronous version for use in components (assumes cache is already loaded)
  */
 export function getCachedLogoPathSync(website: string): string | null {

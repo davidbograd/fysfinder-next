@@ -1,6 +1,6 @@
 ---
-title: "Smerter i lysken – årsager og øvelser"
-lastUpdated: "13/09/2025"
+title: "Smerter i lysken"
+lastUpdated: "12/10/2025"
 metaTitle: "Smerter i lysken → årsager og øvelser"
 datePublished: "13/09/2025"
 ---

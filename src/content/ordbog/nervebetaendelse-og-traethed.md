@@ -1,6 +1,6 @@
 ---
-title: "Nervebetændelse og træthed – årsager og løsninger"
-lastUpdated: "13/09/2025"
+title: "Nervebetændelse og træthed"
+lastUpdated: "12/10/2025"
 metaTitle: "Nervebetændelse og træthed → årsager og løsninger"
 datePublished: "13/09/2025"
 ---

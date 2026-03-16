@@ -1,6 +1,6 @@
 ---
-title: "Nervebetændelse i ben – årsager og behandling"
-lastUpdated: "13/09/2025"
+title: "Nervebetændelse i ben"
+lastUpdated: "12/10/2025"
 metaTitle: "Nervebetændelse i ben → årsager og behandling"
 datePublished: "13/09/2025"
 ---

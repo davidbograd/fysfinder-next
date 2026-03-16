@@ -1,6 +1,6 @@
 ---
-title: "Ondt i foden – årsager og øvelser"
-lastUpdated: "13/09/2025"
+title: "Ondt i foden"
+lastUpdated: "12/10/2025"
 metaTitle: "Ondt i foden → årsager og øvelser"
 datePublished: "13/09/2025"
 ---

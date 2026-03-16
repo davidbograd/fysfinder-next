@@ -1,6 +1,6 @@
 ---
-title: "Nervetryk i lænden – symptomer og lindring"
-lastUpdated: "13/09/2025"
+title: "Nervetryk i lænden"
+lastUpdated: "12/10/2025"
 metaTitle: "Nervetryk i lænden → symptomer og lindring"
 datePublished: "13/09/2025"
 ---

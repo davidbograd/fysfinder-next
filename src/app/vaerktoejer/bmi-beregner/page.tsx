@@ -8,14 +8,31 @@ import { getPageContent } from "@/lib/pageContent";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import rehypeUnwrapImages from "rehype-unwrap-images";
+import rehypeSlug from "rehype-slug";
 import rehypeInternalLinks from "lib/internal-linking/rehype-internal-links";
 import { loadLinkConfig } from "lib/internal-linking/config";
 import RelatedToolsSection from "@/components/features/RelatedToolsSection";
+import { TableOfContents } from "@/components/features/blog-og-ordbog/TableOfContents";
+import { extractTableOfContents } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "BMI-beregner: Beregn og forstå dit Body Mass Index tal ✅",
   description:
     "Beregn dit BMI (Body Mass Index) med vores gratis BMI-beregner. Få din vægtklassifikation og sundhedsrådgivning.",
+  openGraph: {
+    title: "BMI-beregner: Beregn og forstå dit Body Mass Index tal ✅",
+    description:
+      "Beregn dit BMI (Body Mass Index) med vores gratis BMI-beregner. Få din vægtklassifikation og sundhedsrådgivning.",
+    images: [
+      {
+        url: "/images/vaerktoejer/bmi-beregner.png",
+        width: 1200,
+        height: 630,
+        alt: "BMI-beregner illustration med vægt og målebånd",
+      },
+    ],
+    type: "website",
+  },
 };
 
 // Custom component for rendering images within MDX
@@ -45,18 +62,22 @@ export default async function BMICalculatorPage() {
   const pageContent = await getPageContent("bmi-beregner");
   const linkConfig = loadLinkConfig();
   const currentPagePath = "/vaerktoejer/bmi-beregner";
+  const headings = extractTableOfContents(pageContent);
 
   return (
-    <main className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-3xl">
-      <WebAppStructuredData
-        type="tool"
-        name="BMI-beregner"
-        description="Beregn dit BMI (Body Mass Index) med vores gratis BMI-beregner"
-        breadcrumbs={breadcrumbItems}
-        toolType="calculator"
-        calculatorType="bmi"
-      />
-      <div className="space-y-6 sm:space-y-8">
+    <main className="container mx-auto px-4 sm:px-6 py-6 sm:py-8">
+      <div className="flex flex-col lg:flex-row lg:gap-8">
+        <TableOfContents headings={headings} />
+        <div className="flex-1 max-w-3xl">
+          <WebAppStructuredData
+            type="tool"
+            name="BMI-beregner"
+            description="Beregn dit BMI (Body Mass Index) med vores gratis BMI-beregner"
+            breadcrumbs={breadcrumbItems}
+            toolType="calculator"
+            calculatorType="bmi"
+          />
+          <div className="space-y-6 sm:space-y-8">
         <Breadcrumbs items={breadcrumbItems} />
         <div className="space-y-4">
           <h1 className="text-2xl sm:text-3xl font-bold">
@@ -125,6 +146,7 @@ export default async function BMICalculatorPage() {
                 mdxOptions: {
                   remarkPlugins: [remarkGfm],
                   rehypePlugins: [
+                    rehypeSlug,
                     rehypeUnwrapImages,
                     [rehypeInternalLinks, { linkConfig, currentPagePath }],
                   ],
@@ -133,8 +155,9 @@ export default async function BMICalculatorPage() {
             />
           </div>
         </div>
-        
-        <RelatedToolsSection currentToolHref="/vaerktoejer/bmi-beregner" />
+            <RelatedToolsSection currentToolHref="/vaerktoejer/bmi-beregner" />
+          </div>
+        </div>
       </div>
     </main>
   );

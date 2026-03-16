@@ -1,11 +1,16 @@
+// NearbyClinicsList component - Renders nearby clinics with distance
+// Updated: passes clinicId to ClinicCard for analytics tracking
+
 import { ClinicWithDistance } from "@/app/types";
 import ClinicCard from "../../../../../components/features/clinic/ClinicCard";
+import { orderSpecialties } from "@/lib/clinic-utils";
 
-interface NearbysClinicsListProps {
+interface NearbyClinicsListProps {
   clinics: ClinicWithDistance[];
   cityName: string;
   specialtySlug?: string;
   specialtyName?: string;
+  logoPathMap?: Record<string, string | null>;
 }
 
 export function NearbyClinicsList({
@@ -13,7 +18,8 @@ export function NearbyClinicsList({
   cityName,
   specialtySlug,
   specialtyName,
-}: NearbysClinicsListProps) {
+  logoPathMap,
+}: NearbyClinicsListProps) {
   if (clinics.length === 0) return null;
 
   return (
@@ -24,41 +30,29 @@ export function NearbyClinicsList({
           : `Andre klinikker i nærheden af ${cityName}`}
       </h2>
       <div className="space-y-4">
-        {clinics.map((clinic) => {
-          // If we're on a specialty page, reorder the specialties array to show the current specialty first
-          let orderedSpecialties = clinic.specialties;
-          if (specialtySlug && clinic.specialties) {
-            orderedSpecialties = [
-              ...clinic.specialties.filter(
-                (s) => s.specialty_name_slug === specialtySlug
-              ),
-              ...clinic.specialties.filter(
-                (s) => s.specialty_name_slug !== specialtySlug
-              ),
-            ];
-          }
-
-          return (
-            <ClinicCard
-              key={clinic.clinics_id}
-              klinikNavn={clinic.klinikNavn}
-              klinikNavnSlug={clinic.klinikNavnSlug}
-              ydernummer={clinic.ydernummer}
-              avgRating={clinic.avgRating}
-              ratingCount={clinic.ratingCount}
-              adresse={clinic.adresse}
-              postnummer={clinic.postnummer}
-              lokation={clinic.lokation}
-              website={clinic.website}
-              tlf={clinic.tlf}
-              distance={clinic.distance}
-              specialties={orderedSpecialties}
-              team_members={clinic.team_members}
-              premium_listing={clinic.premium_listing}
-              handicapadgang={clinic.handicapadgang}
-            />
-          );
-        })}
+        {clinics.map((clinic) => (
+          <ClinicCard
+            key={clinic.clinics_id}
+            clinicId={clinic.clinics_id}
+            klinikNavn={clinic.klinikNavn}
+            klinikNavnSlug={clinic.klinikNavnSlug}
+            ydernummer={clinic.ydernummer}
+            avgRating={clinic.avgRating}
+            ratingCount={clinic.ratingCount}
+            adresse={clinic.adresse}
+            postnummer={clinic.postnummer}
+            lokation={clinic.lokation}
+            website={clinic.website}
+            tlf={clinic.tlf}
+            distance={clinic.distance}
+            specialties={orderSpecialties(clinic.specialties, specialtySlug)}
+            team_members={clinic.team_members}
+            premium_listing={clinic.premium_listing}
+            handicapadgang={clinic.handicapadgang}
+            verified_klinik={clinic.verified_klinik}
+            logoPath={logoPathMap?.[clinic.clinics_id] ?? null}
+          />
+        ))}
       </div>
     </div>
   );

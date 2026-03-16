@@ -1,6 +1,6 @@
 ---
-title: "Smerter i skulder og arm om natten – årsager og løsninger"
-lastUpdated: "13/09/2025"
+title: "Smerter i skulder og arm om natten"
+lastUpdated: "12/10/2025"
 metaTitle: "Smerter i skulder og arm om natten → årsager og løsninger"
 datePublished: "13/09/2025"
 ---

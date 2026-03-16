@@ -1,6 +1,6 @@
 ---
-title: "Fibersprængning – symptomer, årsager og behandling"
-lastUpdated: "13/09/2025"
+title: "Fibersprængning"
+lastUpdated: "12/10/2025"
 metaTitle: "Fibersprængning → symptomer, årsager og behandling"
 datePublished: "13/09/2025"
 ---

@@ -1,6 +1,6 @@
 ---
-title: "Smerter på ydersiden af knæet – årsager og behandling"
-lastUpdated: "13/09/2025"
+title: "Smerter på ydersiden af knæet"
+lastUpdated: "12/10/2025"
 metaTitle: "Smerter på ydersiden af knæet → årsager og behandling"
 datePublished: "13/09/2025"
 ---

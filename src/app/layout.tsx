@@ -1,3 +1,7 @@
+// Root layout
+// Updated: Removed clinic signup top banner
+// EmailVerificationBanner handles its own auth check client-side
+
 import type { Metadata } from "next";
 import "./globals.css";
 import { GeistSans } from "geist/font/sans";
@@ -6,6 +10,8 @@ import Footer from "@/components/layout/Footer";
 import Script from "next/script";
 import { CookieConsentBanner } from "@/components/layout/CookieConsent";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Toaster } from "@/components/ui/toaster";
+import { EmailVerificationBanner } from "@/components/layout/EmailVerificationBanner";
 
 export const metadata: Metadata = {
   title: "FysFinder",
@@ -54,6 +60,7 @@ export default function RootLayout({
     <html lang="da" className={GeistSans.className}>
       <body className="flex flex-col min-h-screen">
         <Header />
+        <EmailVerificationBanner />
         <main className="flex-grow pt-6 sm:pt-8">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {children}
@@ -61,6 +68,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <CookieConsentBanner />
+        <Toaster />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-BH38ZB6HYH"
           strategy="afterInteractive"

@@ -1,6 +1,6 @@
 ---
-title: "Ondt i halebenet uden grund – årsager og behandling"
-lastUpdated: "13/09/2025"
+title: "Ondt i halebenet uden grund"
+lastUpdated: "12/10/2025"
 metaTitle: "Ondt i halebenet uden grund → årsager og behandling"
 datePublished: "13/09/2025"
 ---

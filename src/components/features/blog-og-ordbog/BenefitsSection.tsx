@@ -5,11 +5,12 @@
 
 import { Clock, BookHeart, Shield } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 interface Benefit {
   icon: React.ReactNode;
   title: string;
-  description: string;
+  description: string | React.ReactNode;
   className?: string;
 }
 
@@ -31,8 +32,25 @@ const benefits: Benefit[] = [
   {
     icon: <Shield className="w-8 h-8 text-logo-blue" />,
     title: "Nem adgang til tilskudsberettiget behandling",
-    description:
-      "Find hurtigt klinikker, der tilbyder behandling med tilskud fra den offentlige sygesikring. Tjek for klinikker med ydernummer.",
+    description: (
+      <span>
+        Find hurtigt klinikker, der tilbyder{" "}
+        <Link 
+          href="/blog/tilskud-til-fysioterapi" 
+          className="text-logo-blue hover:underline transition-all"
+        >
+          behandling med tilskud
+        </Link>{" "}
+        fra den offentlige sygesikring. Tjek for{" "}
+        <Link 
+          href="/find/fysioterapeut/danmark?ydernummer=true" 
+          className="text-logo-blue hover:underline transition-all"
+        >
+          klinikker med ydernummer
+        </Link>
+        .
+      </span>
+    ),
     className: "md:col-start-2 md:row-start-1 md:row-span-2",
   },
 ];

@@ -1,6 +1,6 @@
 ---
-title: "Smerter i skulder og overarm – årsager og øvelser"
-lastUpdated: "13/09/2025"
+title: "Smerter i skulder og overarm"
+lastUpdated: "12/10/2025"
 metaTitle: "Smerter i skulder og overarm → årsager og øvelser"
 datePublished: "13/09/2025"
 ---

@@ -1,6 +1,6 @@
 ---
-title: "Ondt i håndled – smerter og øvelser"
-lastUpdated: "13/09/2025"
+title: "Ondt i håndled"
+lastUpdated: "12/10/2025"
 metaTitle: "Ondt i håndled → smerter og øvelser"
 datePublished: "13/09/2025"
 ---

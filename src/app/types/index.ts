@@ -1,3 +1,6 @@
+// Shared application types
+// Updated: add optional clinic geo fields for location map rendering
+
 export interface Clinic {
   clinics_id: string;
   klinikNavn: string;
@@ -42,6 +45,11 @@ export interface Clinic {
   insurances?: Insurance[];
   extraServices?: ExtraService[];
   premium_listing?: PremiumListing | null;
+  latitude?: number | null;
+  longitude?: number | null;
+  clinic_latitude?: number | null;
+  clinic_longitude?: number | null;
+  google_place_id?: string | null;
 }
 
 export interface SeoSection {
@@ -170,6 +178,11 @@ export interface DBClinicResponse {
     display_order: number;
   }[];
   premium_listings?: PremiumListing[];
+  latitude?: number | null;
+  longitude?: number | null;
+  clinic_latitude?: number | null;
+  clinic_longitude?: number | null;
+  google_place_id?: string | null;
 }
 
 export interface LocationPageData {

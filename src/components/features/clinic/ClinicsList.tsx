@@ -1,22 +1,28 @@
+// ClinicsList component - Renders a paginated list of clinic cards
+// Updated: passes clinicId to ClinicCard for analytics tracking
+
 "use client";
 
 import { useState } from "react";
 import { Clinic } from "@/app/types";
 import ClinicCard from "./ClinicCard";
 import { Button } from "@/components/ui/button";
+import { orderSpecialties } from "@/lib/clinic-utils";
 
 interface ClinicsListProps {
   clinics: Clinic[];
   totalClinics: number;
   specialtySlug?: string;
   itemsPerPage?: number;
+  logoPathMap?: Record<string, string | null>;
 }
 
 export function ClinicsList({
   clinics,
   totalClinics,
   specialtySlug,
-  itemsPerPage = 100,
+  itemsPerPage = 10,
+  logoPathMap,
 }: ClinicsListProps) {
   const [displayCount, setDisplayCount] = useState(itemsPerPage);
 
@@ -36,40 +42,28 @@ export function ClinicsList({
       </h3>
 
       <div className="space-y-4">
-        {visibleClinics.map((clinic: Clinic) => {
-          // If we're on a specialty page, reorder the specialties array to show the current specialty first
-          let orderedSpecialties = clinic.specialties;
-          if (specialtySlug && clinic.specialties) {
-            orderedSpecialties = [
-              ...clinic.specialties.filter(
-                (s) => s.specialty_name_slug === specialtySlug
-              ),
-              ...clinic.specialties.filter(
-                (s) => s.specialty_name_slug !== specialtySlug
-              ),
-            ];
-          }
-
-          return (
-            <ClinicCard
-              key={clinic.clinics_id}
-              klinikNavn={clinic.klinikNavn}
-              klinikNavnSlug={clinic.klinikNavnSlug}
-              ydernummer={clinic.ydernummer}
-              avgRating={clinic.avgRating}
-              ratingCount={clinic.ratingCount}
-              adresse={clinic.adresse}
-              postnummer={clinic.postnummer}
-              lokation={clinic.lokation}
-              website={clinic.website}
-              tlf={clinic.tlf}
-              specialties={orderedSpecialties}
-              team_members={clinic.team_members}
-              premium_listing={clinic.premium_listing}
-              handicapadgang={clinic.handicapadgang}
-            />
-          );
-        })}
+        {visibleClinics.map((clinic: Clinic) => (
+          <ClinicCard
+            key={clinic.clinics_id}
+            clinicId={clinic.clinics_id}
+            klinikNavn={clinic.klinikNavn}
+            klinikNavnSlug={clinic.klinikNavnSlug}
+            ydernummer={clinic.ydernummer}
+            avgRating={clinic.avgRating}
+            ratingCount={clinic.ratingCount}
+            adresse={clinic.adresse}
+            postnummer={clinic.postnummer}
+            lokation={clinic.lokation}
+            website={clinic.website}
+            tlf={clinic.tlf}
+            specialties={orderSpecialties(clinic.specialties, specialtySlug)}
+            team_members={clinic.team_members}
+            premium_listing={clinic.premium_listing}
+            handicapadgang={clinic.handicapadgang}
+            verified_klinik={clinic.verified_klinik}
+            logoPath={logoPathMap?.[clinic.clinics_id] ?? null}
+          />
+        ))}
       </div>
 
       {hasMore && (

@@ -1,4 +1,9 @@
-import { createClient } from "@/app/utils/supabase/server";
+// City utilities for fetching and processing city data with clinic counts
+// Updated: 2025-02-14 - Switched to static Supabase client to avoid cookies() usage
+// This allows pages using these utilities to be statically rendered (ISR/SSG)
+// Previously used the cookie-based server client which forced dynamic rendering
+
+import { createStaticClient } from "@/app/utils/supabase/static";
 
 export interface CityWithCount {
   id: string;
@@ -30,7 +35,7 @@ export const regions: {
 };
 
 export async function fetchSpecialties(): Promise<Specialty[]> {
-  const supabase = await createClient();
+  const supabase = createStaticClient();
   const { data, error } = await supabase
     .from("specialties")
     .select("specialty_id, specialty_name, specialty_name_slug");
@@ -43,29 +48,21 @@ export async function fetchSpecialties(): Promise<Specialty[]> {
   return data;
 }
 
-export async function fetchCitiesWithCounts() {
-  const supabase = await createClient();
+export async function fetchCitiesWithCounts(): Promise<CityWithCount[]> {
+  const supabase = createStaticClient();
 
-  const { data, error } = await supabase.from("cities").select(`
-      id,
-      bynavn,
-      bynavn_slug,
-      postal_codes,
-      clinics:clinics(count)
-    `);
+  // Use the city_clinic_counts view for fast, pre-computed aggregates
+  // This avoids expensive nested queries and prevents timeouts
+  const { data, error } = await supabase
+    .from("city_clinic_counts")
+    .select("id, bynavn, bynavn_slug, postal_codes, clinic_count");
 
   if (error) {
     console.error("Supabase error:", error);
     throw new Error(`Failed to fetch cities: ${error.message}`);
   }
 
-  return (data || []).map((city) => ({
-    id: city.id,
-    bynavn: city.bynavn,
-    bynavn_slug: city.bynavn_slug,
-    postal_codes: city.postal_codes,
-    clinic_count: city.clinics?.[0]?.count || 0,
-  }));
+  return data || [];
 }
 
 export function processCities(cities: CityWithCount[]): RegionData[] {

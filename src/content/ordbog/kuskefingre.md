@@ -1,6 +1,6 @@
 ---
-title: "Kuskefingre – symptomer og behandling"
-lastUpdated: "13/09/2025"
+title: "Kuskefingre"
+lastUpdated: "12/10/2025"
 metaTitle: "Kuskefingre → symptomer og behandling"
 datePublished: "13/09/2025"
 ---

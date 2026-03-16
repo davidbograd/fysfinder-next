@@ -1,3 +1,5 @@
+@import "leaflet/dist/leaflet.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -73,4 +75,24 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@layer components {
+  .leaflet-container {
+    font-family: inherit;
+  }
+
+  .fysfinder-map-popup .leaflet-popup-content-wrapper {
+    @apply rounded-lg border border-gray-200 shadow-md;
+  }
+
+  .fysfinder-map-popup .leaflet-popup-content {
+    @apply m-0 p-3 text-sm text-gray-900 leading-relaxed;
+    font-family: inherit;
+  }
+
+  .fysfinder-map-popup .leaflet-popup-tip {
+    @apply border border-gray-200;
+  }
+
 }

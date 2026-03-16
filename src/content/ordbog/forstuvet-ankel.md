@@ -1,6 +1,6 @@
 ---
-title: "Forstuvet ankel – tegn, førstehjælp og genoptræning"
-lastUpdated: "13/09/2025"
+title: "Forstuvet ankel"
+lastUpdated: "12/10/2025"
 metaTitle: "Forstuvet ankel → tegn, førstehjælp og genoptræning"
 datePublished: "13/09/2025"
 ---

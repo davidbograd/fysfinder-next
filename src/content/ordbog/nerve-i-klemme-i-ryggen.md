@@ -1,6 +1,6 @@
 ---
-title: "Nerve i klemme i ryggen – årsager og lindring"
-lastUpdated: "13/09/2025"
+title: "Nerve i klemme i ryggen"
+lastUpdated: "12/10/2025"
 metaTitle: "Nerve i klemme i ryggen → årsager og lindring"
 datePublished: "13/09/2025"
 ---

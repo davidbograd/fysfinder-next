@@ -9,14 +9,31 @@ import { getPageContent } from "@/lib/pageContent";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import rehypeUnwrapImages from "rehype-unwrap-images";
+import rehypeSlug from "rehype-slug";
 import rehypeInternalLinks from "lib/internal-linking/rehype-internal-links";
 import { loadLinkConfig } from "lib/internal-linking/config";
 import RelatedToolsSection from "@/components/features/RelatedToolsSection";
+import { TableOfContents } from "@/components/features/blog-og-ordbog/TableOfContents";
+import { extractTableOfContents } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Komplet DEXA-scanning guide | Forstå alt om DEXA-scan ✅",
+  title: "Oversæt DEXA-scanning rapport → Forstå dit DXA-resultat ✓",
   description:
-    "Oversæt din DEXA-scanning rapport til letforståeligt dansk og forstå alt om DEXA-scan.",
+    "Få din DEXA-scanning forklaret i letforståeligt dansk. Oversæt din DXA-rapport og forstå værdier, målinger og konklusioner – hurtigt og gratis.",
+  openGraph: {
+    title: "Oversæt DEXA-scanning rapport → Forstå dit DXA-resultat ✓",
+    description:
+      "Få din DEXA-scanning forklaret i letforståeligt dansk. Oversæt din DXA-rapport og forstå værdier, målinger og konklusioner – hurtigt og gratis.",
+    images: [
+      {
+        url: "/images/dexa-scanning/dexa-scanning.jpeg",
+        width: 1200,
+        height: 630,
+        alt: "DEXA-scanning illustration",
+      },
+    ],
+    type: "website",
+  },
 };
 
 // Custom component for rendering images within MDX
@@ -50,21 +67,24 @@ export default async function DEXAScanPage() {
   const pageContent = await getPageContent("dexa-scanning");
   const linkConfig = loadLinkConfig();
   const currentPagePath = "/dexa-scanning";
+  const headings = extractTableOfContents(pageContent);
 
   return (
-    <main className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-3xl">
-      <WebAppStructuredData
-        type="tool"
-        name="DEXA-scanning Oversætter"
-        description="Oversæt din DEXA-scanning rapport til letforståeligt dansk"
-        breadcrumbs={breadcrumbItems}
-      />
-      <div className="space-y-6 sm:space-y-8">
+    <main className="container mx-auto px-4 sm:px-6 py-6 sm:py-8">
+      <div className="flex flex-col lg:flex-row lg:gap-8">
+        <TableOfContents headings={headings} />
+        <div className="flex-1 max-w-3xl">
+          <WebAppStructuredData
+            type="tool"
+            name="DEXA-scanning Oversætter"
+            description="Oversæt din DEXA-scanning rapport til letforståeligt dansk"
+            breadcrumbs={breadcrumbItems}
+          />
+          <div className="space-y-6 sm:space-y-8">
         <Breadcrumbs items={breadcrumbItems} />
         <div className="space-y-4">
           <h1 className="text-2xl sm:text-3xl font-bold">
-            Hvad betyder din DEXA-scanning? Prøv vores DEXA-scanningsrapport
-            oversætter
+            Hvad betyder din DEXA-scanning? Oversæt din DXA-rapport til letforståeligt dansk
           </h1>
           <p className="text-gray-600 text-sm sm:text-base">
             En DEXA-scanning giver indblik i din knoglemasse og risiko for
@@ -83,7 +103,7 @@ export default async function DEXAScanPage() {
         <div className="space-y-12">
           <div className="space-y-4">
             <h2 className="text-xl sm:text-2xl font-semibold">
-              Hvordan det virker
+              DEXA-scanning resultat oversætter: Sådan gør du
             </h2>
             <ol className="list-decimal list-inside space-y-2 text-gray-700">
               <li>
@@ -153,6 +173,7 @@ export default async function DEXAScanPage() {
                 mdxOptions: {
                   remarkPlugins: [remarkGfm],
                   rehypePlugins: [
+                    rehypeSlug,
                     rehypeUnwrapImages,
                     [rehypeInternalLinks, { linkConfig, currentPagePath }],
                   ],
@@ -162,7 +183,9 @@ export default async function DEXAScanPage() {
           </div>
         </div>
         
-        <RelatedToolsSection currentToolHref="/dexa-scanning" />
+            <RelatedToolsSection currentToolHref="/dexa-scanning" />
+          </div>
+        </div>
       </div>
     </main>
   );

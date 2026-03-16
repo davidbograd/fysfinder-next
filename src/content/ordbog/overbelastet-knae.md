@@ -1,6 +1,6 @@
 ---
-title: "Overbelastet knæ – symptomer og forebyggelse"
-lastUpdated: "13/09/2025"
+title: "Overbelastet knæ"
+lastUpdated: "12/10/2025"
 metaTitle: "Overbelastet knæ → symptomer og forebyggelse"
 datePublished: "13/09/2025"
 ---

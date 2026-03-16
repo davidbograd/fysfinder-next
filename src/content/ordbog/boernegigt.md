@@ -1,6 +1,6 @@
 ---
-title: "Børnegigt – symptomer og behandling"
-lastUpdated: "13/09/2025"
+title: "Børnegigt"
+lastUpdated: "12/10/2025"
 metaTitle: "Børnegigt → symptomer og behandling"
 datePublished: "13/09/2025"
 ---

@@ -2,7 +2,9 @@ import { render, screen } from "@testing-library/react";
 import ClinicCard from "../ClinicCard";
 
 const mockClinic = {
+  clinicId: "test-clinic-id",
   klinikNavn: "Fysioterapi Klinikken",
+  klinikNavnSlug: "fysioterapi-klinikken",
   ydernummer: true,
   avgRating: 4.5,
   ratingCount: 42,

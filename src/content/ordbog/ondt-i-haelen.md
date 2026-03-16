@@ -1,6 +1,6 @@
 ---
-title: "Ondt i hælen – smerter og behandling"
-lastUpdated: "13/09/2025"
+title: "Ondt i hælen"
+lastUpdated: "12/10/2025"
 metaTitle: "Ondt i hælen → smerter og behandling"
 datePublished: "13/09/2025"
 ---

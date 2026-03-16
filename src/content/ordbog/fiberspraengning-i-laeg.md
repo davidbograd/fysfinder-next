@@ -1,6 +1,6 @@
 ---
-title: "Fibersprængning i læg – symptomer og genoptræning"
-lastUpdated: "13/09/2025"
+title: "Fibersprængning i læg"
+lastUpdated: "12/10/2025"
 metaTitle: "Fibersprængning i læg → symptomer og genoptræning"
 datePublished: "13/09/2025"
 ---
