@@ -260,6 +260,9 @@ export function LocationClinicsMapClient({
     setSelectedMarkerClinicId(clinicId);
     setHoveredMarkerClinicId(clinicId);
 
+    const isDesktopViewport = window.matchMedia("(min-width: 1280px)").matches;
+    if (!isDesktopViewport) return;
+
     const cardElement = document.getElementById(`clinic-card-${clinicId}`);
     if (cardElement) {
       smoothScrollToElement(cardElement, 380);
