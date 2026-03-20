@@ -1,3 +1,4 @@
+// Updated: 2026-03-17 - Added brand font mapping for Manrope and phase 1 brand utility colors
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -9,6 +10,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-manrope)", "sans-serif"],
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
@@ -61,6 +65,10 @@ const config: Config = {
           "5": "hsl(var(--chart-5))",
         },
         "logo-blue": "#1894e0",
+        "brand-primary": "#104534",
+        "brand-label": "#696671",
+        "brand-green": "#0b5b43",
+        "brand-cream": "#f8f7f2",
       },
       keyframes: {
         "accordion-down": {

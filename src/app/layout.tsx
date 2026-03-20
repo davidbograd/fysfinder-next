@@ -1,10 +1,9 @@
 // Root layout
-// Updated: Removed clinic signup top banner
-// EmailVerificationBanner handles its own auth check client-side
+// Updated: 2026-03-17 - Added Manrope font setup, widened shared content container to 1440px, and removed global main top padding for flush hero alignment
 
 import type { Metadata } from "next";
 import "./globals.css";
-import { GeistSans } from "geist/font/sans";
+import { Manrope } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import Script from "next/script";
@@ -12,6 +11,12 @@ import { CookieConsentBanner } from "@/components/layout/CookieConsent";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Toaster } from "@/components/ui/toaster";
 import { EmailVerificationBanner } from "@/components/layout/EmailVerificationBanner";
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  weight: ["200", "300", "400", "500", "600", "700", "800"],
+  variable: "--font-manrope",
+});
 
 export const metadata: Metadata = {
   title: "FysFinder",
@@ -57,12 +62,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="da" className={GeistSans.className}>
-      <body className="flex flex-col min-h-screen">
+    <html lang="da" className={manrope.variable}>
+      <body className="flex flex-col min-h-screen font-sans">
         <Header />
         <EmailVerificationBanner />
-        <main className="flex-grow pt-6 sm:pt-8">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <main className="flex-grow">
+          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
             {children}
           </div>
         </main>

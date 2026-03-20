@@ -1,3 +1,4 @@
+// Updated: 2026-03-17 - Polished homepage search bar sizing/typography and desktop CTA style to match redesign reference
 "use client";
 
 import React, { useState, Suspense } from "react";
@@ -91,19 +92,22 @@ function InlineSearchButton() {
       onClick={handleClick}
       disabled={isDisabled}
       className={`
-        w-12 h-12 rounded-full transition-colors duration-200 flex items-center justify-center
+        py-3 px-8 rounded-full transition-colors duration-200 inline-flex items-center justify-center gap-2 text-[18px] font-normal
         ${
           isDisabled
-            ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-            : "bg-logo-blue hover:opacity-90 text-white"
+            ? "bg-[#c5cbc9] text-[#6d7875] cursor-not-allowed"
+            : "bg-[#0b5b43] hover:bg-[#084c39] text-white"
         }
       `}
-      aria-label={isSearching ? "Søger..." : "Søg"}
+      aria-label={isSearching ? "Søger..." : "Find"}
     >
       {isSearching ? (
         <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
       ) : (
-        <Search className="w-5 h-5" />
+        <>
+          <Search className="w-6 h-6" />
+          <span className="leading-none">Find</span>
+        </>
       )}
     </button>
   );
@@ -154,16 +158,22 @@ function SimpleFilters() {
  * Inner component that uses SearchProvider context
  */
 function MigrationContent({ showFilters }: { showFilters: boolean }) {
+  const isHomeVariant = !showFilters;
+
   return (
     <div className="space-y-4">
       {/* Unified Search Bar */}
       <div className="mb-4">
-        <div className="flex flex-col sm:flex-row bg-white border border-gray-300 rounded-xl sm:rounded-full shadow-sm hover:shadow-md transition-shadow duration-200">
+        <div
+          className={`flex flex-col sm:flex-row bg-white border border-[#d8ddd9] rounded-xl sm:rounded-full shadow-[0_1px_1px_rgba(15,23,42,0.05)] transition-shadow duration-200 ${
+            isHomeVariant ? "max-w-[920px]" : ""
+          }`}
+        >
           {/* Location Search */}
           <div className="flex-1 relative flex items-center">
             <div className="flex items-center pl-4">
               <svg
-                className="w-5 h-5 text-gray-400 mr-3"
+                className="w-6 h-6 text-[#8a9491] mr-3"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -182,23 +192,39 @@ function MigrationContent({ showFilters }: { showFilters: boolean }) {
                 />
               </svg>
             </div>
-            <LocationSearch className="flex-1 border-0 bg-transparent focus:ring-0 focus:border-0 h-14" />
+            <LocationSearch
+              className={`flex-1 border-0 bg-transparent focus:ring-0 focus:border-0 h-14 ${
+                isHomeVariant
+                    ? "text-[18px] placeholder:text-[18px]"
+                  : ""
+              }`}
+            />
           </div>
 
           {/* Divider */}
-          <div className="hidden sm:block w-px bg-gray-200 my-3"></div>
-          <div className="sm:hidden h-px bg-gray-200 mx-4"></div>
+          <div className="hidden sm:block w-px bg-[#e6e9e7] my-3"></div>
+          <div className="sm:hidden h-px bg-[#e6e9e7] mx-4"></div>
 
           {/* Specialty Search */}
-          <div className="w-full sm:w-[280px] relative flex items-center">
+          <div
+            className={`w-full relative flex items-center ${
+              isHomeVariant ? "sm:w-[340px]" : "sm:w-[280px]"
+            }`}
+          >
             <div className="flex items-center pl-4">
-              <BookHeart className="w-5 h-5 text-gray-400 mr-3" />
+              <BookHeart className="w-6 h-6 text-[#8a9491] mr-3" />
             </div>
-            <SpecialtySearch className="flex-1 border-0 bg-transparent focus:ring-0 focus:border-0 h-14" />
+            <SpecialtySearch
+              className={`flex-1 border-0 bg-transparent focus:ring-0 focus:border-0 h-14 ${
+                isHomeVariant
+                    ? "text-[18px] placeholder:text-[18px]"
+                  : ""
+              }`}
+            />
           </div>
 
           {/* Inline Search Button (Desktop Only) */}
-          <div className="hidden sm:flex items-center pr-1">
+          <div className="hidden sm:flex items-center p-1.5">
             <InlineSearchButton />
           </div>
         </div>
@@ -215,8 +241,8 @@ function MigrationContent({ showFilters }: { showFilters: boolean }) {
           {/* Search Button (Mobile Only - Desktop uses inline button) */}
           <div className="flex sm:hidden">
             <SearchButton
-              text="Søg"
-              className="bg-logo-blue text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200 shadow-sm hover:shadow-md"
+              text="Find"
+              className="bg-[#0b5b43] hover:bg-[#084c39] text-white px-8 py-3 rounded-full font-medium transition-colors duration-200 shadow-sm hover:shadow-md"
             />
           </div>
         </div>
@@ -226,8 +252,8 @@ function MigrationContent({ showFilters }: { showFilters: boolean }) {
       {!showFilters && (
         <div className="flex sm:hidden justify-center mt-4">
           <SearchButton
-            text="Søg"
-            className="bg-logo-blue text-white px-8 py-3 rounded-lg font-medium shadow-sm w-full"
+            text="Find"
+              className="bg-[#0b5b43] hover:bg-[#084c39] text-white px-8 py-3 rounded-full font-medium shadow-sm w-full transition-colors"
           />
         </div>
       )}
