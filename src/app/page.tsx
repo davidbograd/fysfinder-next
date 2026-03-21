@@ -4,6 +4,7 @@
 import React from "react";
 import { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { FAQ } from "@/components/features/blog-og-ordbog/FAQ";
 import { SearchInterface } from "@/components/search/SearchInterface";
 import { RegionList } from "@/components/features/search/RegionList";
@@ -33,17 +34,17 @@ function HeroSection({
   specialties: Specialty[];
 }) {
   return (
-    <section className="relative mt-0 left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen bg-[#f2f1ec] border-b border-[#e3e1d8]">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pt-32 sm:pt-36 pb-10 sm:pb-12">
-        <div className="grid gap-8 lg:grid-cols-[1fr_300px] items-start">
-          <div className="space-y-5">
+    <section className="relative mt-0 left-1/2 -translate-x-1/2 w-dvw max-w-none overflow-x-clip">
+      <div className="w-full min-h-[80vh] bg-brand-beige rounded-b-[32px] overflow-hidden flex items-center">
+        <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-6 lg:px-8 py-16 sm:py-20">
+          <div className="grid gap-8 lg:grid-cols-[1fr_300px] items-start">
+          <div className="space-y-5 min-w-0">
           <div className="space-y-3">
             <h1 className="text-[40px] leading-tight md:text-[56px] md:leading-[1.08] font-normal tracking-tight text-[#1f2b28]">
               Find den bedste fysioterapeut
             </h1>
-            <p className="text-[20px] leading-snug text-[#3f4b48] max-w-2xl lg:max-w-none lg:whitespace-nowrap">
-              Søg blandt tusindvis af fysioterapeuter i hele Danmark. Find den
-              rette behandling tæt på dig.
+            <p className="text-[20px] leading-relaxed text-[#3f4b48] max-w-2xl xl:max-w-none xl:whitespace-nowrap">
+              Søg blandt tusindvis af fysioterapeuter i hele Danmark. Find den rette behandling tæt på dig.
             </p>
           </div>
           <div className="py-4">
@@ -93,6 +94,7 @@ function HeroSection({
               Top anmeldt
             </div>
           </div>
+          </div>
         </div>
       </div>
     </section>
@@ -107,28 +109,24 @@ function ValuePropsSection() {
           Find den rette fysioterapeut, lettere
         </h2>
         <p className="text-[#5a6663] mt-2">
-          Vi guider dig til bedre overblik, hurtigere valg og tryggere behandling.
+          Vi guider dig til den bedste behandling, så du kan komme tilbage til et aktivt liv uden smerter.
         </p>
       </div>
       <div className="grid md:grid-cols-2 gap-4">
-        <article className="rounded-xl border border-[#e3e1d8] bg-[#f3f1ea] p-6 min-h-[230px] overflow-hidden">
+        <article className="rounded-xl bg-brand-beige p-6 min-h-[230px] overflow-hidden">
           <h3 className="text-2xl font-medium text-[#1f2b28]">
-            Specialiseret efter dit behov
+            Spar tid på at finde den rette behandler
           </h3>
           <p className="text-[#5a6663] mt-3 max-w-md">
-            Filtrer på specialer og find klinikker, der matcher netop din skade,
-            udfordring eller behandlingsform.
+            Slut med at ringe rundt til klinikker. Find og book den rette fysioterapeut på få minutter.
           </p>
-          <div className="mt-5 h-16 w-36 rounded-full bg-[#d4a26f]" />
         </article>
-        <article className="rounded-xl border border-[#e3e1d8] bg-[#e9e9e7] p-6 min-h-[230px]">
-          <p className="text-[#cb3a33] font-semibold">WIP</p>
-          <h3 className="text-xl font-medium text-[#1f2b28] mt-2">
-            Find den rette behandler
+        <article className="rounded-xl bg-brand-beige p-6 min-h-[230px]">
+          <h3 className="text-2xl font-medium text-[#1f2b28]">
+            Nem adgang til tilskudsberettiget behandling
           </h3>
           <p className="text-[#5a6663] mt-3">
-            Skab overblik over erfaring, specialer og lokation, så du kan vælge
-            med ro i maven.
+            Find hurtigt klinikker, der tilbyder behandling med tilskud fra den offentlige sygesikring. Tjek for klinikker med ydernummer.
           </p>
         </article>
       </div>
@@ -138,12 +136,30 @@ function ValuePropsSection() {
 
 function PartnerStrip() {
   return (
-    <section className="rounded-xl border border-[#e3e1d8] bg-[#f3f1ea] p-5">
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        <p className="text-[#5a6663] text-sm">Foreninger der anbefaler FysFinder</p>
-        <div className="flex flex-wrap items-center gap-8 text-[#1f2b28] font-semibold tracking-wide">
-          <span>FAKS</span>
-          <span>Hovedpineforeningen</span>
+    <section className="rounded-xl bg-[#f3f1ea] px-6 py-8 md:px-10 md:py-10">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+        <div>
+          <p className="text-[20px] font-light text-brand-label">Partnerskaber</p>
+          <h2 className="mt-1 text-[32px] leading-tight font-normal text-[#1f2b28]">
+            Foreninger der anbefaler FysFinder
+          </h2>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-10">
+          <Image
+            src="/images/samarbejdspartnere/FAKS-logo-med-hele-navn.png"
+            alt="FAKS logo"
+            width={260}
+            height={80}
+            className="h-auto w-auto max-h-[80px] max-w-[360px]"
+          />
+          <Image
+            src="/images/samarbejdspartnere/hovedpine-foreningen.png"
+            alt="Hovedpineforeningen logo"
+            width={340}
+            height={120}
+            className="h-auto w-auto max-h-[80px] max-w-[360px]"
+          />
         </div>
       </div>
     </section>
@@ -151,13 +167,41 @@ function PartnerStrip() {
 }
 
 const specialtyTeasers = [
-  { label: "Knæ", href: "/find/fysioterapeut/danmark/knae" },
-  { label: "Ryg", href: "/find/fysioterapeut/danmark/ryg" },
-  { label: "Skulder", href: "/find/fysioterapeut/danmark/skulder" },
-  { label: "Gyn-obs", href: "/find/fysioterapeut/danmark/gyn-obs" },
-  { label: "Hypermobilitet", href: "/find/fysioterapeut/danmark/hypermobilitet" },
-  { label: "Parkinson", href: "/find/fysioterapeut/danmark/parkinson" },
-  { label: "Skoliose", href: "/find/fysioterapeut/danmark/skoliose" },
+  {
+    label: "Knæ",
+    href: "/find/fysioterapeut/danmark/knae",
+    imageSrc: "/images/homepage/specialer/knae.jpg",
+  },
+  {
+    label: "Ryg",
+    href: "/find/fysioterapeut/danmark/ryg",
+    imageSrc: "/images/homepage/specialer/ryg.jpeg",
+  },
+  {
+    label: "Skulder",
+    href: "/find/fysioterapeut/danmark/skulder",
+    imageSrc: "/images/homepage/specialer/skulder.jpeg",
+  },
+  {
+    label: "Gyn-obs",
+    href: "/find/fysioterapeut/danmark/gyn-obs",
+    imageSrc: "/images/homepage/specialer/gyn-obs.jpg",
+  },
+  {
+    label: "Hypermobilitet",
+    href: "/find/fysioterapeut/danmark/hypermobilitet",
+    imageSrc: "/images/homepage/specialer/hypermobilitet.jpg",
+  },
+  {
+    label: "Parkinson",
+    href: "/find/fysioterapeut/danmark/parkinson",
+    imageSrc: "/images/homepage/specialer/parkinson.jpeg",
+  },
+  {
+    label: "Skoliose",
+    href: "/find/fysioterapeut/danmark/skoliose",
+    imageSrc: "/images/homepage/specialer/skoliose.jpeg",
+  },
 ];
 
 function SpecialtyTeasers() {
@@ -171,9 +215,19 @@ function SpecialtyTeasers() {
           <Link
             key={specialty.href}
             href={specialty.href}
-            className="rounded-lg border border-[#dfe3de] overflow-hidden bg-white hover:shadow-sm transition-shadow"
+            className="group rounded-lg border border-[#dfe3de] overflow-hidden bg-white hover:shadow-sm transition-shadow"
           >
-            <div className="h-16 bg-[linear-gradient(130deg,#9ab3ac,#d7dfdb)]" />
+            <div className="relative aspect-[3/2] bg-[linear-gradient(130deg,#9ab3ac,#d7dfdb)]">
+              {specialty.imageSrc && (
+                <Image
+                  src={specialty.imageSrc}
+                  alt={`${specialty.label} behandling`}
+                  fill
+                  sizes="(max-width: 1024px) 50vw, 14vw"
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+              )}
+            </div>
             <p className="text-base font-medium text-[#1f2b28] text-center py-3">
               {specialty.label}
             </p>
@@ -285,7 +339,7 @@ export const metadata: Metadata = {
 
 function ErrorFallback() {
   return (
-    <section className="rounded-2xl bg-[#f2f1ec] border border-[#e3e1d8] p-8">
+    <section className="rounded-2xl bg-brand-beige border border-[#e3e1d8] p-8">
       <div className="max-w-2xl">
         <h1 className="text-4xl font-semibold text-[#1f2b28]">
           Find den bedste fysioterapeut
@@ -336,7 +390,6 @@ export default async function HomePage() {
             </h2>
             <RegionList regions={regions} />
           </div>
-          <ClinicCtaSection />
           <div>
             <FAQ />
           </div>

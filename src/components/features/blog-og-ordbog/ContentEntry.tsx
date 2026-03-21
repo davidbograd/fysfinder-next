@@ -22,6 +22,21 @@ interface ContentEntryProps {
   };
 }
 
+const getImageDimension = (value: unknown): number | undefined => {
+  if (typeof value === "number" && Number.isFinite(value)) {
+    return value;
+  }
+
+  if (typeof value === "string") {
+    const parsed = Number(value);
+    if (Number.isFinite(parsed)) {
+      return parsed;
+    }
+  }
+
+  return undefined;
+};
+
 export function ContentEntry({ term, backLink }: ContentEntryProps) {
   // Load link config
   const linkConfig = loadLinkConfig();
@@ -65,11 +80,43 @@ export function ContentEntry({ term, backLink }: ContentEntryProps) {
               <h4 {...props} className="font-semibold mt-2 text-gray-800" />
             ),
             p: (props) => <p {...props} className="text-gray-700 mb-4" />,
-            Image: (props) => (
-              <div className="w-full my-8">
-                <Image {...props} alt={props.alt || "Article illustration"} />
-              </div>
-            ),
+            Image: (props) => {
+              const { src, alt, width, height, ...rest } = props;
+              const normalizedWidth = getImageDimension(width);
+              const normalizedHeight = getImageDimension(height);
+              const normalizedAlt = alt || "Article illustration";
+
+              if (!src) {
+                return null;
+              }
+
+              if (normalizedWidth && normalizedHeight) {
+                return (
+                  <div className="w-full my-8">
+                    <Image
+                      src={src}
+                      alt={normalizedAlt}
+                      width={normalizedWidth}
+                      height={normalizedHeight}
+                      className="w-full h-auto rounded-lg"
+                      sizes="(max-width: 1024px) 100vw, 768px"
+                      {...rest}
+                    />
+                  </div>
+                );
+              }
+
+              return (
+                <div className="w-full my-8">
+                  <img
+                    src={typeof src === "string" ? src : ""}
+                    alt={normalizedAlt}
+                    className="w-full h-auto rounded-lg"
+                    loading="lazy"
+                  />
+                </div>
+              );
+            },
             a: (props) => (
               <a {...props} className="text-logo-blue hover:underline" />
             ),

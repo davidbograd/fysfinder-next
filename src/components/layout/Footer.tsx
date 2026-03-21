@@ -4,7 +4,7 @@ import SiteLogo from "@/components/ui/Icons/SiteLogo";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0b5b43] mt-12 rounded-t-[18px]">
+    <footer className="bg-[#0b5b43] mt-12 rounded-t-[32px]">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
           <div className="flex flex-col gap-8 md:flex-row md:flex-wrap md:items-start md:gap-x-32 lg:gap-x-40 md:gap-y-0">
@@ -53,6 +53,9 @@ export default function Footer() {
               </Link>
               <Link href="/samarbejdspartnere" className="block text-[18px] font-light leading-tight text-white hover:text-white/85">
                 Samarbejdspartnere
+              </Link>
+              <Link href="/om-os#kontakt" className="block text-[18px] font-light leading-tight text-white hover:text-white/85">
+                Kontakt
               </Link>
             </div>
             </div>

@@ -140,10 +140,10 @@ export default function Header() {
         className={`z-50 transition-all duration-300 ${
           isHomePage
             ? `fixed inset-x-0 ${isScrolled ? "top-0 bg-[#f8f7f2]/95 backdrop-blur-sm shadow-[0px_8px_15px_rgba(11,59,60,0.1)]" : "top-0 bg-transparent"}`
-            : "sticky top-0 bg-[#f8f7f2]/95 backdrop-blur-sm border-b border-[#e3e1d8]"
+            : "sticky top-0 bg-[#f8f7f2]/95 backdrop-blur-sm shadow-[0px_8px_15px_rgba(11,59,60,0.1)]"
         }`}
       >
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-row justify-between items-center h-14 sm:h-16 transition-all duration-300">
+        <div className="max-w-[1440px] mx-auto px-5 sm:px-6 lg:px-8 flex flex-row justify-between items-center h-14 sm:h-16 transition-all duration-300">
           <div className="flex items-center space-x-6">
             <Link href={isLoggedIn ? "/dashboard" : "/"} className="inline-block">
               <SiteLogo />

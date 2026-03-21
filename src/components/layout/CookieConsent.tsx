@@ -56,12 +56,12 @@ export function CookieConsentBanner() {
       disableStyles={true}
       containerClasses="fixed left-1/2 -translate-x-1/2 bottom-4 max-w-4xl w-full mx-auto bg-white rounded-lg shadow-xl p-4 text-sm flex flex-col sm:flex-row items-center gap-4 sm:items-center sm:justify-between sm:m-4"
       buttonWrapperClasses="flex items-center space-x-2 shrink-0"
-      buttonClasses="whitespace-nowrap px-4 py-1.5 rounded-md bg-[#1894E0] text-white text-xs hover:bg-[#1576B3] transition-colors"
-      declineButtonClasses="whitespace-nowrap px-4 py-1.5 rounded-md border border-[#1894E0] text-[#1894E0] text-xs hover:bg-gray-50 transition-colors"
+      buttonClasses="whitespace-nowrap px-4 py-1.5 rounded-md bg-[#104534] text-white text-xs hover:bg-[#0d3a2b] transition-colors"
+      declineButtonClasses="whitespace-nowrap px-4 py-1.5 rounded-md border border-[#104534] text-[#104534] text-xs hover:bg-gray-50 transition-colors"
     >
       <p className="text-gray-700 text-center sm:text-left">
         Vi bruger cookies for at give dig den bedste oplevelse.{" "}
-        <a href="/privatlivspolitik" className="text-[#1894E0] hover:underline">
+        <a href="/privatlivspolitik" className="text-[#104534] hover:underline">
           Læs mere
         </a>
         .

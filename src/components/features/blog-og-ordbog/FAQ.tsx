@@ -1,3 +1,4 @@
+// Updated: 2026-03-17 - Converted FAQ section to a two-column homepage layout with left intro and right accordion list
 import React from "react";
 import {
   Accordion,
@@ -33,7 +34,7 @@ const faqItems: FAQItem[] = [
       "Fysioterapi er en sundhedsfaglig behandlingsform, der har til formål at genoprette eller forbedre kroppens funktionsevne og bevægelighed. Det anvendes ofte ved skader, smerter, nedsat bevægelsesfunktion eller som forebyggelse mod fremtidige gener. Behandlingen kan bestå af øvelser, manuelle teknikker, massage og rådgivning.",
   },
   {
-    question: "Hvad gør en fysioterapeut?",
+    question: "Hvad hjælper en fysioterapeut med?",
     answer:
       "En fysioterapeut undersøger, diagnosticerer og behandler problemer i muskler, led og nervesystemet. De arbejder med at forbedre patienters fysiske funktion og reducere smerte gennem øvelser, manuel behandling og vejledning i livsstil og ergonomi.",
   },
@@ -143,6 +144,15 @@ const faqItems: FAQItem[] = [
 ];
 
 export function FAQ() {
+  const renderSeoAnswerText = (item: FAQItem) => {
+    const tableText = item.table
+      ? item.table.rows.map((row) => row.join(" - ")).join(" | ")
+      : "";
+    const listText = item.list ? item.list.join(" | ") : "";
+
+    return [item.answer, listText, tableText].filter(Boolean).join(" ");
+  };
+
   const renderContent = (item: FAQItem) => {
     return (
       <div className="space-y-4">
@@ -183,22 +193,37 @@ export function FAQ() {
   };
 
   return (
-    <section className="mb-12 mt-16">
-      <h2 className="text-2xl font-bold mb-4">
-        Ofte stillede spørgsmål omkring fysioterapeuter
-      </h2>
-      <Accordion type="single" collapsible className="w-full">
+    <section className="mb-12">
+      <div className="grid gap-10 lg:grid-cols-[minmax(260px,420px)_1fr] lg:gap-24">
+        <div className="lg:sticky lg:top-24 self-start">
+          <h2 className="text-[40px] leading-tight font-semibold text-[#1f2b28]">
+            Spørgsmål og svar om fysioterapi
+          </h2>
+        </div>
+
+        <Accordion type="single" collapsible className="w-full">
+          {faqItems.map((item, index) => (
+            <AccordionItem key={index} value={`item-${index}`}>
+              <AccordionTrigger className="text-left text-[24px] leading-snug font-medium">
+                {item.question}
+              </AccordionTrigger>
+              <AccordionContent className="text-left">
+                {renderContent(item)}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
+
+      {/* Keep all FAQ answers always present in DOM for SEO crawling */}
+      <div className="sr-only" aria-hidden="true">
         {faqItems.map((item, index) => (
-          <AccordionItem key={index} value={`item-${index}`}>
-            <AccordionTrigger className="text-left">
-              {item.question}
-            </AccordionTrigger>
-            <AccordionContent className="text-left">
-              {renderContent(item)}
-            </AccordionContent>
-          </AccordionItem>
+          <article key={`seo-faq-${index}`}>
+            <h3>{item.question}</h3>
+            <p>{renderSeoAnswerText(item)}</p>
+          </article>
         ))}
-      </Accordion>
+      </div>
     </section>
   );
 }

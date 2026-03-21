@@ -223,7 +223,7 @@ export function RmBeregner() {
                     key={row.reps}
                     className={`border-b last:border-0 border-gray-100 ${
                       row.reps === 1
-                        ? "bg-[#1894e0]/10 font-semibold"
+                        ? "bg-[#104534]/10 font-semibold"
                         : ""
                     }`}
                   >

@@ -165,7 +165,7 @@ function MigrationContent({ showFilters }: { showFilters: boolean }) {
       {/* Unified Search Bar */}
       <div className="mb-4">
         <div
-          className={`flex flex-col sm:flex-row bg-white border border-[#d8ddd9] rounded-xl sm:rounded-full shadow-[0_1px_1px_rgba(15,23,42,0.05)] transition-shadow duration-200 ${
+          className={`flex flex-col md:flex-row bg-white border border-[#d8ddd9] rounded-xl md:rounded-full shadow-[0_1px_1px_rgba(15,23,42,0.05)] transition-shadow duration-200 ${
             isHomeVariant ? "max-w-[920px]" : ""
           }`}
         >
@@ -202,13 +202,13 @@ function MigrationContent({ showFilters }: { showFilters: boolean }) {
           </div>
 
           {/* Divider */}
-          <div className="hidden sm:block w-px bg-[#e6e9e7] my-3"></div>
-          <div className="sm:hidden h-px bg-[#e6e9e7] mx-4"></div>
+          <div className="hidden md:block w-px bg-[#e6e9e7] my-3"></div>
+          <div className="md:hidden h-px bg-[#e6e9e7] mx-4"></div>
 
           {/* Specialty Search */}
           <div
             className={`w-full relative flex items-center ${
-              isHomeVariant ? "sm:w-[340px]" : "sm:w-[280px]"
+              isHomeVariant ? "md:w-[340px]" : "md:w-[280px]"
             }`}
           >
             <div className="flex items-center pl-4">
@@ -224,7 +224,7 @@ function MigrationContent({ showFilters }: { showFilters: boolean }) {
           </div>
 
           {/* Inline Search Button (Desktop Only) */}
-          <div className="hidden sm:flex items-center p-1.5">
+          <div className="hidden md:flex items-center p-1.5">
             <InlineSearchButton />
           </div>
         </div>
@@ -239,7 +239,7 @@ function MigrationContent({ showFilters }: { showFilters: boolean }) {
           </div>
 
           {/* Search Button (Mobile Only - Desktop uses inline button) */}
-          <div className="flex sm:hidden">
+          <div className="flex md:hidden">
             <SearchButton
               text="Find"
               className="bg-[#0b5b43] hover:bg-[#084c39] text-white px-8 py-3 rounded-full font-medium transition-colors duration-200 shadow-sm hover:shadow-md"
@@ -250,7 +250,7 @@ function MigrationContent({ showFilters }: { showFilters: boolean }) {
 
       {/* Mobile Search Button for Homepage (when no filters) */}
       {!showFilters && (
-        <div className="flex sm:hidden justify-center mt-4">
+        <div className="flex md:hidden justify-center mt-4">
           <SearchButton
             text="Find"
               className="bg-[#0b5b43] hover:bg-[#084c39] text-white px-8 py-3 rounded-full font-medium shadow-sm w-full transition-colors"

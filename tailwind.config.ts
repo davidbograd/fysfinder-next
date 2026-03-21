@@ -64,11 +64,12 @@ const config: Config = {
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
         },
-        "logo-blue": "#1894e0",
+        "logo-blue": "#104534",
         "brand-primary": "#104534",
         "brand-label": "#696671",
-        "brand-green": "#0b5b43",
+        "brand-green": "#104534",
         "brand-cream": "#f8f7f2",
+        "brand-beige": "#f2f1ec",
       },
       keyframes: {
         "accordion-down": {
