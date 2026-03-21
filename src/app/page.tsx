@@ -5,6 +5,7 @@ import React from "react";
 import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { StarIcon } from "@heroicons/react/24/solid";
 import { FAQ } from "@/components/features/blog-og-ordbog/FAQ";
 import { SearchInterface } from "@/components/search/SearchInterface";
 import { RegionList } from "@/components/features/search/RegionList";
@@ -37,7 +38,7 @@ function HeroSection({
     <section className="relative mt-0 left-1/2 -translate-x-1/2 w-dvw max-w-none overflow-x-clip">
       <div className="w-full min-h-[80vh] bg-brand-beige rounded-b-[32px] overflow-hidden flex items-center">
         <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-6 lg:px-8 py-16 sm:py-20">
-          <div className="grid gap-6 lg:gap-14 lg:grid-cols-[1fr_400px] xl:grid-cols-[1fr_450px] items-center">
+          <div className="grid gap-6 xl:gap-14 xl:grid-cols-[1fr_450px] items-center">
           <div className="space-y-5 min-w-0">
           <div className="space-y-3">
             <h1 className="text-[40px] leading-tight md:text-[56px] md:leading-[1.08] font-normal tracking-tight text-[#1f2b28]">
@@ -83,24 +84,46 @@ function HeroSection({
             </div>
           </div>
           </div>
-          <div className="hidden lg:block relative h-[430px] w-full">
-            <div className="absolute bottom-8 left-0 w-[180px] h-[260px] rounded-2xl border-4 border-white shadow-lg overflow-hidden -rotate-6 origin-bottom transition-transform duration-300 hover:rotate-0 bg-[linear-gradient(165deg,#a6acb4,#d4c7bf)]">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_56%_26%,rgba(255,255,255,0.26),transparent_50%)]" />
-              <div className="absolute bottom-4 left-3 flex items-center gap-2">
-                <span className="rounded-[16px] bg-[rgba(0,0,0,0.36)] border border-[rgba(255,255,255,0.22)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[7.6px] text-white text-xs px-2 py-1 leading-none">
-                  ★ 5,0
+          <div className="relative h-[320px] sm:h-[360px] xl:h-[430px] w-full max-w-[420px] xl:max-w-none mx-auto xl:mx-0 order-last xl:order-none">
+            <div className="hero-card-in hero-card-in-left absolute bottom-8 left-0 w-[160px] h-[220px] sm:w-[175px] sm:h-[240px] xl:w-[190px] xl:h-[260px] rounded-2xl border-4 border-white shadow-lg overflow-hidden -rotate-6 origin-bottom bg-[#cfc8c3]">
+              <Image
+                src="/images/homepage/physios-portraits/fysioterapeut-01.jpg"
+                alt="Fysioterapeut portræt"
+                fill
+                quality={100}
+                unoptimized
+                sizes="(max-width: 640px) 160px, (max-width: 1279px) 175px, 190px"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_56%_26%,rgba(255,255,255,0.18),transparent_50%)]" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/5 to-transparent" />
+                <div className="absolute bottom-2 left-2 flex flex-col items-start gap-1.5">
+                <span className="rounded-[16px] inline-flex items-center gap-1 bg-[rgba(0,0,0,0.36)] border border-[rgba(255,255,255,0.22)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[7.6px] text-white text-xs px-2 py-1 leading-none">
+                  <StarIcon className="size-3.5 text-amber-500" />
+                  5,0
                 </span>
                 <span className="rounded-[16px] bg-[rgba(0,0,0,0.36)] border border-[rgba(255,255,255,0.22)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[7.6px] text-white text-xs px-2 py-1 leading-none">
-                  Fysioterapeut
+                  Ryg ekspert
                 </span>
               </div>
             </div>
 
-            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-[205px] h-[285px] rounded-2xl border-4 border-white shadow-xl overflow-hidden z-10 bg-[linear-gradient(165deg,#c8c4bc,#ece7db)]">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_46%_22%,rgba(255,255,255,0.28),transparent_46%)]" />
-              <div className="absolute bottom-4 left-3 flex items-center gap-2">
-                <span className="rounded-[16px] bg-[rgba(0,0,0,0.36)] border border-[rgba(255,255,255,0.22)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[7.6px] text-white text-xs px-2 py-1 leading-none">
-                  ★ 4,6
+            <div className="hero-card-in hero-card-in-center absolute bottom-8 left-1/2 -translate-x-1/2 w-[185px] h-[250px] sm:w-[200px] sm:h-[265px] xl:w-[215px] xl:h-[285px] rounded-2xl border-4 border-white shadow-xl overflow-hidden z-10 bg-[#d7d2ca]">
+              <Image
+                src="/images/homepage/physios-portraits/fysioterapeut-02.jpg"
+                alt="Fysioterapeut portræt"
+                fill
+                quality={100}
+                unoptimized
+                sizes="(max-width: 640px) 185px, (max-width: 1279px) 200px, 215px"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_46%_22%,rgba(255,255,255,0.2),transparent_46%)]" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/5 to-transparent" />
+                <div className="absolute bottom-2 left-2 flex flex-col items-start gap-1.5">
+                <span className="rounded-[16px] inline-flex items-center gap-1 bg-[rgba(0,0,0,0.36)] border border-[rgba(255,255,255,0.22)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[7.6px] text-white text-xs px-2 py-1 leading-none">
+                  <StarIcon className="size-3.5 text-amber-500" />
+                  4,6
                 </span>
                 <span className="rounded-[16px] bg-[rgba(0,0,0,0.36)] border border-[rgba(255,255,255,0.22)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[7.6px] text-white text-xs px-2 py-1 leading-none">
                   Knæ ekspert
@@ -108,11 +131,22 @@ function HeroSection({
               </div>
             </div>
 
-            <div className="absolute bottom-8 right-0 w-[180px] h-[260px] rounded-2xl border-4 border-white shadow-lg overflow-hidden rotate-6 origin-bottom transition-transform duration-300 hover:rotate-0 bg-[linear-gradient(165deg,#8e8888,#cbcfd4)]">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_40%_24%,rgba(255,255,255,0.24),transparent_46%)]" />
-              <div className="absolute bottom-4 left-3 flex items-center gap-2">
-                <span className="rounded-[16px] bg-[rgba(0,0,0,0.36)] border border-[rgba(255,255,255,0.22)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[7.6px] text-white text-xs px-2 py-1 leading-none">
-                  ★ 4,2
+            <div className="hero-card-in hero-card-in-right absolute bottom-8 right-0 w-[160px] h-[220px] sm:w-[175px] sm:h-[240px] xl:w-[190px] xl:h-[260px] rounded-2xl border-4 border-white shadow-lg overflow-hidden rotate-6 origin-bottom bg-[#b8bec5]">
+              <Image
+                src="/images/homepage/physios-portraits/fysioterapeut-03.jpg"
+                alt="Fysioterapeut portræt"
+                fill
+                quality={100}
+                unoptimized
+                sizes="(max-width: 640px) 160px, (max-width: 1279px) 175px, 190px"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_40%_24%,rgba(255,255,255,0.16),transparent_46%)]" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/5 to-transparent" />
+                <div className="absolute bottom-2 right-2 flex flex-col items-end gap-1.5">
+                <span className="rounded-[16px] inline-flex items-center gap-1 bg-[rgba(0,0,0,0.36)] border border-[rgba(255,255,255,0.22)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[7.6px] text-white text-xs px-2 py-1 leading-none">
+                  <StarIcon className="size-3.5 text-amber-500" />
+                  4,2
                 </span>
                 <span className="rounded-[16px] bg-[rgba(0,0,0,0.36)] border border-[rgba(255,255,255,0.22)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[7.6px] text-white text-xs px-2 py-1 leading-none">
                   Løbe ekspert
