@@ -1,5 +1,5 @@
 // Homepage component with graceful error handling
-// Updated: 2026-03-17 - Tightened homepage visual polish to better match screenshot layout while preserving existing data flow and structured SEO data
+// Updated: 2026-03-21 - Tightened homepage visual polish and made partnership logos wrap and resize safely on smaller breakpoints
 
 import React from "react";
 import { Metadata } from "next";
@@ -212,21 +212,25 @@ function PartnerStrip() {
           </h2>
         </div>
 
-        <div className="flex flex-wrap items-center gap-10">
-          <Image
-            src="/images/samarbejdspartnere/FAKS-logo-med-hele-navn.png"
-            alt="FAKS logo"
-            width={260}
-            height={80}
-            className="h-auto w-auto max-h-[80px] max-w-[360px]"
-          />
-          <Image
-            src="/images/samarbejdspartnere/hovedpine-foreningen.png"
-            alt="Hovedpineforeningen logo"
-            width={340}
-            height={120}
-            className="h-auto w-auto max-h-[80px] max-w-[360px]"
-          />
+        <div className="flex w-full flex-wrap items-center gap-6 sm:w-auto sm:gap-10">
+          <div className="w-full max-w-full sm:w-auto">
+            <Image
+              src="/images/samarbejdspartnere/FAKS-logo-med-hele-navn.png"
+              alt="FAKS logo"
+              width={260}
+              height={80}
+              className="h-auto w-full max-w-[300px] sm:w-auto sm:max-w-[360px]"
+            />
+          </div>
+          <div className="w-full max-w-full sm:w-auto">
+            <Image
+              src="/images/samarbejdspartnere/hovedpine-foreningen.png"
+              alt="Hovedpineforeningen logo"
+              width={340}
+              height={120}
+              className="h-auto w-full max-w-[300px] sm:w-auto sm:max-w-[360px]"
+            />
+          </div>
         </div>
       </div>
     </section>
