@@ -1,4 +1,4 @@
-/* Updated: 2026-03-17 - Added phase 1 brand tokens and Manrope global font usage */
+/* Updated: 2026-03-21 - Added smooth anchor scrolling for in-page search helper links */
 @import "leaflet/dist/leaflet.css";
 
 @tailwind base;
@@ -73,6 +73,11 @@
   * {
     @apply border-border;
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-manrope), sans-serif;
@@ -164,6 +169,10 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
     .hero-card-in,
     .hero-card-in-left,
     .hero-card-in-center,

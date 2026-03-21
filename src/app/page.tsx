@@ -1,5 +1,5 @@
 // Homepage component with graceful error handling
-// Updated: 2026-03-21 - Centralized the monthly visitors metric and reused it in the hero stats
+// Updated: 2026-03-21 - Specialty helper link now smoothly scrolls to and targets the specialty input field in the hero search bar
 
 import React from "react";
 import { Metadata } from "next";
@@ -312,7 +312,7 @@ function SpecialtyTeasers() {
       <p className="mt-4 text-base text-center text-[#5a6663]">
         Du kan søge blandt alle 136 specialer i{" "}
         <Link
-          href="#top-search"
+          href="#top-search-specialty"
           className="font-medium text-[#0b5b43] underline underline-offset-2 hover:text-[#084c39] transition-colors"
         >
           søgefeltet øverst

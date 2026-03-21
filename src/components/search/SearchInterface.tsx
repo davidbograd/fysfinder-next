@@ -1,4 +1,4 @@
-// Updated: 2026-03-17 - Polished homepage search bar sizing/typography and desktop CTA style to match redesign reference
+// Updated: 2026-03-21 - Added specialty field anchor target with adjusted scroll offset for smoother in-page navigation
 "use client";
 
 import React, { useState, Suspense } from "react";
@@ -209,9 +209,10 @@ function MigrationContent({ showFilters }: { showFilters: boolean }) {
 
           {/* Specialty Search */}
           <div
+            id="top-search-specialty"
             className={`w-full relative flex items-center ${
               isHomeVariant ? "md:w-[290px]" : "md:w-[280px]"
-            }`}
+            } scroll-mt-[260px] md:scroll-mt-[220px] rounded-xl md:rounded-full`}
           >
             <div className="flex items-center pl-4">
               <BookHeart className="w-6 h-6 text-[#8a9491] mr-3" />
