@@ -13,7 +13,7 @@ function DictionaryStructuredData({ terms }: DictionaryStructuredDataProps) {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": ["WebPage", "MedicalWebPage", "CollectionPage"],
-    name: "FysFinder ordbogen",
+    name: "Fysfinder ordbogen",
     description: "Forklaringer om krop, sundhed og træning",
     author: {
       "@type": "Person",
@@ -24,7 +24,7 @@ function DictionaryStructuredData({ terms }: DictionaryStructuredDataProps) {
       sameAs: ["https://www.linkedin.com/in/joachim-bograd-43b0a120a/"],
       affiliation: {
         "@type": "MedicalOrganization",
-        name: "FysFinder",
+        name: "Fysfinder",
         url: "https://fysfinder.dk",
       },
     },
@@ -60,7 +60,7 @@ function DictionaryStructuredData({ terms }: DictionaryStructuredDataProps) {
 }
 
 export const metadata = {
-  title: "FysFinder ordbogen | Alt om krop, sundhed og træning",
+  title: "Fysfinder ordbogen | Alt om krop, sundhed og træning",
   description:
     "Vi har samlet forklaringer og viden inden for anatomi, sundhed og træning til dig, der ønsker at leve et sundere liv og forstå kroppen bedre.",
 };
@@ -73,7 +73,7 @@ export default async function DictionaryPage() {
       <DictionaryStructuredData terms={terms} />
       <div>
         <h1 className="md:text-4xl text-3xl font-bold mb-4">
-          FysFinder ordbogen – Forklaringer om krop, sundhed og træning
+          Fysfinder ordbogen – Forklaringer om krop, sundhed og træning
         </h1>
         <p className="text-xl text-gray-600 mb-8">
           Vi har samlet forklaringer og viden inden for anatomi, sundhed og

@@ -29,7 +29,7 @@ Selvom cupping generelt betragtes som sikkert, kan der opstå nogle bivirkninger
 
 ## Hvordan finder man en fysioterapeut, der tilbyder cupping?
 
-For at finde en fysioterapeut, der tilbyder cupping, kan du bruge FysFinder.dk. Her kan du søge efter klinikker, sammenligne behandlinger og læse anmeldelser fra andre patienter. Det er en god idé at vælge en behandler med erfaring inden for cupping for at sikre den bedste behandling.
+For at finde en fysioterapeut, der tilbyder cupping, kan du bruge Fysfinder.dk. Her kan du søge efter klinikker, sammenligne behandlinger og læse anmeldelser fra andre patienter. Det er en god idé at vælge en behandler med erfaring inden for cupping for at sikre den bedste behandling.
 
 ## Ofte stillede spørgsmål om cupping
 

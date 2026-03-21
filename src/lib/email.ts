@@ -35,7 +35,7 @@ export async function sendClaimNotificationToAdmins(
 
   try {
     const { error } = await resend.emails.send({
-      from: "FysFinder <noreply@fysfinder.dk>",
+      from: "Fysfinder <noreply@fysfinder.dk>",
       to: adminEmails,
       subject: `Ny klinik anmodning: ${data.klinik_navn}`,
       html: `
@@ -61,7 +61,7 @@ export async function sendClaimNotificationToAdmins(
         
         <hr style="margin-top: 32px; border: none; border-top: 1px solid #e5e7eb;" />
         <p style="color: #6b7280; font-size: 12px;">
-          Denne email er sendt automatisk fra FysFinder.
+          Denne email er sendt automatisk fra Fysfinder.
         </p>
       `,
     });
@@ -96,12 +96,12 @@ export async function sendNewUserSignupNotificationToAdmins(
 
   try {
     const { error } = await resend.emails.send({
-      from: "FysFinder <noreply@fysfinder.dk>",
+      from: "Fysfinder <noreply@fysfinder.dk>",
       to: adminEmails,
       subject: `🎉 Ny bruger tilmelding: ${data.email}`,
       html: `
         <h2>🎉 Ny bruger har tilmeldt sig!</h2>
-        <p>En ny bruger har oprettet en konto på FysFinder.</p>
+        <p>En ny bruger har oprettet en konto på Fysfinder.</p>
         
         <h3>Bruger detaljer</h3>
         <ul>
@@ -117,7 +117,7 @@ export async function sendNewUserSignupNotificationToAdmins(
         
         <hr style="margin-top: 32px; border: none; border-top: 1px solid #e5e7eb;" />
         <p style="color: #6b7280; font-size: 12px;">
-          Denne email er sendt automatisk fra FysFinder.
+          Denne email er sendt automatisk fra Fysfinder.
         </p>
       `,
     });

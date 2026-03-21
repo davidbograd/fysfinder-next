@@ -32,7 +32,7 @@ Under en gynækologisk undersøgelse vil lægen typisk udføre en fysisk unders�
 
 ## Hvordan kan man finde en gynækolog i Danmark?
 
-For at finde en gynækolog i Danmark kan man søge online, bruge anbefalinger fra venner eller familie, eller kontakte sin praktiserende læge for henvisninger. FysFinder.dk kan også være en nyttig ressource til at sammenligne gynækologiske tjenester og læger.
+For at finde en gynækolog i Danmark kan man søge online, bruge anbefalinger fra venner eller familie, eller kontakte sin praktiserende læge for henvisninger. Fysfinder.dk kan også være en nyttig ressource til at sammenligne gynækologiske tjenester og læger.
 
 ## Ofte stillede spørgsmål om Gyn Obs
 

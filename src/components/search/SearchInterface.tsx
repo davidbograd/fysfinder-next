@@ -166,7 +166,7 @@ function MigrationContent({ showFilters }: { showFilters: boolean }) {
       <div className="mb-4">
         <div
           className={`flex flex-col md:flex-row bg-white border border-[#d8ddd9] rounded-xl md:rounded-full shadow-[0_1px_1px_rgba(15,23,42,0.05)] transition-shadow duration-200 ${
-            isHomeVariant ? "max-w-[920px]" : ""
+            isHomeVariant ? "max-w-[820px]" : ""
           }`}
         >
           {/* Location Search */}
@@ -208,7 +208,7 @@ function MigrationContent({ showFilters }: { showFilters: boolean }) {
           {/* Specialty Search */}
           <div
             className={`w-full relative flex items-center ${
-              isHomeVariant ? "md:w-[340px]" : "md:w-[280px]"
+              isHomeVariant ? "md:w-[290px]" : "md:w-[280px]"
             }`}
           >
             <div className="flex items-center pl-4">

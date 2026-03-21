@@ -24,7 +24,7 @@ Fysioterapeuter anvender en række forskellige metoder til behandling af hjernes
 
 ## Hvordan kan man finde en fysioterapeut med speciale i hjerneskader?
 
-For at finde en fysioterapeut med erfaring i behandling af hjerneskader kan man søge på FysFinder.dk. Platformen giver en omfattende oversigt over fysioterapeuter i Danmark, hvor man kan sammenligne specialer, priser og anmeldelser. Det er vigtigt at vælge en fysioterapeut, der har erfaring med hjerneskader for at sikre den bedst mulige behandling.
+For at finde en fysioterapeut med erfaring i behandling af hjerneskader kan man søge på Fysfinder.dk. Platformen giver en omfattende oversigt over fysioterapeuter i Danmark, hvor man kan sammenligne specialer, priser og anmeldelser. Det er vigtigt at vælge en fysioterapeut, der har erfaring med hjerneskader for at sikre den bedst mulige behandling.
 
 ## Hvad kan man forvente under en fysioterapibehandling for hjerneskader?
 

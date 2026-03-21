@@ -91,4 +91,4 @@ Behandling afhænger af årsagen. Nogle får smertestillende eller anti-inflamma
 Børn kan få muskelsmerter fra sportsskader, vækstrelaterede smerter eller infektioner. Kroniske smertetilstande er sjældnere hos børn. Ved vedvarende eller alvorlige symptomer bør du søge professionel vurdering.
 
 ### Hvordan finder jeg en fysioterapeut, der kan hjælpe med muskelgigt?
-Søg efter en fysioterapeut med erfaring i smertehåndtering og genoptræning. På FysFinder kan du sammenligne klinikker, se specialer, læse anmeldelser og finde en fysioterapeut i dit lokalområde, så du hurtigt kan komme i gang med et skræddersyet behandlingsforløb.
+Søg efter en fysioterapeut med erfaring i smertehåndtering og genoptræning. På Fysfinder kan du sammenligne klinikker, se specialer, læse anmeldelser og finde en fysioterapeut i dit lokalområde, så du hurtigt kan komme i gang med et skræddersyet behandlingsforløb.

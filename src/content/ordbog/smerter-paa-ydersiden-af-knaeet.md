@@ -49,7 +49,7 @@ Søg hjælp, hvis du oplever kraftig hævelse, kan ikke belaste benet, har en de
 
 Ja. Fysioterapi er ofte førstevalget ved overbelastningsproblemer som ITBS og ved mange menisk- eller ledbåndsrelaterede problemer, hvis der ikke er alvorlig låsning eller stabilitetsproblemer. Fysioterapeuter arbejder med at mindske smerte og inflammation, give specifikke øvelser til at styrke hofte- og knæmuskulatur, korrigere bevægemønstre, og gradvis genoptræne dig til fuld aktivitet. Behandling kan også inkludere manuel terapi, instruktion i træningsprogram, og vejledning i belastningsstyring.
 
-På FysFinder kan du finde og sammenligne fysioterapeuter i dit område, hvis du ønsker professionel hjælp til udredning og træning.
+På Fysfinder kan du finde og sammenligne fysioterapeuter i dit område, hvis du ønsker professionel hjælp til udredning og træning.
 
 ## Hvilke øvelser hjælper mod smerter på ydersiden af knæet?
 

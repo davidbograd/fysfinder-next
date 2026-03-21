@@ -2,9 +2,9 @@ import { Metadata } from "next";
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
 
 export const metadata: Metadata = {
-  title: "Privatlivspolitik | FysFinder.dk",
+  title: "Privatlivspolitik | Fysfinder.dk",
   description:
-    "Læs vores privatlivspolitik og hvordan vi beskytter dine personlige oplysninger på FysFinder.dk",
+    "Læs vores privatlivspolitik og hvordan vi beskytter dine personlige oplysninger på Fysfinder.dk",
 };
 
 export default function PrivacyPolicyPage() {
@@ -19,15 +19,15 @@ export default function PrivacyPolicyPage() {
 
       <article className="prose prose-lg max-w-none mt-6">
         <h1 className="text-3xl font-bold mb-6">
-          Privatlivspolitik for FysFinder.dk
+          Privatlivspolitik for Fysfinder.dk
         </h1>
 
         <div className="text-gray-700 space-y-6">
           <p className="text-lg">
-            Hos <strong>FysFinder.dk</strong> tager vi beskyttelsen af
+            Hos <strong>Fysfinder.dk</strong> tager vi beskyttelsen af
             personoplysninger alvorligt. Denne privatlivspolitik forklarer,
-            hvilke oplysninger vi indsamler på FysFinder.dk, hvordan vi
-            behandler dem, samt dine rettigheder. FysFinder.dk drives med det
+            hvilke oplysninger vi indsamler på Fysfinder.dk, hvordan vi
+            behandler dem, samt dine rettigheder. Fysfinder.dk drives med det
             formål at forbinde patienter og fysioterapi-klinikker i Danmark på
             en nem og overskuelig måde. I den forbindelse behandler vi visse
             personoplysninger om både klinikejere og besøgende brugere. Vi
@@ -41,7 +41,7 @@ export default function PrivacyPolicyPage() {
             </h2>
             <ul className="list-disc pl-6 space-y-2">
               <li>
-                <strong>Dataansvarlig:</strong> FysFinder
+                <strong>Dataansvarlig:</strong> Fysfinder
               </li>
               <li>
                 <strong>Kontakt:</strong> kontakt@fysfinder.dk
@@ -124,7 +124,7 @@ export default function PrivacyPolicyPage() {
             <ul className="list-disc pl-6 space-y-2">
               <li>
                 <strong>Offentlig visning:</strong> Klinikoplysninger
-                offentliggøres på FysFinder.dk, så besøgende kan se dem.
+                offentliggøres på Fysfinder.dk, så besøgende kan se dem.
               </li>
               <li>
                 <strong>Databehandlere:</strong> Fx webhostingudbyder,

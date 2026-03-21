@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-This PRD outlines the redesign of FysFinder's search functionality to create a more robust, SEO-friendly, and user-centric search experience. The current `SearchAndFilters.tsx` component will be completely rewritten to support advanced filtering while maintaining excellent SEO performance and avoiding duplicate content issues.
+This PRD outlines the redesign of Fysfinder's search functionality to create a more robust, SEO-friendly, and user-centric search experience. The current `SearchAndFilters.tsx` component will be completely rewritten to support advanced filtering while maintaining excellent SEO performance and avoiding duplicate content issues.
 
 ## Current State Analysis
 
@@ -812,7 +812,7 @@ async function findCitiesByName(searchTerm: string) {
 
 ```html
 <!-- Location only -->
-<title>Fysioterapeuter i {location} | Find og sammenlign | FysFinder</title>
+<title>Fysioterapeuter i {location} | Find og sammenlign | Fysfinder</title>
 <meta
   name="description"
   content="Find de bedste fysioterapeuter i {location}. Se anmeldelser, specialer og book tid online. {count} klinikker fundet."
@@ -820,7 +820,7 @@ async function findCitiesByName(searchTerm: string) {
 
 <!-- Location + Specialty -->
 <title>
-  {specialty} fysioterapi i {location} | Find fysioterapeuter | FysFinder
+  {specialty} fysioterapi i {location} | Find fysioterapeuter | Fysfinder
 </title>
 <meta
   name="description"
@@ -830,7 +830,7 @@ async function findCitiesByName(searchTerm: string) {
 <!-- Filtered pages (selective indexing) -->
 <title>
   Fysioterapeuter i {location} {filterContext} | Find fysioterapeuter |
-  FysFinder
+  Fysfinder
 </title>
 <meta name="robots" content="index, follow" />
 <link rel="canonical" href="/find/fysioterapeut/{location}" />

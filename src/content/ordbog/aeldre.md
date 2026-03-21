@@ -24,7 +24,7 @@ Fordelene ved fysioterapi for ældre inkluderer forbedret balance, øget styrke,
 
 ## Hvordan finder man en fysioterapeut til ældre?
 
-For at finde en fysioterapeut, der specialiserer sig i behandling af ældre, kan man bruge platforme som FysFinder. Her kan man sammenligne forskellige fysioterapeuter baseret på deres specialer, anmeldelser og priser, hvilket gør det lettere at finde den rette behandling.
+For at finde en fysioterapeut, der specialiserer sig i behandling af ældre, kan man bruge platforme som Fysfinder. Her kan man sammenligne forskellige fysioterapeuter baseret på deres specialer, anmeldelser og priser, hvilket gør det lettere at finde den rette behandling.
 
 ## Hvad skal man forvente under en fysioterapi session for ældre?
 

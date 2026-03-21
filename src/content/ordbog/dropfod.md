@@ -67,7 +67,7 @@ Forebyggelse handler om at tage hånd om risikofaktorer: god fodpleje og blodsuk
 
 ## Hvordan vælger jeg en fysioterapeut til behandling af dropfod?
 
-Vælg en fysioterapeut med erfaring i neurologisk eller ortopædisk genoptræning, som arbejder med gait-træning, ortoser og eventuelt FES. Spørg ind til erfaring med dropfod, behandlingsmetoder og samarbejde med ortopædteknikere. På FysFinder kan du sammenligne fysioterapeuter og klinikker i dit område, se fokusområder og anmeldelser, så du kan finde en behandler, som matcher dine behov.
+Vælg en fysioterapeut med erfaring i neurologisk eller ortopædisk genoptræning, som arbejder med gait-træning, ortoser og eventuelt FES. Spørg ind til erfaring med dropfod, behandlingsmetoder og samarbejde med ortopædteknikere. På Fysfinder kan du sammenligne fysioterapeuter og klinikker i dit område, se fokusområder og anmeldelser, så du kan finde en behandler, som matcher dine behov.
 
 ## Ofte stillede spørgsmål om Dropfod
 

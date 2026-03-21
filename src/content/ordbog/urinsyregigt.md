@@ -51,7 +51,7 @@ Forebyggelse består af både medicinske og livsstilsrettede tiltag. Vægttab ve
 
 ## Hvornår skal jeg søge læge eller fysioterapeut?
 
-Søg læge ved første anfald, ved kraftig smerte, ved tegn på infektion (feber, påvirket almentilstand) eller hvis symptomer ikke forbedres med almindelig smertestillende behandling. Hvis du efter anfaldet oplever nedsat funktion, gangbesvær eller vedvarende stivhed, kan en fysioterapeut hjælpe med genoptræning. På FysFinder kan du nemt sammenligne og finde fysioterapeuter med erfaring i led- og fodproblematikker, så du får hjælp til bevægelighed, styrke og forebyggelse.
+Søg læge ved første anfald, ved kraftig smerte, ved tegn på infektion (feber, påvirket almentilstand) eller hvis symptomer ikke forbedres med almindelig smertestillende behandling. Hvis du efter anfaldet oplever nedsat funktion, gangbesvær eller vedvarende stivhed, kan en fysioterapeut hjælpe med genoptræning. På Fysfinder kan du nemt sammenligne og finde fysioterapeuter med erfaring i led- og fodproblematikker, så du får hjælp til bevægelighed, styrke og forebyggelse.
 
 ## Hvad kan jeg gøre hjemme ved et anfald?
 
@@ -77,4 +77,4 @@ Kostændringer kan reducere risiko og hyppighed af anfald, især hvis du mindske
 ### Hvad gør jeg, hvis smerten ikke går væk?
 Hvis smerten er intens, varer længe, spreder sig eller du får feber, skal du søge læge. For vedvarende problemer med bevægelighed kan en fysioterapeut hjælpe med genoptræning og aflastning.
 
-Har du brug for hjælp til genoptræning, smertehåndtering eller forebyggelse efter et anfald, kan du finde og sammenligne fysioterapeuter på FysFinder, så du får kvalificeret hjælp tæt på dig.
+Har du brug for hjælp til genoptræning, smertehåndtering eller forebyggelse efter et anfald, kan du finde og sammenligne fysioterapeuter på Fysfinder, så du får kvalificeret hjælp tæt på dig.

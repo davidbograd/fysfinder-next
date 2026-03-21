@@ -43,7 +43,7 @@ De mest almindelige fejl inkluderer dårlig kropsholdning, for lange skridt og u
 
 ### Hvordan kan jeg finde en fysioterapeut, der specialiserer sig i løbemetodik?
 
-Du kan finde en fysioterapeut, der specialiserer sig i løbemetodik ved at søge på FysFinder.dk, hvor du kan sammenligne forskellige fysioterapeuter og deres specialer.
+Du kan finde en fysioterapeut, der specialiserer sig i løbemetodik ved at søge på Fysfinder.dk, hvor du kan sammenligne forskellige fysioterapeuter og deres specialer.
 
 ### Hvor lang tid skal jeg restituere efter en hård løbetræning?
 

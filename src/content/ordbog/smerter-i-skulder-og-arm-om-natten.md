@@ -31,7 +31,7 @@ Mange forskellige tilstande kan give natlige smerter i skulder og arm. Rotatorcu
 
 Fysioterapi starter med en grundig vurdering: du bliver spurgt om smertens karakter, søvnmønster, tidligere skader og daglige aktiviteter. Fysioterapeuten tester bevægelighed, muskelstyrke og nervefunktion og identificerer om problemet primært er skulder, nakke eller nervebaseret. Behandlingen kan bestå af manuel terapi, bløddelsbehandling, skulderstabiliserende øvelser, træning af rotatorcuff og skulderbladsmuskler samt vejledning i arbejdsstillinger og søvnvaner. For nerverelaterede smerter bruges ofte nerveglidningsteknikker og øvelser der reducerer irritation.
 
-Fysioterapeuter giver også konkrete smertekontrolstrategier du kan bruge hjemme, såsom positionering om natten, is/varme-anbefalinger og gradvis optrappet træningsprogram. På FysFinder kan du finde og sammenligne fysioterapeuter, så du vælger en behandler med erfaring i skulderproblemer.
+Fysioterapeuter giver også konkrete smertekontrolstrategier du kan bruge hjemme, såsom positionering om natten, is/varme-anbefalinger og gradvis optrappet træningsprogram. På Fysfinder kan du finde og sammenligne fysioterapeuter, så du vælger en behandler med erfaring i skulderproblemer.
 
 ### Hvad kan du forvente af en første behandling hos en fysioterapeut?
 
@@ -88,4 +88,4 @@ Kontakt en fysioterapeut hvis nattesmerterne påvirker din søvn eller daglige f
 ### Kan betændelse eller kalk i skulderen give pludselige nattesmerter?
 Ja. Kalkaflejringer i sener kan give kraftige, pludselige nattesmerter, og bursitis er også ofte værre om natten. Disse tilstande reagerer ofte godt på kombination af smertelindring og fysioterapi.
 
-Hvis du vil finde en fysioterapeut i dit område med erfaring i skulderproblemer, kan du bruge FysFinder til at sammenligne klinikker, behandlingstilbud og anmeldelser, så du hurtigt kommer i gang med den rette hjælp.
+Hvis du vil finde en fysioterapeut i dit område med erfaring i skulderproblemer, kan du bruge Fysfinder til at sammenligne klinikker, behandlingstilbud og anmeldelser, så du hurtigt kommer i gang med den rette hjælp.

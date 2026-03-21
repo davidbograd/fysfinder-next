@@ -45,7 +45,7 @@ Bodybuilding konkurrence er en begivenhed, hvor deltagere viser deres muskelmass
 
 ## Hvordan kan man finde en fysioterapeut til bodybuilding?
 
-At finde en fysioterapeut, der har erfaring med bodybuilding, kan være en god idé for at få hjælp til skader eller for at optimere træningen. FysFinder.dk kan hjælpe med at finde kvalificerede fysioterapeuter i Danmark, der kan støtte dig i din bodybuilding rejse.
+At finde en fysioterapeut, der har erfaring med bodybuilding, kan være en god idé for at få hjælp til skader eller for at optimere træningen. Fysfinder.dk kan hjælpe med at finde kvalificerede fysioterapeuter i Danmark, der kan støtte dig i din bodybuilding rejse.
 
 ## Ofte stillede spørgsmål om bodybuilding
 

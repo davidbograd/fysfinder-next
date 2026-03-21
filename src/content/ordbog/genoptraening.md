@@ -29,7 +29,7 @@ Varigheden af genoptræning varierer afhængigt af den enkelte patients tilstand
 
 ## Hvordan vælger man den rigtige fysioterapeut til genoptræning?
 
-Når man vælger en fysioterapeut til genoptræning, er det vigtigt at overveje deres erfaring, specialisering og behandlingsmetoder. Det kan være nyttigt at læse anmeldelser fra tidligere patienter og få anbefalinger fra læger eller andre sundhedsprofessionelle. FysFinder.dk kan hjælpe med at finde fysioterapeuter i Danmark, der passer til dine behov.
+Når man vælger en fysioterapeut til genoptræning, er det vigtigt at overveje deres erfaring, specialisering og behandlingsmetoder. Det kan være nyttigt at læse anmeldelser fra tidligere patienter og få anbefalinger fra læger eller andre sundhedsprofessionelle. Fysfinder.dk kan hjælpe med at finde fysioterapeuter i Danmark, der passer til dine behov.
 
 ## Ofte stillede spørgsmål om genoptræning
 

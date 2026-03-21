@@ -59,7 +59,7 @@ Søg hjælp, hvis smerten er meget kraftig, hvis du mister følesans eller kraft
 
 ## Hvordan kan fysioterapi hjælpe med ondt i ballen?
 
-Fysioterapi starter med en grundig undersøgelse af bevægelighed, muskelstyrke, nervefunktion og bevægsmønstre. Behandlingen kan indeholde individuel øvelsesterapi, manuel behandling, vejledning i belastningsstyring, ergonomi og gradvis træningsprogram. Mange oplever hurtig bedring ved målrettet styrke- og mobilitetstræning, og fysioterapeuten følger op på progression for at forebygge tilbagefald. På FysFinder kan du sammenligne fysioterapeuter og finde én, der har erfaring med netop denne type smerter.
+Fysioterapi starter med en grundig undersøgelse af bevægelighed, muskelstyrke, nervefunktion og bevægsmønstre. Behandlingen kan indeholde individuel øvelsesterapi, manuel behandling, vejledning i belastningsstyring, ergonomi og gradvis træningsprogram. Mange oplever hurtig bedring ved målrettet styrke- og mobilitetstræning, og fysioterapeuten følger op på progression for at forebygge tilbagefald. På Fysfinder kan du sammenligne fysioterapeuter og finde én, der har erfaring med netop denne type smerter.
 
 ## Hvordan forebygger jeg ondt i ballen fremover?
 
@@ -87,4 +87,4 @@ Mange kan træne med tilretning. Undgå aktiviteter, der direkte udløser voldso
 
 Massage kan give midlertidig smertelindring ved muskelspændinger. Nogle fysioterapeuter bruger også teknikker som dry needling eller specifik manuel terapi, men effekten varierer fra person til person. Det vigtigste er ofte et længerevarende træningsforløb for at korrigere årsagen.
 
-Hvis smerterne er vedvarende eller bekymrende for dig, kan det være en god idé at få en vurdering hos en fysioterapeut. På FysFinder kan du se behandlingsmuligheder og sammenligne fysioterapeuter, så du finder den rette hjælp til dine symptomer.
+Hvis smerterne er vedvarende eller bekymrende for dig, kan det være en god idé at få en vurdering hos en fysioterapeut. På Fysfinder kan du se behandlingsmuligheder og sammenligne fysioterapeuter, så du finder den rette hjælp til dine symptomer.

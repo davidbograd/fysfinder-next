@@ -25,7 +25,7 @@ Selvom termoterapi generelt er sikker, er der nogle risici forbundet med forkert
 
 ## Hvordan kan jeg finde en fysioterapeut, der tilbyder termoterapi?
 
-For at finde en fysioterapeut, der tilbyder termoterapi, kan du bruge FysFinder. Platformen giver dig mulighed for at sammenligne forskellige fysioterapeuter i Danmark, deres specialer, anmeldelser og priser, så du kan vælge den bedste behandling for dine behov.
+For at finde en fysioterapeut, der tilbyder termoterapi, kan du bruge Fysfinder. Platformen giver dig mulighed for at sammenligne forskellige fysioterapeuter i Danmark, deres specialer, anmeldelser og priser, så du kan vælge den bedste behandling for dine behov.
 
 ## Ofte stillede spørgsmål om termoterapi
 

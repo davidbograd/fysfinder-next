@@ -134,4 +134,4 @@ Nej. En MR scanning bruger magnetfelter, mens en CT scanning benytter røntgenst
 
 ### Kan man have klaustrofobi under MR scanning?
 
-Ja, nogle patienter oplever ubehag eller angst under MR scanningen. Informér personalet på forhånd, hvis du lider af klaustrofobi, så der kan tages særlige hensyn. Ved at benytte FysFinders MR-scanningsrapport oversætter, kan du hurtigt og effektivt forstå resultatet af din scanning og dermed tage aktiv del i dit eget behandlingsforløb.
+Ja, nogle patienter oplever ubehag eller angst under MR scanningen. Informér personalet på forhånd, hvis du lider af klaustrofobi, så der kan tages særlige hensyn. Ved at benytte Fysfinders MR-scanningsrapport oversætter, kan du hurtigt og effektivt forstå resultatet af din scanning og dermed tage aktiv del i dit eget behandlingsforløb.

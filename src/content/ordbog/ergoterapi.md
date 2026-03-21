@@ -25,7 +25,7 @@ Ergoterapeuter anvender en række metoder og teknikker, herunder aktivitetsanaly
 
 ## Hvordan kan man finde en ergoterapeut i Danmark?
 
-For at finde en ergoterapeut i Danmark kan man bruge FysFinder, hvor man kan sammenligne forskellige ergoterapi-tjenester, se anmeldelser og finde klinikker, der tilbyder ergoterapi. Det er vigtigt at vælge en ergoterapeut, der har erfaring med den specifikke udfordring, man står overfor.
+For at finde en ergoterapeut i Danmark kan man bruge Fysfinder, hvor man kan sammenligne forskellige ergoterapi-tjenester, se anmeldelser og finde klinikker, der tilbyder ergoterapi. Det er vigtigt at vælge en ergoterapeut, der har erfaring med den specifikke udfordring, man står overfor.
 
 ## Hvad koster ergoterapi?
 

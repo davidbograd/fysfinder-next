@@ -33,7 +33,7 @@ Frekvensen af vibrationsterapi afhænger af den enkelte patients behov og mål. 
 
 ## Hvordan kan man finde en fysioterapeut, der tilbyder vibrationsterapi?
 
-For at finde en fysioterapeut, der tilbyder vibrationsterapi, kan man bruge FysFinder.dk. Platformen giver en omfattende oversigt over fysioterapeuter i Danmark, hvor man kan sammenligne behandlinger, priser og anmeldelser for at finde den rette terapeut.
+For at finde en fysioterapeut, der tilbyder vibrationsterapi, kan man bruge Fysfinder.dk. Platformen giver en omfattende oversigt over fysioterapeuter i Danmark, hvor man kan sammenligne behandlinger, priser og anmeldelser for at finde den rette terapeut.
 
 ## Ofte stillede spørgsmål om vibrationsterapi
 

@@ -29,7 +29,7 @@ Generelt er åndedrætstræning sikker for de fleste mennesker. Dog bør persone
 
 ## Hvordan kan jeg finde en fysioterapeut til åndedrætstræning?
 
-På FysFinder.dk kan du nemt finde fysioterapeuter, der tilbyder specialiseret åndedrætstræning. Du kan sammenligne forskellige klinikker, se anmeldelser og finde den rette behandler, der passer til dine behov. Det er en god idé at kontakte flere fysioterapeuter for at finde ud af, hvilken tilgang der passer bedst til dig.
+På Fysfinder.dk kan du nemt finde fysioterapeuter, der tilbyder specialiseret åndedrætstræning. Du kan sammenligne forskellige klinikker, se anmeldelser og finde den rette behandler, der passer til dine behov. Det er en god idé at kontakte flere fysioterapeuter for at finde ud af, hvilken tilgang der passer bedst til dig.
 
 ## Ofte stillede spørgsmål om åndedrætstræning
 

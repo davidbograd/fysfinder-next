@@ -29,7 +29,7 @@ En typisk kryoterapi-session varer mellem 10 og 30 minutter, afhængigt af den s
 
 ## Hvor kan man få kryoterapi i Danmark?
 
-I Danmark tilbyder mange fysioterapeuter kryoterapi som en del af deres behandlingstilbud. Det er muligt at finde klinikker, der specialiserer sig i kryoterapi, ved at søge på FysFinder.dk, hvor du kan sammenligne forskellige fysioterapeuter og deres behandlinger.
+I Danmark tilbyder mange fysioterapeuter kryoterapi som en del af deres behandlingstilbud. Det er muligt at finde klinikker, der specialiserer sig i kryoterapi, ved at søge på Fysfinder.dk, hvor du kan sammenligne forskellige fysioterapeuter og deres behandlinger.
 
 ## Ofte stillede spørgsmål om kryoterapi
 

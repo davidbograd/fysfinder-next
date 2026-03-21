@@ -37,7 +37,7 @@ Du kan fremme parasympatisk aktivitet gennem simple vaner. Langsom, dyb maveånd
 
 ## Hvornår skal jeg søge hjælp hos en fysioterapeut for parasympatisk ubalance?
 
-Søg hjælp hos en fysioterapeut, hvis du oplever langvarig søvnproblematik, vedvarende muskelspændinger, kroniske smerter eller generel manglende restitution, der påvirker din dagligdag. Fysioterapeuter kan vurdere bevægeapparatet, åndedrætsmønstre og stressrelaterede spændinger og tilbyde konkrete øvelser og behandlinger. På FysFinder kan du finde fysioterapeuter i dit område, se hvilke klinikker der har erfaring med stresshåndtering, kroniske smerter eller rehabilitering, og vælge en behandler, der passer til dine behov.
+Søg hjælp hos en fysioterapeut, hvis du oplever langvarig søvnproblematik, vedvarende muskelspændinger, kroniske smerter eller generel manglende restitution, der påvirker din dagligdag. Fysioterapeuter kan vurdere bevægeapparatet, åndedrætsmønstre og stressrelaterede spændinger og tilbyde konkrete øvelser og behandlinger. På Fysfinder kan du finde fysioterapeuter i dit område, se hvilke klinikker der har erfaring med stresshåndtering, kroniske smerter eller rehabilitering, og vælge en behandler, der passer til dine behov.
 
 | Teknik | Hvad den gør | Hvornår fysioterapeuter bruger den |
 |---|---|---|
@@ -69,4 +69,4 @@ De fleste simple teknikker som langsom vejrtrækning, afspændingsøvelser og g�
 ### Kan ændringer i kost eller søvn påvirke parasympatisk aktivitet?
 Ja. Regelmæssige måltider, en stabil søvnrytme og reduktion af koffein og alkohol om aftenen kan støtte parasympatisk funktion og forbedre restitution.
 
-Hvis du vil finde en fysioterapeut, der kan hjælpe med øvelser og behandling målrettet til at genoprette balance i det autonome nervesystem, kan du søge efter specialiserede fysioterapeuter på FysFinder og vælge en klinik, der arbejder med stress, kroniske smerter eller respiratorisk fysioterapi.
+Hvis du vil finde en fysioterapeut, der kan hjælpe med øvelser og behandling målrettet til at genoprette balance i det autonome nervesystem, kan du søge efter specialiserede fysioterapeuter på Fysfinder og vælge en klinik, der arbejder med stress, kroniske smerter eller respiratorisk fysioterapi.

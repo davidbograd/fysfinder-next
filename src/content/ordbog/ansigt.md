@@ -28,7 +28,7 @@ De mest almindelige ansigtssygdomme inkluderer temporomandibulær led (TMJ) dysf
 
 ## Hvordan finder man en fysioterapeut til ansigtet?
 
-For at finde en fysioterapeut, der specialiserer sig i ansigtet, kan man bruge FysFinder.dk. Platformen giver en oversigt over fysioterapeuter i Danmark, hvor man kan sammenligne deres specialer, anmeldelser og priser for at finde den rette behandler.
+For at finde en fysioterapeut, der specialiserer sig i ansigtet, kan man bruge Fysfinder.dk. Platformen giver en oversigt over fysioterapeuter i Danmark, hvor man kan sammenligne deres specialer, anmeldelser og priser for at finde den rette behandler.
 
 ## Hvilke øvelser kan man lave for at styrke ansigtets muskler?
 
@@ -50,4 +50,4 @@ Ja, fysioterapi kan være en effektiv behandling for TMJ-dysfunktion ved at lind
 
 ### Hvordan kan jeg finde en fysioterapeut, der specialiserer sig i ansigtet?
 
-Du kan finde en fysioterapeut, der specialiserer sig i ansigtet, ved at søge på FysFinder.dk, hvor du kan filtrere efter specialer og læse anmeldelser fra andre patienter.
+Du kan finde en fysioterapeut, der specialiserer sig i ansigtet, ved at søge på Fysfinder.dk, hvor du kan filtrere efter specialer og læse anmeldelser fra andre patienter.

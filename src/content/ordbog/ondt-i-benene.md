@@ -59,15 +59,15 @@ Forebyggelse handler om at variere træning, gradvist øge belastning, varme ord
 
 ## Hvad koster fysioterapi for ondt i benene?
 
-Prisen for fysioterapi kan variere fra klinik til klinik, og nogle tilbyder forskellige pakkeløsninger. Mange fysioterapeuter oplyser priser, behandlingstyper og anmeldelser online, så du kan sammenligne ud fra hvad du har brug for. På FysFinder kan du finde og sammenligne fysioterapeuter og klinikker i dit område for at finde en, der matcher både behov og budget.
+Prisen for fysioterapi kan variere fra klinik til klinik, og nogle tilbyder forskellige pakkeløsninger. Mange fysioterapeuter oplyser priser, behandlingstyper og anmeldelser online, så du kan sammenligne ud fra hvad du har brug for. På Fysfinder kan du finde og sammenligne fysioterapeuter og klinikker i dit område for at finde en, der matcher både behov og budget.
 
 ## Hvordan diagnosticeres årsagen til mine bensmerter?
 
 En fysioterapeut starter med en grundig anamnese og fysisk undersøgelse. Ved mistanke om blodprop kan en ultralydsundersøgelse være nødvendig. Mistanke om diskusprolaps eller alvorlig rygproblematik vurderes ofte med henblik på billeddiagnostik som MR. For kredsløbsproblemer kan gangtests og måling af blodtryk i anklerne være relevante. Fysioterapeuter kan screene og guide videre til den rette undersøgelse.
 
-## Hvordan kan FysFinder hjælpe mig med ondt i benene?
+## Hvordan kan Fysfinder hjælpe mig med ondt i benene?
 
-På FysFinder kan du søge efter fysioterapeuter med relevante specialer, se klinikkernes behandlingstilbud, læse patientanmeldelser og sammenligne priser. Det gør det nemmere at finde en fysioterapeut, der har erfaring med for eksempel løbeskader, nerveudstrålende smerter eller venøse problemstillinger. Søg efter klinikker med erfaring i den type bensmerter, du har, og vælg en, der tilbyder en undersøgelse og plan for optræning.
+På Fysfinder kan du søge efter fysioterapeuter med relevante specialer, se klinikkernes behandlingstilbud, læse patientanmeldelser og sammenligne priser. Det gør det nemmere at finde en fysioterapeut, der har erfaring med for eksempel løbeskader, nerveudstrålende smerter eller venøse problemstillinger. Søg efter klinikker med erfaring i den type bensmerter, du har, og vælg en, der tilbyder en undersøgelse og plan for optræning.
 
 ## Ofte stillede spørgsmål om Ondt i benene
 
@@ -92,4 +92,4 @@ Muskelsmerter føles typisk som ømhed ved berøring og ved bevægelse, mens ner
 ### Kan fysioterapi fjerne iskias?
 Fysioterapi kan ofte lindre symptomer på iskias gennem øvelser, manuel behandling, uddannelse i belastningsteknik og gradvis genoptræning. Ved svære tilfælde kan yderligere medicinsk vurdering eller billeddiagnostik være nødvendig.
 
-Har du fortsat spørgsmål om dine bensmerter, eller vil du finde en fysioterapeut i nærheden, kan du bruge FysFinder til at sammenligne klinikker, se anmeldelser og finde den rette behandler til din situation.
+Har du fortsat spørgsmål om dine bensmerter, eller vil du finde en fysioterapeut i nærheden, kan du bruge Fysfinder til at sammenligne klinikker, se anmeldelser og finde den rette behandler til din situation.

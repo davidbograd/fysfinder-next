@@ -8,7 +8,7 @@ import Image from "next/image";
 export const metadata: Metadata = {
   title: "Om Fysfinder.dk | Platform til at finde fysioterapeuter i Danmark",
   description:
-    "Bliv klogere på FysFinder.dk. Danmarks go-to platform til at finde fysioterapeuter. Kom med bag facaden her ›",
+    "Bliv klogere på Fysfinder.dk. Danmarks go-to platform til at finde fysioterapeuter. Kom med bag facaden her ›",
 };
 
 export default function OmOsPage() {
@@ -40,14 +40,14 @@ export default function OmOsPage() {
       <div className="space-y-8 mt-6">
         <header>
           <h1 className="text-3xl font-bold mb-4">
-            Hvem er FysFinder.dk? Danmarks platform til at finde fysioterapeuter
+            Hvem er Fysfinder.dk? Danmarks platform til at finde fysioterapeuter
           </h1>
         </header>
 
         <div className="space-y-8">
           <section>
             <p className="mb-3 text-lg">
-              FysFinder er skabt som din go-to platform til at{" "}
+              Fysfinder er skabt som din go-to platform til at{" "}
               <Link
                 href="/find/fysioterapeut/danmark"
                 className="text-logo-blue hover:underline"
@@ -59,7 +59,7 @@ export default function OmOsPage() {
               behandlingsform du søger.
             </p>
             <p className="text-lg">
-              FysFinder hjælper lokale klinikker med at få flere patienter. Det
+              Fysfinder hjælper lokale klinikker med at få flere patienter. Det
               er udfordrende at drive en fysioterapeutklinik, og det gør vi
               noget ved gennem øget synlighed og flere patienthenvisninger.
             </p>
@@ -67,11 +67,11 @@ export default function OmOsPage() {
 
           <section>
             <h2 className="text-2xl font-semibold mb-3">
-              Hvorfor blev FysFinder skabt?
+              Hvorfor blev Fysfinder skabt?
             </h2>
             <div className="space-y-3 text-lg">
               <p>
-                FysFinder blev skabt på baggrund af Joachim Bograds frustration
+                Fysfinder blev skabt på baggrund af Joachim Bograds frustration
                 med de nuværende tilbud. Joachim har selv været patient, og er
                 efterfølgende blev uddannet fysioterapeut. Han har derfor
                 oplevet besværet ved at finde den rigtige behandler, samt
@@ -79,14 +79,14 @@ export default function OmOsPage() {
                 fjerde behandler.
               </p>
               <p>
-                Løsningen blev FysFinder.dk, hvor vi gør det nemt og
+                Løsningen blev Fysfinder.dk, hvor vi gør det nemt og
                 overskueligt at finde fysioterapeuter med specialer tæt på dig.
                 Du kan sammenligne kvalificerede behandlere - helt gratis.
               </p>
               <p>
                 Platformen er blevet mødt af stor støtte. Patienter,
                 klinikejere, fysioterapeuter og foreninger har alle taget godt
-                imod FysFinder, hvilket giver os endnu større motivation for at
+                imod Fysfinder, hvilket giver os endnu større motivation for at
                 gøre platformen så god som muligt.
               </p>
             </div>
@@ -94,7 +94,7 @@ export default function OmOsPage() {
 
           <section>
             <h2 className="text-2xl font-semibold mb-6">
-              Personerne bag FysFinder
+              Personerne bag Fysfinder
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -102,7 +102,7 @@ export default function OmOsPage() {
                 name="Joachim Bograd"
                 role="Founder & Fysioterapeut"
                 imageUrl="/images/om-os/joachimbograd-fysfinder.png"
-                alt="Joachim Bograd FysFinder"
+                alt="Joachim Bograd Fysfinder"
                 linkedinUrl="https://www.linkedin.com/in/joachim-bograd-43b0a120a/"
               />
 
@@ -110,7 +110,7 @@ export default function OmOsPage() {
                 name="Alexander Christrup"
                 role="Co-founder & marketing ekspert"
                 imageUrl="/images/om-os/alexanderchristrup-fysfinder.jpeg"
-                alt="Alexander Christrup FysFinder"
+                alt="Alexander Christrup Fysfinder"
                 linkedinUrl="https://www.linkedin.com/in/alexander-christrup/"
               />
 
@@ -118,7 +118,7 @@ export default function OmOsPage() {
                 name="David Bograd"
                 role="Co-founder & designer"
                 imageUrl="/images/om-os/davidbograd-fysfinder.jpeg"
-                alt="David Bograd FysFinder"
+                alt="David Bograd Fysfinder"
                 linkedinUrl="https://www.linkedin.com/in/davidbograd/"
               />
             </div>
@@ -171,7 +171,7 @@ export default function OmOsPage() {
               >
                 FN&apos;s verdensmål #3 for sundhed og trivsel
               </a>
-              . FysFinder bidrager ved at fremme adgangen til sundhedsydelser
+              . Fysfinder bidrager ved at fremme adgangen til sundhedsydelser
               for patienter og støtte lokale klinikker i at styrke deres
               praksis.
             </p>

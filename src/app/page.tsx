@@ -37,14 +37,14 @@ function HeroSection({
     <section className="relative mt-0 left-1/2 -translate-x-1/2 w-dvw max-w-none overflow-x-clip">
       <div className="w-full min-h-[80vh] bg-brand-beige rounded-b-[32px] overflow-hidden flex items-center">
         <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-6 lg:px-8 py-16 sm:py-20">
-          <div className="grid gap-8 lg:grid-cols-[1fr_300px] items-start">
+          <div className="grid gap-6 lg:gap-14 lg:grid-cols-[1fr_400px] xl:grid-cols-[1fr_450px] items-center">
           <div className="space-y-5 min-w-0">
           <div className="space-y-3">
             <h1 className="text-[40px] leading-tight md:text-[56px] md:leading-[1.08] font-normal tracking-tight text-[#1f2b28]">
               Find den bedste fysioterapeut
             </h1>
-            <p className="text-[20px] leading-relaxed text-[#3f4b48] max-w-2xl xl:max-w-none xl:whitespace-nowrap">
-              Søg blandt tusindvis af fysioterapeuter i hele Danmark. Find den rette behandling tæt på dig.
+            <p className="text-[20px] leading-relaxed text-[#3f4b48] max-w-2xl xl:max-w-none">
+              Søg blandt tusindvis af danske fysioterapeuter. Find den rette behandling tæt på dig.
             </p>
           </div>
           <div className="py-4">
@@ -56,8 +56,8 @@ function HeroSection({
               initialFilters={{}}
             />
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 pt-1">
-            <div>
+          <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-16 pt-1">
+            <div className="shrink-0">
               <p className="text-[20px] font-medium text-[#1f2b28] leading-snug">
                 {totalClinics.toLocaleString("da-DK")}
                 <span className="ml-2 text-[18px] font-normal text-brand-label sm:ml-0 sm:block">
@@ -65,7 +65,7 @@ function HeroSection({
                 </span>
               </p>
             </div>
-            <div>
+            <div className="shrink-0">
               <p className="text-[20px] font-medium text-[#1f2b28] leading-snug">
                 {specialties.length}
                 <span className="ml-2 text-[18px] font-normal text-brand-label sm:ml-0 sm:block">
@@ -73,25 +73,51 @@ function HeroSection({
                 </span>
               </p>
             </div>
-            <div>
+            <div className="shrink-0">
               <p className="text-[20px] font-medium text-[#1f2b28] leading-snug">
                 Over 5.500
                 <span className="ml-2 text-[18px] font-normal text-brand-label sm:ml-0 sm:block">
-                  bruger FysFinder månedlig
+                  bruger Fysfinder månedlig
                 </span>
               </p>
             </div>
           </div>
           </div>
-          <div className="hidden lg:block relative h-[230px]">
-            <div className="absolute top-0 right-0 w-44 h-36 rounded-xl bg-[#1f2b28] shadow-md p-3 flex items-end text-white text-xs">
-              Ekspertprofil
+          <div className="hidden lg:block relative h-[430px] w-full">
+            <div className="absolute bottom-8 left-0 w-[180px] h-[260px] rounded-2xl border-4 border-white shadow-lg overflow-hidden -rotate-6 origin-bottom transition-transform duration-300 hover:rotate-0 bg-[linear-gradient(165deg,#a6acb4,#d4c7bf)]">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_56%_26%,rgba(255,255,255,0.26),transparent_50%)]" />
+              <div className="absolute bottom-4 left-3 flex items-center gap-2">
+                <span className="rounded-[16px] bg-[rgba(0,0,0,0.36)] border border-[rgba(255,255,255,0.22)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[7.6px] text-white text-xs px-2 py-1 leading-none">
+                  ★ 5,0
+                </span>
+                <span className="rounded-[16px] bg-[rgba(0,0,0,0.36)] border border-[rgba(255,255,255,0.22)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[7.6px] text-white text-xs px-2 py-1 leading-none">
+                  Fysioterapeut
+                </span>
+              </div>
             </div>
-            <div className="absolute top-10 left-3 w-36 h-30 rounded-xl bg-[#2f6d5b] shadow-md p-3 flex items-end text-white text-xs">
-              Verificeret
+
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-[205px] h-[285px] rounded-2xl border-4 border-white shadow-xl overflow-hidden z-10 bg-[linear-gradient(165deg,#c8c4bc,#ece7db)]">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_46%_22%,rgba(255,255,255,0.28),transparent_46%)]" />
+              <div className="absolute bottom-4 left-3 flex items-center gap-2">
+                <span className="rounded-[16px] bg-[rgba(0,0,0,0.36)] border border-[rgba(255,255,255,0.22)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[7.6px] text-white text-xs px-2 py-1 leading-none">
+                  ★ 4,6
+                </span>
+                <span className="rounded-[16px] bg-[rgba(0,0,0,0.36)] border border-[rgba(255,255,255,0.22)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[7.6px] text-white text-xs px-2 py-1 leading-none">
+                  Knæ ekspert
+                </span>
+              </div>
             </div>
-            <div className="absolute bottom-0 right-12 w-40 h-34 rounded-xl bg-[#d7dfdb] shadow-md p-3 flex items-end text-[#1f2b28] text-xs">
-              Top anmeldt
+
+            <div className="absolute bottom-8 right-0 w-[180px] h-[260px] rounded-2xl border-4 border-white shadow-lg overflow-hidden rotate-6 origin-bottom transition-transform duration-300 hover:rotate-0 bg-[linear-gradient(165deg,#8e8888,#cbcfd4)]">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_40%_24%,rgba(255,255,255,0.24),transparent_46%)]" />
+              <div className="absolute bottom-4 left-3 flex items-center gap-2">
+                <span className="rounded-[16px] bg-[rgba(0,0,0,0.36)] border border-[rgba(255,255,255,0.22)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[7.6px] text-white text-xs px-2 py-1 leading-none">
+                  ★ 4,2
+                </span>
+                <span className="rounded-[16px] bg-[rgba(0,0,0,0.36)] border border-[rgba(255,255,255,0.22)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[7.6px] text-white text-xs px-2 py-1 leading-none">
+                  Løbe ekspert
+                </span>
+              </div>
             </div>
           </div>
           </div>
@@ -113,13 +139,20 @@ function ValuePropsSection() {
         </p>
       </div>
       <div className="grid md:grid-cols-2 gap-4">
-        <article className="rounded-xl bg-brand-beige p-6 min-h-[230px] overflow-hidden">
+        <article className="relative rounded-xl bg-brand-beige p-6 min-h-[380px] overflow-hidden">
           <h3 className="text-2xl font-medium text-[#1f2b28]">
             Spar tid på at finde den rette behandler
           </h3>
-          <p className="text-[#5a6663] mt-3 max-w-md">
-            Slut med at ringe rundt til klinikker. Find og book den rette fysioterapeut på få minutter.
+          <p className="text-[#5a6663] mt-3 max-w-[88%]">
+          Slut med at ringe rundt. Find og book den rette fysioterapeut på få minutter.
           </p>
+          <Image
+            src="/images/homepage/spar-tid-fysfinder.png"
+            alt="Spar tid illustration"
+            width={420}
+            height={420}
+            className="absolute bottom-[-72px] left-1/2 md:left-[58%] lg:left-1/2 -translate-x-1/2 w-[288px] md:w-[368px] h-auto pointer-events-none select-none"
+          />
         </article>
         <article className="rounded-xl bg-brand-beige p-6 min-h-[230px]">
           <h3 className="text-2xl font-medium text-[#1f2b28]">
@@ -141,7 +174,7 @@ function PartnerStrip() {
         <div>
           <p className="text-[20px] font-light text-brand-label">Partnerskaber</p>
           <h2 className="mt-1 text-[32px] leading-tight font-normal text-[#1f2b28]">
-            Foreninger der anbefaler FysFinder
+            Foreninger der anbefaler Fysfinder
           </h2>
         </div>
 
@@ -215,7 +248,7 @@ function SpecialtyTeasers() {
           <Link
             key={specialty.href}
             href={specialty.href}
-            className="group rounded-lg border border-[#dfe3de] overflow-hidden bg-white hover:shadow-sm transition-shadow"
+            className="group rounded-lg border border-[#dfe3de] overflow-hidden bg-white transition-all duration-200 ease-in-out hover:shadow-md hover:-translate-y-1"
           >
             <div className="relative aspect-[3/2] bg-[linear-gradient(130deg,#9ab3ac,#d7dfdb)]">
               {specialty.imageSrc && (
@@ -224,7 +257,7 @@ function SpecialtyTeasers() {
                   alt={`${specialty.label} behandling`}
                   fill
                   sizes="(max-width: 1024px) 50vw, 14vw"
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="object-cover"
                 />
               )}
             </div>
@@ -277,7 +310,7 @@ function HomeStructuredData({
   const structuredData = {
     "@context": "https://schema.org",
     "@type": ["WebSite", "MedicalWebPage"],
-    name: "FysFinder",
+    name: "Fysfinder",
     url: "https://fysfinder.dk",
     about: {
       "@type": "MedicalSpecialty",
@@ -297,7 +330,7 @@ function HomeStructuredData({
     },
     publisher: {
       "@type": ["Organization", "MedicalOrganization"],
-      name: "FysFinder",
+      name: "Fysfinder",
       url: "https://fysfinder.dk",
       description: `Danmarks største oversigt over fysioterapeuter med ${totalClinics} klinikker`,
       medicalSpecialty: ["Fysioterapi", "Physical Therapy"],
@@ -334,7 +367,7 @@ function HomeStructuredData({
 export const metadata: Metadata = {
   title: "Find den bedste fysioterapeut tæt på dig - Fysfinder",
   description:
-    "Find din næste fysioterapeut med FysFinder. Få et fuldt overblik over klinikker nær dig og book din behandling i dag.",
+    "Find din næste fysioterapeut med Fysfinder. Få et fuldt overblik over klinikker nær dig og book din behandling i dag.",
 };
 
 function ErrorFallback() {

@@ -29,7 +29,7 @@ Generelt er myofascial release en sikker behandlingsmetode med få bivirkninger.
 
 ## Hvordan finder jeg en fysioterapeut, der tilbyder myofascial release?
 
-For at finde en fysioterapeut, der tilbyder myofascial release, kan du bruge FysFinder.dk. Platformen giver dig mulighed for at søge efter fysioterapeuter i dit område, sammenligne deres specialer, priser og anmeldelser, så du kan træffe et informeret valg.
+For at finde en fysioterapeut, der tilbyder myofascial release, kan du bruge Fysfinder.dk. Platformen giver dig mulighed for at søge efter fysioterapeuter i dit område, sammenligne deres specialer, priser og anmeldelser, så du kan træffe et informeret valg.
 
 ## Ofte stillede spørgsmål om myofascial release
 

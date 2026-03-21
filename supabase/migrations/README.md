@@ -1,6 +1,6 @@
 # Database Migrations
 
-This directory contains the database migration files for the FysFinder project.
+This directory contains the database migration files for the Fysfinder project.
 
 ## Structure
 

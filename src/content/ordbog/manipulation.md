@@ -29,7 +29,7 @@ Efter en manipulationsbehandling kan patienter opleve en forbedring i bevægelse
 
 ## Hvordan finder man en fysioterapeut, der tilbyder manipulation?
 
-For at finde en fysioterapeut, der tilbyder manipulation, kan man bruge FysFinder. Platformen giver en omfattende oversigt over fysioterapeuter i Danmark, hvor man kan sammenligne deres specialer, anmeldelser og priser. Det gør det nemt at finde en kvalificeret terapeut, der kan hjælpe med ens specifikke behov.
+For at finde en fysioterapeut, der tilbyder manipulation, kan man bruge Fysfinder. Platformen giver en omfattende oversigt over fysioterapeuter i Danmark, hvor man kan sammenligne deres specialer, anmeldelser og priser. Det gør det nemt at finde en kvalificeret terapeut, der kan hjælpe med ens specifikke behov.
 
 ## Ofte stillede spørgsmål om manipulation
 

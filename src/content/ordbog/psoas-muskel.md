@@ -58,9 +58,9 @@ Start med rolige aktiveringsøvelser og stræk, især hvis du har smerter. Hold 
 
 Søg hjælp hvis smerterne er vedvarende og påvirker dagligdagen, hvis du oplever nedsat funktion, eller hvis øvelser hjemme ikke hjælper efter nogle ugers selvbehandling. Også hvis smerten ændrer sig hurtigt, giver følelsesløshed eller muskelsvaghed, bør du få undersøgt det hurtigere. En fysioterapeut kan lave en individuel vurdering, lave et målrettet træningsprogram og bruge manuelle teknikker hvis nødvendigt.
 
-## Hvordan kan FysFinder hjælpe med psoas-problemer?
+## Hvordan kan Fysfinder hjælpe med psoas-problemer?
 
-På FysFinder kan du finde og sammenligne fysioterapeuter i hele Danmark, se hvem der arbejder med muskel- og ledproblemer, sportsskader og genoptræning, samt læse anmeldelser og priser. Hvis du vil have hjælp til psoas-smerter eller et personligt træningsprogram, kan du bruge FysFinder til at finde en fysioterapeut med den rette erfaring og behandlingstilgang i dit område.
+På Fysfinder kan du finde og sammenligne fysioterapeuter i hele Danmark, se hvem der arbejder med muskel- og ledproblemer, sportsskader og genoptræning, samt læse anmeldelser og priser. Hvis du vil have hjælp til psoas-smerter eller et personligt træningsprogram, kan du bruge Fysfinder til at finde en fysioterapeut med den rette erfaring og behandlingstilgang i dit område.
 
 ## Ofte stillede spørgsmål om Psoas muskel
 
@@ -80,4 +80,4 @@ Milde stræk som knælende hoftebøjer-stræk, aktiveringsøvelser som supine ma
 Gentagen og ubalanceret løb kan overbelaste psoas, især hvis din glute- og kernestyrke er svag. Rådfør dig med en fysioterapeut for løbeteknik og styrkeprogram.
 
 ### Hvordan finder jeg en fysioterapeut til psoas-problemer?
-Brug FysFinder til at søge efter fysioterapeuter med erfaring i muskel- og ledbehandling, sportsskader eller genoptræning. Læs anmeldelser, sammenlign priser og vælg en behandler der passer til dine behov.
+Brug Fysfinder til at søge efter fysioterapeuter med erfaring i muskel- og ledbehandling, sportsskader eller genoptræning. Læs anmeldelser, sammenlign priser og vælg en behandler der passer til dine behov.

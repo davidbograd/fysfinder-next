@@ -25,7 +25,7 @@ Deltagelse i GLAiD træning kan føre til en række fordele, herunder reduktion 
 
 ## Hvor kan man finde GLAiD træning i Danmark?
 
-GLAiD træning tilbydes på mange fysioterapiklinikker i Danmark. Det er en god idé at søge efter klinikker, der er certificerede i GLAiD programmet, så man kan være sikker på at få den rette vejledning og støtte. FysFinder.dk kan hjælpe med at finde fysioterapeuter, der tilbyder GLAiD træning i dit område.
+GLAiD træning tilbydes på mange fysioterapiklinikker i Danmark. Det er en god idé at søge efter klinikker, der er certificerede i GLAiD programmet, så man kan være sikker på at få den rette vejledning og støtte. Fysfinder.dk kan hjælpe med at finde fysioterapeuter, der tilbyder GLAiD træning i dit område.
 
 ## Hvad koster GLAiD træning?
 

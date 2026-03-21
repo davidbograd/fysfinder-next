@@ -46,4 +46,4 @@ Mange tilfælde af svangseneproblematik kan behandles effektivt, men det afhæng
 
 ### Hvordan kan jeg finde en fysioterapeut til behandling af svangseneproblematik?
 
-Du kan finde en fysioterapeut ved at søge på FysFinder.dk, hvor du kan sammenligne forskellige klinikker og deres specialer.
+Du kan finde en fysioterapeut ved at søge på Fysfinder.dk, hvor du kan sammenligne forskellige klinikker og deres specialer.

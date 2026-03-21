@@ -51,7 +51,7 @@ Forebyggelse handler om regelmæssig styrketræning, især eksentrisk træning a
 
 ## Hvornår skal jeg søge hjælp hos en fysioterapeut?
 
-Søg hjælp hvis du har stærke smerter, kan ikke støtte på benet, får stor hævelse eller et hurtigt fremtrædende blåt mærke, eller hvis symptomerne ikke forbedres efter et par dage med ro og is. En fysioterapeut kan vurdere skadens omfang, lægge et målrettet genoptræningsprogram, give manuel behandling og hjælpe dig sikkert tilbage til sport eller arbejde. På FysFinder kan du sammenligne fysioterapeuter i hele Danmark og finde en, der passer til dit behov.
+Søg hjælp hvis du har stærke smerter, kan ikke støtte på benet, får stor hævelse eller et hurtigt fremtrædende blåt mærke, eller hvis symptomerne ikke forbedres efter et par dage med ro og is. En fysioterapeut kan vurdere skadens omfang, lægge et målrettet genoptræningsprogram, give manuel behandling og hjælpe dig sikkert tilbage til sport eller arbejde. På Fysfinder kan du sammenligne fysioterapeuter i hele Danmark og finde en, der passer til dit behov.
 
 ## Ofte stillede spørgsmål om Forstrækning i baglåret
 

@@ -46,4 +46,4 @@ Nej, taleforstyrelser kan påvirke både børn og voksne. Selvom mange børn vok
 
 ### Hvordan kan jeg finde en talepædagog?
 
-Du kan finde en talepædagog ved at søge online, kontakte lokale klinikker eller spørge din læge om anbefalinger. FysFinder.dk kan også være en nyttig ressource til at finde specialister i dit område.
+Du kan finde en talepædagog ved at søge online, kontakte lokale klinikker eller spørge din læge om anbefalinger. Fysfinder.dk kan også være en nyttig ressource til at finde specialister i dit område.

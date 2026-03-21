@@ -17,11 +17,11 @@ import { extractTableOfContents } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "RM beregner → Indtast løft og beregn nemt din 1RM ✅",
   description:
-    "FysFinder&apos;s online RM beregner gør det nemt at beregne din 1RM (one-repetion maximum). Tast dine løft og få dine 1-10 repetition max. Beregn din RM →",
+    "Fysfinder&apos;s online RM beregner gør det nemt at beregne din 1RM (one-repetion maximum). Tast dine løft og få dine 1-10 repetition max. Beregn din RM →",
   openGraph: {
     title: "RM beregner → Indtast løft og beregn nemt din 1RM ✅",
     description:
-      "FysFinder&apos;s online RM beregner gør det nemt at beregne din 1RM (one-repetion maximum). Tast dine løft og få dine 1-10 repetition max. Beregn din RM →",
+      "Fysfinder&apos;s online RM beregner gør det nemt at beregne din 1RM (one-repetion maximum). Tast dine løft og få dine 1-10 repetition max. Beregn din RM →",
     images: [
       {
         url: "/images/vaerktoejer/1rm-beregner.jpg",
@@ -83,7 +83,7 @@ export default async function RmBeregnerPage() {
                 RM beregner – Indtast dine løft og beregn nemt din 1RM
               </h1>
               <p className="text-gray-600 text-sm sm:text-base">
-                Med FysFinder&apos;s online RM beregner kan du nemt og hurtigt beregne din 1RM (one-repetition maximum). Tast dine løft ind i beregneren og få dine 1–10 repetition max udregnet. Kom i gang her.
+                Med Fysfinder&apos;s online RM beregner kan du nemt og hurtigt beregne din 1RM (one-repetition maximum). Tast dine løft ind i beregneren og få dine 1–10 repetition max udregnet. Kom i gang her.
               </p>
             </div>
 

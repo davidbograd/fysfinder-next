@@ -25,7 +25,7 @@ Alle kan drage fordel af kropsanalyse, uanset om man er atlet, motionsudøver el
 
 ## Hvordan kan jeg finde en fysioterapeut til kropsanalyse?
 
-For at finde en fysioterapeut, der tilbyder kropsanalyse, kan du besøge FysFinder.dk. Her kan du sammenligne forskellige fysioterapeuter baseret på deres specialer, anmeldelser og priser. Det gør det nemt at finde den rette behandler, der kan hjælpe dig med at nå dine mål.
+For at finde en fysioterapeut, der tilbyder kropsanalyse, kan du besøge Fysfinder.dk. Her kan du sammenligne forskellige fysioterapeuter baseret på deres specialer, anmeldelser og priser. Det gør det nemt at finde den rette behandler, der kan hjælpe dig med at nå dine mål.
 
 ## Ofte stillede spørgsmål om kropsanalyse
 

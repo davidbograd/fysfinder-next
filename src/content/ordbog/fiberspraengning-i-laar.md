@@ -35,7 +35,7 @@ Restitutionstiden afhænger af skadens omfang. Mindre fiberskader kan blive bedr
 | Grad 3 | Stor eller komplet ruptur, betydelig funktionsnedsættelse, mulig kirurgisk vurdering | 8+ uger, ofte længere |
 
 ## Hvornår skal jeg søge hjælp hos en fysioterapeut?
-Søg hjælp, hvis du har kraftig smerte ved belastning, stor hævelse eller blå mærke, manglende evne til at støtte på benet, eller hvis smerterne ikke falder efter få dages hvile og egenomsorg. Er du aktiv atlet eller har skaden påvirket din funktion betydeligt, kan tidlig fysioterapeutisk vurdering reducere risikoen for kroniske problemer og gentagelser. På FysFinder kan du sammenligne fysioterapeuter og klinikker i hele Danmark for at finde en, der matcher dine behov.
+Søg hjælp, hvis du har kraftig smerte ved belastning, stor hævelse eller blå mærke, manglende evne til at støtte på benet, eller hvis smerterne ikke falder efter få dages hvile og egenomsorg. Er du aktiv atlet eller har skaden påvirket din funktion betydeligt, kan tidlig fysioterapeutisk vurdering reducere risikoen for kroniske problemer og gentagelser. På Fysfinder kan du sammenligne fysioterapeuter og klinikker i hele Danmark for at finde en, der matcher dine behov.
 
 ## Kan jeg træne med en fibersprængning i låret?
 Lettte, smertefrie bevægelser og kontrolleret aktivering anbefales ofte allerede i de første dage. Hård træning, sprint og tunge belastninger bør undgås, indtil smerterne er væsentligt aftaget, og en fysioterapeut har vurderet din funktion. Genoptræningen foregår gradvist med fokus på styrke, særligt excentrisk træning, og neuromuskulær kontrol for at sikre en sikker tilbagevenden til fuld aktivitet.

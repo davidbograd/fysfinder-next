@@ -1,4 +1,4 @@
-// FysFinder – Navy body fat calculator logic
+// Fysfinder – Navy body fat calculator logic
 
 export type Gender = "male" | "female";
 export type Unit = "cm" | "in";

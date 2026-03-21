@@ -1,8 +1,8 @@
-# FysFinder Search URLs - SEO Structure Mapping
+# Fysfinder Search URLs - SEO Structure Mapping
 
 ## Overview
 
-This document outlines the complete URL structure for FysFinder's enhanced search functionality. The system uses a two-stage approach similar to HotDoc.com.au with clean, SEO-friendly URLs for primary content and filtered URLs with noindex directives.
+This document outlines the complete URL structure for Fysfinder's enhanced search functionality. The system uses a two-stage approach similar to HotDoc.com.au with clean, SEO-friendly URLs for primary content and filtered URLs with noindex directives.
 
 ## 🎯 Primary URLs (Indexable, SEO-optimized)
 
@@ -193,7 +193,7 @@ const url = `/find/fysioterapeut/${city.bynavn_slug}`;
 #### Location Only
 
 ```html
-<title>Fysioterapeuter i København | Find og sammenlign | FysFinder</title>
+<title>Fysioterapeuter i København | Find og sammenlign | Fysfinder</title>
 <meta
   name="description"
   content="Find de bedste fysioterapeuter i København. Se anmeldelser, specialer og book tid online. 247 klinikker fundet."
@@ -209,7 +209,7 @@ const url = `/find/fysioterapeut/${city.bynavn_slug}`;
 
 ```html
 <title>
-  Sportsskader fysioterapi i København | Find fysioterapeuter | FysFinder
+  Sportsskader fysioterapi i København | Find fysioterapeuter | Fysfinder
 </title>
 <meta
   name="description"
@@ -225,7 +225,7 @@ const url = `/find/fysioterapeut/${city.bynavn_slug}`;
 #### Filtered Page (Non-indexable)
 
 ```html
-<title>Fysioterapeuter med ydernummer i København | FysFinder</title>
+<title>Fysioterapeuter med ydernummer i København | Fysfinder</title>
 <meta
   name="description"
   content="Find fysioterapeuter med ydernummer i København. Filtrede resultater."

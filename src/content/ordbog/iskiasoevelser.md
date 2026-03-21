@@ -45,7 +45,7 @@ Hjemmeøvelser du kan begynde med i dag
 Kneløft mod bryst: Lig på ryggen, træk et knæ mod brystet i 20–30 sekunder. Gentag 2–3 gange pr. side. Piriformisstræk: Kryds ankel over modsatte knæ og træk godt ind mod kroppen, hold 20–30 sekunder. Siddende nerveglidning: Sid på en stol, stræk benet ud med tæer opad, før tilbage; gentag 10–15 gange. Glute bridge: Løft bækkenet og hold 1–2 sekunder i top, gentag 10–15 gange. Start blidt og øg gradvist.
 
 Hvornår skal du søge hjælp hos en fysioterapeut eller læge?
-Søg fysioterapeut hvis du er i tvivl om hvilke øvelser der passer til din situation, hvis smerterne er markant begrænsende, eller hvis du har tilbagevendende problemer. Find en fysioterapeut i dit lokalområde på FysFinder for individuel vejledning og øvelsesprogram. Søg læge akut ved de alvorlige symptomer nævnt tidligere.
+Søg fysioterapeut hvis du er i tvivl om hvilke øvelser der passer til din situation, hvis smerterne er markant begrænsende, eller hvis du har tilbagevendende problemer. Find en fysioterapeut i dit lokalområde på Fysfinder for individuel vejledning og øvelsesprogram. Søg læge akut ved de alvorlige symptomer nævnt tidligere.
 
 Ofte stillede spørgsmål om Iskiasøvelser
 

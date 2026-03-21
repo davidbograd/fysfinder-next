@@ -42,7 +42,7 @@ function DictionaryTermStructuredData({
       sameAs: ["https://www.linkedin.com/in/joachim-bograd-43b0a120a/"],
       affiliation: {
         "@type": "MedicalOrganization",
-        name: "FysFinder",
+        name: "Fysfinder",
         url: "https://fysfinder.dk",
       },
     },
@@ -59,7 +59,7 @@ function DictionaryTermStructuredData({
     articleBody: term.content,
     publisher: {
       "@type": "Organization",
-      name: "FysFinder",
+      name: "Fysfinder",
       url: "https://fysfinder.dk",
     },
     mainEntityOfPage: {

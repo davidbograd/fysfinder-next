@@ -101,4 +101,4 @@ Kortvarig brug af smertestillende kan hjælpe dig gennem akutte smerter, men det
 
 Søg straks hjælp ved kraftig hævelse, intens smerte, synlig deformitet efter traume, nedsat følesans eller infektionstegn som rødme og feber. Har du diabetes og får sår eller ændret følesans i fødderne, skal du kontakte sundhedsvæsenet hurtigt.
 
-Hvis dine ømme fødder ikke bliver bedre med egenomsorg, kan en fysioterapeut vurdere årsagen og hjælpe med et målrettet behandlingsforløb. På FysFinder kan du finde fysioterapeuter med erfaring i fodproblemer og sammenligne behandlingstilbud, så du kommer godt videre med din fodsmerte.
+Hvis dine ømme fødder ikke bliver bedre med egenomsorg, kan en fysioterapeut vurdere årsagen og hjælpe med et målrettet behandlingsforløb. På Fysfinder kan du finde fysioterapeuter med erfaring i fodproblemer og sammenligne behandlingstilbud, så du kommer godt videre med din fodsmerte.

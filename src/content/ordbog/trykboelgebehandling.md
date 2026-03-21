@@ -37,7 +37,7 @@ Trykbølgebehandling anses generelt for at være sikker, men det er vigtigt at k
 
 ## Hvad koster trykbølgebehandling?
 
-Prisen for trykbølgebehandling kan variere afhængigt af klinikken og geografisk placering. Det er en god idé at sammenligne priser og tjenester på FysFinder for at finde den bedste løsning for dig.
+Prisen for trykbølgebehandling kan variere afhængigt af klinikken og geografisk placering. Det er en god idé at sammenligne priser og tjenester på Fysfinder for at finde den bedste løsning for dig.
 
 ## Ofte stillede spørgsmål om trykbølgebehandling
 

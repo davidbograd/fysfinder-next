@@ -43,7 +43,7 @@ export function AuthorPage({ author }: AuthorPageProps) {
 
         <div className="bg-gray-50 p-6 rounded-lg border-l-4 border-logo-blue">
           <p className="text-gray-600 mb-4">
-            Læs {author.givenName}s artikler på FysFinder
+            Læs {author.givenName}s artikler på Fysfinder
           </p>
           <div className="space-y-2">
             <div>
@@ -78,7 +78,7 @@ export function AuthorPage({ author }: AuthorPageProps) {
         {otherAuthors.length > 0 && (
           <div className="border-t pt-8">
             <h2 className="text-2xl font-bold mb-6">
-              Andre forfattere på FysFinder
+              Andre forfattere på Fysfinder
             </h2>
             <div className="grid gap-6 md:grid-cols-2">
               {otherAuthors.map((otherAuthor) => (

@@ -18,10 +18,10 @@ export function FeaturesSection() {
               Alt-i-en platform
             </div>
             <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-              Sådan får du flere patienter med FysFinder
+              Sådan får du flere patienter med Fysfinder
             </h2>
             <p className="max-w-[900px] text-gray-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              FysFinder giver dig smarte værktøjer til nemt at tiltrække flere
+              Fysfinder giver dig smarte værktøjer til nemt at tiltrække flere
               patienter.
             </p>
           </div>

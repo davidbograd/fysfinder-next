@@ -46,4 +46,4 @@ Ja, i Danmark kan du få erstatning for arbejdsskader gennem din arbejdsgivers f
 
 ### Hvordan kan jeg finde en fysioterapeut til behandling af arbejdsskader?
 
-Du kan finde en fysioterapeut ved at søge på FysFinder.dk, hvor du kan sammenligne forskellige klinikker, specialer og anmeldelser for at finde den rette behandling for din arbejdsskade.
+Du kan finde en fysioterapeut ved at søge på Fysfinder.dk, hvor du kan sammenligne forskellige klinikker, specialer og anmeldelser for at finde den rette behandling for din arbejdsskade.

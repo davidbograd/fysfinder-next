@@ -94,7 +94,7 @@ export default function ResetPasswordPage() {
               <p>For at nulstille din adgangskode:</p>
               <ol className="list-decimal list-inside space-y-1 ml-2">
                 <li>Tjek din indbakke (og spam-mappe)</li>
-                <li>Åbn email fra FysFinder</li>
+                <li>Åbn email fra Fysfinder</li>
                 <li>Klik på nulstillingslinket</li>
                 <li>Indtast din nye adgangskode</li>
               </ol>
@@ -103,7 +103,7 @@ export default function ResetPasswordPage() {
             <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-md">
               <p className="text-xs text-blue-800">
                 <strong>Modtog du ikke email?</strong><br/>
-                Tjek din spam-mappe. Emailen kommer fra Supabase eller FysFinder.
+                Tjek din spam-mappe. Emailen kommer fra Supabase eller Fysfinder.
                 Linket udløber efter 1 time.
               </p>
             </div>

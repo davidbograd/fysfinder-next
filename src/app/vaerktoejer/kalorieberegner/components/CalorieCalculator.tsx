@@ -214,7 +214,7 @@ export function CalorieCalculator() {
           </h3>
 
           <div className="grid gap-4">
-            <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+            <div className="bg-brand-beige p-4 rounded-lg border border-[#104534]/18">
               <div className="flex items-center gap-2 mb-2">
                 <Info className="w-5 h-5 text-logo-blue" />
                 <h4 className="font-semibold text-gray-900">

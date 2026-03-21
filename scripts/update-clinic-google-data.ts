@@ -625,14 +625,14 @@ const sendEmailReport = async (
 
       <hr style="margin-top: 32px; border: none; border-top: 1px solid #e5e7eb;" />
       <p style="color: #9ca3af; font-size: 12px;">
-        Denne email er sendt automatisk fra FysFinder efter den månedlige Google Data opdatering.
+        Denne email er sendt automatisk fra Fysfinder efter den månedlige Google Data opdatering.
       </p>
     </div>
   `;
 
   try {
     const { error } = await resend.emails.send({
-      from: "FysFinder <noreply@fysfinder.dk>",
+      from: "Fysfinder <noreply@fysfinder.dk>",
       to: ADMIN_EMAILS,
       subject,
       html,

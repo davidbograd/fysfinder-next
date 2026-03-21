@@ -86,7 +86,13 @@ export const UserMenu = ({ fullWidth = false }: UserMenuProps) => {
 
   if (!user) {
     return (
-      <Button asChild variant="outline" className={`font-normal ${fullWidth ? "w-full" : ""}`}>
+      <Button
+        asChild
+        variant="outline"
+        className={`rounded-full border-[#cfd4d2] bg-[#f8f7f2] font-medium text-[#23302d] hover:bg-[#efeee8] ${
+          fullWidth ? "w-full" : ""
+        }`}
+      >
         <Link href="/auth/signin">Log ind</Link>
       </Button>
     );

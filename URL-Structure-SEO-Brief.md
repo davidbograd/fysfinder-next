@@ -1,4 +1,4 @@
-# FysFinder Search URL Structure
+# Fysfinder Search URL Structure
 
 ## Option 1: Query Parameters (Non-indexable Filters)
 

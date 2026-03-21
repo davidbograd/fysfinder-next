@@ -22,7 +22,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${exercise.title} | FysFinder`,
+    title: `${exercise.title} | Fysfinder`,
     description: `Find effektive træningsøvelser til ${exercise.title.toLowerCase()}. Lær hvordan du styrker dine muskler og forbedrer din mobilitet.`,
   };
 }

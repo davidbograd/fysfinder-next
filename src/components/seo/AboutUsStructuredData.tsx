@@ -15,7 +15,7 @@ export function AboutUsStructuredData({
     mainEntity: {
       "@type": "Organization",
       "@id": "https://fysfinder.dk",
-      name: "FysFinder",
+      name: "Fysfinder",
       url: "https://fysfinder.dk",
       logo: "https://fysfinder.dk/logo.png",
       description: "Danmarks platform til at finde fysioterapeuter",

@@ -33,7 +33,7 @@ Behandling for sensorisk integration kan være gavnlig for børn med udviklingsf
 
 ## Hvordan finder man en fysioterapeut med speciale i sensorisk integration?
 
-For at finde en fysioterapeut med speciale i sensorisk integration kan man søge på FysFinder.dk, hvor man kan sammenligne forskellige klinikker, læse anmeldelser og finde information om behandlingsmetoder. Det er vigtigt at vælge en fysioterapeut, der har erfaring med sensoriske integrationsforstyrrelser og kan tilbyde en skræddersyet behandlingsplan.
+For at finde en fysioterapeut med speciale i sensorisk integration kan man søge på Fysfinder.dk, hvor man kan sammenligne forskellige klinikker, læse anmeldelser og finde information om behandlingsmetoder. Det er vigtigt at vælge en fysioterapeut, der har erfaring med sensoriske integrationsforstyrrelser og kan tilbyde en skræddersyet behandlingsplan.
 
 ## Ofte stillede spørgsmål om sensorisk integration
 

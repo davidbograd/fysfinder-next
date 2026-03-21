@@ -60,7 +60,7 @@ export default function VaerktoejerStructuredData({
           },
           provider: {
             "@type": "Organization",
-            name: "FysFinder",
+            name: "Fysfinder",
             url: baseUrl,
           },
           featureList: [
@@ -176,7 +176,7 @@ export default function VaerktoejerStructuredData({
             name: "Hvor ofte bør jeg opdatere min 1RM i træningen?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "For de fleste er det passende at opdatere sin 1RM hver 6.–10. uge. Hvis du er ny i styrketræning, kan du opleve hurtigere fremgang og derfor justere lidt oftere. Brug FysFinders RM beregner, når du vil opdatere dit estimat.",
+              text: "For de fleste er det passende at opdatere sin 1RM hver 6.–10. uge. Hvis du er ny i styrketræning, kan du opleve hurtigere fremgang og derfor justere lidt oftere. Brug Fysfinders RM beregner, når du vil opdatere dit estimat.",
             },
           },
           {
@@ -184,7 +184,7 @@ export default function VaerktoejerStructuredData({
             name: "Er min 1RM den samme i alle øvelser?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Nej. Din 1RM afhænger af øvelsens kompleksitet, muskelgruppernes størrelse og din teknik i øvelsen. Mange har fx en højere 1RM i dødløft end i squat eller bænkpres. Brug FysFinders RM beregner til at beregne 1RM for hver enkelt øvelse.",
+              text: "Nej. Din 1RM afhænger af øvelsens kompleksitet, muskelgruppernes størrelse og din teknik i øvelsen. Mange har fx en højere 1RM i dødløft end i squat eller bænkpres. Brug Fysfinders RM beregner til at beregne 1RM for hver enkelt øvelse.",
             },
           },
           {
@@ -192,7 +192,7 @@ export default function VaerktoejerStructuredData({
             name: "Hvor præcis er en beregnet 1RM sammenlignet med en testet 1RM?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "En beregnet 1RM ligger typisk meget tæt på den reelle værdi, især hvis du bruger et moderat antal gentagelser (3–8 reps). Variation kan dog opstå pga. teknik, dagsform, søvn og erfaring. FysFinders RM beregner giver et stabilt estimat, du trygt kan planlægge efter.",
+              text: "En beregnet 1RM ligger typisk meget tæt på den reelle værdi, især hvis du bruger et moderat antal gentagelser (3–8 reps). Variation kan dog opstå pga. teknik, dagsform, søvn og erfaring. Fysfinders RM beregner giver et stabilt estimat, du trygt kan planlægge efter.",
             },
           },
           {
@@ -200,7 +200,7 @@ export default function VaerktoejerStructuredData({
             name: "Kan jeg beregne min 1RM uden at løfte tungt?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Ja. Det er netop fordelen ved en RM beregner. Du kan bruge en vægt, du kan løfte flere gange (fx 5–10 reps), og lade FysFinders RM beregner omregne det til et sikkert 1RM-estimat.",
+              text: "Ja. Det er netop fordelen ved en RM beregner. Du kan bruge en vægt, du kan løfte flere gange (fx 5–10 reps), og lade Fysfinders RM beregner omregne det til et sikkert 1RM-estimat.",
             },
           },
           {
@@ -281,7 +281,7 @@ export default function VaerktoejerStructuredData({
                 },
                 provider: {
                   "@type": "Organization",
-                  name: "FysFinder",
+                  name: "Fysfinder",
                 },
                 image: `${baseUrl}${tool.imageUrl}`,
                 url: `${baseUrl}${tool.href}`,

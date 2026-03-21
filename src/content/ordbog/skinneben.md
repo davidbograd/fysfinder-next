@@ -63,7 +63,7 @@ Forebyggelse handler om at styre belastningen og gøre kroppen stærkere til den
 
 ## Hvornår skal jeg søge hjælp hos en fysioterapeut eller akut?
 
-Søg akut hjælp hvis du har voldsom smerte, tydelig misdannelse, kraftig hævelse, følelsesløshed, prikken eller manglende evne til at belaste benet. For vedvarende eller stigende smerter, smerte der ikke aftager ved hvile, eller hvis du oplever gentagne overbelastninger, er det en god idé at kontakte en fysioterapeut. En fysioterapeut kan vurdere årsagen, lave et behandlings- og genoptræningsprogram, og guide dig sikkert tilbage til aktivitet. På FysFinder kan du finde fysioterapeuter og klinikker med erfaring i underbensskader og sammenligne behandlingstilbud, specialer og anmeldelser for at vælge den rette hjælp.
+Søg akut hjælp hvis du har voldsom smerte, tydelig misdannelse, kraftig hævelse, følelsesløshed, prikken eller manglende evne til at belaste benet. For vedvarende eller stigende smerter, smerte der ikke aftager ved hvile, eller hvis du oplever gentagne overbelastninger, er det en god idé at kontakte en fysioterapeut. En fysioterapeut kan vurdere årsagen, lave et behandlings- og genoptræningsprogram, og guide dig sikkert tilbage til aktivitet. På Fysfinder kan du finde fysioterapeuter og klinikker med erfaring i underbensskader og sammenligne behandlingstilbud, specialer og anmeldelser for at vælge den rette hjælp.
 
 ## Ofte stillede spørgsmål om Skinneben
 
@@ -85,4 +85,4 @@ Generelt kræver stressfrakturer en periode med aflastning på typisk 6–12 uge
 ### Hvad kan jeg gøre hjemme mod smerter i skinnebenet?
 Aflastning, let isbehandling kortvarigt efter aktivitet, og at undgå aktiviteter der forværrer smerten er ofte nyttigt. Start gradvist med alternative træningsformer som cykling eller svømning. Hvis smerterne ikke forbedres inden for nogle uger, bør du få professionel vurdering hos en fysioterapeut.
 
-Hvis du vil finde en fysioterapeut der er vant til at behandle underbens- og løbeskader, kan du bruge FysFinder til at søge, sammenligne specialer, læse anmeldelser og vælge en klinik tæt på dig.
+Hvis du vil finde en fysioterapeut der er vant til at behandle underbens- og løbeskader, kan du bruge Fysfinder til at søge, sammenligne specialer, læse anmeldelser og vælge en klinik tæt på dig.

@@ -20,7 +20,7 @@ Der findes forskellige typer fysioterapi, der kan være relevante for handicappe
 
 ## Hvordan finder man en fysioterapeut til handicappede?
 
-For at finde en fysioterapeut, der specialiserer sig i behandling af handicappede, kan man bruge FysFinder. Platformen giver en oversigt over fysioterapeuter i Danmark, hvor man kan sammenligne deres specialer, anmeldelser og priser.
+For at finde en fysioterapeut, der specialiserer sig i behandling af handicappede, kan man bruge Fysfinder. Platformen giver en oversigt over fysioterapeuter i Danmark, hvor man kan sammenligne deres specialer, anmeldelser og priser.
 
 ## Hvad koster fysioterapi for handicappede?
 

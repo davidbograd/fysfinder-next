@@ -53,7 +53,7 @@ Hver behandling tilpasses individuelt, så det er vigtigt at følge lægens anbe
 
 Fysioterapi spiller en stor rolle i genoptræning efter en blodprop, men først når din læge har sagt god for det akutte forløb. En fysioterapeut kan hjælpe med øvelser, der forbedrer blodcirkulationen og styrker musklerne omkring venerne, undervisning i korrekt gang- og aktivitetsniveau, håndtering af hævelse og rådgivning om kompressionstøtte. Målet er at mindske risikoen for kroniske smerter og nedsat funktion samt at forebygge tilbagefald.
 
-På FysFinder kan du finde fysioterapeuter, der tilbyder genoptræning og vejledning efter venøse sygdomme.
+På Fysfinder kan du finde fysioterapeuter, der tilbyder genoptræning og vejledning efter venøse sygdomme.
 
 ## Hvordan kan jeg forebygge blodpropper og reducere risiko for kramper?
 

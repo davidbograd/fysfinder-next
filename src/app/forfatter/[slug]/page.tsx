@@ -35,7 +35,7 @@ export async function generateMetadata({
     title: `${author.name} | ${primaryTitle}`,
     description: `Lær mere om ${author.name}, ${author.jobTitle
       .join(", ")
-      .toLowerCase()} hos FysFinder. ${author.education.degree} fra ${
+      .toLowerCase()} hos Fysfinder. ${author.education.degree} fra ${
       author.education.institution
     }${
       author.expertise.length > 0

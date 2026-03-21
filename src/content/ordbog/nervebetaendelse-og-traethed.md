@@ -39,7 +39,7 @@ Behandling afhænger af årsagen. Hvis der er en identificerbar grund som B12-ma
 
 ## Kan fysioterapi hjælpe mod nervebetændelse og træthed?
 
-Ja. Fysioterapi kan være effektiv til at forbedre funktion og mindske træthed ved nervebetændelse. En fysioterapeut kan lave individuel træning der fokuserer på gradvis optrapning af aktivitet (pacing), styrketræning for at modvirke muskelsvind, nerveglidningsøvelser for at reducere mekanisk irritation og ergonomiske råd for at undgå gentagen belastning. Træningen tilpasses, så den ikke øger smerte eller giver post-eksertionel forværring. Fysioterapeuten kan også vejlede i energistyring, søvnhygiejne og strategier til at minimere træthed i hverdagen. På FysFinder kan du sammenligne fysioterapeuter og finde en behandler med erfaring i neuropatiske tilstande.
+Ja. Fysioterapi kan være effektiv til at forbedre funktion og mindske træthed ved nervebetændelse. En fysioterapeut kan lave individuel træning der fokuserer på gradvis optrapning af aktivitet (pacing), styrketræning for at modvirke muskelsvind, nerveglidningsøvelser for at reducere mekanisk irritation og ergonomiske råd for at undgå gentagen belastning. Træningen tilpasses, så den ikke øger smerte eller giver post-eksertionel forværring. Fysioterapeuten kan også vejlede i energistyring, søvnhygiejne og strategier til at minimere træthed i hverdagen. På Fysfinder kan du sammenligne fysioterapeuter og finde en behandler med erfaring i neuropatiske tilstande.
 
 ## Hvordan kan jeg lindre symptomerne hjemme?
 

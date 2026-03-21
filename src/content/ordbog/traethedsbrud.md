@@ -66,4 +66,4 @@ Ja. Tilstrækkelig energiindtagelse, protein, calcium og vitamin D er vigtige fo
 ### Kan børn få træthedsbrud?
 Ja. Børn og unge kan udvikle træthedsbrud, især ved pludselig stigning i træningsmængde eller ved vækstsmerter kombineret med høj træningsbelastning. Tidlig vurdering er vigtig for at sikre korrekt behandling og undgå påvirkning af vækstzonen.
 
-Hvis du leder efter hjælp til genoptræning eller vurdering af en mulig træthedsbrudsskade, kan du finde og sammenligne fysioterapeuter på FysFinder for at få den rette vejledning og et forløb, der passer til din situation.
+Hvis du leder efter hjælp til genoptræning eller vurdering af en mulig træthedsbrudsskade, kan du finde og sammenligne fysioterapeuter på Fysfinder for at få den rette vejledning og et forløb, der passer til din situation.

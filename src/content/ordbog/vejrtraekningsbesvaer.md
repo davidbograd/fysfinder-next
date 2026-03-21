@@ -46,4 +46,4 @@ Ja, åndedrætsøvelser som diaphragmatisk vejrtrækning og pursed-lip vejrtræk
 
 ### Hvordan kan jeg finde en fysioterapeut til behandling af vejrtrækningsbesvær?
 
-Du kan finde en fysioterapeut ved at søge på FysFinder.dk, hvor du kan sammenligne forskellige klinikker og deres specialer.
+Du kan finde en fysioterapeut ved at søge på Fysfinder.dk, hvor du kan sammenligne forskellige klinikker og deres specialer.

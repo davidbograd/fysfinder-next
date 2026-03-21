@@ -37,7 +37,7 @@ Selvom taping generelt er sikkert, kan der være nogle risici forbundet med fork
 
 ## Hvordan kan man finde en fysioterapeut, der specialiserer sig i taping-teknikker?
 
-For at finde en fysioterapeut, der har erfaring med taping-teknikker, kan man bruge FysFinder. Platformen giver en omfattende oversigt over fysioterapeuter i Danmark, hvor man kan sammenligne deres specialer, anmeldelser og priser. Dette gør det nemt at finde den rette behandler til ens behov.
+For at finde en fysioterapeut, der har erfaring med taping-teknikker, kan man bruge Fysfinder. Platformen giver en omfattende oversigt over fysioterapeuter i Danmark, hvor man kan sammenligne deres specialer, anmeldelser og priser. Dette gør det nemt at finde den rette behandler til ens behov.
 
 ## Ofte stillede spørgsmål om taping-teknikker
 

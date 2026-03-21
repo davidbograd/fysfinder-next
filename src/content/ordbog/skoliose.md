@@ -46,4 +46,4 @@ Det er vigtigt at søge behandling, hvis man oplever symptomer som rygsmerter, s
 
 ### Hvordan kan jeg finde en fysioterapeut til behandling af skoliose?
 
-Du kan finde en fysioterapeut ved at søge på FysFinder.dk, hvor du kan sammenligne forskellige fysioterapeuter og deres specialer.
+Du kan finde en fysioterapeut ved at søge på Fysfinder.dk, hvor du kan sammenligne forskellige fysioterapeuter og deres specialer.

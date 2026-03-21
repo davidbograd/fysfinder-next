@@ -6,7 +6,7 @@ import { ExternalLink } from "lucide-react";
 import { Partner } from "../types";
 
 export const metadata: Metadata = {
-  title: "Vores Samarbejdspartnere | FysFinder",
+  title: "Vores Samarbejdspartnere | Fysfinder",
   description:
     "Se vores samarbejdspartnere der hjælper med at sikre kvalitet og pålidelighed når du skal finde en fysioterapeut.",
 };

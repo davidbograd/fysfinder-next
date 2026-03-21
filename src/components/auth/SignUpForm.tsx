@@ -152,7 +152,7 @@ export const SignUpForm = () => {
       // Success - show message and redirect
       toast({
         title: "Konto oprettet!",
-        description: "Velkommen til FysFinder!",
+        description: "Velkommen til Fysfinder!",
       });
       
       setIsLoading(false);

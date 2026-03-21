@@ -24,7 +24,7 @@ Fysioterapi er en central del af behandlingen af Parkinsons sygdom. Fysioterapeu
 
 ## Hvordan kan man finde en fysioterapeut med speciale i Parkinsons sygdom?
 
-For at finde en fysioterapeut med speciale i Parkinsons sygdom kan man bruge FysFinder.dk, hvor man kan søge efter fysioterapeuter baseret på deres behandlingserfaring og specialer. Det er en god idé at læse anmeldelser og sammenligne priser for at finde den bedste fysioterapeut til ens behov.
+For at finde en fysioterapeut med speciale i Parkinsons sygdom kan man bruge Fysfinder.dk, hvor man kan søge efter fysioterapeuter baseret på deres behandlingserfaring og specialer. Det er en god idé at læse anmeldelser og sammenligne priser for at finde den bedste fysioterapeut til ens behov.
 
 ## Hvad er prognosen for personer med Parkinsons sygdom?
 
@@ -46,4 +46,4 @@ Ja, fysioterapi kan hjælpe med at forbedre bevægelse, styrke og balance hos pe
 
 ### Hvordan kan jeg finde en fysioterapeut til Parkinsons sygdom?
 
-Du kan finde en fysioterapeut med speciale i Parkinsons sygdom ved at søge på FysFinder.dk, hvor du kan sammenligne forskellige behandlere og deres specialer.
+Du kan finde en fysioterapeut med speciale i Parkinsons sygdom ved at søge på Fysfinder.dk, hvor du kan sammenligne forskellige behandlere og deres specialer.

@@ -20,7 +20,7 @@ Symptomerne på psykologiske udfordringer kan variere, men de inkluderer ofte æ
 
 ## Hvordan kan man finde hjælp til psykologiske udfordringer?
 
-At finde hjælp til psykologiske udfordringer kan være en udfordring i sig selv. Det er vigtigt at søge professionel hjælp fra kvalificerede terapeuter eller fysioterapeuter, der har erfaring med at håndtere mentale sundhedsproblemer. FysFinder kan hjælpe med at finde fysioterapeuter, der tilbyder behandling for psykologiske udfordringer.
+At finde hjælp til psykologiske udfordringer kan være en udfordring i sig selv. Det er vigtigt at søge professionel hjælp fra kvalificerede terapeuter eller fysioterapeuter, der har erfaring med at håndtere mentale sundhedsproblemer. Fysfinder kan hjælpe med at finde fysioterapeuter, der tilbyder behandling for psykologiske udfordringer.
 
 ## Hvad er forskellen mellem psykologiske udfordringer og psykiske lidelser?
 

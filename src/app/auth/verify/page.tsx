@@ -52,7 +52,7 @@ export default async function VerifyPage() {
                 <p>For at færdiggøre din konto, skal du:</p>
                 <ol className="list-decimal list-inside space-y-1 ml-2">
                   <li>Tjek din indbakke</li>
-                  <li>Åbn email fra FysFinder</li>
+                  <li>Åbn email fra Fysfinder</li>
                   <li>Klik på verificeringslinket</li>
                 </ol>
               </div>

@@ -21,7 +21,7 @@ Akupunktur betragtes generelt som en sikker behandlingsmetode, når den udføres
 
 ## Hvordan finder man en kvalificeret akupunktør?
 
-For at finde en kvalificeret akupunktør i Danmark kan man søge på FysFinder, hvor man kan sammenligne forskellige behandlere baseret på deres specialer, anmeldelser og priser. Det er vigtigt at vælge en akupunktør, der har den rette uddannelse og erfaring for at sikre en effektiv og sikker behandling.
+For at finde en kvalificeret akupunktør i Danmark kan man søge på Fysfinder, hvor man kan sammenligne forskellige behandlere baseret på deres specialer, anmeldelser og priser. Det er vigtigt at vælge en akupunktør, der har den rette uddannelse og erfaring for at sikre en effektiv og sikker behandling.
 
 ## Hvad kan man forvente under en akupunkturbehandling?
 
@@ -35,7 +35,7 @@ Antallet af akupunkturbehandlinger, der er nødvendige, varierer afhængigt af d
 
 ### Hvad koster akupunkturbehandling?
 
-Prisen for akupunkturbehandling varierer afhængigt af klinikken og akupunktørens erfaring. Det er en god idé at sammenligne priser på FysFinder for at finde en behandling, der passer til dit budget.
+Prisen for akupunkturbehandling varierer afhængigt af klinikken og akupunktørens erfaring. Det er en god idé at sammenligne priser på Fysfinder for at finde en behandling, der passer til dit budget.
 
 ### Er akupunktur smertefuldt?
 

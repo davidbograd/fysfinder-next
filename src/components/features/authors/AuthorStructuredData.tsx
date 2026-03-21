@@ -49,7 +49,7 @@ export function AuthorStructuredData({ author }: AuthorStructuredDataProps) {
     ...(author.isFounder && {
       founder: {
         "@type": "MedicalOrganization",
-        name: "FysFinder",
+        name: "Fysfinder",
         url: "https://fysfinder.dk",
       },
     }),

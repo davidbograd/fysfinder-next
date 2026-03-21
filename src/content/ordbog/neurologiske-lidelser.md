@@ -20,7 +20,7 @@ Fysioterapeuter anvender en række forskellige behandlingsmetoder til at hjælpe
 
 ## Hvordan kan man finde en fysioterapeut med speciale i neurologiske lidelser?
 
-For at finde en fysioterapeut med speciale i neurologiske lidelser kan man bruge FysFinder.dk. Platformen giver en omfattende oversigt over fysioterapeuter i Danmark, hvor man kan sammenligne deres specialer, anmeldelser og priser. Det er en god idé at vælge en fysioterapeut, der har erfaring med den specifikke neurologiske lidelse, man lider af.
+For at finde en fysioterapeut med speciale i neurologiske lidelser kan man bruge Fysfinder.dk. Platformen giver en omfattende oversigt over fysioterapeuter i Danmark, hvor man kan sammenligne deres specialer, anmeldelser og priser. Det er en god idé at vælge en fysioterapeut, der har erfaring med den specifikke neurologiske lidelse, man lider af.
 
 ## Hvad kan man forvente under en fysioterapi session for neurologiske lidelser?
 

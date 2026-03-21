@@ -51,7 +51,7 @@ Forebyggelse handler om styrke, koordinations- og balanceøvelser samt at træne
 ## Hvad er risikoen ved ubehandlet meniskskade?
 Ubehandlede meniskskader kan give vedvarende smerte og gentagne hævelser. Hvis en revne får et stykke brusk til at sidde løst, kan det medføre gentagne låsninger. Langtidsmæssigt kan fjernelse af meniskvæv øge risikoen for tidlig slidgigt, fordi knæet mister noget af sin støddæmpning.
 
-Hvis du vil finde en fysioterapeut eller en klinik, der kan hjælpe med vurdering og genoptræning, kan du bruge FysFinder til at sammenligne behandlingstilbud og læse anmeldelser fra andre brugere i hele Danmark.
+Hvis du vil finde en fysioterapeut eller en klinik, der kan hjælpe med vurdering og genoptræning, kan du bruge Fysfinder til at sammenligne behandlingstilbud og læse anmeldelser fra andre brugere i hele Danmark.
 
 ## Ofte stillede spørgsmål om Menisk skade
 

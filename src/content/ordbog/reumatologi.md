@@ -32,7 +32,7 @@ Selvom både reumatologi og ortopædi beskæftiger sig med muskuloskeletale prob
 
 ## Hvordan finder man en reumatolog i Danmark?
 
-For at finde en reumatolog i Danmark kan man starte med at kontakte sin praktiserende læge, som kan henvise til en specialist. Derudover kan FysFinder.dk være en nyttig ressource til at finde fysioterapeuter, der arbejder med reumatiske tilstande og kan tilbyde støtte og behandling.
+For at finde en reumatolog i Danmark kan man starte med at kontakte sin praktiserende læge, som kan henvise til en specialist. Derudover kan Fysfinder.dk være en nyttig ressource til at finde fysioterapeuter, der arbejder med reumatiske tilstande og kan tilbyde støtte og behandling.
 
 ## Ofte stillede spørgsmål om reumatologi
 

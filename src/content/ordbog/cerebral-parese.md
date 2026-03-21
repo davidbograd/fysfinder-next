@@ -32,7 +32,7 @@ Behandlingen af cerebral parese involverer ofte et team af specialister, herunde
 
 ## Hvordan kan man finde fysioterapeuter, der specialiserer sig i cerebral parese?
 
-På FysFinder kan du nemt finde fysioterapeuter i Danmark, der har erfaring med behandling af cerebral parese. Du kan sammenligne klinikker, læse anmeldelser og finde den rette specialist til dine behov.
+På Fysfinder kan du nemt finde fysioterapeuter i Danmark, der har erfaring med behandling af cerebral parese. Du kan sammenligne klinikker, læse anmeldelser og finde den rette specialist til dine behov.
 
 ## Ofte stillede spørgsmål om cerebral parese
 

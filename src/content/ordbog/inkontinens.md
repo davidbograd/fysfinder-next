@@ -24,7 +24,7 @@ Kegel-øvelser er ofte anbefalet til personer med inkontinens. Disse øvelser fo
 
 ## Hvordan kan man finde en fysioterapeut til inkontinensbehandling?
 
-For at finde en fysioterapeut, der specialiserer sig i inkontinensbehandling, kan man bruge FysFinder. Platformen giver en oversigt over fysioterapeuter i Danmark, hvor man kan sammenligne deres specialer, anmeldelser og priser. Det gør det nemt at finde den rette hjælp.
+For at finde en fysioterapeut, der specialiserer sig i inkontinensbehandling, kan man bruge Fysfinder. Platformen giver en oversigt over fysioterapeuter i Danmark, hvor man kan sammenligne deres specialer, anmeldelser og priser. Det gør det nemt at finde den rette hjælp.
 
 ## Hvad er forventningerne til behandlingen af inkontinens?
 

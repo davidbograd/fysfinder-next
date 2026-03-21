@@ -11,7 +11,7 @@ Navy-metoden anvender simple målinger af din krop – højde, taljemål, hoftem
 - Små målefejl kan påvirke resultatet  
 - Resultatet kan variere afhængigt af kropsbygning  
  
-## Prøv FysFinder’s gratis fedtprocent beregner
+## Prøv Fysfinder’s gratis fedtprocent beregner
 Vores beregner er gratis og tilgængelig online. Du indtaster blot dine kropsmål, og beregneren giver dig en estimeret fedtprocent – hurtigt, nemt og uden behov for særligt udstyr.
  
 ## Beregn din fedtprocent hjemme i sofaen – nemt og hurtigt

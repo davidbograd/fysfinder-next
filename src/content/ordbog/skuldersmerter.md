@@ -51,4 +51,4 @@ Ja, risikofaktorer inkluderer alder, tidligere skader, og aktiviteter, der invol
 
 ### Hvordan kan jeg finde en fysioterapeut til skuldersmerter?
 
-Du kan finde en fysioterapeut ved at søge på FysFinder.dk, hvor du kan sammenligne forskellige klinikker og deres specialer.
+Du kan finde en fysioterapeut ved at søge på Fysfinder.dk, hvor du kan sammenligne forskellige klinikker og deres specialer.

@@ -51,7 +51,7 @@ Søg hjælp hvis kramperne er hyppige, meget smertefulde, varer usædvanligt læ
 
 ## Hvad kan en fysioterapeut gøre ved tilbagevendende kramper?
 
-En fysioterapeut kan undersøge om kramperne skyldes forkortede muskler, ubalance i muskelstyrke, nerveirritation eller gang- og holdningsmønstre. Behandlingen kan indeholde vejledt stræk og styrkeøvelser, teknikker til afslapning af muskel (manuel behandling, massage eller triggerpunktbehandling), ergonomisk rådgivning og et personligt træningsprogram for gradvis at øge belastning uden at provokere kramper. Hvis du vil finde og sammenligne fysioterapeuter i dit område, kan du bruge FysFinder til at se specialer, anmeldelser og priser for klinikker i hele Danmark.
+En fysioterapeut kan undersøge om kramperne skyldes forkortede muskler, ubalance i muskelstyrke, nerveirritation eller gang- og holdningsmønstre. Behandlingen kan indeholde vejledt stræk og styrkeøvelser, teknikker til afslapning af muskel (manuel behandling, massage eller triggerpunktbehandling), ergonomisk rådgivning og et personligt træningsprogram for gradvis at øge belastning uden at provokere kramper. Hvis du vil finde og sammenligne fysioterapeuter i dit område, kan du bruge Fysfinder til at se specialer, anmeldelser og priser for klinikker i hele Danmark.
 
 ## Ofte stillede spørgsmål om Hvorfor får man krampe?
 

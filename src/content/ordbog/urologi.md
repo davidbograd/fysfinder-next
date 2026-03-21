@@ -26,9 +26,9 @@ Urologer tilbyder en bred vifte af behandlinger, der spænder fra medicinsk beha
 
 Det er vigtigt at søge hjælp fra en urolog, hvis du oplever symptomer som vedvarende smerter i nedre del af maven, blod i urinen, hyppig trang til at urinere, eller problemer med erektion. Tidlig diagnose og behandling kan være afgørende for at forhindre alvorlige komplikationer.
 
-## Hvordan kan FysFinder hjælpe med at finde en urolog?
+## Hvordan kan Fysfinder hjælpe med at finde en urolog?
 
-Selvom FysFinder primært fokuserer på fysioterapeuter, kan platformen også være nyttig til at finde information om urologiske klinikker og specialister. Du kan sammenligne forskellige urologiske tjenester, læse anmeldelser og finde priser, så du kan træffe informerede valg om din sundhed.
+Selvom Fysfinder primært fokuserer på fysioterapeuter, kan platformen også være nyttig til at finde information om urologiske klinikker og specialister. Du kan sammenligne forskellige urologiske tjenester, læse anmeldelser og finde priser, så du kan træffe informerede valg om din sundhed.
 
 ## Ofte stillede spørgsmål om urologi
 

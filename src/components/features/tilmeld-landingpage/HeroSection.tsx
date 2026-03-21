@@ -19,7 +19,7 @@ export function HeroSection() {
                 og fyld din kalender
               </h1>
               <p className="text-xl text-gray-600">
-                Få din klinik på FysFinder og bliv synlig for patienter, der
+                Få din klinik på Fysfinder og bliv synlig for patienter, der
                 søger fysioterapeuter i dit område.
               </p>
             </div>

@@ -59,7 +59,7 @@ Ja, skuldersmerter kan blive kroniske hvis årsagen ikke behandles korrekt, hvis
 
 ## Hvordan vælger jeg den rigtige fysioterapeut til skulderproblemer?
 
-Vælg en fysioterapeut med erfaring i skulderdiagnoser og genoptræning. Læs beskrivelser af specialer, se anmeldelser og sammenlign priser og placering for at finde en klinik der passer til dig. Tjek om terapeuten tilbyder en grundig vurdering og opfølgning, og om der er mulighed for individuelle programmer tilpasset dit niveau og målsætning. På FysFinder kan du sammenligne fysioterapeuter og klinikker på disse parametre, så du vælger det tilbud der passer bedst til din situation.
+Vælg en fysioterapeut med erfaring i skulderdiagnoser og genoptræning. Læs beskrivelser af specialer, se anmeldelser og sammenlign priser og placering for at finde en klinik der passer til dig. Tjek om terapeuten tilbyder en grundig vurdering og opfølgning, og om der er mulighed for individuelle programmer tilpasset dit niveau og målsætning. På Fysfinder kan du sammenligne fysioterapeuter og klinikker på disse parametre, så du vælger det tilbud der passer bedst til din situation.
 
 ## Ofte stillede spørgsmål om Ondt i skulder
 
@@ -85,4 +85,4 @@ Ja, nerver fra nakken kan give udstrålende smerter til skulderen. En grundig un
 Operation overvejes ved store seneoverrivninger, vedvarende smerter trods konservativ behandling, eller mekaniske problemer som kræver kirurgisk korrektion. Beslutningen træffes i samråd med specialister efter udredning.
 
 ### Hvordan finder jeg en fysioterapeut der er god til skulderproblemer?
-Se efter erfaring med skulderrehabilitering, specialkurser i skulderdiagnostik, og gode patientanmeldelser. På FysFinder kan du sammenligne fysioterapeuter og klinikker ud fra specialer, anmeldelser og afstand, så du vælger en terapeut, der matcher dine behov.
+Se efter erfaring med skulderrehabilitering, specialkurser i skulderdiagnostik, og gode patientanmeldelser. På Fysfinder kan du sammenligne fysioterapeuter og klinikker ud fra specialer, anmeldelser og afstand, så du vælger en terapeut, der matcher dine behov.

@@ -38,7 +38,7 @@ Uforklarlige smerter er smerter, der opstår uden en klar årsag eller diagnose 
 
 ### Hvordan kan jeg finde en fysioterapeut til at hjælpe med mine smerter?
 
-Du kan finde en fysioterapeut ved at søge på FysFinder.dk, hvor du kan sammenligne forskellige klinikker og deres specialer.
+Du kan finde en fysioterapeut ved at søge på Fysfinder.dk, hvor du kan sammenligne forskellige klinikker og deres specialer.
 
 ### Er uforklarlige smerter almindelige?
 

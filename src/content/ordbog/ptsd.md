@@ -42,4 +42,4 @@ Selvom PTSD kan være en langvarig tilstand, kan mange mennesker opleve betydeli
 
 ### Hvordan kan jeg finde hjælp til PTSD?
 
-Du kan finde hjælp til PTSD ved at kontakte en psykolog, psykiater eller fysioterapeut, der har erfaring med behandling af traumer. FysFinder.dk kan hjælpe dig med at finde kvalificerede fysioterapeuter i Danmark, der kan støtte dig i din helingsrejse.
+Du kan finde hjælp til PTSD ved at kontakte en psykolog, psykiater eller fysioterapeut, der har erfaring med behandling af traumer. Fysfinder.dk kan hjælpe dig med at finde kvalificerede fysioterapeuter i Danmark, der kan støtte dig i din helingsrejse.

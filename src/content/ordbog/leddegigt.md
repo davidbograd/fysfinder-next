@@ -32,7 +32,7 @@ Livsstilsændringer kan have en positiv indvirkning på håndteringen af leddegi
 
 ## Hvordan kan man finde en fysioterapeut til behandling af leddegigt?
 
-For at finde en fysioterapeut, der har erfaring med behandling af leddegigt, kan man bruge FysFinder. Platformen giver en omfattende oversigt over fysioterapeuter i Danmark, hvor man kan sammenligne specialer, priser og anmeldelser for at finde den rette behandler.
+For at finde en fysioterapeut, der har erfaring med behandling af leddegigt, kan man bruge Fysfinder. Platformen giver en omfattende oversigt over fysioterapeuter i Danmark, hvor man kan sammenligne specialer, priser og anmeldelser for at finde den rette behandler.
 
 ## Ofte stillede spørgsmål om leddegigt
 

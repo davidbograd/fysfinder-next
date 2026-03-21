@@ -151,4 +151,4 @@ Nej, DEXA-scanningen er specialiseret i at måle knogletæthed. Den bruges ikke 
 
 ### Hvordan kan jeg forstå min DEXA-scanningsrapport bedre?
 
-Du kan bruge vores DEXA-scanningsrapport oversætter her på FysFinder.dk. Den gør det nemt at oversætte medicinske termer til almindeligt dansk, så du bedre forstår dine resultater.
+Du kan bruge vores DEXA-scanningsrapport oversætter her på Fysfinder.dk. Den gør det nemt at oversætte medicinske termer til almindeligt dansk, så du bedre forstår dine resultater.

@@ -58,7 +58,7 @@ Søg fysioterapeutisk vurdering hvis trælåret varer mere end et par uger trods
 
 En fysioterapeut vil lave en grundig vurdering af bevægemønster, muskelstyrke, ledmobilitet og neurologiske tegn for at finde årsagen til trælåret. Behandlingen kan indeholde manuel terapi, målrettet øvelsesprogram, ergonomirådgivning, træningsprogression og teknikker til smertehåndtering. Fysioterapeuten kan også hjælpe med at lave en plan for gradvis tilbagevenden til sport eller arbejde.
 
-På FysFinder kan du finde fysioterapeuter i hele Danmark, sammenligne klinikker ud fra specialer, behandlingstilbud, anmeldelser og afstand, så du kan vælge en behandler, der passer til dit problem og din hverdag.
+På Fysfinder kan du finde fysioterapeuter i hele Danmark, sammenligne klinikker ud fra specialer, behandlingstilbud, anmeldelser og afstand, så du kan vælge en behandler, der passer til dit problem og din hverdag.
 
 ## Hvordan forebygger man trælår?
 
@@ -86,4 +86,4 @@ Varme virker godt mod stivhed og før aktivitet for at løsne musklerne, mens ku
 Lav øvelser regelmæssigt i mindst nogle uger og evaluer effekten. Mange mærker forbedring efter 2–6 uger, men hold fast i forebyggende træning for at undgå tilbagefald.
 
 ### Hvordan finder jeg en fysioterapeut der kan hjælpe med trælår?
-På FysFinder kan du søge efter fysioterapeuter i dit område, se hvilke specialer de tilbyder, læse patientanmeldelser og sammenligne priser. Vælg en klinik der har erfaring med muskel- og bevægeproblemer i hofte og lår for bedst muligt resultat.
+På Fysfinder kan du søge efter fysioterapeuter i dit område, se hvilke specialer de tilbyder, læse patientanmeldelser og sammenligne priser. Vælg en klinik der har erfaring med muskel- og bevægeproblemer i hofte og lår for bedst muligt resultat.

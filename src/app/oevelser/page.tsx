@@ -26,7 +26,7 @@ export default function ExercisesPage() {
         </h1>
 
         <p className="mb-8">
-          Velkommen til FysFinders oversigt med træningsøvelser. Bliv klogere på
+          Velkommen til Fysfinders oversigt med træningsøvelser. Bliv klogere på
           effektiv træning af kroppen og find trin-for-trin eksempler på
           træningsøvelser til styrke af forskellige kropsdele. Udforsk mere end
           100 forskellige styrketræningsøvelser til arme, bryst, lænd, skulder,
@@ -54,7 +54,7 @@ export default function ExercisesPage() {
         <div className="prose max-w-none">
           <h2>Træningsøvelser til at styrke kroppen og holde dig i gang</h2>
           <p>
-            De træningsøvelser du finder på FysFinder, er designet til at
+            De træningsøvelser du finder på Fysfinder, er designet til at
             forbedre din krops styrke, mobilitet, balance og kondition. Uanset
             om du træner for at forebygge skader, rehabilitere en skade eller
             forbedre din generelle sundhed, kan vores styrkeøvelser være med til
@@ -115,7 +115,7 @@ export default function ExercisesPage() {
 
           <h2>Få et skræddersyet træningsprogram eller genoptræningsprogram</h2>
           <p>
-            På FysFinder kan du gratis finde fysioterapeuter i hele Danmark, der
+            På Fysfinder kan du gratis finde fysioterapeuter i hele Danmark, der
             kan hjælpe dig med at lave et skræddersyet træningsprogram eller
             genoptræningsprogram. Med et træningsprogram tilpasset til dig, er
             du sikker på, at du får de mest effektive træningsøvelser til at
@@ -163,7 +163,7 @@ export default function ExercisesPage() {
             Ja og nej. Der findes mange styrkeøvelser, hvor du ikke behøver
             træningsudstyr. Mange styrkeøvelser er effektive uden udstyr.
             Træningsvægte, elastikker og maskiner kan hjælpe med at øge
-            belastningen og intensiteten ved hårdere træning. Her på FysFinder
+            belastningen og intensiteten ved hårdere træning. Her på Fysfinder
             kan du finde styrkeøvelser med og uden udstyr og maskiner.
           </p>
         </div>

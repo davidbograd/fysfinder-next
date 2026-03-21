@@ -62,7 +62,7 @@ Forebyggelse handler om at skifte til ordentligt fodtøj, øge træningsmængde 
 
 ## Hvad kan en fysioterapeut gøre ved ondt i foden?
 
-En fysioterapeut foretager en grundig undersøgelse af fodens struktur, ledbevægelighed, muskelfunktion og gang- eller løbemønster. Behandlingen kan bestå af specifikke øvelser, manuel terapi, tørring (taping), rådgivning om sko og indlæg samt gradvis genoptræning. Ved behov kan fysioterapeuten henvise til billeddiagnostik eller samarbejde med andre faggrupper. På FysFinder kan du finde og sammenligne fysioterapeuter og klinikker i hele Danmark, så du får hjælp der hvor du bor.
+En fysioterapeut foretager en grundig undersøgelse af fodens struktur, ledbevægelighed, muskelfunktion og gang- eller løbemønster. Behandlingen kan bestå af specifikke øvelser, manuel terapi, tørring (taping), rådgivning om sko og indlæg samt gradvis genoptræning. Ved behov kan fysioterapeuten henvise til billeddiagnostik eller samarbejde med andre faggrupper. På Fysfinder kan du finde og sammenligne fysioterapeuter og klinikker i hele Danmark, så du får hjælp der hvor du bor.
 
 ## Hvilken rolle spiller sko og indlæg i behandling af ondt i foden?
 
@@ -83,4 +83,4 @@ Mild smerte kan nogle gange tolereres, men ved vedvarende eller tiltagende smert
 Indlæg kan være hjælpsomme for mange, men ikke alle har gavn af dem. Effekten afhænger af fodtypen, årsagen til smerterne og typen af indlæg. En faglig vurdering kan afgøre, om standardindlæg eller specialfremstillede indlæg er relevante.
 
 ### Hvordan finder jeg en fysioterapeut i nærheden?
-Du kan bruge FysFinder til at sammenligne fysioterapeuter og klinikker i dit område. Se på behandlingstilbud, specialer, priser og anmeldelser for at vælge en behandler, der matcher dine behov.
+Du kan bruge Fysfinder til at sammenligne fysioterapeuter og klinikker i dit område. Se på behandlingstilbud, specialer, priser og anmeldelser for at vælge en behandler, der matcher dine behov.

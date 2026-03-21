@@ -51,4 +51,4 @@ Ja, torticollis kan være smertefuldt og føre til ubehag i nakken. Smerterne ka
 
 ### Hvordan kan jeg finde en fysioterapeut til behandling af torticollis?
 
-Du kan finde en fysioterapeut ved at søge på FysFinder.dk, hvor du kan sammenligne forskellige fysioterapeuter, deres specialer og anmeldelser for at finde den rette behandling for torticollis.
+Du kan finde en fysioterapeut ved at søge på Fysfinder.dk, hvor du kan sammenligne forskellige fysioterapeuter, deres specialer og anmeldelser for at finde den rette behandling for torticollis.

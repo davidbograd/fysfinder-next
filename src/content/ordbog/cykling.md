@@ -36,7 +36,7 @@ Almindelige cykelrelaterede skader inkluderer knæskader, rygsmerter og håndled
 
 ## Hvordan kan jeg finde en fysioterapeut til cykelskader?
 
-For at finde en fysioterapeut, der specialiserer sig i cykelskader, kan du bruge FysFinder. Platformen giver dig mulighed for at sammenligne forskellige fysioterapeuter baseret på deres specialer, anmeldelser og priser, så du kan finde den rette hjælp til dine behov.
+For at finde en fysioterapeut, der specialiserer sig i cykelskader, kan du bruge Fysfinder. Platformen giver dig mulighed for at sammenligne forskellige fysioterapeuter baseret på deres specialer, anmeldelser og priser, så du kan finde den rette hjælp til dine behov.
 
 ## Ofte stillede spørgsmål om cykling
 

@@ -51,7 +51,7 @@ Hvis du har tilbagevendende kramper, bør du tjekke medicinliste og eventuelle k
 
 En fysioterapeut laver en grundig undersøgelse af bevægemønster, fodstilling og muskelstyrke. På baggrund af det kan du få et individuelt program med styrkeøvelser, neuromuskulær træning og specifikke stræk, der retter op på ubalancer og mindsker kramper. Fysioterapeuten kan også vejlede om sko, indlæg, ergonomi og hjemmeøvelser og anvende bløddelsteknikker, soneterapi eller TENS som led i behandlingen.
 
-På FysFinder kan du sammenligne fysioterapeuter og klinikker, læse anmeldelser og finde en behandler med erfaring i muskelsmerter og kramper.
+På Fysfinder kan du sammenligne fysioterapeuter og klinikker, læse anmeldelser og finde en behandler med erfaring i muskelsmerter og kramper.
 
 ## Hurtig oversigt: situation, årsag og hurtig lindring
 
@@ -87,4 +87,4 @@ En akut fodkrampe varer ofte fra få sekunder op til flere minutter. Efterfølge
 ### Kan fysioterapi fjerne kramper permanent?
 Fysioterapi kan reducere hyppighed og intensitet ved at rette op på muskelubalance, forbedre bevægelighed og styrke relevant muskulatur. Permanent fjernelse afhænger af årsagen; nogle får fuld effekt, andre oplever færre episoder.
 
-Hvis du har gentagne eller invaliderende kramper i foden, kan en fysioterapeut hjælpe med både akut lindring, øvelser og en personlig forebyggelsesplan. På FysFinder kan du finde og sammenligne fysioterapeuter, så du vælger en klinik, der passer til dine behov.
+Hvis du har gentagne eller invaliderende kramper i foden, kan en fysioterapeut hjælpe med både akut lindring, øvelser og en personlig forebyggelsesplan. På Fysfinder kan du finde og sammenligne fysioterapeuter, så du vælger en klinik, der passer til dine behov.

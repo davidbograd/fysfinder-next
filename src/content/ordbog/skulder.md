@@ -50,4 +50,4 @@ Ja, faktorer som alder, tidligere skader, overbelastning og visse sportsaktivite
 
 ### Hvordan vælger jeg den rigtige fysioterapeut til skulderproblemer?
 
-Det er vigtigt at vælge en fysioterapeut med erfaring inden for skulderrehabilitering. Du kan finde information om specialiseringer og anmeldelser på FysFinder.dk for at træffe det bedste valg.
+Det er vigtigt at vælge en fysioterapeut med erfaring inden for skulderrehabilitering. Du kan finde information om specialiseringer og anmeldelser på Fysfinder.dk for at træffe det bedste valg.

@@ -17,11 +17,11 @@ import { extractTableOfContents } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "Pace beregner → Beregn din løbehastighed i min/km ✅",
   description:
-    "Med FysFinder&apos;s online pace beregner kan du nemt beregne din løbehastighed i min/km. Uanset om du træner til 5 km, halvmarathon eller et helt marathon.",
+    "Med Fysfinder&apos;s online pace beregner kan du nemt beregne din løbehastighed i min/km. Uanset om du træner til 5 km, halvmarathon eller et helt marathon.",
   openGraph: {
     title: "Pace beregner → Beregn din løbehastighed i min/km ✅",
     description:
-      "Med FysFinder&apos;s online pace beregner kan du nemt beregne din løbehastighed i min/km. Uanset om du træner til 5 km, halvmarathon eller et helt marathon.",
+      "Med Fysfinder&apos;s online pace beregner kan du nemt beregne din løbehastighed i min/km. Uanset om du træner til 5 km, halvmarathon eller et helt marathon.",
     images: [
       {
         url: "/images/vaerktoejer/pace-beregner.png",
@@ -82,7 +82,7 @@ export default async function PaceBeregnerPage() {
                 Pace beregner – Beregn nemt din løbehastighed (min/km)
               </h1>
               <p className="text-gray-600 text-sm sm:text-base">
-                Med FysFinder&apos;s pace beregner kan du nemt beregne din løbehastighed i
+                Med Fysfinder&apos;s pace beregner kan du nemt beregne din løbehastighed i
                 antal minutter pr. kilometer (løbe pace). Bliv klogere på dine
                 løbetider og find din optimale pacing strategi – uanset om du træner
                 til 5 km, halvmarathon eller et helt marathon.

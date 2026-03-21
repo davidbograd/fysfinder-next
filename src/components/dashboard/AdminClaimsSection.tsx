@@ -211,7 +211,7 @@ export const AdminClaimsSection = () => {
                       <CardHeader className="pb-3">
                         <CardTitle className="text-sm font-semibold">Klinik detaljer</CardTitle>
                         <CardDescription className="text-xs">
-                          Nuværende oplysninger på FysFinder
+                          Nuværende oplysninger på Fysfinder
                         </CardDescription>
                       </CardHeader>
                       <CardContent className="space-y-2">

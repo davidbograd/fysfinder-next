@@ -43,4 +43,4 @@ Marvskader kan ikke altid helbredes, men med den rette behandling og rehabiliter
 
 ### Hvordan kan jeg finde en fysioterapeut, der specialiserer sig i marvskader?
 
-Du kan finde en fysioterapeut, der specialiserer sig i marvskader ved at søge på FysFinder.dk, hvor du kan sammenligne forskellige klinikker, behandlinger og anmeldelser.
+Du kan finde en fysioterapeut, der specialiserer sig i marvskader ved at søge på Fysfinder.dk, hvor du kan sammenligne forskellige klinikker, behandlinger og anmeldelser.

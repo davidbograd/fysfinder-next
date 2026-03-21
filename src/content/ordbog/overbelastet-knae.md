@@ -46,7 +46,7 @@ Dynamisk opvarmning, stræk for stramme muskler (forsigtig quadriceps- og hasest
 
 ## Hvordan kan fysioterapi hjælpe ved overbelastet knæ?
 
-En fysioterapeut kan lave en målrettet undersøgelse og sætte et personligt træningsprogram op, der målretter de svage led og muskler. Fysioterapi tilbyder også manuel behandling, vejledning i løbestil, hjælp til gradvis belastningsoptrapning og monitorering af fremgang. Hvis du vil finde og sammenligne klinikker og fysioterapeuter i dit område, kan du bruge FysFinder til at vælge den rette hjælper til knærehabilitering.
+En fysioterapeut kan lave en målrettet undersøgelse og sætte et personligt træningsprogram op, der målretter de svage led og muskler. Fysioterapi tilbyder også manuel behandling, vejledning i løbestil, hjælp til gradvis belastningsoptrapning og monitorering af fremgang. Hvis du vil finde og sammenligne klinikker og fysioterapeuter i dit område, kan du bruge Fysfinder til at vælge den rette hjælper til knærehabilitering.
 
 ## Hvornår skal jeg søge hjælp for mit overbelastede knæ?
 
@@ -86,4 +86,4 @@ Støttebind og tape kan give symptomlindring og forbedret funktion midlertidigt,
 ### Påvirker vægt mit knæ og helingsprocessen?
 Ja. Overvægt øger belastningen på knæet ved hver bevægelse. Et vægttab kan reducere smerte og mindske gentagne overbelastninger, samtidig med at genoptræning bliver mere effektiv.
 
-Hvis du vil have hjælp til at finde en fysioterapeut, der arbejder med knæproblemer og genoptræning, kan du søge og sammenligne klinikker på FysFinder for at finde en, der passer til dine behov.
+Hvis du vil have hjælp til at finde en fysioterapeut, der arbejder med knæproblemer og genoptræning, kan du søge og sammenligne klinikker på Fysfinder for at finde en, der passer til dine behov.

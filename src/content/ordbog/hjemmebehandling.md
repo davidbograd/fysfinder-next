@@ -16,7 +16,7 @@ Ved hjemmebehandling kan fysioterapeuter tilbyde en række forskellige behandlin
 
 ## Hvordan finder man en fysioterapeut til hjemmebehandling?
 
-For at finde en fysioterapeut, der tilbyder hjemmebehandling, kan man søge online på platforme som FysFinder. Her kan man sammenligne forskellige fysioterapeuter baseret på deres specialer, anmeldelser og priser. Det er vigtigt at vælge en fysioterapeut, der har erfaring med hjemmebehandling og som kan imødekomme ens specifikke behov.
+For at finde en fysioterapeut, der tilbyder hjemmebehandling, kan man søge online på platforme som Fysfinder. Her kan man sammenligne forskellige fysioterapeuter baseret på deres specialer, anmeldelser og priser. Det er vigtigt at vælge en fysioterapeut, der har erfaring med hjemmebehandling og som kan imødekomme ens specifikke behov.
 
 ## Hvad koster hjemmebehandling?
 
@@ -46,7 +46,7 @@ Mange fysioterapeuter tilbyder hjemmebehandling, og det kan være dækket af syg
 
 ### Hvordan booker jeg en hjemmebehandling?
 
-Du kan booke en hjemmebehandling ved at kontakte en fysioterapeut direkte eller ved at bruge online platforme som FysFinder, hvor du kan finde og sammenligne fysioterapeuter, der tilbyder hjemmebehandling.
+Du kan booke en hjemmebehandling ved at kontakte en fysioterapeut direkte eller ved at bruge online platforme som Fysfinder, hvor du kan finde og sammenligne fysioterapeuter, der tilbyder hjemmebehandling.
 
 ### Hvad skal jeg have klar til hjemmebehandlingen?
 

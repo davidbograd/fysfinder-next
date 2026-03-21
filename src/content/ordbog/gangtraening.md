@@ -25,7 +25,7 @@ Der er mange fordele ved gangtræning. Det kan forbedre muskelstyrken, øge udho
 
 ## Hvordan kan man finde en fysioterapeut til gangtræning?
 
-For at finde en fysioterapeut, der tilbyder gangtræning, kan man bruge FysFinder. Platformen giver en omfattende oversigt over fysioterapeuter i Danmark, hvor man kan sammenligne deres specialer, priser og anmeldelser. Det gør det nemt at finde den rette fysioterapeut, der kan hjælpe med gangtræning og andre rehabiliteringsbehov.
+For at finde en fysioterapeut, der tilbyder gangtræning, kan man bruge Fysfinder. Platformen giver en omfattende oversigt over fysioterapeuter i Danmark, hvor man kan sammenligne deres specialer, priser og anmeldelser. Det gør det nemt at finde den rette fysioterapeut, der kan hjælpe med gangtræning og andre rehabiliteringsbehov.
 
 ## Ofte stillede spørgsmål om gangtræning
 

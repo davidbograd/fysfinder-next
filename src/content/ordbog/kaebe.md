@@ -46,4 +46,4 @@ Hjemmebehandlinger kan inkludere varme- eller kuldebehandling, bløde kostvaner 
 
 ### Hvordan kan jeg finde en fysioterapeut til behandling af kæbesmerter?
 
-Du kan finde en fysioterapeut ved at søge på FysFinder.dk, hvor du kan sammenligne forskellige klinikker, behandlinger og anmeldelser for at finde den rette terapeut til dine behov.
+Du kan finde en fysioterapeut ved at søge på Fysfinder.dk, hvor du kan sammenligne forskellige klinikker, behandlinger og anmeldelser for at finde den rette terapeut til dine behov.

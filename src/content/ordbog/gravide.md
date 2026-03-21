@@ -46,4 +46,4 @@ Ja, fysioterapi kan hjælpe gravide kvinder med at forberede sig til fødslen ve
 
 ### Hvordan finder jeg en fysioterapeut, der specialiserer sig i gravide?
 
-Du kan finde en fysioterapeut, der specialiserer sig i gravide, ved at søge på FysFinder.dk, hvor du kan sammenligne forskellige fysioterapeuter og deres specialer.
+Du kan finde en fysioterapeut, der specialiserer sig i gravide, ved at søge på Fysfinder.dk, hvor du kan sammenligne forskellige fysioterapeuter og deres specialer.

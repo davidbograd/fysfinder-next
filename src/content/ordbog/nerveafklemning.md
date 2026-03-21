@@ -51,4 +51,4 @@ Ja, risikofaktorer inkluderer overvægt, stillesiddende livsstil, gentagne bevæ
 
 ### Hvordan kan jeg finde en fysioterapeut til behandling af nerveafklemning?
 
-Du kan finde en fysioterapeut ved at søge på FysFinder.dk, hvor du kan sammenligne forskellige klinikker, behandlinger og anmeldelser for at finde den rette fysioterapeut til dine behov.
+Du kan finde en fysioterapeut ved at søge på Fysfinder.dk, hvor du kan sammenligne forskellige klinikker, behandlinger og anmeldelser for at finde den rette fysioterapeut til dine behov.

@@ -35,9 +35,9 @@ Når du løber, tænker du typisk: "Jeg skal holde 5:00 min/km for at nå mit m�
 
 Pace gør det mere intuitivt at styre tempoet undervejs, fordi det direkte fortæller dig, hvor lang tid hver kilometer bør tage.
 
-## Beregn din løbehastighed (min/km) med FysFinder's pace beregner
+## Beregn din løbehastighed (min/km) med Fysfinder's pace beregner
 
-Med FysFinder's online pace beregner kan du hurtigt finde ud af, hvor hurtigt du løber. Indtast din distance og tid, og se:
+Med Fysfinder's online pace beregner kan du hurtigt finde ud af, hvor hurtigt du løber. Indtast din distance og tid, og se:
 
 - Din gennemsnitlige pace (min/km)
 - Din hastighed (km/t)
@@ -83,7 +83,7 @@ Ved at kende din pace og hastighed, kan du nemmere følge en struktureret træni
 
 ## Online pace beregner – nemt og gratis
 
-FysFinder's online pace beregner er gratis at bruge og kræver ingen login.
+Fysfinder's online pace beregner er gratis at bruge og kræver ingen login.
 
 Indtast blot distance og tid, og få med det samme vist din pace, hastighed og forventede sluttid.
 
@@ -93,5 +93,5 @@ Perfekt for både begyndere og erfarne løbere, der vil få mere ud af deres tr�
 
 Mange fysioterapeuter specialiserer sig i løberelaterede skader, løbestil og optimering af præstation.
 
-På FysFinder.dk kan du [finde fysioterapeuter i hele Danmark](/find/fysioterapeut/danmark), som kan hjælpe dig med alt fra løbeskader og genoptræning til løbestilsanalyse og performance-coaching.
+På Fysfinder.dk kan du [finde fysioterapeuter i hele Danmark](/find/fysioterapeut/danmark), som kan hjælpe dig med alt fra løbeskader og genoptræning til løbestilsanalyse og performance-coaching.
 

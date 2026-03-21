@@ -59,7 +59,7 @@ Når smerterne er mindre, kan du arbejde mere målrettet med ydre rotationer med
 ## Hvornår skal jeg søge en fysioterapeut for impingement skulder?
 Søg fysioterapi, hvis smerterne påvirker din søvn, dit arbejde eller daglige aktiviteter, eller hvis du ikke mærker forbedring efter 1–2 ugers egenomsorg. Kontakt straks en fagperson ved pludselig svaghed, manglende evne til at løfte armen, følelsesløshed eller mistanke om større skade. En fysioterapeut kan lave en præcis vurdering, sætte et målrettet træningsprogram op og vejlede dig i progression.
 
-Hvis du vil finde en fysioterapeut i nærheden af dig, kan du søge efter klinikker og specialer via FysFinder.
+Hvis du vil finde en fysioterapeut i nærheden af dig, kan du søge efter klinikker og specialer via Fysfinder.
 
 ## Hvor lang tid tager det at blive fri for impingement i skulderen?
 Tiden varierer. Mange ser bedring inden for 4–12 uger med målrettet fysioterapi og gradvis optrapning. For mere kroniske tilfælde kan det tage flere måneder at genopbygge styrke og bevægelsesmønster. Hvis der er strukturelle skader eller stor seneskade, kan behandlingen og helingsprocessen være længere og kræve supplerende indgreb.

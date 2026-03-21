@@ -77,7 +77,7 @@ Skånsom styrketræning af kerne, hofteekstensorer og baglår er vigtigt. En gru
 
 ## Hvornår skal jeg søge hjælp hos en fysioterapeut?
 
-Søg fysioterapeut hvis smerterne er meget stærke, påvirker din gang, ikke bedres efter få uger, eller hvis du oplever vedvarende følelsesløshed eller svaghed. Ved pludselige problemer med vandladning eller afføring eller markant muskelsvaghed skal du søge akut hjælp. På FysFinder kan du nemt finde og sammenligne fysioterapeuter i dit lokalområde, se specialer som ryg/iskias, priser og patientanmeldelser, så du kan vælge en behandler der passer til dine behov.
+Søg fysioterapeut hvis smerterne er meget stærke, påvirker din gang, ikke bedres efter få uger, eller hvis du oplever vedvarende følelsesløshed eller svaghed. Ved pludselige problemer med vandladning eller afføring eller markant muskelsvaghed skal du søge akut hjælp. På Fysfinder kan du nemt finde og sammenligne fysioterapeuter i dit lokalområde, se specialer som ryg/iskias, priser og patientanmeldelser, så du kan vælge en behandler der passer til dine behov.
 
 ## Kan iskias gå væk af sig selv?
 
@@ -117,4 +117,4 @@ Ja, ændret vægtfordeling og øget tryk i bækkenet kan føre til iskiaslignend
 
 Ja, hvis nerven er vedvarende påvirket eller hvis genoptræning og behandling udebliver, kan symptomerne blive langvarige. Tidlig indsats hos en fysioterapeut mindsker risikoen for kronisk forløb.
 
-Hvis du er i tvivl om dine symptomer eller har brug for personlig vejledning, kan du søge efter en fysioterapeut på FysFinder og vælge en behandler med erfaring i rygsmerter og iskias.
+Hvis du er i tvivl om dine symptomer eller har brug for personlig vejledning, kan du søge efter en fysioterapeut på Fysfinder og vælge en behandler med erfaring i rygsmerter og iskias.

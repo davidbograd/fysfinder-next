@@ -91,4 +91,4 @@ Ja. En fysioterapeut kan lave en individuel genoptræningsplan, give øvelser, m
 ### Hvor hurtigt kan jeg forvente at være tilbage i sport?
 Det afhænger af skadens grad. Mindre overrivninger kan tillade retur til sport efter 1–3 uger, moderate efter 4–8 uger, og større skader kan tage flere måneder. Returner først når funktionelle krav (styrke, hop, sprint) er opfyldt uden smerte.
 
-Har du brug for hjælp til genoptræning eller vil du finde en erfaren fysioterapeut i dit område, kan du bruge FysFinder til at sammenligne klinikker og terapeuter og finde den rette hjælp til din fibersprængning i læg.
+Har du brug for hjælp til genoptræning eller vil du finde en erfaren fysioterapeut i dit område, kan du bruge Fysfinder til at sammenligne klinikker og terapeuter og finde den rette hjælp til din fibersprængning i læg.

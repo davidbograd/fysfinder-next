@@ -34,7 +34,7 @@ Resultatet kan hjælpe din fysioterapeut med at skræddersy et individuelt behan
 
 ## Hvor kan jeg finde fysioterapeuter, der bruger STarT Back Screening Tool?
 
-På FysFinder.dk kan du nemt finde fysioterapeuter i hele Danmark, som anvender STarT Back Screening Tool som en del af deres vurdering og behandling. Brug vores platform til at:
+På Fysfinder.dk kan du nemt finde fysioterapeuter i hele Danmark, som anvender STarT Back Screening Tool som en del af deres vurdering og behandling. Brug vores platform til at:
 
 - Sammenligne klinikker
 - Læse anmeldelser
@@ -49,7 +49,7 @@ Find en fysioterapeut nær dig og tag det første skridt mod en ryg uden smerter
 
 Nej, værktøjet kan bruges af alle med akutte eller milde rygsmerter for at vurdere risikoen for forværring.
 
-### Er det gratis at bruge STarT Back Screening Tool på FysFinder.dk?
+### Er det gratis at bruge STarT Back Screening Tool på Fysfinder.dk?
 
 Ja, det er helt gratis at bruge værktøjet via vores platform.
 

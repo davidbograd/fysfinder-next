@@ -48,7 +48,7 @@ I dette eksempel svarer det ca. til:
 
 Tallene er estimerede og kan variere lidt fra person til person, men de giver et stærkt udgangspunkt til at planlægge din træning.
 
-## Sådan bruger du FysFinders RM beregner
+## Sådan bruger du Fysfinders RM beregner
 
 Følg disse trin for at få de mest præcise resultater:
 
@@ -160,7 +160,7 @@ Du kan bruge RM beregneren til stort set alle styrketræningsøvelser, blandt an
 
 Mange fysioterapeuter arbejder målrettet med styrketræning, løfteteknik og forebyggelse af overbelastningsskader.
 
-På FysFinder.dk kan du [finde fysioterapeuter i hele Danmark](/find/fysioterapeut/danmark), som kan hjælpe dig med alt fra smerter relateret til tunge løft, forbedring af din teknik i fx squat, dødløft og bænkpres, til genoptræning og optimering af din styrkepræstation.
+På Fysfinder.dk kan du [finde fysioterapeuter i hele Danmark](/find/fysioterapeut/danmark), som kan hjælpe dig med alt fra smerter relateret til tunge løft, forbedring af din teknik i fx squat, dødløft og bænkpres, til genoptræning og optimering af din styrkepræstation.
 
 ## Ofte stillede spørgsmål om 1RM og styrketræning
 
@@ -170,11 +170,11 @@ At kende sin 1RM gør det nemmere at planlægge træning, vælge passende belast
 
 ### Hvor ofte bør jeg opdatere min 1RM i træningen?
 
-For de fleste er det passende at opdatere sin 1RM hver 6.–10. uge. Hvis du er ny i styrketræning, kan du opleve hurtigere fremgang og derfor justere lidt oftere. Brug FysFinders RM beregner, når du vil opdatere dit estimat.
+For de fleste er det passende at opdatere sin 1RM hver 6.–10. uge. Hvis du er ny i styrketræning, kan du opleve hurtigere fremgang og derfor justere lidt oftere. Brug Fysfinders RM beregner, når du vil opdatere dit estimat.
 
 ### Er min 1RM den samme i alle øvelser?
 
-Nej. Din 1RM afhænger af øvelsens kompleksitet, muskelgruppernes størrelse og din teknik i øvelsen. Mange har fx en højere 1RM i dødløft end i squat eller bænkpres. Brug FysFinders RM beregner til at beregne 1RM for hver enkelt øvelse.
+Nej. Din 1RM afhænger af øvelsens kompleksitet, muskelgruppernes størrelse og din teknik i øvelsen. Mange har fx en højere 1RM i dødløft end i squat eller bænkpres. Brug Fysfinders RM beregner til at beregne 1RM for hver enkelt øvelse.
 
 ### Skal jeg vælge specifikke øvelser, hvis jeg vil forbedre min 1RM?
 
@@ -186,11 +186,11 @@ I starten af en genoptræningsperiode bruges 1RM sjældent, fordi styrken ofte v
 
 ### Hvor præcis er en beregnet 1RM sammenlignet med en testet 1RM?
 
-En beregnet 1RM ligger typisk meget tæt på den reelle værdi, især hvis du bruger et moderat antal gentagelser (3–8 reps). Variation kan dog opstå pga. teknik, dagsform, søvn og erfaring. FysFinders RM beregner giver et stabilt estimat, du trygt kan planlægge efter.
+En beregnet 1RM ligger typisk meget tæt på den reelle værdi, især hvis du bruger et moderat antal gentagelser (3–8 reps). Variation kan dog opstå pga. teknik, dagsform, søvn og erfaring. Fysfinders RM beregner giver et stabilt estimat, du trygt kan planlægge efter.
 
 ### Kan jeg bruge RM beregning, hvis jeg træner med håndvægte?
 
-Ja. RM-beregning fungerer også ved håndvægte, kettlebells eller andre former for modstand. Du skal blot kende den samlede vægt du løfter – og så kan du bruge FysFinders RM beregner på samme måde som med stang.
+Ja. RM-beregning fungerer også ved håndvægte, kettlebells eller andre former for modstand. Du skal blot kende den samlede vægt du løfter – og så kan du bruge Fysfinders RM beregner på samme måde som med stang.
 
 ### Er 1RM kun relevant for styrkeløftere?
 
@@ -198,7 +198,7 @@ Nej. Alle der styrketræner kan have gavn af at kende deres 1RM, uanset om måle
 
 ### Kan jeg beregne min 1RM uden at løfte tungt?
 
-Ja. Det er netop fordelen ved en RM beregner. Du kan bruge en vægt, du kan løfte flere gange (fx 5–10 reps), og lade FysFinders RM beregner omregne det til et sikkert 1RM-estimat.
+Ja. Det er netop fordelen ved en RM beregner. Du kan bruge en vægt, du kan løfte flere gange (fx 5–10 reps), og lade Fysfinders RM beregner omregne det til et sikkert 1RM-estimat.
 
 ### Hvordan ved jeg om min teknik er god nok til at lave realistiske RM-beregninger?
 

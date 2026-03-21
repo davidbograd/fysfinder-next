@@ -29,7 +29,7 @@ Som med enhver behandling er der potentielle risici forbundet med reposition. De
 
 ## Hvordan kan jeg finde en fysioterapeut til reposition?
 
-For at finde en fysioterapeut, der specialiserer sig i reposition, kan du bruge FysFinder. Platformen giver dig mulighed for at sammenligne forskellige fysioterapeuter i Danmark baseret på deres specialer, anmeldelser og priser. Dette gør det lettere for dig at vælge den rette terapeut, der kan hjælpe med dine specifikke behov.
+For at finde en fysioterapeut, der specialiserer sig i reposition, kan du bruge Fysfinder. Platformen giver dig mulighed for at sammenligne forskellige fysioterapeuter i Danmark baseret på deres specialer, anmeldelser og priser. Dette gør det lettere for dig at vælge den rette terapeut, der kan hjælpe med dine specifikke behov.
 
 ## Ofte stillede spørgsmål om reposition
 

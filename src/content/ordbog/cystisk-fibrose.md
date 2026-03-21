@@ -28,7 +28,7 @@ Der findes flere typer fysioterapi, der kan være gavnlige for personer med cyst
 
 ## Hvordan kan man finde en fysioterapeut med erfaring i cystisk fibrose?
 
-For at finde en fysioterapeut med erfaring i behandling af cystisk fibrose kan man søge på FysFinder.dk. Her kan man sammenligne forskellige fysioterapeuter, deres specialer, anmeldelser og priser, så man kan vælge den bedste behandling for ens behov.
+For at finde en fysioterapeut med erfaring i behandling af cystisk fibrose kan man søge på Fysfinder.dk. Her kan man sammenligne forskellige fysioterapeuter, deres specialer, anmeldelser og priser, så man kan vælge den bedste behandling for ens behov.
 
 ## Hvad er prognosen for personer med cystisk fibrose?
 

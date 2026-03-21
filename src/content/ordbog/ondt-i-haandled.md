@@ -57,7 +57,7 @@ Forebyggelse handler om at reducere gentaget belastning, variere arbejdsstilling
 
 ## Find en fysioterapeut til håndledssmerter
 
-Hvis du vil have individuel vurdering og et tilpasset øvelsesprogram, kan en fysioterapeut med erfaring i hånd- og håndledsproblemer hjælpe. På FysFinder kan du sammenligne fysioterapeuter og klinikker i hele Danmark, læse om specialer, se patientanmeldelser, tjekke priser og finde en klinik tæt på dig. En fysioterapeut kan lave en klinisk undersøgelse, vejlede i øvelser og ergonomi, og følge din fremgang med målrettet genoptræning.
+Hvis du vil have individuel vurdering og et tilpasset øvelsesprogram, kan en fysioterapeut med erfaring i hånd- og håndledsproblemer hjælpe. På Fysfinder kan du sammenligne fysioterapeuter og klinikker i hele Danmark, læse om specialer, se patientanmeldelser, tjekke priser og finde en klinik tæt på dig. En fysioterapeut kan lave en klinisk undersøgelse, vejlede i øvelser og ergonomi, og følge din fremgang med målrettet genoptræning.
 
 ## Ofte stillede spørgsmål om Ondt i håndled
 

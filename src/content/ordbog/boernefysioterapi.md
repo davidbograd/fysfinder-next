@@ -28,7 +28,7 @@ Det er vigtigt at søge hjælp fra en børnefysioterapeut, hvis du bemærker, at
 
 ## Hvordan finder man en børnefysioterapeut?
 
-For at finde en kvalificeret børnefysioterapeut kan du søge online på platforme som FysFinder, hvor du kan sammenligne forskellige fysioterapeuter, deres specialer, anmeldelser og priser. Det er vigtigt at vælge en terapeut, der har erfaring med at arbejde med børn og kan tilbyde en behandlingsmetode, der passer til dit barns behov.
+For at finde en kvalificeret børnefysioterapeut kan du søge online på platforme som Fysfinder, hvor du kan sammenligne forskellige fysioterapeuter, deres specialer, anmeldelser og priser. Det er vigtigt at vælge en terapeut, der har erfaring med at arbejde med børn og kan tilbyde en behandlingsmetode, der passer til dit barns behov.
 
 ## Ofte stillede spørgsmål om børnefysioterapi
 

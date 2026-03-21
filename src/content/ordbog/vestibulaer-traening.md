@@ -33,7 +33,7 @@ Generelt er vestibulær træning sikker, når den udføres under vejledning af e
 
 ## Hvordan finder jeg en fysioterapeut til vestibulær træning?
 
-For at finde en fysioterapeut, der tilbyder vestibulær træning, kan du besøge FysFinder.dk. Her kan du sammenligne forskellige klinikker, læse anmeldelser og finde specialister, der kan hjælpe med dine specifikke behov.
+For at finde en fysioterapeut, der tilbyder vestibulær træning, kan du besøge Fysfinder.dk. Her kan du sammenligne forskellige klinikker, læse anmeldelser og finde specialister, der kan hjælpe med dine specifikke behov.
 
 ## Ofte stillede spørgsmål om vestibulær træning
 

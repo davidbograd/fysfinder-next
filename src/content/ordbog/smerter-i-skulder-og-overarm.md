@@ -20,7 +20,7 @@ Sørg for at bemærke svaghed ved specifikke bevægelser (fx udadrotation), natl
 ## Hvad kan fysioterapi gøre ved smerter i skulder og overarm?
 Fysioterapi starter med en grundig undersøgelse: hvor gør det ondt, hvilke bevægelser udløser smerte, hvor stærk er musklen, og hvordan er din skulderstilling. Behandlingen kan inkludere vejledning i belastningsstyring, måltrettet træning til rotatorcuff og skulderblad (scapula), mobilisering af stive led, smertelindrende manuelt arbejde og øvelser, som gradvist øger styrke og bevægelighed.
 
-Fysioterapeuter arbejder også med ergonomi, arbejdsstillinger og træningsprogrammer tilpasset dit aktivitetsniveau, så du kan vende tilbage til arbejde og sport uden at provokere smerten. På FysFinder kan du sammenligne fysioterapeuter og finde klinikker, der har erfaring med skulderproblemer.
+Fysioterapeuter arbejder også med ergonomi, arbejdsstillinger og træningsprogrammer tilpasset dit aktivitetsniveau, så du kan vende tilbage til arbejde og sport uden at provokere smerten. På Fysfinder kan du sammenligne fysioterapeuter og finde klinikker, der har erfaring med skulderproblemer.
 
 ## Hvilke øvelser kan hjælpe mod smerter i skulder og overarm?
 Det vigtigste er at starte blidt og gradvist øge belastningen uden at provokere kraftig smerte. Penduløvelser hjælper ofte som første fase for at reducere smerte og bevare bevægelse. Senere fokus er stabilitet i skulderbladet og styrke i rotatorcuffen, især udadrotation og indadrotation med elastik.
@@ -69,4 +69,4 @@ Kulde kan hjælpe ved akut inflammation og skarp smerte; varme kan hjælpe ved s
 ### Kan nakkesmerter give smerter i skulder og overarm?
 Ja. Nervepåvirkning fra nakken kan give strålende smerter og føleforstyrrelser i skulder, overarm og ned i hånden. Hvis du har føleforstyrrelser, svaghed eller nakkesmerter samtidig med skuldersmerter, bør du nævne det ved vurdering.
 
-Hvis du er i tvivl om årsagen eller hvilke øvelser, der passer til dig, kan en fysioterapeut hjælpe med individuel vurdering og træningsprogram. FysFinder gør det nemt at sammenligne fysioterapeuter i dit område, så du kan finde en med erfaring i skulderrehabilitering.
+Hvis du er i tvivl om årsagen eller hvilke øvelser, der passer til dig, kan en fysioterapeut hjælpe med individuel vurdering og træningsprogram. Fysfinder gør det nemt at sammenligne fysioterapeuter i dit område, så du kan finde en med erfaring i skulderrehabilitering.

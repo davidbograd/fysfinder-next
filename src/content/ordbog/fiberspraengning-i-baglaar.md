@@ -41,7 +41,7 @@ Der findes ingen fast dato—det afhænger af skadegrad og hvor vellykket genopt
 Forebyggelse bygger på regelmæssig styrketræning med særlig fokus på eccentrisk hamstringstyrke, en ordentlig opvarmning før træning eller kamp, styrkebalance mellem for- og baglår, korrekt træningsprogrammering (ingen pludselige belastningsstigninger) og tilstrækkelig restitution. Nordics og tilsvarende øvelser har dokumenteret forebyggende effekt i flere idrætsgrene. Også løbeteknik og stabilitet i hofte og core spiller en rolle.
 
 ## Hvornår skal jeg søge en fysioterapeut ved fibersprængning i baglår?
-Du bør søge en fysioterapeut, hvis smerterne er betydelige, hvis du har svært ved at gå normalt, hvis smerterne ikke forbedres efter et par dage med hvile, eller hvis du vil have en plan for sikker og effektiv genoptræning. En fysioterapeut kan vurdere skadeomfanget, lave et målrettet genoptræningsprogram og følge din progression så du minimerer risiko for tilbagefald. På FysFinder kan du sammenligne fysioterapeuter og finde en klinik, der har erfaring med hamstringsskader.
+Du bør søge en fysioterapeut, hvis smerterne er betydelige, hvis du har svært ved at gå normalt, hvis smerterne ikke forbedres efter et par dage med hvile, eller hvis du vil have en plan for sikker og effektiv genoptræning. En fysioterapeut kan vurdere skadeomfanget, lave et målrettet genoptræningsprogram og følge din progression så du minimerer risiko for tilbagefald. På Fysfinder kan du sammenligne fysioterapeuter og finde en klinik, der har erfaring med hamstringsskader.
 
 ## Ofte stillede spørgsmål om Fibersprængning i baglår
 

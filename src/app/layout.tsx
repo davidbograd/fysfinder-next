@@ -19,7 +19,7 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "FysFinder",
+  title: "Fysfinder",
   description: "Find den bedste fysioterapeut",
   metadataBase: new URL("https://www.fysfinder.dk"),
   icons: {
@@ -38,10 +38,10 @@ export const metadata: Metadata = {
   },
   manifest: "/favicon/site.webmanifest",
   appleWebApp: {
-    title: "FysFinder",
+    title: "Fysfinder",
   },
   openGraph: {
-    title: "FysFinder - Find den bedste fysioterapeut",
+    title: "Fysfinder - Find den bedste fysioterapeut",
     description:
       "Se anmeldelser, specialer, priser og meget mere fra danske fysioterapeuter",
     images: [
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
         url: "/opengraph-fysfinder.jpg",
         width: 1200,
         height: 630,
-        alt: "FysFinder - Find den bedste fysioterapeut",
+        alt: "Fysfinder - Find den bedste fysioterapeut",
       },
     ],
     type: "website",

@@ -11,7 +11,7 @@ function BlogStructuredData({ posts }: BlogStructuredDataProps) {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": ["WebPage", "Blog", "CollectionPage"],
-    name: "FysFinder Blog",
+    name: "Fysfinder Blog",
     description: "Læs de seneste blogindlæg om fysioterapi, sundhed og velvære",
     author: {
       "@type": "Person",
@@ -22,7 +22,7 @@ function BlogStructuredData({ posts }: BlogStructuredDataProps) {
       sameAs: ["https://www.linkedin.com/in/joachim-bograd-43b0a120a/"],
       affiliation: {
         "@type": "MedicalOrganization",
-        name: "FysFinder",
+        name: "Fysfinder",
         url: "https://fysfinder.dk",
       },
     },
@@ -75,7 +75,7 @@ export default async function BlogPage() {
       <div className="max-w-7xl mx-auto">
         <div className="mb-12">
           <h1 className="md:text-4xl text-3xl font-bold mb-4">
-            FysFinder Blog
+            Fysfinder Blog
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl">
             Her finder du spændende artikler om fysioterapi, sundhed og velvære.

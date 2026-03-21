@@ -28,7 +28,7 @@ Det anbefales at søge hjælp fra en fysioterapeut, så snart man føler behov f
 
 ## Hvordan finder man en fysioterapeut til efterfødsel?
 
-For at finde en fysioterapeut, der specialiserer sig i efterfødsel, kan man bruge platforme som FysFinder. Her kan man sammenligne forskellige fysioterapeuter, se deres specialer, læse anmeldelser og finde den, der passer bedst til ens behov. Det er vigtigt at vælge en fysioterapeut, der forstår de specifikke udfordringer, man står overfor efter fødslen.
+For at finde en fysioterapeut, der specialiserer sig i efterfødsel, kan man bruge platforme som Fysfinder. Her kan man sammenligne forskellige fysioterapeuter, se deres specialer, læse anmeldelser og finde den, der passer bedst til ens behov. Det er vigtigt at vælge en fysioterapeut, der forstår de specifikke udfordringer, man står overfor efter fødslen.
 
 ## Ofte stillede spørgsmål om efterfødsel
 

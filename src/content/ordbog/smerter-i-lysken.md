@@ -68,7 +68,7 @@ Nogle tilstande, som en tydelig inguinal brok eller en større strukturel skade 
 
 ## Hvordan finder jeg en fysioterapeut til smerter i lysken?
 
-Hvis du har brug for hjælp til vurdering eller genoptræning, kan du søge efter fysioterapeuter med erfaring i lyskesmerter eller idrætsfysioterapi på FysFinder. Brug søgefunktionen til at sammenligne klinikker, se hvilke behandlingstyper fysioterapeuten tilbyder, læse anmeldelser og finde en klinik tæt på dig. En fysioterapeut kan lave en individuel plan, tilpasse øvelserne til dit niveau og støtte dig sikkert tilbage til fuld funktion.
+Hvis du har brug for hjælp til vurdering eller genoptræning, kan du søge efter fysioterapeuter med erfaring i lyskesmerter eller idrætsfysioterapi på Fysfinder. Brug søgefunktionen til at sammenligne klinikker, se hvilke behandlingstyper fysioterapeuten tilbyder, læse anmeldelser og finde en klinik tæt på dig. En fysioterapeut kan lave en individuel plan, tilpasse øvelserne til dit niveau og støtte dig sikkert tilbage til fuld funktion.
 
 ## Ofte stillede spørgsmål om Smerter i lysken
 
@@ -90,4 +90,4 @@ Ja. Graviditet kan give øget belastning og ændret mekanik i bækkenet, som kan
 ### Skal jeg tage smertestillende ved lyskesmerter?
 Smertestillende som paracetamol eller NSAID kan afhjælpe symptomer midlertidigt, men bør bruges med omtanke og kun som en del af en plan, der også inkluderer hvile, øvelser og evt. faglig vurdering. Tal med apotek eller læge ved tvivl.
 
-Har du brug for professionel hjælp til smerter i lysken, kan en fysioterapeut vurdere din situation, lave et sikkert træningsprogram og følge dig gennem genoptræningen. På FysFinder kan du finde og sammenligne fysioterapeuter i dit område og vælge en, der passer til dine behov.
+Har du brug for professionel hjælp til smerter i lysken, kan en fysioterapeut vurdere din situation, lave et sikkert træningsprogram og følge dig gennem genoptræningen. På Fysfinder kan du finde og sammenligne fysioterapeuter i dit område og vælge en, der passer til dine behov.

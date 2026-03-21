@@ -43,7 +43,7 @@ Behandling afhænger af årsagen. Mange bliver bedre med konservativ behandling:
 
 ## Kan fysioterapi hjælpe mod ondt i fødderne?
 
-Ja. Fysioterapeuter vurderer fodens bevægemønster, styrke og mobilitet, analyserer gang og løbestil og lærer dig målrettede øvelser til både styrke og fleksibilitet. En fysioterapeut kan vejlede i valg af sko og indlæg, vise korrekt opbygning af træning for at undgå genopblussen og tilbyde teknikker som bløddelsbehandling, tape og nerveglidning. På FysFinder kan du sammenligne fysioterapeuter og klinikker, se specialer og anmeldelser, så du kan vælge en behandler med erfaring i fodsmerter.
+Ja. Fysioterapeuter vurderer fodens bevægemønster, styrke og mobilitet, analyserer gang og løbestil og lærer dig målrettede øvelser til både styrke og fleksibilitet. En fysioterapeut kan vejlede i valg af sko og indlæg, vise korrekt opbygning af træning for at undgå genopblussen og tilbyde teknikker som bløddelsbehandling, tape og nerveglidning. På Fysfinder kan du sammenligne fysioterapeuter og klinikker, se specialer og anmeldelser, så du kan vælge en behandler med erfaring i fodsmerter.
 
 ## Hvilke sko og indlæg skal jeg vælge hvis jeg har ondt i fødderne?
 

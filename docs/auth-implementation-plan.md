@@ -1,7 +1,7 @@
 # Authentication Implementation Plan
 
 ## Overview
-This document outlines the plan for implementing user authentication for the FysFinder platform, allowing users to sign up with email, password, full name, and clinic name.
+This document outlines the plan for implementing user authentication for the Fysfinder platform, allowing users to sign up with email, password, full name, and clinic name.
 
 ## Current Setup
 - ✅ Next.js 15 (App Router)

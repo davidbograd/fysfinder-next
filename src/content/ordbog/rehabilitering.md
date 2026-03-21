@@ -21,7 +21,7 @@ Rehabilitering kan være gavnligt for en bred vifte af personer, herunder dem, d
 
 ## Hvordan vælger man den rigtige rehabiliteringsklinik?
 
-Når man vælger en rehabiliteringsklinik, er det vigtigt at overveje faktorer som klinikkens specialisering, behandlingsmetoder, tilgængelighed og anmeldelser fra tidligere patienter. FysFinder.dk kan hjælpe med at sammenligne forskellige klinikker og finde den, der bedst opfylder ens behov.
+Når man vælger en rehabiliteringsklinik, er det vigtigt at overveje faktorer som klinikkens specialisering, behandlingsmetoder, tilgængelighed og anmeldelser fra tidligere patienter. Fysfinder.dk kan hjælpe med at sammenligne forskellige klinikker og finde den, der bedst opfylder ens behov.
 
 ## Hvad kan man forvente under rehabiliteringsprocessen?
 

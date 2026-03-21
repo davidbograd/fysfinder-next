@@ -73,4 +73,4 @@ Stressfraktur giver oftere en mere lokaliseret, intens og vedvarende smerte, som
 Kortvarig brug af smertestillende eller NSAID kan lindre symptomer, men medicin fjerner ikke årsagen. Brug medicin sparsomt og søg rådgivning hos sundhedspersonale hvis symptomerne er alvorlige eller langvarige.
 
 ### Hvor finder jeg fysioterapeuter, der kan hjælpe med skinnebensbetændelse?
-På FysFinder kan du sammenligne fysioterapeuter og klinikker, se specialer og anmeldelser, og finde behandlere med erfaring i løbeskader og belastningsproblematikker. Vælg en fysioterapeut, der tilbyder individuel vurdering, genoptræningsplan og opfølgning.
+På Fysfinder kan du sammenligne fysioterapeuter og klinikker, se specialer og anmeldelser, og finde behandlere med erfaring i løbeskader og belastningsproblematikker. Vælg en fysioterapeut, der tilbyder individuel vurdering, genoptræningsplan og opfølgning.

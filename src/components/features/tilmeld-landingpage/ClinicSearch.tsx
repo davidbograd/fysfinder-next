@@ -26,7 +26,7 @@ export function ClinicSearch() {
     <section id="clinic-search" className="w-full bg-gray-50 py-12 md:py-24">
       <div className="container px-4 md:px-6">
         <h2 className="text-center text-2xl font-bold md:text-3xl mb-12">
-          Sådan får du din klinik på FysFinder
+          Sådan får du din klinik på Fysfinder
         </h2>
 
         <div className="max-w-3xl mx-auto space-y-6">
@@ -41,7 +41,7 @@ export function ClinicSearch() {
               </h3>
             </div>
             <p className="mb-6 text-gray-600">
-              Opret en gratis konto på FysFinder og få adgang til at claim og opdatere din klinikprofil.
+              Opret en gratis konto på Fysfinder og få adgang til at claim og opdatere din klinikprofil.
             </p>
 
             <div className="space-y-4">
@@ -78,7 +78,7 @@ export function ClinicSearch() {
             </div>
             <p className="text-gray-600">
               Modtag henvendelser fra de tusindvis af danskere, der månedligt
-              bruger FysFinder.
+              bruger Fysfinder.
             </p>
           </div>
         </div>

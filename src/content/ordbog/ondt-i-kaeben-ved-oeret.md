@@ -63,7 +63,7 @@ Ja. Stress øger muskelspændinger og kan føre til bruxisme (tandskæren), som 
 
 Søg hjælp hvis smerterne er meget kraftige, hvis du får feber og hævelse, hvis du ikke kan åbne munden, hvis du oplever besvær med at trække vejret eller synke, eller hvis symptomerne forværres trods egenomsorg over flere dage. Kontakt tandlæge ved tydelige tandproblemer, og søg læge eller øre-næse-hals-specialist hvis der er tegn på øreinfektion, høreproblemer eller andre alvorlige symptomer. En fysioterapeut kan hjælpe, hvis dine kæbesmerter primært er muskulære eller bevægelsesrelaterede.
 
-På FysFinder kan du finde fysioterapeuter med erfaring i kæbesmerter og temporomandibulære lidelser, sammenligne klinikker og se, hvilke behandlingsformer de tilbyder.
+På Fysfinder kan du finde fysioterapeuter med erfaring i kæbesmerter og temporomandibulære lidelser, sammenligne klinikker og se, hvilke behandlingsformer de tilbyder.
 
 ## Ofte stillede spørgsmål om Ondt i kæben ved øret
 

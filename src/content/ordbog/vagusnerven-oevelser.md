@@ -48,7 +48,7 @@ Forskningen viser, at ikke-invasive metoder som langsom vejrtrækning, toning og
 
 ## Hvornår skal jeg søge hjælp fra en fysioterapeut?
 
-Hvis du oplever vedvarende stress, søvnproblemer, ustabil puls eller kraftige spændinger i nakke og skuldre, kan en fysioterapeut hjælpe med at vurdere og lave et tilpasset program. En fysioterapeut kan kombinere vejrtrækningsøvelser med manuel behandling, holdningskorrigering og genoptræning så øvelserne bliver sikre og effektive. Brug FysFinder til at sammenligne klinikker og finde en fysioterapeut med erfaring i vejrtrækningsterapi og nervesystemsregulering.
+Hvis du oplever vedvarende stress, søvnproblemer, ustabil puls eller kraftige spændinger i nakke og skuldre, kan en fysioterapeut hjælpe med at vurdere og lave et tilpasset program. En fysioterapeut kan kombinere vejrtrækningsøvelser med manuel behandling, holdningskorrigering og genoptræning så øvelserne bliver sikre og effektive. Brug Fysfinder til at sammenligne klinikker og finde en fysioterapeut med erfaring i vejrtrækningsterapi og nervesystemsregulering.
 
 | Øvelse | Hvad gør den? | Anbefalet varighed/hyppighed |
 |---|---:|---:|
@@ -73,4 +73,4 @@ Bivirkninger er sjældne men kan inkludere svimmelhed eller kvalme hvis du press
 ### Kan jeg kombinere øvelserne med anden fysioterapi?
 Ja. Fysioterapeuter integrerer ofte vagusnerven øvelser i et større forløb med manuel behandling, styrke- og mobilitetstræning for bedre helhedsvirkning.
 
-Hvis du vil have hjælp til at finde en fysioterapeut i dit område, kan du bruge FysFinder til at sammenligne klinikker, specialer og anmeldelser, så du finder en behandler, der kan lave et personligt program for dig.
+Hvis du vil have hjælp til at finde en fysioterapeut i dit område, kan du bruge Fysfinder til at sammenligne klinikker, specialer og anmeldelser, så du finder en behandler, der kan lave et personligt program for dig.

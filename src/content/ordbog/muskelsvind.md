@@ -32,7 +32,7 @@ Livsstilsændringer kan have en positiv indvirkning på personer med muskelsvind
 
 ## Hvilke ressourcer er tilgængelige for personer med muskelsvind?
 
-Der findes mange ressourcer for personer med muskelsvind, herunder organisationer, der tilbyder information, støtte og rådgivning. FysFinder.dk kan hjælpe med at finde fysioterapeuter, der har erfaring med at arbejde med muskelsvind og kan tilbyde den nødvendige behandling og støtte.
+Der findes mange ressourcer for personer med muskelsvind, herunder organisationer, der tilbyder information, støtte og rådgivning. Fysfinder.dk kan hjælpe med at finde fysioterapeuter, der har erfaring med at arbejde med muskelsvind og kan tilbyde den nødvendige behandling og støtte.
 
 ## Ofte stillede spørgsmål om muskelsvind
 

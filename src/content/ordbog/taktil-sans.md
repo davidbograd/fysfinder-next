@@ -29,7 +29,7 @@ Der findes mange øvelser, der kan hjælpe med at forbedre taktil sans. Disse ka
 
 ## Hvordan kan man finde en fysioterapeut, der specialiserer sig i taktil sans?
 
-For at finde en fysioterapeut, der har erfaring med behandling af taktil sans, kan man bruge platforme som FysFinder. Her kan man sammenligne forskellige fysioterapeuter baseret på deres specialer, anmeldelser og priser. Det er vigtigt at vælge en terapeut, der forstår ens specifikke behov og kan tilbyde skræddersyede behandlinger.
+For at finde en fysioterapeut, der har erfaring med behandling af taktil sans, kan man bruge platforme som Fysfinder. Her kan man sammenligne forskellige fysioterapeuter baseret på deres specialer, anmeldelser og priser. Det er vigtigt at vælge en terapeut, der forstår ens specifikke behov og kan tilbyde skræddersyede behandlinger.
 
 ## Ofte stillede spørgsmål om taktil sans
 

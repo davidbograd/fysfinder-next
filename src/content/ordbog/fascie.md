@@ -47,4 +47,4 @@ Ja, fascieproblemer kan føre til smerter og ubehag i andre dele af kroppen. Det
 
 ### Hvordan kan jeg finde en fysioterapeut, der specialiserer sig i fasciebehandling?
 
-Du kan finde en fysioterapeut, der specialiserer sig i fasciebehandling ved at søge på FysFinder.dk, hvor du kan sammenligne forskellige fysioterapeuter og deres behandlingstilbud.
+Du kan finde en fysioterapeut, der specialiserer sig i fasciebehandling ved at søge på Fysfinder.dk, hvor du kan sammenligne forskellige fysioterapeuter og deres behandlingstilbud.

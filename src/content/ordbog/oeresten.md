@@ -50,4 +50,4 @@ Ja, øresten kan komme tilbage, især hvis man har haft episoder tidligere. Det 
 
 ### Hvordan kan jeg finde en fysioterapeut til behandling af øresten?
 
-Du kan finde en fysioterapeut, der specialiserer sig i vestibulær rehabilitering, ved at søge på FysFinder.dk, hvor du kan sammenligne forskellige klinikker og deres behandlingstilbud.
+Du kan finde en fysioterapeut, der specialiserer sig i vestibulær rehabilitering, ved at søge på Fysfinder.dk, hvor du kan sammenligne forskellige klinikker og deres behandlingstilbud.

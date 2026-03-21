@@ -54,7 +54,7 @@ Mange oplever betydelig bedring i løbet af uger til få måneder med konservati
 
 ## Hvordan vælger jeg en fysioterapeut for en klemt nerve i ryggen?
 
-Vælg en fysioterapeut med erfaring i ryg- og nervesmerter, som tilbyder en grundig undersøgelse, individuelle øvelser og opfølgning. På FysFinder kan du sammenligne fysioterapeuter ud fra specialer, patientanmeldelser, behandlingsformer og afstand, så du nemt kan finde en behandler, der matcher dit behov og din hverdag. Spørg om erfaring med neural mobilisering, rygrehabilitering og om fysioterapeuten kan vise før/efter-plan for dit forløb.
+Vælg en fysioterapeut med erfaring i ryg- og nervesmerter, som tilbyder en grundig undersøgelse, individuelle øvelser og opfølgning. På Fysfinder kan du sammenligne fysioterapeuter ud fra specialer, patientanmeldelser, behandlingsformer og afstand, så du nemt kan finde en behandler, der matcher dit behov og din hverdag. Spørg om erfaring med neural mobilisering, rygrehabilitering og om fysioterapeuten kan vise før/efter-plan for dit forløb.
 
 ## Ofte stillede spørgsmål om nerve i klemme i ryggen
 
@@ -73,4 +73,4 @@ Iskias beskriver symptomer (smerter og udstråling langs ischiasnerven), mens "n
 ### Hvornår hjælper operation mod en klemt nerve i ryggen?
 Operation kan overvejes, hvis konservativ behandling ikke hjælper efter flere uger til måneder, eller hvis der er alvorlige neurologiske udfald som hurtigt forværrende svaghed eller manglende kontrol med blære/tarm. Beslutningen træffes i samarbejde med specialister efter grundig vurdering.
 
-Hvis du er i tvivl om dine symptomer eller har brug for individuel vurdering, kan en fysioterapeut på FysFinder hjælpe med undersøgelse, plan for øvelser og et behandlingsforløb, der passer til din hverdag og dine mål.
+Hvis du er i tvivl om dine symptomer eller har brug for individuel vurdering, kan en fysioterapeut på Fysfinder hjælpe med undersøgelse, plan for øvelser og et behandlingsforløb, der passer til din hverdag og dine mål.

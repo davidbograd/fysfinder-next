@@ -45,7 +45,7 @@ export default function Footer() {
             </div>
             <div className="w-fit shrink-0">
             <p className="text-[14px] text-white/60 mb-3">
-              FysFinder
+              Fysfinder
             </p>
             <div className="space-y-2">
               <Link href="/om-os" className="block text-[18px] font-light leading-tight text-white hover:text-white/85">
@@ -71,7 +71,7 @@ export default function Footer() {
             <SiteLogo />
           </div>
           <div className="flex items-center gap-4 text-xs text-[#99c3b5]">
-            <p>© 2026 FysFinder</p>
+            <p>© 2026 Fysfinder</p>
             <Link href="/privatlivspolitik" className="hover:text-[#d4e6df]">
               Privatlivspolitik
             </Link>

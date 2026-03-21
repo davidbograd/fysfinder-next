@@ -116,6 +116,6 @@ Ved at kende dit daglige kaloriebehov kan du nemt tilpasse din kost og aktivitet
 
 TDEE beregningen tager højde for individuelle faktorer som køn, alder, vægt, højde og fysisk aktivitetsniveau, hvilket gør den særligt nyttig for dig, der er i gang med genoptræning efter skade, har nedsat mobilitet eller følger et træningsprogram udarbejdet af en fysioterapeut. Mange overser betydningen af energibalance i forbindelse med genoptræning, men et passende kalorieindtag kan være afgørende for en effektiv og sikker rehabilitering.
 
-## Prøv FysFinder's gratis online TDEE beregner
+## Prøv Fysfinder's gratis online TDEE beregner
 
 Brug vores gratis TDEE beregner og få et skræddersyet estimat af dit daglige kaloriebehov – et vigtigt skridt, hvis du vil kombinere kost, træning og fysioterapi på en måde, der støtter både vægttab og sund genopbygning af kroppen.

@@ -53,7 +53,7 @@ Der er ofte familiær forekomst, så en arvelig komponent findes i mange tilfæl
 I milde tilfælde er påvirkningen ofte minimal. I moderate til svære tilfælde kan fordybningen skubbe på hjertet eller nedsætte lungevolumen, hvilket kan give åndenød og nedsat kondition. Funktionstest og billeddiagnostik afgør, om hjerte eller lunger er påvirket.
 
 ## Hvordan vælger jeg en fysioterapeut til pectus excavatum?
-Søg en fysioterapeut med erfaring i thorax-, respirations- eller ortopædisk genoptræning og gerne med erfaring i forløb efter brystkasseoperationer. Tjek anmeldelser, specialer og behandlingsområder. På FysFinder kan du sammenligne fysioterapeuter i Danmark ud fra behandlingstyper, specialer, anmeldelser og priser, så du lettere finder en behandler, der passer til dit behov.
+Søg en fysioterapeut med erfaring i thorax-, respirations- eller ortopædisk genoptræning og gerne med erfaring i forløb efter brystkasseoperationer. Tjek anmeldelser, specialer og behandlingsområder. På Fysfinder kan du sammenligne fysioterapeuter i Danmark ud fra behandlingstyper, specialer, anmeldelser og priser, så du lettere finder en behandler, der passer til dit behov.
 
 ## Ofte stillede spørgsmål om Pectus excavatum
 
@@ -76,6 +76,6 @@ Vacuum bell er en sugekop, der placeres på brystet og via undertryk løfter ste
 Tidlig genoptræning starter ofte inden for uger til måneder og kan fortsætte i flere måneder for at genopbygge styrke og bevægelighed. Fuld sportslig tilbagevenden kan variere, men mange vender gradvist tilbage efter 2–3 måneder med forsigtighed og efter lægens anvisninger.
 
 ### Hvordan finder jeg en fysioterapeut med erfaring i pectus excavatum?
-Søg efter fysioterapeuter med erfaring i thorax- og respirationsproblemer eller postoperativ genoptræning. Brug værktøjer som FysFinder til at sammenligne specialer, behandlingstyper, anmeldelser og priser, så du kan vælge en behandler, der matcher dit behov.
+Søg efter fysioterapeuter med erfaring i thorax- og respirationsproblemer eller postoperativ genoptræning. Brug værktøjer som Fysfinder til at sammenligne specialer, behandlingstyper, anmeldelser og priser, så du kan vælge en behandler, der matcher dit behov.
 
-Hvis du vil have hjælp til at finde en fysioterapeut, der arbejder med brystkasseproblemer og genoptræning, kan du bruge FysFinder til at få overblik og sammenligne muligheder i dit område.
+Hvis du vil have hjælp til at finde en fysioterapeut, der arbejder med brystkasseproblemer og genoptræning, kan du bruge Fysfinder til at få overblik og sammenligne muligheder i dit område.

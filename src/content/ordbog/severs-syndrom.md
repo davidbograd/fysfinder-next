@@ -50,7 +50,7 @@ Forebyggelse handler om at undgå pludselige stigninger i træningsmængde, brug
 
 ## Hvornår skal jeg søge hjælp hos en fysioterapeut?
 
-Kontakt en fysioterapeut hvis smerten påvirker daglig aktivitet, varer i mere end et par uger trods hvile og simple tiltag, eller hvis barnet halter konstant. Søg omgående hjælp ved stærke smerter, natlige smerter, feber eller markant hævelse, da det kan være tegn på anden sygdom. På FysFinder kan du finde og sammenligne fysioterapeuter, der arbejder med børns sportsrelaterede skader, så du hurtigt kan få vejledning og et målrettet genoptræningsforløb.
+Kontakt en fysioterapeut hvis smerten påvirker daglig aktivitet, varer i mere end et par uger trods hvile og simple tiltag, eller hvis barnet halter konstant. Søg omgående hjælp ved stærke smerter, natlige smerter, feber eller markant hævelse, da det kan være tegn på anden sygdom. På Fysfinder kan du finde og sammenligne fysioterapeuter, der arbejder med børns sportsrelaterede skader, så du hurtigt kan få vejledning og et målrettet genoptræningsforløb.
 
 ## Ofte stillede spørgsmål om Severs syndrom
 

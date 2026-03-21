@@ -29,7 +29,7 @@ Generelt er ledmobilisering en sikker behandlingsmetode, men som med enhver form
 
 ## Hvordan kan jeg finde en fysioterapeut, der tilbyder ledmobilisering?
 
-For at finde en fysioterapeut, der tilbyder ledmobilisering, kan du bruge FysFinder. Platformen giver dig mulighed for at sammenligne forskellige fysioterapeuter i Danmark, deres specialer, anmeldelser og priser. Dette gør det nemt at finde den rette behandler til dine behov.
+For at finde en fysioterapeut, der tilbyder ledmobilisering, kan du bruge Fysfinder. Platformen giver dig mulighed for at sammenligne forskellige fysioterapeuter i Danmark, deres specialer, anmeldelser og priser. Dette gør det nemt at finde den rette behandler til dine behov.
 
 ## Ofte stillede spørgsmål om ledmobilisering
 

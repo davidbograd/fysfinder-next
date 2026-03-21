@@ -33,7 +33,7 @@ export const VerifyClinicModal = ({ children }: VerifyClinicModalProps) => {
           </DialogTitle>
           <DialogDescription className="text-base pt-2 space-y-2">
             <span className="block">
-              Tusindvis bruger FysFinder til at finde en fysioterapeut. Tag kontrol over din klinik og bliv fundet af nye patienter - helt gratis!
+              Tusindvis bruger Fysfinder til at finde en fysioterapeut. Tag kontrol over din klinik og bliv fundet af nye patienter - helt gratis!
             </span>
           </DialogDescription>
         </DialogHeader>

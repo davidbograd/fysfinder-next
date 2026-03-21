@@ -29,7 +29,7 @@ Der er visse øvelser og aktiviteter, som gravide kvinder bør undgå. Disse ink
 
 ## Hvordan kan man finde en fysioterapeut til graviditetstræning?
 
-For at finde en fysioterapeut, der specialiserer sig i graviditetstræning, kan man bruge FysFinder. Platformen giver en oversigt over fysioterapeuter i Danmark, hvor man kan sammenligne deres specialer, anmeldelser og priser, så man kan finde den rette hjælp til sin graviditetstræning.
+For at finde en fysioterapeut, der specialiserer sig i graviditetstræning, kan man bruge Fysfinder. Platformen giver en oversigt over fysioterapeuter i Danmark, hvor man kan sammenligne deres specialer, anmeldelser og priser, så man kan finde den rette hjælp til sin graviditetstræning.
 
 ## Ofte stillede spørgsmål om graviditetstræning
 

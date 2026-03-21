@@ -24,7 +24,7 @@ Fysioterapeuter tilbyder en række behandlinger, der kan være gavnlige for skle
 
 ## Hvordan finder man en fysioterapeut med erfaring i behandling af sklerose?
 
-Når man søger efter en fysioterapeut, der har erfaring med sklerose, er det vigtigt at overveje deres specialisering og erfaring. FysFinder.dk gør det nemt at finde fysioterapeuter i Danmark, der har ekspertise inden for neurologiske tilstande som sklerose. Gennem platformen kan man sammenligne klinikker, læse anmeldelser og finde den rette behandler.
+Når man søger efter en fysioterapeut, der har erfaring med sklerose, er det vigtigt at overveje deres specialisering og erfaring. Fysfinder.dk gør det nemt at finde fysioterapeuter i Danmark, der har ekspertise inden for neurologiske tilstande som sklerose. Gennem platformen kan man sammenligne klinikker, læse anmeldelser og finde den rette behandler.
 
 ## Hvad kan man forvente under en fysioterapibehandling for sklerose?
 

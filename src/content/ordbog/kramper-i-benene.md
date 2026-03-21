@@ -39,7 +39,7 @@ En enkel vægstræk af læggen hjælper mange: stil dig med hænderne mod en væ
 
 ## Kan fysioterapi hjælpe mod kramper i benene?
 
-Ja. En fysioterapeut kan vurdere om kramperne skyldes muskelubalance, teknikfejl, gangmønster eller underliggende biomekaniske problemer. Behandlingen kan bestå af målrettede udspændinger, styrkeøvelser, manuel terapi og vejledning i belastning og restitution. Hvis kramperne er knyttet til sportsudøvelse, kan en sportsfysioterapeut hjælpe med at tilpasse træningen og forebygge tilbagefald. På FysFinder kan du sammenligne fysioterapeuter i hele Danmark efter specialer, anmeldelser, behandlingstyper og priser for at finde nogen, der passer til dit problem.
+Ja. En fysioterapeut kan vurdere om kramperne skyldes muskelubalance, teknikfejl, gangmønster eller underliggende biomekaniske problemer. Behandlingen kan bestå af målrettede udspændinger, styrkeøvelser, manuel terapi og vejledning i belastning og restitution. Hvis kramperne er knyttet til sportsudøvelse, kan en sportsfysioterapeut hjælpe med at tilpasse træningen og forebygge tilbagefald. På Fysfinder kan du sammenligne fysioterapeuter i hele Danmark efter specialer, anmeldelser, behandlingstyper og priser for at finde nogen, der passer til dit problem.
 
 ## Hvornår skal jeg søge hjælp for kramper i benene?
 
@@ -72,4 +72,4 @@ Nogle lægemidler kan øge risikoen for kramper. Tal med din læge, hvis kramper
 ### Kan børn få kramper i benene?
 Ja, børn og unge kan få kramper, ofte i forbindelse med vækst eller aktivitet. Hvis kramperne er hyppige eller alvorlige, bør du få en vurdering.
 
-Hvis kramper i benene generer dig ofte og påvirker din hverdag, kan en fysioterapeut hjælpe med vurdering og målrettet behandling. På FysFinder kan du finde og sammenligne fysioterapeuter i dit område ud fra specialer, anmeldelser og priser, så du nemt kan få professionel hjælp til at forebygge og behandle kramper.
+Hvis kramper i benene generer dig ofte og påvirker din hverdag, kan en fysioterapeut hjælpe med vurdering og målrettet behandling. På Fysfinder kan du finde og sammenligne fysioterapeuter i dit område ud fra specialer, anmeldelser og priser, så du nemt kan få professionel hjælp til at forebygge og behandle kramper.

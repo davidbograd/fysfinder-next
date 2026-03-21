@@ -29,7 +29,7 @@ Generelt er hyaluronsyre sikkert at anvende, men der kan forekomme milde bivirkn
 
 ## Hvordan finder man en fysioterapeut, der tilbyder hyaluronsyrebehandling?
 
-For at finde en fysioterapeut, der tilbyder hyaluronsyrebehandling, kan man bruge FysFinder.dk. Platformen giver en omfattende oversigt over fysioterapeuter i Danmark, hvor man kan sammenligne behandlinger, priser og anmeldelser for at finde den rette behandler.
+For at finde en fysioterapeut, der tilbyder hyaluronsyrebehandling, kan man bruge Fysfinder.dk. Platformen giver en omfattende oversigt over fysioterapeuter i Danmark, hvor man kan sammenligne behandlinger, priser og anmeldelser for at finde den rette behandler.
 
 ## Hvad koster hyaluronsyrebehandling?
 

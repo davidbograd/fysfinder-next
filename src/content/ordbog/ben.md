@@ -38,4 +38,4 @@ Ja, fysioterapi kan være meget effektiv til at håndtere kroniske benproblemer.
 
 ### Hvordan vælger jeg den rigtige fysioterapeut til benproblemer?
 
-Når du vælger en fysioterapeut, er det vigtigt at overveje deres erfaring med benproblemer, deres behandlingsmetoder og patientanmeldelser. FysFinder.dk kan hjælpe dig med at finde kvalificerede fysioterapeuter i dit område.
+Når du vælger en fysioterapeut, er det vigtigt at overveje deres erfaring med benproblemer, deres behandlingsmetoder og patientanmeldelser. Fysfinder.dk kan hjælpe dig med at finde kvalificerede fysioterapeuter i dit område.

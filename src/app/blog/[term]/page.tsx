@@ -40,7 +40,7 @@ function BlogPostStructuredData({ term }: BlogPostStructuredDataProps) {
       sameAs: ["https://www.linkedin.com/in/joachim-bograd-43b0a120a/"],
       affiliation: {
         "@type": "MedicalOrganization",
-        name: "FysFinder",
+        name: "Fysfinder",
         url: "https://fysfinder.dk",
       },
     },
@@ -57,7 +57,7 @@ function BlogPostStructuredData({ term }: BlogPostStructuredDataProps) {
     articleBody: term.content,
     publisher: {
       "@type": "Organization",
-      name: "FysFinder",
+      name: "Fysfinder",
       url: "https://fysfinder.dk",
     },
     mainEntityOfPage: {
@@ -108,7 +108,7 @@ export async function generateMetadata({
   const { term } = await params;
   const post = await getBlogPost(term);
   return {
-    title: post.metaTitle || `${post.title} | FysFinder Blog`,
+    title: post.metaTitle || `${post.title} | Fysfinder Blog`,
     description: post.description,
   };
 }

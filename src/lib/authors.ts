@@ -42,7 +42,7 @@ export const authors: Author[] = [
     familyName: "Bograd",
     jobTitle: ["Fysioterapeut & Founder af Fysfinder"],
     description:
-      "Fysioterapeut, forfatter og stifter af FysFinder. Specialist i muskuloskeletal fysioterapi, smertevidenskab og træning.",
+      "Fysioterapeut, forfatter og stifter af Fysfinder. Specialist i muskuloskeletal fysioterapi, smertevidenskab og træning.",
     image: "/images/om-os/joachimbograd-fysfinder.png",
     linkedinUrl: "https://www.linkedin.com/in/joachim-bograd-43b0a120a/",
     education: {
@@ -68,7 +68,7 @@ export const authors: Author[] = [
     ],
     affiliations: [
       {
-        name: "FysFinder",
+        name: "Fysfinder",
         type: "MedicalOrganization",
         url: "https://fysfinder.dk",
         description: "Danmarks platform til at finde fysioterapeuter",
@@ -81,12 +81,12 @@ export const authors: Author[] = [
     ],
     workExamples: [
       {
-        name: "FysFinder Blog",
+        name: "Fysfinder Blog",
         url: "https://fysfinder.dk/blog",
         description: "Faglige artikler om fysioterapi og sundhed",
       },
       {
-        name: "FysFinder Ordbog",
+        name: "Fysfinder Ordbog",
         url: "https://fysfinder.dk/ordbog",
         description:
           "Faglig ordbog med fysioterapeutiske termer og forklaringer",
@@ -97,7 +97,7 @@ export const authors: Author[] = [
       "Han har videreuddannet sig gennem kurser inden for muskuloskeletal fysioterapi, smertevidenskab og træning – områder, der har givet ham en særlig ekspertise i komplekse smerteproblematikker, ryg- og nakkeproblemer, skadesforebyggelse, bevægelse og neurofysiologi.",
       "Joachim har desuden solid erfaring som skribent og har bidraget med faglige artikler på flere sundhedsfaglige platforme.",
       "Han har også arbejdet som frivillig rådgiver på Smertelinjen, hvor han har styrket sine kompetencer inden for kommunikation og formidling af viden om smerter.",
-      "Som stifter af FysFinder brænder Joachim for at gøre fysioterapi mere tilgængeligt for alle. I sit arbejde som forfatter på platformen fokuserer han på at formidle viden i et klart og letforståeligt sprog, så flere kan få indsigt i deres egen krop, forstå deres smerter og tage aktivt del i deres egen behandling.",
+      "Som stifter af Fysfinder brænder Joachim for at gøre fysioterapi mere tilgængeligt for alle. I sit arbejde som forfatter på platformen fokuserer han på at formidle viden i et klart og letforståeligt sprog, så flere kan få indsigt i deres egen krop, forstå deres smerter og tage aktivt del i deres egen behandling.",
     ],
     isFounder: true,
     awards: ["Stifter af Danmarks førende platform for fysioterapisøgning"],
@@ -145,7 +145,7 @@ export const authors: Author[] = [
     ],
     affiliations: [
       {
-        name: "FysFinder",
+        name: "Fysfinder",
         type: "MedicalOrganization",
         url: "https://fysfinder.dk",
         description: "Danmarks platform til at finde fysioterapeuter",
@@ -163,12 +163,12 @@ export const authors: Author[] = [
     ],
     workExamples: [
       {
-        name: "FysFinder Blog",
+        name: "Fysfinder Blog",
         url: "https://fysfinder.dk/blog",
         description: "Faglige artikler om fysioterapi og sundhed",
       },
       {
-        name: "FysFinder Ordbog",
+        name: "Fysfinder Ordbog",
         url: "https://fysfinder.dk/ordbog",
         description:
           "Faglig ordbog med fysioterapeutiske termer og forklaringer",
@@ -178,7 +178,7 @@ export const authors: Author[] = [
       "Natasja Sørensen er uddannet fysioterapeut fra Professionshøjskolen Absalon og har solid erfaring både som praktiserende fysioterapeut og som sundhedsfaglig konsulent.",
       "Hun har videreuddannet sig som vanecoach gennem MadroInstitutet og er specialiseret i at støtte mennesker i deres livsstilsændringer og opbygning af nye, bæredygtige vaner. Natasja har desuden en stærk baggrund inden for træning og har arbejdet indgående med blandt andet pilates, yoga, styrketræning, calisthenics og løb.",
       "Som sundhedsfaglig konsulent har hun opnået indgående kendskab til forskellige behandlingsformer og har et særligt fokus på at skræddersy behandlingsforløb ud fra den enkeltes behov og forudsætninger.",
-      "Natasja bidrager til FysFinder som forfatter og formidler, hvor hun kombinerer sin faglige indsigt med en passion for at gøre ny viden inden for sundhed tilgængelig for alle.",
+      "Natasja bidrager til Fysfinder som forfatter og formidler, hvor hun kombinerer sin faglige indsigt med en passion for at gøre ny viden inden for sundhed tilgængelig for alle.",
     ],
     memberOf: {
       name: "Danske Fysioterapeuter",
@@ -225,7 +225,7 @@ export const authors: Author[] = [
     ],
     affiliations: [
       {
-        name: "FysFinder",
+        name: "Fysfinder",
         type: "MedicalOrganization",
         url: "https://fysfinder.dk",
         description: "Danmarks platform til at finde fysioterapeuter",
@@ -243,12 +243,12 @@ export const authors: Author[] = [
     ],
     workExamples: [
       {
-        name: "FysFinder Blog",
+        name: "Fysfinder Blog",
         url: "https://fysfinder.dk/blog",
         description: "Faglige artikler om fysioterapi og sundhed",
       },
       {
-        name: "FysFinder Ordbog",
+        name: "Fysfinder Ordbog",
         url: "https://fysfinder.dk/ordbog",
         description:
           "Faglig ordbog med fysioterapeutiske termer og forklaringer",
@@ -289,7 +289,7 @@ export function getAuthorForStructuredData(
     sameAs: author.linkedinUrl ? [author.linkedinUrl] : undefined,
     affiliation: {
       "@type": "MedicalOrganization",
-      name: "FysFinder",
+      name: "Fysfinder",
       url: "https://fysfinder.dk",
     },
   };

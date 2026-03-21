@@ -28,7 +28,7 @@ Behandlingsmetoder for psykiske problemer kan omfatte terapi, medicin, livsstils
 
 ## Hvordan finder man en fysioterapeut til behandling af psykiske problemer?
 
-For at finde en fysioterapeut, der specialiserer sig i behandling af psykiske problemer, kan man bruge FysFinder. Platformen giver en omfattende oversigt over fysioterapeuter i Danmark, hvor man kan sammenligne deres specialer, anmeldelser og priser for at finde den rette behandler.
+For at finde en fysioterapeut, der specialiserer sig i behandling af psykiske problemer, kan man bruge Fysfinder. Platformen giver en omfattende oversigt over fysioterapeuter i Danmark, hvor man kan sammenligne deres specialer, anmeldelser og priser for at finde den rette behandler.
 
 ## Hvad er forskellen mellem psykiske problemer og psykiske lidelser?
 
@@ -54,4 +54,4 @@ Ja, fysioterapi kan hjælpe med at reducere stress og angst gennem forskellige t
 
 ### Hvordan finder jeg en god fysioterapeut til psykiske problemer?
 
-Du kan finde en fysioterapeut ved at bruge FysFinder, hvor du kan sammenligne specialer, anmeldelser og priser for at finde den rette behandler til dine behov.
+Du kan finde en fysioterapeut ved at bruge Fysfinder, hvor du kan sammenligne specialer, anmeldelser og priser for at finde den rette behandler til dine behov.
