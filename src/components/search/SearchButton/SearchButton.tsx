@@ -65,7 +65,7 @@ export const SearchButton: React.FC<SearchButtonProps> = ({
         ${
           isDisabled
             ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-            : "bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800 shadow-sm hover:shadow-md"
+            : "bg-[#0b5b43] text-white hover:bg-[#084c39] active:bg-[#074534] shadow-sm hover:shadow-md"
         }
         ${className}
       `}

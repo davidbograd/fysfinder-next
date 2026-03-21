@@ -3,6 +3,7 @@
 import React, { useState, useContext } from "react";
 import { useRouter } from "next/navigation";
 import { useSearch } from "./SearchProvider";
+import { Search } from "lucide-react";
 
 interface SearchButtonProps {
   text?: string;
@@ -55,9 +56,12 @@ export const SearchButton: React.FC<SearchButtonProps> = ({
           targetUrl += `?${queryString}`;
         }
       } else {
-        // Neither location nor specialty selected - stay on current page
-        const currentUrl = window.location.pathname;
-        targetUrl = queryString ? `${currentUrl}?${queryString}` : currentUrl;
+        // Fallback to Denmark search when no inputs are selected
+        targetUrl = "/find/fysioterapeut/danmark";
+
+        if (queryString) {
+          targetUrl += `?${queryString}`;
+        }
       }
 
       console.log("Executing search:", {
@@ -77,8 +81,7 @@ export const SearchButton: React.FC<SearchButtonProps> = ({
     }
   };
 
-  // Button is disabled if neither location nor specialty is selected
-  const isDisabled = (!state.location && !state.specialty) || isSearching;
+  const isDisabled = isSearching;
 
   return (
     <button
@@ -89,7 +92,7 @@ export const SearchButton: React.FC<SearchButtonProps> = ({
         ${
           isDisabled
             ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-            : "bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800 shadow-sm hover:shadow-md"
+            : "bg-[#0b5b43] text-white hover:bg-[#084c39] active:bg-[#074534] shadow-sm hover:shadow-md"
         }
         ${className}
       `}
@@ -101,7 +104,10 @@ export const SearchButton: React.FC<SearchButtonProps> = ({
           <span>Søger...</span>
         </div>
       ) : (
-        text
+        <span className="inline-flex items-center gap-2">
+          <Search className="h-5 w-5" />
+          <span>{text}</span>
+        </span>
       )}
     </button>
   );

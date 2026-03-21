@@ -70,9 +70,12 @@ function InlineSearchButton() {
           targetUrl += `?${queryString}`;
         }
       } else {
-        // Neither location nor specialty selected
-        setIsSearching(false);
-        return;
+        // Fallback to Denmark search when no inputs are selected
+        targetUrl = "/find/fysioterapeut/danmark";
+
+        if (queryString) {
+          targetUrl += `?${queryString}`;
+        }
       }
 
       // Navigate to the target URL
@@ -84,8 +87,7 @@ function InlineSearchButton() {
     }
   };
 
-  // Button is disabled if neither location nor specialty is selected
-  const isDisabled = (!state.location && !state.specialty) || isSearching;
+  const isDisabled = isSearching;
 
   return (
     <button
