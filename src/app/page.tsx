@@ -1,5 +1,5 @@
 // Homepage component with graceful error handling
-// Updated: 2026-03-21 - Tightened homepage visual polish and made partnership logos wrap and resize safely on smaller breakpoints
+// Updated: 2026-03-21 - Centralized the monthly visitors metric and reused it in the hero stats
 
 import React from "react";
 import { Metadata } from "next";
@@ -9,6 +9,7 @@ import { StarIcon } from "@heroicons/react/24/solid";
 import { FAQ } from "@/components/features/blog-og-ordbog/FAQ";
 import { SearchInterface } from "@/components/search/SearchInterface";
 import { RegionList } from "@/components/features/search/RegionList";
+import { FORMATTED_MONTHLY_VISITORS_DK } from "@/lib/siteMetrics";
 import {
   fetchCitiesWithCounts,
   fetchSpecialties,
@@ -35,7 +36,10 @@ function HeroSection({
   specialties: Specialty[];
 }) {
   return (
-    <section className="relative mt-0 left-1/2 -translate-x-1/2 w-dvw max-w-none overflow-x-clip">
+    <section
+      id="top-search"
+      className="relative mt-0 left-1/2 -translate-x-1/2 w-dvw max-w-none overflow-x-clip"
+    >
       <div className="w-full min-h-[80vh] bg-brand-beige rounded-b-[32px] overflow-hidden flex items-center">
         <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-6 lg:px-8 py-16 sm:py-20">
           <div className="grid gap-6 xl:gap-14 xl:grid-cols-[1fr_450px] items-center">
@@ -76,7 +80,7 @@ function HeroSection({
             </div>
             <div className="shrink-0">
               <p className="text-[20px] font-medium text-[#1f2b28] leading-snug">
-                Over 5.500
+                Over {FORMATTED_MONTHLY_VISITORS_DK}
                 <span className="ml-2 text-[18px] font-normal text-brand-label sm:ml-0 sm:block">
                   bruger Fysfinder månedligt
                 </span>
@@ -100,7 +104,7 @@ function HeroSection({
                 <div className="absolute bottom-2 left-2 flex flex-col items-start gap-1.5">
                 <span className="rounded-[16px] inline-flex items-center gap-1 bg-[rgba(0,0,0,0.36)] border border-[rgba(255,255,255,0.22)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[7.6px] text-white text-xs px-2 py-1 leading-none">
                   <StarIcon className="size-3.5 text-amber-500" />
-                  5,0
+                  4.5
                 </span>
                 <span className="rounded-[16px] bg-[rgba(0,0,0,0.36)] border border-[rgba(255,255,255,0.22)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[7.6px] text-white text-xs px-2 py-1 leading-none">
                   Ryg ekspert
@@ -123,7 +127,7 @@ function HeroSection({
                 <div className="absolute bottom-2 left-2 flex flex-col items-start gap-1.5">
                 <span className="rounded-[16px] inline-flex items-center gap-1 bg-[rgba(0,0,0,0.36)] border border-[rgba(255,255,255,0.22)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[7.6px] text-white text-xs px-2 py-1 leading-none">
                   <StarIcon className="size-3.5 text-amber-500" />
-                  4,6
+                  5.0
                 </span>
                 <span className="rounded-[16px] bg-[rgba(0,0,0,0.36)] border border-[rgba(255,255,255,0.22)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[7.6px] text-white text-xs px-2 py-1 leading-none">
                   Knæ ekspert
@@ -146,7 +150,7 @@ function HeroSection({
                 <div className="absolute bottom-2 right-2 flex flex-col items-end gap-1.5">
                 <span className="rounded-[16px] inline-flex items-center gap-1 bg-[rgba(0,0,0,0.36)] border border-[rgba(255,255,255,0.22)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[7.6px] text-white text-xs px-2 py-1 leading-none">
                   <StarIcon className="size-3.5 text-amber-500" />
-                  4,2
+                  4.8
                 </span>
                 <span className="rounded-[16px] bg-[rgba(0,0,0,0.36)] border border-[rgba(255,255,255,0.22)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[7.6px] text-white text-xs px-2 py-1 leading-none">
                   Løbe ekspert
@@ -305,6 +309,15 @@ function SpecialtyTeasers() {
           </Link>
         ))}
       </div>
+      <p className="mt-4 text-base text-center text-[#5a6663]">
+        Du kan søge blandt alle 136 specialer i{" "}
+        <Link
+          href="#top-search"
+          className="font-medium text-[#0b5b43] underline underline-offset-2 hover:text-[#084c39] transition-colors"
+        >
+          søgefeltet øverst
+        </Link>
+      </p>
     </section>
   );
 }

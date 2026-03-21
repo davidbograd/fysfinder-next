@@ -1,4 +1,4 @@
-// Updated: 2026-03-21 - Made footer logo responsive on mobile to avoid fixed-width overflow while preserving larger sizing on small screens and up
+// Updated: 2026-03-21 - Bottom-aligned the footer legal links row content on larger screens
 import Link from "next/link";
 import SiteLogo from "@/components/ui/Icons/SiteLogo";
 
@@ -66,7 +66,7 @@ export default function Footer() {
             </p>
           </div>
         </div>
-        <div className="mt-10 pt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-10 pt-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div className="w-full sm:w-auto max-w-[300px] sm:max-w-none [&_svg]:w-full [&_svg]:h-auto sm:[&_svg]:h-[80px] sm:[&_svg]:w-auto [&_svg]:max-w-full [&_svg_path:last-child]:fill-white [&_svg_path:first-child]:fill-white/90">
             <SiteLogo />
           </div>

@@ -1,4 +1,6 @@
+// Stats section with centralized traffic metric from shared site constants.
 import { fetchCitiesWithCounts } from "@/app/utils/cityUtils";
+import { FORMATTED_MONTHLY_VISITORS_DK } from "@/lib/siteMetrics";
 
 export async function StatsSection() {
   const cities = await fetchCitiesWithCounts();
@@ -9,7 +11,9 @@ export async function StatsSection() {
       <div className="container px-4 md:px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
           <div className="space-y-2">
-            <h3 className="text-4xl font-bold">4,800+</h3>
+            <h3 className="text-4xl font-bold">
+              {FORMATTED_MONTHLY_VISITORS_DK}+
+            </h3>
             <p className="text-gray-600">månedlige besøgende</p>
           </div>
           <div className="space-y-2">

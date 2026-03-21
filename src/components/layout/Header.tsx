@@ -1,4 +1,4 @@
-// Updated: 2026-03-17 - Added homepage-specific transparent/fixed header behavior with scroll-activated background while preserving existing auth/menu behavior
+// Updated: 2026-03-21 - Made header shadow appear only after scroll on all pages while preserving homepage transparent/fixed behavior
 "use client";
 
 import Link from "next/link";
@@ -23,11 +23,6 @@ export default function Header() {
   const isHomePage = pathname === "/";
 
   useEffect(() => {
-    if (!isHomePage) {
-      setIsScrolled(false);
-      return;
-    }
-
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 16);
     };
@@ -38,7 +33,7 @@ export default function Header() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [isHomePage]);
+  }, [pathname]);
 
   useEffect(() => {
     const supabase = createClient();
@@ -140,7 +135,7 @@ export default function Header() {
         className={`z-50 transition-all duration-300 ${
           isHomePage
             ? `fixed inset-x-0 ${isScrolled ? "top-0 bg-[#f8f7f2]/95 backdrop-blur-sm shadow-[0px_8px_15px_rgba(11,59,60,0.1)]" : "top-0 bg-transparent"}`
-            : "sticky top-0 bg-[#f8f7f2]/95 backdrop-blur-sm shadow-[0px_8px_15px_rgba(11,59,60,0.1)]"
+            : `sticky top-0 bg-[#f8f7f2]/95 backdrop-blur-sm ${isScrolled ? "shadow-[0px_8px_15px_rgba(11,59,60,0.1)]" : ""}`
         }`}
       >
         <div className="max-w-[1440px] mx-auto px-5 sm:px-6 lg:px-8 flex flex-row justify-between items-center h-14 sm:h-16 transition-all duration-300">
