@@ -62,7 +62,7 @@ function HeroSection({
               <p className="text-[20px] font-medium text-[#1f2b28] leading-snug">
                 {totalClinics.toLocaleString("da-DK")}
                 <span className="ml-2 text-[18px] font-normal text-brand-label sm:ml-0 sm:block">
-                  fysioterapi klinikker
+                klinikker
                 </span>
               </p>
             </div>
