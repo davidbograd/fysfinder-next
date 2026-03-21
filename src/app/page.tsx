@@ -70,7 +70,7 @@ function HeroSection({
               <p className="text-[20px] font-medium text-[#1f2b28] leading-snug">
                 {specialties.length}
                 <span className="ml-2 text-[18px] font-normal text-brand-label sm:ml-0 sm:block">
-                  behandling specialer
+                forskellige specialer
                 </span>
               </p>
             </div>
@@ -78,7 +78,7 @@ function HeroSection({
               <p className="text-[20px] font-medium text-[#1f2b28] leading-snug">
                 Over 5.500
                 <span className="ml-2 text-[18px] font-normal text-brand-label sm:ml-0 sm:block">
-                  bruger Fysfinder månedlig
+                  bruger Fysfinder månedligt
                 </span>
               </p>
             </div>

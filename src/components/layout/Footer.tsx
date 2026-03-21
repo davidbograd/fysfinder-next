@@ -1,4 +1,4 @@
-// Updated: 2026-03-17 - Adjusted footer column grouping to add larger separation between left navigation columns and right aligned meta label
+// Updated: 2026-03-21 - Made footer logo responsive on mobile to avoid fixed-width overflow while preserving larger sizing on small screens and up
 import Link from "next/link";
 import SiteLogo from "@/components/ui/Icons/SiteLogo";
 
@@ -67,7 +67,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-10 pt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="[&_svg]:h-[80px] [&_svg]:w-auto [&_svg_path:last-child]:fill-white [&_svg_path:first-child]:fill-white/90">
+          <div className="w-full sm:w-auto max-w-[300px] sm:max-w-none [&_svg]:w-full [&_svg]:h-auto sm:[&_svg]:h-[80px] sm:[&_svg]:w-auto [&_svg]:max-w-full [&_svg_path:last-child]:fill-white [&_svg_path:first-child]:fill-white/90">
             <SiteLogo />
           </div>
           <div className="flex items-center gap-4 text-xs text-[#99c3b5]">
