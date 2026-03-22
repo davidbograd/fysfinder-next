@@ -1,6 +1,8 @@
+// Ordbog term MDX; wide markdown tables use MdxProseTable for horizontal scroll + edge fade.
 import Link from "next/link";
 import Image from "next/image";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import { MdxProseTable } from "@/components/mdx/MdxProseTable";
 import remarkGfm from "remark-gfm";
 import { slugify } from "@/app/utils/slugify";
 
@@ -123,6 +125,7 @@ export function ContentEntry({ term, backLink }: ContentEntryProps) {
             ul: (props) => <ul {...props} className="list-disc pl-6 mb-4" />,
             ol: (props) => <ol {...props} className="list-decimal pl-6 mb-4" />,
             li: (props) => <li {...props} className="mb-2" />,
+            table: MdxProseTable,
           }}
           options={{
             mdxOptions: {

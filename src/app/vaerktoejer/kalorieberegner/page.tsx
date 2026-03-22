@@ -1,3 +1,4 @@
+// Kalorieberegner tool page; MDX SEO uses shared MdxProseTable (scroll + fade) and prose header wrap.
 import { Metadata } from "next";
 import { CalorieCalculator } from "./components/CalorieCalculator";
 import { Calculator, Shield, Clock } from "lucide-react";
@@ -14,6 +15,8 @@ import { loadLinkConfig } from "lib/internal-linking/config";
 import RelatedToolsSection from "@/components/features/RelatedToolsSection";
 import { TableOfContents } from "@/components/features/blog-og-ordbog/TableOfContents";
 import { extractTableOfContents } from "@/lib/utils";
+import { MdxProseTable } from "@/components/mdx/MdxProseTable";
+import { MDX_PROSE_TABLE_HEADER_WRAP } from "@/lib/mdx/mdx-prose-table-classnames";
 
 export const metadata: Metadata = {
   title: "Kalorieberegner (TDEE): Beregn dit daglige kaloriebehov ✅",
@@ -51,6 +54,7 @@ const MdxImage = (props: any) => {
 
 const mdxComponents = {
   img: MdxImage,
+  table: MdxProseTable,
 };
 
 export default async function CalorieCalculatorPage() {
@@ -68,7 +72,7 @@ export default async function CalorieCalculatorPage() {
     <main className="container mx-auto px-4 sm:px-6 py-6 sm:py-8">
       <div className="flex flex-col lg:flex-row lg:gap-8">
         <TableOfContents headings={headings} />
-        <div className="flex-1 max-w-3xl">
+        <div className="flex-1 min-w-0 max-w-3xl">
           <WebAppStructuredData
             type="tool"
             name="Kalorieberegner"
@@ -121,7 +125,7 @@ export default async function CalorieCalculatorPage() {
 
           {/* SEO Content rendered from Markdown */}
           <div
-            className="prose prose-slate max-w-none 
+            className={`prose prose-slate max-w-none 
                  prose-headings:text-gray-900
                  prose-h2:text-xl prose-h2:sm:text-2xl prose-h2:font-semibold prose-h2:mt-12 prose-h2:mb-4
                  prose-h3:text-lg prose-h3:sm:text-xl prose-h3:font-semibold prose-h3:mt-8 prose-h3:mb-2
@@ -132,10 +136,10 @@ export default async function CalorieCalculatorPage() {
                  prose-strong:font-semibold prose-strong:text-gray-900
                  prose-a:text-logo-blue prose-a:no-underline hover:prose-a:underline
                  prose-table:w-full prose-table:border-collapse prose-table:mt-4
-                 prose-th:bg-logo-blue prose-th:text-white prose-th:px-4 prose-th:py-2 prose-th:text-left prose-th:border
+                 prose-th:bg-logo-blue prose-th:text-white prose-th:px-4 prose-th:py-2 prose-th:text-left prose-th:border ${MDX_PROSE_TABLE_HEADER_WRAP}
                  prose-td:px-4 prose-td:py-2 prose-td:border
                  [&>*:first-child]:mt-0
-                 [&>*:last-child]:mb-0"
+                 [&>*:last-child]:mb-0`}
           >
             <MDXRemote
               source={pageContent}

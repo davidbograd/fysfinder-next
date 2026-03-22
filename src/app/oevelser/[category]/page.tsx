@@ -2,6 +2,7 @@ import { getExerciseBySlug } from "@/lib/exercises";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import { MdxProseTable } from "@/components/mdx/MdxProseTable";
 
 interface ExercisePageProps {
   params: Promise<{
@@ -39,7 +40,10 @@ export default async function ExercisePage({ params }: ExercisePageProps) {
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-6xl mx-auto">
         <article className="prose max-w-none">
-          <MDXRemote source={exercise.content} />
+          <MDXRemote
+            source={exercise.content}
+            components={{ table: MdxProseTable }}
+          />
         </article>
       </div>
     </div>
