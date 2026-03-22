@@ -1,5 +1,6 @@
 "use client";
 
+// Pace calculator UI — time fields show timer / min / sek suffixes inside inputs.
 import React, { useMemo, useState } from "react";
 import { Calculator, Rabbit, Gauge, Clock } from "lucide-react";
 
@@ -275,7 +276,7 @@ export function PaceCalculator() {
                   value={hh}
                   onChange={(e) => setHh(e.target.value)}
                 />
-                <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none text-sm">
+                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-sm">
                   timer
                 </span>
               </div>
@@ -289,7 +290,7 @@ export function PaceCalculator() {
                   value={mm}
                   onChange={(e) => handleTimeInputChange(e.target.value, setMm)}
                 />
-                <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none text-sm">
+                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-sm">
                   min
                 </span>
               </div>
@@ -303,7 +304,7 @@ export function PaceCalculator() {
                   value={ss}
                   onChange={(e) => handleTimeInputChange(e.target.value, setSs)}
                 />
-                <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none text-sm">
+                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-sm">
                   sek
                 </span>
               </div>
@@ -375,7 +376,7 @@ export function PaceCalculator() {
                   value={paceMin}
                   onChange={(e) => handleTimeInputChange(e.target.value, setPaceMin)}
                 />
-                <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none text-sm">
+                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-sm">
                   min
                 </span>
               </div>
@@ -389,7 +390,7 @@ export function PaceCalculator() {
                   value={paceSec}
                   onChange={(e) => handleTimeInputChange(e.target.value, setPaceSec)}
                 />
-                <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none text-sm">
+                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-sm">
                   sek
                 </span>
               </div>
@@ -478,7 +479,7 @@ export function PaceCalculator() {
                   value={tablePaceMin}
                   onChange={(e) => handleTimeInputChange(e.target.value, setTablePaceMin)}
                 />
-                <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none text-sm">
+                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-sm">
                   min
                 </span>
               </div>
@@ -492,7 +493,7 @@ export function PaceCalculator() {
                   value={tablePaceSec}
                   onChange={(e) => handleTimeInputChange(e.target.value, setTablePaceSec)}
                 />
-                <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none text-sm">
+                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-sm">
                   sek
                 </span>
               </div>

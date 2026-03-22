@@ -67,7 +67,7 @@ export default async function PaceBeregnerPage() {
   const headings = extractTableOfContents(pageContent);
 
   return (
-    <main className="container mx-auto px-4 sm:px-6 py-6 sm:py-8">
+    <main className="container mx-auto py-6 sm:py-8">
       <div className="flex flex-col lg:flex-row lg:gap-8">
         <TableOfContents headings={headings} />
         <div className="flex-1 min-w-0 max-w-3xl">
