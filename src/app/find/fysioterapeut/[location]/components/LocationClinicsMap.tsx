@@ -1,5 +1,5 @@
 // LocationClinicsMap
-// Updated: move dynamic map loading into a client component wrapper
+// Updated: allows customizing map scope label per route context
 
 "use client";
 
@@ -9,6 +9,7 @@ import { City, Clinic } from "@/app/types";
 interface LocationClinicsMapProps {
   clinics: Clinic[];
   city: City;
+  resultsScopeLabel?: string;
 }
 
 const LocationClinicsMapClient = dynamic(
@@ -26,7 +27,17 @@ const LocationClinicsMapClient = dynamic(
   }
 );
 
-export function LocationClinicsMap({ clinics, city }: LocationClinicsMapProps) {
-  return <LocationClinicsMapClient clinics={clinics} city={city} />;
+export function LocationClinicsMap({
+  clinics,
+  city,
+  resultsScopeLabel,
+}: LocationClinicsMapProps) {
+  return (
+    <LocationClinicsMapClient
+      clinics={clinics}
+      city={city}
+      resultsScopeLabel={resultsScopeLabel}
+    />
+  );
 }
 

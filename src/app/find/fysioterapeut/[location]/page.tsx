@@ -1,5 +1,5 @@
-// Location page - refactored to extract shared components and utilities
-// Updated: adds SEO-safe split view with contextual map for city pages
+// Location page - shared location rendering with city/specialty data fetching
+// Updated: enables map split-view for Denmark specialty pages
 
 import React from "react";
 import ClinicCard from "@/components/features/clinic/ClinicCard";
@@ -490,6 +490,16 @@ export default async function LocationPage({
   // Special handling for "danmark" page
   if (resolvedParams.location === "danmark") {
     const { h1, h2 } = generateHeadings("Danmark", specialtyName, filters);
+    const shouldShowDanmarkMap = data.clinics.length > 0;
+    const denmarkMapCity = {
+      id: "danmark",
+      bynavn: "Danmark",
+      bynavn_slug: "danmark",
+      latitude: 56.2639,
+      longitude: 9.5018,
+      postal_codes: [],
+      betegnelse: "Fysioterapeuter i Danmark",
+    };
 
     return (
       <div className="container mx-auto px-4">
@@ -538,21 +548,44 @@ export default async function LocationPage({
             showFilters={true}
             initialFilters={filters}
           />
+        </div>
+        {shouldShowDanmarkMap ? (
+          <div className="mt-6 grid gap-6 xl:grid-cols-[minmax(0,1fr)_420px]">
+            <div className="space-y-4">
+              <ClinicsList
+                clinics={data.clinics}
+                totalClinics={data.clinics.length}
+                specialtySlug={resolvedParams.specialty}
+                logoPathMap={logoPathMap}
+              />
+            </div>
+            <div className="self-start xl:sticky xl:top-24">
+              <LocationClinicsMap
+                clinics={data.clinics}
+                city={denmarkMapCity}
+                resultsScopeLabel="Danmark"
+              />
+            </div>
+          </div>
+        ) : (
+          <div className="max-w-[800px] mx-auto mt-6">
+            <ClinicsList
+              clinics={data.clinics}
+              totalClinics={data.clinics.length}
+              specialtySlug={resolvedParams.specialty}
+              logoPathMap={logoPathMap}
+            />
+          </div>
+        )}
 
-          <ClinicsList
-            clinics={data.clinics}
-            totalClinics={data.clinics.length}
-            specialtySlug={resolvedParams.specialty}
-            logoPathMap={logoPathMap}
-          />
-
-          {resolvedParams.specialty && specialty?.seo_tekst && (
+        {resolvedParams.specialty && specialty?.seo_tekst && (
+          <div className="max-w-[800px] mx-auto">
             <SeoContent
               source={specialty.seo_tekst}
               currentPagePath={currentPagePath}
             />
-          )}
-        </div>
+          </div>
+        )}
       </div>
     );
   }

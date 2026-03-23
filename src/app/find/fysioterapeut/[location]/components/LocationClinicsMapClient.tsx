@@ -1,5 +1,5 @@
 // LocationClinicsMapClient
-// Updated: add auto-fit behavior and upgraded map popup presentation
+// Updated: supports route-specific scope labels in map messaging
 
 "use client";
 
@@ -19,6 +19,7 @@ import {
 interface LocationClinicsMapClientProps {
   clinics: Clinic[];
   city: City;
+  resultsScopeLabel?: string;
 }
 
 interface MappableClinic {
@@ -188,6 +189,7 @@ function smoothScrollToElement(target: HTMLElement, durationMs = 380) {
 export function LocationClinicsMapClient({
   clinics,
   city,
+  resultsScopeLabel,
 }: LocationClinicsMapClientProps) {
   const [hoveredCardClinicId, setHoveredCardClinicId] = useState<string | null>(null);
   const [hoveredMarkerClinicId, setHoveredMarkerClinicId] = useState<string | null>(null);
@@ -207,6 +209,7 @@ export function LocationClinicsMapClient({
   );
 
   const hasMappableClinics = mappableClinics.length > 0;
+  const mapScopeLabel = resultsScopeLabel || city.bynavn;
   const { resolvedTileUrl, tileApiKey, attribution } = getTileConfiguration();
   const centerLat = city.latitude || 55.6761;
   const centerLng = city.longitude || 12.5683;
@@ -276,7 +279,7 @@ export function LocationClinicsMapClient({
     return (
       <section
         className="rounded-xl border border-gray-200 bg-gray-50 p-4"
-        aria-label={`Kortvisning for ${city.bynavn}`}
+        aria-label={`Kortvisning for ${mapScopeLabel}`}
       >
         <p className="text-sm text-gray-600">
           Kortet kunne ikke indlæses.{" "}
@@ -295,7 +298,7 @@ export function LocationClinicsMapClient({
   return (
     <section
       className="overflow-hidden rounded-xl border border-gray-200 bg-white"
-      aria-label={`Kortvisning for ${city.bynavn}`}
+      aria-label={`Kortvisning for ${mapScopeLabel}`}
     >
       <div className="h-[380px] md:h-[520px]">
         <MapContainer
@@ -372,7 +375,7 @@ export function LocationClinicsMapClient({
         <p className="flex items-start gap-1.5 text-xs text-gray-600">
           <Info className="mt-0.5 h-3.5 w-3.5 flex-shrink-0" aria-hidden="true" />
           <span>
-            Viser kun {city.bynavn}-klinikker.{" "}
+            Viser kun {mapScopeLabel}-klinikker.{" "}
             <strong>Opdateres ikke</strong> ved flytning.
           </span>
         </p>
