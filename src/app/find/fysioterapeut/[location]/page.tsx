@@ -1,7 +1,7 @@
 // Location page - shared location rendering with city/specialty data fetching
 // Updated: enables map split-view for Denmark specialty pages
 
-import React from "react";
+import { cache } from "react";
 import ClinicCard from "@/components/features/clinic/ClinicCard";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { deslugify, slugify } from "@/app/utils/slugify";
@@ -130,7 +130,7 @@ function sortClinicsByRating<
 /**
  * Fetches all data needed for the location page
  */
-export async function fetchLocationData(
+async function fetchLocationDataUncached(
   locationSlug: string,
   specialtySlug?: string,
   filters?: { ydernummer?: boolean; handicap?: boolean }
@@ -375,6 +375,38 @@ export async function fetchLocationData(
       specialties: [],
     };
   }
+}
+
+const fetchLocationDataCached = cache(
+  async (
+    locationSlug: string,
+    specialtySlug: string | undefined,
+    ydernummer: boolean,
+    handicap: boolean
+  ): Promise<LocationPageData> => {
+    const filters =
+      ydernummer || handicap
+        ? {
+            ...(ydernummer ? { ydernummer: true } : {}),
+            ...(handicap ? { handicap: true } : {}),
+          }
+        : undefined;
+
+    return fetchLocationDataUncached(locationSlug, specialtySlug, filters);
+  }
+);
+
+export async function fetchLocationData(
+  locationSlug: string,
+  specialtySlug?: string,
+  filters?: { ydernummer?: boolean; handicap?: boolean }
+): Promise<LocationPageData> {
+  return fetchLocationDataCached(
+    locationSlug,
+    specialtySlug,
+    Boolean(filters?.ydernummer),
+    Boolean(filters?.handicap)
+  );
 }
 
 // Generate static params for all cities
