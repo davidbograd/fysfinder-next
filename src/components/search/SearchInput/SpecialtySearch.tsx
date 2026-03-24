@@ -1,3 +1,4 @@
+// Updated: 2026-03-24 - Added cached specialty loading, aligned focus behavior, and improved combobox accessibility semantics
 "use client";
 
 import { useState, useEffect, useRef } from "react";
@@ -14,6 +15,9 @@ interface SpecialtySearchProps {
   placeholder?: string;
   className?: string;
 }
+
+let specialtiesCache: Specialty[] | null = null;
+let specialtiesPromise: Promise<Specialty[]> | null = null;
 
 // Client-side Supabase client
 const supabase = createClient(
@@ -36,6 +40,22 @@ async function fetchSpecialties(): Promise<Specialty[]> {
   return data || [];
 }
 
+async function getCachedSpecialties(): Promise<Specialty[]> {
+  if (specialtiesCache) return specialtiesCache;
+  if (specialtiesPromise) return specialtiesPromise;
+
+  specialtiesPromise = fetchSpecialties()
+    .then((results) => {
+      specialtiesCache = results;
+      return results;
+    })
+    .finally(() => {
+      specialtiesPromise = null;
+    });
+
+  return specialtiesPromise;
+}
+
 export const SpecialtySearch: React.FC<SpecialtySearchProps> = ({
   placeholder = "Alle specialer",
   className = "",
@@ -54,17 +74,22 @@ export const SpecialtySearch: React.FC<SpecialtySearchProps> = ({
   const dropdownRef = useRef<HTMLDivElement>(null);
   // Tracks the latest selected specialty to avoid stale closures in timeouts
   const latestSpecialtyRef = useRef(state.specialty);
+  const latestSearchTermRef = useRef(searchTerm);
 
   useEffect(() => {
     latestSpecialtyRef.current = state.specialty;
   }, [state.specialty]);
+
+  useEffect(() => {
+    latestSearchTermRef.current = searchTerm;
+  }, [searchTerm]);
 
   // Load specialties on component mount
   useEffect(() => {
     const loadSpecialties = async () => {
       setIsLoading(true);
       try {
-        const specialtiesData = await fetchSpecialties();
+        const specialtiesData = await getCachedSpecialties();
         setSpecialties(specialtiesData);
         setFilteredSpecialties(specialtiesData);
       } catch (error) {
@@ -175,13 +200,19 @@ export const SpecialtySearch: React.FC<SpecialtySearchProps> = ({
 
   // Handle input focus
   const handleFocus = () => {
+    const moveCaretToEnd = () => {
+      const el = inputRef.current;
+      if (!el) return;
+      const len = el.value.length;
+      try {
+        el.setSelectionRange(len, len);
+      } catch {}
+    };
+
     setShowDropdown(true);
     setSelectedIndex(-1);
-
-    // If a specialty is currently selected, clear the input to improve discovery
-    if (state.specialty) {
-      setSearchTerm("");
-    }
+    requestAnimationFrame(() => moveCaretToEnd());
+    setTimeout(() => moveCaretToEnd(), 0);
   };
 
   // Handle input blur
@@ -199,9 +230,11 @@ export const SpecialtySearch: React.FC<SpecialtySearchProps> = ({
 
       // If no specialty is selected and search term doesn't match any specialty exactly,
       // clear the search term
-      if (!latestSpecialtyRef.current && searchTerm) {
+      if (!latestSpecialtyRef.current && latestSearchTermRef.current) {
         const exactMatch = specialties.find(
-          (s) => s.specialty_name.toLowerCase() === searchTerm.toLowerCase()
+          (s) =>
+            s.specialty_name.toLowerCase() ===
+            latestSearchTermRef.current.toLowerCase()
         );
         if (!exactMatch) {
           setSearchTerm("");
@@ -215,6 +248,11 @@ export const SpecialtySearch: React.FC<SpecialtySearchProps> = ({
     handleSpecialtySelect(null);
     inputRef.current?.focus();
   };
+
+  const activeDescendantId =
+    showDropdown && selectedIndex >= 0
+      ? `specialty-option-${selectedIndex}`
+      : undefined;
 
   return (
     <div className="relative w-full">
@@ -232,8 +270,11 @@ export const SpecialtySearch: React.FC<SpecialtySearchProps> = ({
           aria-label="Search for specialty"
           aria-autocomplete="list"
           aria-expanded={showDropdown}
+          aria-haspopup="listbox"
           aria-controls="specialty-dropdown"
+          aria-activedescendant={activeDescendantId}
           aria-describedby="specialty-search-help"
+          aria-busy={isLoading}
           role="combobox"
         />
 
@@ -303,6 +344,7 @@ export const SpecialtySearch: React.FC<SpecialtySearchProps> = ({
               selectedIndex === 0 ? "bg-blue-50" : ""
             }`}
             role="option"
+            id="specialty-option-0"
             aria-selected={selectedIndex === 0}
           >
             <div className="flex items-center">
@@ -324,6 +366,7 @@ export const SpecialtySearch: React.FC<SpecialtySearchProps> = ({
                   selectedIndex === adjustedIndex ? "bg-blue-50" : ""
                 }`}
                 role="option"
+                id={`specialty-option-${adjustedIndex}`}
                 aria-selected={selectedIndex === adjustedIndex}
               >
                 <div className="flex flex-col">

@@ -36,7 +36,7 @@ export async function proxy(request: NextRequest) {
   // Refresh session if expired
   await supabase.auth.getUser();
 
-  // Handle search-v2 find routes (existing logic)
+  // DEV-ONLY: handle isolated search-v2 find route canonicalization.
   if (request.nextUrl.pathname.startsWith("/search-v2/find/")) {
     const searchParams = request.nextUrl.searchParams;
     const handicap = searchParams.get("handicap");

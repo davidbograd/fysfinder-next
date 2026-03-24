@@ -1,9 +1,11 @@
 "use client";
+// Updated: 2026-03-24 - Switched to centralized canonical search URL builder
 
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSearch } from "./SearchProvider";
 import { Search } from "lucide-react";
+import { buildSearchTargetUrlFromState } from "./buildSearchTargetUrl";
 
 interface SearchButtonProps {
   text?: string;
@@ -26,43 +28,7 @@ export const SearchButton: React.FC<SearchButtonProps> = ({
     setIsSearching(true);
 
     try {
-      // Build URL with filter parameters from SearchProvider state
-      const params = new URLSearchParams();
-      if (state.filters.ydernummer) params.set("ydernummer", "true");
-      if (state.filters.handicap) params.set("handicap", "true");
-
-      const queryString = params.toString();
-
-      // Determine target URL based on search state
-      let targetUrl;
-
-      if (state.location) {
-        // Build URL with location and optional specialty
-        const specialtyPart = state.specialty?.slug
-          ? `/${state.specialty.slug}`
-          : "";
-        targetUrl = `/find/fysioterapeut/${state.location.slug}${specialtyPart}`;
-
-        // Add filter parameters
-        if (queryString) {
-          targetUrl += `?${queryString}`;
-        }
-      } else if (state.specialty?.slug) {
-        // Allow specialty-only search across Denmark
-        targetUrl = `/find/fysioterapeut/danmark/${state.specialty.slug}`;
-
-        // Add filter parameters
-        if (queryString) {
-          targetUrl += `?${queryString}`;
-        }
-      } else {
-        // Fallback to Denmark search when no inputs are selected
-        targetUrl = "/find/fysioterapeut/danmark";
-
-        if (queryString) {
-          targetUrl += `?${queryString}`;
-        }
-      }
+      const targetUrl = buildSearchTargetUrlFromState(state);
 
       console.log("Executing search:", {
         location: state.location,
@@ -71,7 +37,6 @@ export const SearchButton: React.FC<SearchButtonProps> = ({
         targetUrl: targetUrl,
       });
 
-      // Navigate to the target URL
       router.push(targetUrl);
     } catch (error) {
       console.error("Search error:", error);

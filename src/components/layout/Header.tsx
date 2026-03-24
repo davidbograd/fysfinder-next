@@ -1,4 +1,4 @@
-// Updated: 2026-03-21 - Made header shadow appear only after scroll on all pages while preserving homepage transparent/fixed behavior
+// Updated: 2026-03-24 - Moved search-first desktop bar next to logo and kept right side for secondary actions
 "use client";
 
 import Link from "next/link";
@@ -10,6 +10,7 @@ import { useState, useEffect } from "react";
 import { UserMenu } from "@/components/auth/UserMenu";
 import { createClient } from "@/app/utils/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { HeaderSearchBar } from "@/components/layout/HeaderSearchBar";
 
 export default function Header() {
   const pathname = usePathname();
@@ -21,6 +22,8 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
 
   const isHomePage = pathname === "/";
+  const isSearchFirstDesktopVariant =
+    pathname.startsWith("/ordbog") || pathname.startsWith("/vaerktoejer");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -139,54 +142,77 @@ export default function Header() {
         }`}
       >
         <div className="max-w-[1440px] mx-auto px-5 sm:px-6 lg:px-8 flex flex-row justify-between items-center h-14 sm:h-16 transition-all duration-300">
-          <div className="flex items-center space-x-6">
+          <div className="flex items-center gap-4">
             <Link href={isLoggedIn ? "/dashboard" : "/"} className="inline-block">
               <SiteLogo />
             </Link>
 
             {/* Left side navigation */}
-            <nav className="hidden md:flex items-center space-x-6">
-              {isLoggedIn ? (
-                <Link
-                  href="/dashboard"
-                  className="text-sm text-[#3c4946] hover:text-[#1f2b28] transition-colors"
-                >
-                  Dashboard
-                </Link>
-              ) : (
-                <>
+            {isSearchFirstDesktopVariant ? (
+              <HeaderSearchBar className="hidden min-[1241px]:block" />
+            ) : (
+              <nav className="hidden md:flex items-center space-x-6">
+                {isLoggedIn ? (
                   <Link
-                    href="/ordbog"
+                    href="/dashboard"
                     className="text-sm text-[#3c4946] hover:text-[#1f2b28] transition-colors"
                   >
-                    Ordbog
+                    Dashboard
                   </Link>
-                  <Link
-                    href="/vaerktoejer"
-                    className="text-sm text-[#3c4946] hover:text-[#1f2b28] transition-colors"
-                  >
-                    Værktøjer
-                  </Link>
-                  <Link
-                    href="/blog"
-                    className="text-sm text-[#3c4946] hover:text-[#1f2b28] transition-colors"
-                  >
-                    Blog
-                  </Link>
-                  <Link
-                    href="/om-os"
-                    className="text-sm text-[#3c4946] hover:text-[#1f2b28] transition-colors"
-                  >
-                    Om os
-                  </Link>
-                </>
-              )}
-            </nav>
+                ) : (
+                  <>
+                    <Link
+                      href="/ordbog"
+                      className="text-sm text-[#3c4946] hover:text-[#1f2b28] transition-colors"
+                    >
+                      Ordbog
+                    </Link>
+                    <Link
+                      href="/vaerktoejer"
+                      className="text-sm text-[#3c4946] hover:text-[#1f2b28] transition-colors"
+                    >
+                      Værktøjer
+                    </Link>
+                    <Link
+                      href="/blog"
+                      className="text-sm text-[#3c4946] hover:text-[#1f2b28] transition-colors"
+                    >
+                      Blog
+                    </Link>
+                    <Link
+                      href="/om-os"
+                      className="text-sm text-[#3c4946] hover:text-[#1f2b28] transition-colors"
+                    >
+                      Om os
+                    </Link>
+                  </>
+                )}
+              </nav>
+            )}
           </div>
 
           {/* Desktop Navigation - Right side CTAs */}
-          <nav className="hidden md:flex items-center space-x-4">
-            {isLoggedIn ? (
+          <nav
+            className={`items-center space-x-3 ${
+              isSearchFirstDesktopVariant
+                ? "hidden min-[1241px]:flex"
+                : "hidden md:flex"
+            }`}
+          >
+            {isSearchFirstDesktopVariant ? (
+              <>
+                {!isLoggedIn && (
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="rounded-full border-[#cfd4d2] bg-[#f8f7f2] font-medium text-[#23302d] hover:bg-[#efeee8]"
+                  >
+                    <Link href="/tilmeld">For klinikker</Link>
+                  </Button>
+                )}
+                <UserMenu />
+              </>
+            ) : isLoggedIn ? (
               <UserMenu />
             ) : (
               <>
@@ -209,7 +235,13 @@ export default function Header() {
           </nav>
 
           {/* Mobile Navigation */}
-          <nav className="flex md:hidden items-center space-x-3">
+          <nav
+            className={`flex items-center space-x-3 ${
+              isSearchFirstDesktopVariant
+                ? "min-[1241px]:hidden"
+                : "md:hidden"
+            }`}
+          >
             {!isLoggedIn && (
               <Button
                 asChild

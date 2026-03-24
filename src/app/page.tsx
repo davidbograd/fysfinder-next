@@ -503,6 +503,15 @@ export default async function HomePage() {
               Find fysioterapeut efter område
             </h2>
             <RegionList regions={regions} />
+            <p className="mt-4 text-base text-center text-[#5a6663]">
+              Se alle{" "}
+              <Link
+                href="/find/fysioterapeut/danmark"
+                className="font-medium text-[#0b5b43] underline underline-offset-2 hover:text-[#084c39] transition-colors"
+              >
+                fysioterapuet klinikker i Danmark
+              </Link>
+            </p>
           </div>
           <div>
             <FAQ />

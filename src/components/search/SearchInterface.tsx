@@ -1,4 +1,4 @@
-// Updated: 2026-03-21 - Added specialty field anchor target with adjusted scroll offset for smoother in-page navigation
+// Updated: 2026-03-24 - Reused centralized canonical search URL builder for inline submit behavior
 "use client";
 
 import React, { useState, Suspense } from "react";
@@ -14,6 +14,7 @@ import { SearchButton } from "./SearchButton";
 import { Checkbox } from "@/components/ui/checkbox";
 import { BookHeart, Search } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { buildSearchTargetUrlFromState } from "./buildSearchTargetUrl";
 
 interface SearchInterfaceProps {
   specialties: {
@@ -40,45 +41,7 @@ function InlineSearchButton() {
     setIsSearching(true);
 
     try {
-      // Build URL with filter parameters from SearchProvider state
-      const params = new URLSearchParams();
-      if (state.filters.ydernummer) params.set("ydernummer", "true");
-      if (state.filters.handicap) params.set("handicap", "true");
-
-      const queryString = params.toString();
-
-      // Determine target URL based on search state
-      let targetUrl;
-
-      if (state.location) {
-        // Build URL with location and optional specialty
-        const specialtyPart = state.specialty?.slug
-          ? `/${state.specialty.slug}`
-          : "";
-        targetUrl = `/find/fysioterapeut/${state.location.slug}${specialtyPart}`;
-
-        // Add filter parameters
-        if (queryString) {
-          targetUrl += `?${queryString}`;
-        }
-      } else if (state.specialty?.slug) {
-        // Allow specialty-only search across Denmark
-        targetUrl = `/find/fysioterapeut/danmark/${state.specialty.slug}`;
-
-        // Add filter parameters
-        if (queryString) {
-          targetUrl += `?${queryString}`;
-        }
-      } else {
-        // Fallback to Denmark search when no inputs are selected
-        targetUrl = "/find/fysioterapeut/danmark";
-
-        if (queryString) {
-          targetUrl += `?${queryString}`;
-        }
-      }
-
-      // Navigate to the target URL
+      const targetUrl = buildSearchTargetUrlFromState(state);
       router.push(targetUrl);
     } catch (error) {
       console.error("Search error:", error);
@@ -98,7 +61,7 @@ function InlineSearchButton() {
         ${
           isDisabled
             ? "bg-[#c5cbc9] text-[#6d7875] cursor-not-allowed"
-            : "bg-[#0b5b43] hover:bg-[#084c39] text-white"
+            : "bg-[#0b5b43] hover:bg-[#084c39] text-white cursor-pointer"
         }
       `}
       aria-label={isSearching ? "Søger..." : "Find"}
@@ -227,7 +190,7 @@ function MigrationContent({ showFilters }: { showFilters: boolean }) {
           </div>
 
           {/* Inline Search Button (Desktop Only) */}
-          <div className="hidden md:flex items-center p-1.5">
+          <div className="hidden md:flex shrink-0 items-center p-1.5 relative z-10">
             <InlineSearchButton />
           </div>
         </div>

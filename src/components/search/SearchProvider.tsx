@@ -1,3 +1,4 @@
+// Updated: 2026-03-24 - Removed search-v2 URL dependency from shared provider and standardized URL updates to canonical search routes
 "use client";
 
 import React, {
@@ -7,11 +8,8 @@ import React, {
   ReactNode,
   useCallback,
 } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import {
-  buildSearchV2Url,
-  parseFiltersFromURL,
-} from "@/utils/parameter-normalization";
+import { useRouter } from "next/navigation";
+import { buildSearchUrl } from "@/utils/parameter-normalization";
 
 // Types for search state
 export interface LocationQuery {
@@ -216,7 +214,6 @@ export function SearchProvider({
 
   const [state, dispatch] = useReducer(searchReducer, initState);
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   // Action helpers
   const setLocation = (location: LocationQuery | null) => {
@@ -344,7 +341,7 @@ export function SearchProvider({
     if (!state.location) return;
 
     try {
-      const targetUrl = buildSearchV2Url(
+      const targetUrl = buildSearchUrl(
         state.location.slug,
         state.specialty?.slug,
         state.filters

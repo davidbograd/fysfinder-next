@@ -142,7 +142,8 @@ export function buildSearchUrl(
 }
 
 /**
- * Builds URL for the isolated search-v2 routes during development
+ * DEV-ONLY: Builds URL for isolated search-v2 routes during development.
+ * Production search navigation should use buildSearchUrl().
  */
 export function buildSearchV2Url(
   location: string,

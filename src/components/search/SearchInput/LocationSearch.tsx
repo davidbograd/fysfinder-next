@@ -1,3 +1,4 @@
+// Updated: 2026-03-24 - Improved combobox accessibility semantics and active option tracking
 "use client";
 
 import { useState, useEffect, useRef } from "react";
@@ -165,7 +166,7 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
   };
 
   // Format suggestion display text
-  const formatSuggestionText = (city: City, isExactMatch: boolean) => {
+  const formatSuggestionText = (city: City) => {
     const postalCodesText =
       city.postal_codes.length > 0
         ? `${city.postal_codes.slice(0, 3).join(", ")}${
@@ -192,6 +193,13 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
     };
   }, []);
 
+  const totalSuggestionCount =
+    (suggestions?.exact_match ? 1 : 0) + (suggestions?.nearby_cities.length || 0);
+  const activeDescendantId =
+    showDropdown && selectedIndex >= 0 && selectedIndex < totalSuggestionCount
+      ? `location-option-${selectedIndex}`
+      : undefined;
+
   return (
     <div className="relative w-full">
       <div className="relative">
@@ -208,8 +216,11 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
           aria-label="Search for location"
           aria-autocomplete="list"
           aria-expanded={showDropdown}
+          aria-haspopup="listbox"
           aria-controls="location-dropdown"
+          aria-activedescendant={activeDescendantId}
           aria-describedby="location-search-help"
+          aria-busy={isLoading}
           role="combobox"
         />
 
@@ -279,9 +290,10 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
                 selectedIndex === 0 ? "bg-blue-50" : ""
               }`}
               role="option"
+              id="location-option-0"
               aria-selected={selectedIndex === 0}
             >
-              {formatSuggestionText(suggestions.exact_match, true)}
+              {formatSuggestionText(suggestions.exact_match)}
             </button>
           )}
 
@@ -297,9 +309,10 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
                   selectedIndex === adjustedIndex ? "bg-blue-50" : ""
                 }`}
                 role="option"
+                id={`location-option-${adjustedIndex}`}
                 aria-selected={selectedIndex === adjustedIndex}
               >
-                {formatSuggestionText(city, false)}
+                {formatSuggestionText(city)}
                 {city.distance > 0 && (
                   <span className="text-xs text-gray-400 ml-2">
                     {city.distance.toFixed(1)} km away

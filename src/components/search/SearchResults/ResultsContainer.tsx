@@ -1,3 +1,4 @@
+// Updated: 2026-03-24 - Marked this container as search-v2 dev-only to avoid production routing drift
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -10,6 +11,9 @@ interface ResultsContainerProps {
   specialty?: string;
   children?: React.ReactNode;
 }
+
+// NOTE: This container is for isolated search-v2 development flows only.
+// Production pages should use canonical /find/fysioterapeut routes.
 
 function ResultsContent({
   location,
