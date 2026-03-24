@@ -1,11 +1,12 @@
 // Homepage component with graceful error handling
-// Updated: 2026-03-21 - Specialty helper link now smoothly scrolls to and targets the specialty input field in the hero search bar
+// Updated: 2026-03-24 - Added icons to hero data points and aligned specialty icon with search bar usage
 
 import React from "react";
 import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { StarIcon } from "@heroicons/react/24/solid";
+import { BookHeart, MapPin, UserRound } from "lucide-react";
 import { FAQ } from "@/components/features/blog-og-ordbog/FAQ";
 import { SearchInterface } from "@/components/search/SearchInterface";
 import { RegionList } from "@/components/features/search/RegionList";
@@ -63,28 +64,43 @@ function HeroSection({
           </div>
           <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-16 pt-1">
             <div className="shrink-0">
-              <p className="text-[20px] font-medium text-[#1f2b28] leading-snug">
-                {totalClinics.toLocaleString("da-DK")}
-                <span className="ml-2 text-[18px] font-normal text-brand-label sm:ml-0 sm:block">
-                klinikker
-                </span>
-              </p>
+              <div className="flex items-center gap-2.5">
+                <div className="h-11 w-11 shrink-0 rounded-full bg-[#1f2b28]/10 flex items-center justify-center">
+                  <MapPin className="h-6 w-6 text-[#4b5754]" aria-hidden="true" />
+                </div>
+                <p className="text-[20px] font-medium text-[#1f2b28] leading-snug">
+                  {totalClinics.toLocaleString("da-DK")}
+                  <span className="ml-2 text-[18px] font-normal text-brand-label sm:ml-0 sm:block">
+                  klinikker
+                  </span>
+                </p>
+              </div>
             </div>
             <div className="shrink-0">
-              <p className="text-[20px] font-medium text-[#1f2b28] leading-snug">
-                {specialties.length}
-                <span className="ml-2 text-[18px] font-normal text-brand-label sm:ml-0 sm:block">
-                forskellige specialer
-                </span>
-              </p>
+              <div className="flex items-center gap-2.5">
+                <div className="h-11 w-11 shrink-0 rounded-full bg-[#1f2b28]/10 flex items-center justify-center">
+                  <BookHeart className="h-6 w-6 text-[#4b5754]" aria-hidden="true" />
+                </div>
+                <p className="text-[20px] font-medium text-[#1f2b28] leading-snug">
+                  {specialties.length}
+                  <span className="ml-2 text-[18px] font-normal text-brand-label sm:ml-0 sm:block">
+                  forskellige specialer
+                  </span>
+                </p>
+              </div>
             </div>
             <div className="shrink-0">
-              <p className="text-[20px] font-medium text-[#1f2b28] leading-snug">
-                Over {FORMATTED_MONTHLY_VISITORS_DK}
-                <span className="ml-2 text-[18px] font-normal text-brand-label sm:ml-0 sm:block">
-                  bruger Fysfinder månedligt
-                </span>
-              </p>
+              <div className="flex items-center gap-2.5">
+                <div className="h-11 w-11 shrink-0 rounded-full bg-[#1f2b28]/10 flex items-center justify-center">
+                  <UserRound className="h-6 w-6 text-[#4b5754]" aria-hidden="true" />
+                </div>
+                <p className="text-[20px] font-medium text-[#1f2b28] leading-snug">
+                  Over {FORMATTED_MONTHLY_VISITORS_DK}
+                  <span className="ml-2 text-[18px] font-normal text-brand-label sm:ml-0 sm:block">
+                    bruger Fysfinder månedligt
+                  </span>
+                </p>
+              </div>
             </div>
           </div>
           </div>
@@ -197,7 +213,21 @@ function ValuePropsSection() {
             Nem adgang til tilskudsberettiget behandling
           </h3>
           <p className="text-[#5a6663] mt-3">
-            Find hurtigt klinikker, der tilbyder behandling med tilskud fra den offentlige sygesikring. Tjek for klinikker med ydernummer.
+            Find hurtigt klinikker, der tilbyder{" "}
+            <Link
+              href="https://www.fysfinder.dk/find/fysioterapeut/danmark?ydernummer=true"
+              className="font-medium text-[#0b5b43] underline underline-offset-2 hover:text-[#084c39] transition-colors"
+            >
+              behandling med tilskud fra den offentlige sygesikring
+            </Link>
+            . Tjek for{" "}
+            <Link
+              href="https://www.fysfinder.dk/find/fysioterapeut/danmark?ydernummer=true"
+              className="font-medium text-[#0b5b43] underline underline-offset-2 hover:text-[#084c39] transition-colors"
+            >
+              klinikker med ydernummer
+            </Link>
+            .
           </p>
         </article>
       </div>
