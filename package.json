@@ -61,7 +61,7 @@
     "glob-promise": "^6.0.7",
     "hastscript": "^9.0.1",
     "leaflet": "^1.9.4",
-    "lucide-react": "^0.436.0",
+    "lucide-react": "^1.0.1",
     "next": "^16.0.7",
     "next-mdx-remote": "^6.0.0",
     "nuqs": "^2.3.1",

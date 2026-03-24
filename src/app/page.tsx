@@ -6,7 +6,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { StarIcon } from "@heroicons/react/24/solid";
-import { BookHeart, MapPin, UserRound } from "lucide-react";
+import { BookHeart, HouseHeart, UserRound } from "lucide-react";
 import { FAQ } from "@/components/features/blog-og-ordbog/FAQ";
 import { SearchInterface } from "@/components/search/SearchInterface";
 import { RegionList } from "@/components/features/search/RegionList";
@@ -66,7 +66,7 @@ function HeroSection({
             <div className="shrink-0">
               <div className="flex items-center gap-2.5">
                 <div className="h-11 w-11 shrink-0 rounded-full bg-[#1f2b28]/10 flex items-center justify-center">
-                  <MapPin className="h-6 w-6 text-[#4b5754]" aria-hidden="true" />
+                  <HouseHeart className="h-6 w-6 text-[#4b5754]" aria-hidden="true" />
                 </div>
                 <p className="text-[20px] font-medium text-[#1f2b28] leading-snug">
                   {totalClinics.toLocaleString("da-DK")}
