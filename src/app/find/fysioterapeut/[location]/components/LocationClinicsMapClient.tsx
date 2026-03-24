@@ -1,5 +1,5 @@
 // LocationClinicsMapClient
-// Updated: supports route-specific scope labels in map messaging
+// Updated: uses custom Fysfinder pin asset for map markers
 
 "use client";
 
@@ -29,25 +29,23 @@ interface MappableClinic {
 }
 
 const defaultMarkerIcon = L.icon({
-  iconRetinaUrl:
-    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
-  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+  iconUrl: "/map/fysfinder-pin.png",
   shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
+  iconSize: [32, 40],
+  iconAnchor: [16, 40],
+  popupAnchor: [0, -34],
   shadowSize: [41, 41],
+  shadowAnchor: [13, 40],
 });
 
 const highlightedMarkerIcon = L.icon({
-  iconRetinaUrl:
-    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
-  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+  iconUrl: "/map/fysfinder-pin.png",
   shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
-  iconSize: [30, 49],
-  iconAnchor: [15, 49],
-  popupAnchor: [1, -34],
+  iconSize: [36, 45],
+  iconAnchor: [18, 45],
+  popupAnchor: [0, -38],
   shadowSize: [45, 45],
+  shadowAnchor: [14, 45],
 });
 
 function toFiniteNumber(value: unknown): number | null {
@@ -350,7 +348,7 @@ export function LocationClinicsMapClient({
                 <div className="w-[220px] space-y-2">
                   <Link
                     href={`/klinik/${clinic.klinikNavnSlug}`}
-                    className="block text-sm font-semibold leading-tight text-logo-blue hover:underline"
+                    className="block text-sm font-semibold leading-tight text-[#084c39] hover:text-[#084c39] hover:underline"
                   >
                     {clinic.klinikNavn}
                   </Link>
