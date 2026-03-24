@@ -13,7 +13,7 @@ import { useToast } from "@/hooks/use-toast";
 import { HeaderSearchBar } from "@/components/layout/HeaderSearchBar";
 
 export default function Header() {
-  const pathname = usePathname();
+  const pathname = usePathname() ?? "";
   const router = useRouter();
   const { toast } = useToast();
   const [isMenuOpen, setIsMenuOpen] = useState(false);

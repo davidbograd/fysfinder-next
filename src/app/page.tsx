@@ -509,7 +509,7 @@ export default async function HomePage() {
                 href="/find/fysioterapeut/danmark"
                 className="font-medium text-[#0b5b43] underline underline-offset-2 hover:text-[#084c39] transition-colors"
               >
-                fysioterapuet klinikker i Danmark
+                fysioterapeutklinikker i Danmark
               </Link>
             </p>
           </div>
