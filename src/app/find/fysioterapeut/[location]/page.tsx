@@ -1,5 +1,5 @@
 // Location page - shared location rendering with city/specialty data fetching
-// Updated: enables map split-view for Denmark specialty pages
+// Updated: removes duplicate page-level horizontal padding (layout already provides it)
 
 import { cache } from "react";
 import ClinicCard from "@/components/features/clinic/ClinicCard";
@@ -534,7 +534,7 @@ export default async function LocationPage({
     };
 
     return (
-      <div className="container mx-auto px-4">
+      <div className="w-full">
         <LocationStructuredData
           clinics={data.clinics}
           specialtyName={specialtyName}
@@ -646,7 +646,7 @@ export default async function LocationPage({
   );
 
   return (
-    <div className="container mx-auto px-4">
+    <div className="w-full">
       <LocationStructuredData
         city={data.city}
         clinics={data.clinics}

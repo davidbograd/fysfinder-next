@@ -1,4 +1,4 @@
-// Updated: 2026-03-24 - Moved search-first desktop bar next to logo and kept right side for secondary actions
+// Updated: 2026-03-25 - Uses homepage-equivalent clinic/specialty counts passed from layout for mobile overlay datapoints
 "use client";
 
 import Link from "next/link";
@@ -11,19 +11,32 @@ import { UserMenu } from "@/components/auth/UserMenu";
 import { createClient } from "@/app/utils/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { HeaderSearchBar } from "@/components/layout/HeaderSearchBar";
+import { SearchInterface } from "@/components/search/SearchInterface";
+import { HeroDataPoints } from "@/components/features/search/HeroDataPoints";
 
-export default function Header() {
+interface HeaderProps {
+  totalClinics: number;
+  specialtyCount: number;
+}
+
+export default function Header({ totalClinics, specialtyCount }: HeaderProps) {
   const pathname = usePathname() ?? "";
   const router = useRouter();
   const { toast } = useToast();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userDisplayName, setUserDisplayName] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
 
   const isHomePage = pathname === "/";
   const isSearchFirstDesktopVariant =
-    pathname.startsWith("/ordbog") || pathname.startsWith("/vaerktoejer");
+    pathname.startsWith("/ordbog") ||
+    pathname.startsWith("/vaerktoejer") ||
+    pathname.startsWith("/mr-scanning") ||
+    pathname.startsWith("/dexa-scanning") ||
+    pathname.startsWith("/blog") ||
+    pathname.startsWith("/om-os");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,6 +50,35 @@ export default function Header() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [pathname]);
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+    setIsMobileSearchOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    document.body.style.overflow =
+      isMenuOpen || isMobileSearchOpen ? "hidden" : "unset";
+
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isMenuOpen, isMobileSearchOpen]);
+
+  useEffect(() => {
+    if (!isMobileSearchOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsMobileSearchOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isMobileSearchOpen]);
 
   useEffect(() => {
     const supabase = createClient();
@@ -117,19 +159,23 @@ export default function Header() {
       description: "Du er nu logget ud.",
     });
     
-    toggleMenu();
+    setIsMenuOpen(false);
+    setIsMobileSearchOpen(false);
     router.push("/");
     router.refresh();
   };
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-    // Prevent scrolling when menu is open
-    if (!isMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
+    setIsMenuOpen((previous) => !previous);
+  };
+
+  const openMobileSearchOverlay = () => {
+    setIsMenuOpen(false);
+    setIsMobileSearchOpen(true);
+  };
+
+  const closeMobileSearchOverlay = () => {
+    setIsMobileSearchOpen(false);
   };
 
   return (
@@ -218,12 +264,6 @@ export default function Header() {
               <>
                 <Button
                   asChild
-                  className="rounded-full bg-[#0b5b43] hover:bg-[#084c39] text-white font-medium"
-                >
-                  <Link href="/find/fysioterapeut/danmark">Find fysioterapeut</Link>
-                </Button>
-                <Button
-                  asChild
                   variant="outline"
                   className="rounded-full border-[#cfd4d2] bg-[#f8f7f2] font-medium text-[#23302d] hover:bg-[#efeee8]"
                 >
@@ -242,13 +282,13 @@ export default function Header() {
                 : "md:hidden"
             }`}
           >
-            {!isLoggedIn && (
+            {!isLoggedIn && isSearchFirstDesktopVariant && (
               <Button
-                asChild
                 size="sm"
                 className="rounded-full bg-[#0b5b43] hover:bg-[#084c39] text-white font-medium"
+                onClick={openMobileSearchOverlay}
               >
-                <Link href="/find/fysioterapeut/danmark">Find fysioterapeut</Link>
+                Find fysioterapeut
               </Button>
             )}
             <button
@@ -264,7 +304,11 @@ export default function Header() {
 
       {/* Mobile Menu Overlay - Moved outside header */}
       {isMenuOpen && (
-        <div className="fixed inset-0 z-[200] md:hidden">
+        <div
+          className={`fixed inset-0 z-[200] ${
+            isSearchFirstDesktopVariant ? "min-[1241px]:hidden" : "md:hidden"
+          }`}
+        >
           {/* Semi-transparent background overlay */}
           <div className="absolute inset-0 bg-[#f8f7f2]" />
 
@@ -328,6 +372,12 @@ export default function Header() {
                   )}
                 {/* Bottom buttons */}
                 <div className="mt-auto p-4 space-y-3 border-t border-[#e3e1d8]">
+                  <Button
+                    className="w-full rounded-full bg-[#0b5b43] hover:bg-[#084c39] text-white font-medium"
+                    onClick={openMobileSearchOverlay}
+                  >
+                    Find fysioterapeut
+                  </Button>
                   {isLoggedIn ? (
                     <>
                       {/* User info display */}
@@ -351,15 +401,6 @@ export default function Header() {
                     <>
                       <Button
                         asChild
-                        className="w-full rounded-full bg-[#0b5b43] hover:bg-[#084c39] text-white font-medium"
-                        onClick={toggleMenu}
-                      >
-                        <Link href="/find/fysioterapeut/danmark">
-                          Find fysioterapeut
-                        </Link>
-                      </Button>
-                      <Button
-                        asChild
                         variant="outline"
                         className="w-full rounded-full border-[#cfd4d2] bg-[#f8f7f2] font-medium text-[#23302d] hover:bg-[#efeee8]"
                         onClick={toggleMenu}
@@ -371,6 +412,59 @@ export default function Header() {
                       </div>
                     </>
                   )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {isMobileSearchOpen && (
+        <div
+          className={`fixed inset-0 z-[250] ${
+            isSearchFirstDesktopVariant ? "min-[1241px]:hidden" : "md:hidden"
+          }`}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Søg efter fysioterapeut"
+        >
+          <div className="absolute inset-0 bg-[#f8f7f2]" />
+          <div className="relative h-full bg-[#f8f7f2]">
+            <div className="flex h-full flex-col">
+              <div className="flex items-center justify-between border-b border-[#e3e1d8] px-4 py-2">
+                <Link
+                  href={isLoggedIn ? "/dashboard" : "/"}
+                  className="inline-block"
+                  onClick={closeMobileSearchOverlay}
+                >
+                  <SiteLogo />
+                </Link>
+                <button
+                  onClick={closeMobileSearchOverlay}
+                  className="p-2 text-[#3c4946] hover:text-[#1f2b28]"
+                  aria-label="Luk søgning"
+                >
+                  <X className="h-6 w-6" />
+                </button>
+              </div>
+              <div className="flex-1 overflow-y-auto p-4">
+                <div className="mx-auto flex min-h-full w-full max-w-xl flex-col">
+                  <div>
+                    <h2 className="mb-4 text-xl font-semibold text-[#1f2b28]">
+                      Find fysioterapeut
+                    </h2>
+                    <SearchInterface
+                      specialties={[]}
+                      defaultSearchValue=""
+                      citySlug="danmark"
+                      showFilters={false}
+                      initialFilters={{}}
+                    />
+                  </div>
+                  <HeroDataPoints
+                    totalClinics={totalClinics}
+                    specialtyCount={specialtyCount}
+                    className="mt-auto pt-6 sm:gap-3"
+                  />
                 </div>
               </div>
             </div>

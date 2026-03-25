@@ -1,4 +1,4 @@
-// Updated: 2026-03-24 - Added icon-based compact styling and updated CTA copy for header search bar
+// Updated: 2026-03-25 - Kept header search bar desktop-focused while mobile overlay reuses SearchInterface
 "use client";
 
 import { FormEvent, useState } from "react";

@@ -1,16 +1,15 @@
 // Homepage component with graceful error handling
-// Updated: 2026-03-24 - Added icons to hero data points and aligned specialty icon with search bar usage
+// Updated: 2026-03-25 - Extracted hero datapoints into a shared reusable component
 
 import React from "react";
 import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { StarIcon } from "@heroicons/react/24/solid";
-import { BookHeart, HouseHeart, UserRound } from "lucide-react";
 import { FAQ } from "@/components/features/blog-og-ordbog/FAQ";
 import { SearchInterface } from "@/components/search/SearchInterface";
 import { RegionList } from "@/components/features/search/RegionList";
-import { FORMATTED_MONTHLY_VISITORS_DK } from "@/lib/siteMetrics";
+import { HeroDataPoints } from "@/components/features/search/HeroDataPoints";
 import {
   fetchCitiesWithCounts,
   fetchSpecialties,
@@ -62,47 +61,10 @@ function HeroSection({
               initialFilters={{}}
             />
           </div>
-          <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-16 pt-1">
-            <div className="shrink-0">
-              <div className="flex items-center gap-2.5">
-                <div className="h-11 w-11 shrink-0 rounded-full bg-[#1f2b28]/10 flex items-center justify-center">
-                  <HouseHeart className="h-6 w-6 text-[#4b5754]" aria-hidden="true" />
-                </div>
-                <p className="text-[20px] font-medium text-[#1f2b28] leading-snug">
-                  {totalClinics.toLocaleString("da-DK")}
-                  <span className="ml-2 text-[18px] font-normal text-brand-label sm:ml-0 sm:block">
-                  klinikker
-                  </span>
-                </p>
-              </div>
-            </div>
-            <div className="shrink-0">
-              <div className="flex items-center gap-2.5">
-                <div className="h-11 w-11 shrink-0 rounded-full bg-[#1f2b28]/10 flex items-center justify-center">
-                  <BookHeart className="h-6 w-6 text-[#4b5754]" aria-hidden="true" />
-                </div>
-                <p className="text-[20px] font-medium text-[#1f2b28] leading-snug">
-                  {specialties.length}
-                  <span className="ml-2 text-[18px] font-normal text-brand-label sm:ml-0 sm:block">
-                  forskellige specialer
-                  </span>
-                </p>
-              </div>
-            </div>
-            <div className="shrink-0">
-              <div className="flex items-center gap-2.5">
-                <div className="h-11 w-11 shrink-0 rounded-full bg-[#1f2b28]/10 flex items-center justify-center">
-                  <UserRound className="h-6 w-6 text-[#4b5754]" aria-hidden="true" />
-                </div>
-                <p className="text-[20px] font-medium text-[#1f2b28] leading-snug">
-                  Over {FORMATTED_MONTHLY_VISITORS_DK}
-                  <span className="ml-2 text-[18px] font-normal text-brand-label sm:ml-0 sm:block">
-                    bruger Fysfinder månedligt
-                  </span>
-                </p>
-              </div>
-            </div>
-          </div>
+          <HeroDataPoints
+            totalClinics={totalClinics}
+            specialtyCount={specialties.length}
+          />
           </div>
           <div className="relative h-[320px] sm:h-[360px] xl:h-[430px] w-full max-w-[420px] xl:max-w-none mx-auto xl:mx-0 order-last xl:order-none">
             <div className="hero-card-in hero-card-in-left absolute bottom-8 left-0 w-[160px] h-[220px] sm:w-[175px] sm:h-[240px] xl:w-[190px] xl:h-[260px] rounded-2xl border-4 border-white shadow-lg overflow-hidden -rotate-6 origin-bottom bg-[#cfc8c3]">

@@ -1,5 +1,5 @@
 // Root layout
-// Updated: 2026-03-17 - Added Manrope font setup, widened shared content container to 1440px, and removed global main top padding for flush hero alignment
+// Updated: 2026-03-25 - Added homepage-equivalent clinic and specialty metrics fetch for header mobile overlay datapoints
 
 import type { Metadata } from "next";
 import "./globals.css";
@@ -11,6 +11,7 @@ import { CookieConsentBanner } from "@/components/layout/CookieConsent";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Toaster } from "@/components/ui/toaster";
 import { EmailVerificationBanner } from "@/components/layout/EmailVerificationBanner";
+import { fetchCitiesWithCounts, fetchSpecialties } from "@/app/utils/cityUtils";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -56,15 +57,30 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  let totalClinics = 0;
+  let specialtyCount = 0;
+
+  try {
+    const [cities, specialties] = await Promise.all([
+      fetchCitiesWithCounts(),
+      fetchSpecialties(),
+    ]);
+
+    totalClinics = cities.reduce((sum, city) => sum + city.clinic_count, 0);
+    specialtyCount = specialties.length;
+  } catch (error) {
+    console.error("Layout metrics fetch error:", error);
+  }
+
   return (
     <html lang="da" className={manrope.variable}>
       <body className="flex flex-col min-h-screen font-sans">
-        <Header />
+        <Header totalClinics={totalClinics} specialtyCount={specialtyCount} />
         <EmailVerificationBanner />
         <main className="flex-grow">
           <div className="max-w-[1440px] mx-auto px-5 sm:px-6 lg:px-8">
