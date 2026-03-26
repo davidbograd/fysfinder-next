@@ -1,5 +1,5 @@
 // Shared application types
-// Updated: add optional clinic geo fields for location map rendering
+// Updated: include city-level location preposition for grammar-aware location copy
 
 export interface Clinic {
   clinics_id: string;
@@ -79,6 +79,7 @@ export interface City {
   id: string;
   bynavn: string;
   bynavn_slug: string;
+  location_preposition?: "i" | "på";
   postal_codes: string[];
   latitude: number;
   longitude: number;

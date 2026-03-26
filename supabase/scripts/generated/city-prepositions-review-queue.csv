@@ -1,0 +1,7 @@
+city_id,bynavn,bynavn_slug,location_preposition,confidence,reason,needs_manual_review
+9a7c9034-1f32-4768-9dff-f23b1576a614,Nørrebro,noerrebro,på,medium,district_or_peninsula_variant,true
+a0a25830-65fe-4f4c-b5ca-145656d3abfe,Sjællands Odde,sjaellands-odde,på,medium,district_or_peninsula_variant,true
+3eeb021e-c901-4621-8510-2cd3a1b5c9bf,Sydals,sydals,på,medium,district_or_peninsula_variant,true
+f74ce46e-6b57-462b-8004-984193c6c987,Thyholm,thyholm,på,medium,district_or_peninsula_variant,true
+2764b072-dcf2-4b18-a4df-0a4f9338e411,Vesterbro,vesterbro,på,medium,district_or_peninsula_variant,true
+cb3a6eb3-b15a-4e8a-bad7-28fd9a6ef5a4,Østerbro,oesterbro,på,medium,district_or_peninsula_variant,true

@@ -1,0 +1,608 @@
+city_id,bynavn,bynavn_slug,location_preposition,confidence,reason,needs_manual_review
+b6414434-38e4-4031-90a4-92f78221c89d,Aabenraa,aabenraa,i,high,default_city_town,false
+e02e87b4-6bec-4aa8-af42-898cf30b988b,Aabybro,aabybro,i,high,default_city_town,false
+3f19b59c-1244-44f5-95e4-f602d2341898,Aakirkeby,aakirkeby,i,high,default_city_town,false
+2f694471-da30-4fce-a0b6-110be1819443,Aalborg,aalborg,i,high,default_city_town,false
+9487c358-62f7-4420-9b11-ea57e4e86eef,Aalborg SV,aalborg-sv,i,high,default_city_town,false
+dfcdbcca-e05b-4fd7-bfe6-ab06a42f8006,Aalborg SØ,aalborg-soe,i,high,default_city_town,false
+646a5440-25e4-496c-a008-d6559f98aad8,Aalborg Øst,aalborg-oest,i,high,default_city_town,false
+92777e24-38ce-4769-81f4-306266ee5101,Aalestrup,aalestrup,i,high,default_city_town,false
+b0049d3f-2547-47f1-90b1-6cb8cff4776c,Aarhus C,aarhus-c,i,high,default_city_town,false
+e113cca8-9052-4b3f-8322-4aa4c1f8c41e,Aarhus N,aarhus-n,i,high,default_city_town,false
+a0ab749b-0609-42cc-a347-d5e90b06ac10,Aarhus V,aarhus-v,i,high,default_city_town,false
+2fb11661-1494-4933-84f8-09ce8f9e59eb,Aars,aars,i,high,default_city_town,false
+eca1075e-b4be-467f-9586-49f083f396ab,Aarup,aarup,i,high,default_city_town,false
+419e88a1-d0a7-49ca-ac03-8bd6a0ff074e,Agedrup,agedrup,i,high,default_city_town,false
+019985ea-3063-452b-b687-46ce4f3b099f,Agerbæk,agerbaek,i,high,default_city_town,false
+f1fecfe6-8bd7-42eb-bab4-ba87531dc4b2,Agerskov,agerskov,i,high,default_city_town,false
+48524720-8ac4-423c-a96d-dfd78512576a,Agersø,agersoe,på,high,island_or_named_area,false
+1c5ebbfc-2a1a-4937-8689-d1a195ba815f,Albertslund,albertslund,i,high,default_city_town,false
+948cf7d6-61ef-4815-a9d5-262e34041249,Allerød,alleroed,i,high,default_city_town,false
+9bbff8e5-0e53-4190-a6a4-ee1449880c76,Allinge,allinge,i,high,default_city_town,false
+9874f6e4-2532-45c6-85b8-afcb193cf649,Allingåbro,allingaabro,i,high,default_city_town,false
+882ff7f4-628c-4c8a-863a-1040e711aeb4,Almind,almind,i,high,default_city_town,false
+bb6427a7-540d-43af-98d4-a527f4292f70,Amager,amager,på,high,island_or_named_area,false
+8906fcbe-63aa-4963-9941-e04776e54c78,Anholt,anholt,på,high,island_or_named_area,false
+0a77d572-93e1-4dcc-b3d8-e8fd7f14e5da,Ans By,ans-by,i,high,default_city_town,false
+5ac97051-9630-4de8-9299-f7102eae9729,Ansager,ansager,i,high,default_city_town,false
+715a3c58-46bb-4933-a408-a53a307d5a77,Arden,arden,i,high,default_city_town,false
+7d238b41-0955-49c1-be5e-f1605653040e,Asaa,asaa,i,high,default_city_town,false
+34f523e3-2a5f-4858-9146-407bac4b91d9,Askeby,askeby,i,high,default_city_town,false
+284c6c80-01e3-4f8d-b8bf-8230244db1b7,Askø,askoe,på,high,island_or_named_area,false
+03bd6079-a48f-470d-b7f4-54e79255ed4b,Asnæs,asnaes,i,high,default_city_town,false
+e2e85f8a-a1a3-41aa-a1bd-aa85d92b9b12,Asperup,asperup,i,high,default_city_town,false
+7685d952-e67b-4811-9e1a-47f8b2e1e988,Assens,assens,i,high,default_city_town,false
+57462d61-2ee4-4a24-9e9d-03117aad1ae5,Augustenborg,augustenborg,i,high,default_city_town,false
+0c2da03d-b293-49d1-b6b7-e40d730c3e4f,Aulum,aulum,i,high,default_city_town,false
+926000e6-a6fd-42c5-90dc-c048ae611aca,Auning,auning,i,high,default_city_town,false
+55410a32-bc9b-4c25-9124-6443833e249c,Avernakø,avernakoe,på,high,island_or_named_area,false
+3d0941bf-56b5-4121-8c65-d092f324a03f,Bagenkop,bagenkop,i,high,default_city_town,false
+78e06f8e-1228-407b-9e6b-7f74380a5d10,Bagsværd,bagsvaerd,i,high,default_city_town,false
+343e1b1b-eab5-4e88-b0f3-f4f9f5cd440c,Balle,balle,i,high,default_city_town,false
+43d557fc-df8d-4fae-bd4b-428f846954ef,Ballerup,ballerup,i,high,default_city_town,false
+070a1477-6cde-404e-bba4-f7bb695a7c7d,Bandholm,bandholm,i,high,default_city_town,false
+1c909655-3139-4033-97bb-b10e280bee02,Barrit,barrit,i,high,default_city_town,false
+42ee8ecd-254f-42e5-ae5b-6da2e2f8b68c,Barsø,barsoe,på,high,island_or_named_area,false
+1909153c-ad44-48de-9857-41d0a6e90b14,Beder,beder,i,high,default_city_town,false
+7ccb1989-67b6-4848-b8ca-73ff5870c669,Bedsted Thy,bedsted-thy,i,high,default_city_town,false
+643f277b-c5a7-4802-84bb-cfb15a75cb41,Bevtoft,bevtoft,i,high,default_city_town,false
+79750839-c727-4d8f-84b6-9e22a76d6fb5,Billum,billum,i,high,default_city_town,false
+3cc32459-72e2-46e0-adfe-0609a94ebadf,Billund,billund,i,high,default_city_town,false
+371bd85e-23ed-462c-979a-5dc5ea00d326,Bindslev,bindslev,i,high,default_city_town,false
+c463f1c1-01a1-4ee5-a34b-a4408dd2c96d,Birkerød,birkeroed,i,high,default_city_town,false
+eed3901a-4a30-45f1-b405-19161ca0a504,Birkholm,birkholm,på,high,island_or_named_area,false
+1c729ce9-7c25-4c2d-a4c8-07fb082a0734,Bjerringbro,bjerringbro,i,high,default_city_town,false
+fbfc5a71-73f8-4dd7-b246-46196954df31,Bjert,bjert,i,high,default_city_town,false
+340cc045-8adb-4364-a834-c9a38a63ce33,Bjæverskov,bjaeverskov,i,high,default_city_town,false
+e59f0789-7cd4-40e3-8765-1c407963aece,Bjørnø,bjoernoe,på,high,island_or_named_area,false
+2429378a-01d7-4081-bf80-c0ab218d202b,Blokhus,blokhus,i,high,default_city_town,false
+0a13fcb8-9341-4fff-a578-f9864b225d5f,Blommenslyst,blommenslyst,i,high,default_city_town,false
+81b22165-8582-4afc-a488-c2b186f58f42,Blåvand,blaavand,i,high,default_city_town,false
+f93add70-f1c9-45b6-a0d4-a261cd755410,Boeslunde,boeslunde,i,high,default_city_town,false
+8b035f50-fe14-402f-a3af-3cde5dd14b7d,Bogense,bogense,i,high,default_city_town,false
+8aaca81c-0ac7-40d0-8f93-95df85d63ffb,Bogø By,bogoe-by,i,high,island_or_named_area,false
+8f2f0cf4-5d42-44c3-af9f-5fe6a2ce62d3,Bolderslev,bolderslev,i,high,default_city_town,false
+3f94e5fe-6f2d-4246-b7a3-00268f72bf5a,Bording,bording,i,high,default_city_town,false
+a8eafe66-744e-4ec6-b6a6-a8495df632c2,Borre,borre,i,high,default_city_town,false
+1fc15f3d-a10c-49fc-be5e-9c5c50433755,Borup,borup,i,high,default_city_town,false
+a8223c29-86d0-497f-8ab4-cb2ac57bdbe5,Brabrand,brabrand,i,high,default_city_town,false
+ed56111f-ceb2-4eac-8573-d71a08c32ff7,Bramming,bramming,i,high,default_city_town,false
+607a7ae5-164c-4995-a31b-ed07ad5ac58f,Brande,brande,i,high,default_city_town,false
+557562bb-13d1-44a4-9d94-a9c522e4c983,Branderup J,branderup-j,i,high,default_city_town,false
+f9761be1-17c4-4b20-ae10-927f6008f16e,Bredebro,bredebro,i,high,default_city_town,false
+063cd7c2-3c45-4eeb-9609-66348be9fe27,Bredsten,bredsten,i,high,default_city_town,false
+82a9f8d3-bf8f-4718-8150-90cee7cf34a1,Brenderup Fyn,brenderup-fyn,i,high,default_city_town,false
+0fcbe211-d332-477c-a08b-b1c2e31e3ab9,Broager,broager,i,high,default_city_town,false
+3b74c084-59f8-49df-9289-975f0ed8e389,Broby,broby,i,high,default_city_town,false
+17953658-1a3d-400d-ae89-c1eeeeb3ec8a,Brovst,brovst,i,high,default_city_town,false
+b95dc5a7-6141-46b4-b72e-79d0a417a998,Bryrup,bryrup,i,high,default_city_town,false
+442cfd63-b133-4dab-a8c8-7c4a75583180,Brædstrup,braedstrup,i,high,default_city_town,false
+120dc836-360e-44e3-9b54-a1db22938a37,Brøndby,broendby,i,high,default_city_town,false
+89641046-2761-4d2f-a6fe-52ac04648b89,Brøndby Strand,broendby-strand,i,high,default_city_town,false
+01ab65a4-c448-4b1d-a685-79e189ad26ea,Brønderslev,broenderslev,i,high,default_city_town,false
+e481da35-cbe7-4095-805b-8ec8b52d21b0,Brønshøj,broenshoej,i,high,default_city_town,false
+8310d415-4121-4208-9844-d5d4ac7b38a7,Brørup,broerup,i,high,default_city_town,false
+ab28561a-3db1-4705-92db-15a3738789f5,Bylderup-Bov,bylderup-bov,i,high,default_city_town,false
+ba4ffcbf-0f53-4e92-ab67-4b9a3a2a5905,Bække,baekke,i,high,default_city_town,false
+397bf7ba-f8f7-4431-ada7-6654f93221f8,Bækmarksbro,baekmarksbro,i,high,default_city_town,false
+b54e2b14-ea1b-41c7-9a81-760d331085ed,Bælum,baelum,i,high,default_city_town,false
+7f449066-6712-4959-a23e-8d3adf760c42,Børkop,boerkop,i,high,default_city_town,false
+cf107c86-b818-4553-92e8-afb75fafca19,Bøvlingbjerg,boevlingbjerg,i,high,default_city_town,false
+7d7f2184-ddf5-49bb-b8fe-610f4b606231,Charlottenlund,charlottenlund,i,high,default_city_town,false
+68528e75-8807-41a9-8ffa-d84c93633528,Christiansfeld,christiansfeld,i,high,default_city_town,false
+f10529b9-89de-4b80-aa23-f3eb24efd51a,Dalby,dalby,i,high,default_city_town,false
+55036b02-c5e3-45e1-ab82-a1afb34ae42a,Dalmose,dalmose,i,high,default_city_town,false
+fd8079e4-0194-40fd-ac73-95d4ebb8c103,Danmark,danmark,i,high,system_location,false
+07a42762-8014-4af5-b253-71f3b77ceb79,Dannemare,dannemare,i,high,default_city_town,false
+6c2664fc-4c00-4a6e-8490-b613b143920a,Daugård,daugaard,i,high,default_city_town,false
+18c6dc2b-fec4-4ca1-82d8-26d91164accd,Dianalund,dianalund,i,high,default_city_town,false
+d8c04956-e2da-4550-b3a2-df59c5d1cd2e,Dragør,dragoer,i,high,default_city_town,false
+6fd31d32-16b6-430c-8f2b-63636ca8249a,Dronninglund,dronninglund,i,high,default_city_town,false
+815d9453-7008-4c49-ac12-6cae7946cdc5,Dronningmølle,dronningmoelle,i,high,default_city_town,false
+4ca15c55-e373-48cc-850c-7e0f7194a560,Dybvad,dybvad,i,high,default_city_town,false
+ec4856fe-ba72-45d0-ac43-212ec63e7066,Dyssegård,dyssegaard,i,high,default_city_town,false
+36197ebf-6357-45bf-a47f-92678ea828f7,Ebberup,ebberup,i,high,default_city_town,false
+1a8eabc0-e289-4323-9cbd-47d99b6db732,Ebeltoft,ebeltoft,i,high,default_city_town,false
+7cf83001-54e1-4508-abf9-ab59f6a4b7cc,Egernsund,egernsund,i,high,default_city_town,false
+cb1b6825-e5a6-45ed-bc57-5c27ec62fc83,Egtved,egtved,i,high,default_city_town,false
+8dfcd370-9707-4940-b2b9-dae2f805bbd2,Egå,egaa,i,high,default_city_town,false
+9e0279b9-ca67-4385-8b12-92d0c5b9c415,Ejby,ejby,i,high,default_city_town,false
+974ce03f-4f18-49ce-9796-067af07f5fde,Ejstrupholm,ejstrupholm,i,high,default_city_town,false
+3f72465e-9a06-46de-93f1-38cb5aa905ed,Endelave,endelave,på,high,island_or_named_area,false
+45ed42b4-9717-4fa7-a9b5-e14809a31b5a,Engesvang,engesvang,i,high,default_city_town,false
+94c6e3e6-a3f0-457a-82b8-640a20b88efc,Errindlev,errindlev,i,high,default_city_town,false
+4c383a0b-5e51-49fd-89f0-a5d8b4da0bea,Erslev,erslev,i,high,default_city_town,false
+e5724cfb-aa0f-4d02-a8fd-e21d57e0498d,Esbjerg,esbjerg,i,high,default_city_town,false
+289dde98-d24a-4f56-9639-e477d72052a6,Esbjerg N,esbjerg-n,i,high,default_city_town,false
+5fcf7bd3-5cb1-4574-b8bb-ffd6ef7b741d,Esbjerg V,esbjerg-v,i,high,default_city_town,false
+959980b7-0281-4ae2-8ff8-31bae158e79b,Esbjerg Ø,esbjerg-oe,i,high,default_city_town,false
+4b1570c5-6e2a-462e-8e91-1e6d102e5d97,Eskebjerg,eskebjerg,i,high,default_city_town,false
+8cf02328-583c-46a4-a2b0-66b9b0321093,Eskilstrup,eskilstrup,i,high,default_city_town,false
+3b315074-1e6f-4c55-9488-5b095c6c6cfa,Espergærde,espergaerde,i,high,default_city_town,false
+735b11eb-5ab6-4181-914f-7b4bb3522780,Faaborg,faaborg,i,high,default_city_town,false
+a62d0f87-17b4-4b4f-8af5-671b356989ff,Fanø,fanoe,på,high,island_or_named_area,false
+7dc21084-785b-4539-af9f-29f94325a047,Farsø,farsoe,i,high,default_city_town,false
+3a528549-6a5c-4d28-924b-bd6973c54e15,Farum,farum,i,high,default_city_town,false
+4433f04d-2348-420e-b451-06a97b9cbc3a,Faxe,faxe,i,high,default_city_town,false
+2499a930-cff5-4aa4-999c-9a04907e65ec,Faxe Ladeplads,faxe-ladeplads,i,high,default_city_town,false
+1c038905-3f14-4009-860e-0e5f7d9e7e6d,Fejø,fejoe,på,high,island_or_named_area,false
+14376c01-a370-405f-9c4b-c3dc83b2acce,Femø,femoe,på,high,island_or_named_area,false
+b08c9c6a-a738-4139-85f3-9a9905be5f5c,Ferritslev Fyn,ferritslev-fyn,i,high,default_city_town,false
+e9ab25f9-19ee-4505-b29d-b0274fcff90e,Fjenneslev,fjenneslev,i,high,default_city_town,false
+1eb3c39c-c028-4573-b484-8966a09dc978,Fjerritslev,fjerritslev,i,high,default_city_town,false
+74e2dd49-85ff-4761-b54b-67fb0e210f87,Flemming,flemming,i,high,default_city_town,false
+5bd80a85-3006-423c-8ea9-fb1f913904d4,Fredensborg,fredensborg,i,high,default_city_town,false
+83a90fcc-4c07-4840-b1fc-dc2155efcf46,Fredericia,fredericia,i,high,default_city_town,false
+0f2c55e7-f351-45ce-9b0b-3ef343e3f6d0,Frederiksberg,frederiksberg,i,high,default_city_town,false
+3fe848bc-3327-4b9b-8cd8-f69a3eb35f73,Frederiksberg C,frederiksberg-c,i,high,default_city_town,false
+1ab3051b-30d4-4aa5-9c62-d59e836967c9,Frederikshavn,frederikshavn,i,high,default_city_town,false
+7062ad6e-dff1-4fd3-92e9-339d2b53e319,Frederikssund,frederikssund,i,high,default_city_town,false
+7644f284-f053-43a1-a6d0-60e5a2ff46d5,Frederiksværk,frederiksvaerk,i,high,default_city_town,false
+883b4de4-065e-4968-a866-cb3ca0e07787,Frørup,froerup,i,high,default_city_town,false
+8beb3e21-01f7-4716-a3d0-8c7969cf6674,Frøstrup,froestrup,i,high,default_city_town,false
+1b8dded0-c390-4852-80a0-5af8f60c885d,Fuglebjerg,fuglebjerg,i,high,default_city_town,false
+b8a8ab22-3be3-4c6a-955e-79ee29c63912,Fur,fur,på,high,island_or_named_area,false
+6fcd2a2c-de67-4d50-8053-18396d3f13c8,Fårevejle,faarevejle,i,high,default_city_town,false
+22cfd597-2998-4e27-9235-bfaaa5ec5a8c,Fårup,faarup,i,high,default_city_town,false
+b5741257-4889-4fab-b232-0efc324bea11,Fårvang,faarvang,i,high,default_city_town,false
+39193d1d-a5a6-4581-b89d-67f1a56519c7,Føllenslev,foellenslev,i,high,default_city_town,false
+14667d3b-11d0-4e02-bbe9-fa46c9a8e3ae,Føvling,foevling,i,high,default_city_town,false
+8ab6ad62-5767-4d6c-8cef-7476b3dc9b7e,Gadbjerg,gadbjerg,i,high,default_city_town,false
+dd7ea539-ea33-481a-891a-abceb1cf3fee,Gadstrup,gadstrup,i,high,default_city_town,false
+cd4aac76-101c-46e0-86ca-73d55fa14483,Galten,galten,i,high,default_city_town,false
+985028fb-2c42-4675-b2b6-cba839f54ba1,Gandrup,gandrup,i,high,default_city_town,false
+04ce7262-815a-49c6-9eba-47ed3b2eaed9,Gedser,gedser,i,high,default_city_town,false
+ce62c127-b37e-4f92-8784-5632c406c969,Gedsted,gedsted,i,high,default_city_town,false
+c9b8349c-d54e-4017-9761-3bbdcbb63746,Gedved,gedved,i,high,default_city_town,false
+c2807786-0631-4834-a3aa-70f11f60e3f4,Gelsted,gelsted,i,high,default_city_town,false
+2b0a0ca6-8ea1-4ab1-b4eb-51b65fc725d7,Gentofte,gentofte,i,high,default_city_town,false
+251ab444-d148-4dbf-8c9b-cf41eadf52f8,Gesten,gesten,i,high,default_city_town,false
+c72d0468-b138-4baa-891f-9f3e7bb262ae,Gilleleje,gilleleje,i,high,default_city_town,false
+176b58c1-e334-4a80-a168-26edc99a80ab,Gislev,gislev,i,high,default_city_town,false
+7e2c7e5c-7633-4712-900f-25a45cb04c55,Gislinge,gislinge,i,high,default_city_town,false
+c21b2cfa-3c96-46e0-bec1-c61305614263,Gistrup,gistrup,i,high,default_city_town,false
+39968885-b48f-4638-8d3a-ba0542329522,Give,give,i,high,default_city_town,false
+30eef596-babf-407e-a1c5-f0669185a895,Gjerlev J,gjerlev-j,i,high,default_city_town,false
+202f1a77-b137-448c-9c9f-8580fa1066d1,Gjern,gjern,i,high,default_city_town,false
+2c329e3d-46ac-4498-86ce-64156df0acb7,Glamsbjerg,glamsbjerg,i,high,default_city_town,false
+76a9d230-da17-46b6-afb3-24a88ebe7e00,Glejbjerg,glejbjerg,i,high,default_city_town,false
+29db458e-07ea-487c-a41e-e4471a154980,Glesborg,glesborg,i,high,default_city_town,false
+1bda136e-7029-4287-a6ac-2ef217b9122b,Glostrup,glostrup,i,high,default_city_town,false
+ee20b673-0841-43f2-8c47-760c91cc9bdb,Glumsø,glumsoe,i,high,default_city_town,false
+3f756d4c-80c8-4a4c-a030-a8035dd9aad2,Gram,gram,i,high,default_city_town,false
+dce2de63-694a-4888-8653-2362d8cbdfb6,Gredstedbro,gredstedbro,i,high,default_city_town,false
+dab5efdf-cc69-4800-ab57-e9a8a04146df,Grenaa,grenaa,i,high,default_city_town,false
+308f5503-ebe8-4346-8d39-064333d0088b,Greve,greve,i,high,default_city_town,false
+2b9bdf7a-7c89-4426-b7d6-3d8a90c45975,Grevinge,grevinge,i,high,default_city_town,false
+58d0bb6a-c068-4271-a684-3f5dfa61181b,Grindsted,grindsted,i,high,default_city_town,false
+26ec201e-0d81-4772-9e06-9cb2134e780e,Gråsten,graasten,i,high,default_city_town,false
+db3d3f31-87bd-4f91-a05d-906179843948,Græsted,graested,i,high,default_city_town,false
+93a56ca8-3c08-4fce-b197-8eb0c2fe075e,Gudbjerg Sydfyn,gudbjerg-sydfyn,i,high,default_city_town,false
+9988d41c-540f-4fda-9b9b-abed8ca7a0de,Gudhjem,gudhjem,i,high,default_city_town,false
+c2bffc6c-d6d3-44f8-a321-9059fc47ba3a,Gudme,gudme,i,high,default_city_town,false
+8bf95cdb-1823-497d-ad03-521fcf94341f,Guldborg,guldborg,i,high,default_city_town,false
+3d19b1c6-6cb2-43f7-97b5-78dc9f038fca,Gørding,goerding,i,high,default_city_town,false
+c1f91af0-09f7-441d-9861-8bb83c5f3c42,Gørlev,goerlev,i,high,default_city_town,false
+01143a9c-e8e8-4bf5-962a-f8c048a81798,Gørløse,goerloese,i,high,default_city_town,false
+7f7fb1f8-6384-4352-9d13-942522d36ba1,Haarby,haarby,i,high,default_city_town,false
+7e14155b-060e-41fa-ac07-8e68dd3702d5,Haderslev,haderslev,i,high,default_city_town,false
+e3cbe214-6239-4bc8-96b2-437bdf9cae73,Haderup,haderup,i,high,default_city_town,false
+5b9ae901-2f7d-49c9-b416-0baa8458d3db,Hadsten,hadsten,i,high,default_city_town,false
+09d24407-da64-45b2-8df6-b5cf1decefa2,Hadsund,hadsund,i,high,default_city_town,false
+bc6bf796-21a3-42ce-89e2-f3cac8b40e00,Hals,hals,i,high,default_city_town,false
+177893f3-6de2-4d30-a563-9c2cb8fe386a,Hammel,hammel,i,high,default_city_town,false
+def15d46-7298-48fa-ae2f-22912e3331df,Hampen,hampen,i,high,default_city_town,false
+4cc9f4c0-cb1c-4178-9c3e-16468ac253e6,Hanstholm,hanstholm,i,high,default_city_town,false
+1261a700-e8fe-4bb1-8818-e21747c60441,Harboøre,harbooere,i,high,default_city_town,false
+7a070078-b6b9-4ce8-9d08-3196822e23c7,Harlev J,harlev-j,i,high,default_city_town,false
+0ed66137-4365-4afc-ae60-66e3a81e2224,Harndrup,harndrup,i,high,default_city_town,false
+b2591795-ff3e-4fd4-bf98-63bd61930c4d,Harpelunde,harpelunde,i,high,default_city_town,false
+87bd9738-2929-4a63-925c-01d70fb330e4,Hasle,hasle,i,high,default_city_town,false
+42481b40-f0f9-445a-98ad-d73d4dc91c1f,Haslev,haslev,i,high,default_city_town,false
+b1a80d9a-ff95-45fb-a184-9e88502f0305,Hasselager,hasselager,i,high,default_city_town,false
+a08cd934-47cb-4a63-a4b4-1d653a174983,Havdrup,havdrup,i,high,default_city_town,false
+52cdf861-a450-4d58-88bb-784b5d403c5e,Havndal,havndal,i,high,default_city_town,false
+e2c094c8-b3c0-4f96-b046-95d480c5e1b0,Hedehusene,hedehusene,i,high,default_city_town,false
+c808a1fd-c447-4948-a7e5-364279eb78d2,Hedensted,hedensted,i,high,default_city_town,false
+743ea8ed-a293-4655-b9c7-7e67892190d1,Hejls,hejls,i,high,default_city_town,false
+4cd0b0b4-be35-4ada-af05-74b1567b93f0,Hejnsvig,hejnsvig,i,high,default_city_town,false
+f3a72f35-6beb-4097-a9e8-38c3fee338b7,Hellebæk,hellebaek,i,high,default_city_town,false
+37797789-f768-47f2-8921-9f82c55a08ee,Hellerup,hellerup,i,high,default_city_town,false
+6a461208-10b1-4317-87f1-69020d4f5d4e,Helsinge,helsinge,i,high,default_city_town,false
+c0809410-11f0-45b1-877b-805b52c4d59b,Helsingør,helsingoer,i,high,default_city_town,false
+c9b63731-cdda-4e5c-986d-205172325e6e,Hemmet,hemmet,i,high,default_city_town,false
+9e2b84d6-c826-4529-ac43-869dc52a47dd,Henne,henne,i,high,default_city_town,false
+08a7deb3-3db3-4d1c-992b-e51ff97248af,Herfølge,herfoelge,i,high,default_city_town,false
+57bd5c77-06d5-482a-b45c-06adcdcf0738,Herlev,herlev,i,high,default_city_town,false
+60344a42-1364-4b06-9b07-2ba9c8c4f74c,Herlufmagle,herlufmagle,i,high,default_city_town,false
+aa9f61b3-3915-4855-aeac-ddac30738488,Herning,herning,i,high,default_city_town,false
+f9bdbda0-dbb9-48f1-8cf1-12a08be83cc2,Hesselager,hesselager,i,high,default_city_town,false
+82aa4e78-f555-4319-ad7a-f403a990eb0e,Hillerød,hilleroed,i,high,default_city_town,false
+14f3248b-0dd4-49e6-ac13-8b4a799caf57,Hinnerup,hinnerup,i,high,default_city_town,false
+9aa7b1c1-23fb-42d2-953b-99262b38a3a6,Hirtshals,hirtshals,i,high,default_city_town,false
+d326786e-b374-4ebc-b167-a37efd1cfc5b,Hjallerup,hjallerup,i,high,default_city_town,false
+9aa8ec83-f871-4e34-9c55-5d642df55633,Hjerm,hjerm,i,high,default_city_town,false
+332844ad-c5af-4a5c-8014-01fbdff642a4,Hjortshøj,hjortshoej,i,high,default_city_town,false
+b27cdffe-2907-4d60-bafc-fde16c89004f,Hjørring,hjoerring,i,high,default_city_town,false
+88205e19-d202-4702-bf9b-b9af60c68793,Hobro,hobro,i,high,default_city_town,false
+f3608a59-f30c-4e7f-b715-30ba182186e6,Holbæk,holbaek,i,high,default_city_town,false
+ba35e20f-a187-407a-bf53-1b95f572a69e,Holeby,holeby,i,high,default_city_town,false
+37fe3922-16ec-4fb2-b382-668f15e0c33d,Holmegaard,holmegaard,i,high,default_city_town,false
+06c5a68d-de58-4ec5-bc29-0863033907bb,Holstebro,holstebro,i,high,default_city_town,false
+d0abf63e-878f-4b58-bd16-7877c9a9fee7,Holsted,holsted,i,high,default_city_town,false
+9d924cd3-50bc-4c87-ab53-98090a53c926,Holte,holte,i,high,default_city_town,false
+dbd08acb-dc75-4482-ab07-b7b4b0209c0a,Horbelev,horbelev,i,high,default_city_town,false
+7450dec7-e060-43b3-ac09-510099f030a8,Hornbæk,hornbaek,i,high,default_city_town,false
+c1d95377-8ddb-41a6-91ba-08aba769a866,Hornslet,hornslet,i,high,default_city_town,false
+79af2276-3806-4153-a368-14ac1786b957,Hornsyld,hornsyld,i,high,default_city_town,false
+8619a4ac-c26e-406a-8325-4ad197ae1244,Horsens,horsens,i,high,default_city_town,false
+099b701c-d4e5-4477-ae43-ddef68ea1ddb,Horslunde,horslunde,i,high,default_city_town,false
+4f62e4b0-75bc-4696-8173-8a733095f915,Hovborg,hovborg,i,high,default_city_town,false
+7f2c8fce-d6a7-44fc-8db7-38c99fcddd17,Hovedgård,hovedgaard,i,high,default_city_town,false
+423364a1-498f-4be4-9345-20d5da15d445,Humble,humble,i,high,default_city_town,false
+48db2504-cb46-486b-8d14-c69159d08814,Humlebæk,humlebaek,i,high,default_city_town,false
+f8581d05-db8c-442a-818d-82f884e7c10d,Hundested,hundested,i,high,default_city_town,false
+2322c988-124a-4939-8ca2-b1e9edcfcb76,Hundslund,hundslund,i,high,default_city_town,false
+52e1fad9-f20d-434d-9b86-e1f0f8025bc3,Hurup Thy,hurup-thy,i,high,default_city_town,false
+a927f4d6-ff52-4739-8173-112dcd55d513,Hvalsø,hvalsoe,i,high,default_city_town,false
+5effdcd6-bff7-4261-9a0f-26c87d814b2c,Hvide Sande,hvide-sande,i,high,default_city_town,false
+239c5bc3-a3ec-496e-9bda-e3d01937d040,Hvidovre,hvidovre,i,high,default_city_town,false
+898ef627-5205-4e20-8011-92bf7cdc8dd0,Hårlev,haarlev,i,high,default_city_town,false
+b8bfaef7-6b4c-4b6c-ad78-fdb0eaedaf0b,Højbjerg,hoejbjerg,i,high,default_city_town,false
+e2c32d79-8856-45a2-ab23-82a5dfc58bd3,Højby,hoejby,i,high,default_city_town,false
+8ea0b0a6-4d05-414a-9fe8-696bd14348a8,Højer,hoejer,i,high,default_city_town,false
+58857fa4-7eec-4352-9320-ea84663a70cf,Højslev,hoejslev,i,high,default_city_town,false
+3ef24dcc-2e0e-46fa-a279-a5a7e2f1d2c9,Høng,hoeng,i,high,default_city_town,false
+def0b18f-3382-46e3-8176-8212fa384071,Hørning,hoerning,i,high,default_city_town,false
+b147d52d-f7b4-46ab-986d-63845d56147d,Hørsholm,hoersholm,i,high,default_city_town,false
+df8a5038-551d-430d-a83d-361b57211682,Hørve,hoerve,i,high,default_city_town,false
+919c78dd-f848-4d3d-ad91-e7e022d5f2f9,Idestrup,idestrup,i,high,default_city_town,false
+1bbc0048-3967-4d41-a6f8-e3321a118ac6,Ikast,ikast,i,high,default_city_town,false
+97a742c0-9ec6-49b4-b452-206c782ca902,Ishøj,ishoej,i,high,default_city_town,false
+91bfe75a-817b-4c65-9a4b-2ab8055349a8,Janderup Vestj,janderup-vestj,i,high,default_city_town,false
+88d197af-c24d-4a3b-9665-1d75efe47447,Jelling,jelling,i,high,default_city_town,false
+8712bb54-d92b-48a7-9e17-50ec8f5ed703,Jerslev J,jerslev-j,i,high,default_city_town,false
+cbf7791c-9873-427b-92a9-3f2895ac88ba,Jerslev Sjælland,jerslev-sjaelland,i,high,default_city_town,false
+e3e48a6c-6ede-448f-952f-d9b4e1073833,Jerup,jerup,i,high,default_city_town,false
+9c16c570-13eb-4c08-a583-e48b5f745662,Jordrup,jordrup,i,high,default_city_town,false
+f7ce2718-0d44-4b2c-ad5d-62a3dc7fa11c,Juelsminde,juelsminde,i,high,default_city_town,false
+73c50a60-1310-4348-b3bd-e6cfd9c6eff6,Jyderup,jyderup,i,high,default_city_town,false
+16ee2e40-e683-4ef0-8b3c-a6233f1e65a0,Jyllinge,jyllinge,i,high,default_city_town,false
+3901f881-2dc9-46ab-b403-861bb3a9e585,Jystrup Midtsj,jystrup-midtsj,i,high,default_city_town,false
+68a73162-b17b-494f-b474-f1b7b98bdbba,Jægerspris,jaegerspris,i,high,default_city_town,false
+c6bef3b8-d98d-46e1-bb41-ba7ac8ef4e4e,Kalundborg,kalundborg,i,high,default_city_town,false
+ee45ece0-4ba0-41bf-8ef9-329d4158e2dd,Kalvehave,kalvehave,i,high,default_city_town,false
+4b20ad81-7ed1-4f85-97f0-b5e4202c8e51,Karby,karby,i,high,default_city_town,false
+bb827566-db1e-4c39-9e58-fd129494e6f7,Karise,karise,i,high,default_city_town,false
+56976e72-8f61-40ff-b69e-9aba0c6aef14,Karlslunde,karlslunde,i,high,default_city_town,false
+bb7f38e7-e529-409d-aba2-9fee9245b2e7,Karrebæksminde,karrebaeksminde,i,high,default_city_town,false
+f2fbe900-9c8f-493f-946b-0924adbad52e,Karup J,karup-j,i,high,default_city_town,false
+886fd0a3-03ae-465e-a697-f4cb685bb872,Kastrup,kastrup,i,high,default_city_town,false
+e5e73ffe-a90d-449b-be82-ba352bc406f7,Kerteminde,kerteminde,i,high,default_city_town,false
+afe047e3-8311-49d7-b929-76f46160ede3,Kettinge,kettinge,i,high,default_city_town,false
+f77a1cdb-247a-4350-baf6-35121c611c49,Kibæk,kibaek,i,high,default_city_town,false
+b910a218-5f22-4ee5-a55e-c5530aaf1032,Kirke Eskilstrup,kirke-eskilstrup,i,high,default_city_town,false
+72cc284d-b8a5-4433-b71f-3fac0e49005b,Kirke Hyllinge,kirke-hyllinge,i,high,default_city_town,false
+d2ec8765-560c-41a3-a41c-7237b1cf3bf0,Kirke Såby,kirke-saaby,i,high,default_city_town,false
+95c0ed2d-3077-4ac4-8692-527c7a8cff4b,Kjellerup,kjellerup,i,high,default_city_town,false
+d1043f64-a1ec-422b-937f-b398d35d41a6,Klampenborg,klampenborg,i,high,default_city_town,false
+2b656721-1714-49b6-9cc3-9e1c1b070127,Klarup,klarup,i,high,default_city_town,false
+82287b7a-c037-4504-ae1d-8e09ba04aeab,Klemensker,klemensker,i,high,default_city_town,false
+1ef9dca4-c605-4c9a-96e0-108407ce4c83,Klippinge,klippinge,i,high,default_city_town,false
+9103efa6-3fc1-44ca-b97f-78c80d25583f,Klovborg,klovborg,i,high,default_city_town,false
+9865b06b-dcfd-4dda-94ad-2c02f2002cf4,Knebel,knebel,i,high,default_city_town,false
+e9b1d288-3e45-42af-9817-15d09d7e5b3f,Kokkedal,kokkedal,i,high,default_city_town,false
+0bd3bd88-566f-4e55-840b-88d89025c559,Kolding,kolding,i,high,default_city_town,false
+5015a624-7a48-42b8-b7b7-51c3e9f14031,Kolind,kolind,i,high,default_city_town,false
+110cebba-d1e3-46a9-afe9-c84456e6c5a4,Kongens Lyngby,kongens-lyngby,i,high,default_city_town,false
+11947271-aa86-4b21-9b63-bfe1906f1e83,Kongerslev,kongerslev,i,high,default_city_town,false
+1e58efe1-2103-4869-82af-96dbae0ac584,Korsør,korsoer,i,high,default_city_town,false
+f73d7384-df71-44f5-a339-b527556fe9a5,Kruså,krusaa,i,high,default_city_town,false
+c25c0d21-0f76-411f-9a47-1da90ce689c2,Kvistgård,kvistgaard,i,high,default_city_town,false
+b5331962-3fdf-48ba-b7db-1045064a13eb,Kværndrup,kvaerndrup,i,high,default_city_town,false
+5b8319ee-deac-472d-9df3-d29773d1c56e,København K,koebenhavn-k,i,high,default_city_town,false
+5baa31fd-3cdd-415c-9bfa-a3231ff18b66,København NV,koebenhavn-nv,i,high,default_city_town,false
+1403bf8b-130b-4c90-b502-646f2b071628,Køge,koege,i,high,default_city_town,false
+abd0fef7-f59b-445c-91ca-b2ac38961e8d,Langebæk,langebaek,i,high,default_city_town,false
+58a05674-ea5d-459a-a331-98b5ca63dc09,Langeskov,langeskov,i,high,default_city_town,false
+1cc360c3-6062-4455-906e-63280287819c,Langå,langaa,i,high,default_city_town,false
+8a428521-2e30-4477-a97c-f87eb6578885,Lejre,lejre,i,high,default_city_town,false
+66b27126-56d9-4a31-9e3a-89afe4e07635,Lem St,lem-st,i,high,default_city_town,false
+5180a4c9-3a84-44ea-baee-f3397d2e1ad9,Lemming,lemming,i,high,default_city_town,false
+f23f5232-1618-4cd4-8188-dcccd851abb8,Lemvig,lemvig,i,high,default_city_town,false
+a9eed874-f1e5-4c10-a59b-e8a87ff9fc99,Lille Skensved,lille-skensved,i,high,default_city_town,false
+f5c57331-b96a-4795-9156-0560e933862a,Lintrup,lintrup,i,high,default_city_town,false
+80312db9-42ea-4106-8141-7e7fbc088864,Liseleje,liseleje,i,high,default_city_town,false
+5d69baf1-9816-499e-bb86-c91ae7689da7,Lundby,lundby,i,high,default_city_town,false
+f245ec43-3733-4497-9739-e9d0491777c8,Lunderskov,lunderskov,i,high,default_city_town,false
+8e1a5b30-09ac-4baa-9c59-2bc917284298,Lynge,lynge,i,high,default_city_town,false
+cbf83107-839a-4fd7-bf13-2202134b311e,Lystrup,lystrup,i,high,default_city_town,false
+4dea3855-913a-4a4d-acdb-f095c304d7bd,Lyø,lyoe,på,high,island_or_named_area,false
+6bb1e66a-9aa4-4d5e-b77a-af797a5b1762,Låsby,laasby,i,high,default_city_town,false
+69c523dd-a26f-426d-94e9-8ae1a63556e0,Læsø,laesoe,på,high,island_or_named_area,false
+f33483f4-c344-485e-9f6d-64fb4bc555eb,Løgstrup,loegstrup,i,high,default_city_town,false
+700a7e77-c689-4cac-a241-f15abf33c9e0,Løgstør,loegstoer,i,high,default_city_town,false
+aa7d0c6b-123c-48ac-ac00-02c260d402b0,Løgumkloster,loegumkloster,i,high,default_city_town,false
+446b761c-2cb7-4c58-9fd8-f710d309f4ea,Løkken,loekken,i,high,default_city_town,false
+582547f6-1c51-489d-8d92-edb25f2d4a8a,Løsning,loesning,i,high,default_city_town,false
+b8fbce15-901a-4904-88cf-7a1605e3bd61,Malling,malling,i,high,default_city_town,false
+52f65f07-66bd-4aa4-97aa-e21f4f47d5e0,Mariager,mariager,i,high,default_city_town,false
+e386793a-85bf-42c2-b374-3f588b9e1382,Maribo,maribo,i,high,default_city_town,false
+f1c3ca04-037e-4eb5-96a8-9d45749f74ef,Marslev,marslev,i,high,default_city_town,false
+d3f7e44a-bbc9-49c3-976b-8c92e88fdbe4,Marstal,marstal,i,high,default_city_town,false
+c5e5bff4-b532-4241-8eaf-a11479882e1f,Martofte,martofte,i,high,default_city_town,false
+53898130-b6c1-48b4-88da-0e8bf58eab53,Melby,melby,i,high,default_city_town,false
+bb81bbe4-41e8-42ed-bba0-f26ff34a9393,Mern,mern,i,high,default_city_town,false
+fca71774-0e4b-41db-acb2-c20928a962f3,Mesinge,mesinge,i,high,default_city_town,false
+11f97bda-ef53-45ae-85cc-5d6b7bcf7544,Middelfart,middelfart,i,high,default_city_town,false
+acee22a1-a186-4bb2-a891-ea6f49bf4f3e,Millinge,millinge,i,high,default_city_town,false
+adfdc8f7-e1bf-4e03-8aee-fa41ce3bbdfc,Morud,morud,i,high,default_city_town,false
+6de9453a-93f8-4602-9473-9e3b3277318a,Munke Bjergby,munke-bjergby,i,high,default_city_town,false
+5ef22873-933b-4615-a138-851f3fc523d1,Munkebo,munkebo,i,high,default_city_town,false
+a8061fea-1006-41ad-b9ea-3163982db250,Måløv,maaloev,i,high,default_city_town,false
+74506caa-c841-49e6-ab41-5163fbddc4a6,Mårslet,maarslet,i,high,default_city_town,false
+51acfb6c-7353-42af-bdfa-8cfa977a80ab,Møldrup,moeldrup,i,high,default_city_town,false
+6d7887f8-cc8b-4d18-8644-69ebb229350e,Mørke,moerke,i,high,default_city_town,false
+9ece4f9a-dd2c-4805-b129-85fb2e30f760,Mørkøv,moerkoev,i,high,default_city_town,false
+5da4dc1d-8615-4485-801a-5c46de72c94d,Nakskov,nakskov,i,high,default_city_town,false
+55560f57-61e0-451f-b086-691a6282aa72,Nexø,nexoe,i,high,default_city_town,false
+ac18de3b-6e1f-4c9a-a03d-1e1c716b93ae,Nibe,nibe,i,high,default_city_town,false
+ab046e23-9195-4727-937c-ad31e64c76a0,Nimtofte,nimtofte,i,high,default_city_town,false
+a055c0e0-f1ff-4038-a194-64a7c4ad3c8e,Nivå,nivaa,i,high,default_city_town,false
+45bfc433-da7a-4e42-98a0-6b1ff44df76a,Nordborg,nordborg,i,high,default_city_town,false
+6a1d0841-adac-4d7c-a5c0-953d28724577,Nordhavn,nordhavn,i,high,default_city_town,false
+8cd042b4-de9c-4297-8841-7a5320f685b4,Nyborg,nyborg,i,high,default_city_town,false
+21583e32-516b-4585-bb3c-670b0a7ee861,Nykøbing F,nykoebing-f,i,high,default_city_town,false
+d64fb455-7db6-47a6-9973-e295f1277ccd,Nykøbing M,nykoebing-m,i,high,default_city_town,false
+13affa6f-3b1e-4f35-b3c7-5547d16b0be5,Nykøbing Sj,nykoebing-sj,i,high,default_city_town,false
+c365d161-a976-406c-9ea0-8cd5ccaf7cd3,Nyrup,nyrup,i,high,default_city_town,false
+102016b8-09e6-4103-bb8f-bb1f422f93fb,Nysted,nysted,i,high,default_city_town,false
+953897a3-c580-4fd2-82e6-a988a8d6e102,Nærum,naerum,i,high,default_city_town,false
+cae23403-909b-4c47-ac92-7ca5ca6d861a,Næstved,naestved,i,high,default_city_town,false
+817d9d37-b967-44db-bf52-5b2d4a1e5433,Nørager,noerager,i,high,default_city_town,false
+71c34ce4-16a4-48bc-9118-0bade878df7b,Nørre Aaby,noerre-aaby,i,high,default_city_town,false
+e48b4dc1-aa3f-4f77-8ef2-d2b1c113684c,Nørre Alslev,noerre-alslev,i,high,default_city_town,false
+dfbd1e2a-66b9-4731-999a-d93a89af2bdb,Nørre Asmindrup,noerre-asmindrup,i,high,default_city_town,false
+f8ce51ab-1a05-4245-88a9-7a9a89a2ebe0,Nørre Nebel,noerre-nebel,i,high,default_city_town,false
+e3ebf4aa-bd18-4943-8799-fe0af8ed5fe3,Nørre Snede,noerre-snede,i,high,default_city_town,false
+1ca369c0-7b5f-48aa-a667-495a39718a20,Nørreballe,noerreballe,i,high,default_city_town,false
+9a7c9034-1f32-4768-9dff-f23b1576a614,Nørrebro,noerrebro,på,medium,district_or_peninsula_variant,true
+f091f84b-5da6-40bb-9d6b-d46f02ad7c11,Nørresundby,noerresundby,i,high,default_city_town,false
+d858abfe-fefb-4eaa-b68d-5beeabb011f4,Odder,odder,i,high,default_city_town,false
+16b1d823-cb73-4bb7-82dd-20b0636df382,Odense C,odense-c,i,high,default_city_town,false
+cb9e5c97-9d06-43ad-8dc8-791fa37d75ce,Odense M,odense-m,i,high,default_city_town,false
+471aefd5-6343-4eda-93c3-9cf4199ea2ba,Odense N,odense-n,i,high,default_city_town,false
+edcda3b2-573a-4b0a-b66a-154585d285d1,Odense NV,odense-nv,i,high,default_city_town,false
+b4f27e17-8446-4bb4-9b44-936bce7cb45f,Odense NØ,odense-noe,i,high,default_city_town,false
+7c8bd234-e014-4d61-bda4-53045eaa300a,Odense S,odense-s,i,high,default_city_town,false
+df6e5728-5fb4-4683-a4a0-16c30bdd4d7b,Odense SV,odense-sv,i,high,default_city_town,false
+29cfe8eb-cc6e-44c4-a58f-ad0cc1f525ee,Odense SØ,odense-soe,i,high,default_city_town,false
+e53530c8-aa6c-4ff6-95d5-d32b9c413a50,Odense V,odense-v,i,high,default_city_town,false
+9ebad1b6-52cf-475f-864c-178821319ace,Oksbøl,oksboel,i,high,default_city_town,false
+16409d89-6bed-422a-ae8c-b3ed8e8ee506,Omø,omoe,på,high,island_or_named_area,false
+9029e29c-1138-4e62-a4ec-0c8a3b4914b3,Online,online,i,high,system_location,false
+8e09345e-86ce-4479-9a45-e4b61389ebb1,Orø,oroe,på,high,island_or_named_area,false
+bf02803d-5072-4382-a593-ebfe6a9d0a57,Otterup,otterup,i,high,default_city_town,false
+a7125e1a-52ac-4dff-aba5-a7c68e2e5d76,Oure,oure,i,high,default_city_town,false
+a5c7e9e3-280b-4256-8969-d1255ca7272a,Outrup,outrup,i,high,default_city_town,false
+beae93d4-68c3-4ef7-ad2e-c47c8ebf1a2c,Padborg,padborg,i,high,default_city_town,false
+c1bd24b8-e718-4469-baf6-14c47a12bdde,Pandrup,pandrup,i,high,default_city_town,false
+104a68ed-a9dd-42bb-8123-a51160bd0c5c,Præstø,praestoe,i,high,default_city_town,false
+4b100f55-b514-4980-82f2-3bf3ce434a60,Randbøl,randboel,i,high,default_city_town,false
+55ff4d55-6f30-4102-b730-69b9af2b3b5d,Randers C,randers-c,i,high,default_city_town,false
+2e3d357a-f03d-4b4e-bd1b-385828fc152f,Randers NV,randers-nv,i,high,default_city_town,false
+b409a103-bb66-4ef1-bffd-a736ef31fef1,Randers NØ,randers-noe,i,high,default_city_town,false
+656fcda5-e8d6-4a16-97a5-c8af895585ed,Randers SV,randers-sv,i,high,default_city_town,false
+aa09a135-72de-4b6a-bfaf-d558bf7d2f8e,Randers SØ,randers-soe,i,high,default_city_town,false
+4ee174ad-a8ad-4a7d-a5bc-5f4bca953646,Ranum,ranum,i,high,default_city_town,false
+93dcbb6f-1bb8-4703-b7be-8b122818f782,Rask Mølle,rask-moelle,i,high,default_city_town,false
+a374307c-3457-455e-8bb5-819fa87d444d,Redsted M,redsted-m,i,high,default_city_town,false
+a311b3a3-93de-41e5-bc84-53c1306be706,Regstrup,regstrup,i,high,default_city_town,false
+8b1ba01d-a819-469e-ad0d-187757f56210,Ribe,ribe,i,high,default_city_town,false
+6b3bca03-13a7-4579-be7f-47bb541ffba7,Ringe,ringe,i,high,default_city_town,false
+fa05972e-19f0-4586-b237-f733d8141e92,Ringkøbing,ringkoebing,i,high,default_city_town,false
+8722754a-9554-4f47-83bf-23bc3b768516,Ringsted,ringsted,i,high,default_city_town,false
+25e464cb-ff4f-4d28-85c6-5b7dd081acdd,Risskov,risskov,i,high,default_city_town,false
+4de1b964-069f-4cbc-ae4a-6c6b5ded9b3e,Roskilde,roskilde,i,high,default_city_town,false
+3c581f15-0ae4-4582-8f40-e98d53cda492,Roslev,roslev,i,high,default_city_town,false
+2329d713-ab82-44ab-ad09-beebe230d234,Rude,rude,i,high,default_city_town,false
+1076976c-f195-4b67-94b3-3ee5b4686463,Rudkøbing,rudkoebing,i,high,default_city_town,false
+10375aee-8bfb-44bb-a049-df646cb4f03a,Ruds Vedby,ruds-vedby,i,high,default_city_town,false
+adfea4c9-6e7b-4974-9942-dad8d2b06222,Rungsted Kyst,rungsted-kyst,i,high,default_city_town,false
+1a9a77ad-8b79-4ded-b213-66d9e4d291ae,Ry,ry,i,high,default_city_town,false
+4ded1e84-8e48-4362-b6ec-33fb8514aaba,Rynkeby,rynkeby,i,high,default_city_town,false
+bc92a04e-f534-4838-80b4-7a77413da71c,Ryomgård,ryomgaard,i,high,default_city_town,false
+a1b6c599-458e-4c71-97ec-a84f9be57099,Ryslinge,ryslinge,i,high,default_city_town,false
+20658cd7-718b-4231-9bed-ff183bf8c55a,Rødby,roedby,i,high,default_city_town,false
+161e67af-da2b-436c-a620-84ac3f24cc74,Rødding,roedding,i,high,default_city_town,false
+e70c5279-e6a8-499e-8a34-771a90114f19,Rødekro,roedekro,i,high,default_city_town,false
+b1b482d5-9c7d-45bf-a956-c483d7f6888c,Rødkærsbro,roedkaersbro,i,high,default_city_town,false
+2078da56-ea09-4dd4-a7c9-7869302418dd,Rødovre,roedovre,i,high,default_city_town,false
+640e3487-a242-442d-a7a3-2792bb93f363,Rødvig Stevns,roedvig-stevns,i,high,default_city_town,false
+092fc8ad-0b24-4764-867e-471d8f333248,Rømø,roemoe,på,high,island_or_named_area,false
+243f916e-a8cb-484d-8fc7-87f9eed4d7da,Rønde,roende,i,high,default_city_town,false
+91fade60-0496-403b-b10f-e19a4da583d9,Rønne,roenne,i,high,default_city_town,false
+4dad5c87-062f-47ad-8d5d-4f43c8a1354a,Rønnede,roennede,i,high,default_city_town,false
+2b818a19-1816-4f46-a527-0464c2a15c2e,Rørvig,roervig,i,high,default_city_town,false
+aaa9bc93-5b0e-401a-ad5a-88f7a0db67ab,Sabro,sabro,i,high,default_city_town,false
+c51a77fc-87a8-4f2c-88f2-5ade0915d518,Sakskøbing,sakskoebing,i,high,default_city_town,false
+385a2c60-26b7-48c2-abc1-e1ac48acecad,Saltum,saltum,i,high,default_city_town,false
+c815f0fe-af26-424f-921d-f54439a527dc,Samsø,samsoe,på,high,island_or_named_area,false
+2a565cf0-d532-49b9-b5e9-028eff9b0b33,Sandved,sandved,i,high,default_city_town,false
+eddede94-a544-439d-866b-ad341105a842,Sejerø,sejeroe,på,high,island_or_named_area,false
+0a5f1b37-dad8-40c8-b822-47deff3c278c,Silkeborg,silkeborg,i,high,default_city_town,false
+e4f89e0c-6fab-4076-8f74-16ae2c8a4b36,Sindal,sindal,i,high,default_city_town,false
+a0a25830-65fe-4f4c-b5ca-145656d3abfe,Sjællands Odde,sjaellands-odde,på,medium,district_or_peninsula_variant,true
+8dc8017f-0406-474a-bd45-ae2702d494dd,Sjølund,sjoelund,i,high,default_city_town,false
+2dabb338-f889-487e-b0a1-b3b45ae321fa,Skagen,skagen,i,high,default_city_town,false
+5df0dd8b-b0a5-4e30-a692-931881ea9cf6,Skals,skals,i,high,default_city_town,false
+21a77445-6a0e-4dfe-8433-19c016faa425,Skamby,skamby,i,high,default_city_town,false
+b87c6347-d667-4e7b-8672-749e3203d928,Skanderborg,skanderborg,i,high,default_city_town,false
+9ccc09ed-51c7-4f13-bad6-35495e59d509,Skibby,skibby,i,high,default_city_town,false
+70aa5ead-0b9b-4fc0-a1e2-e01457cc31be,Skive,skive,i,high,default_city_town,false
+de9cf0b8-59c8-4d40-aa1a-dd5d9352fec4,Skjern,skjern,i,high,default_city_town,false
+24fb0c25-ed0e-4e22-a881-ca89388eba2f,Skodsborg,skodsborg,i,high,default_city_town,false
+80b694e2-6b89-4542-9eff-49aa9aaf3991,Skovlunde,skovlunde,i,high,default_city_town,false
+db14bbcc-ae2f-49d2-9034-e3983079cc08,Skårup Fyn,skaarup-fyn,i,high,default_city_town,false
+ff9cefff-599e-4a70-9c37-7a6c1fa1a306,Skælskør,skaelskoer,i,high,default_city_town,false
+f268c5a1-90e4-4816-aa63-03a3216ed4b4,Skærbæk,skaerbaek,i,high,default_city_town,false
+317655b5-b2fc-4677-b584-888e074e6be4,Skævinge,skaevinge,i,high,default_city_town,false
+57503280-a43d-44b1-8b87-f8b86886b377,Skødstrup,skoedstrup,i,high,default_city_town,false
+b3fba739-e632-4ceb-bf3c-94e46ab5932a,Skørping,skoerping,i,high,default_city_town,false
+355d8821-4d02-431e-9509-d850613e947c,Slagelse,slagelse,i,high,default_city_town,false
+1a5f395e-4efc-479c-8b8f-244ae749cbcd,Slangerup,slangerup,i,high,default_city_town,false
+c8f04fa0-d28c-4dc6-a5f1-b440000cd9af,Smørum,smoerum,i,high,default_city_town,false
+714f9a15-0733-43e6-b38e-4b47c18d6d1d,Snedsted,snedsted,i,high,default_city_town,false
+ebff8e9b-fd70-4fe1-b126-a51871b98679,Snekkersten,snekkersten,i,high,default_city_town,false
+9853120d-51d8-416c-bf8f-1bf0ce3dcc66,Snertinge,snertinge,i,high,default_city_town,false
+e6bc6f62-f060-4af5-a024-9e6e23fa7d48,Solbjerg,solbjerg,i,high,default_city_town,false
+8cf098dc-05e0-4586-8989-fe1a6348bfc1,Solrød Strand,solroed-strand,i,high,default_city_town,false
+679d5ab9-68c2-4341-82c8-3d778ee67a08,Sommersted,sommersted,i,high,default_city_town,false
+9bc927aa-1747-44d0-88df-bf428c470895,Sorring,sorring,i,high,default_city_town,false
+dc92bf48-452b-4970-8a08-7c3270f12886,Sorø,soroe,i,high,default_city_town,false
+c84922bf-4db7-49f7-b6e7-36dcdbfccc92,Spentrup,spentrup,i,high,default_city_town,false
+5e090928-71a2-4f4c-a7aa-5c209e24337e,Spjald,spjald,i,high,default_city_town,false
+98ef0665-0426-4e8f-a1b9-3e3cfee7a648,Sporup,sporup,i,high,default_city_town,false
+184bdd25-314e-4b0d-be4c-b7f1547acf48,Spøttrup,spoettrup,i,high,default_city_town,false
+fa8d258b-167c-453c-9948-ca916960cc21,Stakroge,stakroge,i,high,default_city_town,false
+a18eebfb-fe30-4bfb-b458-3fd10c25d282,Stege,stege,i,high,default_city_town,false
+fa420f2a-5ede-4147-9ff0-3c9babb4a476,Stenderup,stenderup,i,high,default_city_town,false
+f1514e17-e925-427b-9807-1058bbab127d,Stenlille,stenlille,i,high,default_city_town,false
+20734845-3c20-4bbd-8824-93708c54f6e1,Stenløse,stenloese,i,high,default_city_town,false
+b6fbc084-90f3-4a9c-be9c-56dc7f1a02d1,Stenstrup,stenstrup,i,high,default_city_town,false
+73afb39e-a1ae-47b2-9b80-319f716815a6,Stensved,stensved,i,high,default_city_town,false
+736a0b68-8495-4ce1-b432-ec23dd4cdebf,Stoholm Jyll,stoholm-jyll,i,high,default_city_town,false
+5651d9fb-3f16-4f7f-acc0-94b7f0db93a7,Stokkemarke,stokkemarke,i,high,default_city_town,false
+9d7ce1fd-2818-4a8d-b9ca-2687fbe2d7f3,Store Fuglede,store-fuglede,i,high,default_city_town,false
+4d7b6ca0-ac70-41c6-a522-6f7364adb6fb,Store Heddinge,store-heddinge,i,high,default_city_town,false
+3697c49d-c78f-407d-95a7-55cbfc8772e5,Store Merløse,store-merloese,i,high,default_city_town,false
+54cbdd3d-1985-4461-ad8c-73448c1d0427,Storvorde,storvorde,i,high,default_city_town,false
+4284a50d-0adb-405c-aa9f-ee6a23860631,Stouby,stouby,i,high,default_city_town,false
+69fa4fe1-48ff-4bb7-9d44-ea7f77b1e5be,Strandby,strandby,i,high,default_city_town,false
+92e6a882-1226-4a87-9497-54376ae43c6a,Struer,struer,i,high,default_city_town,false
+5bf92f83-a9c4-4b5d-8bfe-369001b174c2,Strynø,strynoe,på,high,island_or_named_area,false
+32fdd205-5f14-40c8-b456-8cfab188c5fe,Strøby,stroeby,i,high,default_city_town,false
+fa5bf21c-97a8-4a02-bbd6-e2736545543f,Stubbekøbing,stubbekoebing,i,high,default_city_town,false
+70eec6e3-af06-4621-a688-81bdddd2bae3,Støvring,stoevring,i,high,default_city_town,false
+3cdece97-d0f0-4f7f-a0de-f3c45d09c97e,Suldrup,suldrup,i,high,default_city_town,false
+6d9bdd24-eae3-4e93-80cd-2f1c2b0a3366,Sulsted,sulsted,i,high,default_city_town,false
+1c00a5c5-2295-454f-a17e-ab1497fe1cdc,Sunds,sunds,i,high,default_city_town,false
+56252d72-7737-4267-b93e-7c83c2c746fe,Svaneke,svaneke,i,high,default_city_town,false
+56dd17b7-ad14-47ee-a115-037efdc692e5,Svebølle,sveboelle,i,high,default_city_town,false
+87119896-4ee4-4660-afda-f06602bba99d,Svendborg,svendborg,i,high,default_city_town,false
+aa9f7a67-ab6f-4715-bbad-35fad341f308,Svenstrup J,svenstrup-j,i,high,default_city_town,false
+a9206742-2a97-43d1-879a-6d2bac88d46b,Svinninge,svinninge,i,high,default_city_town,false
+3eeb021e-c901-4621-8510-2cd3a1b5c9bf,Sydals,sydals,på,medium,district_or_peninsula_variant,true
+3b38ce17-753c-4280-b804-b4942a1284f2,Sydhavn,sydhavn,i,high,default_city_town,false
+3ef1255b-376f-46ec-82df-0537da40dd67,Sæby,saeby,i,high,default_city_town,false
+f51bf04f-b147-40d2-8f8c-91138810ede4,Søborg,soeborg,i,high,default_city_town,false
+4c76ef7b-a3db-4dfa-8391-10f774b567b0,Søby Ærø,soeby-aeroe,i,high,default_city_town,false
+b57fec0d-51dc-44ca-83ae-0375d0e028d9,Søllested,soellested,i,high,default_city_town,false
+274edcd5-66ee-4402-aa14-61f229c19f6b,Sønder Felding,soender-felding,i,high,default_city_town,false
+ae121849-2139-4e10-96e1-0dee00c8d456,Sønder Omme,soender-omme,i,high,default_city_town,false
+b03ee202-31fb-4a51-bf73-021a1e9d7e68,Sønder Stenderup,soender-stenderup,i,high,default_city_town,false
+a8de8106-4534-4cd8-8615-33cafd5c711e,Sønderborg,soenderborg,i,high,default_city_town,false
+ded80005-83d4-4d4e-85b9-478c1c6e52ee,Søndersø,soendersoe,i,high,default_city_town,false
+60dbf1b6-20bb-4798-a98d-fb6e15b98b96,Sørvad,soervad,i,high,default_city_town,false
+52088b4e-b0c0-49ec-bc4d-10cdc8e053cd,Taastrup,taastrup,i,high,default_city_town,false
+a081d944-f3d1-4f23-937f-1c8c80bc9aad,Tappernøje,tappernoeje,i,high,default_city_town,false
+8cea4aa0-92f1-49ac-9920-4977ca8695b7,Tarm,tarm,i,high,default_city_town,false
+070ce0ae-1ee1-49ef-a728-0ea2eed63ac4,Terndrup,terndrup,i,high,default_city_town,false
+dfaa915f-c0df-4b3c-9bea-8424c831a9e6,Them,them,i,high,default_city_town,false
+bbd4b7b7-12d6-46eb-8172-d08729af1dab,Thisted,thisted,i,high,default_city_town,false
+3878b24b-aab9-44a4-8c42-9111f3fdaf10,Thorsø,thorsoe,i,high,default_city_town,false
+24c35f6f-6c26-4c0a-ac99-952fb86d453b,Thyborøn,thyboroen,i,high,default_city_town,false
+f74ce46e-6b57-462b-8004-984193c6c987,Thyholm,thyholm,på,medium,district_or_peninsula_variant,true
+4d6f3040-06b1-4316-8138-39121ace6179,Tikøb,tikoeb,i,high,default_city_town,false
+d9eec4da-c81a-4fb9-9b6d-31e046660d3d,Tilst,tilst,i,high,default_city_town,false
+ac8dfaf8-9409-4861-bf38-0af1b98361f2,Tim,tim,i,high,default_city_town,false
+6ffdf6da-ba62-48b5-afa5-d7d187a60fe5,Tinglev,tinglev,i,high,default_city_town,false
+8779aa5e-ed85-484c-8f14-eae38e7b081c,Tistrup,tistrup,i,high,default_city_town,false
+e38d8503-d056-4cf7-8204-91ee4d9a1152,Tisvildeleje,tisvildeleje,i,high,default_city_town,false
+8a74193a-46b3-44e6-9685-e1fa08d6d8d1,Tjele,tjele,i,high,default_city_town,false
+9264b72c-d192-4903-a93b-5d0e2e93c2f2,Tjæreborg,tjaereborg,i,high,default_city_town,false
+7d2bac4b-8bee-4f10-b55b-8ec3241b19df,Toftlund,toftlund,i,high,default_city_town,false
+44f7fdf3-974c-4823-b2d7-0b357bff52ba,Tommerup,tommerup,i,high,default_city_town,false
+b206d304-fd48-4671-bf83-8310616ccf2d,Toreby L,toreby-l,i,high,default_city_town,false
+e4f6e110-d33c-4455-8e9f-da39f01eadb1,Torrig L,torrig-l,i,high,default_city_town,false
+5dba7f28-7d6e-4d96-86f2-2811ffe88db3,Tranbjerg J,tranbjerg-j,i,high,default_city_town,false
+be75e553-c358-4582-a37f-254752781c10,Tranekær,tranekaer,i,high,default_city_town,false
+190420c8-0447-4dea-8de3-ea3fd907c5e4,Trige,trige,i,high,default_city_town,false
+3d0c3f4a-b351-432d-b18d-0b7e8f5d1346,Trustrup,trustrup,i,high,default_city_town,false
+713b8bb9-bec4-4c84-9e01-322db1c70806,Tune,tune,i,high,default_city_town,false
+b8118d32-b8a5-4077-9832-ee690bda353e,Tunø,tunoe,på,high,island_or_named_area,false
+59aa51f8-08b4-4591-b35b-13169af20c54,Tureby,tureby,i,high,default_city_town,false
+9765ee7c-3bfd-4e27-989e-b445b1145fe2,Tylstrup,tylstrup,i,high,default_city_town,false
+f00e33b7-305c-43d7-88ae-b5b60c75be64,Tårs,taars,i,high,default_city_town,false
+4f3f967d-4a85-48fb-babe-a7a1179b60c3,Tølløse,toelloese,i,high,default_city_town,false
+16e5cae7-f781-433c-a159-896e388d7ed5,Tønder,toender,i,high,default_city_town,false
+4fc06a2d-75b7-4f38-825a-5a6d6a5e260f,Tørring,toerring,i,high,default_city_town,false
+0cec5fcf-7109-4435-a685-ae09952499e4,Ugerløse,ugerloese,i,high,default_city_town,false
+c8bef8aa-5bd3-492b-b581-5d4f7e2f014b,Uldum,uldum,i,high,default_city_town,false
+c3f4611a-3284-4464-89ea-8e180fe412bb,Ulfborg,ulfborg,i,high,default_city_town,false
+fa3c471d-7816-49e5-98ee-fe50fff62ce2,Ullerslev,ullerslev,i,high,default_city_town,false
+2801fc3c-9584-4492-bfc7-a46198c2cb56,Ulstrup,ulstrup,i,high,default_city_town,false
+9737c9db-1e54-4e19-96d9-da458ad8669c,Vadum,vadum,i,high,default_city_town,false
+494f35e6-d1bb-4ce6-b08b-224fd85e4e62,Valby,valby,i,high,default_city_town,false
+328e8344-b3a6-4584-9d69-40f26c99c321,Vallensbæk,vallensbaek,i,high,default_city_town,false
+e3537b0a-4374-429a-ba91-b1571ef27045,Vallensbæk Strand,vallensbaek-strand,i,high,default_city_town,false
+18c3be29-de00-4dff-a5ee-b718ecd83cf2,Vamdrup,vamdrup,i,high,default_city_town,false
+a5035d66-5552-4a75-9c00-330cd70cd016,Vandel,vandel,i,high,default_city_town,false
+ff152aea-4158-4c8d-a486-06469eebc148,Vanløse,vanloese,i,high,default_city_town,false
+d1685010-a199-4aee-8c9b-cd7520aaab9d,Varde,varde,i,high,default_city_town,false
+f156a3b7-682a-4776-ba76-aa73a35500c8,Vedbæk,vedbaek,i,high,default_city_town,false
+717f58ab-ebab-41de-9ffe-107441a7f0b5,Veflinge,veflinge,i,high,default_city_town,false
+cc3ebba2-b1d8-4f44-b8c2-b0344fe79d23,Vejby,vejby,i,high,default_city_town,false
+17c0103b-4134-49f3-882a-24587539cc3a,Vejen,vejen,i,high,default_city_town,false
+34030a33-baae-4448-b0a7-8b3500546f92,Vejers Strand,vejers-strand,i,high,default_city_town,false
+c7e23d67-01b0-40b7-bba4-8f3a75d4d9c5,Vejle,vejle,i,high,default_city_town,false
+9d2ea247-4e40-4f5d-ad13-96b8142ae24c,Vejle Øst,vejle-oest,i,high,default_city_town,false
+11018051-47eb-4f08-a12b-11c4a482de48,Vejstrup,vejstrup,i,high,default_city_town,false
+ae1585c2-0f52-4954-8724-ecadb8317a27,Veksø Sjælland,veksoe-sjaelland,i,high,default_city_town,false
+1ad3e31b-f46a-4781-8f60-4e7342b0c136,Vemb,vemb,i,high,default_city_town,false
+667a8779-bdba-4bc4-a502-4c5f9f26847a,Vemmelev,vemmelev,i,high,default_city_town,false
+bf468a1d-190d-4587-a24f-08a8805b5212,Vesløs,vesloes,i,high,default_city_town,false
+4248ad7c-d0a1-4322-a822-814faf908cb9,Vestbjerg,vestbjerg,i,high,default_city_town,false
+b0f89f63-4e2f-4acc-a90a-093ab06934f9,Vester Skerninge,vester-skerninge,i,high,default_city_town,false
+f7ee58ad-a04b-4e5c-ade3-64aa67e34473,Vesterborg,vesterborg,i,high,default_city_town,false
+2764b072-dcf2-4b18-a4df-0a4f9338e411,Vesterbro,vesterbro,på,medium,district_or_peninsula_variant,true
+763e80db-3803-40b4-a166-d166788aa458,Vestervig,vestervig,i,high,default_city_town,false
+9d4284ce-e691-4546-96cd-2857aef2a5b2,Viborg,viborg,i,high,default_city_town,false
+d97787bb-0e6b-4e42-8cbb-1f6d9afdcd73,Viby J,viby-j,i,high,default_city_town,false
+09abdfee-3611-43ce-9d8e-c30ca0ae66a2,Viby Sjælland,viby-sjaelland,i,high,default_city_town,false
+243de783-1922-44b6-ada8-57e76e8bafeb,Videbæk,videbaek,i,high,default_city_town,false
+a10f900e-4fab-4ea2-9b71-d039a1117e78,Vig,vig,i,high,default_city_town,false
+ba3bd2b8-3007-4ff0-b6c8-843f4350336c,Vildbjerg,vildbjerg,i,high,default_city_town,false
+c83182b4-dd39-49da-8ce4-aed8f7d010ad,Vils,vils,i,high,default_city_town,false
+9532b0e3-5386-4ed9-9f94-a81a9af9e41f,Vinderup,vinderup,i,high,default_city_town,false
+4b579ff9-4f2e-477f-aecf-356418a43ebc,Vipperød,vipperoed,i,high,default_city_town,false
+27953dd2-8321-4472-8c47-6ecdb70728c5,Virum,virum,i,high,default_city_town,false
+ec0f703d-9fd0-4634-9cde-954356b2ac2d,Vissenbjerg,vissenbjerg,i,high,default_city_town,false
+1e614fa7-b917-46cf-b0cd-0df7096385bf,Viuf,viuf,i,high,default_city_town,false
+3327d50f-04f0-466b-8136-5e21f1a9b987,Vodskov,vodskov,i,high,default_city_town,false
+e8979481-3ce3-4283-a820-f504e1133c4b,Vojens,vojens,i,high,default_city_town,false
+f7eb2a39-aa64-4813-b7df-6e01313875b6,Vonge,vonge,i,high,default_city_town,false
+5ceb975d-29d0-41a8-bf4d-2ca79002cc8b,Vorbasse,vorbasse,i,high,default_city_town,false
+95a15086-3522-4d01-b6e8-0960cff9d3c9,Vordingborg,vordingborg,i,high,default_city_town,false
+da7e27ff-e8b0-49e7-bb1c-3f8c99099fce,Vrå,vraa,i,high,default_city_town,false
+10e4977a-534d-47d2-b072-79029cf33ca8,Væggerløse,vaeggerloese,i,high,default_city_town,false
+772e8cef-61f4-4541-8aa8-0f482e0d7aec,Værløse,vaerloese,i,high,default_city_town,false
+d6b64b31-c0c4-444d-b891-9befc2171c4a,Åbyhøj,aabyhoej,i,high,default_city_town,false
+b74a5623-e445-4ca6-ad06-0615cf8dfc55,Ålbæk,aalbaek,i,high,default_city_town,false
+6b097941-26cf-4925-90a3-7de21e1ab7c9,Ålsgårde,aalsgaarde,i,high,default_city_town,false
+0bc1953a-e3a0-4e43-8e26-40e11e1d6f28,Årre,aarre,i,high,default_city_town,false
+3d8b3b1e-00b4-48f0-bed3-6824ac6ff7a4,Årslev,aarslev,i,high,default_city_town,false
+2dde9295-fede-40e5-86fc-0bb3c97e3e16,Ærøskøbing,aeroeskoebing,i,high,default_city_town,false
+fa77e52e-d44b-4122-840b-f2b3ee0252bc,Ølgod,oelgod,i,high,default_city_town,false
+fa7e5695-260c-4aaa-9cfc-cf8f0b8233b2,Ølsted,oelsted,i,high,default_city_town,false
+a85e4e39-5bef-45bd-bc2c-a89ecc14a0dd,Ølstykke,oelstykke,i,high,default_city_town,false
+3ea2aeaa-6f78-4b51-b2c8-9c59e2b2c46d,Ørbæk,oerbaek,i,high,default_city_town,false
+65fa078c-2a70-4987-bed5-bb453809a9db,Ørnhøj,oernhoej,i,high,default_city_town,false
+50fee258-be53-4855-ac10-0270801b1156,Ørsted,oersted,i,high,default_city_town,false
+ed37a5cf-3535-4930-b9ec-e7c9dd828a3a,Ørum Djurs,oerum-djurs,i,high,default_city_town,false
+3cdcebfd-74e3-414f-87f0-5efae3779121,Østbirk,oestbirk,i,high,default_city_town,false
+5451428a-8fd3-4ab5-92e2-89b2b73487f4,Øster Assels,oester-assels,i,high,default_city_town,false
+d7e745be-f97d-4d47-b2c4-86f54e75e53d,Øster Ulslev,oester-ulslev,i,high,default_city_town,false
+cb3a6eb3-b15a-4e8a-bad7-28fd9a6ef5a4,Østerbro,oesterbro,på,medium,district_or_peninsula_variant,true
+7d3cf2f4-6333-4e10-9845-5cfe1c5449de,Østermarie,oestermarie,i,high,default_city_town,false
+19d38ac7-b1c2-448a-9075-b4367cfa2705,Østervrå,oestervraa,i,high,default_city_town,false

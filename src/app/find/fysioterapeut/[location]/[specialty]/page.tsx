@@ -1,5 +1,5 @@
 // Specialty page - delegates rendering to LocationPage, provides specialty-specific metadata
-// Updated to use shared parseFilters utility
+// Updated to pass city-level preposition into dynamic meta title generation
 
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -40,7 +40,9 @@ export async function generateMetadata({
   const title = generateMetaTitle(
     locationName,
     specialty.specialty_name,
-    filters
+    filters,
+    undefined,
+    data.city?.location_preposition
   );
 
   // Build filter context for description
@@ -49,10 +51,12 @@ export async function generateMetadata({
   if (filters.handicap) filterContext.push("med handicapadgang");
   const filterSuffix =
     filterContext.length > 0 ? ` (${filterContext.join(" og ")})` : "";
+  const locationPreposition = data.city?.location_preposition ?? "i";
+  const locationPhrase = `${locationPreposition} ${locationName}`;
 
   return {
     title,
-    description: `Find ${specialty.specialty_name.toLowerCase()} fysioterapeuter i ${locationName}${filterSuffix.toLowerCase()}. Se anmeldelser, priser og book tid online. Start her →`,
+    description: `Find ${specialty.specialty_name.toLowerCase()} fysioterapeuter ${locationPhrase}${filterSuffix.toLowerCase()}. Se anmeldelser, priser og book tid online. Start her →`,
   };
 }
 

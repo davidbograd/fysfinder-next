@@ -1,5 +1,5 @@
 // Location page - shared location rendering with city/specialty data fetching
-// Updated: removes duplicate page-level horizontal padding (layout already provides it)
+// Updated: uses city-level location preposition for meta titles and lead description copy
 
 import { cache } from "react";
 import ClinicCard from "@/components/features/clinic/ClinicCard";
@@ -228,6 +228,7 @@ async function fetchLocationDataUncached(
         id: "online",
         bynavn: "Online",
         bynavn_slug: "online",
+        location_preposition: "i",
         latitude: 0,
         longitude: 0,
         postal_codes: [],
@@ -461,7 +462,8 @@ export async function generateMetadata({
     // Only pass clinic count when no filters and no specialty (simple location page)
     !filters.ydernummer && !filters.handicap && !specialtyName
       ? data.clinics.length
-      : undefined
+      : undefined,
+    data.city?.location_preposition
   );
 
   return {
@@ -644,6 +646,8 @@ export default async function LocationPage({
     specialtyName,
     filters
   );
+  const cityPreposition = data.city.location_preposition ?? "i";
+  const cityLocationPhrase = `${cityPreposition} ${data.city.bynavn}`;
 
   return (
     <div className="w-full">
@@ -669,7 +673,7 @@ export default async function LocationPage({
         <p className="text-gray-600 mb-8">
           {isOnline
             ? `${data.clinics.length} online fysioterapi klinikker.`
-            : `${data.clinics.length} fysioterapi klinikker i ${data.city.bynavn}.`}
+            : `${data.clinics.length} fysioterapi klinikker ${cityLocationPhrase}.`}
           <span className="hidden md:inline">
             {" "}
             Sammenlign anmeldelser, specialer og mere.

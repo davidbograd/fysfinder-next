@@ -13,6 +13,14 @@ export interface HeadingResult {
   h2: string | null;
 }
 
+function getLocationPhrase(
+  locationName: string,
+  locationPreposition?: "i" | "på"
+): string {
+  const preposition = locationPreposition === "på" ? "på" : "i";
+  return `${preposition} ${locationName}`;
+}
+
 /**
  * Generate dynamic H1 and H2 text based on location, specialty, and filters
  * Uses 3-tier system for optimal SEO and user experience
@@ -77,11 +85,13 @@ export function generateMetaTitle(
   locationName: string,
   specialtyName?: string,
   filters?: HeadingFilters,
-  clinicCount?: number
+  clinicCount?: number,
+  locationPreposition?: "i" | "på"
 ): string {
   const hasYdernummer = filters?.ydernummer;
   const hasHandicap = filters?.handicap;
   const filterCount = (hasYdernummer ? 1 : 0) + (hasHandicap ? 1 : 0);
+  const locationPhrase = getLocationPhrase(locationName, locationPreposition);
 
   // Base text components
   const specialtyPrefix = specialtyName ? `${specialtyName} ` : "";
@@ -89,7 +99,7 @@ export function generateMetaTitle(
   if (filterCount === 0) {
     // No filters
     if (specialtyName) {
-      return `${specialtyPrefix}fysioterapi i ${locationName} | Find fysioterapeuter ›`;
+      return `${specialtyPrefix}fysioterapi ${locationPhrase} | Find fysioterapeuter ›`;
     } else {
       // Add clinic count to title when 2+ clinics and no filters/specialty
       // This creates titles like "15 fysioterapi klinikker i København | Find fysioterapeuter"
@@ -99,33 +109,33 @@ export function generateMetaTitle(
           locationName.toLowerCase() === "danmark" && clinicCount >= 1000
             ? "1000+"
             : clinicCount.toString();
-        return `${countDisplay} fysioterapi klinikker i ${locationName} | Find fysioterapeuter`;
+        return `${countDisplay} fysioterapi klinikker ${locationPhrase} | Find fysioterapeuter`;
       } else {
-        return `Fysioterapi klinikker i ${locationName} | Find fysioterapeuter ›`;
+        return `Fysioterapi klinikker ${locationPhrase} | Find fysioterapeuter ›`;
       }
     }
   } else if (filterCount === 1) {
     // Single filter
     if (hasYdernummer) {
       if (specialtyName) {
-        return `${specialtyPrefix}fysioterapi i ${locationName} | Ydernummer (vederlagsfri)`;
+        return `${specialtyPrefix}fysioterapi ${locationPhrase} | Ydernummer (vederlagsfri)`;
       } else {
         return `Fysioterapi ${locationName} | Ydernummer (vederlagsfri behandling)`;
       }
     } else {
       // hasHandicap must be true since filterCount === 1
       if (specialtyName) {
-        return `${specialtyPrefix}fysioterapeuter med handicapadgang i ${locationName}`;
+        return `${specialtyPrefix}fysioterapeuter med handicapadgang ${locationPhrase}`;
       } else {
-        return `Fysioterapeuter med handicapadgang i ${locationName}`;
+        return `Fysioterapeuter med handicapadgang ${locationPhrase}`;
       }
     }
   } else {
     // Multiple filters
     if (specialtyName) {
-      return `${specialtyPrefix}fysioterapi i ${locationName} | Med ydernummer`;
+      return `${specialtyPrefix}fysioterapi ${locationPhrase} | Med ydernummer`;
     } else {
-      return `Fysioterapeuter i ${locationName} | Ydernummer & handicapadgang`;
+      return `Fysioterapeuter ${locationPhrase} | Ydernummer & handicapadgang`;
     }
   }
 }
@@ -157,9 +167,16 @@ export function generateSpecialtyHeading(
 export function generateLocationMetaTitle(
   locationName: string,
   filters?: HeadingFilters,
-  clinicCount?: number
+  clinicCount?: number,
+  locationPreposition?: "i" | "på"
 ): string {
-  return generateMetaTitle(locationName, undefined, filters, clinicCount);
+  return generateMetaTitle(
+    locationName,
+    undefined,
+    filters,
+    clinicCount,
+    locationPreposition
+  );
 }
 
 /**
@@ -169,7 +186,14 @@ export function generateSpecialtyMetaTitle(
   locationName: string,
   specialtyName: string,
   filters?: HeadingFilters,
-  clinicCount?: number
+  clinicCount?: number,
+  locationPreposition?: "i" | "på"
 ): string {
-  return generateMetaTitle(locationName, specialtyName, filters, clinicCount);
+  return generateMetaTitle(
+    locationName,
+    specialtyName,
+    filters,
+    clinicCount,
+    locationPreposition
+  );
 }
