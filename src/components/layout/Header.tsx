@@ -1,11 +1,11 @@
-// Updated: 2026-03-25 - Uses homepage-equivalent clinic/specialty counts passed from layout for mobile overlay datapoints
+// Updated: 2026-03-26 - Moves desktop info links to right-side CTA area and adds a "Mere" dropdown for search-first desktop pages
 "use client";
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import SiteLogo from "@/components/ui/Icons/SiteLogo";
 import { Button } from "@/components/ui/button";
-import { Menu, X, User, LogOut } from "lucide-react";
+import { Menu, X, User, LogOut, ChevronDown } from "lucide-react";
 import { useState, useEffect } from "react";
 import { UserMenu } from "@/components/auth/UserMenu";
 import { createClient } from "@/app/utils/supabase/client";
@@ -37,6 +37,12 @@ export default function Header({ totalClinics, specialtyCount }: HeaderProps) {
     pathname.startsWith("/dexa-scanning") ||
     pathname.startsWith("/blog") ||
     pathname.startsWith("/om-os");
+  const informationalLinks = [
+    { href: "/ordbog", label: "Ordbog" },
+    { href: "/vaerktoejer", label: "Værktøjer" },
+    { href: "/blog", label: "Blog" },
+    { href: "/om-os", label: "Om os" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -205,48 +211,43 @@ export default function Header({ totalClinics, specialtyCount }: HeaderProps) {
                   >
                     Dashboard
                   </Link>
-                ) : (
-                  <>
-                    <Link
-                      href="/ordbog"
-                      className="text-sm text-[#3c4946] hover:text-[#1f2b28] transition-colors"
-                    >
-                      Ordbog
-                    </Link>
-                    <Link
-                      href="/vaerktoejer"
-                      className="text-sm text-[#3c4946] hover:text-[#1f2b28] transition-colors"
-                    >
-                      Værktøjer
-                    </Link>
-                    <Link
-                      href="/blog"
-                      className="text-sm text-[#3c4946] hover:text-[#1f2b28] transition-colors"
-                    >
-                      Blog
-                    </Link>
-                    <Link
-                      href="/om-os"
-                      className="text-sm text-[#3c4946] hover:text-[#1f2b28] transition-colors"
-                    >
-                      Om os
-                    </Link>
-                  </>
-                )}
+                ) : null}
               </nav>
             )}
           </div>
 
           {/* Desktop Navigation - Right side CTAs */}
           <nav
-            className={`items-center space-x-3 ${
+            className={`items-center ${
               isSearchFirstDesktopVariant
-                ? "hidden min-[1241px]:flex"
-                : "hidden md:flex"
+                ? "hidden min-[1241px]:flex space-x-3"
+                : "hidden md:flex space-x-5"
             }`}
           >
             {isSearchFirstDesktopVariant ? (
               <>
+                <div className="group relative">
+                  <button
+                    type="button"
+                    className="inline-flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium text-[#3c4946] transition-colors hover:text-[#1f2b28] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b5b43]/30"
+                    aria-haspopup="true"
+                    aria-label="Åbn mere menu"
+                  >
+                    Mere
+                    <ChevronDown className="h-4 w-4" />
+                  </button>
+                  <div className="invisible absolute right-0 top-full z-50 mt-2 w-44 translate-y-1 rounded-2xl border border-[#e3e1d8] bg-[#f8f7f2] p-2 opacity-0 shadow-[0px_10px_24px_rgba(11,59,60,0.12)] transition-all group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+                    {informationalLinks.map((link) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        className="block rounded-xl px-3 py-2 text-sm text-[#3c4946] transition-colors hover:bg-[#efeee8] hover:text-[#1f2b28]"
+                      >
+                        {link.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
                 {!isLoggedIn && (
                   <Button
                     asChild
@@ -262,6 +263,15 @@ export default function Header({ totalClinics, specialtyCount }: HeaderProps) {
               <UserMenu />
             ) : (
               <>
+                {informationalLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="text-sm text-[#3c4946] hover:text-[#1f2b28] transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
                 <Button
                   asChild
                   variant="outline"
@@ -340,34 +350,16 @@ export default function Header({ totalClinics, specialtyCount }: HeaderProps) {
                     </div>
                   ) : (
                     <div className="flex flex-col space-y-4 p-4">
-                      <Link
-                        href="/ordbog"
-                        className="text-lg font-medium text-[#1f2b28] py-2"
-                        onClick={toggleMenu}
-                      >
-                        Ordbog
-                      </Link>
-                      <Link
-                        href="/vaerktoejer"
-                        className="text-lg font-medium text-[#1f2b28] py-2"
-                        onClick={toggleMenu}
-                      >
-                        Værktøjer
-                      </Link>
-                      <Link
-                        href="/blog"
-                        className="text-lg font-medium text-[#1f2b28] py-2"
-                        onClick={toggleMenu}
-                      >
-                        Blog
-                      </Link>
-                      <Link
-                        href="/om-os"
-                        className="text-lg font-medium text-[#1f2b28] py-2"
-                        onClick={toggleMenu}
-                      >
-                        Om os
-                      </Link>
+                      {informationalLinks.map((link) => (
+                        <Link
+                          key={link.href}
+                          href={link.href}
+                          className="py-2 text-lg font-medium text-[#1f2b28]"
+                          onClick={toggleMenu}
+                        >
+                          {link.label}
+                        </Link>
+                      ))}
                     </div>
                   )}
                 {/* Bottom buttons */}

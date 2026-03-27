@@ -1,5 +1,5 @@
 // ClinicCard - Displays a single clinic in the listing
-// Updated: added clinicId prop, IntersectionObserver for list impression tracking, contact click tracking
+// Updated: forwards optional city context metadata for suburb-level analytics attribution
 
 "use client";
 
@@ -45,6 +45,7 @@ interface Props {
   handicapadgang?: boolean | null;
   verified_klinik?: boolean | null;
   logoPath?: string | null;
+  trackingContextCityId?: string;
 }
 
 function isPremiumActive(
@@ -77,6 +78,7 @@ const ClinicCard: React.FC<Props> = ({
   handicapadgang,
   verified_klinik,
   logoPath,
+  trackingContextCityId,
 }) => {
   const MAX_VISIBLE_MEMBERS = 5;
   const hasMoreMembers = team_members.length > MAX_VISIBLE_MEMBERS;
@@ -95,7 +97,16 @@ const ClinicCard: React.FC<Props> = ({
       ([entry]) => {
         if (entry.isIntersecting && !hasTrackedImpression.current) {
           hasTrackedImpression.current = true;
-          trackClinicEvent({ clinicId, eventType: "list_impression" });
+          trackClinicEvent({
+            clinicId,
+            eventType: "list_impression",
+            metadata: {
+              source: "list_view",
+              ...(trackingContextCityId
+                ? { context_city_id: trackingContextCityId }
+                : {}),
+            },
+          });
           observer.disconnect();
         }
       },
@@ -361,13 +372,41 @@ const ClinicCard: React.FC<Props> = ({
                 {website && (
                   <WebsiteButton
                     website={website}
-                    onClick={clinicId ? () => trackClinicEvent({ clinicId, eventType: "website_click", metadata: { source: "list_view" } }) : undefined}
+                    onClick={
+                      clinicId
+                        ? () =>
+                            trackClinicEvent({
+                              clinicId,
+                              eventType: "website_click",
+                              metadata: {
+                                source: "list_view",
+                                ...(trackingContextCityId
+                                  ? { context_city_id: trackingContextCityId }
+                                  : {}),
+                              },
+                            })
+                        : undefined
+                    }
                   />
                 )}
                 {tlf && (
                   <PhoneButton
                     phoneNumber={tlf}
-                    onClick={clinicId ? () => trackClinicEvent({ clinicId, eventType: "phone_click", metadata: { source: "list_view" } }) : undefined}
+                    onClick={
+                      clinicId
+                        ? () =>
+                            trackClinicEvent({
+                              clinicId,
+                              eventType: "phone_click",
+                              metadata: {
+                                source: "list_view",
+                                ...(trackingContextCityId
+                                  ? { context_city_id: trackingContextCityId }
+                                  : {}),
+                              },
+                            })
+                        : undefined
+                    }
                   />
                 )}
               </div>

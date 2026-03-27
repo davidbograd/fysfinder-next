@@ -1,8 +1,12 @@
+// Dashboard page for clinic owners and admins
+// Updated: dev-only ?dev_state=empty toggle for testing empty dashboard state
+
 import { redirect } from "next/navigation";
 import { createClient } from "@/app/utils/supabase/server";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Mail, Shield } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Info, Mail, Shield, TrendingUp } from "lucide-react";
 import Link from "next/link";
 import { isAdminEmail } from "@/lib/admin";
 import { AdminClaimsSection } from "@/components/dashboard/AdminClaimsSection";
@@ -11,10 +15,18 @@ import { AdminAnalyticsSection } from "@/components/dashboard/AdminAnalyticsSect
 import { UserClaimsSection } from "@/components/dashboard/UserClaimsSection";
 import { getOwnedClinics } from "@/app/actions/clinic-management";
 import { ClinicCard } from "@/components/dashboard/ClinicCard";
-import { ClinicStatsCard } from "@/components/dashboard/ClinicStatsCard";
+import { getAllOwnedClinicAnalytics } from "@/app/actions/clinic-analytics";
+import { getClinicDashboardUplift } from "@/app/actions/dashboard-uplift";
 import { getUserClaims } from "@/app/actions/user-claims";
+import { Suspense } from "react";
+import { DashboardDevToolbar } from "@/components/dashboard/DashboardDevToolbar";
 
-export default async function DashboardPage() {
+interface DashboardPageProps {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}
+
+export default async function DashboardPage({ searchParams }: DashboardPageProps) {
+  const resolvedSearchParams = await searchParams;
   const supabase = await createClient();
   const {
     data: { user },
@@ -24,28 +36,189 @@ export default async function DashboardPage() {
     redirect("/auth/signin");
   }
 
-  // Get user profile
-  const { data: profile } = await supabase
-    .from("user_profiles")
-    .select("full_name, email")
-    .eq("id", user.id)
-    .single();
-
   // Check if user is admin
   const isAdmin = isAdminEmail(user.email);
 
   // Get owned clinics
   const ownedClinicsResult = await getOwnedClinics();
-  const ownedClinics = ownedClinicsResult.clinics || [];
+  let ownedClinics = ownedClinicsResult.clinics || [];
 
-  // Get user claims (only pending ones matter for display)
   const userClaimsResult = await getUserClaims();
   const userClaims = userClaimsResult.claims || [];
-  const pendingClaims = userClaims.filter((c: any) => c.status === "pending");
+  let pendingClaims = userClaims.filter((c: any) => c.status === "pending");
 
-  // Check if user has any clinics (owned or pending)
+  const analyticsResult =
+    ownedClinics.length > 0 ? await getAllOwnedClinicAnalytics() : { stats: {} };
+  const analyticsByClinic = analyticsResult.stats || {};
+  const analyticsTotals = Object.values(analyticsByClinic).reduce(
+    (acc, stats: any) => {
+      acc.profileViews += stats.profileViews || 0;
+      acc.listImpressions += stats.listImpressions || 0;
+      acc.phoneClicks += stats.phoneClicks || 0;
+      acc.websiteClicks += stats.websiteClicks || 0;
+      acc.emailClicks += stats.emailClicks || 0;
+      return acc;
+    },
+    {
+      profileViews: 0,
+      listImpressions: 0,
+      phoneClicks: 0,
+      websiteClicks: 0,
+      emailClicks: 0,
+    }
+  );
+  const isDevelopment = process.env.NODE_ENV !== "production";
+  const isDevEmptyState =
+    isDevelopment && resolvedSearchParams.dev_state === "empty";
+
+  if (isDevEmptyState) {
+    ownedClinics = [];
+    pendingClaims = [];
+    analyticsTotals.profileViews = 0;
+    analyticsTotals.listImpressions = 0;
+    analyticsTotals.phoneClicks = 0;
+    analyticsTotals.websiteClicks = 0;
+    analyticsTotals.emailClicks = 0;
+  }
+
   const hasAnyClinics = ownedClinics.length > 0 || pendingClaims.length > 0;
   const totalClinicCount = ownedClinics.length + pendingClaims.length;
+  const totalLeadClicks =
+    analyticsTotals.phoneClicks +
+    analyticsTotals.websiteClicks +
+    analyticsTotals.emailClicks;
+  const totalViews = analyticsTotals.profileViews + analyticsTotals.listImpressions;
+  const getShare = (value: number, total: number) =>
+    total > 0 ? Math.round((value / total) * 100) : 0;
+  const phoneShare = getShare(analyticsTotals.phoneClicks, totalLeadClicks);
+  const websiteShare = getShare(analyticsTotals.websiteClicks, totalLeadClicks);
+  const emailShare = getShare(analyticsTotals.emailClicks, totalLeadClicks);
+  const listShare = getShare(analyticsTotals.listImpressions, totalViews);
+  const profileShare = getShare(analyticsTotals.profileViews, totalViews);
+  const upliftByClinic =
+    ownedClinics.length > 0
+      ? await Promise.all(
+          ownedClinics.map((clinic: any) =>
+            getClinicDashboardUplift(clinic.clinics_id)
+          )
+        )
+      : [];
+  const mergedCityOpportunity = upliftByClinic.reduce(
+    (acc, result) => {
+      if (!result.data) return acc;
+      for (const row of result.data.cityActivity) {
+        const existing = acc.get(row.cityName) || {
+          cityName: row.cityName,
+          homeLeadClicks: 0,
+          homeViews: 0,
+          neighborLeadClicks: 0,
+          neighborViews: 0,
+        };
+        if (row.isHome) {
+          existing.homeLeadClicks += row.leadClicks || 0;
+          existing.homeViews += row.views || 0;
+        } else {
+          existing.neighborLeadClicks += row.leadClicks || 0;
+          existing.neighborViews += row.views || 0;
+        }
+        acc.set(row.cityName, existing);
+      }
+      return acc;
+    },
+    new Map<
+      string,
+      {
+        cityName: string;
+        homeLeadClicks: number;
+        homeViews: number;
+        neighborLeadClicks: number;
+        neighborViews: number;
+      }
+    >()
+  );
+  const cityOpportunityList = Array.from(mergedCityOpportunity.values());
+  const homeCityNames = new Set(
+    cityOpportunityList
+      .filter((city) => city.homeLeadClicks > 0 || city.homeViews > 0)
+      .map((city) => city.cityName)
+  );
+  const primaryPlacementData =
+    upliftByClinic.find(
+      (result) =>
+        result.data?.rankInHomeCity && result.data?.totalClinicsInHomeCity
+    )?.data ||
+    upliftByClinic.find((result) => result.data)?.data ||
+    null;
+
+  const formatAreaList = (areas: string[]) => {
+    if (areas.length === 0) return "nabo-områder";
+    if (areas.length === 1) return areas[0];
+    if (areas.length === 2) return `${areas[0]} og ${areas[1]}`;
+    return `${areas.slice(0, -1).join(", ")} og ${areas[areas.length - 1]}`;
+  };
+
+  const leadAreas = cityOpportunityList
+    .map((city) => ({
+      cityName: city.cityName,
+      total: city.neighborLeadClicks,
+    }))
+    .filter((city) => city.total > 0 && !homeCityNames.has(city.cityName))
+    .sort((a, b) => b.total - a.total)
+    .map((city) => city.cityName);
+  const viewsAreas = cityOpportunityList
+    .map((city) => ({
+      cityName: city.cityName,
+      total: city.neighborViews,
+    }))
+    .filter((city) => city.total > 0 && !homeCityNames.has(city.cityName))
+    .sort((a, b) => b.total - a.total)
+    .map((city) => city.cityName);
+
+  const leadOpportunityTotal = cityOpportunityList.reduce(
+    (sum, city) => sum + city.neighborLeadClicks,
+    0
+  );
+  const viewsOpportunityTotal = cityOpportunityList.reduce(
+    (sum, city) => sum + city.neighborViews,
+    0
+  );
+
+  const isDevWithData = isDevelopment && !isDevEmptyState;
+  const hasLeadOpportunity = isDevWithData
+    ? true
+    : leadOpportunityTotal > 0;
+  const hasViewsOpportunity = isDevWithData
+    ? true
+    : viewsOpportunityTotal > 0;
+  const finalLeadOpportunityTotal = isDevWithData ? 26 : leadOpportunityTotal;
+  const finalViewsOpportunityTotal = isDevWithData ? 540 : viewsOpportunityTotal;
+  const finalLeadAreas = isDevWithData
+    ? ["Aabenraa", "Rødekro", "Padborg"]
+    : leadAreas;
+  const finalViewsAreas = isDevWithData
+    ? ["Aabenraa", "Rødekro", "Padborg"]
+    : viewsAreas;
+  const rankInHomeCity = primaryPlacementData?.rankInHomeCity ?? null;
+  const totalClinicsInHomeCity = primaryPlacementData?.totalClinicsInHomeCity ?? null;
+  const safeRankInHomeCity = rankInHomeCity ?? 0;
+  const safeTotalClinicsInHomeCity = totalClinicsInHomeCity ?? 0;
+  const shouldShowPlacementPreview =
+    safeRankInHomeCity > 0 && safeTotalClinicsInHomeCity > 0;
+  const leaderboardRows =
+    shouldShowPlacementPreview
+      ? (() => {
+          const startRank = Math.max(1, safeRankInHomeCity - 2);
+          const endRank = Math.min(safeTotalClinicsInHomeCity, safeRankInHomeCity + 2);
+          return Array.from({ length: endRank - startRank + 1 }, (_, index) => {
+            const rowRank = startRank + index;
+            return {
+              rank: rowRank,
+              isYou: rowRank === safeRankInHomeCity,
+              relation: "",
+            };
+          });
+        })()
+      : [];
 
   return (
     <div className="py-8 w-full">
@@ -53,9 +226,6 @@ export default async function DashboardPage() {
         <h1 className="text-3xl font-bold tracking-tight text-gray-900">
           Dashboard
         </h1>
-        <p className="mt-2 text-sm text-gray-600">
-          Velkommen {profile?.full_name || ""}
-        </p>
       </div>
 
       {/* Admin Banner */}
@@ -78,6 +248,325 @@ export default async function DashboardPage() {
       )}
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {/* Analytics Overview - Primary Section */}
+        {ownedClinics.length > 0 && (
+          <div className="md:col-span-2 lg:col-span-3 grid grid-cols-1 gap-6 md:grid-cols-3">
+            <Card className="flex h-full flex-col overflow-hidden">
+              <CardContent className="flex-1 pt-6">
+                <div>
+                  <div className="space-y-1">
+                    <div className="flex items-end gap-3">
+                      <p className="text-4xl font-bold tracking-tight text-gray-900 tabular-nums">
+                        {totalLeadClicks.toLocaleString("da-DK")}
+                      </p>
+                      <p className="text-xl font-medium tracking-tight text-gray-500">
+                        Lead klik
+                      </p>
+                    </div>
+                    <p className="text-sm leading-relaxed text-gray-600">
+                      Viser reel interesse fra patienter tæt på en booking.
+                    </p>
+                  </div>
+
+                  <div className="mt-6 space-y-3">
+                    <TooltipProvider delayDuration={100}>
+                      <div className="relative h-5 w-full overflow-hidden rounded-full bg-brand-beige">
+                        <div className="flex h-full w-full">
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <div
+                                className="relative flex items-center justify-center bg-[#2f5fa7] cursor-help"
+                                style={{
+                                  width: `${phoneShare}%`,
+                                }}
+                              />
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>
+                                Vist tlf nummer {analyticsTotals.phoneClicks.toLocaleString("da-DK")} (
+                                {phoneShare}%)
+                              </p>
+                            </TooltipContent>
+                          </Tooltip>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <div
+                                className="relative flex items-center justify-center bg-[#4f6ea8] cursor-help"
+                                style={{
+                                  width: `${websiteShare}%`,
+                                }}
+                              />
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>
+                                Website klik {analyticsTotals.websiteClicks.toLocaleString("da-DK")} (
+                                {websiteShare}%)
+                              </p>
+                            </TooltipContent>
+                          </Tooltip>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <div
+                                className="relative flex items-center justify-center bg-[#8fa6d6] cursor-help"
+                                style={{
+                                  width: `${emailShare}%`,
+                                }}
+                              />
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>
+                                Email klik {analyticsTotals.emailClicks.toLocaleString("da-DK")} (
+                                {emailShare}%)
+                              </p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </div>
+                      </div>
+                    </TooltipProvider>
+                    <div className="space-y-2">
+                      <div className="flex items-center text-sm">
+                        <div className="flex items-center text-gray-700">
+                          <span className="h-2.5 w-2.5 rounded-full bg-[#2f5fa7]" />
+                          <span className="px-2 font-medium text-gray-900 tabular-nums">
+                            {analyticsTotals.phoneClicks.toLocaleString("da-DK")}
+                          </span>
+                          <span>Vist tlf nummer</span>
+                        </div>
+                      </div>
+                      <div className="flex items-center text-sm">
+                        <div className="flex items-center text-gray-700">
+                          <span className="h-2.5 w-2.5 rounded-full bg-[#4f6ea8]" />
+                          <span className="px-2 font-medium text-gray-900 tabular-nums">
+                            {analyticsTotals.websiteClicks.toLocaleString("da-DK")}
+                          </span>
+                          <span>Website klik</span>
+                        </div>
+                      </div>
+                      <div className="flex items-center text-sm">
+                        <div className="flex items-center text-gray-700">
+                          <span className="h-2.5 w-2.5 rounded-full bg-[#8fa6d6]" />
+                          <span className="px-2 font-medium text-gray-900 tabular-nums">
+                            {analyticsTotals.emailClicks.toLocaleString("da-DK")}
+                          </span>
+                          <span>Email klik</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+              {hasLeadOpportunity && (
+                <div className="border-t border-logo-blue/20 bg-logo-blue/5 px-6 py-4">
+                  <div className="space-y-2">
+                    <p className="flex items-start gap-2 text-sm font-semibold text-gray-900">
+                      <TrendingUp className="mt-0.5 h-4 w-4 text-logo-blue" />
+                      Du går glip af patienter
+                    </p>
+                    <p className="text-sm text-gray-700">
+                      Der var {finalLeadOpportunityTotal.toLocaleString("da-DK")} klik til andre klinikker spredt over{" "}
+                      {formatAreaList(finalLeadAreas)}.
+                    </p>
+                    <p className="text-sm text-gray-700">
+                      Bliv synlig på flere byer og få flere patienter.
+                    </p>
+                    <Button type="button" size="sm" className="sm:shrink-0">
+                      Opgrader
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </Card>
+
+            <Card className="flex h-full flex-col overflow-hidden">
+              <CardContent className="flex-1 pt-6">
+                <div>
+                  <div className="space-y-1">
+                    <div className="flex items-end gap-3">
+                      <p className="text-4xl font-bold tracking-tight text-gray-900 tabular-nums">
+                        {totalViews.toLocaleString("da-DK")}
+                      </p>
+                      <p className="text-xl font-medium tracking-tight text-gray-500">
+                        Visninger
+                      </p>
+                    </div>
+                    <p className="text-sm leading-relaxed text-gray-600">
+                      Så mange potentielle patienter har set din klinik.
+                    </p>
+                  </div>
+                <div className="mt-6 space-y-3">
+                  <TooltipProvider delayDuration={100}>
+                    <div className="h-5 w-full overflow-hidden rounded-full bg-brand-beige">
+                      <div className="flex h-full w-full">
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <div
+                              className="bg-[#8fa6d6] cursor-help border-r border-white/50"
+                              style={{
+                                width: `${listShare}%`,
+                              }}
+                            />
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>
+                              I søgeresultater {analyticsTotals.listImpressions.toLocaleString("da-DK")} (
+                              {listShare}%)
+                            </p>
+                          </TooltipContent>
+                        </Tooltip>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <div
+                              className="bg-[#2f5fa7] cursor-help"
+                              style={{
+                                width: `${profileShare}%`,
+                              }}
+                            />
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>
+                              På kliniksider {analyticsTotals.profileViews.toLocaleString("da-DK")} (
+                              {profileShare}%)
+                            </p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </div>
+                    </div>
+                  </TooltipProvider>
+                  <div className="space-y-2">
+                    <div className="flex items-center text-sm">
+                      <div className="flex items-center text-gray-700">
+                        <span className="h-2.5 w-2.5 rounded-full bg-[#8fa6d6]" />
+                        <span className="px-2 font-medium text-gray-900 tabular-nums">
+                          {analyticsTotals.listImpressions.toLocaleString("da-DK")}
+                        </span>
+                        <span>I søgeresultater</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center text-sm">
+                      <div className="flex items-center text-gray-700">
+                        <span className="h-2.5 w-2.5 rounded-full bg-[#2f5fa7]" />
+                        <span className="px-2 font-medium text-gray-900 tabular-nums">
+                          {analyticsTotals.profileViews.toLocaleString("da-DK")}
+                        </span>
+                        <span>På kliniksider</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+              </CardContent>
+              {hasViewsOpportunity && (
+                <div className="border-t border-logo-blue/20 bg-logo-blue/5 px-6 py-4">
+                  <div className="space-y-2">
+                    <p className="flex items-start gap-2 text-sm font-semibold text-gray-900">
+                      <TrendingUp className="mt-0.5 h-4 w-4 text-logo-blue" />
+                      Du går glip af patienter
+                    </p>
+                    <p className="text-sm text-gray-700">
+                      Der var {finalViewsOpportunityTotal.toLocaleString("da-DK")} visninger af andre klinikker spredt over{" "}
+                      {formatAreaList(finalViewsAreas)}.
+                    </p>
+                    <p className="text-sm text-gray-700">
+                      Bliv synlig på flere byer og få flere patienter.
+                    </p>
+                    <Button type="button" size="sm" className="sm:shrink-0">
+                      Opgrader
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </Card>
+
+            <Card className="flex h-full flex-col overflow-hidden">
+              <CardContent className="flex-1 pt-6">
+                <div className="space-y-2">
+                  {shouldShowPlacementPreview &&
+                  rankInHomeCity &&
+                  totalClinicsInHomeCity ? (
+                    <>
+                      <p className="text-xl font-medium tracking-tight text-gray-500">
+                        Din placering i {primaryPlacementData?.homeCityName || "din by"}
+                      </p>
+                      <div className="overflow-hidden rounded-lg border border-gray-200 bg-white">
+                        {leaderboardRows.map((row) => (
+                          <div
+                            key={`leaderboard-row-${row.rank}`}
+                            className={`flex items-center justify-between px-4 py-2.5 ${
+                              row.isYou
+                                ? "border-y border-logo-blue/25 bg-brand-beige"
+                                : "border-t border-gray-100 first:border-t-0"
+                            }`}
+                          >
+                            <div className="flex items-center gap-3">
+                              <span
+                                className={`w-8 text-lg font-semibold tabular-nums ${
+                                  row.isYou ? "text-logo-blue" : "text-gray-600"
+                                }`}
+                              >
+                                #{row.rank}
+                              </span>
+                              <span
+                                className={`text-sm ${
+                                  row.isYou
+                                    ? "font-semibold text-gray-900"
+                                    : "text-gray-700"
+                                }`}
+                              >
+                                {row.isYou
+                                  ? primaryPlacementData?.clinicName || "Din klinik"
+                                  : "Klinik"}
+                              </span>
+                              {row.isYou && (
+                                <span className="rounded-full bg-logo-blue px-2 py-0.5 text-xs font-semibold text-white">
+                                  Din klinik
+                                </span>
+                              )}
+                            </div>
+                            {!row.isYou && (
+                              <span className="text-sm text-gray-500">
+                                {row.relation}
+                              </span>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                      {rankInHomeCity > 1 && (
+                        <div className="rounded-md bg-brand-beige/70 px-3 py-2">
+                          <p className="flex items-start gap-2 text-sm text-gray-700">
+                            <Info className="mt-0.5 h-4 w-4 flex-shrink-0 text-logo-blue" />
+                            Klinikker over dig får typisk flere henvendelser.
+                          </p>
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <p className="text-sm text-gray-600">
+                      Placering beregnes, når vi har nok data.
+                    </p>
+                  )}
+                </div>
+              </CardContent>
+              {shouldShowPlacementPreview &&
+                rankInHomeCity &&
+                rankInHomeCity > 1 && (
+                  <div className="border-t border-logo-blue/20 bg-logo-blue/5 px-6 py-4">
+                    <div className="space-y-2">
+                      <p className="text-sm font-semibold text-gray-900">
+                        Bliv nr 1 og få flere patienter
+                      </p>
+                      <p className="text-sm text-gray-700">
+                        Top klinikker får flere henvendelser og patienter.
+                      </p>
+                      <Button type="button" size="sm">
+                        Opgrader
+                      </Button>
+                    </div>
+                  </div>
+                )}
+            </Card>
+          </div>
+        )}
+
         {/* Admin Claims Section - Full Width for Admins */}
         {isAdmin && (
           <div className="md:col-span-2 lg:col-span-3">
@@ -106,7 +595,7 @@ export default async function DashboardPage() {
           </div>
         )}
 
-        {/* Your Clinics Section - Full Width at Top */}
+        {/* Your Clinics Section */}
         <Card className="md:col-span-2 lg:col-span-3">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
             <div>
@@ -126,11 +615,10 @@ export default async function DashboardPage() {
           <CardContent className="space-y-4">
             {hasAnyClinics ? (
               <>
-                {/* Owned Clinics with Stats */}
+                {/* Owned Clinics */}
                 {ownedClinics.map((clinic: any) => (
-                  <div key={clinic.clinics_id} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div key={clinic.clinics_id} className="grid grid-cols-1 gap-4">
                     <ClinicCard clinic={clinic} />
-                    <ClinicStatsCard clinicId={clinic.clinics_id} />
                   </div>
                 ))}
                 {/* Pending Claims - displayed like clinic cards */}
@@ -147,30 +635,6 @@ export default async function DashboardPage() {
               </div>
             )}
           </CardContent>
-        </Card>
-
-        {/* Upgrade to Paid Plan Section */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Opgrader til betalt plan</CardTitle>
-            <CardDescription>Få mere synlighed for din klinik</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            <p className="text-sm text-gray-600">
-              Med en betalt plan får din klinik:
-            </p>
-            <ul className="space-y-2 text-sm text-gray-600 list-disc list-inside">
-              <li>Højere placering i søgeresultater</li>
-              <li>Fremhævet visning på kliniksider</li>
-              <li>Bedre eksponering for potentielle patienter</li>
-              <li>Prioriteret support</li>
-            </ul>
-          </CardContent>
-          <CardFooter>
-            <Button className="w-full" variant="default">
-              Se priser og opgrader
-            </Button>
-          </CardFooter>
         </Card>
 
         {/* Contact Section */}
@@ -198,6 +662,11 @@ export default async function DashboardPage() {
         </Card>
 
       </div>
+      {isDevelopment && (
+        <Suspense fallback={null}>
+          <DashboardDevToolbar />
+        </Suspense>
+      )}
     </div>
   );
 }

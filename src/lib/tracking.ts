@@ -1,5 +1,5 @@
 // Client-side utility for sending clinic events to our tracking API
-// Updated: bot filtering, session dedup for views/impressions, skip non-production environments
+// Updated: supports richer metadata for suburb-level attribution in dashboard analytics
 
 type ClinicEventType =
   | "profile_view"
@@ -12,7 +12,7 @@ type ClinicEventType =
 interface TrackEventParams {
   clinicId: string;
   eventType: ClinicEventType;
-  metadata?: Record<string, string>;
+  metadata?: Record<string, string | number | boolean | null>;
 }
 
 const BOT_PATTERN = /bot|crawl|spider|slurp|googlebot|bingbot|yandex|baidu|duckduck|facebookexternalhit|linkedinbot|prerender|headless|phantomjs|lighthouse/i;

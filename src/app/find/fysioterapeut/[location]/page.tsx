@@ -1,5 +1,5 @@
 // Location page - shared location rendering with city/specialty data fetching
-// Updated: uses city-level location preposition for meta titles and lead description copy
+// Updated: forwards city context metadata to clinic-card tracking on list pages
 
 import { cache } from "react";
 import ClinicCard from "@/components/features/clinic/ClinicCard";
@@ -591,6 +591,7 @@ export default async function LocationPage({
                 totalClinics={data.clinics.length}
                 specialtySlug={resolvedParams.specialty}
                 logoPathMap={logoPathMap}
+                trackingContextCityId={data.city!.id}
               />
             </div>
             <div className="self-start xl:sticky xl:top-24">
@@ -742,6 +743,7 @@ export default async function LocationPage({
                 handicapadgang={clinic.handicapadgang}
                 verified_klinik={clinic.verified_klinik}
                 logoPath={logoPathMap[clinic.clinics_id] ?? null}
+                trackingContextCityId={data.city!.id}
               />
             ))}
           </div>

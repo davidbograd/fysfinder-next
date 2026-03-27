@@ -1,11 +1,12 @@
 // Hook for tracking clinic interactions (GA4 + first-party database tracking)
-// Updated: added first-party event tracking alongside GA4 for dashboard analytics
+// Updated: includes optional city context metadata for suburb-level attribution
 
 import { trackClinicEvent } from "@/lib/tracking";
 
 interface ClinicAnalyticsProps {
   clinicName: string;
   clinicId?: string;
+  contextCityId?: string | null;
 }
 
 const INTERACTION_TO_EVENT_TYPE = {
@@ -18,6 +19,7 @@ const INTERACTION_TO_EVENT_TYPE = {
 export function useClinicAnalytics({
   clinicName,
   clinicId,
+  contextCityId,
 }: ClinicAnalyticsProps) {
   const trackClinicInteraction = (
     interactionType: "website" | "phone" | "email" | "booking"
@@ -40,6 +42,10 @@ export function useClinicAnalytics({
       trackClinicEvent({
         clinicId,
         eventType: INTERACTION_TO_EVENT_TYPE[interactionType],
+        metadata: {
+          source: "profile_sidebar",
+          ...(contextCityId ? { context_city_id: contextCityId } : {}),
+        },
       });
     }
   };

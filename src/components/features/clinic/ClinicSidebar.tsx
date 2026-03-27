@@ -1,5 +1,8 @@
 "use client";
 
+// Clinic sidebar with contact actions and analytics tracking metadata context
+// Updated: forwards city context to tracking for suburb-level attribution
+
 import { StarIcon } from "@heroicons/react/24/solid";
 import { Button } from "@/components/ui/button";
 import { EmailButton } from "@/components/EmailButton";
@@ -18,6 +21,7 @@ interface ClinicSidebarProps {
     tlf: string | null;
     email: string | null;
     id?: string;
+    cityId?: string | null;
     verified_klinik: boolean;
     premium_listing?: {
       booking_link: string | null;
@@ -36,6 +40,7 @@ export function ClinicSidebar({ clinic }: ClinicSidebarProps) {
   } = useClinicAnalytics({
     clinicName: clinic.klinikNavn,
     clinicId: clinic.id,
+    contextCityId: clinic.cityId,
   });
 
   // Helper function to check if a string is empty or null

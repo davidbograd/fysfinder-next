@@ -1,5 +1,5 @@
 // ClinicsList component - Renders a paginated list of clinic cards
-// Updated: passes clinicId to ClinicCard for analytics tracking
+// Updated: forwards optional city context for suburb-level analytics attribution
 
 "use client";
 
@@ -15,6 +15,7 @@ interface ClinicsListProps {
   specialtySlug?: string;
   itemsPerPage?: number;
   logoPathMap?: Record<string, string | null>;
+  trackingContextCityId?: string;
 }
 
 export function ClinicsList({
@@ -23,6 +24,7 @@ export function ClinicsList({
   specialtySlug,
   itemsPerPage = 10,
   logoPathMap,
+  trackingContextCityId,
 }: ClinicsListProps) {
   const [displayCount, setDisplayCount] = useState(itemsPerPage);
 
@@ -62,6 +64,7 @@ export function ClinicsList({
             handicapadgang={clinic.handicapadgang}
             verified_klinik={clinic.verified_klinik}
             logoPath={logoPathMap?.[clinic.clinics_id] ?? null}
+            trackingContextCityId={trackingContextCityId}
           />
         ))}
       </div>

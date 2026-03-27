@@ -12,6 +12,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Toaster } from "@/components/ui/toaster";
 import { EmailVerificationBanner } from "@/components/layout/EmailVerificationBanner";
 import { fetchCitiesWithCounts, fetchSpecialties } from "@/app/utils/cityUtils";
+import AgentationDevtools from "@/components/dev/AgentationDevtools";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -104,6 +105,7 @@ export default async function RootLayout({
             });
           `}
         </Script>
+        <AgentationDevtools />
         <SpeedInsights />
       </body>
     </html>

@@ -1,3 +1,6 @@
+// Clinic detail page with profile tracking and rich clinic content
+// Updated: passes city context metadata for suburb-level event attribution
+
 import React from "react";
 import { MeetTheTeam } from "@/components/features/team/MeetTheTeam";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
@@ -366,7 +369,13 @@ export default async function ClinicPage({
 
     return (
       <div className="container mx-auto px-4 py-8">
-        <TrackProfileView clinicId={clinic.clinics_id} />
+        <TrackProfileView
+          clinicId={clinic.clinics_id}
+          metadata={{
+            source: "profile_page",
+            ...(clinic.city_id ? { context_city_id: clinic.city_id } : {}),
+          }}
+        />
         <ClinicStructuredData clinic={clinic} />
         <BreadcrumbStructuredData items={breadcrumbItems} />
 
@@ -402,6 +411,7 @@ export default async function ClinicPage({
               tlf: clinic.tlf,
               email: clinic.email,
               id: clinic.clinics_id,
+              cityId: clinic.city_id,
               verified_klinik: clinic.verified_klinik ?? false,
               premium_listing: clinic.premium_listing,
             }}

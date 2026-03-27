@@ -1,5 +1,5 @@
 // Shared application types
-// Updated: include city-level location preposition for grammar-aware location copy
+// Updated: include city_id on clinic models for analytics attribution context
 
 export interface Clinic {
   clinics_id: string;
@@ -50,6 +50,7 @@ export interface Clinic {
   clinic_latitude?: number | null;
   clinic_longitude?: number | null;
   google_place_id?: string | null;
+  city_id?: string | null;
 }
 
 export interface SeoSection {
@@ -184,6 +185,7 @@ export interface DBClinicResponse {
   clinic_latitude?: number | null;
   clinic_longitude?: number | null;
   google_place_id?: string | null;
+  city_id?: string | null;
 }
 
 export interface LocationPageData {

@@ -1,5 +1,5 @@
 // API route for tracking clinic events (views, clicks)
-// Uses service role to bypass RLS; validates event types server-side
+// Uses service role to bypass RLS and accepts structured metadata for attribution
 
 import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
@@ -18,7 +18,7 @@ type EventType = (typeof VALID_EVENT_TYPES)[number];
 interface TrackEventBody {
   clinicId: string;
   eventType: EventType;
-  metadata?: Record<string, string>;
+  metadata?: Record<string, string | number | boolean | null>;
 }
 
 export async function POST(request: Request) {

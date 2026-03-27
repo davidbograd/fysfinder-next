@@ -1,5 +1,5 @@
 // Invisible client component that tracks a clinic profile view on mount
-// Placed on the clinic detail page to record each page load
+// Updated: supports optional attribution metadata for suburb-level analytics
 
 "use client";
 
@@ -8,9 +8,10 @@ import { trackClinicEvent } from "@/lib/tracking";
 
 interface TrackProfileViewProps {
   clinicId: string;
+  metadata?: Record<string, string | number | boolean | null>;
 }
 
-export const TrackProfileView = ({ clinicId }: TrackProfileViewProps) => {
+export const TrackProfileView = ({ clinicId, metadata }: TrackProfileViewProps) => {
   const hasFired = useRef(false);
 
   useEffect(() => {
@@ -20,8 +21,9 @@ export const TrackProfileView = ({ clinicId }: TrackProfileViewProps) => {
     trackClinicEvent({
       clinicId,
       eventType: "profile_view",
+      metadata,
     });
-  }, [clinicId]);
+  }, [clinicId, metadata]);
 
   return null;
 };
