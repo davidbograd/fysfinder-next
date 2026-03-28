@@ -591,7 +591,7 @@ export default async function LocationPage({
                 totalClinics={data.clinics.length}
                 specialtySlug={resolvedParams.specialty}
                 logoPathMap={logoPathMap}
-                trackingContextCityId={data.city!.id}
+                trackingContextCityId={denmarkMapCity.id}
               />
             </div>
             <div className="self-start xl:sticky xl:top-24">
