@@ -76,6 +76,8 @@
 
   html {
     scroll-behavior: smooth;
+    /* Offset in-page anchors / scrollIntoView so sticky/fixed header does not cover headings */
+    @apply scroll-pt-20;
   }
 
   body {
