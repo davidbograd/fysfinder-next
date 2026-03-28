@@ -1,6 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { slugify } from "@/app/utils/slugify";
+import { slug } from "github-slugger";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -27,7 +27,7 @@ export function extractTableOfContents(content: string) {
 
   while ((match = headingRegex.exec(content)) !== null) {
     const text = match[1];
-    const id = slugify(text);
+    const id = slug(text);
     headings.push({ text, id });
   }
 
