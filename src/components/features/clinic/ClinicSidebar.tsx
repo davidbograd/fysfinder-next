@@ -1,7 +1,7 @@
 "use client";
 
-// Clinic sidebar with contact actions and analytics tracking metadata context
-// Updated: forwards city context to tracking for suburb-level attribution
+// Clinic sidebar with contact actions and analytics tracking metadata context.
+// Updated: reuses shared premium-active entitlement helper for booking-link visibility.
 
 import { StarIcon } from "@heroicons/react/24/solid";
 import { Button } from "@/components/ui/button";
@@ -11,6 +11,7 @@ import { WebsiteButton } from "@/components/WebsiteButton";
 import { BookingButton } from "@/components/BookingButton";
 import { useClinicAnalytics } from "@/app/hooks/useClinicAnalytics";
 import { VerifyClinicModal } from "./VerifyClinicModal";
+import { isPremiumListingActive } from "@/lib/clinic-entitlements";
 
 interface ClinicSidebarProps {
   clinic: {
@@ -54,10 +55,7 @@ export function ClinicSidebar({ clinic }: ClinicSidebarProps) {
   const hasAnyContactInfo = hasWebsite || hasPhone || hasEmail;
 
   // Check if clinic is premium and has booking link
-  const isPremium =
-    clinic.premium_listing &&
-    new Date(clinic.premium_listing.start_date) <= new Date() &&
-    new Date(clinic.premium_listing.end_date) > new Date();
+  const isPremium = isPremiumListingActive(clinic.premium_listing);
   const hasBookingLink =
     isPremium &&
     clinic.premium_listing?.booking_link &&

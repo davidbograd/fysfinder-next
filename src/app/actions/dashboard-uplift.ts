@@ -1,11 +1,12 @@
-// Server action for dashboard uplift metrics (value + rank + missed opportunity)
-// Updated: removed unused map-point payload and coordinate fetch logic.
+// Server action for dashboard uplift metrics (value + rank + missed opportunity).
+// Updated: keeps nearby-city opportunity data visible for all owners and exposes premium access flag for gated surfaces.
 
 "use server";
 
 import { createClient } from "@/app/utils/supabase/server";
 import { createClient as createServiceClient } from "@supabase/supabase-js";
 import { getClinicAnalytics } from "@/app/actions/clinic-analytics";
+import { canAccessNearbyCityRanking } from "@/lib/clinic-entitlements";
 
 interface ClinicCityRankRow {
   clinic_id: string;
@@ -29,6 +30,10 @@ interface ClinicIdentity {
   clinics_id: string;
   city_id: string | null;
   lokation: string | null;
+  premium_listings?: Array<{
+    start_date: string;
+    end_date: string;
+  }> | null;
 }
 
 export interface NeighborCityActivityRow {
@@ -52,6 +57,7 @@ interface NeighborCityActivityRpcRow {
 export interface DashboardUpliftMetrics {
   clinicId: string;
   clinicName?: string | null;
+  hasNearbyCityRankingAccess: boolean;
   homeCityId: string | null;
   homeCityName: string;
   rankInHomeCity: number | null;
@@ -103,7 +109,7 @@ export async function getClinicDashboardUplift(
 
   const { data: clinicIdentity, error: clinicError } = await serviceSupabase
     .from("clinics")
-    .select("clinics_id, city_id, lokation, klinikNavn")
+    .select("clinics_id, city_id, lokation, klinikNavn, premium_listings(start_date,end_date)")
     .eq("clinics_id", clinicId)
     .single();
 
@@ -112,6 +118,9 @@ export async function getClinicDashboardUplift(
   }
 
   const identity = clinicIdentity as ClinicIdentity & { klinikNavn?: string | null };
+  const hasNearbyCityRankingAccess = canAccessNearbyCityRanking({
+    premium_listings: identity.premium_listings || [],
+  });
 
   const analyticsResult = await getClinicAnalytics(clinicId, days);
   if (analyticsResult.error || !analyticsResult.stats) {
@@ -181,6 +190,7 @@ export async function getClinicDashboardUplift(
     data: {
       clinicId,
       clinicName: identity.klinikNavn || null,
+      hasNearbyCityRankingAccess,
       homeCityId: identity.city_id,
       homeCityName: identity.lokation || "Din by",
       rankInHomeCity: rankRow?.rank_position ?? null,

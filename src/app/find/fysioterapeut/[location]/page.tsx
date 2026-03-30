@@ -1,5 +1,5 @@
-// Location page - shared location rendering with city/specialty data fetching
-// Updated: forwards city context metadata to clinic-card tracking on list pages
+// Location page - shared location rendering with city/specialty data fetching.
+// Updated: uses centralized entitlement policies for premium/verified sorting behavior.
 
 import { cache } from "react";
 import ClinicCard from "@/components/features/clinic/ClinicCard";
@@ -8,6 +8,8 @@ import { deslugify, slugify } from "@/app/utils/slugify";
 import { Metadata } from "next";
 import {
   Clinic,
+  City,
+  ClinicWithDistance,
   DBClinicResponse,
   LocationPageData,
   SpecialtyWithSeo,
@@ -25,6 +27,7 @@ import { PartnershipBanner } from "@/components/features/partnership/Partnership
 import { SeoContent } from "@/components/seo/SeoContent";
 import { orderSpecialties } from "@/lib/clinic-utils";
 import { resolveLogoPathMap } from "@/lib/logo-cache";
+import { getRankingPolicy, sortClinicsByPolicy } from "@/lib/clinic-entitlements";
 
 // Heading generation utility
 import {
@@ -39,12 +42,33 @@ export const revalidate = 86400; // 24 hours ISR (must be a literal for Next.js 
 // Supabase client for static generation (no cookies, safe for ISR)
 const supabase = createStaticClient();
 
+type FetchRetryOptions = RequestInit & {
+  next?: {
+    revalidate: number;
+  };
+};
+
+interface LocationFilters {
+  ydernummer?: boolean;
+  handicap?: boolean;
+}
+
+interface NearbyClinicSpecialty {
+  specialty_name: string;
+}
+
+interface NearbyClinicFilterable {
+  clinic_specialties?: NearbyClinicSpecialty[];
+}
+
+interface NearbyRankingClinic extends ClinicWithDistance, NearbyClinicFilterable {}
+
 async function fetchWithRetry(
   url: string,
-  options: any,
+  options: FetchRetryOptions,
   retries = 3,
   delay = 1000
-) {
+): Promise<unknown> {
   for (let i = 0; i < retries; i++) {
     try {
       const response = await fetch(url, options);
@@ -64,25 +88,13 @@ async function fetchWithRetry(
  */
 function isValidClinicResponse(data: unknown): data is DBClinicResponse {
   if (!data || typeof data !== "object") return false;
-  const clinic = data as any;
+  const clinic = data as Partial<DBClinicResponse>;
   return (
     "clinics_id" in clinic &&
     "klinikNavn" in clinic &&
     "clinic_specialties" in clinic &&
     Array.isArray(clinic.clinic_specialties)
   );
-}
-
-/**
- * Checks if a clinic has active premium status
- */
-function isPremiumActive(clinic: Clinic): boolean {
-  if (!clinic.premium_listing) return false;
-  const now = new Date();
-  const isActive =
-    new Date(clinic.premium_listing.start_date) <= now &&
-    new Date(clinic.premium_listing.end_date) > now;
-  return isActive;
 }
 
 /**
@@ -100,31 +112,236 @@ function mapDBClinicToClinic(dbClinic: DBClinicResponse): Clinic {
   return clinic;
 }
 
-/**
- * Utility function to sort clinics by rating, optionally considering premium status
- */
-function sortClinicsByRating<
-  T extends { avgRating: number | null; ratingCount: number | null }
->(clinics: T[], options: { includePremium?: boolean } = {}): T[] {
-  const { includePremium = true } = options;
-  return [...clinics].sort((a, b) => {
-    // Optionally sort by premium status first
-    if (includePremium) {
-      const aPremium = isPremiumActive(a as unknown as Clinic);
-      const bPremium = isPremiumActive(b as unknown as Clinic);
-      if (aPremium !== bPremium) return bPremium ? 1 : -1;
-    }
+function getPrimaryRankingContext(
+  locationSlug: string,
+  specialtySlug?: string
+): "danmark" | "online" | "city" | "city-specialty" {
+  if (locationSlug === "danmark") return "danmark";
+  if (locationSlug === "online") return "online";
+  if (specialtySlug) return "city-specialty";
+  return "city";
+}
 
-    // Then sort by rating
-    const ratingA = a.avgRating || 0;
-    const ratingB = b.avgRating || 0;
-    if (ratingA !== ratingB) return ratingB - ratingA;
+function applyClinicFilters(url: string, filters?: LocationFilters): string {
+  let nextUrl = url;
+  if (filters?.ydernummer) nextUrl += "&ydernummer=eq.true";
+  if (filters?.handicap) nextUrl += "&handicapadgang=eq.true";
+  return nextUrl;
+}
 
-    // Finally sort by review count
-    const countA = a.ratingCount || 0;
-    const countB = b.ratingCount || 0;
-    return countB - countA;
+function mapValidClinics(clinicsData: unknown): Clinic[] {
+  const validClinics = Array.isArray(clinicsData)
+    ? clinicsData.filter(isValidClinicResponse)
+    : [];
+  return validClinics.map(mapDBClinicToClinic);
+}
+
+function filterNearbyClinicsBySpecialty<T extends NearbyClinicFilterable>(
+  nearbyClinics: T[],
+  specialties: SpecialtyWithSeo[],
+  specialtySlug?: string
+): T[] {
+  if (!specialtySlug || nearbyClinics.length === 0) return nearbyClinics;
+
+  const specialtyNameToSlug = new Map(
+    specialties.map((specialty) => [
+      specialty.specialty_name,
+      specialty.specialty_name_slug,
+    ])
+  );
+
+  return nearbyClinics.filter((clinic) => {
+    if (!clinic.clinic_specialties || !Array.isArray(clinic.clinic_specialties))
+      return false;
+
+    return clinic.clinic_specialties.some((specialty) => {
+      const specialtySlugFromName = specialtyNameToSlug.get(
+        specialty.specialty_name
+      );
+      return specialtySlugFromName === specialtySlug;
+    });
   });
+}
+
+interface LocationFetchContext {
+  headers: Record<string, string>;
+  fetchOptions: FetchRetryOptions;
+  specialtiesUrl: string;
+  locationSlug: string;
+  specialtySlug?: string;
+  filters?: LocationFilters;
+  primaryRankingPolicy: ReturnType<typeof getRankingPolicy>;
+  nearbyRankingPolicy: ReturnType<typeof getRankingPolicy>;
+}
+
+async function fetchDanmarkLocationData(
+  context: LocationFetchContext
+): Promise<LocationPageData> {
+  const { specialtiesUrl, fetchOptions, specialtySlug, filters, primaryRankingPolicy } =
+    context;
+
+  let clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),premium_listings(id,start_date,end_date,booking_link)`;
+
+  if (specialtySlug) {
+    clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),premium_listings(id,start_date,end_date,booking_link),filtered_specialties:clinic_specialties!inner(specialty:specialties!inner(specialty_name_slug))&filtered_specialties.specialties.specialty_name_slug=eq.${specialtySlug}`;
+  }
+
+  clinicsUrl = applyClinicFilters(clinicsUrl, filters);
+
+  const [specialties, clinicsData] = await Promise.all([
+    fetchWithRetry(specialtiesUrl, fetchOptions) as Promise<SpecialtyWithSeo[]>,
+    fetchWithRetry(clinicsUrl, fetchOptions),
+  ]);
+
+  const clinics = mapValidClinics(clinicsData);
+
+  return {
+    city: null,
+    clinics: sortClinicsByPolicy(clinics, primaryRankingPolicy),
+    nearbyClinicsList: [],
+    specialties,
+  };
+}
+
+async function fetchOnlineLocationData(
+  context: LocationFetchContext
+): Promise<LocationPageData> {
+  const { specialtiesUrl, fetchOptions, specialtySlug, filters, primaryRankingPolicy } =
+    context;
+
+  let clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order),premium_listings(id,start_date,end_date,booking_link)`;
+  const specialtyFilter = specialtySlug
+    ? `&filtered_specialties.specialties.specialty_name_slug=eq.${specialtySlug}`
+    : "";
+
+  if (specialtySlug) {
+    clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order),premium_listings(id,start_date,end_date,booking_link),filtered_specialties:clinic_specialties!inner(specialty:specialties!inner(specialty_name_slug))${specialtyFilter}`;
+  }
+
+  clinicsUrl += "&or=(lokationSlug.eq.online,online_fysioterapeut.eq.true)";
+  clinicsUrl = applyClinicFilters(clinicsUrl, filters);
+
+  const [specialties, cityDataResult, clinicsData] = await Promise.all([
+    fetchWithRetry(specialtiesUrl, fetchOptions) as Promise<SpecialtyWithSeo[]>,
+    (fetchWithRetry(
+      `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/cities?bynavn_slug=eq.online&select=*`,
+      fetchOptions
+    ) as Promise<City[]>).catch((error: unknown) => {
+      console.warn("Could not fetch city data for 'online' location:", error);
+      return null;
+    }),
+    fetchWithRetry(clinicsUrl, fetchOptions),
+  ]);
+
+  const cityForOnline = cityDataResult?.[0] || null;
+  const finalCityObject: City =
+    cityForOnline ||
+    ({
+      id: "online",
+      bynavn: "Online",
+      bynavn_slug: "online",
+      location_preposition: "i",
+      latitude: 0,
+      longitude: 0,
+      postal_codes: [],
+      betegnelse: "Online fysioterapi",
+      seo_tekst: undefined,
+    } as City);
+
+  const clinics = mapValidClinics(clinicsData);
+
+  return {
+    city: finalCityObject,
+    clinics: sortClinicsByPolicy(clinics, primaryRankingPolicy),
+    nearbyClinicsList: [],
+    specialties,
+  };
+}
+
+async function fetchCityLocationData(
+  context: LocationFetchContext
+): Promise<LocationPageData> {
+  const {
+    headers,
+    fetchOptions,
+    specialtiesUrl,
+    locationSlug,
+    specialtySlug,
+    filters,
+    primaryRankingPolicy,
+    nearbyRankingPolicy,
+  } = context;
+
+  const [specialties, cityData] = await Promise.all([
+    fetchWithRetry(specialtiesUrl, fetchOptions) as Promise<SpecialtyWithSeo[]>,
+    fetchWithRetry(
+      `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/cities?bynavn_slug=eq.${locationSlug}&select=*`,
+      fetchOptions
+    ) as Promise<City[]>,
+  ]);
+
+  const city = cityData[0] || null;
+  if (!city)
+    return {
+      city: null,
+      clinics: [],
+      nearbyClinicsList: [],
+      specialties,
+    };
+
+  let clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order),premium_listings(id,start_date,end_date,booking_link)&city_id=eq.${city.id}`;
+  if (specialtySlug) {
+    clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order),premium_listings(id,start_date,end_date,booking_link),filtered_specialties:clinic_specialties!inner(specialty:specialties!inner(specialty_name_slug))&city_id=eq.${city.id}&filtered_specialties.specialties.specialty_name_slug=eq.${specialtySlug}`;
+  }
+
+  let premiumClinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order),premium_listings!inner(id,start_date,end_date,booking_link,premium_listing_locations!inner(city_id))&premium_listings.premium_listing_locations.city_id=eq.${city.id}`;
+  if (specialtySlug) {
+    premiumClinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order),premium_listings!inner(id,start_date,end_date,booking_link,premium_listing_locations!inner(city_id)),filtered_specialties:clinic_specialties!inner(specialty:specialties!inner(specialty_name_slug))&premium_listings.premium_listing_locations.city_id=eq.${city.id}&filtered_specialties.specialties.specialty_name_slug=eq.${specialtySlug}`;
+  }
+
+  clinicsUrl = applyClinicFilters(clinicsUrl, filters);
+  premiumClinicsUrl = applyClinicFilters(premiumClinicsUrl, filters);
+
+  const [clinicsData, premiumClinicsData, nearbyData] = await Promise.all([
+    fetchWithRetry(clinicsUrl, fetchOptions),
+    fetchWithRetry(premiumClinicsUrl, fetchOptions),
+    fetchWithRetry(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/rpc/get_nearby_clinics`, {
+      ...fetchOptions,
+      method: "POST",
+      headers: { ...headers, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        origin_lat: city.latitude,
+        origin_lng: city.longitude,
+        max_distance_km: 10,
+        exclude_city_id: city.id,
+      }),
+    }),
+  ]);
+
+  const clinics = mapValidClinics(clinicsData);
+  const premiumClinics = mapValidClinics(premiumClinicsData);
+  const allClinics = [
+    ...premiumClinics,
+    ...clinics.filter(
+      (clinic) => !premiumClinics.some((premium) => premium.clinics_id === clinic.clinics_id)
+    ),
+  ];
+
+  const nearbyClinics = Array.isArray(nearbyData)
+    ? (nearbyData as NearbyRankingClinic[])
+    : [];
+  const nearbyClinicsList = filterNearbyClinicsBySpecialty(
+    nearbyClinics,
+    specialties,
+    specialtySlug
+  );
+
+  return {
+    city,
+    clinics: sortClinicsByPolicy(allClinics, primaryRankingPolicy),
+    nearbyClinicsList: sortClinicsByPolicy(nearbyClinicsList, nearbyRankingPolicy),
+    specialties,
+  };
 }
 
 /**
@@ -133,7 +350,7 @@ function sortClinicsByRating<
 async function fetchLocationDataUncached(
   locationSlug: string,
   specialtySlug?: string,
-  filters?: { ydernummer?: boolean; handicap?: boolean }
+  filters?: LocationFilters
 ): Promise<LocationPageData> {
   const headers = {
     apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -144,230 +361,29 @@ async function fetchLocationDataUncached(
     headers,
     next: { revalidate: CACHE_TIMES.LOCATION_PAGE },
   };
+  const primaryRankingPolicy = getRankingPolicy(
+    getPrimaryRankingContext(locationSlug, specialtySlug)
+  );
+  const nearbyRankingPolicy = getRankingPolicy("nearby");
 
   try {
     const specialtiesUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/specialties?select=specialty_id,specialty_name,specialty_name_slug,seo_tekst`;
 
-    // Special handling for "danmark" location - fetch specialties and clinics in parallel
-    if (locationSlug === "danmark") {
-      let clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),premium_listings(id,start_date,end_date,booking_link)`;
-
-      if (specialtySlug) {
-        clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),premium_listings(id,start_date,end_date,booking_link),filtered_specialties:clinic_specialties!inner(specialty:specialties!inner(specialty_name_slug))&filtered_specialties.specialties.specialty_name_slug=eq.${specialtySlug}`;
-      }
-
-      // Apply filters
-      if (filters?.ydernummer) {
-        clinicsUrl += `&ydernummer=eq.true`;
-      }
-      if (filters?.handicap) {
-        clinicsUrl += `&handicapadgang=eq.true`;
-      }
-
-      // Parallel: fetch specialties and clinics at the same time
-      const [specialties, clinicsData] = await Promise.all([
-        fetchWithRetry(specialtiesUrl, fetchOptions) as Promise<SpecialtyWithSeo[]>,
-        fetchWithRetry(clinicsUrl, fetchOptions),
-      ]);
-
-      const validClinics = (clinicsData as unknown[]).filter(
-        isValidClinicResponse
-      );
-      const clinics = validClinics.map(mapDBClinicToClinic);
-
-      return {
-        city: null,
-        clinics: sortClinicsByRating(clinics, { includePremium: false }),
-        nearbyClinicsList: [],
-        specialties,
-      };
-    }
-
-    // Special handling for "online" location - fetch specialties, city, and clinics in parallel
-    if (locationSlug === "online") {
-      let clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order),premium_listings(id,start_date,end_date,booking_link)`;
-
-      // Add specialty filter if needed
-      const specialtyFilter = specialtySlug
-        ? `&filtered_specialties.specialties.specialty_name_slug=eq.${specialtySlug}`
-        : "";
-
-      // If specialty is specified, modify the query to include specialty join
-      if (specialtySlug) {
-        clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order),premium_listings(id,start_date,end_date,booking_link),filtered_specialties:clinic_specialties!inner(specialty:specialties!inner(specialty_name_slug))${specialtyFilter}`;
-      }
-
-      // Add the OR condition for online clinics
-      clinicsUrl += `&or=(lokationSlug.eq.online,online_fysioterapeut.eq.true)`;
-
-      // Apply filters
-      if (filters?.ydernummer) {
-        clinicsUrl += `&ydernummer=eq.true`;
-      }
-      if (filters?.handicap) {
-        clinicsUrl += `&handicapadgang=eq.true`;
-      }
-
-      // Parallel: fetch specialties, city data, and clinics at the same time
-      const [specialties, cityDataResult, clinicsData] = await Promise.all([
-        fetchWithRetry(specialtiesUrl, fetchOptions) as Promise<SpecialtyWithSeo[]>,
-        fetchWithRetry(
-          `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/cities?bynavn_slug=eq.online&select=*`,
-          fetchOptions
-        ).catch((error: unknown) => {
-          console.warn("Could not fetch city data for 'online' location:", error);
-          return null;
-        }),
-        fetchWithRetry(clinicsUrl, fetchOptions),
-      ]);
-
-      const cityForOnline = cityDataResult?.[0] || null;
-
-      // Use fetched city data if available, otherwise create minimal object
-      const finalCityObject = cityForOnline || {
-        id: "online",
-        bynavn: "Online",
-        bynavn_slug: "online",
-        location_preposition: "i",
-        latitude: 0,
-        longitude: 0,
-        postal_codes: [],
-        betegnelse: "Online fysioterapi",
-        seo_tekst: undefined,
-      };
-
-      const validClinics = (clinicsData as unknown[]).filter(
-        isValidClinicResponse
-      );
-      const clinics = validClinics.map(mapDBClinicToClinic);
-
-      return {
-        city: finalCityObject,
-        clinics: sortClinicsByRating(clinics),
-        nearbyClinicsList: [],
-        specialties,
-      };
-    }
-
-    // For specific city locations - Phase 1: fetch specialties and city in parallel
-    const [specialties, cityData] = await Promise.all([
-      fetchWithRetry(specialtiesUrl, fetchOptions) as Promise<SpecialtyWithSeo[]>,
-      fetchWithRetry(
-        `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/cities?bynavn_slug=eq.${locationSlug}&select=*`,
-        fetchOptions
-      ),
-    ]);
-
-    const city = cityData[0] || null;
-
-    if (!city) {
-      return {
-        city: null,
-        clinics: [],
-        nearbyClinicsList: [],
-        specialties,
-      };
-    }
-
-    // Build the clinics query for city
-    let clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order),premium_listings(id,start_date,end_date,booking_link)&city_id=eq.${city.id}`;
-
-    if (specialtySlug) {
-      clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order),premium_listings(id,start_date,end_date,booking_link),filtered_specialties:clinic_specialties!inner(specialty:specialties!inner(specialty_name_slug))&city_id=eq.${city.id}&filtered_specialties.specialties.specialty_name_slug=eq.${specialtySlug}`;
-    }
-
-    // Fetch premium clinics for this city
-    let premiumClinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order),premium_listings!inner(id,start_date,end_date,booking_link,premium_listing_locations!inner(city_id))&premium_listings.premium_listing_locations.city_id=eq.${city.id}`;
-
-    if (specialtySlug) {
-      premiumClinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order),premium_listings!inner(id,start_date,end_date,booking_link,premium_listing_locations!inner(city_id)),filtered_specialties:clinic_specialties!inner(specialty:specialties!inner(specialty_name_slug))&premium_listings.premium_listing_locations.city_id=eq.${city.id}&filtered_specialties.specialties.specialty_name_slug=eq.${specialtySlug}`;
-    }
-
-    // Apply filters to both clinic queries
-    if (filters?.ydernummer) {
-      clinicsUrl += `&ydernummer=eq.true`;
-      premiumClinicsUrl += `&ydernummer=eq.true`;
-    }
-    if (filters?.handicap) {
-      clinicsUrl += `&handicapadgang=eq.true`;
-      premiumClinicsUrl += `&handicapadgang=eq.true`;
-    }
-
-    // Phase 2: fetch clinics, premium clinics, and nearby clinics in parallel
-    const [clinicsData, premiumClinicsData, nearbyData] = await Promise.all([
-      fetchWithRetry(clinicsUrl, fetchOptions),
-      fetchWithRetry(premiumClinicsUrl, fetchOptions),
-      fetchWithRetry(
-        `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/rpc/get_nearby_clinics`,
-        {
-          ...fetchOptions,
-          method: "POST",
-          headers: { ...headers, "Content-Type": "application/json" },
-          body: JSON.stringify({
-            origin_lat: city.latitude,
-            origin_lng: city.longitude,
-            max_distance_km: 10,
-            exclude_city_id: city.id,
-          }),
-        }
-      ),
-    ]);
-
-    // Safely process the clinics data
-    const validClinics = Array.isArray(clinicsData)
-      ? clinicsData.filter(isValidClinicResponse)
-      : [];
-    const validPremiumClinics = Array.isArray(premiumClinicsData)
-      ? premiumClinicsData.filter(isValidClinicResponse)
-      : [];
-
-    // Map both sets of clinics
-    const clinics = validClinics.map(mapDBClinicToClinic);
-    const premiumClinics = validPremiumClinics.map(mapDBClinicToClinic);
-
-    // Combine premium and regular clinics, ensuring no duplicates
-    const allClinics = [
-      ...premiumClinics,
-      ...clinics.filter(
-        (clinic) =>
-          !premiumClinics.some((pc) => pc.clinics_id === clinic.clinics_id)
-      ),
-    ];
-
-    let nearbyClinicsList = Array.isArray(nearbyData) ? nearbyData : [];
-
-    // Filter nearby clinics by specialty if a specialty is specified
-    if (specialtySlug && nearbyClinicsList.length > 0) {
-      // Create a mapping of specialty names to slugs for quick lookup
-      const specialtyNameToSlug = new Map(
-        specialties.map((s) => [s.specialty_name, s.specialty_name_slug])
-      );
-
-      nearbyClinicsList = nearbyClinicsList.filter((clinic: any) => {
-        // Check if clinic has the required specialty
-        if (
-          !clinic.clinic_specialties ||
-          !Array.isArray(clinic.clinic_specialties)
-        ) {
-          return false;
-        }
-
-        return clinic.clinic_specialties.some((cs: any) => {
-          const specialtySlugFromName = specialtyNameToSlug.get(
-            cs.specialty_name
-          );
-          return specialtySlugFromName === specialtySlug;
-        });
-      });
-    }
-
-    return {
-      city,
-      clinics: sortClinicsByRating(allClinics),
-      nearbyClinicsList: sortClinicsByRating(nearbyClinicsList),
-      specialties,
+    const context: LocationFetchContext = {
+      headers,
+      fetchOptions,
+      specialtiesUrl,
+      locationSlug,
+      specialtySlug,
+      filters,
+      primaryRankingPolicy,
+      nearbyRankingPolicy,
     };
-  } catch (error) {
+
+    if (locationSlug === "danmark") return fetchDanmarkLocationData(context);
+    if (locationSlug === "online") return fetchOnlineLocationData(context);
+    return fetchCityLocationData(context);
+  } catch {
     // Return a minimal valid response instead of throwing
     return {
       city: null,

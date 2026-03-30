@@ -56,4 +56,7 @@ scripts/config/sources/*.json
 # Cursor
 .cursor/
 
+# Local docs should never be committed
+docs/
+
 # Logo cache images are committed to git (fetched via GitHub Action)

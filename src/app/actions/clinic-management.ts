@@ -1,3 +1,6 @@
+// Clinic management actions for owned clinics and admin overrides.
+// Updated: adds explicit guard that team-member management stays available for free users.
+
 "use server";
 
 import { createClient } from "@/app/utils/supabase/server";
@@ -5,6 +8,7 @@ import { createClient as createServiceClient } from "@supabase/supabase-js";
 import { updateTag } from "next/cache";
 import { CACHE_TAGS } from "@/lib/cache-config";
 import { isAdminEmail } from "@/lib/admin";
+import { canAccessTeamMembersFeature } from "@/lib/clinic-entitlements";
 
 async function canManageClinic(
   supabase: Awaited<ReturnType<typeof createClient>>,
@@ -524,6 +528,11 @@ export async function updateClinicTeamMembers(
 
   if (!hasAccess) {
     return { error: "Du ejer ikke denne klinik" };
+  }
+
+  // Team members remain available for free and premium users.
+  if (!canAccessTeamMembersFeature()) {
+    return { error: "Adgang til behandlere er midlertidigt utilgængelig" };
   }
 
   // Use service role for updates

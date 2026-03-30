@@ -1,5 +1,5 @@
-// Dashboard page for clinic owners and admins
-// Updated: dev-only ?dev_state=empty toggle for testing empty dashboard state
+// Dashboard page for clinic owners and admins.
+// Updated: restores nearby-city opportunity visibility in KPI upsells for free and premium owners.
 
 import { redirect } from "next/navigation";
 import { createClient } from "@/app/utils/supabase/server";
@@ -15,7 +15,10 @@ import { AdminAnalyticsSection } from "@/components/dashboard/AdminAnalyticsSect
 import { UserClaimsSection } from "@/components/dashboard/UserClaimsSection";
 import { getOwnedClinics } from "@/app/actions/clinic-management";
 import { ClinicCard } from "@/components/dashboard/ClinicCard";
-import { getAllOwnedClinicAnalytics } from "@/app/actions/clinic-analytics";
+import {
+  ClinicStats,
+  getAllOwnedClinicAnalytics,
+} from "@/app/actions/clinic-analytics";
 import { getClinicDashboardUplift } from "@/app/actions/dashboard-uplift";
 import { getUserClaims } from "@/app/actions/user-claims";
 import { Suspense } from "react";
@@ -23,6 +26,39 @@ import { DashboardDevToolbar } from "@/components/dashboard/DashboardDevToolbar"
 
 interface DashboardPageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}
+
+interface DashboardClaim {
+  id: string;
+  clinic_id: string;
+  klinik_navn: string;
+  status: string;
+  created_at: string;
+  reviewed_at: string | null;
+  admin_notes: string | null;
+  clinics:
+    | {
+        clinics_id: string;
+        klinikNavn: string;
+        adresse: string | null;
+        postnummer: number | null;
+        lokation: string | null;
+      }
+    | {
+        clinics_id: string;
+        klinikNavn: string;
+        adresse: string | null;
+        postnummer: number | null;
+        lokation: string | null;
+      }[]
+    | null;
+}
+
+interface DashboardOwnedClinic {
+  clinics_id: string;
+  klinikNavn: string;
+  lokation: string | null;
+  verified_klinik: boolean | null;
 }
 
 export default async function DashboardPage({ searchParams }: DashboardPageProps) {
@@ -41,17 +77,18 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
 
   // Get owned clinics
   const ownedClinicsResult = await getOwnedClinics();
-  let ownedClinics = ownedClinicsResult.clinics || [];
+  let ownedClinics: DashboardOwnedClinic[] =
+    (ownedClinicsResult.clinics || []) as DashboardOwnedClinic[];
 
   const userClaimsResult = await getUserClaims();
-  const userClaims = userClaimsResult.claims || [];
-  let pendingClaims = userClaims.filter((c: any) => c.status === "pending");
+  const userClaims: DashboardClaim[] = (userClaimsResult.claims || []) as DashboardClaim[];
+  let pendingClaims = userClaims.filter((claim) => claim.status === "pending");
 
   const analyticsResult =
     ownedClinics.length > 0 ? await getAllOwnedClinicAnalytics() : { stats: {} };
-  const analyticsByClinic = analyticsResult.stats || {};
+  const analyticsByClinic = analyticsResult.stats || ({} as Record<string, ClinicStats>);
   const analyticsTotals = Object.values(analyticsByClinic).reduce(
-    (acc, stats: any) => {
+    (acc, stats) => {
       acc.profileViews += stats.profileViews || 0;
       acc.listImpressions += stats.listImpressions || 0;
       acc.phoneClicks += stats.phoneClicks || 0;
@@ -98,9 +135,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
   const upliftByClinic =
     ownedClinics.length > 0
       ? await Promise.all(
-          ownedClinics.map((clinic: any) =>
-            getClinicDashboardUplift(clinic.clinics_id)
-          )
+          ownedClinics.map((clinic) => getClinicDashboardUplift(clinic.clinics_id))
         )
       : [];
   const mergedCityOpportunity = upliftByClinic.reduce(
@@ -616,7 +651,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
             {hasAnyClinics ? (
               <>
                 {/* Owned Clinics */}
-                {ownedClinics.map((clinic: any) => (
+                {ownedClinics.map((clinic) => (
                   <div key={clinic.clinics_id} className="grid grid-cols-1 gap-4">
                     <ClinicCard clinic={clinic} />
                   </div>

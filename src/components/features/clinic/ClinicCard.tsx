@@ -1,5 +1,5 @@
-// ClinicCard - Displays a single clinic in the listing
-// Updated: forwards optional city context metadata for suburb-level analytics attribution
+// ClinicCard - Displays a single clinic in the listing.
+// Updated: reuses shared premium-active entitlement helper for card prominence.
 
 "use client";
 
@@ -22,6 +22,7 @@ import { PhoneButton } from "@/components/PhoneButton";
 import Link from "next/link";
 import VerifiedCheck from "@/assets/icons/verified-check.svg";
 import { trackClinicEvent } from "@/lib/tracking";
+import { isPremiumListingActive } from "@/lib/clinic-entitlements";
 
 interface Props {
   clinicId?: string;
@@ -46,17 +47,6 @@ interface Props {
   verified_klinik?: boolean | null;
   logoPath?: string | null;
   trackingContextCityId?: string;
-}
-
-function isPremiumActive(
-  premium_listing: PremiumListing | null | undefined
-): boolean {
-  if (!premium_listing) return false;
-  const now = new Date();
-  return (
-    new Date(premium_listing.start_date) <= now &&
-    new Date(premium_listing.end_date) > now
-  );
 }
 
 const ClinicCard: React.FC<Props> = ({
@@ -84,7 +74,7 @@ const ClinicCard: React.FC<Props> = ({
   const hasMoreMembers = team_members.length > MAX_VISIBLE_MEMBERS;
   const visibleMembers = team_members.slice(0, MAX_VISIBLE_MEMBERS);
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
-  const isPremium = isPremiumActive(premium_listing);
+  const isPremium = isPremiumListingActive(premium_listing);
   const hasLogo = Boolean(logoPath);
   const cardRef = useRef<HTMLDivElement>(null);
   const hasTrackedImpression = useRef(false);
