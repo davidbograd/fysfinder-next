@@ -18,7 +18,7 @@ describe("Breadcrumbs", () => {
 
   it("renders correct number of separators", () => {
     render(<Breadcrumbs items={mockItems} />);
-    const separators = screen.getAllByText("/");
+    const separators = screen.getAllByText("›");
     expect(separators).toHaveLength(2);
   });
 

@@ -36,6 +36,7 @@ import {
 } from "@/lib/headers-and-metatitles";
 import { CACHE_TIMES } from "@/lib/cache-config";
 import { createStaticClient } from "@/app/utils/supabase/static";
+import { LocationFilters, parseFilters } from "@/app/find/fysioterapeut/filter-utils";
 
 export const revalidate = 86400; // 24 hours ISR (must be a literal for Next.js segment config)
 
@@ -47,11 +48,6 @@ type FetchRetryOptions = RequestInit & {
     revalidate: number;
   };
 };
-
-interface LocationFilters {
-  ydernummer?: boolean;
-  handicap?: boolean;
-}
 
 interface NearbyClinicSpecialty {
   specialty_name: string;
@@ -430,18 +426,6 @@ export async function fetchLocationData(
 export async function generateStaticParams() {
   const { data: cities } = await supabase.from("cities").select("bynavn");
   return cities?.map((city) => ({ location: slugify(city.bynavn) })) || [];
-}
-
-/**
- * Parses filter parameters from URL search params
- */
-export function parseFilters(
-  searchParams: { [key: string]: string | string[] | undefined } | undefined
-): { ydernummer?: boolean; handicap?: boolean } {
-  const filters: { ydernummer?: boolean; handicap?: boolean } = {};
-  if (searchParams?.ydernummer === "true") filters.ydernummer = true;
-  if (searchParams?.handicap === "true") filters.handicap = true;
-  return filters;
 }
 
 export async function generateMetadata({

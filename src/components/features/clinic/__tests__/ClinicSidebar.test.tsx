@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { ClinicSidebar } from "../ClinicSidebar";
 
 // Mock the analytics hook
@@ -7,6 +7,7 @@ jest.mock("@/app/hooks/useClinicAnalytics", () => ({
     trackWebsiteClick: jest.fn(),
     trackPhoneClick: jest.fn(),
     trackEmailClick: jest.fn(),
+    trackBookingClick: jest.fn(),
   }),
 }));
 
@@ -17,8 +18,14 @@ const mockClinic = {
   website: "https://www.testfysio.dk",
   tlf: "+45 12345678",
   email: "kontakt@testfysio.dk",
-  northstar: true,
   id: "123",
+  cityId: "city-1",
+  verified_klinik: true,
+  premium_listing: {
+    booking_link: "https://booking.example.com/test",
+    start_date: "2024-01-01T00:00:00.000Z",
+    end_date: "2099-01-01T00:00:00.000Z",
+  },
 };
 
 describe("ClinicSidebar", () => {
@@ -36,20 +43,20 @@ describe("ClinicSidebar", () => {
     // Check website
     expect(screen.getByText("testfysio.dk")).toBeInTheDocument();
 
-    // Check phone
-    expect(screen.getByText("+45 12345678")).toBeInTheDocument();
+    // Check phone button text and masked number state
+    expect(screen.getByText("Vis nummer")).toBeInTheDocument();
 
     // Check email
     expect(screen.getByText("kontakt@testfysio.dk")).toBeInTheDocument();
   });
 
-  it("shows booking button for northstar clinics", () => {
+  it("shows booking button for active premium clinics", () => {
     render(<ClinicSidebar clinic={mockClinic} />);
     expect(screen.getByText("Book tid")).toBeInTheDocument();
   });
 
-  it("hides booking button for non-northstar clinics", () => {
-    render(<ClinicSidebar clinic={{ ...mockClinic, northstar: false }} />);
+  it("hides booking button for non-premium clinics", () => {
+    render(<ClinicSidebar clinic={{ ...mockClinic, premium_listing: null }} />);
     expect(screen.queryByText("Book tid")).not.toBeInTheDocument();
   });
 

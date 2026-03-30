@@ -3,9 +3,10 @@
 
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import LocationPage, { fetchLocationData, parseFilters } from "../page";
+import LocationPage, { fetchLocationData } from "../page";
 import { SpecialtyWithSeo } from "@/app/types";
 import { generateMetaTitle } from "@/lib/headers-and-metatitles";
+import { parseFilters } from "@/app/find/fysioterapeut/filter-utils";
 
 export async function generateMetadata({
   params,

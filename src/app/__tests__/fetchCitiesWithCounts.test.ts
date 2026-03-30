@@ -1,8 +1,9 @@
+// Updated: 2026-03-30 - Mocked static Supabase client path used by city utilities.
 import { fetchCitiesWithCounts } from "../utils/cityUtils";
 
 // Mock Supabase client - now using city_clinic_counts view
-jest.mock("@/app/utils/supabase/server", () => ({
-  createClient: () => ({
+jest.mock("@/app/utils/supabase/static", () => ({
+  createStaticClient: () => ({
     from: () => ({
       select: () => ({
         data: [
@@ -61,7 +62,7 @@ describe("fetchCitiesWithCounts", () => {
   it("handles empty result from database", async () => {
     // Override mock for this test
     jest
-      .spyOn(require("@/app/utils/supabase/server"), "createClient")
+      .spyOn(require("@/app/utils/supabase/static"), "createStaticClient")
       .mockImplementationOnce(() => ({
         from: () => ({
           select: () => ({

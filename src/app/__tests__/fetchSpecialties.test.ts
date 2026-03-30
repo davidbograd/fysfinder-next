@@ -1,8 +1,9 @@
+// Updated: 2026-03-30 - Mocked static Supabase client path used by city utilities.
 import { fetchSpecialties, type Specialty } from "../utils/cityUtils";
 
 // Mock Supabase client
-jest.mock("@/app/utils/supabase/server", () => ({
-  createClient: () => ({
+jest.mock("@/app/utils/supabase/static", () => ({
+  createStaticClient: () => ({
     from: () => ({
       select: () => ({
         data: [
@@ -37,7 +38,7 @@ describe("fetchSpecialties", () => {
   it("handles empty result", async () => {
     // Override mock for this test
     jest
-      .spyOn(require("@/app/utils/supabase/server"), "createClient")
+      .spyOn(require("@/app/utils/supabase/static"), "createStaticClient")
       .mockImplementationOnce(() => ({
         from: () => ({
           select: () => ({
@@ -54,7 +55,7 @@ describe("fetchSpecialties", () => {
   it("handles database error", async () => {
     // Override mock for this test
     jest
-      .spyOn(require("@/app/utils/supabase/server"), "createClient")
+      .spyOn(require("@/app/utils/supabase/static"), "createStaticClient")
       .mockImplementationOnce(() => ({
         from: () => ({
           select: () => ({

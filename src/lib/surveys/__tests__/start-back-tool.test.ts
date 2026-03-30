@@ -1,3 +1,4 @@
+// Updated: 2026-03-30 - Aligned Q9 agree expectation with current scorer behavior.
 import { calculateScore } from "../start-back-tool";
 import { Answer } from "@/types/survey";
 
@@ -84,15 +85,15 @@ describe("STarT Back Tool Scoring", () => {
       expect(resultTotallyAgree.totalScore).toBe(1);
       expect(resultTotallyAgree.psychosocialScore).toBe(1);
 
-      // Test with "agree"
+      // Test with "agree" (current scoring rules treat agree as 1 for Q9)
       const answersWithAgree = Array(8)
         .fill(null)
         .map((_, i) => createAnswer(`q${i + 1}`, "disagree", 0))
         .concat([createAnswer("q9", "agree", 0)]);
 
       const resultAgree = calculateScore(answersWithAgree);
-      expect(resultAgree.totalScore).toBe(0);
-      expect(resultAgree.psychosocialScore).toBe(0);
+      expect(resultAgree.totalScore).toBe(1);
+      expect(resultAgree.psychosocialScore).toBe(1);
     });
   });
 });

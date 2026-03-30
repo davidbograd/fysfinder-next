@@ -1,4 +1,6 @@
+// Updated: 2026-03-30 - Added verified badge and hover event MVP assertions.
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import ClinicCard from "../ClinicCard";
 
 const mockClinic = {
@@ -58,5 +60,27 @@ describe("ClinicCard", () => {
     render(<ClinicCard {...mockClinic} distance={2.5} />);
     expect(screen.getByText(/2.5/)).toBeInTheDocument();
     expect(screen.getByText(/km væk/)).toBeInTheDocument();
+  });
+
+  it("shows verified clinic icon when clinic is verified", () => {
+    render(<ClinicCard {...mockClinic} verified_klinik />);
+    expect(screen.getByAltText("Verified clinic")).toBeInTheDocument();
+  });
+
+  it("dispatches card hover event on mouse enter", async () => {
+    const user = userEvent.setup();
+    const dispatchSpy = jest.spyOn(window, "dispatchEvent");
+
+    render(<ClinicCard {...mockClinic} />);
+    const card = document.getElementById("clinic-card-test-clinic-id");
+    expect(card).toBeTruthy();
+
+    await user.hover(card!);
+
+    expect(dispatchSpy).toHaveBeenCalled();
+    const [eventArg] = dispatchSpy.mock.calls[0];
+    expect(eventArg).toBeInstanceOf(CustomEvent);
+    expect((eventArg as CustomEvent).type).toBe("fysfinder:clinic-card-hover");
+    dispatchSpy.mockRestore();
   });
 });
