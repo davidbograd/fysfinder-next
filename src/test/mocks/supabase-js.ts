@@ -1,4 +1,4 @@
-// Added: 2026-03-30 - Minimal @supabase/supabase-js mock to keep tests deterministic.
+// Updated: 2026-03-30 - Relaxed promise typing to avoid tuple inference in production TS build.
 type QueryResult<T = unknown> = Promise<{ data: T; error: null }>;
 
 interface QueryBuilder {
@@ -9,7 +9,7 @@ interface QueryBuilder {
   or: () => QueryBuilder;
   limit: () => QueryBuilder;
   maybeSingle: () => QueryResult<null>;
-  then: PromiseLike<{ data: []; error: null }>["then"];
+  then: PromiseLike<{ data: unknown[]; error: null }>["then"];
 }
 
 function createQueryBuilder(): QueryBuilder {
@@ -22,7 +22,10 @@ function createQueryBuilder(): QueryBuilder {
     limit: () => builder,
     maybeSingle: () => Promise.resolve({ data: null, error: null }),
     then: (onFulfilled, onRejected) =>
-      Promise.resolve({ data: [], error: null }).then(onFulfilled, onRejected),
+      Promise.resolve<{ data: unknown[]; error: null }>({
+        data: [],
+        error: null,
+      }).then(onFulfilled, onRejected),
   };
   return builder;
 }
