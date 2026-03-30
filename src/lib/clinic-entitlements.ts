@@ -27,6 +27,10 @@ interface PremiumAccessCarrier {
   premium_listings?: Array<Pick<PremiumListing, "start_date" | "end_date">> | null;
 }
 
+interface VerifiedStatusCarrier {
+  verified_klinik?: boolean | null;
+}
+
 const RANKING_POLICY_BY_CONTEXT: Record<RankingContext, RankingPolicy> = {
   danmark: { prioritizePremium: false, prioritizeVerifiedSignedUp: false },
   online: { prioritizePremium: true, prioritizeVerifiedSignedUp: false },
@@ -59,7 +63,7 @@ export function isPremiumListingActive(
 }
 
 export function hasVerifiedSignupPriority(
-  clinic: Pick<Clinic, "verified_klinik"> | RankingClinic
+  clinic: VerifiedStatusCarrier
 ): boolean {
   return Boolean(clinic.verified_klinik);
 }
