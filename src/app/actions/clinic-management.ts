@@ -4,6 +4,27 @@ import { createClient } from "@/app/utils/supabase/server";
 import { createClient as createServiceClient } from "@supabase/supabase-js";
 import { updateTag } from "next/cache";
 import { CACHE_TAGS } from "@/lib/cache-config";
+import { isAdminEmail } from "@/lib/admin";
+
+async function canManageClinic(
+  supabase: Awaited<ReturnType<typeof createClient>>,
+  userId: string,
+  clinicId: string,
+  isAdmin: boolean
+) {
+  if (isAdmin) {
+    return true;
+  }
+
+  const { data: ownership, error: ownershipError } = await supabase
+    .from("clinic_owners")
+    .select("clinic_id")
+    .eq("user_id", userId)
+    .eq("clinic_id", clinicId)
+    .single();
+
+  return !ownershipError && !!ownership;
+}
 
 /**
  * Get all clinics owned by the current user
@@ -73,15 +94,10 @@ export async function getClinicForEdit(clinicId: string) {
     return { error: "Ikke logget ind" };
   }
 
-  // Check ownership
-  const { data: ownership, error: ownershipError } = await supabase
-    .from("clinic_owners")
-    .select("clinic_id")
-    .eq("user_id", user.id)
-    .eq("clinic_id", clinicId)
-    .single();
+  const isAdmin = isAdminEmail(user.email);
+  const hasAccess = await canManageClinic(supabase, user.id, clinicId, isAdmin);
 
-  if (ownershipError || !ownership) {
+  if (!hasAccess) {
     return { error: "Du ejer ikke denne klinik" };
   }
 
@@ -191,15 +207,10 @@ export async function updateClinic(
     return { error: "Ikke logget ind" };
   }
 
-  // Check ownership
-  const { data: ownership, error: ownershipError } = await supabase
-    .from("clinic_owners")
-    .select("clinic_id")
-    .eq("user_id", user.id)
-    .eq("clinic_id", clinicId)
-    .single();
+  const isAdmin = isAdminEmail(user.email);
+  const hasAccess = await canManageClinic(supabase, user.id, clinicId, isAdmin);
 
-  if (ownershipError || !ownership) {
+  if (!hasAccess) {
     return { error: "Du ejer ikke denne klinik" };
   }
 
@@ -262,15 +273,10 @@ export async function updateClinicSpecialties(
     return { error: "Ikke logget ind" };
   }
 
-  // Check ownership
-  const { data: ownership, error: ownershipError } = await supabase
-    .from("clinic_owners")
-    .select("clinic_id")
-    .eq("user_id", user.id)
-    .eq("clinic_id", clinicId)
-    .single();
+  const isAdmin = isAdminEmail(user.email);
+  const hasAccess = await canManageClinic(supabase, user.id, clinicId, isAdmin);
 
-  if (ownershipError || !ownership) {
+  if (!hasAccess) {
     return { error: "Du ejer ikke denne klinik" };
   }
 
@@ -352,15 +358,10 @@ export async function updateClinicInsurances(
     return { error: "Ikke logget ind" };
   }
 
-  // Check ownership
-  const { data: ownership, error: ownershipError } = await supabase
-    .from("clinic_owners")
-    .select("clinic_id")
-    .eq("user_id", user.id)
-    .eq("clinic_id", clinicId)
-    .single();
+  const isAdmin = isAdminEmail(user.email);
+  const hasAccess = await canManageClinic(supabase, user.id, clinicId, isAdmin);
 
-  if (ownershipError || !ownership) {
+  if (!hasAccess) {
     return { error: "Du ejer ikke denne klinik" };
   }
 
@@ -472,15 +473,10 @@ export async function getClinicTeamMembers(clinicId: string) {
     return { error: "Ikke logget ind" };
   }
 
-  // Check ownership
-  const { data: ownership, error: ownershipError } = await supabase
-    .from("clinic_owners")
-    .select("clinic_id")
-    .eq("user_id", user.id)
-    .eq("clinic_id", clinicId)
-    .single();
+  const isAdmin = isAdminEmail(user.email);
+  const hasAccess = await canManageClinic(supabase, user.id, clinicId, isAdmin);
 
-  if (ownershipError || !ownership) {
+  if (!hasAccess) {
     return { error: "Du ejer ikke denne klinik" };
   }
 
@@ -523,15 +519,10 @@ export async function updateClinicTeamMembers(
     return { error: "Ikke logget ind" };
   }
 
-  // Check ownership
-  const { data: ownership, error: ownershipError } = await supabase
-    .from("clinic_owners")
-    .select("clinic_id")
-    .eq("user_id", user.id)
-    .eq("clinic_id", clinicId)
-    .single();
+  const isAdmin = isAdminEmail(user.email);
+  const hasAccess = await canManageClinic(supabase, user.id, clinicId, isAdmin);
 
-  if (ownershipError || !ownership) {
+  if (!hasAccess) {
     return { error: "Du ejer ikke denne klinik" };
   }
 
