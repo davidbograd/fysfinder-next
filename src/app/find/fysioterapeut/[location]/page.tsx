@@ -26,7 +26,6 @@ import { SearchInterface } from "@/components/search/SearchInterface";
 import { PartnershipBanner } from "@/components/features/partnership/PartnershipBanner";
 import { SeoContent } from "@/components/seo/SeoContent";
 import { orderSpecialties } from "@/lib/clinic-utils";
-import { resolveLogoPathMap } from "@/lib/logo-cache";
 import { getRankingPolicy, sortClinicsByPolicy } from "@/lib/clinic-entitlements";
 
 // Heading generation utility
@@ -496,12 +495,6 @@ export default async function LocationPage({
   );
   const specialties = data.specialties;
 
-  // Resolve logo paths server-side to eliminate client-side flash/CLS
-  const logoPathMap = await resolveLogoPathMap([
-    ...data.clinics,
-    ...data.nearbyClinicsList,
-  ]);
-
   const currentPagePath = resolvedParams.specialty
     ? `/find/fysioterapeut/${resolvedParams.location}/${resolvedParams.specialty}`
     : `/find/fysioterapeut/${resolvedParams.location}`;
@@ -590,7 +583,6 @@ export default async function LocationPage({
                 clinics={data.clinics}
                 totalClinics={data.clinics.length}
                 specialtySlug={resolvedParams.specialty}
-                logoPathMap={logoPathMap}
                 trackingContextCityId={denmarkMapCity.id}
               />
             </div>
@@ -608,7 +600,6 @@ export default async function LocationPage({
               clinics={data.clinics}
               totalClinics={data.clinics.length}
               specialtySlug={resolvedParams.specialty}
-              logoPathMap={logoPathMap}
             />
           </div>
         )}
@@ -742,7 +733,6 @@ export default async function LocationPage({
                 premium_listing={clinic.premium_listing}
                 handicapadgang={clinic.handicapadgang}
                 verified_klinik={clinic.verified_klinik}
-                logoPath={logoPathMap[clinic.clinics_id] ?? null}
                 trackingContextCityId={data.city!.id}
               />
             ))}
@@ -762,7 +752,6 @@ export default async function LocationPage({
           cityName={data.city.bynavn}
           specialtySlug={resolvedParams.specialty}
           specialtyName={specialtyName}
-          logoPathMap={logoPathMap}
         />
       )}
 

@@ -6,7 +6,10 @@
 import { Agentation } from "agentation";
 
 const AgentationDevtools = () => {
-  if (process.env.NODE_ENV !== "development") {
+  if (
+    process.env.NODE_ENV !== "development" ||
+    process.env.NEXT_PUBLIC_ENABLE_AGENTATION_DEVTOOLS !== "true"
+  ) {
     return null;
   }
 

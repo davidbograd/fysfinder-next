@@ -45,7 +45,6 @@ interface Props {
   premium_listing?: PremiumListing | null;
   handicapadgang?: boolean | null;
   verified_klinik?: boolean | null;
-  logoPath?: string | null;
   trackingContextCityId?: string;
 }
 
@@ -67,15 +66,29 @@ const ClinicCard: React.FC<Props> = ({
   premium_listing,
   handicapadgang,
   verified_klinik,
-  logoPath,
   trackingContextCityId,
 }) => {
   const MAX_VISIBLE_MEMBERS = 5;
   const hasMoreMembers = team_members.length > MAX_VISIBLE_MEMBERS;
   const visibleMembers = team_members.slice(0, MAX_VISIBLE_MEMBERS);
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
+  const [logoLoadFailed, setLogoLoadFailed] = useState(false);
   const isPremium = isPremiumListingActive(premium_listing);
-  const hasLogo = Boolean(logoPath);
+  const logoDevToken = process.env.NEXT_PUBLIC_LOGO_DEV_PUBLISHABLE_KEY;
+  const logoDomain = website
+    ? website
+        .trim()
+        .replace(/^https?:\/\//i, "")
+        .replace(/^www\./i, "")
+        .split("/")[0]
+        .split("?")[0]
+        .toLowerCase()
+    : null;
+  const logoPath =
+    logoDomain && logoDevToken
+      ? `https://img.logo.dev/${logoDomain}?token=${logoDevToken}&size=64&format=png&fallback=404&retina=true`
+      : null;
+  const hasLogo = Boolean(logoPath) && !logoLoadFailed;
   const cardRef = useRef<HTMLDivElement>(null);
   const hasTrackedImpression = useRef(false);
   const [isMapHighlighted, setIsMapHighlighted] = useState(false);
@@ -179,6 +192,7 @@ const ClinicCard: React.FC<Props> = ({
                     width={64}
                     height={64}
                     className="w-full h-full object-contain"
+                    onError={() => setLogoLoadFailed(true)}
                   />
                 </div>
               ) : (

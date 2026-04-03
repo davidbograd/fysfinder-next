@@ -14,7 +14,6 @@ interface ClinicsListProps {
   totalClinics: number;
   specialtySlug?: string;
   itemsPerPage?: number;
-  logoPathMap?: Record<string, string | null>;
   trackingContextCityId?: string;
 }
 
@@ -23,7 +22,6 @@ export function ClinicsList({
   totalClinics,
   specialtySlug,
   itemsPerPage = 10,
-  logoPathMap,
   trackingContextCityId,
 }: ClinicsListProps) {
   const [displayCount, setDisplayCount] = useState(itemsPerPage);
@@ -63,7 +61,6 @@ export function ClinicsList({
             premium_listing={clinic.premium_listing}
             handicapadgang={clinic.handicapadgang}
             verified_klinik={clinic.verified_klinik}
-            logoPath={logoPathMap?.[clinic.clinics_id] ?? null}
             trackingContextCityId={trackingContextCityId}
           />
         ))}

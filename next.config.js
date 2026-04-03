@@ -8,8 +8,13 @@ const nextConfig = {
         hostname: 'dbqnutjbrxydltkeftnv.supabase.co',
         pathname: '/**',
       },
+      {
+        protocol: "https",
+        hostname: "img.logo.dev",
+        pathname: "/**",
+      },
     ],
-    // Logo.dev removed - logos are served from local /public/logos/ directory
+    qualities: [75, 100],
   },
   redirects: async () => {
     return [

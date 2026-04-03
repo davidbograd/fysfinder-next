@@ -10,7 +10,6 @@ interface NearbyClinicsListProps {
   cityName: string;
   specialtySlug?: string;
   specialtyName?: string;
-  logoPathMap?: Record<string, string | null>;
 }
 
 export function NearbyClinicsList({
@@ -18,7 +17,6 @@ export function NearbyClinicsList({
   cityName,
   specialtySlug,
   specialtyName,
-  logoPathMap,
 }: NearbyClinicsListProps) {
   if (clinics.length === 0) return null;
 
@@ -50,7 +48,6 @@ export function NearbyClinicsList({
             premium_listing={clinic.premium_listing}
             handicapadgang={clinic.handicapadgang}
             verified_klinik={clinic.verified_klinik}
-            logoPath={logoPathMap?.[clinic.clinics_id] ?? null}
           />
         ))}
       </div>

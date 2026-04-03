@@ -67,6 +67,23 @@ describe("ClinicCard", () => {
     expect(screen.getByAltText("Verified clinic")).toBeInTheDocument();
   });
 
+  it("renders logo.dev image when website and token are provided", () => {
+    const previousToken = process.env.NEXT_PUBLIC_LOGO_DEV_PUBLISHABLE_KEY;
+    process.env.NEXT_PUBLIC_LOGO_DEV_PUBLISHABLE_KEY = "pk_test_token";
+
+    render(
+      <ClinicCard {...mockClinic} website="https://www.example.com/clinic" />
+    );
+
+    const logo = screen.getByAltText("Fysioterapi Klinikken logo");
+    expect(logo).toHaveAttribute(
+      "src",
+      "https://img.logo.dev/example.com?token=pk_test_token&size=64&format=png&fallback=404&retina=true"
+    );
+
+    process.env.NEXT_PUBLIC_LOGO_DEV_PUBLISHABLE_KEY = previousToken;
+  });
+
   it("dispatches card hover event on mouse enter", async () => {
     const user = userEvent.setup();
     const dispatchSpy = jest.spyOn(window, "dispatchEvent");

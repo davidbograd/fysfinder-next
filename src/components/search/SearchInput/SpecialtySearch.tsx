@@ -3,7 +3,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useSearch } from "../SearchProvider";
-import { createClient } from "@supabase/supabase-js";
+import { createClient } from "@/app/utils/supabase/client";
 
 interface Specialty {
   specialty_id: string;
@@ -20,10 +20,7 @@ let specialtiesCache: Specialty[] | null = null;
 let specialtiesPromise: Promise<Specialty[]> | null = null;
 
 // Client-side Supabase client
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+const supabase = createClient();
 
 // Client-side specialty fetcher
 async function fetchSpecialties(): Promise<Specialty[]> {
