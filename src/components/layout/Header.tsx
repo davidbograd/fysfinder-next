@@ -7,6 +7,7 @@ import SiteLogo from "@/components/ui/Icons/SiteLogo";
 import { Button } from "@/components/ui/button";
 import { Menu, X, User, LogOut, ChevronDown } from "lucide-react";
 import { useState, useEffect } from "react";
+import type { AuthChangeEvent, Session } from "@supabase/supabase-js";
 import { UserMenu } from "@/components/auth/UserMenu";
 import { createClient } from "@/app/utils/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -127,7 +128,8 @@ export default function Header({ totalClinics, specialtyCount }: HeaderProps) {
     // Listen for auth changes
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
+    } = supabase.auth.onAuthStateChange(
+      (event: AuthChangeEvent, session: Session | null) => {
       setIsLoggedIn(!!session?.user);
       
       // Force a re-check after state change to ensure sync
