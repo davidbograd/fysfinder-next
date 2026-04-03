@@ -114,18 +114,6 @@ export const SignUpForm = () => {
         return;
       }
 
-      // Check if we have a session
-      if (!authData.session) {
-        toast({
-          title: "Email bekræftelse påkrævet",
-          description: "Tjek din email for at bekræfte din konto.",
-          variant: "destructive",
-        });
-        setIsLoading(false);
-        router.push("/auth/verify");
-        return;
-      }
-
       // Create user profile using server action
       try {
         const profileResult = await createUserProfile({
@@ -147,6 +135,18 @@ export const SignUpForm = () => {
         // Profile creation failed, but user is already created and logged in
         // Continue to dashboard anyway - profile might already exist or temporary issue
         console.warn("Profile creation error:", profileError);
+      }
+
+      // Check if we have a session
+      if (!authData.session) {
+        toast({
+          title: "Email bekræftelse påkrævet",
+          description: "Tjek din email for at bekræfte din konto.",
+          variant: "destructive",
+        });
+        setIsLoading(false);
+        router.push("/auth/verify");
+        return;
       }
 
       // Success - show message and redirect

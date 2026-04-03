@@ -120,16 +120,21 @@ export async function submitClinicClaim(data: {
     return { error: "Fejl ved indsendelse af claim" };
   }
 
-  // Send email notification to admins (don't block on failure)
-  sendClaimNotificationToAdmins({
+  // Await email send to avoid serverless dropping fire-and-forget promises.
+  const emailResult = await sendClaimNotificationToAdmins({
     klinik_navn: data.klinik_navn,
     fulde_navn: data.fulde_navn,
     email: data.email,
     telefon: data.telefon,
     job_titel: data.job_titel,
-  }).catch((error) => {
-    console.error("Failed to send admin notification:", error);
   });
+
+  if (!emailResult.success) {
+    console.error(
+      "Failed to send admin claim notification:",
+      emailResult.error
+    );
+  }
 
   return { success: true };
 }

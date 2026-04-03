@@ -28,13 +28,18 @@ export const createUserProfile = async (data: {
       return { error: error.message };
     }
 
-    // Send email notification to admins (don't block on failure)
-    sendNewUserSignupNotificationToAdmins({
+    // Await email send to avoid serverless dropping fire-and-forget promises.
+    const emailResult = await sendNewUserSignupNotificationToAdmins({
       full_name: data.full_name,
       email: data.email,
-    }).catch((error) => {
-      console.error("Failed to send admin notification:", error);
     });
+
+    if (!emailResult.success) {
+      console.error(
+        "Failed to send admin signup notification:",
+        emailResult.error
+      );
+    }
 
     return { success: true };
   } catch (err) {
