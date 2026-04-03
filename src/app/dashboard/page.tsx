@@ -1,5 +1,5 @@
 // Dashboard page for clinic owners and admins.
-// Updated: restores nearby-city opportunity visibility in KPI upsells for free and premium owners.
+// Updated: includes booking clicks in lead KPI totals and contribution breakdown.
 
 import { redirect } from "next/navigation";
 import { createClient } from "@/app/utils/supabase/server";
@@ -94,6 +94,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
       acc.phoneClicks += stats.phoneClicks || 0;
       acc.websiteClicks += stats.websiteClicks || 0;
       acc.emailClicks += stats.emailClicks || 0;
+      acc.bookingClicks += stats.bookingClicks || 0;
       return acc;
     },
     {
@@ -102,6 +103,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
       phoneClicks: 0,
       websiteClicks: 0,
       emailClicks: 0,
+      bookingClicks: 0,
     }
   );
   const isDevelopment = process.env.NODE_ENV !== "production";
@@ -116,6 +118,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
     analyticsTotals.phoneClicks = 0;
     analyticsTotals.websiteClicks = 0;
     analyticsTotals.emailClicks = 0;
+    analyticsTotals.bookingClicks = 0;
   }
 
   const hasAnyClinics = ownedClinics.length > 0 || pendingClaims.length > 0;
@@ -123,13 +126,15 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
   const totalLeadClicks =
     analyticsTotals.phoneClicks +
     analyticsTotals.websiteClicks +
-    analyticsTotals.emailClicks;
+    analyticsTotals.emailClicks +
+    analyticsTotals.bookingClicks;
   const totalViews = analyticsTotals.profileViews + analyticsTotals.listImpressions;
   const getShare = (value: number, total: number) =>
     total > 0 ? Math.round((value / total) * 100) : 0;
   const phoneShare = getShare(analyticsTotals.phoneClicks, totalLeadClicks);
   const websiteShare = getShare(analyticsTotals.websiteClicks, totalLeadClicks);
   const emailShare = getShare(analyticsTotals.emailClicks, totalLeadClicks);
+  const bookingShare = getShare(analyticsTotals.bookingClicks, totalLeadClicks);
   const listShare = getShare(analyticsTotals.listImpressions, totalViews);
   const profileShare = getShare(analyticsTotals.profileViews, totalViews);
   const upliftByClinic =
@@ -184,6 +189,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
     )?.data ||
     upliftByClinic.find((result) => result.data)?.data ||
     null;
+  const primaryUpgradeClinicId = ownedClinics[0]?.clinics_id || null;
 
   const formatAreaList = (areas: string[]) => {
     if (areas.length === 0) return "nabo-områder";
@@ -355,6 +361,22 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                               </p>
                             </TooltipContent>
                           </Tooltip>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <div
+                                className="relative flex items-center justify-center bg-[#b8c8e6] cursor-help"
+                                style={{
+                                  width: `${bookingShare}%`,
+                                }}
+                              />
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>
+                                Booking klik {analyticsTotals.bookingClicks.toLocaleString("da-DK")} (
+                                {bookingShare}%)
+                              </p>
+                            </TooltipContent>
+                          </Tooltip>
                         </div>
                       </div>
                     </TooltipProvider>
@@ -386,6 +408,15 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                           <span>Email klik</span>
                         </div>
                       </div>
+                      <div className="flex items-center text-sm">
+                        <div className="flex items-center text-gray-700">
+                          <span className="h-2.5 w-2.5 rounded-full bg-[#b8c8e6]" />
+                          <span className="px-2 font-medium text-gray-900 tabular-nums">
+                            {analyticsTotals.bookingClicks.toLocaleString("da-DK")}
+                          </span>
+                          <span>Booking klik</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -404,9 +435,17 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                     <p className="text-sm text-gray-700">
                       Bliv synlig på flere byer og få flere patienter.
                     </p>
-                    <Button type="button" size="sm" className="sm:shrink-0">
-                      Opgrader
-                    </Button>
+                    {primaryUpgradeClinicId ? (
+                      <Button asChild type="button" size="sm" className="sm:shrink-0">
+                        <Link href={`/dashboard/clinic/${primaryUpgradeClinicId}/premium`}>
+                          Opgrader
+                        </Link>
+                      </Button>
+                    ) : (
+                      <Button type="button" size="sm" className="sm:shrink-0" disabled>
+                        Opgrader
+                      </Button>
+                    )}
                   </div>
                 </div>
               )}
@@ -504,9 +543,17 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                     <p className="text-sm text-gray-700">
                       Bliv synlig på flere byer og få flere patienter.
                     </p>
-                    <Button type="button" size="sm" className="sm:shrink-0">
-                      Opgrader
-                    </Button>
+                    {primaryUpgradeClinicId ? (
+                      <Button asChild type="button" size="sm" className="sm:shrink-0">
+                        <Link href={`/dashboard/clinic/${primaryUpgradeClinicId}/premium`}>
+                          Opgrader
+                        </Link>
+                      </Button>
+                    ) : (
+                      <Button type="button" size="sm" className="sm:shrink-0" disabled>
+                        Opgrader
+                      </Button>
+                    )}
                   </div>
                 </div>
               )}
@@ -592,9 +639,17 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                       <p className="text-sm text-gray-700">
                         Top klinikker får flere henvendelser og patienter.
                       </p>
-                      <Button type="button" size="sm">
-                        Opgrader
-                      </Button>
+                      {primaryUpgradeClinicId ? (
+                        <Button asChild type="button" size="sm">
+                          <Link href={`/dashboard/clinic/${primaryUpgradeClinicId}/premium`}>
+                            Opgrader
+                          </Link>
+                        </Button>
+                      ) : (
+                        <Button type="button" size="sm" disabled>
+                          Opgrader
+                        </Button>
+                      )}
                     </div>
                   </div>
                 )}

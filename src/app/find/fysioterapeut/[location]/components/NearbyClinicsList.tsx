@@ -1,5 +1,5 @@
-// NearbyClinicsList component - Renders nearby clinics with distance
-// Updated: passes clinicId to ClinicCard for analytics tracking
+// NearbyClinicsList component - Renders nearby clinics with distance.
+// Updated: forwards location tracking context so nearby interactions keep city attribution.
 
 import { ClinicWithDistance } from "@/app/types";
 import ClinicCard from "../../../../../components/features/clinic/ClinicCard";
@@ -8,6 +8,7 @@ import { orderSpecialties } from "@/lib/clinic-utils";
 interface NearbyClinicsListProps {
   clinics: ClinicWithDistance[];
   cityName: string;
+  trackingContextCityId?: string;
   specialtySlug?: string;
   specialtyName?: string;
 }
@@ -15,6 +16,7 @@ interface NearbyClinicsListProps {
 export function NearbyClinicsList({
   clinics,
   cityName,
+  trackingContextCityId,
   specialtySlug,
   specialtyName,
 }: NearbyClinicsListProps) {
@@ -48,6 +50,7 @@ export function NearbyClinicsList({
             premium_listing={clinic.premium_listing}
             handicapadgang={clinic.handicapadgang}
             verified_klinik={clinic.verified_klinik}
+            trackingContextCityId={trackingContextCityId}
           />
         ))}
       </div>

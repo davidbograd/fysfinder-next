@@ -750,6 +750,7 @@ export default async function LocationPage({
         <NearbyClinicsList
           clinics={data.nearbyClinicsList}
           cityName={data.city.bynavn}
+          trackingContextCityId={data.city.id}
           specialtySlug={resolvedParams.specialty}
           specialtyName={specialtyName}
         />
