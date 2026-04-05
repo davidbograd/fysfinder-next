@@ -33,6 +33,7 @@ User-agent: Google-Extended
 User-agent: AdsBot-Google
 User-agent: AdsBot-Google-Mobile
 User-agent: AdsBot-Google-Mobile-Apps
+Disallow: /search
 Disallow: /_next/
 Allow: /*.js$
 Allow: /*.css$

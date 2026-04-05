@@ -85,7 +85,7 @@ export default async function SearchPage({
                   <CardHeader>
                     <CardTitle>
                       <Link
-                        href={`/${clinic.lokationSlug}/${clinic.klinikNavnSlug}`}
+                        href={`/klinik/${clinic.klinikNavnSlug}`}
                         className="text-blue-500 hover:underline"
                       >
                         {clinic.klinikNavn}
