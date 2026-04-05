@@ -57,5 +57,6 @@ Sitemap: https://www.fysfinder.dk/sitemap-cities.xml
 Sitemap: https://www.fysfinder.dk/sitemap-specialties-core.xml
 Sitemap: https://www.fysfinder.dk/sitemap-specialties-cities.xml
 Sitemap: https://www.fysfinder.dk/sitemap-clinics.xml
-Sitemap: https://www.fysfinder.dk/sitemap-articles.xml
 Sitemap: https://www.fysfinder.dk/sitemap-ordbog.xml
+Sitemap: https://www.fysfinder.dk/sitemap-blog-posts.xml
+Sitemap: https://www.fysfinder.dk/sitemap-vaerktoejer.xml
