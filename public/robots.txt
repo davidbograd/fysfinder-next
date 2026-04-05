@@ -3,6 +3,7 @@ User-agent: *
 Allow: /
 Disallow: /search
 Disallow: /postnumre
+Disallow: /_next/
 Crawl-delay: 1
 
 # **** Ahrefs Bot Settings ****
@@ -32,6 +33,7 @@ User-agent: Google-Extended
 User-agent: AdsBot-Google
 User-agent: AdsBot-Google-Mobile
 User-agent: AdsBot-Google-Mobile-Apps
+Disallow: /_next/
 Allow: /*.js$
 Allow: /*.css$
 Allow: /*.png$
