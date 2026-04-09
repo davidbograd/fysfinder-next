@@ -17,7 +17,7 @@ export function SignupCtaSplitSection() {
       <div className="mx-auto w-full max-w-[1440px] px-5 sm:px-6 lg:px-8">
         <div className="rounded-3xl bg-[#f3f1ea] p-6 md:p-8 lg:p-10">
           <div className="grid w-full gap-8 lg:grid-cols-2 lg:items-center lg:gap-12">
-            <div className="mx-auto w-full max-w-[560px]">
+            <div className="mx-auto w-full max-w-[500px]">
               <div className="overflow-hidden rounded-2xl">
                 <Image
                   src="/images/tilmeld/fysio-patient-behandling2.jpg"

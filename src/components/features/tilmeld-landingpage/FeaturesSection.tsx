@@ -11,7 +11,7 @@ export function FeaturesSection() {
       <div className="mx-auto w-full max-w-[1440px] px-5 sm:px-6 lg:px-8">
         <div className="mb-10 space-y-3">
           <h2 className="text-[2rem] font-semibold leading-tight text-[#1f2b28]">
-            Få flere patienter - helt gratis
+            Kom i gang med Fysfinder - helt gratis
           </h2>
           <p className="max-w-3xl text-gray-600">
             Fysfinder gør din fysioterapeutklinik synlig, når patienter søger

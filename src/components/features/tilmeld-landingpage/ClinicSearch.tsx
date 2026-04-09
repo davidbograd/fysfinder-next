@@ -75,7 +75,7 @@ export function ClinicSearch() {
                   className="h-auto bg-logo-blue px-7 py-3 text-base text-white hover:bg-logo-blue/90"
                   asChild
                 >
-                  <Link href="/auth/signup">Kom gratis i gang</Link>
+                  <Link href="/auth/signup">Tilmeld din klinik gratis</Link>
                 </Button>
               </div>
             </div>
