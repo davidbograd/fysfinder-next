@@ -178,6 +178,24 @@
     --hero-card-sway-delay: 1020ms;
   }
 
+  @keyframes hero-pill-stack-in {
+    0% {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .hero-stacked-pill-in {
+    opacity: 0;
+    animation: hero-pill-stack-in 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--hero-pill-delay, 0s);
+    will-change: opacity, transform;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
@@ -191,6 +209,12 @@
       opacity: 1;
       translate: 0 0;
       rotate: 0deg;
+    }
+
+    .hero-stacked-pill-in {
+      animation: none;
+      opacity: 1;
+      transform: none;
     }
   }
 }

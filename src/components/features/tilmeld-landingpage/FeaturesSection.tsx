@@ -1,74 +1,73 @@
 import {
   ChartNoAxesCombined,
   BadgeCheck,
-  Wand2,
-  CalendarArrowUp,
+  Eye,
+  MessageSquare,
 } from "lucide-react";
 
 export function FeaturesSection() {
   return (
     <section
       id="features"
-      className="w-full py-12 md:py-24 lg:py-32 bg-gray-50"
+      className="w-full bg-background py-16 md:py-20"
     >
-      <div className="container px-4 md:px-6">
-        <div className="flex flex-col items-center justify-center space-y-4 text-center">
-          <div className="space-y-2">
-            <div className="inline-block rounded-lg bg-logo-blue px-3 py-1 text-sm text-white">
-              Alt-i-en platform
-            </div>
-            <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-              Sådan får du flere patienter med Fysfinder
+      <div className="mx-auto w-full max-w-[1440px] px-5 sm:px-6 lg:px-8">
+        <div className="mb-10">
+          <div className="space-y-3">
+            <h2 className="text-[2rem] font-semibold leading-tight text-[#1f2b28]">
+              Sådan får du flere patienter - helt gratis
             </h2>
-            <p className="max-w-[900px] text-gray-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Fysfinder giver dig smarte værktøjer til nemt at tiltrække flere
-              patienter.
+            <p className="max-w-3xl text-gray-600">
+              Fysfinder gør din fysioterapeutklinik synlig, når patienter søger
+              efter fysioterapi i dit område.
             </p>
           </div>
         </div>
-        <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
+        <div className="grid max-w-5xl items-center gap-6 lg:grid-cols-2 lg:gap-12">
           <div className="flex gap-4">
-            <ChartNoAxesCombined className="h-8 w-8 text-logo-blue" />
+            <Eye className="h-8 w-8 text-logo-blue" />
             <div className="space-y-2">
-              <h3 className="text-xl font-bold">Øget synlighed</h3>
+              <h3 className="text-xl font-semibold text-[#1f2b28]">
+                Bliv fundet først
+              </h3>
               <p className="text-gray-600">
-                Vær blandt de første i søgeresultaterne, når patienter leder
-                efter fysioterapi i dit område.
+                Vær synlig når patienter søger efter fysioterapi i dit område -
+                ikke gemt bag store kæder.
               </p>
             </div>
           </div>
           <div className="flex gap-4">
             <BadgeCheck className="h-8 w-8 text-logo-blue" />
             <div className="space-y-2">
-              <h3 className="text-xl font-bold">Verificeret badge</h3>
+              <h3 className="text-xl font-semibold text-[#1f2b28]">
+                Skab tillid med det samme
+              </h3>
               <p className="text-gray-600">
-                Skil dig ud med et verificeret badge, der viser patienter, at
-                din klinik er legitim og pålidelig.
+                En professionel profil og verificeret badge gør det nemt for
+                patienter at vælge dig.
               </p>
             </div>
           </div>
           <div className="flex gap-4">
-            <Wand2 className="h-8 w-8 text-logo-blue" />
+            <ChartNoAxesCombined className="h-8 w-8 text-logo-blue" />
             <div className="space-y-2">
-              <h3 className="text-xl font-bold">Profiltilpasning</h3>
+              <h3 className="text-xl font-semibold text-[#1f2b28]">
+                Vis hvad du tilbyder
+              </h3>
               <p className="text-gray-600">
-                Fremvis dine ydelser, personale, faciliteter og specialer med en
-                fuldt tilpasselig profil.
+                Fremhæv dine ydelser, specialer og faciliteter, så patienter ved
+                hvorfor de skal vælge netop dig.
               </p>
             </div>
           </div>
           <div className="flex gap-4">
-            <CalendarArrowUp className="h-8 w-8 text-logo-blue" />
+            <MessageSquare className="h-8 w-8 text-logo-blue" />
             <div className="space-y-2">
-              <div className="flex items-center gap-2">
-                <h3 className="text-xl font-bold">Direkte booking</h3>
-                <span className="bg-amber-100 text-amber-800 text-xs px-2 py-0.5 rounded-full font-medium">
-                  Premium
-                </span>
-              </div>
+              <h3 className="text-xl font-semibold text-[#1f2b28]">
+                Få henvendelser direkte
+              </h3>
               <p className="text-gray-600">
-                Lad patienter booke tider gennem din profil med link direkte til
-                dit bookingsystem.
+                Patienter kan kontakte dig eller booke direkte via din profil.
               </p>
             </div>
           </div>

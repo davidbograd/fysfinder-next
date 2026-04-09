@@ -1,5 +1,5 @@
 // Homepage component with graceful error handling
-// Updated: 2026-03-25 - Extracted hero datapoints into a shared reusable component
+// Updated: 2026-04-06 - Reused shared PartnerStrip component across homepage and tilmeld
 
 import React from "react";
 import { Metadata } from "next";
@@ -10,6 +10,7 @@ import { FAQ } from "@/components/features/blog-og-ordbog/FAQ";
 import { SearchInterface } from "@/components/search/SearchInterface";
 import { RegionList } from "@/components/features/search/RegionList";
 import { HeroDataPoints } from "@/components/features/search/HeroDataPoints";
+import { PartnerStrip } from "@/components/features/shared/PartnerStrip";
 import {
   fetchCitiesWithCounts,
   fetchSpecialties,
@@ -192,42 +193,6 @@ function ValuePropsSection() {
             .
           </p>
         </article>
-      </div>
-    </section>
-  );
-}
-
-function PartnerStrip() {
-  return (
-    <section className="rounded-xl bg-[#f3f1ea] px-6 py-8 md:px-10 md:py-10">
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-        <div>
-          <p className="text-[20px] font-light text-brand-label">Partnerskaber</p>
-          <h2 className="mt-1 text-[32px] leading-tight font-normal text-[#1f2b28]">
-            Foreninger der anbefaler Fysfinder
-          </h2>
-        </div>
-
-        <div className="flex w-full flex-wrap items-center gap-6 sm:w-auto sm:gap-10">
-          <div className="w-full max-w-full sm:w-auto">
-            <Image
-              src="/images/samarbejdspartnere/FAKS-logo-med-hele-navn.png"
-              alt="FAKS logo"
-              width={260}
-              height={80}
-              className="h-auto w-full max-w-[300px] sm:w-auto sm:max-w-[360px]"
-            />
-          </div>
-          <div className="w-full max-w-full sm:w-auto">
-            <Image
-              src="/images/samarbejdspartnere/hovedpine-foreningen.png"
-              alt="Hovedpineforeningen logo"
-              width={340}
-              height={120}
-              className="h-auto w-full max-w-[300px] sm:w-auto sm:max-w-[360px]"
-            />
-          </div>
-        </div>
       </div>
     </section>
   );
