@@ -15,7 +15,7 @@ describe("/tilmeld page", () => {
     expect(
       screen.getByRole("heading", {
         level: 2,
-        name: /Spørgsmål og svar om Fysfinder/i,
+        name: /Fysfinder FAQ/i,
       })
     ).toBeInTheDocument();
     expect(

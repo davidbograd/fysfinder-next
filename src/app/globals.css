@@ -84,6 +84,12 @@
     @apply bg-background text-foreground;
     font-family: var(--font-manrope), sans-serif;
   }
+
+  /* Site-wide heading weight standardization */
+  h1,
+  h2 {
+    font-weight: 400 !important;
+  }
 }
 
 @layer components {

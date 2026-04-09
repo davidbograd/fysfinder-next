@@ -30,10 +30,10 @@ export default function ClinicOwnerPage() {
         <HeroSection />
       </FullBleedSection>
       <FullBleedSection>
-        <ClinicSearch />
+        <FeaturesSection />
       </FullBleedSection>
       <FullBleedSection>
-        <TextImageSection />
+        <ClinicSearch />
       </FullBleedSection>
       <FullBleedSection>
         <div className="mx-auto w-full max-w-[1440px] px-5 sm:px-6 lg:px-8">
@@ -41,7 +41,7 @@ export default function ClinicOwnerPage() {
         </div>
       </FullBleedSection>
       <FullBleedSection>
-        <FeaturesSection />
+        <TextImageSection />
       </FullBleedSection>
       <FullBleedSection>
         <SignupCtaSplitSection />
