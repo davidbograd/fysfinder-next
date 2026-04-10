@@ -14,7 +14,7 @@ const steps: Step[] = [
   {
     title: "Opret din klinik",
     description:
-      "Opret dig gratis på Fysfinder og claime din klinikprofil.",
+      "Opret dig gratis på Fysfinder og verificér din klinik.",
   },
   {
     title: "Bliv fundet lokalt",
