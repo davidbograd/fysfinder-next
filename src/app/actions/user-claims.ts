@@ -47,6 +47,19 @@ export async function getUserClaims() {
     return { error: "Fejl ved hentning af anmodninger" };
   }
 
-  return { claims: claims || [] };
+  const { data: creationRequests, error: creationRequestsError } = await supabase
+    .from("clinic_creation_requests")
+    .select(
+      "id, clinic_name, address, postal_code, city_name, status, created_at, reviewed_at, admin_notes, created_clinic_id"
+    )
+    .eq("user_id", user.id)
+    .order("created_at", { ascending: false });
+
+  if (creationRequestsError) {
+    console.error("Error fetching user clinic creation requests:", creationRequestsError);
+    return { error: "Fejl ved hentning af oprettelses-anmodninger" };
+  }
+
+  return { claims: claims || [], creationRequests: creationRequests || [] };
 }
 

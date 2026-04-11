@@ -18,7 +18,6 @@ import {
   Edit,
   Rocket,
   Trash2,
-  CheckCircle2,
 } from "lucide-react";
 
 interface ClinicCardProps {
@@ -88,14 +87,6 @@ export const ClinicCard = ({ clinic }: ClinicCardProps) => {
             <p className="text-sm text-gray-600">{clinic.lokation}</p>
           )}
         </div>
-
-        {/* Verified Badge */}
-        {clinic.verified_klinik && (
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-green-50 text-green-700 rounded text-xs font-medium">
-            <CheckCircle2 className="h-3.5 w-3.5" />
-            Verificeret
-          </div>
-        )}
 
         {/* Action Buttons */}
         <div className="space-y-2 pt-2">

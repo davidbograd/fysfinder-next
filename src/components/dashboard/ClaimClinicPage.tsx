@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { searchCities } from "@/app/actions/search-cities";
 import { searchClinicsByCity, submitClinicClaim } from "@/app/actions/claim-clinic";
@@ -36,6 +37,13 @@ interface Clinic {
   verified_klinik: boolean;
 }
 
+function sortClinicsForClaimList(clinics: Clinic[]) {
+  return [...clinics].sort((a, b) => {
+    if (a.verified_klinik === b.verified_klinik) return 0;
+    return a.verified_klinik ? 1 : -1;
+  });
+}
+
 export const ClaimClinicPage = ({ userProfile }: ClaimClinicPageProps) => {
   const router = useRouter();
   const { toast } = useToast();
@@ -49,12 +57,12 @@ export const ClaimClinicPage = ({ userProfile }: ClaimClinicPageProps) => {
   const [isLoadingClinics, setIsLoadingClinics] = useState(false);
   const [selectedClinic, setSelectedClinic] = useState<Clinic | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmittingClaim, setIsSubmittingClaim] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const debounceRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
-  const [formData, setFormData] = useState({
+  const [claimFormData, setClaimFormData] = useState({
     klinik_navn: "",
     job_titel: "",
     fulde_navn: userProfile?.full_name || "",
@@ -62,6 +70,15 @@ export const ClaimClinicPage = ({ userProfile }: ClaimClinicPageProps) => {
     telefon: "",
   });
 
+  const getPrimaryPostalCode = (city: City | null) => {
+    if (city?.postal_codes?.[0]) return city.postal_codes[0];
+    const fallbackClinic = clinics.find((clinic) => clinic.postnummer);
+    return fallbackClinic?.postnummer ? `${fallbackClinic.postnummer}` : "";
+  };
+  const formatCitySelection = (city: City) => {
+    const primaryPostalCode = getPrimaryPostalCode(city);
+    return primaryPostalCode ? `${primaryPostalCode} ${city.bynavn}` : city.bynavn;
+  };
   // Debounced search function
   const debouncedSearch = async (query: string) => {
     if (query.length < 2) {
@@ -96,7 +113,7 @@ export const ClaimClinicPage = ({ userProfile }: ClaimClinicPageProps) => {
     setInputValue(value);
 
     // Clear selected city if user edits
-    if (selectedCity && value !== selectedCity.bynavn) {
+    if (selectedCity && value !== formatCitySelection(selectedCity)) {
       setSelectedCity(null);
       setClinics([]);
     }
@@ -115,7 +132,7 @@ export const ClaimClinicPage = ({ userProfile }: ClaimClinicPageProps) => {
   // Handle location selection
   const handleLocationSelect = async (city: City) => {
     setSelectedCity(city);
-    setInputValue(city.bynavn);
+    setInputValue(formatCitySelection(city));
     setShowCityDropdown(false);
     setSuggestions(null);
     setSelectedIndex(-1);
@@ -125,7 +142,7 @@ export const ClaimClinicPage = ({ userProfile }: ClaimClinicPageProps) => {
     try {
       const clinicsResult = await searchClinicsByCity(city.bynavn_slug);
       if (clinicsResult.clinics) {
-        setClinics(clinicsResult.clinics);
+        setClinics(sortClinicsForClaimList(clinicsResult.clinics));
       }
       if (clinicsResult.error) {
         toast({
@@ -233,8 +250,8 @@ export const ClaimClinicPage = ({ userProfile }: ClaimClinicPageProps) => {
       return;
     }
     setSelectedClinic(clinic);
-    setFormData({
-      ...formData,
+    setClaimFormData({
+      ...claimFormData,
       klinik_navn: clinic.klinikNavn,
     });
     setIsModalOpen(true);
@@ -244,15 +261,15 @@ export const ClaimClinicPage = ({ userProfile }: ClaimClinicPageProps) => {
     e.preventDefault();
     if (!selectedClinic) return;
 
-    setIsSubmitting(true);
+    setIsSubmittingClaim(true);
     try {
       const result = await submitClinicClaim({
         clinic_id: selectedClinic.clinics_id,
-        klinik_navn: formData.klinik_navn,
-        job_titel: formData.job_titel,
-        fulde_navn: formData.fulde_navn,
-        email: formData.email,
-        telefon: formData.telefon,
+        klinik_navn: claimFormData.klinik_navn,
+        job_titel: claimFormData.job_titel,
+        fulde_navn: claimFormData.fulde_navn,
+        email: claimFormData.email,
+        telefon: claimFormData.telefon,
       });
 
       if (result.error) {
@@ -261,7 +278,7 @@ export const ClaimClinicPage = ({ userProfile }: ClaimClinicPageProps) => {
           description: result.error,
           variant: "destructive",
         });
-        setIsSubmitting(false);
+        setIsSubmittingClaim(false);
         return;
       }
 
@@ -279,7 +296,7 @@ export const ClaimClinicPage = ({ userProfile }: ClaimClinicPageProps) => {
         variant: "destructive",
       });
     } finally {
-      setIsSubmitting(false);
+      setIsSubmittingClaim(false);
     }
   };
 
@@ -287,33 +304,17 @@ export const ClaimClinicPage = ({ userProfile }: ClaimClinicPageProps) => {
     <div className="py-8 w-full max-w-4xl">
       <div className="mb-8">
         <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-          Tag ejerskab af din klinik
+          Tilknyt din klinik
         </h1>
         <p className="mt-2 text-sm text-gray-600">
-          Søg efter din klinik og tag ejerskab
+          Vælg en by, find din klinik og tag ejerskab. Hvis din klinik ikke findes, kan du oprette en ny.
         </p>
       </div>
 
-      {/* What you will need section */}
+      {/* Shared city search */}
       <Card className="mb-6">
         <CardHeader>
-          <CardTitle>Hvad har du brug for?</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <ul className="space-y-2 text-sm text-gray-600 list-disc list-inside">
-            <li>Klinikkens navn</li>
-            <li>Din stillingsbetegnelse</li>
-            <li>Dit fulde navn</li>
-            <li>Din email</li>
-            <li>Dit telefonnummer (valgfrit)</li>
-          </ul>
-        </CardContent>
-      </Card>
-
-      {/* Search section */}
-      <Card className="mb-6">
-        <CardHeader>
-          <CardTitle>Søg efter din klinik</CardTitle>
+          <CardTitle>Vælg by</CardTitle>
           <CardDescription>
             Indtast by eller postnummer for at finde din klinik
           </CardDescription>
@@ -421,64 +422,97 @@ export const ClaimClinicPage = ({ userProfile }: ClaimClinicPageProps) => {
 
           {selectedCity && (
             <div className="text-sm text-gray-600">
-              Viser klinikker fra: <strong>{selectedCity.bynavn}</strong>
+              Valgt by: <strong>{formatCitySelection(selectedCity)}</strong>
               {isLoadingClinics && (
                 <Loader2 className="ml-2 h-3 w-3 inline animate-spin" />
               )}
             </div>
           )}
 
-          {clinics.length > 0 && (
-            <div className="space-y-3">
-              <h3 className="font-medium text-gray-900">
-                Fundet {clinics.length} klinik(ker)
-              </h3>
-              <div className="space-y-2">
-                {clinics.map((clinic) => (
-                  <div
-                    key={clinic.clinics_id}
-                    className="flex items-center justify-between p-4 border rounded-lg"
-                  >
-                    <div className="flex-1">
-                      <h4 className="font-medium text-gray-900">
-                        {clinic.klinikNavn}
-                      </h4>
-                      {(clinic.adresse || (clinic.postnummer && clinic.lokation)) && (
-                        <p className="text-sm text-gray-600">
-                          {[
-                            clinic.adresse,
-                            clinic.postnummer && clinic.lokation
-                              ? `${clinic.postnummer} ${clinic.lokation}`
-                              : null,
-                          ]
-                            .filter(Boolean)
-                            .join(", ")}
-                        </p>
-                      )}
-                      {clinic.verified_klinik && (
-                        <span className="inline-block mt-2 text-xs px-2 py-1 bg-green-100 text-green-800 rounded">
-                          Verificeret
-                        </span>
-                      )}
-                    </div>
-                    <Button
-                      onClick={() => handleOpenClaimModal(clinic)}
-                      disabled={clinic.verified_klinik}
-                      variant={clinic.verified_klinik ? "outline" : "default"}
-                      title={clinic.verified_klinik ? "Denne klinik er allerede verificeret" : undefined}
-                    >
-                      {clinic.verified_klinik ? "Allerede verificeret" : "Tag ejerskab"}
-                    </Button>
+          {selectedCity && (
+            <div className="space-y-4 pt-2">
+              {clinics.length > 0 && (
+                <div className="space-y-3">
+                  <h3 className="font-medium text-gray-900">
+                    Fundet {clinics.length} klinik(ker)
+                  </h3>
+                  <div className="space-y-2">
+                    {clinics.map((clinic) => (
+                      <div
+                        key={clinic.clinics_id}
+                        className="flex items-center justify-between p-4 border rounded-lg"
+                      >
+                        <div className="flex-1">
+                          <h4 className="font-medium text-gray-900">
+                            {clinic.klinikNavn}
+                          </h4>
+                          {(clinic.adresse || (clinic.postnummer && clinic.lokation)) && (
+                            <p className="text-sm text-gray-600">
+                              {[
+                                clinic.adresse,
+                                clinic.postnummer && clinic.lokation
+                                  ? `${clinic.postnummer} ${clinic.lokation}`
+                                  : null,
+                              ]
+                                .filter(Boolean)
+                                .join(", ")}
+                            </p>
+                          )}
+                          {clinic.verified_klinik && (
+                            <span className="inline-block mt-2 text-xs px-2 py-1 bg-green-100 text-green-800 rounded">
+                              Verificeret
+                            </span>
+                          )}
+                        </div>
+                        <Button
+                          onClick={() => handleOpenClaimModal(clinic)}
+                          disabled={clinic.verified_klinik}
+                          variant={clinic.verified_klinik ? "outline" : "default"}
+                          title={
+                            clinic.verified_klinik
+                              ? "Denne klinik er allerede verificeret"
+                              : undefined
+                          }
+                        >
+                          {clinic.verified_klinik
+                            ? "Allerede verificeret"
+                            : "Tag ejerskab"}
+                        </Button>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            </div>
-          )}
+                </div>
+              )}
 
-          {selectedCity && clinics.length === 0 && !isLoadingClinics && (
-            <p className="text-sm text-gray-500">
-              Ingen klinikker fundet i {selectedCity.bynavn}
-            </p>
+              {clinics.length === 0 && !isLoadingClinics && (
+                <p className="text-sm text-gray-500">Ingen klinikker fundet i {selectedCity.bynavn}</p>
+              )}
+
+              {!isLoadingClinics && (
+                <div className="rounded-lg border border-dashed border-gray-300 p-4 bg-gray-50">
+                  <p className="text-sm text-gray-700 mb-3">
+                    Er din klinik ikke på listen?
+                  </p>
+                  <Button asChild className="rounded-full">
+                    <Link
+                      href={
+                        selectedCity
+                          ? `/dashboard/claim/new?cityId=${encodeURIComponent(
+                              selectedCity.id
+                            )}&cityName=${encodeURIComponent(
+                              selectedCity.bynavn
+                            )}&citySlug=${encodeURIComponent(selectedCity.bynavn_slug)}&postalCode=${encodeURIComponent(
+                              getPrimaryPostalCode(selectedCity)
+                            )}`
+                          : "/dashboard/claim/new"
+                      }
+                    >
+                      Opret ny klinik
+                    </Link>
+                  </Button>
+                </div>
+              )}
+            </div>
           )}
         </CardContent>
       </Card>
@@ -522,9 +556,9 @@ export const ClaimClinicPage = ({ userProfile }: ClaimClinicPageProps) => {
                 <Label htmlFor="klinik_navn">Klinik navn</Label>
                 <Input
                   id="klinik_navn"
-                  value={formData.klinik_navn}
+                  value={claimFormData.klinik_navn}
                   onChange={(e) =>
-                    setFormData({ ...formData, klinik_navn: e.target.value })
+                    setClaimFormData({ ...claimFormData, klinik_navn: e.target.value })
                   }
                   required
                 />
@@ -533,9 +567,9 @@ export const ClaimClinicPage = ({ userProfile }: ClaimClinicPageProps) => {
                 <Label htmlFor="job_titel">Din rolle i klinikken?</Label>
                 <Input
                   id="job_titel"
-                  value={formData.job_titel}
+                  value={claimFormData.job_titel}
                   onChange={(e) =>
-                    setFormData({ ...formData, job_titel: e.target.value })
+                    setClaimFormData({ ...claimFormData, job_titel: e.target.value })
                   }
                   required
                 />
@@ -544,9 +578,9 @@ export const ClaimClinicPage = ({ userProfile }: ClaimClinicPageProps) => {
                 <Label htmlFor="fulde_navn">Fulde navn</Label>
                 <Input
                   id="fulde_navn"
-                  value={formData.fulde_navn}
+                  value={claimFormData.fulde_navn}
                   onChange={(e) =>
-                    setFormData({ ...formData, fulde_navn: e.target.value })
+                    setClaimFormData({ ...claimFormData, fulde_navn: e.target.value })
                   }
                   required
                 />
@@ -556,9 +590,9 @@ export const ClaimClinicPage = ({ userProfile }: ClaimClinicPageProps) => {
                 <Input
                   id="email"
                   type="email"
-                  value={formData.email}
+                  value={claimFormData.email}
                   onChange={(e) =>
-                    setFormData({ ...formData, email: e.target.value })
+                    setClaimFormData({ ...claimFormData, email: e.target.value })
                   }
                   required
                 />
@@ -568,9 +602,9 @@ export const ClaimClinicPage = ({ userProfile }: ClaimClinicPageProps) => {
                 <Input
                   id="telefon"
                   type="tel"
-                  value={formData.telefon}
+                  value={claimFormData.telefon}
                   onChange={(e) =>
-                    setFormData({ ...formData, telefon: e.target.value })
+                    setClaimFormData({ ...claimFormData, telefon: e.target.value })
                   }
                   required
                 />
@@ -581,12 +615,12 @@ export const ClaimClinicPage = ({ userProfile }: ClaimClinicPageProps) => {
                 type="button"
                 variant="outline"
                 onClick={() => setIsModalOpen(false)}
-                disabled={isSubmitting}
+                disabled={isSubmittingClaim}
               >
                 Annuller
               </Button>
-              <Button type="submit" disabled={isSubmitting}>
-                {isSubmitting ? "Indsender..." : "Tag ejerskab"}
+              <Button type="submit" disabled={isSubmittingClaim}>
+                {isSubmittingClaim ? "Indsender..." : "Tag ejerskab"}
               </Button>
             </DialogFooter>
           </form>

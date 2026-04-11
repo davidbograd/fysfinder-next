@@ -61,6 +61,19 @@ interface DashboardOwnedClinic {
   verified_klinik: boolean | null;
 }
 
+interface DashboardCreationRequest {
+  id: string;
+  clinic_name: string;
+  address: string;
+  postal_code: string;
+  city_name: string;
+  status: string;
+  created_at: string;
+  reviewed_at: string | null;
+  admin_notes: string | null;
+  created_clinic_id: string | null;
+}
+
 export default async function DashboardPage({ searchParams }: DashboardPageProps) {
   const resolvedSearchParams = await searchParams;
   const supabase = await createClient();
@@ -82,7 +95,12 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
 
   const userClaimsResult = await getUserClaims();
   const userClaims: DashboardClaim[] = (userClaimsResult.claims || []) as DashboardClaim[];
+  const userCreationRequests: DashboardCreationRequest[] =
+    (userClaimsResult.creationRequests || []) as DashboardCreationRequest[];
   let pendingClaims = userClaims.filter((claim) => claim.status === "pending");
+  let pendingCreationRequests = userCreationRequests.filter(
+    (request) => request.status === "pending"
+  );
 
   const analyticsResult =
     ownedClinics.length > 0 ? await getAllOwnedClinicAnalytics() : { stats: {} };
@@ -113,6 +131,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
   if (isDevEmptyState) {
     ownedClinics = [];
     pendingClaims = [];
+    pendingCreationRequests = [];
     analyticsTotals.profileViews = 0;
     analyticsTotals.listImpressions = 0;
     analyticsTotals.phoneClicks = 0;
@@ -121,8 +140,12 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
     analyticsTotals.bookingClicks = 0;
   }
 
-  const hasAnyClinics = ownedClinics.length > 0 || pendingClaims.length > 0;
-  const totalClinicCount = ownedClinics.length + pendingClaims.length;
+  const hasAnyClinics =
+    ownedClinics.length > 0 ||
+    pendingClaims.length > 0 ||
+    pendingCreationRequests.length > 0;
+  const totalClinicCount =
+    ownedClinics.length + pendingClaims.length + pendingCreationRequests.length;
   const totalLeadClicks =
     analyticsTotals.phoneClicks +
     analyticsTotals.websiteClicks +
@@ -314,14 +337,13 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                       <div className="relative h-5 w-full overflow-hidden rounded-full bg-brand-beige">
                         <div className="flex h-full w-full">
                           <Tooltip>
-                            <TooltipTrigger asChild>
-                              <div
-                                className="relative flex items-center justify-center bg-[#2f5fa7] cursor-help"
-                                style={{
-                                  width: `${phoneShare}%`,
-                                }}
-                              />
-                            </TooltipTrigger>
+                            <TooltipTrigger
+                              className="relative h-full bg-[#2f5fa7] cursor-help"
+                              style={{
+                                width: `${phoneShare}%`,
+                              }}
+                              aria-label="Vist tlf nummer andel"
+                            />
                             <TooltipContent>
                               <p>
                                 Vist tlf nummer {analyticsTotals.phoneClicks.toLocaleString("da-DK")} (
@@ -330,14 +352,13 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                             </TooltipContent>
                           </Tooltip>
                           <Tooltip>
-                            <TooltipTrigger asChild>
-                              <div
-                                className="relative flex items-center justify-center bg-[#4f6ea8] cursor-help"
-                                style={{
-                                  width: `${websiteShare}%`,
-                                }}
-                              />
-                            </TooltipTrigger>
+                            <TooltipTrigger
+                              className="relative h-full bg-[#4f6ea8] cursor-help"
+                              style={{
+                                width: `${websiteShare}%`,
+                              }}
+                              aria-label="Website klik andel"
+                            />
                             <TooltipContent>
                               <p>
                                 Website klik {analyticsTotals.websiteClicks.toLocaleString("da-DK")} (
@@ -346,14 +367,13 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                             </TooltipContent>
                           </Tooltip>
                           <Tooltip>
-                            <TooltipTrigger asChild>
-                              <div
-                                className="relative flex items-center justify-center bg-[#8fa6d6] cursor-help"
-                                style={{
-                                  width: `${emailShare}%`,
-                                }}
-                              />
-                            </TooltipTrigger>
+                            <TooltipTrigger
+                              className="relative h-full bg-[#8fa6d6] cursor-help"
+                              style={{
+                                width: `${emailShare}%`,
+                              }}
+                              aria-label="Email klik andel"
+                            />
                             <TooltipContent>
                               <p>
                                 Email klik {analyticsTotals.emailClicks.toLocaleString("da-DK")} (
@@ -362,14 +382,13 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                             </TooltipContent>
                           </Tooltip>
                           <Tooltip>
-                            <TooltipTrigger asChild>
-                              <div
-                                className="relative flex items-center justify-center bg-[#b8c8e6] cursor-help"
-                                style={{
-                                  width: `${bookingShare}%`,
-                                }}
-                              />
-                            </TooltipTrigger>
+                            <TooltipTrigger
+                              className="relative h-full bg-[#b8c8e6] cursor-help"
+                              style={{
+                                width: `${bookingShare}%`,
+                              }}
+                              aria-label="Booking klik andel"
+                            />
                             <TooltipContent>
                               <p>
                                 Booking klik {analyticsTotals.bookingClicks.toLocaleString("da-DK")} (
@@ -472,14 +491,13 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                     <div className="h-5 w-full overflow-hidden rounded-full bg-brand-beige">
                       <div className="flex h-full w-full">
                         <Tooltip>
-                          <TooltipTrigger asChild>
-                            <div
-                              className="bg-[#8fa6d6] cursor-help border-r border-white/50"
-                              style={{
-                                width: `${listShare}%`,
-                              }}
-                            />
-                          </TooltipTrigger>
+                          <TooltipTrigger
+                            className="h-full bg-[#8fa6d6] cursor-help border-r border-white/50"
+                            style={{
+                              width: `${listShare}%`,
+                            }}
+                            aria-label="Søgeresultat-visning andel"
+                          />
                           <TooltipContent>
                             <p>
                               I søgeresultater {analyticsTotals.listImpressions.toLocaleString("da-DK")} (
@@ -488,14 +506,13 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                           </TooltipContent>
                         </Tooltip>
                         <Tooltip>
-                          <TooltipTrigger asChild>
-                            <div
-                              className="bg-[#2f5fa7] cursor-help"
-                              style={{
-                                width: `${profileShare}%`,
-                              }}
-                            />
-                          </TooltipTrigger>
+                          <TooltipTrigger
+                            className="h-full bg-[#2f5fa7] cursor-help"
+                            style={{
+                              width: `${profileShare}%`,
+                            }}
+                            aria-label="Klinikside-visning andel"
+                          />
                           <TooltipContent>
                             <p>
                               På kliniksider {analyticsTotals.profileViews.toLocaleString("da-DK")} (
@@ -712,7 +729,10 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                   </div>
                 ))}
                 {/* Pending Claims - displayed like clinic cards */}
-                <UserClaimsSection claims={userClaims} />
+                <UserClaimsSection
+                  claims={userClaims}
+                  creationRequests={userCreationRequests}
+                />
               </>
             ) : (
               <div className="text-center py-8">
