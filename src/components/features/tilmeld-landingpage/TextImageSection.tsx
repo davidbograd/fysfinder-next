@@ -105,7 +105,7 @@ export function TextImageSection() {
             <div className="h-[5px] w-full bg-rose-700" />
               <div className="p-6">
                 <h3 className="mb-4 text-2xl font-semibold text-[#1f2b28]">
-                  Selv skaffe patienter
+                  Skaf patienter selv
                 </h3>
                 <div className="space-y-4">
                   {withoutFysfinderPoints.map((point) => (
