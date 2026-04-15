@@ -5,6 +5,7 @@
 
 import { createClient } from "@/app/utils/supabase/server";
 import { createClient as createServiceClient } from "@supabase/supabase-js";
+import { buildPremiumLocationCityIds } from "@/lib/stripe/premium-locations";
 
 interface NearbyCityActivityRpcRow {
   city_id: string;
@@ -222,9 +223,11 @@ export async function savePremiumLocationSelections(
         : (validCityRows || []).map((row) => row.id)
     );
 
-    const validSelectedCityIds = selectedCityIds.filter((cityId) =>
-      allowedCityIds.has(cityId)
-    );
+    const persistedCityIds = buildPremiumLocationCityIds({
+      homeCityId: clinic.city_id || null,
+      selectedCityIds,
+      allowedCityIds,
+    });
 
     const { error: deleteError } = await serviceSupabase
       .from("premium_listing_locations")
@@ -235,11 +238,11 @@ export async function savePremiumLocationSelections(
       return { error: "Kunne ikke opdatere byer" };
     }
 
-    if (validSelectedCityIds.length > 0) {
+    if (persistedCityIds.length > 0) {
       const { error: insertError } = await serviceSupabase
         .from("premium_listing_locations")
         .insert(
-          validSelectedCityIds.map((cityId) => ({
+          persistedCityIds.map((cityId) => ({
             premium_listing_id: activeListing.id,
             city_id: cityId,
           }))
