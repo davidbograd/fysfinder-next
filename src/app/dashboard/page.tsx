@@ -6,7 +6,7 @@ import { createClient } from "@/app/utils/supabase/server";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { Info, Mail, Shield, TrendingUp } from "lucide-react";
+import { Mail, Shield, TrendingUp } from "lucide-react";
 import Link from "next/link";
 import { isAdminEmail } from "@/lib/admin";
 import { AdminClaimsSection } from "@/components/dashboard/AdminClaimsSection";
@@ -205,13 +205,6 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
       .filter((city) => city.homeLeadClicks > 0 || city.homeViews > 0)
       .map((city) => city.cityName)
   );
-  const primaryPlacementData =
-    upliftByClinic.find(
-      (result) =>
-        result.data?.rankInHomeCity && result.data?.totalClinicsInHomeCity
-    )?.data ||
-    upliftByClinic.find((result) => result.data)?.data ||
-    null;
   const primaryUpgradeClinicId = ownedClinics[0]?.clinics_id || null;
 
   const formatAreaList = (areas: string[]) => {
@@ -262,28 +255,6 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
   const finalViewsAreas = isDevWithData
     ? ["Aabenraa", "Rødekro", "Padborg"]
     : viewsAreas;
-  const rankInHomeCity = primaryPlacementData?.rankInHomeCity ?? null;
-  const totalClinicsInHomeCity = primaryPlacementData?.totalClinicsInHomeCity ?? null;
-  const safeRankInHomeCity = rankInHomeCity ?? 0;
-  const safeTotalClinicsInHomeCity = totalClinicsInHomeCity ?? 0;
-  const shouldShowPlacementPreview =
-    safeRankInHomeCity > 0 && safeTotalClinicsInHomeCity > 0;
-  const leaderboardRows =
-    shouldShowPlacementPreview
-      ? (() => {
-          const startRank = Math.max(1, safeRankInHomeCity - 2);
-          const endRank = Math.min(safeTotalClinicsInHomeCity, safeRankInHomeCity + 2);
-          return Array.from({ length: endRank - startRank + 1 }, (_, index) => {
-            const rowRank = startRank + index;
-            return {
-              rank: rowRank,
-              isYou: rowRank === safeRankInHomeCity,
-              relation: "",
-            };
-          });
-        })()
-      : [];
-
   return (
     <div className="py-8 w-full">
       <div className="mb-8">
@@ -576,101 +547,6 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
               )}
             </Card>
 
-            <Card className="flex h-full flex-col overflow-hidden">
-              <CardContent className="flex-1 pt-6">
-                <div className="space-y-2">
-                  {shouldShowPlacementPreview &&
-                  rankInHomeCity &&
-                  totalClinicsInHomeCity ? (
-                    <>
-                      <p className="text-xl font-medium tracking-tight text-gray-500">
-                        Din placering i {primaryPlacementData?.homeCityName || "din by"}
-                      </p>
-                      <div className="overflow-hidden rounded-lg border border-gray-200 bg-white">
-                        {leaderboardRows.map((row) => (
-                          <div
-                            key={`leaderboard-row-${row.rank}`}
-                            className={`flex items-center justify-between px-4 py-2.5 ${
-                              row.isYou
-                                ? "border-y border-logo-blue/25 bg-brand-beige"
-                                : "border-t border-gray-100 first:border-t-0"
-                            }`}
-                          >
-                            <div className="flex items-center gap-3">
-                              <span
-                                className={`w-8 text-lg font-semibold tabular-nums ${
-                                  row.isYou ? "text-logo-blue" : "text-gray-600"
-                                }`}
-                              >
-                                #{row.rank}
-                              </span>
-                              <span
-                                className={`text-sm ${
-                                  row.isYou
-                                    ? "font-semibold text-gray-900"
-                                    : "text-gray-700"
-                                }`}
-                              >
-                                {row.isYou
-                                  ? primaryPlacementData?.clinicName || "Din klinik"
-                                  : "Klinik"}
-                              </span>
-                              {row.isYou && (
-                                <span className="rounded-full bg-logo-blue px-2 py-0.5 text-xs font-semibold text-white">
-                                  Din klinik
-                                </span>
-                              )}
-                            </div>
-                            {!row.isYou && (
-                              <span className="text-sm text-gray-500">
-                                {row.relation}
-                              </span>
-                            )}
-                          </div>
-                        ))}
-                      </div>
-                      {rankInHomeCity > 1 && (
-                        <div className="rounded-md bg-brand-beige/70 px-3 py-2">
-                          <p className="flex items-start gap-2 text-sm text-gray-700">
-                            <Info className="mt-0.5 h-4 w-4 flex-shrink-0 text-logo-blue" />
-                            Klinikker over dig får typisk flere henvendelser.
-                          </p>
-                        </div>
-                      )}
-                    </>
-                  ) : (
-                    <p className="text-sm text-gray-600">
-                      Placering beregnes, når vi har nok data.
-                    </p>
-                  )}
-                </div>
-              </CardContent>
-              {shouldShowPlacementPreview &&
-                rankInHomeCity &&
-                rankInHomeCity > 1 && (
-                  <div className="border-t border-logo-blue/20 bg-logo-blue/5 px-6 py-4">
-                    <div className="space-y-2">
-                      <p className="text-sm font-semibold text-gray-900">
-                        Bliv nr 1 og få flere patienter
-                      </p>
-                      <p className="text-sm text-gray-700">
-                        Top klinikker får flere henvendelser og patienter.
-                      </p>
-                      {primaryUpgradeClinicId ? (
-                        <Button asChild type="button" size="sm">
-                          <Link href={`/dashboard/clinic/${primaryUpgradeClinicId}/premium`}>
-                            Opgrader
-                          </Link>
-                        </Button>
-                      ) : (
-                        <Button type="button" size="sm" disabled>
-                          Opgrader
-                        </Button>
-                      )}
-                    </div>
-                  </div>
-                )}
-            </Card>
           </div>
         )}
 
