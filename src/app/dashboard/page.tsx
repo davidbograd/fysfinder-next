@@ -59,6 +59,8 @@ interface DashboardOwnedClinic {
   klinikNavn: string;
   lokation: string | null;
   verified_klinik: boolean | null;
+  hasActivePremium?: boolean;
+  premiumCityNames?: string[];
 }
 
 interface DashboardCreationRequest {
@@ -144,6 +146,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
     ownedClinics.length > 0 ||
     pendingClaims.length > 0 ||
     pendingCreationRequests.length > 0;
+  const hasAnyPremiumClinic = ownedClinics.some((clinic) => Boolean(clinic.verified_klinik));
   const totalClinicCount =
     ownedClinics.length + pendingClaims.length + pendingCreationRequests.length;
   const totalLeadClicks =
@@ -411,7 +414,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                   </div>
                 </div>
               </CardContent>
-              {hasLeadOpportunity && (
+              {hasLeadOpportunity && !hasAnyPremiumClinic && (
                 <div className="border-t border-logo-blue/20 bg-logo-blue/5 px-6 py-4">
                   <div className="space-y-2">
                     <p className="flex items-start gap-2 text-sm font-semibold text-gray-900">
@@ -517,7 +520,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                 </div>
                 </div>
               </CardContent>
-              {hasViewsOpportunity && (
+              {hasViewsOpportunity && !hasAnyPremiumClinic && (
                 <div className="border-t border-logo-blue/20 bg-logo-blue/5 px-6 py-4">
                   <div className="space-y-2">
                     <p className="flex items-start gap-2 text-sm font-semibold text-gray-900">

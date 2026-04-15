@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/app/utils/supabase/server";
 import { getClinicForEdit, getAllSpecialties, getAllInsurances, getClinicTeamMembers } from "@/app/actions/clinic-management";
 import { EditClinicForm } from "@/components/dashboard/EditClinicForm";
+import { EditClinicHeaderActions } from "@/components/dashboard/EditClinicHeaderActions";
 
 interface EditClinicPageProps {
   params: Promise<{ clinicId: string }>;
@@ -39,10 +40,11 @@ export default async function EditClinicPage({ params }: EditClinicPageProps) {
 
   return (
     <div className="py-8 w-full max-w-4xl mx-auto">
-      <div className="mb-8">
+      <div className="mb-8 flex items-start justify-between gap-4">
         <h1 className="text-3xl font-bold tracking-tight text-gray-900">
           Rediger din klinik
         </h1>
+        <EditClinicHeaderActions clinicId={clinicId} clinicName={clinic.klinikNavn} />
       </div>
 
       <EditClinicForm

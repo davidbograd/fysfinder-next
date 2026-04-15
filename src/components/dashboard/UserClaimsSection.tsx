@@ -37,9 +37,9 @@ interface UserClaimsSectionProps {
 export const UserClaimsSection = ({ claims, creationRequests }: UserClaimsSectionProps) => {
   // Only show pending claims - approved become owned clinics, rejected are hidden
   const pendingClaims = claims.filter((c) => c.status === "pending");
-  // Approved creation requests become owned clinics and should not render here.
+  // Only pending creation requests should be visible in this list.
   const visibleCreationRequests = creationRequests.filter(
-    (request) => request.status !== "approved"
+    (request) => request.status === "pending"
   );
   const sortedCreationRequests = [...visibleCreationRequests].sort((a, b) =>
     a.created_at < b.created_at ? 1 : -1
@@ -81,17 +81,6 @@ export const UserClaimsSection = ({ claims, creationRequests }: UserClaimsSectio
       })}
 
       {sortedCreationRequests.map((request) => {
-        const statusStyles: Record<string, string> = {
-          pending: "bg-yellow-50 text-yellow-700",
-          approved: "bg-green-50 text-green-700",
-          rejected: "bg-red-50 text-red-700",
-        };
-        const statusLabel: Record<string, string> = {
-          pending: "Afventer godkendelse",
-          approved: "Godkendt",
-          rejected: "Afvist",
-        };
-
         return (
           <div
             key={request.id}
@@ -107,17 +96,11 @@ export const UserClaimsSection = ({ claims, creationRequests }: UserClaimsSectio
             </div>
 
             <div
-              className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-medium ${
-                statusStyles[request.status] || statusStyles.pending
-              }`}
+              className="inline-flex items-center gap-1.5 rounded bg-yellow-50 px-2.5 py-1 text-xs font-medium text-yellow-700"
             >
               <Clock className="h-3.5 w-3.5" />
-              {statusLabel[request.status] || "Afventer godkendelse"}
+              Afventer godkendelse
             </div>
-
-            {request.status === "rejected" && request.admin_notes && (
-              <p className="text-sm text-red-700">{request.admin_notes}</p>
-            )}
           </div>
         );
       })}

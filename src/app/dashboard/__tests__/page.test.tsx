@@ -118,4 +118,58 @@ describe("DashboardPage auth gate", () => {
     expect(screen.getAllByText("Booking klik").length).toBeGreaterThan(0);
     expect(screen.getByText("45")).toBeInTheDocument();
   });
+
+  it("hides lead and view upsell when at least one clinic is premium", async () => {
+    mockGetUser.mockResolvedValue({
+      data: { user: { id: "user-1", email: "owner@example.com" } },
+    });
+    mockGetOwnedClinics.mockResolvedValue({
+      clinics: [
+        {
+          clinics_id: "clinic-1",
+          klinikNavn: "Premium Klinik",
+          lokation: "Aabenraa",
+          verified_klinik: true,
+        },
+        {
+          clinics_id: "clinic-2",
+          klinikNavn: "Free Klinik",
+          lokation: "Rødekro",
+          verified_klinik: false,
+        },
+      ],
+    });
+    mockGetAllOwnedClinicAnalytics.mockResolvedValue({
+      stats: {
+        "clinic-1": {
+          clinicId: "clinic-1",
+          period: "30 dage",
+          profileViews: 200,
+          listImpressions: 500,
+          phoneClicks: 5,
+          websiteClicks: 3,
+          emailClicks: 2,
+          bookingClicks: 1,
+          totalContactClicks: 11,
+        },
+        "clinic-2": {
+          clinicId: "clinic-2",
+          period: "30 dage",
+          profileViews: 100,
+          listImpressions: 100,
+          phoneClicks: 1,
+          websiteClicks: 1,
+          emailClicks: 0,
+          bookingClicks: 0,
+          totalContactClicks: 2,
+        },
+      },
+    });
+
+    const DashboardPage = (await import("../page")).default;
+    const ui = await DashboardPage({ searchParams: Promise.resolve({}) });
+    render(ui);
+
+    expect(screen.queryByText("Du går glip af patienter")).not.toBeInTheDocument();
+  });
 });

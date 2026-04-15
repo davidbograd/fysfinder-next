@@ -8,7 +8,10 @@ import { createClient as createServiceClient } from "@supabase/supabase-js";
 import { updateTag } from "next/cache";
 import { CACHE_TAGS } from "@/lib/cache-config";
 import { isAdminEmail } from "@/lib/admin";
-import { canAccessTeamMembersFeature } from "@/lib/clinic-entitlements";
+import {
+  canAccessTeamMembersFeature,
+  isPremiumListingActive,
+} from "@/lib/clinic-entitlements";
 
 async function canManageClinic(
   supabase: Awaited<ReturnType<typeof createClient>>,
@@ -61,7 +64,15 @@ export async function getOwnedClinics() {
         email,
         tlf,
         website,
-        verified_klinik
+        verified_klinik,
+        premium_listings (
+          id,
+          start_date,
+          end_date,
+          premium_listing_locations (
+            city_id
+          )
+        )
       )
     `
     )
@@ -80,7 +91,69 @@ export async function getOwnedClinics() {
       return clinic;
     }) || [];
 
-  return { clinics: clinics.filter(Boolean) };
+  const validClinics = clinics.filter(Boolean);
+  const allSelectedCityIds = Array.from(
+    new Set(
+      validClinics.flatMap((clinic: any) =>
+        (clinic.premium_listings || [])
+          .filter((listing: any) =>
+            isPremiumListingActive({
+              start_date: listing.start_date,
+              end_date: listing.end_date,
+            })
+          )
+          .flatMap((listing: any) =>
+            (listing.premium_listing_locations || []).map((location: any) => location.city_id)
+          )
+      )
+    )
+  );
+
+  const cityNameById = new Map<string, string>();
+  if (allSelectedCityIds.length > 0) {
+    const { data: cityRows, error: citiesError } = await supabase
+      .from("cities")
+      .select("id, bynavn")
+      .in("id", allSelectedCityIds);
+
+    if (citiesError) {
+      console.error("Error fetching premium city names:", citiesError);
+    } else {
+      (cityRows || []).forEach((row) => {
+        cityNameById.set(row.id, row.bynavn);
+      });
+    }
+  }
+
+  const enrichedClinics = validClinics.map((clinic: any) => {
+    const activePremiumListings = (clinic.premium_listings || []).filter((listing: any) =>
+      isPremiumListingActive({
+        start_date: listing.start_date,
+        end_date: listing.end_date,
+      })
+    );
+    const activeListing = [...activePremiumListings].sort((a: any, b: any) =>
+      b.end_date.localeCompare(a.end_date)
+    )[0];
+    const selectedCityIds = Array.from(
+      new Set(
+        (activeListing?.premium_listing_locations || []).map(
+          (location: { city_id: string }) => location.city_id
+        )
+      )
+    );
+    const premiumCityNames = selectedCityIds
+      .map((cityId) => cityNameById.get(cityId))
+      .filter((cityName): cityName is string => Boolean(cityName));
+
+    return {
+      ...clinic,
+      hasActivePremium: Boolean(activeListing),
+      premiumCityNames,
+    };
+  });
+
+  return { clinics: enrichedClinics };
 }
 
 /**
