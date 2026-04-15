@@ -1,3 +1,6 @@
+// Dashboard clinic card actions.
+// Updated: wires upgrade CTA to the real premium checkout flow.
+
 "use client";
 
 import { useState } from "react";
@@ -68,11 +71,7 @@ export const ClinicCard = ({ clinic }: ClinicCardProps) => {
   };
 
   const handleUpgrade = () => {
-    // Placeholder - no action for now
-    toast({
-      title: "Kommer snart",
-      description: "Opgraderingsfunktionalitet kommer snart",
-    });
+    router.push(`/dashboard/clinic/${clinic.clinics_id}/premium`);
   };
 
   return (
