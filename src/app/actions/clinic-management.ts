@@ -135,11 +135,19 @@ export async function getOwnedClinics() {
     const activeListing = [...activePremiumListings].sort((a: any, b: any) =>
       b.end_date.localeCompare(a.end_date)
     )[0];
+    const premiumListingLocations: Array<{ city_id: unknown }> = Array.isArray(
+      activeListing?.premium_listing_locations
+    )
+      ? activeListing.premium_listing_locations
+      : [];
     const selectedCityIds = Array.from(
       new Set(
-        (activeListing?.premium_listing_locations || []).map(
-          (location: { city_id: string }) => location.city_id
-        )
+        premiumListingLocations
+          .map((location: { city_id: unknown }) => location.city_id)
+          .filter(
+            (cityId: unknown): cityId is string =>
+              typeof cityId === "string" && cityId.length > 0
+          )
       )
     );
     const premiumCityNames = selectedCityIds
