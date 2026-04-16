@@ -1,4 +1,26 @@
-import { buildPremiumLocationCityIds } from "@/lib/stripe/premium-locations";
+import {
+  buildPremiumLocationCityIds,
+  normalizePremiumNeighborCityIds,
+} from "@/lib/stripe/premium-locations";
+
+describe("normalizePremiumNeighborCityIds", () => {
+  it("keeps at most two allowed unique neighbor cities", () => {
+    const result = normalizePremiumNeighborCityIds({
+      homeCityId: "home-city",
+      selectedCityIds: [
+        "neighbor-1",
+        "neighbor-1",
+        "home-city",
+        "neighbor-2",
+        "neighbor-3",
+        "disallowed-city",
+      ],
+      allowedCityIds: new Set(["home-city", "neighbor-1", "neighbor-2", "neighbor-3"]),
+    });
+
+    expect(result).toEqual(["neighbor-1", "neighbor-2"]);
+  });
+});
 
 describe("buildPremiumLocationCityIds", () => {
   it("always preserves home city even if owner only selects neighbors", () => {

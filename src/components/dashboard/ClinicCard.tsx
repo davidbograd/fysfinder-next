@@ -7,12 +7,13 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Edit, MapPin, Rocket } from "lucide-react";
+import { Edit, ExternalLink, MapPin, Rocket } from "lucide-react";
 
 interface ClinicCardProps {
   clinic: {
     clinics_id: string;
     klinikNavn: string;
+    klinikNavnSlug: string;
     lokation: string | null;
     verified_klinik: boolean | null;
     hasActivePremium?: boolean;
@@ -52,6 +53,15 @@ export const ClinicCard = ({ clinic }: ClinicCardProps) => {
               Premium
             </Badge>
           )}
+          <Link
+            href={`/klinik/${clinic.klinikNavnSlug}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex w-fit items-center gap-1 text-sm font-medium text-gray-500 hover:text-gray-700 hover:underline"
+          >
+            Se klinik
+            <ExternalLink className="h-3.5 w-3.5" />
+          </Link>
         </div>
         {visibleCitiesLabel.length > 0 && (
           <p className="mt-1 flex items-center gap-1.5 text-sm">
@@ -62,7 +72,7 @@ export const ClinicCard = ({ clinic }: ClinicCardProps) => {
       </div>
 
       {/* Action Buttons */}
-      <div className="space-y-2 pt-2">
+      <div className="flex flex-wrap items-center gap-2 pt-2">
         <Button
           asChild
           variant="outline"
@@ -78,7 +88,7 @@ export const ClinicCard = ({ clinic }: ClinicCardProps) => {
           <Button
             onClick={handleUpgrade}
             variant="default"
-            className="w-full justify-start bg-green-600 hover:bg-green-700"
+            className="w-fit justify-start bg-brand-primary text-brand-cream hover:bg-brand-primary/90"
           >
             <Rocket className="h-4 w-4 mr-2" />
             Opgrader til premium

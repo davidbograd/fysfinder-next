@@ -13,6 +13,14 @@ import {
   isSubscriptionEntitled,
 } from "@/lib/stripe/premium-sync";
 import { getInvoiceSubscriptionId } from "@/lib/stripe/invoice";
+import {
+  buildPremiumLocationCityIds,
+  normalizePremiumNeighborCityIds,
+} from "@/lib/stripe/premium-locations";
+
+interface NearbyCityActivityRpcRow {
+  city_id: string;
+}
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -175,6 +183,114 @@ async function syncSubscriptionEntitlement(subscriptionId: string) {
   }
 }
 
+function parseSelectedCityIds(raw: string | null | undefined): string[] {
+  if (!raw) return [];
+  return raw
+    .split(",")
+    .map((value) => value.trim())
+    .filter(Boolean);
+}
+
+async function applyCheckoutSelectedCities(params: {
+  clinicId: string;
+  selectedCityIds: string[];
+}) {
+  const { clinicId, selectedCityIds } = params;
+  if (selectedCityIds.length === 0) return;
+
+  const serviceSupabase = getServiceSupabase();
+  const nowIso = new Date().toISOString();
+  const { data: activeListing, error: listingError } = await serviceSupabase
+    .from("premium_listings")
+    .select("id")
+    .eq("clinic_id", clinicId)
+    .lte("start_date", nowIso)
+    .gt("end_date", nowIso)
+    .order("end_date", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  if (listingError || !activeListing) {
+    throw new Error("Missing active listing for selected city sync");
+  }
+
+  const { data: clinic, error: clinicError } = await serviceSupabase
+    .from("clinics")
+    .select("city_id")
+    .eq("clinics_id", clinicId)
+    .single();
+
+  if (clinicError) {
+    throw new Error(`Failed to load clinic for selected city sync: ${clinicError.message}`);
+  }
+
+  const { data: allowedCityRows, error: allowedCityError } = await serviceSupabase.rpc(
+    "get_clinic_neighbor_city_activity",
+    {
+      p_clinic_id: clinicId,
+      p_days: 30,
+      p_max_distance_km: 20,
+    }
+  );
+  const fallbackCandidateIds = Array.from(
+    new Set([...(clinic.city_id ? [clinic.city_id] : []), ...selectedCityIds])
+  );
+
+  let validCityRows: Array<{ id: string }> = [];
+  if (fallbackCandidateIds.length > 0) {
+    const { data, error: validCityError } = await serviceSupabase
+      .from("cities")
+      .select("id")
+      .in("id", fallbackCandidateIds);
+
+    if (validCityError) {
+      throw new Error(`Failed to validate selected cities: ${validCityError.message}`);
+    }
+
+    validCityRows = data || [];
+  }
+
+  const allowedCityIds = new Set<string>(
+    !allowedCityError && Array.isArray(allowedCityRows)
+      ? (allowedCityRows as NearbyCityActivityRpcRow[]).map((row) => row.city_id)
+      : validCityRows.map((row) => row.id)
+  );
+  const normalizedNeighborCityIds = normalizePremiumNeighborCityIds({
+    homeCityId: clinic.city_id || null,
+    selectedCityIds,
+    allowedCityIds,
+  });
+  const persistedCityIds = buildPremiumLocationCityIds({
+    homeCityId: clinic.city_id || null,
+    selectedCityIds: normalizedNeighborCityIds,
+    allowedCityIds,
+  });
+
+  const { error: deleteError } = await serviceSupabase
+    .from("premium_listing_locations")
+    .delete()
+    .eq("premium_listing_id", activeListing.id);
+
+  if (deleteError) {
+    throw new Error(`Failed to clear previous selected cities: ${deleteError.message}`);
+  }
+
+  if (persistedCityIds.length === 0) {
+    return;
+  }
+
+  const { error: insertError } = await serviceSupabase.from("premium_listing_locations").insert(
+    persistedCityIds.map((cityId) => ({
+      premium_listing_id: activeListing.id,
+      city_id: cityId,
+    }))
+  );
+
+  if (insertError) {
+    throw new Error(`Failed to save selected cities: ${insertError.message}`);
+  }
+}
+
 export async function POST(request: Request) {
   const stripe = getStripeClient();
   const signature = request.headers.get("stripe-signature");
@@ -208,6 +324,15 @@ export async function POST(request: Request) {
               ? session.subscription
               : session.subscription.id;
           await syncSubscriptionEntitlement(subscriptionId);
+
+          const checkoutClinicId = session.metadata?.clinic_id;
+          const selectedCityIds = parseSelectedCityIds(session.metadata?.selected_city_ids);
+          if (checkoutClinicId) {
+            await applyCheckoutSelectedCities({
+              clinicId: checkoutClinicId,
+              selectedCityIds,
+            });
+          }
         }
         break;
       }

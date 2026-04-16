@@ -57,6 +57,7 @@ interface DashboardClaim {
 interface DashboardOwnedClinic {
   clinics_id: string;
   klinikNavn: string;
+  klinikNavnSlug: string;
   lokation: string | null;
   verified_klinik: boolean | null;
   hasActivePremium?: boolean;

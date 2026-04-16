@@ -1,6 +1,6 @@
 const MAX_PREMIUM_NEIGHBOR_CITIES = 2;
 
-export function buildPremiumLocationCityIds(params: {
+export function normalizePremiumNeighborCityIds(params: {
   homeCityId: string | null;
   selectedCityIds: string[];
   allowedCityIds: Set<string>;
@@ -18,6 +18,17 @@ export function buildPremiumLocationCityIds(params: {
       break;
     }
   }
+
+  return uniqueNeighborCityIds;
+}
+
+export function buildPremiumLocationCityIds(params: {
+  homeCityId: string | null;
+  selectedCityIds: string[];
+  allowedCityIds: Set<string>;
+}): string[] {
+  const { homeCityId, allowedCityIds } = params;
+  const uniqueNeighborCityIds = normalizePremiumNeighborCityIds(params);
 
   if (!homeCityId) {
     return uniqueNeighborCityIds;

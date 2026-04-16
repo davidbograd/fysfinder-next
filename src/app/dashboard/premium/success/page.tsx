@@ -7,7 +7,6 @@ import { createClient } from "@/app/utils/supabase/server";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { getPremiumUpgradeContext } from "@/app/actions/premium-upgrade";
-import { PremiumLocationPicker } from "@/components/dashboard/PremiumLocationPicker";
 
 interface PremiumSuccessPageProps {
   searchParams: Promise<{ clinicId?: string; session_id?: string }>;
@@ -41,7 +40,9 @@ export default async function PremiumSuccessPage({ searchParams }: PremiumSucces
     selectedCityIds,
     cityOptions,
   } = contextResult.data;
-  const homeCityName = cityOptions.find((city) => city.isHome)?.cityName || "hjemmebyen";
+  const selectedCityNames = cityOptions
+    .filter((city) => selectedCityIds.includes(city.cityId))
+    .map((city) => city.cityName);
 
   return (
     <div className="py-8 w-full max-w-3xl mx-auto space-y-6">
@@ -59,40 +60,35 @@ export default async function PremiumSuccessPage({ searchParams }: PremiumSucces
         </CardHeader>
         <CardContent className="space-y-3">
           {hasActivePremium ? (
-            <p className="text-sm text-green-700">
-              Premium er aktiv. Vælg nu hvilke nabobyer du vil være synlig i.
-            </p>
+            <>
+              <p className="text-sm text-green-700">
+                Premium er aktiv, og dine byvalg er gemt.
+              </p>
+              {selectedCityNames.length > 0 && (
+                <p className="text-sm text-gray-700">
+                  Synlig i: {selectedCityNames.join(", ")}
+                </p>
+              )}
+            </>
           ) : (
             <p className="text-sm text-amber-700">
               Vi venter stadig på bekræftelse fra betalingssystemet. Opdater siden om et
-              øjeblik, og vælg derefter byer.
+              øjeblik.
             </p>
           )}
         </CardContent>
       </Card>
 
-      {hasActivePremium && (
-        <Card>
-          <CardHeader>
-            <CardTitle>Vælg nabobyer</CardTitle>
-            <CardDescription>
-              Din klinik er altid synlig i {homeCityName}. Vælg de ekstra byer, hvor du også vil
-              vises.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <PremiumLocationPicker
-              clinicId={clinicId}
-              cityOptions={cityOptions}
-              initiallySelectedCityIds={selectedCityIds}
-            />
-          </CardContent>
-        </Card>
-      )}
-
-      <Button asChild variant="ghost">
-        <Link href="/dashboard">Tilbage til dashboard</Link>
-      </Button>
+      <div className="flex flex-wrap gap-3">
+        {hasActivePremium && (
+          <Button asChild variant="outline">
+            <Link href={`/dashboard/clinic/${clinicId}/premium`}>Administrer byvalg</Link>
+          </Button>
+        )}
+        <Button asChild variant="ghost">
+          <Link href="/dashboard">Tilbage til dashboard</Link>
+        </Button>
+      </div>
     </div>
   );
 }

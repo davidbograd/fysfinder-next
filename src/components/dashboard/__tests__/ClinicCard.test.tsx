@@ -23,6 +23,7 @@ describe("Dashboard ClinicCard", () => {
         clinic={{
           clinics_id: "clinic-123",
           klinikNavn: "Test Klinik",
+          klinikNavnSlug: "test-klinik",
           lokation: "Aabenraa",
           verified_klinik: true,
           hasActivePremium: false,
@@ -33,6 +34,10 @@ describe("Dashboard ClinicCard", () => {
 
     await user.click(screen.getByRole("button", { name: /opgrader til premium/i }));
     expect(mockPush).toHaveBeenCalledWith("/dashboard/clinic/clinic-123/premium");
+    expect(screen.getByRole("link", { name: /se klinik/i })).toHaveAttribute(
+      "href",
+      "/klinik/test-klinik"
+    );
     expect(screen.queryByRole("button", { name: /fjern ejerskab/i })).not.toBeInTheDocument();
   });
 
@@ -42,6 +47,7 @@ describe("Dashboard ClinicCard", () => {
         clinic={{
           clinics_id: "clinic-456",
           klinikNavn: "Premium Klinik",
+          klinikNavnSlug: "premium-klinik",
           lokation: "Odense",
           verified_klinik: true,
           hasActivePremium: true,

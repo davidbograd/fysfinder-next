@@ -5,14 +5,15 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Check } from "lucide-react";
 import { createClient } from "@/app/utils/supabase/server";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { PremiumCheckoutButton } from "@/components/dashboard/PremiumCheckoutButton";
+import { PremiumLocationPicker } from "@/components/dashboard/PremiumLocationPicker";
 import { getPremiumUpgradeContext } from "@/app/actions/premium-upgrade";
 
 interface PremiumClinicPageProps {
   params: Promise<{ clinicId: string }>;
-  searchParams: Promise<{ canceled?: string }>;
+  searchParams: Promise<{ canceled?: string; selectedCityIds?: string }>;
 }
 
 export default async function PremiumClinicPage({
@@ -36,8 +37,13 @@ export default async function PremiumClinicPage({
     redirect("/dashboard");
   }
 
-  const { clinicName, cityOptions, hasActivePremium } = contextResult.data;
-  const neighborCount = cityOptions.filter((city) => !city.isHome).length;
+  const { clinicName, cityOptions, hasActivePremium, selectedCityIds } = contextResult.data;
+  const preselectedNeighborCityIds = resolvedSearchParams.selectedCityIds
+    ? resolvedSearchParams.selectedCityIds
+        .split(",")
+        .map((cityId) => cityId.trim())
+        .filter(Boolean)
+    : selectedCityIds;
 
   return (
     <div className="py-8 w-full max-w-3xl mx-auto space-y-6">
@@ -88,7 +94,11 @@ export default async function PremiumClinicPage({
 
           {!hasActivePremium ? (
             <div className="space-y-2">
-              <PremiumCheckoutButton clinicId={clinicId} />
+              <PremiumCheckoutButton
+                clinicId={clinicId}
+                cityOptions={cityOptions}
+                initiallySelectedCityIds={preselectedNeighborCityIds}
+              />
               <p className="text-xs text-gray-500">
                 Vi har tilfredshedsgaranti og ingen bindingsperiode.
               </p>
@@ -98,11 +108,11 @@ export default async function PremiumClinicPage({
               <p className="text-sm text-green-700 font-medium">
                 Din premium-adgang er allerede aktiv.
               </p>
-              <Button asChild variant="outline">
-                <Link href={`/dashboard/premium/success?clinicId=${clinicId}`}>
-                  Administrer byvalg
-                </Link>
-              </Button>
+              <PremiumLocationPicker
+                clinicId={clinicId}
+                cityOptions={cityOptions}
+                initiallySelectedCityIds={selectedCityIds}
+              />
             </div>
           )}
         </CardContent>
