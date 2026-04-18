@@ -1,8 +1,9 @@
-// Updated: 2026-04-06 - Matched homepage full-bleed width behavior so each tilmeld section can span viewport edges.
+// Updated: 2026-04-18 - Added featured clinic testimonials below ClinicSearch (Sådan bliver du fundet…).
 import { Metadata } from "next";
 import { ReactNode } from "react";
 import { HeroSection } from "@/components/features/tilmeld-landingpage/HeroSection";
 import { ClinicSearch } from "@/components/features/tilmeld-landingpage/ClinicSearch";
+import { TilmeldClinicTestimonials } from "@/components/features/tilmeld-landingpage/TilmeldClinicTestimonials";
 import { TextImageSection } from "@/components/features/tilmeld-landingpage/TextImageSection";
 import { FeaturesSection } from "@/components/features/tilmeld-landingpage/FeaturesSection";
 import { SignupCtaSplitSection } from "@/components/features/tilmeld-landingpage/SignupCtaSplitSection";
@@ -34,6 +35,9 @@ export default function ClinicOwnerPage() {
       </FullBleedSection>
       <FullBleedSection>
         <ClinicSearch />
+      </FullBleedSection>
+      <FullBleedSection>
+        <TilmeldClinicTestimonials />
       </FullBleedSection>
       <FullBleedSection>
         <div className="mx-auto w-full max-w-[1440px] px-5 sm:px-6 lg:px-8">
