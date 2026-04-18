@@ -12,7 +12,7 @@
  * Note: klinikNavn and postnummer are NOT editable
  */
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 import { createClient } from "@/app/utils/supabase/client";
@@ -29,7 +29,27 @@ import {
   updateClinicInsurances,
   updateClinicTeamMembers,
 } from "@/app/actions/clinic-management";
-import { Loader2, Mail, Phone, Globe, Plus, X, Image as ImageIcon } from "lucide-react";
+import {
+  Loader2,
+  Mail,
+  Phone,
+  Globe,
+  Plus,
+  X,
+  Image as ImageIcon,
+  Check,
+  Minus,
+  Search,
+  TrendingUp,
+} from "lucide-react";
+import {
+  CLINIC_PROFILE_RECOMMENDATION_ORDER,
+  clinicProfileEditSidebarLabelsDa,
+  computeClinicProfileCompleteness,
+  getClinicProfileCompletenessAriaDa,
+  type ClinicProfileCompletenessInput,
+} from "@/lib/clinic-profile-completeness";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 
 interface EditClinicFormProps {
@@ -46,6 +66,12 @@ interface TeamMemberForm {
   image_url: string;
   display_order: number;
 }
+
+/** Danish ordering (CLDR da-DK): Latin letters then æ, ø, å after z. */
+const DANISH_SPECIALTY_COLLATOR = new Intl.Collator("da-DK", {
+  sensitivity: "base",
+  numeric: true,
+});
 
 export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: initialTeamMembers }: EditClinicFormProps) => {
   const router = useRouter();
@@ -101,6 +127,7 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
   });
 
   const [selectedSpecialties, setSelectedSpecialties] = useState<string[]>(currentSpecialties);
+  const [specialtySearchQuery, setSpecialtySearchQuery] = useState("");
   // For insurance UX: when not accepting all, we select the ones NOT accepted (exclusions)
   // Initialize exclusions from current data: if not all are accepted, exclusions = all - accepted
   const initialExcludedInsurances = (() => {
@@ -154,22 +181,60 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
   };
 
   const handleSpecialtyToggle = (specialtyId: string) => {
+    const isSelected = selectedSpecialties.includes(specialtyId);
+
+    if (!isSelected && selectedSpecialties.length >= 10) {
+      toast({
+        title: "Maksimum nået",
+        description: "Du kan maksimalt vælge 10 specialiteter",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setSelectedSpecialties((prev) => {
       if (prev.includes(specialtyId)) {
         return prev.filter((id) => id !== specialtyId);
-      } else {
-        if (prev.length >= 10) {
-          toast({
-            title: "Maksimum nået",
-            description: "Du kan maksimalt vælge 10 specialiteter",
-            variant: "destructive",
-          });
-          return prev;
-        }
-        return [...prev, specialtyId];
       }
+      return [...prev, specialtyId];
     });
+
+    if (!isSelected && specialtySearchQuery.trim()) {
+      setSpecialtySearchQuery("");
+    }
   };
+
+  const specialtyOptions = useMemo(
+    () =>
+      specialties
+        .filter((s) => !["Skoliose"].includes(s.specialty_name))
+        .sort((a, b) =>
+          DANISH_SPECIALTY_COLLATOR.compare(a.specialty_name, b.specialty_name)
+        ),
+    [specialties]
+  );
+
+  const filteredSpecialtyOptions = useMemo(() => {
+    const q = specialtySearchQuery.trim().toLowerCase();
+    if (!q) {
+      return specialtyOptions;
+    }
+    return specialtyOptions.filter((s) =>
+      s.specialty_name.toLowerCase().includes(q)
+    );
+  }, [specialtyOptions, specialtySearchQuery]);
+
+  const selectedSpecialtyTags = useMemo(() => {
+    const byId = new Map(
+      specialtyOptions.map((s) => [s.specialty_id, s])
+    );
+    return selectedSpecialties
+      .map((id) => byId.get(id))
+      .filter((s): s is (typeof specialtyOptions)[number] => Boolean(s))
+      .sort((a, b) =>
+        DANISH_SPECIALTY_COLLATOR.compare(a.specialty_name, b.specialty_name)
+      );
+  }, [selectedSpecialties, specialtyOptions]);
 
   const handleInsuranceToggle = (insuranceId: string) => {
     setSelectedInsurances((prev) => {
@@ -296,6 +361,75 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
     }
   };
 
+  const validTeamMemberCount = useMemo(
+    () =>
+      teamMembers.filter(
+        (member) => member.name.trim() !== "" && member.role.trim() !== ""
+      ).length,
+    [teamMembers]
+  );
+
+  const profileCompleteness = useMemo(() => {
+    const totalInsuranceTypesCount = insurances.length;
+    const acceptedInsuranceCount = acceptsAllInsurances
+      ? totalInsuranceTypesCount
+      : insurances.filter(
+          (i) => !selectedInsurances.includes(i.insurance_id)
+        ).length;
+
+    const input: ClinicProfileCompletenessInput = {
+      email: formData.email,
+      tlf: formData.tlf,
+      website: formData.website,
+      om_os: formData.om_os,
+      mandag: formData.mandag,
+      tirsdag: formData.tirsdag,
+      onsdag: formData.onsdag,
+      torsdag: formData.torsdag,
+      fredag: formData.fredag,
+      lørdag: formData.lørdag,
+      søndag: formData.søndag,
+      førsteKons: formData.førsteKons,
+      opfølgning: formData.opfølgning,
+      ydernummer:
+        hasYdernummer === "yes"
+          ? true
+          : hasYdernummer === "no"
+            ? false
+            : null,
+      specialtyCount: selectedSpecialties.length,
+      teamMemberCount: validTeamMemberCount,
+      acceptedInsuranceCount,
+      totalInsuranceTypesCount,
+    };
+    return computeClinicProfileCompleteness(input);
+  }, [
+    insurances,
+    acceptsAllInsurances,
+    selectedInsurances,
+    formData.email,
+    formData.tlf,
+    formData.website,
+    formData.om_os,
+    formData.mandag,
+    formData.tirsdag,
+    formData.onsdag,
+    formData.torsdag,
+    formData.fredag,
+    formData.lørdag,
+    formData.søndag,
+    formData.førsteKons,
+    formData.opfølgning,
+    hasYdernummer,
+    selectedSpecialties.length,
+    validTeamMemberCount,
+  ]);
+
+  const profileMissingKeySet = useMemo(
+    () => new Set(profileCompleteness.missingKeys),
+    [profileCompleteness.missingKeys]
+  );
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -399,7 +533,12 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-10">
+      <form
+        onSubmit={handleSubmit}
+        className="min-w-0 flex-1 space-y-6"
+        aria-describedby="clinic-profile-progress-summary"
+      >
       {/* Basic Information */}
       <Card>
         <CardHeader>
@@ -443,8 +582,11 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="email" className="flex items-center gap-2">
-                <Mail className="h-4 w-4 text-gray-500" />
+              <Label
+                htmlFor="email"
+                className="flex min-h-5 items-center gap-2"
+              >
+                <Mail className="h-4 w-4 shrink-0 text-gray-500" />
                 Email
               </Label>
               <Input
@@ -455,8 +597,11 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="tlf" className="flex items-center gap-2">
-                <Phone className="h-4 w-4 text-gray-500" />
+              <Label
+                htmlFor="tlf"
+                className="flex min-h-5 items-center gap-2"
+              >
+                <Phone className="h-4 w-4 shrink-0 text-gray-500" />
                 Telefon
               </Label>
               <div className="flex gap-2">
@@ -482,8 +627,11 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="website" className="flex items-center gap-2">
-                <Globe className="h-4 w-4 text-gray-500" />
+              <Label
+                htmlFor="website"
+                className="flex min-h-5 items-center gap-2"
+              >
+                <Globe className="h-4 w-4 shrink-0 text-gray-500" />
                 Website
               </Label>
               <Input
@@ -494,7 +642,12 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="adresse">Adresse</Label>
+              <Label
+                htmlFor="adresse"
+                className="flex min-h-5 items-center gap-2"
+              >
+                Adresse
+              </Label>
               <Input
                 id="adresse"
                 value={formData.adresse}
@@ -502,109 +655,185 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
               />
             </div>
           </div>
-          {/* Priser (moved into Grundlæggende information) */}
-          <div className="space-y-4 pt-6 border-t">
-            <div className="space-y-3">
-              <Label className="text-base font-medium">
-                Har klinikken ydernummer?
-              </Label>
-              <RadioGroup
-                value={hasYdernummer}
-                onValueChange={(value) => {
-                  setHasYdernummer(value);
-                  handleInputChange("ydernummer", value === "yes");
-                }}
-              >
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="yes" id="ydernummer-yes" />
-                  <Label htmlFor="ydernummer-yes" className="cursor-pointer">
-                    Ja
-                  </Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="no" id="ydernummer-no" />
-                  <Label htmlFor="ydernummer-no" className="cursor-pointer">
-                    Nej
-                  </Label>
-                </div>
-              </RadioGroup>
-            </div>
-
-            {hasYdernummer === "no" && (
-              <div className="space-y-4 pt-2 border-t">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="førsteKons">Pris, første konsultation (DKK)</Label>
-                    <Input
-                      id="førsteKons"
-                      value={formData.førsteKons}
-                      onChange={(e) => handleInputChange("førsteKons", e.target.value)}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="første_kons_minutter">Varighed, første konsultation (Minutter)</Label>
-                    <Input
-                      id="første_kons_minutter"
-                      type="number"
-                      min="5"
-                      max="180"
-                      value={formData.første_kons_minutter}
-                      onChange={(e) => handleInputChange("første_kons_minutter", e.target.value)}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="opfølgning">Pris, opfølgning (DKK)</Label>
-                    <Input
-                      id="opfølgning"
-                      value={formData.opfølgning}
-                      onChange={(e) => handleInputChange("opfølgning", e.target.value)}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="opfølgning_minutter">Varighed, opfølgning (Minutter)</Label>
-                    <Input
-                      id="opfølgning_minutter"
-                      type="number"
-                      min="5"
-                      max="180"
-                      value={formData.opfølgning_minutter}
-                      onChange={(e) => handleInputChange("opfølgning_minutter", e.target.value)}
-                    />
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
         </CardContent>
       </Card>
 
-      {/* Specialties - Moved to second section */}
       <Card>
         <CardHeader>
-          <CardTitle>Specialiteter</CardTitle>
-                  <CardDescription>
-                    Vælg specialer som klinikken er eksperter i ({selectedSpecialties.length}/10)
-                  </CardDescription>
+          <CardTitle>Priser og ydernummer</CardTitle>
+          <CardDescription>
+            Angiv om klinikken har ydernummer, eller udfyld priser for privatpatienter.
+          </CardDescription>
         </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 max-h-96 overflow-y-auto p-2">
-            {specialties
-              .filter((specialty) => !["Skoliose"].includes(specialty.specialty_name))
-              .map((specialty) => (
-                <div key={specialty.specialty_id} className="flex items-center space-x-2">
-                  <Checkbox
-                    id={`specialty-${specialty.specialty_id}`}
-                    checked={selectedSpecialties.includes(specialty.specialty_id)}
-                    onCheckedChange={() => handleSpecialtyToggle(specialty.specialty_id)}
+        <CardContent className="space-y-4">
+          <div className="space-y-3">
+            <Label className="text-base font-medium">
+              Har klinikken ydernummer?
+            </Label>
+            <RadioGroup
+              value={hasYdernummer}
+              onValueChange={(value) => {
+                setHasYdernummer(value);
+                handleInputChange("ydernummer", value === "yes");
+              }}
+            >
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="yes" id="ydernummer-yes" />
+                <Label htmlFor="ydernummer-yes" className="cursor-pointer">
+                  Ja
+                </Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="no" id="ydernummer-no" />
+                <Label htmlFor="ydernummer-no" className="cursor-pointer">
+                  Nej
+                </Label>
+              </div>
+            </RadioGroup>
+          </div>
+
+          {hasYdernummer === "no" && (
+            <div className="space-y-4 pt-2 border-t">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="førsteKons">Pris, første konsultation (DKK)</Label>
+                  <Input
+                    id="førsteKons"
+                    value={formData.førsteKons}
+                    onChange={(e) => handleInputChange("førsteKons", e.target.value)}
                   />
-                  <Label
-                    htmlFor={`specialty-${specialty.specialty_id}`}
-                    className="cursor-pointer text-sm"
-                  >
-                    {specialty.specialty_name}
-                  </Label>
                 </div>
+                <div className="space-y-2">
+                  <Label htmlFor="første_kons_minutter">Varighed, første konsultation (Minutter)</Label>
+                  <Input
+                    id="første_kons_minutter"
+                    type="number"
+                    min="5"
+                    max="180"
+                    value={formData.første_kons_minutter}
+                    onChange={(e) => handleInputChange("første_kons_minutter", e.target.value)}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="opfølgning">Pris, opfølgning (DKK)</Label>
+                  <Input
+                    id="opfølgning"
+                    value={formData.opfølgning}
+                    onChange={(e) => handleInputChange("opfølgning", e.target.value)}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="opfølgning_minutter">Varighed, opfølgning (Minutter)</Label>
+                  <Input
+                    id="opfølgning_minutter"
+                    type="number"
+                    min="5"
+                    max="180"
+                    value={formData.opfølgning_minutter}
+                    onChange={(e) => handleInputChange("opfølgning_minutter", e.target.value)}
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Specialer</CardTitle>
+          <CardDescription>
+            Vælg ét eller flere specialer, som klinikken er stærk i ({selectedSpecialties.length}/10)
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          {selectedSpecialtyTags.length > 0 ? (
+            <div
+              className="flex flex-wrap gap-2"
+              role="list"
+              aria-label="Valgte specialer"
+            >
+              {selectedSpecialtyTags.map((s) => (
+                <span
+                  key={s.specialty_id}
+                  role="listitem"
+                  className="inline-flex max-w-full items-center gap-1 rounded-full border border-brand-primary/20 bg-brand-beige py-1 pl-2.5 pr-1 text-sm text-brand-label"
+                >
+                  <span className="truncate">{s.specialty_name}</span>
+                  <button
+                    type="button"
+                    onClick={() => handleSpecialtyToggle(s.specialty_id)}
+                    className="shrink-0 rounded-full p-1 text-brand-primary hover:bg-brand-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    aria-label={`Fjern ${s.specialty_name}`}
+                  >
+                    <X className="h-3.5 w-3.5" aria-hidden={true} />
+                  </button>
+                </span>
               ))}
+            </div>
+          ) : null}
+          <div className="space-y-2">
+            <Label htmlFor="specialty-search">Søg efter speciale</Label>
+            <div className="relative">
+              <Search
+                className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500"
+                aria-hidden={true}
+              />
+              <Input
+                id="specialty-search"
+                type="search"
+                value={specialtySearchQuery}
+                onChange={(e) => setSpecialtySearchQuery(e.target.value)}
+                placeholder="F.eks. knæ, ryg, hovedpine…"
+                className="pl-9"
+                autoComplete="off"
+                aria-controls="specialty-checklist"
+              />
+            </div>
+          </div>
+          <div
+            id="specialty-checklist"
+            role="group"
+            aria-label="Liste over specialer"
+            className="grid max-h-96 grid-cols-1 gap-x-6 gap-y-1 overflow-y-auto pr-1 md:grid-cols-2"
+          >
+            {filteredSpecialtyOptions.length === 0 ? (
+              <p className="col-span-full text-sm text-gray-600">
+                Ingen specialer matcher søgningen. Prøv et andet søgeord.
+              </p>
+            ) : (
+              filteredSpecialtyOptions.map((specialty) => {
+                const inputId = `specialty-${specialty.specialty_id}`;
+                const checked = selectedSpecialties.includes(specialty.specialty_id);
+                const atSpecialtyLimit = !checked && selectedSpecialties.length >= 10;
+                return (
+                  <div
+                    key={specialty.specialty_id}
+                    className={cn(
+                      "flex items-center gap-2 py-1",
+                      atSpecialtyLimit && "cursor-not-allowed opacity-55"
+                    )}
+                  >
+                    <Checkbox
+                      id={inputId}
+                      checked={checked}
+                      className="rounded-none"
+                      disabled={atSpecialtyLimit}
+                      onCheckedChange={() => handleSpecialtyToggle(specialty.specialty_id)}
+                    />
+                    <Label
+                      htmlFor={inputId}
+                      className={cn(
+                        "cursor-pointer text-sm font-medium leading-snug",
+                        atSpecialtyLimit && "cursor-not-allowed"
+                      )}
+                    >
+                      {specialty.specialty_name}
+                    </Label>
+                  </div>
+                );
+              })
+            )}
           </div>
         </CardContent>
       </Card>
@@ -630,31 +859,33 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
           </div>
           
           <div className="pt-4 border-t space-y-4">
-            <p className="text-sm font-medium text-gray-900">Har klinikken...</p>
+            <p className="text-sm font-medium text-gray-900">Vores klinik har...</p>
             
-            <div className="flex flex-col sm:flex-row gap-4">
-              <div className="flex items-center space-x-2">
+            <div className="flex flex-col gap-3 sm:flex-row sm:gap-6">
+              <div className="flex items-center gap-2">
                 <Checkbox
                   id="handicapadgang"
+                  className="rounded-none"
                   checked={formData.handicapadgang === true}
                   onCheckedChange={(checked) =>
                     handleInputChange("handicapadgang", checked === true ? true : checked === false ? false : null)
                   }
                 />
                 <Label htmlFor="handicapadgang" className="cursor-pointer">
-                  Handicapadgang?
+                  Handicapadgang
                 </Label>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center gap-2">
                 <Checkbox
                   id="online_fysioterapeut"
+                  className="rounded-none"
                   checked={formData.online_fysioterapeut}
                   onCheckedChange={(checked) =>
                     handleInputChange("online_fysioterapeut", checked === true)
                   }
                 />
                 <Label htmlFor="online_fysioterapeut" className="cursor-pointer">
-                  Online fysioterapeut?
+                  Online fysioterapeut
                 </Label>
               </div>
             </div>
@@ -698,7 +929,16 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
       <Card>
         <CardHeader>
           <CardTitle>Åbningstider</CardTitle>
-          <CardDescription>Indtast åbningstider for hver dag</CardDescription>
+          <CardDescription className="text-pretty">
+            Indtast åbningstider for hver dag, f.eks{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs font-mono text-foreground">
+              09:00-17:00
+            </code>{" "}
+            eller{" "}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs font-mono text-foreground">
+              Lukket
+            </code>
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -937,7 +1177,88 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
           Gem ændringer
         </Button>
       </div>
-    </form>
+      </form>
+
+      {/* Below sticky Header (h-16) + small gap so the card doesn’t sit flush */}
+      <aside
+        className="w-full shrink-0 lg:w-72 xl:w-80 lg:sticky lg:top-[calc(4rem+0.75rem)] lg:self-start"
+        aria-label="Klinikprofil: hvad der er udfyldt"
+      >
+        <Card className="border-gray-200 shadow-sm">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-lg font-semibold tracking-tight">
+              <span className="inline-flex flex-wrap items-baseline gap-x-1.5 gap-y-0">
+                Klinik profil{" "}
+                <span className="tabular-nums text-emerald-700">
+                  {profileCompleteness.completedCount}/
+                  {profileCompleteness.totalCount}
+                </span>
+              </span>
+            </CardTitle>
+            <p
+              id="clinic-profile-progress-summary"
+              className="sr-only"
+              aria-live="polite"
+              aria-atomic="true"
+            >
+              {getClinicProfileCompletenessAriaDa(profileCompleteness)}
+            </p>
+          </CardHeader>
+          <CardContent className="flex flex-col gap-5 pt-0">
+            <ul className="space-y-2.5" role="list">
+              {CLINIC_PROFILE_RECOMMENDATION_ORDER.map((key) => {
+                const done = !profileMissingKeySet.has(key);
+                const label = clinicProfileEditSidebarLabelsDa[key];
+                return (
+                  <li
+                    key={key}
+                    className="flex items-start gap-2.5 text-sm leading-snug text-gray-700"
+                  >
+                    <span
+                      className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center"
+                      aria-hidden={true}
+                    >
+                      {done ? (
+                        <Check
+                          className="h-4 w-4 text-emerald-600"
+                          strokeWidth={2.5}
+                          aria-hidden={true}
+                        />
+                      ) : (
+                        <Minus
+                          className="h-4 w-4 text-gray-300"
+                          strokeWidth={2}
+                          aria-hidden={true}
+                        />
+                      )}
+                    </span>
+                    <span className={done ? "font-medium text-gray-900" : ""}>
+                      {label}
+                      <span className="sr-only">
+                        {done ? ", udfyldt" : ", mangler endnu"}
+                      </span>
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
+            <div
+              className="flex gap-2.5 rounded-md bg-brand-beige px-3 py-2.5 text-sm text-brand-label"
+              role="note"
+            >
+              <TrendingUp
+                className="mt-0.5 h-4 w-4 shrink-0 text-brand-primary"
+                strokeWidth={1.75}
+                aria-hidden={true}
+              />
+              <p className="leading-snug">
+                Klinikker med en udfyldt profil får flere patienter
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+      </aside>
+    </div>
   );
 };
 

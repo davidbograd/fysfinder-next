@@ -20,8 +20,8 @@ jest.mock("next/navigation", () => ({
 }));
 
 const profileComplete: ClinicProfileCompleteness = {
-  completedCount: 6,
-  totalCount: 6,
+  completedCount: 7,
+  totalCount: 7,
   percent: 100,
   missingKeys: [],
 };
@@ -29,18 +29,18 @@ const profileComplete: ClinicProfileCompleteness = {
 const profileMotivationCopy =
   "Klinikker med en udfyldt profil får flere patienter";
 
-/** Contact OK; still missing four lower-priority items (matches 2 af 6). */
+/** Contact + pricing OK; still missing five lower-priority items (matches 2 af 7). */
 const profileIncomplete: ClinicProfileCompleteness = {
   completedCount: 2,
-  totalCount: 6,
-  percent: 33,
-  missingKeys: ["specialties", "about", "openingHours", "team"],
+  totalCount: 7,
+  percent: 29,
+  missingKeys: ["specialties", "about", "openingHours", "team", "insurances"],
 };
 
 const profileMissingContact: ClinicProfileCompleteness = {
-  completedCount: 4,
-  totalCount: 6,
-  percent: 67,
+  completedCount: 5,
+  totalCount: 7,
+  percent: 71,
   missingKeys: ["contact", "pricing"],
 };
 
@@ -141,9 +141,9 @@ describe("OwnedClinicCard", () => {
     );
 
     expect(screen.getByText("Klinikprofil")).toBeInTheDocument();
-    expect(screen.getByText("2 af 6")).toBeInTheDocument();
+    expect(screen.getByText("2 af 7")).toBeInTheDocument();
     expect(
-      screen.getByRole("progressbar", { name: /2 af 6 trin fuldført på klinikprofilen/i })
+      screen.getByRole("progressbar", { name: /2 af 7 trin fuldført på klinikprofilen/i })
     ).toBeInTheDocument();
     expect(screen.getByText(profileMotivationCopy)).toBeInTheDocument();
   });
@@ -182,7 +182,7 @@ describe("OwnedClinicCard", () => {
           premiumCityNames: [],
           profileCompleteness: {
             completedCount: 0,
-            totalCount: 6,
+            totalCount: 7,
             percent: 0,
             missingKeys: [
               "contact",
@@ -191,6 +191,7 @@ describe("OwnedClinicCard", () => {
               "about",
               "openingHours",
               "team",
+              "insurances",
             ],
           },
         }}

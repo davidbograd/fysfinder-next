@@ -49,11 +49,12 @@ export async function getOwnedClinics() {
     return { error: "Ikke logget ind" };
   }
 
-  // Get owned clinics via clinic_owners table
-  const { data: ownerships, error: ownershipError } = await supabase
-    .from("clinic_owners")
-    .select(
-      `
+  // Get owned clinics via clinic_owners table + total insurance types (profile completeness)
+  const [ownershipsResult, insuranceCountResult] = await Promise.all([
+    supabase
+      .from("clinic_owners")
+      .select(
+        `
       clinic_id,
       clinics:clinic_id (
         clinics_id,
@@ -79,6 +80,7 @@ export async function getOwnedClinics() {
         ydernummer,
         clinic_specialties ( specialty_id ),
         clinic_team_members ( id ),
+        clinic_insurances ( insurance_id ),
         premium_listings (
           id,
           start_date,
@@ -89,13 +91,21 @@ export async function getOwnedClinics() {
         )
       )
     `
-    )
-    .eq("user_id", user.id);
+      )
+      .eq("user_id", user.id),
+    supabase
+      .from("insurance_companies")
+      .select("insurance_id", { count: "exact", head: true }),
+  ]);
+
+  const { data: ownerships, error: ownershipError } = ownershipsResult;
 
   if (ownershipError) {
     console.error("Error fetching owned clinics:", ownershipError);
     return { error: "Fejl ved hentning af klinikker" };
   }
+
+  const totalInsuranceTypesCount = insuranceCountResult.count ?? 0;
 
   const clinics =
     ownerships?.map((ownership: any) => {
@@ -174,6 +184,9 @@ export async function getOwnedClinics() {
     const teamMemberCount = Array.isArray(clinic.clinic_team_members)
       ? clinic.clinic_team_members.length
       : 0;
+    const acceptedInsuranceCount = Array.isArray(clinic.clinic_insurances)
+      ? clinic.clinic_insurances.length
+      : 0;
 
     const profileCompleteness = computeClinicProfileCompleteness({
       email: clinic.email,
@@ -192,11 +205,14 @@ export async function getOwnedClinics() {
       ydernummer: clinic.ydernummer,
       specialtyCount,
       teamMemberCount,
+      acceptedInsuranceCount,
+      totalInsuranceTypesCount,
     });
 
     const clinicCore = { ...clinic };
     delete clinicCore.clinic_specialties;
     delete clinicCore.clinic_team_members;
+    delete clinicCore.clinic_insurances;
     delete clinicCore.premium_listings;
 
     return {

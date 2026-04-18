@@ -9,7 +9,8 @@ export type ClinicProfileChecklistKey =
   | "openingHours"
   | "specialties"
   | "team"
-  | "pricing";
+  | "pricing"
+  | "insurances";
 
 export type ClinicProfileCompleteness = {
   completedCount: number;
@@ -25,6 +26,7 @@ const CHECKLIST_KEYS: ClinicProfileChecklistKey[] = [
   "specialties",
   "team",
   "pricing",
+  "insurances",
 ];
 
 /**
@@ -38,6 +40,7 @@ export const CLINIC_PROFILE_RECOMMENDATION_ORDER: ClinicProfileChecklistKey[] = 
   "about",
   "openingHours",
   "team",
+  "insurances",
 ];
 
 const recommendationPriority = Object.fromEntries(
@@ -63,10 +66,25 @@ export const clinicProfileChecklistDetailLabelsDa: Record<
   contact: "Mindst én kontaktoplysning (e-mail, telefon eller website)",
   about: "Beskrivelse under ”Om os”",
   openingHours: "Åbningstider",
-  specialties: "Mindst én specialitet",
+  specialties: "Mindst ét speciale",
   team: "Mindst ét teammedlem",
   pricing:
     "Med ydernummer: intet mere. Uden ydernummer: udfyld Pris, første konsultation og Pris, opfølgning.",
+  insurances: "Mindst én accepteret forsikring (vælg ”Ja til alle” eller gem et udvalg)",
+};
+
+/** Short section titles for the clinic editor sidebar (same order as CLINIC_PROFILE_RECOMMENDATION_ORDER). */
+export const clinicProfileEditSidebarLabelsDa: Record<
+  ClinicProfileChecklistKey,
+  string
+> = {
+  contact: "Kontaktoplysninger",
+  pricing: "Priser og ydernummer",
+  specialties: "Specialer",
+  about: "Om os",
+  openingHours: "Åbningstider",
+  team: "Team",
+  insurances: "Forsikringer",
 };
 
 const clinicProfileChecklistShortHintsDa: Record<
@@ -76,9 +94,10 @@ const clinicProfileChecklistShortHintsDa: Record<
   contact: "kontaktoplysninger",
   about: "Om os-beskrivelse",
   openingHours: "åbningstider",
-  specialties: "specialiteter",
+  specialties: "specialer",
   team: "team",
-  pricing: "priser",
+  pricing: "priser og ydernummer",
+  insurances: "forsikringer",
 };
 
 export type ClinicProfileCompletenessInput = {
@@ -102,6 +121,10 @@ export type ClinicProfileCompletenessInput = {
   ydernummer?: boolean | null;
   specialtyCount: number;
   teamMemberCount: number;
+  /** Antal forsikringer klinikken accepterer (efter undtagelser hvis ”nej til alle”). */
+  acceptedInsuranceCount: number;
+  /** Antal forsikringstyper i systemet; 0 = intet at konfigurere (trinet tæller som opfyldt). */
+  totalInsuranceTypesCount: number;
 };
 
 const hasNonEmptyTrimmed = (value: string | null | undefined): boolean =>
@@ -152,6 +175,13 @@ const hasPricing = (input: ClinicProfileCompletenessInput): boolean => {
   );
 };
 
+const hasInsurances = (input: ClinicProfileCompletenessInput): boolean => {
+  if (input.totalInsuranceTypesCount <= 0) {
+    return true;
+  }
+  return input.acceptedInsuranceCount >= 1;
+};
+
 const evaluators: Record<
   ClinicProfileChecklistKey,
   (input: ClinicProfileCompletenessInput) => boolean
@@ -162,6 +192,7 @@ const evaluators: Record<
   specialties: hasSpecialties,
   team: hasTeam,
   pricing: hasPricing,
+  insurances: hasInsurances,
 };
 
 export const computeClinicProfileCompleteness = (

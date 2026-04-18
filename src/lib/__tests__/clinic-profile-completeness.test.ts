@@ -21,15 +21,17 @@ const emptyInput = {
   opfølgning: null,
   specialtyCount: 0,
   teamMemberCount: 0,
+  acceptedInsuranceCount: 0,
+  totalInsuranceTypesCount: 1,
 };
 
 describe("computeClinicProfileCompleteness", () => {
   it("returns 0% when everything is empty", () => {
     const r = computeClinicProfileCompleteness(emptyInput);
     expect(r.completedCount).toBe(0);
-    expect(r.totalCount).toBe(6);
+    expect(r.totalCount).toBe(7);
     expect(r.percent).toBe(0);
-    expect(r.missingKeys).toHaveLength(6);
+    expect(r.missingKeys).toHaveLength(7);
     expect(r.missingKeys).toEqual(CLINIC_PROFILE_RECOMMENDATION_ORDER);
   });
 
@@ -114,6 +116,24 @@ describe("computeClinicProfileCompleteness", () => {
     expect(r.missingKeys).not.toContain("team");
   });
 
+  it("counts insurances when at least one accepted and types exist", () => {
+    const r = computeClinicProfileCompleteness({
+      ...emptyInput,
+      acceptedInsuranceCount: 1,
+      totalInsuranceTypesCount: 3,
+    });
+    expect(r.missingKeys).not.toContain("insurances");
+  });
+
+  it("counts insurances as satisfied when there are no insurance types to configure", () => {
+    const r = computeClinicProfileCompleteness({
+      ...emptyInput,
+      acceptedInsuranceCount: 0,
+      totalInsuranceTypesCount: 0,
+    });
+    expect(r.missingKeys).not.toContain("insurances");
+  });
+
   it("counts pricing when both price fields are set", () => {
     const partial = computeClinicProfileCompleteness({
       ...emptyInput,
@@ -159,7 +179,7 @@ describe("computeClinicProfileCompleteness", () => {
       specialtyCount: 1,
       teamMemberCount: 1,
     });
-    expect(r.missingKeys).toEqual(["pricing", "about"]);
+    expect(r.missingKeys).toEqual(["pricing", "about", "insurances"]);
   });
 
   it("returns 100% when all criteria are met", () => {
@@ -177,8 +197,11 @@ describe("computeClinicProfileCompleteness", () => {
       søndag: null,
       førsteKons: "500",
       opfølgning: "400",
+      ydernummer: false,
       specialtyCount: 2,
       teamMemberCount: 1,
+      acceptedInsuranceCount: 1,
+      totalInsuranceTypesCount: 5,
     });
     expect(r.percent).toBe(100);
     expect(r.missingKeys).toHaveLength(0);
@@ -206,7 +229,7 @@ describe("getClinicProfileCompletenessNudgeDa", () => {
       /priser/
     );
     expect(getClinicProfileCompletenessNudgeDa(["pricing", "specialties"])).toMatch(
-      /specialiteter/
+      /specialer/
     );
   });
 });
@@ -216,10 +239,10 @@ describe("getClinicProfileCompletenessAriaDa", () => {
     expect(
       getClinicProfileCompletenessAriaDa({
         completedCount: 3,
-        totalCount: 6,
-        percent: 50,
+        totalCount: 7,
+        percent: 43,
         missingKeys: ["contact", "about", "team"],
       })
-    ).toBe("3 af 6 trin fuldført på klinikprofilen");
+    ).toBe("3 af 7 trin fuldført på klinikprofilen");
   });
 });

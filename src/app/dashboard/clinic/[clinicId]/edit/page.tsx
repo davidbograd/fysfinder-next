@@ -41,7 +41,7 @@ export default async function EditClinicPage({ params }: EditClinicPageProps) {
   const teamMembers = teamMembersResult.teamMembers || [];
 
   return (
-    <div className="py-8 w-full max-w-4xl mx-auto">
+    <div className="py-8 w-full max-w-6xl mx-auto px-4 sm:px-6">
       <div className="mb-8">
         <Link
           href="/dashboard"
