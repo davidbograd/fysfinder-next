@@ -107,4 +107,40 @@ describe("CreateClinicRequestPage", () => {
       );
     });
   });
+
+  it("shows a clinic name field error when the name is already taken", async () => {
+    const user = userEvent.setup();
+    mockSubmitClinicCreationRequest.mockResolvedValue({
+      fieldErrors: {
+        clinic_name:
+          "En klinik med dette navn findes allerede. Tilføj evt din by til navnet for at gøre det unikt.",
+      },
+    });
+
+    render(
+      <CreateClinicRequestPage
+        userProfile={{ full_name: "Test Person", email: "test@example.com" }}
+        initialCity={{
+          id: "city-1",
+          name: "Aabenraa",
+          slug: "aabenraa",
+          postalCode: "6200",
+        }}
+      />
+    );
+
+    await user.type(screen.getByLabelText("Kliniknavn"), "Dobbelt Navn");
+    await user.type(screen.getByLabelText("Adresse (vej og nr)"), "Testvej 10");
+    await user.type(screen.getByLabelText("Din rolle i klinikken"), "Ejer");
+    await user.click(screen.getByRole("button", { name: "Opret din klinik" }));
+
+    await waitFor(() => {
+      expect(
+        screen.getByText(
+          "En klinik med dette navn findes allerede. Tilføj evt din by til navnet for at gøre det unikt."
+        )
+      ).toBeInTheDocument();
+    });
+    expect(mockToast).not.toHaveBeenCalled();
+  });
 });

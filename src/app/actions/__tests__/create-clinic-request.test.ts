@@ -24,9 +24,7 @@ jest.mock("@/app/utils/supabase/server", () => ({
       if (table === "clinics") {
         return {
           select: () => ({
-            eq: () => ({
-              ilike: (...args: unknown[]) => mockClinicsLookup(...args),
-            }),
+            ilike: (...args: unknown[]) => mockClinicsLookup(...args),
           }),
         };
       }
@@ -66,6 +64,7 @@ jest.mock("@/lib/email", () => ({
     mockSendCreationNotification(...args),
 }));
 
+import { DUPLICATE_CLINIC_NAME_MESSAGE } from "../create-clinic-request.shared";
 import { submitClinicCreationRequest } from "../create-clinic-request";
 
 describe("submitClinicCreationRequest", () => {
@@ -145,5 +144,33 @@ describe("submitClinicCreationRequest", () => {
         website: "www.klinik.dk",
       })
     );
+  });
+
+  it("returns a field error when a clinic with the same name already exists", async () => {
+    mockGetUser.mockResolvedValue({ data: { user: { id: "user-1" } } });
+    mockCitySingle.mockResolvedValue({
+      data: { id: "city-1", bynavn: "Aabenraa" },
+      error: null,
+    });
+    mockClinicsLookup.mockResolvedValue({
+      data: [{ clinics_id: "c-1", klinikNavn: "Eksisterende Klinik" }],
+      error: null,
+    });
+
+    const result = await submitClinicCreationRequest({
+      clinic_name: "Eksisterende Klinik",
+      address: "Testvej 10",
+      postal_code: "6200",
+      city_id: "city-1",
+      city_name: "Aabenraa",
+      requester_name: "Test Person",
+      requester_email: "test@example.com",
+      requester_role: "Ejer",
+    });
+
+    expect(result).toEqual({
+      fieldErrors: { clinic_name: DUPLICATE_CLINIC_NAME_MESSAGE },
+    });
+    expect(mockServiceInsert).not.toHaveBeenCalled();
   });
 });

@@ -60,6 +60,7 @@ export const CreateClinicRequestPage = ({
 
   const selectedCity = initialSelectedCity;
   const [isSubmittingCreate, setIsSubmittingCreate] = useState(false);
+  const [clinicNameError, setClinicNameError] = useState<string | null>(null);
 
   const [createFormData, setCreateFormData] = useState({
     clinic_name: "",
@@ -105,6 +106,7 @@ export const CreateClinicRequestPage = ({
     }
 
     setIsSubmittingCreate(true);
+    setClinicNameError(null);
     try {
       const result = await submitClinicCreationRequest({
         clinic_name: createFormData.clinic_name,
@@ -118,7 +120,12 @@ export const CreateClinicRequestPage = ({
         website: createFormData.website,
       });
 
-      if (result.error) {
+      if ("fieldErrors" in result && result.fieldErrors.clinic_name) {
+        setClinicNameError(result.fieldErrors.clinic_name);
+        return;
+      }
+
+      if ("error" in result && result.error) {
         toast({
           title: "Fejl",
           description: result.error,
@@ -166,11 +173,19 @@ export const CreateClinicRequestPage = ({
               <Input
                 id="clinic_name"
                 value={createFormData.clinic_name}
-                onChange={(e) =>
-                  setCreateFormData({ ...createFormData, clinic_name: e.target.value })
-                }
+                onChange={(e) => {
+                  setClinicNameError(null);
+                  setCreateFormData({ ...createFormData, clinic_name: e.target.value });
+                }}
                 required
+                aria-invalid={clinicNameError ? true : undefined}
+                aria-describedby={clinicNameError ? "clinic_name_error" : undefined}
               />
+              {clinicNameError ? (
+                <p id="clinic_name_error" className="text-sm text-destructive" role="alert">
+                  {clinicNameError}
+                </p>
+              ) : null}
             </div>
             <div className="space-y-2">
               <Label htmlFor="address">Adresse (vej og nr)</Label>

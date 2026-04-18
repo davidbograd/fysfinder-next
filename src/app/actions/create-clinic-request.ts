@@ -3,6 +3,10 @@
 import { createClient } from "@/app/utils/supabase/server";
 import { createClient as createServiceClient } from "@supabase/supabase-js";
 import { sendClinicCreationNotificationToAdmins } from "@/lib/email";
+import {
+  DUPLICATE_CLINIC_NAME_MESSAGE,
+  type SubmitClinicCreationRequestResult,
+} from "@/app/actions/create-clinic-request.shared";
 
 const MAX_NAME_LENGTH = 120;
 const MAX_ADDRESS_LENGTH = 180;
@@ -58,7 +62,9 @@ function validateInput(input: ClinicCreationRequestInput): string | null {
   return null;
 }
 
-export async function submitClinicCreationRequest(input: ClinicCreationRequestInput) {
+export async function submitClinicCreationRequest(
+  input: ClinicCreationRequestInput
+): Promise<SubmitClinicCreationRequestResult> {
   const validationError = validateInput(input);
   if (validationError) {
     return { error: validationError };
@@ -74,7 +80,6 @@ export async function submitClinicCreationRequest(input: ClinicCreationRequestIn
   }
 
   const normalizedClinicName = normalizeText(input.clinic_name);
-  const normalizedAddress = normalizeText(input.address);
 
   const { data: city, error: cityError } = await supabase
     .from("cities")
@@ -88,8 +93,7 @@ export async function submitClinicCreationRequest(input: ClinicCreationRequestIn
 
   const { data: existingClinics, error: clinicLookupError } = await supabase
     .from("clinics")
-    .select("clinics_id, klinikNavn, adresse")
-    .eq("city_id", input.city_id)
+    .select("clinics_id, klinikNavn")
     .ilike("klinikNavn", input.clinic_name.trim());
 
   if (clinicLookupError) {
@@ -97,14 +101,12 @@ export async function submitClinicCreationRequest(input: ClinicCreationRequestIn
     return { error: "Fejl ved validering af klinik" };
   }
 
-  const duplicateClinic = (existingClinics || []).find((clinic) => {
-    const sameName = normalizeText(clinic.klinikNavn || "") === normalizedClinicName;
-    const sameAddress = normalizeText(clinic.adresse || "") === normalizedAddress;
-    return sameName || (sameName && sameAddress);
-  });
+  const duplicateByName = (existingClinics || []).some(
+    (clinic) => normalizeText(clinic.klinikNavn || "") === normalizedClinicName
+  );
 
-  if (duplicateClinic) {
-    return { error: "Klinikken findes allerede. Prøv i stedet at tage ejerskab af den eksisterende klinik." };
+  if (duplicateByName) {
+    return { fieldErrors: { clinic_name: DUPLICATE_CLINIC_NAME_MESSAGE } };
   }
 
   const { data: existingRequest, error: existingRequestError } = await supabase
