@@ -1,4 +1,4 @@
-// ClinicCard - Displays a single clinic in the listing.
+// ClinicListingCard - Displays a single clinic in search/listing results.
 // Updated: reuses shared premium-active entitlement helper for card prominence.
 
 "use client";
@@ -48,7 +48,7 @@ interface Props {
   trackingContextCityId?: string;
 }
 
-const ClinicCard: React.FC<Props> = ({
+const ClinicListingCard: React.FC<Props> = ({
   clinicId,
   klinikNavn,
   klinikNavnSlug,
@@ -422,4 +422,4 @@ const ClinicCard: React.FC<Props> = ({
   );
 };
 
-export default ClinicCard;
+export default ClinicListingCard;

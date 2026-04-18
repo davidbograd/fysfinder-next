@@ -2,7 +2,7 @@
 // Updated: uses centralized entitlement policies for premium/verified sorting behavior.
 
 import { cache } from "react";
-import ClinicCard from "@/components/features/clinic/ClinicCard";
+import ClinicListingCard from "@/components/features/clinic/ClinicListingCard";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { deslugify, slugify } from "@/app/utils/slugify";
 import { Metadata } from "next";

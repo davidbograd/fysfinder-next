@@ -2,7 +2,7 @@
 // Updated: forwards location tracking context so nearby interactions keep city attribution.
 
 import { ClinicWithDistance } from "@/app/types";
-import ClinicCard from "../../../../../components/features/clinic/ClinicCard";
+import ClinicListingCard from "../../../../../components/features/clinic/ClinicListingCard";
 import { orderSpecialties } from "@/lib/clinic-utils";
 
 interface NearbyClinicsListProps {

@@ -1,5 +1,5 @@
 // Clinic management actions for owned clinics and admin overrides.
-// Updated: adds explicit guard that team-member management stays available for free users.
+// Updated: profile completeness on owned clinics; adds explicit guard that team-member management stays available for free users.
 
 "use server";
 
@@ -12,6 +12,7 @@ import {
   canAccessTeamMembersFeature,
   isPremiumListingActive,
 } from "@/lib/clinic-entitlements";
+import { computeClinicProfileCompleteness } from "@/lib/clinic-profile-completeness";
 
 async function canManageClinic(
   supabase: Awaited<ReturnType<typeof createClient>>,
@@ -65,6 +66,19 @@ export async function getOwnedClinics() {
         tlf,
         website,
         verified_klinik,
+        om_os,
+        mandag,
+        tirsdag,
+        onsdag,
+        torsdag,
+        fredag,
+        lørdag,
+        søndag,
+        førsteKons,
+        opfølgning,
+        ydernummer,
+        clinic_specialties ( specialty_id ),
+        clinic_team_members ( id ),
         premium_listings (
           id,
           start_date,
@@ -154,10 +168,42 @@ export async function getOwnedClinics() {
       .map((cityId) => cityNameById.get(cityId))
       .filter((cityName): cityName is string => Boolean(cityName));
 
+    const specialtyCount = Array.isArray(clinic.clinic_specialties)
+      ? clinic.clinic_specialties.length
+      : 0;
+    const teamMemberCount = Array.isArray(clinic.clinic_team_members)
+      ? clinic.clinic_team_members.length
+      : 0;
+
+    const profileCompleteness = computeClinicProfileCompleteness({
+      email: clinic.email,
+      tlf: clinic.tlf,
+      website: clinic.website,
+      om_os: clinic.om_os,
+      mandag: clinic.mandag,
+      tirsdag: clinic.tirsdag,
+      onsdag: clinic.onsdag,
+      torsdag: clinic.torsdag,
+      fredag: clinic.fredag,
+      lørdag: clinic.lørdag,
+      søndag: clinic.søndag,
+      førsteKons: clinic.førsteKons,
+      opfølgning: clinic.opfølgning,
+      ydernummer: clinic.ydernummer,
+      specialtyCount,
+      teamMemberCount,
+    });
+
+    const clinicCore = { ...clinic };
+    delete clinicCore.clinic_specialties;
+    delete clinicCore.clinic_team_members;
+    delete clinicCore.premium_listings;
+
     return {
-      ...clinic,
+      ...clinicCore,
       hasActivePremium: Boolean(activeListing),
       premiumCityNames,
+      profileCompleteness,
     };
   });
 

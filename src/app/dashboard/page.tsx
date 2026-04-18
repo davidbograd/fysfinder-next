@@ -14,7 +14,7 @@ import { AdminStatsSection } from "@/components/dashboard/AdminStatsSection";
 import { AdminAnalyticsSection } from "@/components/dashboard/AdminAnalyticsSection";
 import { UserClaimsSection } from "@/components/dashboard/UserClaimsSection";
 import { getOwnedClinics } from "@/app/actions/clinic-management";
-import { ClinicCard } from "@/components/dashboard/ClinicCard";
+import { OwnedClinicCard } from "@/components/dashboard/OwnedClinicCard";
 import {
   ClinicStats,
   getAllOwnedClinicAnalytics,
@@ -23,6 +23,7 @@ import { getClinicDashboardUplift } from "@/app/actions/dashboard-uplift";
 import { getUserClaims } from "@/app/actions/user-claims";
 import { Suspense } from "react";
 import { DashboardDevToolbar } from "@/components/dashboard/DashboardDevToolbar";
+import type { ClinicProfileCompleteness } from "@/lib/clinic-profile-completeness";
 
 interface DashboardPageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -62,6 +63,7 @@ interface DashboardOwnedClinic {
   verified_klinik: boolean | null;
   hasActivePremium?: boolean;
   premiumCityNames?: string[];
+  profileCompleteness: ClinicProfileCompleteness;
 }
 
 interface DashboardCreationRequest {
@@ -602,12 +604,12 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
           <CardContent className="space-y-4">
             {hasAnyClinics ? (
               <>
-                {/* Owned Clinics */}
-                {ownedClinics.map((clinic) => (
-                  <div key={clinic.clinics_id} className="grid grid-cols-1 gap-4">
-                    <ClinicCard clinic={clinic} />
-                  </div>
-                ))}
+                {/* Owned Clinics — max two per row (half width each from md and up) */}
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                  {ownedClinics.map((clinic) => (
+                    <OwnedClinicCard key={clinic.clinics_id} clinic={clinic} />
+                  ))}
+                </div>
                 {/* Pending Claims - displayed like clinic cards */}
                 <UserClaimsSection
                   claims={userClaims}

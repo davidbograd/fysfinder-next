@@ -1,7 +1,7 @@
 // Updated: 2026-03-30 - Added verified badge and hover event MVP assertions.
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import ClinicCard from "../ClinicCard";
+import ClinicListingCard from "../ClinicListingCard";
 
 const mockClinic = {
   clinicId: "test-clinic-id",
@@ -28,9 +28,9 @@ const mockClinic = {
   ],
 };
 
-describe("ClinicCard", () => {
+describe("ClinicListingCard", () => {
   it("renders basic clinic information", () => {
-    render(<ClinicCard {...mockClinic} />);
+    render(<ClinicListingCard {...mockClinic} />);
 
     // Check clinic name
     expect(screen.getByText("Fysioterapi Klinikken")).toBeInTheDocument();
@@ -46,24 +46,24 @@ describe("ClinicCard", () => {
   });
 
   it("displays ydernummer badge when clinic has ydernummer", () => {
-    render(<ClinicCard {...mockClinic} />);
+    render(<ClinicListingCard {...mockClinic} />);
     expect(screen.getByText("Har ydernummer")).toBeInTheDocument();
   });
 
   it("shows specialties with badges", () => {
-    render(<ClinicCard {...mockClinic} />);
+    render(<ClinicListingCard {...mockClinic} />);
     expect(screen.getByText("Sportsfysioterapi")).toBeInTheDocument();
     expect(screen.getByText("Børnefysioterapi")).toBeInTheDocument();
   });
 
   it("shows distance when provided", () => {
-    render(<ClinicCard {...mockClinic} distance={2.5} />);
+    render(<ClinicListingCard {...mockClinic} distance={2.5} />);
     expect(screen.getByText(/2.5/)).toBeInTheDocument();
     expect(screen.getByText(/km væk/)).toBeInTheDocument();
   });
 
   it("shows verified clinic icon when clinic is verified", () => {
-    render(<ClinicCard {...mockClinic} verified_klinik />);
+    render(<ClinicListingCard {...mockClinic} verified_klinik />);
     expect(screen.getByAltText("Verified clinic")).toBeInTheDocument();
   });
 
@@ -72,7 +72,7 @@ describe("ClinicCard", () => {
     process.env.NEXT_PUBLIC_LOGO_DEV_PUBLISHABLE_KEY = "pk_test_token";
 
     render(
-      <ClinicCard {...mockClinic} website="https://www.example.com/clinic" />
+      <ClinicListingCard {...mockClinic} website="https://www.example.com/clinic" />
     );
 
     const logo = screen.getByAltText("Fysioterapi Klinikken logo");
@@ -88,7 +88,7 @@ describe("ClinicCard", () => {
     const user = userEvent.setup();
     const dispatchSpy = jest.spyOn(window, "dispatchEvent");
 
-    render(<ClinicCard {...mockClinic} />);
+    render(<ClinicListingCard {...mockClinic} />);
     const card = document.getElementById("clinic-card-test-clinic-id");
     expect(card).toBeTruthy();
 

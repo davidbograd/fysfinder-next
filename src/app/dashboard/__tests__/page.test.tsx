@@ -50,8 +50,8 @@ jest.mock("@/components/dashboard/AdminAnalyticsSection", () => ({
 jest.mock("@/components/dashboard/UserClaimsSection", () => ({
   UserClaimsSection: () => null,
 }));
-jest.mock("@/components/dashboard/ClinicCard", () => ({
-  ClinicCard: () => null,
+jest.mock("@/components/dashboard/OwnedClinicCard", () => ({
+  OwnedClinicCard: () => null,
 }));
 jest.mock("@/components/dashboard/DashboardDevToolbar", () => ({
   DashboardDevToolbar: () => null,

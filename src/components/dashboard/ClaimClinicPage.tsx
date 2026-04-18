@@ -18,7 +18,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, X } from "lucide-react";
+import { ArrowLeft, Loader2, X } from "lucide-react";
 import { City, SearchResult } from "@/app/types";
 
 interface ClaimClinicPageProps {
@@ -303,6 +303,13 @@ export const ClaimClinicPage = ({ userProfile }: ClaimClinicPageProps) => {
   return (
     <div className="py-8 w-full max-w-4xl">
       <div className="mb-8">
+        <Link
+          href="/dashboard"
+          className="mb-3 inline-flex items-center gap-1.5 text-sm font-medium text-gray-600 hover:text-gray-900"
+        >
+          <ArrowLeft className="h-4 w-4 shrink-0" aria-hidden />
+          Tilbage til dashboard
+        </Link>
         <h1 className="text-3xl font-bold tracking-tight text-gray-900">
           Tilknyt din klinik
         </h1>

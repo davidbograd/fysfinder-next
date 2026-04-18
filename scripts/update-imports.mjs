@@ -15,7 +15,7 @@ const importMappings = {
   "@/app/components/CookieConsent": "@/components/layout/CookieConsent",
 
   // Feature components - Clinic
-  "@/app/components/ClinicCard": "@/components/features/clinic/ClinicCard",
+  "@/app/components/ClinicCard": "@/components/features/clinic/ClinicListingCard",
   "@/app/components/ClinicsList": "@/components/features/clinic/ClinicsList",
   "@/app/components/ClinicSidebar":
     "@/components/features/clinic/ClinicSidebar",

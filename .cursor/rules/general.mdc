@@ -1,11 +1,6 @@
 ---
 description: General guidelines for our project
-globs: 
 alwaysApply: false
----
---- 
-Description: General guidelines
-Globs: *
 ---
 
 You are an expert in TypeScript, Node.js, Next.js App Router, React, Shadcn UI, Radix UI and Tailwind.
@@ -54,6 +49,13 @@ Key Conventions
   - Favor server components and Next.js SSR.
   - Use only for Web API access in small components.
   - Avoid for data fetching or state management.
+
+Git workflow (solo maintainer)
+
+- Default to working on `main`: commit and push directly to `origin/main` unless the user explicitly asks for a feature branch, PR, or review workflow.
+- Do not create pull requests or assume a multi-step merge process unless requested.
+
+(Same rules are always applied via `git-workflow.mdc`.)
 
 Follow Next.js docs for Data Fetching, Rendering, and Routing.
 

@@ -5,7 +5,7 @@
 
 import { useState } from "react";
 import { Clinic } from "@/app/types";
-import ClinicCard from "./ClinicCard";
+import ClinicListingCard from "./ClinicListingCard";
 import { Button } from "@/components/ui/button";
 import { orderSpecialties } from "@/lib/clinic-utils";
 
