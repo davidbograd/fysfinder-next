@@ -73,6 +73,128 @@ const DANISH_SPECIALTY_COLLATOR = new Intl.Collator("da-DK", {
   numeric: true,
 });
 
+const OM_OS_MAX_LENGTH = 320;
+
+const isOptionalEmailValid = (email: string): boolean => {
+  const t = email.trim();
+  if (!t) return true;
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(t);
+};
+
+const isOptionalWebsiteValid = (website: string): boolean => {
+  const t = website.trim();
+  if (!t) return true;
+  try {
+    const withProto = /^https?:\/\//i.test(t) ? t : `https://${t}`;
+    new URL(withProto);
+    return true;
+  } catch {
+    return false;
+  }
+};
+
+/** Strips http(s):// and leading slashes so the input only holds host + path. */
+const normalizeWebsiteSuffixInput = (raw: string): string => {
+  let t = raw.trim();
+  t = t.replace(/^https?:\/\//i, "");
+  t = t.replace(/^\/+/, "");
+  return t.trim();
+};
+
+/** Full URL for validation and DB; empty string if the website field is left blank. */
+const buildFullWebsiteUrlFromSuffix = (suffix: string): string => {
+  const normalized = normalizeWebsiteSuffixInput(suffix);
+  if (!normalized) return "";
+  return `https://${normalized}`;
+};
+
+const isMinuteFieldInRange = (value: string): boolean => {
+  const t = value.trim();
+  if (!t) return true;
+  const n = parseInt(t, 10);
+  return !Number.isNaN(n) && n >= 5 && n <= 180;
+};
+
+type EditClinicValidationInput = {
+  email: string;
+  website: string;
+  om_os: string;
+  hasYdernummer: string;
+  første_kons_minutter: string;
+  opfølgning_minutter: string;
+  allInsuranceTypesCount: number;
+  acceptedInsuranceCount: number;
+  selectedSpecialtiesCount: number;
+  teamMembers: TeamMemberForm[];
+};
+
+const getEditClinicValidationMessage = ({
+  email,
+  website,
+  om_os,
+  hasYdernummer,
+  første_kons_minutter,
+  opfølgning_minutter,
+  allInsuranceTypesCount,
+  acceptedInsuranceCount,
+  selectedSpecialtiesCount,
+  teamMembers,
+}: EditClinicValidationInput): string | null => {
+  if (!isOptionalEmailValid(email)) {
+    return "E-mail ser ikke gyldig ud. Brug formatet navn@domæne.dk, eller lad feltet stå tomt.";
+  }
+  if (!isOptionalWebsiteValid(website)) {
+    return "Website skal være en gyldig adresse efter https://, f.eks. www.ditklinik.dk eller ditklinik.dk.";
+  }
+  if (om_os.trim().length > OM_OS_MAX_LENGTH) {
+    return `Teksten under «Om os» må højst være ${OM_OS_MAX_LENGTH} tegn (nu: ${om_os.trim().length}). Forkort teksten, og prøv igen.`;
+  }
+  if (hasYdernummer === "no") {
+    if (!isMinuteFieldInRange(første_kons_minutter)) {
+      return "Varighed for første konsultation skal være et heltal mellem 5 og 180 minutter, eller lad feltet stå tomt.";
+    }
+    if (!isMinuteFieldInRange(opfølgning_minutter)) {
+      return "Varighed for opfølgning skal være et heltal mellem 5 og 180 minutter, eller lad feltet stå tomt.";
+    }
+  }
+  if (allInsuranceTypesCount > 0 && acceptedInsuranceCount === 0) {
+    return "Vælg mindst én forsikring, I accepterer, eller vælg «Ja» under om klinikken accepterer alle forsikringer.";
+  }
+  if (selectedSpecialtiesCount > 10) {
+    return "Du kan maksimalt vælge 10 specialer. Fjern ét eller flere, og prøv igen.";
+  }
+  for (const m of teamMembers) {
+    const hasName = m.name.trim() !== "";
+    const hasRole = m.role.trim() !== "";
+    if (hasName !== hasRole) {
+      return "For hver behandler skal både navn og rolle udfyldes. Fjern tomme rækker med X, hvis de ikke skal bruges.";
+    }
+  }
+  return null;
+};
+
+const mapClinicSaveErrorToUserMessage = (raw: string): string => {
+  const known: Record<string, string> = {
+    "Ikke logget ind":
+      "Du er ikke logget ind. Opdater siden eller log ind igen, og prøv at gemme.",
+    "Du ejer ikke denne klinik":
+      "Du har ikke adgang til at ændre denne klinik. Kontakt os, hvis det er en fejl.",
+    "Maksimum 10 specialiteter tilladt":
+      "Du kan maksimalt vælge 10 specialer. Fjern ét eller flere, og gem igen.",
+    "Fejl ved opdatering af klinik":
+      "Kunne ikke gemme klinikoplysningerne. Tjek forbindelsen og prøv igen. Kontakt os, hvis problemet fortsætter.",
+    "Fejl ved opdatering af specialiteter":
+      "Kunne ikke gemme specialer. Prøv igen om et øjeblik.",
+    "Fejl ved opdatering af behandlere":
+      "Kunne ikke gemme behandlere. Tjek at hver række har både navn og rolle, og prøv igen.",
+    "Fejl ved opdatering af forsikringer":
+      "Kunne ikke gemme forsikringer. Prøv igen om et øjeblik.",
+    "Adgang til behandlere er midlertidigt utilgængelig":
+      "Behandlere kan ikke opdateres lige nu. Prøv igen senere.",
+  };
+  return known[raw] ?? raw;
+};
+
 export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: initialTeamMembers }: EditClinicFormProps) => {
   const router = useRouter();
   const { toast } = useToast();
@@ -103,7 +225,7 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
   const [formData, setFormData] = useState({
     email: clinic.email || "",
     tlf: cleanInitialPhone,
-    website: clinic.website || "",
+    website: normalizeWebsiteSuffixInput(clinic.website || ""),
     adresse: clinic.adresse || "",
     lokation: clinic.lokation || "",
     mandag: clinic.mandag || "",
@@ -178,6 +300,10 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
 
   const handleInputChange = (field: string, value: string | boolean | null) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleWebsiteSuffixChange = (raw: string) => {
+    handleInputChange("website", normalizeWebsiteSuffixInput(raw));
   };
 
   const handleSpecialtyToggle = (specialtyId: string) => {
@@ -380,7 +506,7 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
     const input: ClinicProfileCompletenessInput = {
       email: formData.email,
       tlf: formData.tlf,
-      website: formData.website,
+      website: buildFullWebsiteUrlFromSuffix(formData.website),
       om_os: formData.om_os,
       mandag: formData.mandag,
       tirsdag: formData.tirsdag,
@@ -432,6 +558,34 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const totalInsuranceTypesCount = insurances.length;
+    const acceptedInsuranceCount = acceptsAllInsurances
+      ? totalInsuranceTypesCount
+      : allInsuranceIds.filter((id) => !selectedInsurances.includes(id)).length;
+
+    const clientValidationMessage = getEditClinicValidationMessage({
+      email: formData.email,
+      website: buildFullWebsiteUrlFromSuffix(formData.website),
+      om_os: formData.om_os,
+      hasYdernummer,
+      første_kons_minutter: formData.første_kons_minutter,
+      opfølgning_minutter: formData.opfølgning_minutter,
+      allInsuranceTypesCount: totalInsuranceTypesCount,
+      acceptedInsuranceCount,
+      selectedSpecialtiesCount: selectedSpecialties.length,
+      teamMembers,
+    });
+
+    if (clientValidationMessage) {
+      toast({
+        title: "Kan ikke gemme",
+        description: clientValidationMessage,
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsLoading(true);
 
     try {
@@ -446,7 +600,7 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
       const updateData: any = {
         email: formData.email || null,
         tlf: cleanPhone,
-        website: formData.website || null,
+        website: buildFullWebsiteUrlFromSuffix(formData.website) || null,
         adresse: formData.adresse || null,
         mandag: formData.mandag || null,
         tirsdag: formData.tirsdag || null,
@@ -521,10 +675,13 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
 
       router.push("/dashboard");
       router.refresh();
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const raw =
+        error instanceof Error ? error.message : String(error ?? "");
       toast({
         title: "Fejl",
-        description: error.message || "Kunne ikke opdatere klinik",
+        description:
+          mapClinicSaveErrorToUserMessage(raw) || "Kunne ikke opdatere klinik",
         variant: "destructive",
       });
     } finally {
@@ -535,6 +692,7 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
   return (
     <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-10">
       <form
+        noValidate
         onSubmit={handleSubmit}
         className="min-w-0 flex-1 space-y-6"
         aria-describedby="clinic-profile-progress-summary"
@@ -634,12 +792,28 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
                 <Globe className="h-4 w-4 shrink-0 text-gray-500" />
                 Website
               </Label>
-              <Input
-                id="website"
-                type="url"
-                value={formData.website}
-                onChange={(e) => handleInputChange("website", e.target.value)}
-              />
+              <div className="flex h-10 w-full rounded-md border border-input bg-background ring-offset-background focus-within:outline-none focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
+                <span
+                  className="flex shrink-0 items-center border-r border-input bg-gray-50 px-3 text-sm text-gray-500 select-none"
+                  aria-hidden="true"
+                >
+                  https://
+                </span>
+                <Input
+                  id="website"
+                  type="text"
+                  inputMode="url"
+                  autoComplete="url"
+                  value={formData.website}
+                  onChange={(e) => handleWebsiteSuffixChange(e.target.value)}
+                  placeholder="www.dinklinik.dk"
+                  aria-describedby="website-https-hint"
+                  className="h-10 min-w-0 flex-1 rounded-none border-0 bg-transparent px-3 py-2 shadow-none focus-visible:ring-0 focus-visible:ring-offset-0"
+                />
+              </div>
+              <p id="website-https-hint" className="sr-only">
+                Adressen gemmes med https. Du behøver ikke skrive https i feltet.
+              </p>
             </div>
             <div className="space-y-2">
               <Label

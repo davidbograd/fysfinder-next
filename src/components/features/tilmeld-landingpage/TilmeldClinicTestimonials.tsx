@@ -1,4 +1,4 @@
-// Updated: 2026-04-18 - Tighter vertical rhythm (stars / quote / author); Anders quote; Issam + Anders cards.
+// Updated: 2026-04-18 - Testimonial quotes without inline highlights; Issam + Anders cards.
 import Image from "next/image";
 import { MapPin } from "lucide-react";
 import { StarIcon } from "@heroicons/react/24/solid";
@@ -87,19 +87,8 @@ export function TilmeldClinicTestimonials() {
             imageHeight={280}
             quote={
               <p className="text-base leading-relaxed text-gray-700 text-balance md:text-[1.05rem]">
-                Det giver tryghed at bruge en løsning, der er{" "}
-                <span className="rounded-md bg-[#f3f1ea] px-1 py-0.5 text-[#1f2b28]">
-                  lavet af en fysioterapeut
-                </span>
-                . Det er{" "}
-                <span className="rounded-md bg-[#f3f1ea] px-1 py-0.5 text-[#1f2b28]">
-                  simpelt, relevant
-                </span>{" "}
-                – og{" "}
-                <span className="rounded-md bg-[#f3f1ea] px-1 py-0.5 text-[#1f2b28]">
-                  virker i praksis
-                </span>
-                .
+                Det giver tryghed at bruge en løsning, der er lavet af en fysioterapeut. Det er simpelt,
+                relevant – og virker i praksis.
               </p>
             }
           />
@@ -114,15 +103,8 @@ export function TilmeldClinicTestimonials() {
             imageHeight={400}
             quote={
               <p className="text-base leading-relaxed text-gray-700 text-balance md:text-[1.05rem]">
-                Jeg har aldrig haft lyst til at bruge tid på{" "}
-                <span className="rounded-md bg-[#f3f1ea] px-1 py-0.5 text-[#1f2b28]">
-                  marketing
-                </span>
-                . Fysfinder er nok det nemmeste jeg har gjort for at{" "}
-                <span className="rounded-md bg-[#f3f1ea] px-1 py-0.5 text-[#1f2b28]">
-                  få mere synlighed
-                </span>
-                .
+                Jeg har aldrig haft lyst til at bruge tid på marketing. Fysfinder er nok det nemmeste jeg
+                har gjort for at få mere synlighed.
               </p>
             }
           />

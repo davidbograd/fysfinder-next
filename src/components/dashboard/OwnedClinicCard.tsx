@@ -32,6 +32,20 @@ import {
   Rocket,
 } from "lucide-react";
 
+/** Filled segment color by number of completed checklist steps (7 = full, no bar). */
+const clinicProfileProgressFilledClass = (completedCount: number): string => {
+  if (completedCount >= 1 && completedCount <= 3) {
+    return "bg-orange-500";
+  }
+  if (completedCount >= 4 && completedCount <= 5) {
+    return "bg-yellow-500";
+  }
+  if (completedCount === 6) {
+    return "bg-green-600";
+  }
+  return "bg-green-600";
+};
+
 interface OwnedClinicCardProps {
   clinic: {
     clinics_id: string;
@@ -158,7 +172,9 @@ export const OwnedClinicCard = ({ clinic }: OwnedClinicCardProps) => {
                   className={cn(
                     "h-2.5 min-w-0 flex-1 rounded-full transition-colors",
                     index < completeness.completedCount
-                      ? "bg-green-600"
+                      ? clinicProfileProgressFilledClass(
+                          completeness.completedCount
+                        )
                       : "bg-brand-beige"
                   )}
                 />
