@@ -31,7 +31,7 @@ export function NearbyClinicsList({
       </h2>
       <div className="space-y-4">
         {clinics.map((clinic) => (
-          <ClinicCard
+          <ClinicListingCard
             key={clinic.clinics_id}
             clinicId={clinic.clinics_id}
             klinikNavn={clinic.klinikNavn}

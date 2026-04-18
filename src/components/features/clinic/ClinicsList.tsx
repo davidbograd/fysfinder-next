@@ -43,7 +43,7 @@ export function ClinicsList({
 
       <div className="space-y-4">
         {visibleClinics.map((clinic: Clinic) => (
-          <ClinicCard
+          <ClinicListingCard
             key={clinic.clinics_id}
             clinicId={clinic.clinics_id}
             klinikNavn={clinic.klinikNavn}
