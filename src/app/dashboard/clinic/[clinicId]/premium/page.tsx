@@ -1,6 +1,7 @@
 // Premium upgrade page for a clinic.
 // Added: explains value and starts Stripe Checkout for owned clinics.
 
+import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Check } from "lucide-react";
@@ -10,6 +11,10 @@ import { Button } from "@/components/ui/button";
 import { PremiumCheckoutButton } from "@/components/dashboard/PremiumCheckoutButton";
 import { PremiumLocationPicker } from "@/components/dashboard/PremiumLocationPicker";
 import { getPremiumUpgradeContext } from "@/app/actions/premium-upgrade";
+
+export const metadata: Metadata = {
+  title: "Fysfinder Premium",
+};
 
 interface PremiumClinicPageProps {
   params: Promise<{ clinicId: string }>;

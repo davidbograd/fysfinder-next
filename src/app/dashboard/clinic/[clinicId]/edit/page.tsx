@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
@@ -5,6 +6,10 @@ import { createClient } from "@/app/utils/supabase/server";
 import { getClinicForEdit, getAllSpecialties, getAllInsurances, getClinicTeamMembers } from "@/app/actions/clinic-management";
 import { EditClinicForm } from "@/components/dashboard/EditClinicForm";
 import { EditClinicHeaderActions } from "@/components/dashboard/EditClinicHeaderActions";
+
+export const metadata: Metadata = {
+  title: "Rediger din klinik",
+};
 
 interface EditClinicPageProps {
   params: Promise<{ clinicId: string }>;

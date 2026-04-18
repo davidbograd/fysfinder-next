@@ -1,6 +1,7 @@
 // Dashboard page for clinic owners and admins.
 // Updated: includes booking clicks in lead KPI totals and contribution breakdown.
 
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { createClient } from "@/app/utils/supabase/server";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -24,6 +25,10 @@ import { getUserClaims } from "@/app/actions/user-claims";
 import { Suspense } from "react";
 import { DashboardDevToolbar } from "@/components/dashboard/DashboardDevToolbar";
 import type { ClinicProfileCompleteness } from "@/lib/clinic-profile-completeness";
+
+export const metadata: Metadata = {
+  title: "Dashboard",
+};
 
 interface DashboardPageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;

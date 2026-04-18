@@ -1,6 +1,11 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { createClient } from "@/app/utils/supabase/server";
 import { CreateClinicRequestPage } from "@/components/dashboard/CreateClinicRequestPage";
+
+export const metadata: Metadata = {
+  title: "Opret ny klinik",
+};
 
 interface CreateClaimNewPageProps {
   searchParams: Promise<{

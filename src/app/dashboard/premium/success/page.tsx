@@ -1,12 +1,17 @@
 // Premium success and location-selection page.
 // Added: guides owner to pick neighbor cities after successful payment.
 
+import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/app/utils/supabase/server";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { getPremiumUpgradeContext } from "@/app/actions/premium-upgrade";
+
+export const metadata: Metadata = {
+  title: "Premium bekræftet",
+};
 
 interface PremiumSuccessPageProps {
   searchParams: Promise<{ clinicId?: string; session_id?: string }>;

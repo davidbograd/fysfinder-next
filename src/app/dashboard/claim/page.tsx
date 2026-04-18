@@ -1,6 +1,11 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { createClient } from "@/app/utils/supabase/server";
 import { ClaimClinicPage } from "@/components/dashboard/ClaimClinicPage";
+
+export const metadata: Metadata = {
+  title: "Tilknyt din klinik",
+};
 
 export default async function ClaimPage() {
   const supabase = await createClient();

@@ -1,7 +1,12 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { createClient } from "@/app/utils/supabase/server";
 import { isAdminEmail } from "@/lib/admin";
 import { VerifiedClinicsList } from "@/components/dashboard/VerifiedClinicsList";
+
+export const metadata: Metadata = {
+  title: "Verificerede klinikker",
+};
 
 export default async function AdminClinicsPage() {
   const supabase = await createClient();
