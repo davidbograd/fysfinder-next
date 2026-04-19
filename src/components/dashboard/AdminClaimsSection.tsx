@@ -122,7 +122,7 @@ export const AdminClaimsSection = () => {
       const result = await approveClaim(claimId, {
         googleMapsUrl: trimmedMaps || undefined,
       });
-      if (result.error) {
+      if ("error" in result) {
         toast({
           title: "Fejl",
           description: result.error,
@@ -214,7 +214,7 @@ export const AdminClaimsSection = () => {
       const result = await approveClinicCreationRequest(requestId, {
         googleMapsUrl: trimmedMaps || undefined,
       });
-      if (result.error) {
+      if ("error" in result) {
         toast({
           title: "Fejl",
           description: result.error,
