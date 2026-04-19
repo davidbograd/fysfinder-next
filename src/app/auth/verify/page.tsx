@@ -31,8 +31,8 @@ export default async function VerifyPage({ searchParams }: VerifyPageProps) {
     return (
       <div className="min-h-screen flex items-center justify-center p-4 bg-slate-50/80">
         <Card className="max-w-md w-full border-slate-200 shadow-sm">
-          <CardHeader className="text-center">
-            <div className="flex justify-center mb-4">
+          <CardHeader>
+            <div className="flex justify-start mb-4">
               <Check
                 className="h-14 w-14 text-brand-green"
                 strokeWidth={2.5}
@@ -40,7 +40,7 @@ export default async function VerifyPage({ searchParams }: VerifyPageProps) {
               />
             </div>
             <CardTitle>Email bekræftet, velkommen til Fysfinder!</CardTitle>
-            <div className="text-base text-slate-600 text-center space-y-2">
+            <div className="text-base text-slate-600 space-y-2">
               <p>Din email er verificeret.</p>
               <p>
                 Lad os tilføje din klinik så vi kan hjælpe med at få flere
@@ -51,7 +51,7 @@ export default async function VerifyPage({ searchParams }: VerifyPageProps) {
           <CardContent>
             <Button
               asChild
-              className="w-full bg-brand-green text-white hover:bg-brand-green/90"
+              className="w-full justify-start bg-brand-green text-white hover:bg-brand-green/90"
             >
               <Link href="/dashboard/claim">Tilknyt din klinik</Link>
             </Button>
@@ -66,8 +66,8 @@ export default async function VerifyPage({ searchParams }: VerifyPageProps) {
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-slate-50/80">
       <Card className="max-w-md w-full border-slate-200 shadow-sm">
-        <CardHeader className="text-center">
-          <div className="flex justify-center mb-3">
+        <CardHeader>
+          <div className="flex justify-start mb-3">
             <div className="rounded-full bg-brand-green/10 p-3">
               <Mail className="h-8 w-8 text-brand-green" aria-hidden />
             </div>
@@ -117,7 +117,7 @@ export default async function VerifyPage({ searchParams }: VerifyPageProps) {
             hasSession={!!user}
           />
 
-          <p className="text-xs text-center text-slate-500 pt-2">
+          <p className="text-xs text-slate-500 pt-2">
             Forkert email?{" "}
             <Link
               href="/auth/signup"
