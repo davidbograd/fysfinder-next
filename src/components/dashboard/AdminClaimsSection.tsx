@@ -5,6 +5,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Spinner } from "@/components/ui/spinner";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   getPendingClaims,
   approveClaim,
@@ -60,6 +62,8 @@ export const AdminClaimsSection = () => {
   const [creationRequests, setCreationRequests] = useState<ClinicCreationRequest[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [processingKey, setProcessingKey] = useState<string | null>(null);
+  /** Optional Google Maps URL per pending item (claim id or creation request id). */
+  const [googleMapsUrlByItemId, setGoogleMapsUrlByItemId] = useState<Record<string, string>>({});
 
   const loadClaims = async () => {
     setIsLoading(true);
@@ -106,11 +110,18 @@ export const AdminClaimsSection = () => {
     loadClaims();
   }, []);
 
+  const handleGoogleMapsUrlChange = (itemId: string, value: string) => {
+    setGoogleMapsUrlByItemId((prev) => ({ ...prev, [itemId]: value }));
+  };
+
   const handleApprove = async (claimId: string) => {
     const key = `claim-${claimId}`;
     setProcessingKey(key);
     try {
-      const result = await approveClaim(claimId);
+      const trimmedMaps = googleMapsUrlByItemId[claimId]?.trim();
+      const result = await approveClaim(claimId, {
+        googleMapsUrl: trimmedMaps || undefined,
+      });
       if (result.error) {
         toast({
           title: "Fejl",
@@ -120,7 +131,22 @@ export const AdminClaimsSection = () => {
       } else {
         toast({
           title: "Anmodning godkendt",
-          description: "Ejerskabet er blevet tildelt",
+          description:
+            result.googleSync?.ok === true
+              ? "Ejerskabet er blevet tildelt. Google-data er opdateret."
+              : "Ejerskabet er blevet tildelt.",
+        });
+        if (result.googleSync && !result.googleSync.ok) {
+          toast({
+            title: "Google-synk",
+            description: result.googleSync.message,
+            variant: "destructive",
+          });
+        }
+        setGoogleMapsUrlByItemId((prev) => {
+          const next = { ...prev };
+          delete next[claimId];
+          return next;
         });
         await loadClaims();
       }
@@ -184,7 +210,10 @@ export const AdminClaimsSection = () => {
     const key = `create-${requestId}`;
     setProcessingKey(key);
     try {
-      const result = await approveClinicCreationRequest(requestId);
+      const trimmedMaps = googleMapsUrlByItemId[requestId]?.trim();
+      const result = await approveClinicCreationRequest(requestId, {
+        googleMapsUrl: trimmedMaps || undefined,
+      });
       if (result.error) {
         toast({
           title: "Fejl",
@@ -194,7 +223,22 @@ export const AdminClaimsSection = () => {
       } else {
         toast({
           title: "Anmodning godkendt",
-          description: "Klinikken er oprettet og ejerskab er tildelt",
+          description:
+            result.googleSync?.ok === true
+              ? "Klinikken er oprettet og ejerskab er tildelt. Google-data er opdateret."
+              : "Klinikken er oprettet og ejerskab er tildelt",
+        });
+        if (result.googleSync && !result.googleSync.ok) {
+          toast({
+            title: "Google-synk",
+            description: result.googleSync.message,
+            variant: "destructive",
+          });
+        }
+        setGoogleMapsUrlByItemId((prev) => {
+          const next = { ...prev };
+          delete next[requestId];
+          return next;
         });
         await loadClaims();
       }
@@ -398,6 +442,27 @@ export const AdminClaimsSection = () => {
                     </Card>
                   </div>
 
+                  <div className="space-y-2 pt-2">
+                    <Label htmlFor={`google-maps-claim-${claim.id}`} className="text-sm font-medium">
+                      Google Maps-link (valgfri)
+                    </Label>
+                    <Input
+                      id={`google-maps-claim-${claim.id}`}
+                      type="url"
+                      inputMode="url"
+                      autoComplete="off"
+                      placeholder="https://maps.app.goo.gl/... eller fuldt maps-link"
+                      value={googleMapsUrlByItemId[claim.id] ?? ""}
+                      onChange={(e) => handleGoogleMapsUrlChange(claim.id, e.target.value)}
+                      disabled={processingKey === `claim-${claim.id}` || !!clinic?.verified_klinik}
+                      aria-label="Google Maps-link til klinikken efter godkendelse"
+                    />
+                    <p className="text-xs text-gray-500">
+                      Hvis du indsætter et link, hentes åbningstider, telefon m.m. fra Google med det
+                      samme (kun tomme felter opdateres).
+                    </p>
+                  </div>
+
                   <div className="flex gap-3 pt-2">
                     <Button
                       onClick={() => handleApprove(claim.id)}
@@ -510,6 +575,27 @@ export const AdminClaimsSection = () => {
                         </p>
                       </CardContent>
                     </Card>
+                  </div>
+
+                  <div className="space-y-2 pt-2">
+                    <Label htmlFor={`google-maps-create-${request.id}`} className="text-sm font-medium">
+                      Google Maps-link (valgfri)
+                    </Label>
+                    <Input
+                      id={`google-maps-create-${request.id}`}
+                      type="url"
+                      inputMode="url"
+                      autoComplete="off"
+                      placeholder="https://maps.app.goo.gl/... eller fuldt maps-link"
+                      value={googleMapsUrlByItemId[request.id] ?? ""}
+                      onChange={(e) => handleGoogleMapsUrlChange(request.id, e.target.value)}
+                      disabled={processingKey === `create-${request.id}`}
+                      aria-label="Google Maps-link til ny klinik efter godkendelse"
+                    />
+                    <p className="text-xs text-gray-500">
+                      Hvis du indsætter et link, hentes åbningstider, telefon m.m. fra Google med det
+                      samme (kun tomme felter opdateres).
+                    </p>
                   </div>
 
                   <div className="flex gap-3 pt-2">

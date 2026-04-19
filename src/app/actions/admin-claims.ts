@@ -4,6 +4,14 @@ import { createClient } from "@/app/utils/supabase/server";
 import { createClient as createServiceClient } from "@supabase/supabase-js";
 import { isAdminEmail } from "@/lib/admin";
 import { sendClinicApprovalEmailToUser, sendClinicRejectionEmailToUser } from "@/lib/email";
+import {
+  syncClinicFromGoogleMapsUrlOnApprove,
+  type GoogleSyncResult,
+} from "@/lib/google-places/approve-bootstrap-sync";
+
+export type AdminApproveWithOptionalGoogleSyncResult =
+  | { success: true; googleSync?: GoogleSyncResult }
+  | { error: string };
 
 function toSlug(value: string) {
   return value
@@ -83,7 +91,10 @@ export async function getPendingClaims() {
 /**
  * Approve a clinic claim (admin only)
  */
-export async function approveClaim(claimId: string) {
+export async function approveClaim(
+  claimId: string,
+  options?: { googleMapsUrl?: string }
+): Promise<AdminApproveWithOptionalGoogleSyncResult> {
   const supabase = await createClient();
 
   // Get current user
@@ -204,7 +215,18 @@ export async function approveClaim(claimId: string) {
     );
   }
 
-  return { success: true };
+  const mapsUrl = options?.googleMapsUrl?.trim();
+  if (!mapsUrl) {
+    return { success: true };
+  }
+
+  const googleSync = await syncClinicFromGoogleMapsUrlOnApprove(
+    serviceSupabase,
+    claim.clinic_id,
+    mapsUrl
+  );
+
+  return { success: true, googleSync };
 }
 
 /**
@@ -326,7 +348,10 @@ export async function getPendingClinicCreationRequests() {
 /**
  * Approve a clinic creation request by creating a verified clinic and owner relation (admin only)
  */
-export async function approveClinicCreationRequest(requestId: string) {
+export async function approveClinicCreationRequest(
+  requestId: string,
+  options?: { googleMapsUrl?: string }
+): Promise<AdminApproveWithOptionalGoogleSyncResult> {
   const supabase = await createClient();
   const {
     data: { user },
@@ -480,7 +505,18 @@ export async function approveClinicCreationRequest(requestId: string) {
     );
   }
 
-  return { success: true };
+  const mapsUrl = options?.googleMapsUrl?.trim();
+  if (!mapsUrl) {
+    return { success: true };
+  }
+
+  const googleSync = await syncClinicFromGoogleMapsUrlOnApprove(
+    serviceSupabase,
+    createdClinic.clinics_id,
+    mapsUrl
+  );
+
+  return { success: true, googleSync };
 }
 
 /**

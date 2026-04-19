@@ -13,6 +13,7 @@ const mockClaimUpdateEq = jest.fn();
 const mockClinicsUpdateEq = jest.fn();
 const mockSendClinicApprovalEmailToUser = jest.fn();
 const mockSendClinicRejectionEmailToUser = jest.fn();
+const mockSyncClinicFromGoogleMapsUrlOnApprove = jest.fn();
 
 const mockClinicsInsert = jest.fn((payload: unknown) => ({
   select: () => ({
@@ -37,6 +38,11 @@ jest.mock("@/lib/email", () => ({
     mockSendClinicApprovalEmailToUser(...args),
   sendClinicRejectionEmailToUser: (...args: unknown[]) =>
     mockSendClinicRejectionEmailToUser(...args),
+}));
+
+jest.mock("@/lib/google-places/approve-bootstrap-sync", () => ({
+  syncClinicFromGoogleMapsUrlOnApprove: (...args: unknown[]) =>
+    mockSyncClinicFromGoogleMapsUrlOnApprove(...args),
 }));
 
 jest.mock("@supabase/supabase-js", () => ({
@@ -136,6 +142,8 @@ describe("admin clinic creation request actions", () => {
     mockClinicsUpdateEq.mockReset();
     mockSendClinicApprovalEmailToUser.mockReset();
     mockSendClinicRejectionEmailToUser.mockReset();
+    mockSyncClinicFromGoogleMapsUrlOnApprove.mockReset();
+    mockSyncClinicFromGoogleMapsUrlOnApprove.mockResolvedValue({ ok: true });
   });
 
   it("approves request by creating clinic and owner relation", async () => {
@@ -199,6 +207,102 @@ describe("admin clinic creation request actions", () => {
       clinic_name: "Ny Klinik",
       recipient_email: "owner@example.com",
       recipient_name: undefined,
+    });
+    expect(mockSyncClinicFromGoogleMapsUrlOnApprove).not.toHaveBeenCalled();
+  });
+
+  it("runs Google sync when googleMapsUrl is provided on creation approval", async () => {
+    mockGetUser.mockResolvedValue({
+      data: { user: { id: "admin-1", email: "admin@example.com" } },
+    });
+    mockIsAdminEmail.mockReturnValue(true);
+    mockRequestSingle.mockResolvedValue({
+      data: {
+        id: "req-maps",
+        status: "pending",
+        clinic_name: "Maps Klinik",
+        address: "Gade 1",
+        postal_code: "2100",
+        city_name: "København",
+        city_id: "city-1",
+        website: null,
+        description: null,
+        requester_email: "owner@example.com",
+        user_id: "user-1",
+      },
+      error: null,
+    });
+    mockExistingClinicMaybeSingle.mockResolvedValue({ data: null, error: null });
+    mockClinicsInsertSelectSingle.mockResolvedValue({
+      data: { clinics_id: "clinic-maps" },
+      error: null,
+    });
+    mockClinicOwnersInsert.mockResolvedValue({ error: null });
+    mockInsurancesSelect.mockResolvedValue({
+      data: [{ insurance_id: "ins-1" }],
+      error: null,
+    });
+    mockClinicInsurancesInsert.mockResolvedValue({ error: null });
+    mockRequestUpdateEq.mockResolvedValue({ error: null });
+    mockSendClinicApprovalEmailToUser.mockResolvedValue({ success: true });
+
+    const mapsUrl = "https://maps.app.goo.gl/test";
+    const result = await approveClinicCreationRequest("req-maps", { googleMapsUrl: mapsUrl });
+
+    expect(result).toEqual({ success: true, googleSync: { ok: true } });
+    expect(mockSyncClinicFromGoogleMapsUrlOnApprove).toHaveBeenCalledWith(
+      expect.anything(),
+      "clinic-maps",
+      mapsUrl
+    );
+  });
+
+  it("returns googleSync error when sync fails on creation approval", async () => {
+    mockGetUser.mockResolvedValue({
+      data: { user: { id: "admin-1", email: "admin@example.com" } },
+    });
+    mockIsAdminEmail.mockReturnValue(true);
+    mockRequestSingle.mockResolvedValue({
+      data: {
+        id: "req-fail",
+        status: "pending",
+        clinic_name: "Fail Klinik",
+        address: "Gade 2",
+        postal_code: "2100",
+        city_name: "København",
+        city_id: "city-1",
+        website: null,
+        description: null,
+        requester_email: "owner@example.com",
+        user_id: "user-1",
+      },
+      error: null,
+    });
+    mockExistingClinicMaybeSingle.mockResolvedValue({ data: null, error: null });
+    mockClinicsInsertSelectSingle.mockResolvedValue({
+      data: { clinics_id: "clinic-fail" },
+      error: null,
+    });
+    mockClinicOwnersInsert.mockResolvedValue({ error: null });
+    mockInsurancesSelect.mockResolvedValue({
+      data: [{ insurance_id: "ins-1" }],
+      error: null,
+    });
+    mockClinicInsurancesInsert.mockResolvedValue({ error: null });
+    mockRequestUpdateEq.mockResolvedValue({ error: null });
+    mockSendClinicApprovalEmailToUser.mockResolvedValue({ success: true });
+    mockSyncClinicFromGoogleMapsUrlOnApprove.mockResolvedValue({
+      ok: false,
+      message: "Google fejl",
+    });
+
+    const result = await approveClinicCreationRequest("req-fail", {
+      googleMapsUrl: "https://www.google.com/maps/place/Test",
+    });
+
+    expect(result).toEqual({
+      success: true,
+      googleSync: { ok: false, message: "Google fejl" },
     });
   });
 
@@ -289,6 +393,46 @@ describe("admin clinic creation request actions", () => {
       recipient_email: "owner@example.com",
       recipient_name: "Clinic Owner",
     });
+    expect(mockSyncClinicFromGoogleMapsUrlOnApprove).not.toHaveBeenCalled();
+  });
+
+  it("runs Google sync when googleMapsUrl is provided on claim approval", async () => {
+    mockGetUser.mockResolvedValue({
+      data: { user: { id: "admin-1", email: "admin@example.com" } },
+    });
+    mockIsAdminEmail.mockReturnValue(true);
+    mockClaimSingle.mockResolvedValue({
+      data: {
+        id: "claim-maps",
+        status: "pending",
+        clinic_id: "clinic-claim-maps",
+        user_id: "user-1",
+        email: "owner@example.com",
+        fulde_navn: "Owner",
+        klinik_navn: "Claim Maps",
+      },
+      error: null,
+    });
+    mockClaimUpdateEq.mockResolvedValue({ error: null });
+    mockClinicsUpdateEq.mockResolvedValue({ error: null });
+    mockClinicOwnersInsert.mockResolvedValue({ error: null });
+    mockInsurancesSelect.mockResolvedValue({
+      data: [{ insurance_id: "ins-1" }],
+      error: null,
+    });
+    mockClinicInsurancesDeleteEq.mockResolvedValue({ error: null });
+    mockClinicInsurancesInsert.mockResolvedValue({ error: null });
+    mockSendClinicApprovalEmailToUser.mockResolvedValue({ success: true });
+
+    const url = "https://maps.app.goo.gl/abc";
+    const result = await approveClaim("claim-maps", { googleMapsUrl: url });
+
+    expect(result).toEqual({ success: true, googleSync: { ok: true } });
+    expect(mockSyncClinicFromGoogleMapsUrlOnApprove).toHaveBeenCalledWith(
+      expect.anything(),
+      "clinic-claim-maps",
+      url
+    );
   });
 
   it("sends rejection email when claim is rejected", async () => {
