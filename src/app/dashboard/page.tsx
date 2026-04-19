@@ -1,7 +1,6 @@
 // Dashboard page for clinic owners and admins.
 // Updated: includes booking clicks in lead KPI totals and contribution breakdown.
 
-import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { createClient } from "@/app/utils/supabase/server";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -25,10 +24,6 @@ import { getUserClaims } from "@/app/actions/user-claims";
 import { Suspense } from "react";
 import { DashboardDevToolbar } from "@/components/dashboard/DashboardDevToolbar";
 import type { ClinicProfileCompleteness } from "@/lib/clinic-profile-completeness";
-
-export const metadata: Metadata = {
-  title: "Dashboard",
-};
 
 interface DashboardPageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -622,9 +617,9 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                 />
               </>
             ) : (
-              <div className="text-center py-8">
-                <p className="text-sm text-gray-600 mb-4">
-                  Du har endnu ikke tilknyttet nogen klinikker til din konto.
+              <div className="py-8 text-center">
+                <p className="mb-4 text-sm text-gray-600">
+                  Ingen tilknyttet klinikker. Tilføj en klinik og få flere patienter.
                 </p>
                 <Button asChild>
                   <Link href="/dashboard/claim">Tilknyt din klinik</Link>
