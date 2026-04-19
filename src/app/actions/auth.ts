@@ -3,6 +3,7 @@
 import { createClient as createServiceClient } from "@supabase/supabase-js";
 import { createClient } from "@/app/utils/supabase/server";
 import { sendNewUserSignupNotificationToAdmins } from "@/lib/email";
+import { validateEmail } from "@/lib/auth-errors";
 
 export const createUserProfile = async (data: {
   id: string;
@@ -46,6 +47,28 @@ export const createUserProfile = async (data: {
     console.error("Unexpected error in createUserProfile:", err);
     return { error: "Failed to create profile" };
   }
+};
+
+/**
+ * Resend signup confirmation email by address (when the user has no session yet)
+ */
+export const resendSignupVerificationForEmail = async (email: string) => {
+  const emailError = validateEmail(email);
+  if (emailError) {
+    return { error: emailError };
+  }
+
+  const supabase = await createClient();
+  const { error } = await supabase.auth.resend({
+    type: "signup",
+    email: email.trim(),
+  });
+
+  if (error) {
+    return { error: "Kunne ikke sende verificeringsmail. Prøv igen senere." };
+  }
+
+  return { success: true };
 };
 
 /**

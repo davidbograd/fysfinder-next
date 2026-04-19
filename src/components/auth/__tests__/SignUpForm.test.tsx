@@ -56,8 +56,17 @@ describe("SignUpForm", () => {
       });
     });
 
+    expect(mockSignUp).toHaveBeenCalledWith(
+      expect.objectContaining({
+        email: "test@example.com",
+        options: expect.objectContaining({
+          emailRedirectTo: expect.stringMatching(/\/auth\/callback$/),
+        }),
+      })
+    );
+
     expect(global.__TEST_ROUTER_MOCKS__.push).toHaveBeenCalledWith(
-      "/auth/verify"
+      "/auth/verify?email=test%40example.com"
     );
   });
 });

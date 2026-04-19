@@ -806,7 +806,7 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
                   autoComplete="url"
                   value={formData.website}
                   onChange={(e) => handleWebsiteSuffixChange(e.target.value)}
-                  placeholder="www.dinklinik.dk"
+                  placeholder="www.ditklinik.dk"
                   aria-describedby="website-https-hint"
                   className="h-10 min-w-0 flex-1 rounded-none border-0 bg-transparent px-3 py-2 shadow-none focus-visible:ring-0 focus-visible:ring-offset-0"
                 />

@@ -49,6 +49,16 @@ describe("auth callback route", () => {
     );
   });
 
+  it("redirects to verify when Supabase returns an oauth-style error (e.g. otp_expired)", async () => {
+    const response = await GET({
+      url: "https://fysfinder.dk/auth/callback?error=access_denied&error_code=otp_expired&next=%2Fdashboard",
+    } as Request);
+    expect(response.headers.get("location")).toBe(
+      "https://fysfinder.dk/auth/verify?callbackError=otp_expired"
+    );
+    expect(mockExchangeCodeForSession).not.toHaveBeenCalled();
+  });
+
   it("redirects to next path on successful callback", async () => {
     mockExchangeCodeForSession.mockResolvedValue({
       data: {

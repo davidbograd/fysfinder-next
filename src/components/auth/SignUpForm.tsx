@@ -77,11 +77,16 @@ export const SignUpForm = () => {
     const supabase = createClient();
 
     try {
+      // Must match an entry in Supabase Auth → Redirect URLs exactly (no extra query
+      // params, or the confirmation link can be rejected). /auth/callback defaults next to /dashboard.
+      const emailRedirectTo = `${window.location.origin}/auth/callback`;
+
       // Sign up the user
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
         options: {
+          emailRedirectTo,
           data: {
             full_name: formData.fullName,
           },
@@ -137,15 +142,11 @@ export const SignUpForm = () => {
         console.warn("Profile creation error:", profileError);
       }
 
-      // Check if we have a session
+      // Check if we have a session (no session when email confirmation is required)
       if (!authData.session) {
-        toast({
-          title: "Email bekræftelse påkrævet",
-          description: "Tjek din email for at bekræfte din konto.",
-          variant: "destructive",
-        });
         setIsLoading(false);
-        router.push("/auth/verify");
+        const emailQs = encodeURIComponent(formData.email);
+        router.push(`/auth/verify?email=${emailQs}`);
         return;
       }
 
