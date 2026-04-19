@@ -48,12 +48,15 @@ export default async function VerifyPage({ searchParams }: VerifyPageProps) {
               </p>
             </div>
           </CardHeader>
-          <CardContent>
+          <CardContent className="space-y-3">
             <Button
               asChild
               className="w-full justify-start bg-brand-green text-white hover:bg-brand-green/90"
             >
               <Link href="/dashboard/claim">Tilknyt din klinik</Link>
+            </Button>
+            <Button asChild variant="outline" className="w-full justify-start">
+              <Link href="/dashboard">Tilknyt senere</Link>
             </Button>
           </CardContent>
         </Card>

@@ -59,6 +59,31 @@ describe("auth callback route", () => {
     expect(mockExchangeCodeForSession).not.toHaveBeenCalled();
   });
 
+  it("redirects to verify when callback succeeds without next (e.g. email confirmation)", async () => {
+    mockExchangeCodeForSession.mockResolvedValue({
+      data: {
+        user: {
+          id: "user-1",
+          email: "test@example.com",
+          user_metadata: { full_name: "Test User" },
+        },
+      },
+      error: null,
+    });
+    mockMaybeSingle.mockResolvedValue({ data: { id: "user-1" } });
+    mockCreateUserProfile.mockResolvedValue(undefined);
+
+    const response = await GET({
+      url: "https://fysfinder.dk/auth/callback?code=abc",
+    } as Request);
+
+    expect(response.headers.get("location")).toBe(
+      "https://fysfinder.dk/auth/verify"
+    );
+    expect(mockExchangeCodeForSession).toHaveBeenCalledWith("abc");
+    expect(mockCreateUserProfile).not.toHaveBeenCalled();
+  });
+
   it("redirects to next path on successful callback", async () => {
     mockExchangeCodeForSession.mockResolvedValue({
       data: {

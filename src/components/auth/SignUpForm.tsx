@@ -78,7 +78,7 @@ export const SignUpForm = () => {
 
     try {
       // Must match an entry in Supabase Auth → Redirect URLs exactly (no extra query
-      // params, or the confirmation link can be rejected). /auth/callback defaults next to /dashboard.
+      // params, or the confirmation link can be rejected). /auth/callback defaults next to /auth/verify.
       const emailRedirectTo = `${window.location.origin}/auth/callback`;
 
       // Sign up the user
