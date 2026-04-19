@@ -7,7 +7,7 @@ interface ClinicPricingProps {
 
 export function ClinicPricing({ clinic }: ClinicPricingProps) {
   return (
-    <section className="py-8 border-b border-gray-200">
+    <section className="border-b border-gray-200 pt-4 pb-8 lg:py-8">
       <h2 className="text-2xl font-semibold mb-4">Priser</h2>
       {clinic.ydernummer === true && (
         <div className="flex items-center mb-2">

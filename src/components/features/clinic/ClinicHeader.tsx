@@ -52,47 +52,47 @@ export function ClinicHeader({ clinic }: ClinicHeaderProps) {
           </span>
         </div>
 
-        {/* Address Section */}
-        <p className="text-gray-500">
-          {clinic.adresse}, {clinic.postnummer} {clinic.lokation}
-        </p>
+        {/* Address + accessibility badges on one line when space allows */}
+        <div className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1">
+          <p className="text-gray-500">
+            {clinic.adresse}, {clinic.postnummer} {clinic.lokation}
+          </p>
+          {(clinic.handicapadgang || clinic.god_adgang_verificeret) && (
+            <div className="flex shrink-0 items-center gap-2">
+              {clinic.handicapadgang && (
+                <TooltipProvider delayDuration={50}>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <FaWheelchair className="h-4 w-4 text-logo-blue" />
+                    </TooltipTrigger>
+                    <TooltipContent side="bottom" className="font-normal">
+                      <p>Kørestolsvenlig indgang</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              )}
 
-        {/* Icons Section */}
-        {(clinic.handicapadgang || clinic.god_adgang_verificeret) && (
-          <div className="flex items-center gap-2">
-            {clinic.handicapadgang && (
-              <TooltipProvider delayDuration={50}>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <FaWheelchair className="w-4 h-4 text-logo-blue" />
-                  </TooltipTrigger>
-                  <TooltipContent side="bottom" className="font-normal">
-                    <p>Kørestolsvenlig indgang</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            )}
-
-            {clinic.god_adgang_verificeret && (
-              <TooltipProvider delayDuration={50}>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Image
-                      src="/images/klinik/god-adgang-badge.png"
-                      alt="God Adgang badge"
-                      width={16}
-                      height={16}
-                      className="w-4 h-4 cursor-pointer"
-                    />
-                  </TooltipTrigger>
-                  <TooltipContent side="bottom" className="font-normal">
-                    <p>Klinik er registret hos God Adgang</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            )}
-          </div>
-        )}
+              {clinic.god_adgang_verificeret && (
+                <TooltipProvider delayDuration={50}>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Image
+                        src="/images/klinik/god-adgang-badge.png"
+                        alt="God Adgang badge"
+                        width={16}
+                        height={16}
+                        className="h-4 w-4 cursor-pointer"
+                      />
+                    </TooltipTrigger>
+                    <TooltipContent side="bottom" className="font-normal">
+                      <p>Klinik er registret hos God Adgang</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

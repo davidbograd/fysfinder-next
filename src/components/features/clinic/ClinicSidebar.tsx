@@ -65,23 +65,24 @@ export function ClinicSidebar({ clinic }: ClinicSidebarProps) {
     <div className="order-first lg:order-none lg:w-2/5">
       <div className="lg:sticky lg:top-20 sm:top-16">
         <div className="bg-white p-6 rounded-lg shadow-md">
-          <div className="flex items-center mb-4">
+          {/* Name + rating: only in sidebar on lg+; on mobile the page header already shows this */}
+          <div className="mb-4 hidden items-center lg:flex">
             <div>
-              <p className="text-2xl font-semibold mb-4">{clinic.klinikNavn}</p>
-              <div className="flex items-center mt-1">
-                <StarIcon className="h-5 w-5 text-amber-500 mr-2" />
-                <span className="font-semibold mr-2">
+              <p className="mb-4 text-2xl font-semibold">{clinic.klinikNavn}</p>
+              <div className="mt-1 flex items-center">
+                <StarIcon className="mr-2 h-5 w-5 text-amber-500" />
+                <span className="mr-2 font-semibold">
                   {clinic.avgRating != null
                     ? clinic.avgRating.toFixed(1)
                     : "N/A"}
                 </span>
-                <span className="text-gray-500 text-sm">
+                <span className="text-sm text-gray-500">
                   ({clinic.ratingCount} anmeldelser)
                 </span>
               </div>
             </div>
           </div>
-          <div className="space-y-4 mt-6">
+          <div className="mt-0 space-y-4 lg:mt-6">
             {hasBookingLink && (
               <BookingButton
                 bookingLink={clinic.premium_listing!.booking_link!}

@@ -383,7 +383,7 @@ export default async function ClinicPage({
 
         <ClinicHeader clinic={clinic} />
 
-        <div className="flex flex-col lg:flex-row gap-16">
+        <div className="flex flex-col gap-6 lg:flex-row lg:gap-16">
           {/* Main content (3/5 width on large screens) */}
           <div className="lg:w-3/5">
             <ClinicPricing clinic={clinic} />
