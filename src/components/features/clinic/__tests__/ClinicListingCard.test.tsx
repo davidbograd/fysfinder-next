@@ -84,6 +84,27 @@ describe("ClinicListingCard", () => {
     process.env.NEXT_PUBLIC_LOGO_DEV_PUBLISHABLE_KEY = previousToken;
   });
 
+  it("prefers uploaded logo_url over logo.dev when both are provided", () => {
+    const previousToken = process.env.NEXT_PUBLIC_LOGO_DEV_PUBLISHABLE_KEY;
+    process.env.NEXT_PUBLIC_LOGO_DEV_PUBLISHABLE_KEY = "pk_test_token";
+
+    render(
+      <ClinicListingCard
+        {...mockClinic}
+        website="https://www.example.com/clinic"
+        logo_url="https://cdn.example.com/my-logo.png"
+      />
+    );
+
+    const logo = screen.getByAltText("Fysioterapi Klinikken logo");
+    expect(logo).toHaveAttribute(
+      "src",
+      "https://cdn.example.com/my-logo.png"
+    );
+
+    process.env.NEXT_PUBLIC_LOGO_DEV_PUBLISHABLE_KEY = previousToken;
+  });
+
   it("dispatches card hover event on mouse enter", async () => {
     const user = userEvent.setup();
     const dispatchSpy = jest.spyOn(window, "dispatchEvent");

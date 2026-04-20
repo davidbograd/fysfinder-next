@@ -724,6 +724,7 @@ export default async function LocationPage({
                 postnummer={clinic.postnummer}
                 lokation={clinic.lokation}
                 website={clinic.website}
+                logo_url={clinic.logo_url}
                 tlf={clinic.tlf}
                 specialties={orderSpecialties(
                   clinic.specialties,

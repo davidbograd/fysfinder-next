@@ -12,7 +12,7 @@
  * Note: klinikNavn and postnummer are NOT editable
  */
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 import { createClient } from "@/app/utils/supabase/client";
@@ -277,6 +277,9 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
   
   // Track which team member image is uploading
   const [uploadingImageIndex, setUploadingImageIndex] = useState<number | null>(null);
+  const [logoUrl, setLogoUrl] = useState<string>(clinic.logo_url ?? "");
+  const [isUploadingLogo, setIsUploadingLogo] = useState(false);
+  const logoFileInputRef = useRef<HTMLInputElement>(null);
   
   // Team members state
   const [teamMembers, setTeamMembers] = useState<TeamMemberForm[]>(
@@ -401,6 +404,72 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
         display_order: i + 1,
       }));
     });
+  };
+
+  const handleLogoUpload = async (file: File) => {
+    const validImageTypes = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+    if (!validImageTypes.includes(file.type)) {
+      toast({
+        title: "Ugyldigt filtype",
+        description: "Kun JPEG, PNG eller WEBP billeder er tilladt",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const maxSize = 5 * 1024 * 1024;
+    if (file.size > maxSize) {
+      toast({
+        title: "Fil for stor",
+        description: "Logoet må maksimalt være 5MB",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsUploadingLogo(true);
+
+    try {
+      const supabase = createClient();
+      const fileExt = file.name.split(".").pop();
+      const fileName = `${clinic.clinics_id}/logo-${Date.now()}.${fileExt}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from("clinic-team-pics")
+        .upload(fileName, file, {
+          contentType: file.type,
+          upsert: false,
+        });
+
+      if (uploadError) {
+        console.error("Logo upload error:", uploadError);
+        throw uploadError;
+      }
+
+      const {
+        data: { publicUrl },
+      } = supabase.storage.from("clinic-team-pics").getPublicUrl(fileName);
+
+      setLogoUrl(publicUrl);
+
+      toast({
+        title: "Logo uploadet",
+        description: "Logoet er blevet uploadet. Husk at gemme ændringer.",
+      });
+    } catch (error: unknown) {
+      console.error("Error uploading logo:", error);
+      const message =
+        error && typeof error === "object" && "message" in error
+          ? String((error as { message?: string }).message)
+          : "Kunne ikke uploade logoet";
+      toast({
+        title: "Fejl ved upload",
+        description: message,
+        variant: "destructive",
+      });
+    } finally {
+      setIsUploadingLogo(false);
+    }
   };
 
   const handleImageUpload = async (index: number, file: File) => {
@@ -620,6 +689,7 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
         opfølgning_minutter: hasYdernummer === "no" && formData.opfølgning_minutter ? parseInt(formData.opfølgning_minutter) : null,
         om_os: formData.om_os || null,
         online_fysioterapeut: formData.online_fysioterapeut,
+        logo_url: logoUrl.trim() || null,
       };
 
       const clinicUpdateResult = await updateClinic(clinic.clinics_id, updateData);
@@ -827,6 +897,90 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
                 value={formData.adresse}
                 onChange={(e) => handleInputChange("adresse", e.target.value)}
               />
+            </div>
+          </div>
+
+          <div className="space-y-2 border-t pt-6">
+            <Label htmlFor="clinic-logo-upload">
+              Klinik logo <span className="font-normal text-gray-500">(valgfrit)</span>
+            </Label>
+            <p className="text-sm text-gray-600">
+              Logo vises på jeres klinikprofil og i søgeresultater.
+            </p>
+            <input
+              ref={logoFileInputRef}
+              id="clinic-logo-upload"
+              type="file"
+              accept="image/jpeg,image/jpg,image/png,image/webp"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) {
+                  void handleLogoUpload(file);
+                }
+                e.target.value = "";
+              }}
+              className="sr-only"
+              disabled={isUploadingLogo}
+            />
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-start">
+              {logoUrl ? (
+                <div className="flex flex-col gap-2">
+                  <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-lg border bg-gray-50">
+                    <Image
+                      src={logoUrl}
+                      alt="Klinik logo"
+                      fill
+                      className="object-contain p-1"
+                      sizes="96px"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setLogoUrl("")}
+                      className="absolute right-1 top-1 rounded-full bg-red-500 p-1 text-white hover:bg-red-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                      aria-label="Fjern logo"
+                    >
+                      <X className="h-4 w-4" aria-hidden />
+                    </button>
+                  </div>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    className="w-fit"
+                    disabled={isUploadingLogo}
+                    onClick={() => logoFileInputRef.current?.click()}
+                  >
+                    Skift logo
+                  </Button>
+                </div>
+              ) : (
+                <label
+                  htmlFor="clinic-logo-upload"
+                  className={cn(
+                    "flex h-24 w-24 shrink-0 cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed px-1.5 py-2 text-center transition-colors",
+                    isUploadingLogo
+                      ? "cursor-wait border-blue-400 bg-blue-50"
+                      : "border-gray-300 hover:border-gray-400"
+                  )}
+                >
+                  {isUploadingLogo ? (
+                    <>
+                      <Loader2 className="mb-1 h-7 w-7 shrink-0 animate-spin text-blue-500" />
+                      <span className="text-xs text-blue-600">Uploader...</span>
+                    </>
+                  ) : (
+                    <>
+                      <ImageIcon className="mb-1 h-7 w-7 shrink-0 text-gray-400" aria-hidden />
+                      <span className="text-[11px] font-medium leading-snug text-gray-600">
+                        Upload logo
+                      </span>
+                      <span className="mt-0.5 text-[10px] leading-tight text-gray-400">
+                        JPEG, PNG, WEBP
+                      </span>
+                    </>
+                  )}
+                </label>
+              )}
             </div>
           </div>
         </CardContent>

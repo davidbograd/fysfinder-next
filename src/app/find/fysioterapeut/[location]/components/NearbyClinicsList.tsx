@@ -43,6 +43,7 @@ export function NearbyClinicsList({
             postnummer={clinic.postnummer}
             lokation={clinic.lokation}
             website={clinic.website}
+            logo_url={clinic.logo_url}
             tlf={clinic.tlf}
             distance={clinic.distance}
             specialties={orderSpecialties(clinic.specialties, specialtySlug)}

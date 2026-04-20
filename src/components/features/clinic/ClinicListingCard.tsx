@@ -23,6 +23,7 @@ import Link from "next/link";
 import VerifiedCheck from "@/assets/icons/verified-check.svg";
 import { trackClinicEvent } from "@/lib/tracking";
 import { isPremiumListingActive } from "@/lib/clinic-entitlements";
+import { getClinicLogoDisplayUrl } from "@/lib/clinic-logo";
 
 interface Props {
   clinicId?: string;
@@ -35,6 +36,7 @@ interface Props {
   postnummer: number;
   lokation: string;
   website?: string;
+  logo_url?: string | null;
   tlf?: string;
   distance?: number;
   specialties?: {
@@ -59,6 +61,7 @@ const ClinicListingCard: React.FC<Props> = ({
   postnummer,
   lokation,
   website,
+  logo_url,
   tlf,
   distance,
   specialties = [],
@@ -74,24 +77,18 @@ const ClinicListingCard: React.FC<Props> = ({
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
   const [logoLoadFailed, setLogoLoadFailed] = useState(false);
   const isPremium = isPremiumListingActive(premium_listing);
-  const logoDevToken = process.env.NEXT_PUBLIC_LOGO_DEV_PUBLISHABLE_KEY;
-  const logoDomain = website
-    ? website
-        .trim()
-        .replace(/^https?:\/\//i, "")
-        .replace(/^www\./i, "")
-        .split("/")[0]
-        .split("?")[0]
-        .toLowerCase()
-    : null;
-  const logoPath =
-    logoDomain && logoDevToken
-      ? `https://img.logo.dev/${logoDomain}?token=${logoDevToken}&size=64&format=png&fallback=404&retina=true`
-      : null;
+  const logoPath = getClinicLogoDisplayUrl({
+    logoUrl: logo_url,
+    website,
+  });
   const hasLogo = Boolean(logoPath) && !logoLoadFailed;
   const cardRef = useRef<HTMLDivElement>(null);
   const hasTrackedImpression = useRef(false);
   const [isMapHighlighted, setIsMapHighlighted] = useState(false);
+
+  useEffect(() => {
+    setLogoLoadFailed(false);
+  }, [logoPath]);
 
   useEffect(() => {
     if (!clinicId || hasTrackedImpression.current || !cardRef.current) return;

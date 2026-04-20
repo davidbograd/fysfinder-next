@@ -51,6 +51,7 @@ export interface Clinic {
   clinic_longitude?: number | null;
   google_place_id?: string | null;
   city_id?: string | null;
+  logo_url?: string | null;
 }
 
 export interface SeoSection {
@@ -186,6 +187,7 @@ export interface DBClinicResponse {
   clinic_longitude?: number | null;
   google_place_id?: string | null;
   city_id?: string | null;
+  logo_url?: string | null;
 }
 
 export interface LocationPageData {

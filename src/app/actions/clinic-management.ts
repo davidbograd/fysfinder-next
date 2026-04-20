@@ -253,35 +253,7 @@ export async function getClinicForEdit(clinicId: string) {
     .from("clinics")
     .select(
       `
-      clinics_id,
-      klinikNavn,
-      lokation,
-      adresse,
-      postnummer,
-      email,
-      tlf,
-      website,
-      mandag,
-      tirsdag,
-      onsdag,
-      torsdag,
-      fredag,
-      lørdag,
-      søndag,
-      hjemmetræning,
-      holdtræning,
-      parkering,
-      handicapadgang,
-      ydernummer,
-      antalBehandlere,
-      førsteKons,
-      opfølgning,
-      første_kons_minutter,
-      opfølgning_minutter,
-      om_os,
-      online_fysioterapeut,
-      ikkeAkutVentetidUger,
-      vederlagsfriVentetidUger,
+      *,
       clinic_specialties (
         specialty_id,
         specialty:specialty_id (
@@ -302,7 +274,13 @@ export async function getClinicForEdit(clinicId: string) {
     .single();
 
   if (clinicError) {
-    console.error("Error fetching clinic:", clinicError);
+    console.error(
+      "Error fetching clinic:",
+      clinicError.message,
+      clinicError.code,
+      clinicError.details,
+      clinicError.hint
+    );
     return { error: "Fejl ved hentning af klinik" };
   }
 
@@ -341,6 +319,7 @@ export async function updateClinic(
     online_fysioterapeut?: boolean;
     ikkeAkutVentetidUger?: number;
     vederlagsfriVentetidUger?: number;
+    logo_url?: string | null;
   }
 ) {
   const supabase = await createClient();
