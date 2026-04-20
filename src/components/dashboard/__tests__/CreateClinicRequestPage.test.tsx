@@ -33,7 +33,7 @@ describe("CreateClinicRequestPage", () => {
       />
     );
 
-    expect(screen.getByText(", Aabenraa 6200")).toBeInTheDocument();
+    expect(screen.getByText("Aabenraa 6200")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Skift by" })).toBeInTheDocument();
   });
 
