@@ -1,5 +1,5 @@
 // Premium upgrade page for a clinic.
-// Added: explains value and starts Stripe Checkout for owned clinics.
+// Updated: 2026-04-20 - Added VAT-exclusion note to the premium monthly price label.
 
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -72,7 +72,7 @@ export default async function PremiumClinicPage({
           <div className="rounded-md border bg-muted/30 px-4 py-3">
             <span className="text-sm font-medium text-gray-600">Fysfinder Premium, {clinicName}</span>
             <p className="text-2xl font-bold text-gray-900 mt-0.5">
-              499 DKK <span className="text-sm font-normal text-gray-500">/ måned</span>
+              499 DKK <span className="text-sm font-normal text-gray-500">/ måned (ekslusiv moms)</span>
             </p>
           </div>
         </CardHeader>
