@@ -131,12 +131,6 @@ export const SignInForm = () => {
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <Label htmlFor="password">Adgangskode</Label>
-              <Link
-                href="/auth/reset-password"
-                className="text-sm text-primary hover:underline"
-              >
-                Glemt adgangskode?
-              </Link>
             </div>
             <Input
               id="password"
@@ -149,6 +143,14 @@ export const SignInForm = () => {
               disabled={isLoading}
               className={fieldErrors.password ? "border-red-500" : ""}
             />
+            <div className="flex justify-end">
+              <Link
+                href="/auth/reset-password"
+                className="text-sm text-primary hover:underline"
+              >
+                Glemt adgangskode?
+              </Link>
+            </div>
             {fieldErrors.password && (
               <p className="text-sm text-red-600">{fieldErrors.password}</p>
             )}

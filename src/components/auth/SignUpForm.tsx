@@ -8,7 +8,7 @@ import { createUserProfile } from "@/app/actions/auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import {
   parseAuthError,
@@ -173,14 +173,8 @@ export const SignUpForm = () => {
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>Opret konto</CardTitle>
-        <CardDescription>
-          Indtast dine oplysninger for at oprette en konto
-        </CardDescription>
-      </CardHeader>
       <form onSubmit={handleSubmit}>
-        <CardContent className="space-y-4">
+        <CardContent className="pt-4 space-y-4">
           <div className="space-y-2">
             <Label htmlFor="fullName">Fulde navn</Label>
             <Input
