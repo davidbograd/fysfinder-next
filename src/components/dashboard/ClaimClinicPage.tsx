@@ -526,7 +526,7 @@ export const ClaimClinicPage = ({ userProfile }: ClaimClinicPageProps) => {
 
       {/* Claim Modal */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="sm:max-w-[500px]">
+        <DialogContent className="max-h-[90dvh] overflow-y-auto sm:max-w-[500px]">
           <DialogHeader>
             <DialogTitle>Tag ejerskab</DialogTitle>
             <DialogDescription>
@@ -617,7 +617,7 @@ export const ClaimClinicPage = ({ userProfile }: ClaimClinicPageProps) => {
                 />
               </div>
             </div>
-            <DialogFooter>
+            <DialogFooter className="gap-2">
               <Button
                 type="button"
                 variant="outline"

@@ -41,8 +41,8 @@ export const CreateClinicRequestPage = ({
     if (!city) return "Vælg by først";
     const primaryPostalCode = getPrimaryPostalCode(city);
     return primaryPostalCode
-      ? `, ${city.bynavn} ${primaryPostalCode}`
-      : `, ${city.bynavn}`;
+      ? `${city.bynavn} ${primaryPostalCode}`
+      : city.bynavn;
   };
   const formatCitySelection = (city: CityOption) => {
     const primaryPostalCode = getPrimaryPostalCode(city);
