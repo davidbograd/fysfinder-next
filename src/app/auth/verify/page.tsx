@@ -29,8 +29,8 @@ export default async function VerifyPage({ searchParams }: VerifyPageProps) {
 
   if (user?.email_confirmed_at) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-4 bg-slate-50/80">
-        <Card className="max-w-md w-full border-slate-200 shadow-sm">
+      <div className="flex min-h-[calc(100vh-200px)] w-full min-w-0 items-center justify-center py-12">
+        <Card className="w-full min-w-0 max-w-md border-slate-200 shadow-sm">
           <CardHeader>
             <div className="flex justify-start mb-4">
               <Check
@@ -67,21 +67,28 @@ export default async function VerifyPage({ searchParams }: VerifyPageProps) {
   const displayEmail = user?.email ?? emailFromQuery;
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-slate-50/80">
-      <Card className="max-w-md w-full border-slate-200 shadow-sm">
-        <CardHeader>
+    <div className="flex min-h-[calc(100vh-200px)] w-full min-w-0 items-center justify-center py-12">
+      <Card className="w-full min-w-0 max-w-md border-slate-200 shadow-sm">
+        <CardHeader className="min-w-0">
           <div className="flex justify-start mb-3">
-            <div className="rounded-full bg-brand-green/10 p-3">
-              <Mail className="h-8 w-8 text-brand-green" aria-hidden />
+            <div className="rounded-full bg-slate-100 p-3">
+              <Mail className="h-8 w-8 text-slate-600" aria-hidden />
             </div>
           </div>
           <CardTitle>Bekræft din email</CardTitle>
-          <CardDescription className="text-base text-slate-600">
+          <CardDescription className="min-w-0 text-base text-slate-600">
             {displayEmail ? (
               <>
-                Vi har sendt et link til{" "}
-                <strong className="text-slate-900">{displayEmail}</strong>.
-                Åbn mailen og klik på linket for at aktivere din konto.
+                <span className="block">Vi har sendt et link til</span>
+                <span className="mt-2 block w-full min-w-0">
+                  <strong className="break-all text-slate-900">
+                    {displayEmail}
+                  </strong>
+                  .
+                </span>
+                <span className="mt-2 block">
+                  Åbn mailen og klik på linket for at aktivere din konto.
+                </span>
               </>
             ) : (
               <>
@@ -91,7 +98,7 @@ export default async function VerifyPage({ searchParams }: VerifyPageProps) {
             )}
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="min-w-0 space-y-4">
           {showLinkExpiredNotice && (
             <div
               role="alert"
@@ -120,7 +127,7 @@ export default async function VerifyPage({ searchParams }: VerifyPageProps) {
             hasSession={!!user}
           />
 
-          <p className="text-xs text-slate-500 pt-2">
+          <p className="text-sm text-slate-500 pt-2">
             Forkert email?{" "}
             <Link
               href="/auth/signup"
