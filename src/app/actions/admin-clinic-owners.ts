@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { createClient } from "@/app/utils/supabase/server";
 import { createClient as createServiceClient } from "@supabase/supabase-js";
 import { isAdminEmail } from "@/lib/admin";
+import type { User } from "@supabase/supabase-js";
 
 interface AdminClinicSearchResult {
   clinics_id: string;
@@ -27,6 +28,9 @@ interface ClinicOwnerInfo {
 }
 
 type AdminOwnershipActionResult<T> = T | { error: string };
+type RequireAdminResult =
+  | { ok: true; user: User }
+  | { ok: false; error: string };
 
 function getServiceClient() {
   return createServiceClient(
@@ -35,29 +39,29 @@ function getServiceClient() {
   );
 }
 
-async function requireAdmin() {
+async function requireAdmin(): Promise<RequireAdminResult> {
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
   if (!user) {
-    return { error: "Ikke logget ind" as const };
+    return { ok: false, error: "Ikke logget ind" };
   }
 
   if (!isAdminEmail(user.email)) {
-    return { error: "Ingen adgang - kun administratorer kan bruge værktøjet" as const };
+    return { ok: false, error: "Ingen adgang - kun administratorer kan bruge værktøjet" };
   }
 
-  return { user };
+  return { ok: true, user };
 }
 
 export async function searchClinicsForAdmin(
   query: string
 ): Promise<AdminOwnershipActionResult<{ clinics: AdminClinicSearchResult[] }>> {
   const admin = await requireAdmin();
-  if ("error" in admin) {
-    return admin;
+  if (!admin.ok) {
+    return { error: admin.error };
   }
 
   const trimmedQuery = query.trim();
@@ -85,8 +89,8 @@ export async function searchUsersForAdmin(
   query: string
 ): Promise<AdminOwnershipActionResult<{ users: AdminUserSearchResult[] }>> {
   const admin = await requireAdmin();
-  if ("error" in admin) {
-    return admin;
+  if (!admin.ok) {
+    return { error: admin.error };
   }
 
   const trimmedQuery = query.trim();
@@ -119,8 +123,8 @@ export async function getClinicOwnerForAdmin(
   }>
 > {
   const admin = await requireAdmin();
-  if ("error" in admin) {
-    return admin;
+  if (!admin.ok) {
+    return { error: admin.error };
   }
 
   const trimmedClinicId = clinicId.trim();
@@ -195,8 +199,8 @@ export async function setClinicOwnerForAdmin(input: {
   }>
 > {
   const admin = await requireAdmin();
-  if ("error" in admin) {
-    return admin;
+  if (!admin.ok) {
+    return { error: admin.error };
   }
 
   const clinicId = input.clinicId.trim();
