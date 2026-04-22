@@ -1,4 +1,4 @@
-// Updated: 2026-04-03 - Covers auth-gate redirect and booking-inclusive lead KPI totals.
+// Updated: 2026-04-22 - Covers auth-gate redirect, booking-inclusive lead KPIs, and admin ownership tool entry visibility.
 import { render, screen } from "@testing-library/react";
 
 const mockRedirect = jest.fn();
@@ -7,6 +7,7 @@ const mockGetOwnedClinics = jest.fn();
 const mockGetAllOwnedClinicAnalytics = jest.fn();
 const mockGetClinicDashboardUplift = jest.fn();
 const mockGetUserClaims = jest.fn();
+const mockIsAdminEmail = jest.fn();
 
 jest.mock("next/navigation", () => ({
   redirect: (...args: unknown[]) => mockRedirect(...args),
@@ -38,6 +39,10 @@ jest.mock("@/app/actions/user-claims", () => ({
   getUserClaims: (...args: unknown[]) => mockGetUserClaims(...args),
 }));
 
+jest.mock("@/lib/admin", () => ({
+  isAdminEmail: (...args: unknown[]) => mockIsAdminEmail(...args),
+}));
+
 jest.mock("@/components/dashboard/AdminClaimsSection", () => ({
   AdminClaimsSection: () => null,
 }));
@@ -65,6 +70,7 @@ describe("DashboardPage auth gate", () => {
     mockGetAllOwnedClinicAnalytics.mockResolvedValue({ stats: {} });
     mockGetClinicDashboardUplift.mockResolvedValue({ data: null });
     mockGetUserClaims.mockResolvedValue({ claims: [] });
+    mockIsAdminEmail.mockReturnValue(false);
   });
 
   it("redirects anonymous users to signin", async () => {
@@ -171,5 +177,20 @@ describe("DashboardPage auth gate", () => {
     render(ui);
 
     expect(screen.queryByText("Du går glip af patienter")).not.toBeInTheDocument();
+  });
+
+  it("shows clinic ownership admin link for admins", async () => {
+    mockGetUser.mockResolvedValue({
+      data: { user: { id: "admin-1", email: "admin@example.com" } },
+    });
+    mockIsAdminEmail.mockReturnValue(true);
+
+    const DashboardPage = (await import("../page")).default;
+    const ui = await DashboardPage({ searchParams: Promise.resolve({}) });
+    render(ui);
+
+    expect(
+      screen.getByRole("link", { name: /åbn ejerskabsværktøj/i })
+    ).toHaveAttribute("href", "/dashboard/admin/clinic-owners");
   });
 });

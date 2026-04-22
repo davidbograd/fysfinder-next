@@ -1,12 +1,12 @@
 // Dashboard page for clinic owners and admins.
-// Updated: includes booking clicks in lead KPI totals and contribution breakdown.
+// Updated: includes booking clicks in lead KPI totals plus an admin entry card for clinic ownership management.
 
 import { redirect } from "next/navigation";
 import { createClient } from "@/app/utils/supabase/server";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { Mail, Shield, TrendingUp } from "lucide-react";
+import { ArrowRight, Mail, Shield, TrendingUp, UserCog } from "lucide-react";
 import Link from "next/link";
 import { isAdminEmail } from "@/lib/admin";
 import { AdminClaimsSection } from "@/components/dashboard/AdminClaimsSection";
@@ -554,6 +554,29 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
             </Card>
 
           </div>
+        )}
+
+        {/* Admin Claims Section - Full Width for Admins */}
+        {isAdmin && (
+          <Card className="md:col-span-2 lg:col-span-3 border-purple-200 bg-purple-50/40">
+            <CardHeader className="pb-3">
+              <CardTitle className="flex items-center gap-2 text-gray-900">
+                <UserCog className="h-5 w-5 text-purple-700" />
+                Klinik-ejerskab
+              </CardTitle>
+              <CardDescription>
+                Tildel eller overdrag ejerskab af en klinik til en anden bruger.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button asChild size="sm" className="inline-flex items-center gap-2">
+                <Link href="/dashboard/admin/clinic-owners">
+                  Åbn ejerskabsværktøj
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </Button>
+            </CardContent>
+          </Card>
         )}
 
         {/* Admin Claims Section - Full Width for Admins */}

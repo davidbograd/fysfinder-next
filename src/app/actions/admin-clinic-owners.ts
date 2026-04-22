@@ -1,0 +1,295 @@
+// Admin ownership actions for clinic-to-user assignment and secure single-owner transfers.
+"use server";
+
+import { revalidatePath } from "next/cache";
+import { createClient } from "@/app/utils/supabase/server";
+import { createClient as createServiceClient } from "@supabase/supabase-js";
+import { isAdminEmail } from "@/lib/admin";
+
+interface AdminClinicSearchResult {
+  clinics_id: string;
+  klinikNavn: string;
+  lokation: string | null;
+  adresse: string | null;
+  postnummer: number | null;
+}
+
+interface AdminUserSearchResult {
+  id: string;
+  full_name: string;
+  email: string;
+}
+
+interface ClinicOwnerInfo {
+  userId: string;
+  fullName: string | null;
+  email: string | null;
+}
+
+type AdminOwnershipActionResult<T> = T | { error: string };
+
+function getServiceClient() {
+  return createServiceClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+}
+
+async function requireAdmin() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return { error: "Ikke logget ind" as const };
+  }
+
+  if (!isAdminEmail(user.email)) {
+    return { error: "Ingen adgang - kun administratorer kan bruge værktøjet" as const };
+  }
+
+  return { user };
+}
+
+export async function searchClinicsForAdmin(
+  query: string
+): Promise<AdminOwnershipActionResult<{ clinics: AdminClinicSearchResult[] }>> {
+  const admin = await requireAdmin();
+  if ("error" in admin) {
+    return admin;
+  }
+
+  const trimmedQuery = query.trim();
+  if (!trimmedQuery) {
+    return { clinics: [] };
+  }
+
+  const serviceSupabase = getServiceClient();
+  const { data: clinics, error } = await serviceSupabase
+    .from("clinics")
+    .select("clinics_id, klinikNavn, lokation, adresse, postnummer")
+    .or(`klinikNavn.ilike.%${trimmedQuery}%,lokation.ilike.%${trimmedQuery}%`)
+    .order("klinikNavn", { ascending: true })
+    .limit(20);
+
+  if (error) {
+    console.error("Error searching clinics for admin ownership tool:", error);
+    return { error: "Kunne ikke søge efter klinikker" };
+  }
+
+  return { clinics: clinics || [] };
+}
+
+export async function searchUsersForAdmin(
+  query: string
+): Promise<AdminOwnershipActionResult<{ users: AdminUserSearchResult[] }>> {
+  const admin = await requireAdmin();
+  if ("error" in admin) {
+    return admin;
+  }
+
+  const trimmedQuery = query.trim();
+  if (!trimmedQuery) {
+    return { users: [] };
+  }
+
+  const serviceSupabase = getServiceClient();
+  const { data: users, error } = await serviceSupabase
+    .from("user_profiles")
+    .select("id, full_name, email")
+    .or(`full_name.ilike.%${trimmedQuery}%,email.ilike.%${trimmedQuery}%`)
+    .order("full_name", { ascending: true })
+    .limit(20);
+
+  if (error) {
+    console.error("Error searching users for admin ownership tool:", error);
+    return { error: "Kunne ikke søge efter brugere" };
+  }
+
+  return { users: users || [] };
+}
+
+export async function getClinicOwnerForAdmin(
+  clinicId: string
+): Promise<
+  AdminOwnershipActionResult<{
+    owner: ClinicOwnerInfo | null;
+    ownerCount: number;
+  }>
+> {
+  const admin = await requireAdmin();
+  if ("error" in admin) {
+    return admin;
+  }
+
+  const trimmedClinicId = clinicId.trim();
+  if (!trimmedClinicId) {
+    return { error: "Klinik-id mangler" };
+  }
+
+  const serviceSupabase = getServiceClient();
+  const { data: ownershipRows, error: ownershipError } = await serviceSupabase
+    .from("clinic_owners")
+    .select("user_id")
+    .eq("clinic_id", trimmedClinicId);
+
+  if (ownershipError) {
+    console.error("Error loading clinic owner for admin ownership tool:", ownershipError);
+    return { error: "Kunne ikke hente nuværende ejer" };
+  }
+
+  const ownerRows = ownershipRows || [];
+  if (ownerRows.length === 0) {
+    return { owner: null, ownerCount: 0 };
+  }
+
+  const ownerIds = ownerRows.map((row) => row.user_id);
+  const { data: profiles, error: profilesError } = await serviceSupabase
+    .from("user_profiles")
+    .select("id, full_name, email")
+    .in("id", ownerIds);
+
+  if (profilesError) {
+    console.error("Error loading owner profiles for admin ownership tool:", profilesError);
+    return { error: "Kunne ikke hente ejerdetaljer" };
+  }
+
+  const profileById = new Map((profiles || []).map((profile) => [profile.id, profile]));
+  const primaryOwnerUserId = ownerRows[0]?.user_id;
+  const primaryOwnerProfile = primaryOwnerUserId
+    ? profileById.get(primaryOwnerUserId)
+    : null;
+  let resolvedOwnerEmail = primaryOwnerProfile?.email || null;
+
+  if (!resolvedOwnerEmail && primaryOwnerUserId) {
+    const { data: authUserData, error: authUserError } =
+      await serviceSupabase.auth.admin.getUserById(primaryOwnerUserId);
+    if (authUserError) {
+      console.error("Error loading owner email from auth.users:", authUserError);
+    } else {
+      resolvedOwnerEmail = authUserData.user?.email || null;
+    }
+  }
+
+  return {
+    owner: primaryOwnerUserId
+      ? {
+          userId: primaryOwnerUserId,
+          fullName: primaryOwnerProfile?.full_name || null,
+          email: resolvedOwnerEmail,
+        }
+      : null,
+    ownerCount: ownerRows.length,
+  };
+}
+
+export async function setClinicOwnerForAdmin(input: {
+  clinicId: string;
+  newOwnerUserId: string;
+}): Promise<
+  AdminOwnershipActionResult<{
+    success: true;
+    previousOwnerUserIds: string[];
+    ownerUserId: string;
+  }>
+> {
+  const admin = await requireAdmin();
+  if ("error" in admin) {
+    return admin;
+  }
+
+  const clinicId = input.clinicId.trim();
+  const newOwnerUserId = input.newOwnerUserId.trim();
+
+  if (!clinicId || !newOwnerUserId) {
+    return { error: "Klinik og bruger skal vælges" };
+  }
+
+  const serviceSupabase = getServiceClient();
+
+  const [clinicResult, userResult, currentOwnersResult] = await Promise.all([
+    serviceSupabase
+      .from("clinics")
+      .select("clinics_id")
+      .eq("clinics_id", clinicId)
+      .single(),
+    serviceSupabase
+      .from("user_profiles")
+      .select("id")
+      .eq("id", newOwnerUserId)
+      .single(),
+    serviceSupabase
+      .from("clinic_owners")
+      .select("user_id, clinic_id")
+      .eq("clinic_id", clinicId),
+  ]);
+
+  if (clinicResult.error || !clinicResult.data) {
+    return { error: "Klinikken findes ikke" };
+  }
+
+  if (userResult.error || !userResult.data) {
+    return { error: "Brugeren findes ikke" };
+  }
+
+  if (currentOwnersResult.error) {
+    console.error("Error reading existing clinic owners:", currentOwnersResult.error);
+    return { error: "Kunne ikke hente nuværende ejerskab" };
+  }
+
+  const existingOwnerRows = currentOwnersResult.data || [];
+  const existingOwnerUserIds = existingOwnerRows.map((row) => row.user_id);
+  if (existingOwnerRows.length === 1 && existingOwnerRows[0]?.user_id === newOwnerUserId) {
+    return { error: "Brugeren er allerede ejer af klinikken" };
+  }
+
+  const { error: deleteError } = await serviceSupabase
+    .from("clinic_owners")
+    .delete()
+    .eq("clinic_id", clinicId);
+
+  if (deleteError) {
+    console.error("Error clearing existing clinic owners:", deleteError);
+    return { error: "Kunne ikke opdatere nuværende ejerskab" };
+  }
+
+  const { error: insertError } = await serviceSupabase
+    .from("clinic_owners")
+    .insert({ clinic_id: clinicId, user_id: newOwnerUserId });
+
+  if (insertError) {
+    console.error("Error creating replacement clinic owner:", insertError);
+
+    if (existingOwnerRows.length > 0) {
+      const restoreRows = existingOwnerRows.map((ownerRow) => ({
+        clinic_id: ownerRow.clinic_id,
+        user_id: ownerRow.user_id,
+      }));
+      const { error: restoreError } = await serviceSupabase
+        .from("clinic_owners")
+        .insert(restoreRows);
+      if (restoreError) {
+        console.error("Error restoring previous clinic owners after failed transfer:", restoreError);
+      }
+    }
+
+    return { error: "Kunne ikke gemme nyt ejerskab" };
+  }
+
+  console.info("Admin clinic ownership transfer completed", {
+    adminUserId: admin.user.id,
+    clinicId,
+    previousOwnerUserIds: existingOwnerUserIds,
+    nextOwnerUserId: newOwnerUserId,
+  });
+
+  revalidatePath("/dashboard");
+  revalidatePath("/dashboard/admin/clinic-owners");
+
+  return {
+    success: true,
+    previousOwnerUserIds: existingOwnerUserIds,
+    ownerUserId: newOwnerUserId,
+  };
+}
