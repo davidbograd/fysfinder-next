@@ -1,0 +1,60 @@
+---
+description: Single source of truth for slug / heading id generation
+alwaysApply: true
+---
+
+# Slugs and heading ids
+
+We generate URL fragments and DOM ids for headings in exactly one place in the codebase. Do not introduce alternate slug implementations — it has already caused a production bug where TOC anchors silently failed to scroll for any heading containing `æ`, `ø`, `å`, or `ü`.
+
+## The one true slug function
+
+`slugify` from `src/app/utils/slugify.ts`.
+
+It is Danish-aware: it transliterates `æ → ae`, `ø → oe`, `å → aa`, `ü → u`, lowercases, and replaces anything that is not a word character with `-`. This produces ASCII-only, URL-friendly slugs that play nicely as URL fragments (no percent-encoding) and match common Danish URL conventions on this site.
+
+## How to apply it
+
+### Plain strings (e.g. TOC data extraction, anchor data, section ids)
+```ts
+import { slugify } from "@/app/utils/slugify";
+const id = slugify(headingText);
+```
+
+### MDX content rendered with `next-mdx-remote`
+Use the shared rehype plugin in the MDX `rehypePlugins` list:
+```ts
+import rehypeDanishSlug from "@/lib/mdx/rehype-danish-slug";
+
+<MDXRemote
+  source={content}
+  options={{
+    mdxOptions: {
+      rehypePlugins: [rehypeDanishSlug, /* ... */],
+    },
+  }}
+/>
+```
+
+This assigns the `id` attribute to every heading element using `slugify` under the hood. It is a drop-in replacement for `rehype-slug`.
+
+### Custom MDX heading component (e.g. `ContentEntry.tsx`)
+If for styling reasons you're overriding the `h2`/`h3` component in MDX, either:
+1. Prefer adding `rehypeDanishSlug` to `rehypePlugins` and leave the `h2`/`h3` override purely cosmetic (no `id` handling), or
+2. If you must assign the id inline, call `slugify(headingText)` — never roll your own regex.
+
+### Extracting a TOC from markdown source
+Use `extractTableOfContents` from `@/lib/utils`. It already calls `slugify` internally, so its output will line up with any of the rendering methods above.
+
+## Banned imports
+
+Do **not** import these — ESLint will reject them:
+
+- `github-slugger` — produces slugs like `sådan-bruger-du` instead of `saadan-bruger-du`. Mixing it with our `slugify` guarantees mismatched ids.
+- `rehype-slug` — uses `github-slugger` internally; same problem.
+
+If you find yourself wanting a different slug algorithm, talk about it before adding it. URL fragments are a public contract (users bookmark them, we link to them internally); changing slug output silently breaks those links.
+
+## Why this rule exists
+
+Prior history: we had three different slug implementations coexisting — `slug` from `github-slugger`, `slugify` from this codebase, and `rehype-slug` (which itself wraps `github-slugger`). Different pages picked different combinations, so the TOC worked on some pages and silently failed on others, depending on whether the heading text contained Danish characters. Keeping slug generation centralized in one function is the simplest durable fix.

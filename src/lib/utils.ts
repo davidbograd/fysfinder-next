@@ -1,6 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { slug } from "github-slugger";
+import { slugify } from "@/app/utils/slugify";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -27,7 +27,10 @@ export function extractTableOfContents(content: string) {
 
   while ((match = headingRegex.exec(content)) !== null) {
     const text = match[1];
-    const id = slug(text);
+    // Must match the id produced by the `h2` component in ContentEntry.tsx, which uses
+    // the same `slugify` helper. Previously this used github-slugger, whose output differs
+    // from `slugify` for headings containing æ/ø/å/ü, which broke TOC anchor scrolling.
+    const id = slugify(text);
     headings.push({ text, id });
   }
 

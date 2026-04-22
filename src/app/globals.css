@@ -75,8 +75,11 @@
   }
 
   html {
-    scroll-behavior: smooth;
-    /* Offset in-page anchors / scrollIntoView so sticky/fixed header does not cover headings */
+    /* Offset in-page anchors / scrollIntoView so sticky/fixed header does not cover headings.
+       Note: scroll-behavior is intentionally NOT set to `smooth` globally, because it would
+       cause the Next.js App Router's scroll-to-top on route change to animate from the old
+       scroll position, making navigations feel laggy. When smooth scrolling is wanted for
+       specific in-page interactions, call `scrollIntoView({ behavior: "smooth" })` directly. */
     @apply scroll-pt-20;
   }
 
@@ -203,10 +206,6 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-
     .hero-card-in,
     .hero-card-in-left,
     .hero-card-in-center,

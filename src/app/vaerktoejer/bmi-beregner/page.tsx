@@ -8,7 +8,7 @@ import { getPageContent } from "@/lib/pageContent";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import rehypeUnwrapImages from "rehype-unwrap-images";
-import rehypeSlug from "rehype-slug";
+import rehypeDanishSlug from "@/lib/mdx/rehype-danish-slug";
 import rehypeInternalLinks from "lib/internal-linking/rehype-internal-links";
 import { loadLinkConfig } from "lib/internal-linking/config";
 import RelatedToolsSection from "@/components/features/RelatedToolsSection";
@@ -149,7 +149,7 @@ export default async function BMICalculatorPage() {
                 mdxOptions: {
                   remarkPlugins: [remarkGfm],
                   rehypePlugins: [
-                    rehypeSlug,
+                    rehypeDanishSlug,
                     rehypeUnwrapImages,
                     [rehypeInternalLinks, { linkConfig, currentPagePath }],
                   ],

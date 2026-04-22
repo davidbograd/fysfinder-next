@@ -84,6 +84,26 @@ const eslintConfig = [
       'react/prop-types': 'off',
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+      // Heading id / URL fragment slugs must go through `slugify` in src/app/utils/slugify.ts
+      // so ContentEntry, rehype-danish-slug, and extractTableOfContents all agree.
+      // See .cursor/rules/slugs-and-heading-ids.mdc for rationale.
+      'no-restricted-imports': [
+        'error',
+        {
+          paths: [
+            {
+              name: 'github-slugger',
+              message:
+                "Use `slugify` from '@/app/utils/slugify' instead. github-slugger produces different slugs for æ/ø/å/ü than the rest of the app and breaks TOC anchor scrolling.",
+            },
+            {
+              name: 'rehype-slug',
+              message:
+                "Use `rehypeDanishSlug` from '@/lib/mdx/rehype-danish-slug' instead. rehype-slug uses github-slugger internally, which produces inconsistent slugs for Danish characters.",
+            },
+          ],
+        },
+      ],
     },
     settings: {
       react: {
