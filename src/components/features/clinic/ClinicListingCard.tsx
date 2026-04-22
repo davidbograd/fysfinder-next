@@ -207,27 +207,26 @@ const ClinicListingCard: React.FC<Props> = ({
             {isPremium && (
               <p className="text-gray-600 text-sm mb-1">Sponsoreret</p>
             )}
-            <div className="flex items-start gap-2 mb-2">
+            <h3 className="mb-2 text-xl font-semibold leading-snug text-gray-900 [overflow-wrap:anywhere]">
               <Link
                 href={`/klinik/${klinikNavnSlug}`}
-                className="hover:opacity-90 transition-opacity duration-200"
+                className="text-inherit hover:opacity-90 transition-opacity duration-200"
               >
-                <h3 className="text-xl font-semibold text-gray-900">
-                  {klinikNavn}
-                </h3>
+                {klinikNavn}
               </Link>
-              {/* Verified Icon */}
               {verified_klinik && (
                 <TooltipProvider>
                   <Tooltip>
-                    <TooltipTrigger>
-                      <Image
-                        src={VerifiedCheck}
-                        alt="Verified clinic"
-                        width={20}
-                        height={20}
-                        className="w-5 h-5 mt-1"
-                      />
+                    <TooltipTrigger asChild>
+                      <span className="ml-1.5 inline-block shrink-0 align-middle -translate-y-px">
+                        <Image
+                          src={VerifiedCheck}
+                          alt="Verified clinic"
+                          width={20}
+                          height={20}
+                          className="h-5 w-5"
+                        />
+                      </span>
                     </TooltipTrigger>
                     <TooltipContent>
                       <p>Denne klinik er verificeret af Fysfinder.</p>
@@ -235,12 +234,16 @@ const ClinicListingCard: React.FC<Props> = ({
                   </Tooltip>
                 </TooltipProvider>
               )}
-              {/* Accessibility Icon */}
               {handicapadgang && (
                 <TooltipProvider>
                   <Tooltip>
-                    <TooltipTrigger>
-                      <FaWheelchair className="w-5 h-5 text-logo-blue mt-1" />
+                    <TooltipTrigger asChild>
+                      <span className="ml-1.5 inline-block shrink-0 align-middle -translate-y-px text-logo-blue">
+                        <FaWheelchair
+                          className="h-5 w-5"
+                          aria-label="Handicapadgang"
+                        />
+                      </span>
                     </TooltipTrigger>
                     <TooltipContent>
                       <p>Handicapadgang</p>
@@ -248,7 +251,7 @@ const ClinicListingCard: React.FC<Props> = ({
                   </Tooltip>
                 </TooltipProvider>
               )}
-            </div>
+            </h3>
             <Link
               href={`/klinik/${klinikNavnSlug}`}
               className="flex items-center mb-3 hover:opacity-90 transition-opacity duration-200 w-fit"

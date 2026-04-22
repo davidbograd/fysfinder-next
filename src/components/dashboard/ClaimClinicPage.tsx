@@ -441,7 +441,8 @@ export const ClaimClinicPage = ({ userProfile }: ClaimClinicPageProps) => {
               {clinics.length > 0 && (
                 <div className="space-y-3">
                   <h3 className="font-medium text-gray-900">
-                    Fundet {clinics.length} klinik(ker)
+                    Fundet {clinics.length}{" "}
+                    {clinics.length === 1 ? "klinik" : "klinikker"}
                   </h3>
                   <div className="space-y-2">
                     {clinics.map((clinic) => (
