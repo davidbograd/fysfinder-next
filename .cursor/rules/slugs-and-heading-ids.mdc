@@ -22,26 +22,23 @@ const id = slugify(headingText);
 ```
 
 ### MDX content rendered with `next-mdx-remote`
-Use the shared rehype plugin in the MDX `rehypePlugins` list:
+Always register `rehypeDanishSlug` in `rehypePlugins`; it assigns the `id` attribute to every heading element using `slugify` under the hood. It is a drop-in replacement for `rehype-slug`.
+
+For tool/scan SEO pages (`vaerktoejer/*`, `mr-scanning`, `dexa-scanning`) there is a shared factory that wires it in along with the other standard plugins:
 ```ts
-import rehypeDanishSlug from "@/lib/mdx/rehype-danish-slug";
+import { buildToolPageMdxOptions } from "@/lib/mdx/build-tool-page-mdx-options";
 
 <MDXRemote
-  source={content}
-  options={{
-    mdxOptions: {
-      rehypePlugins: [rehypeDanishSlug, /* ... */],
-    },
-  }}
+  source={pageContent}
+  components={mdxComponents}
+  options={buildToolPageMdxOptions(currentPagePath)}
 />
 ```
 
-This assigns the `id` attribute to every heading element using `slugify` under the hood. It is a drop-in replacement for `rehype-slug`.
+For ordbog/blog, see `src/components/features/blog-og-ordbog/ContentEntry.tsx` — same idea, different plugin set.
 
-### Custom MDX heading component (e.g. `ContentEntry.tsx`)
-If for styling reasons you're overriding the `h2`/`h3` component in MDX, either:
-1. Prefer adding `rehypeDanishSlug` to `rehypePlugins` and leave the `h2`/`h3` override purely cosmetic (no `id` handling), or
-2. If you must assign the id inline, call `slugify(headingText)` — never roll your own regex.
+### Custom MDX heading component (e.g. for styling)
+MDX component overrides for `h2`/`h3`/etc. should only apply styling, **never** compute `id` themselves. The rehype plugin already assigned the correct id by the time React renders. Spreading `{...props}` into the element passes it through — that's all you need.
 
 ### Extracting a TOC from markdown source
 Use `extractTableOfContents` from `@/lib/utils`. It already calls `slugify` internally, so its output will line up with any of the rendering methods above.

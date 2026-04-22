@@ -7,11 +7,7 @@ import RelatedToolsSection from "@/components/features/RelatedToolsSection";
 import { TableOfContents } from "@/components/features/blog-og-ordbog/TableOfContents";
 import { getPageContent } from "@/lib/pageContent";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import remarkGfm from "remark-gfm";
-import rehypeUnwrapImages from "rehype-unwrap-images";
-import rehypeDanishSlug from "@/lib/mdx/rehype-danish-slug";
-import rehypeInternalLinks from "lib/internal-linking/rehype-internal-links";
-import { loadLinkConfig } from "lib/internal-linking/config";
+import { buildToolPageMdxOptions } from "@/lib/mdx/build-tool-page-mdx-options";
 import { extractTableOfContents } from "@/lib/utils";
 import { MdxProseTable } from "@/components/mdx/MdxProseTable";
 import { MDX_PROSE_TABLE_HEADER_WRAP } from "@/lib/mdx/mdx-prose-table-classnames";
@@ -62,7 +58,6 @@ export default async function RmBeregnerPage() {
   ];
 
   const pageContent = await getPageContent("rm-beregner");
-  const linkConfig = loadLinkConfig();
   const currentPagePath = "/vaerktoejer/rm-beregner";
   const headings = extractTableOfContents(pageContent);
 
@@ -134,16 +129,7 @@ export default async function RmBeregnerPage() {
                 <MDXRemote
                   source={pageContent}
                   components={mdxComponents}
-                  options={{
-                    mdxOptions: {
-                      remarkPlugins: [remarkGfm],
-                      rehypePlugins: [
-                        rehypeDanishSlug,
-                        rehypeUnwrapImages,
-                        [rehypeInternalLinks, { linkConfig, currentPagePath }],
-                      ],
-                    },
-                  }}
+                  options={buildToolPageMdxOptions(currentPagePath)}
                 />
               </div>
             </div>

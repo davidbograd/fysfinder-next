@@ -7,11 +7,7 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import WebAppStructuredData from "@/components/seo/VaerktoejerStructuredData";
 import { getPageContent } from "@/lib/pageContent";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import remarkGfm from "remark-gfm";
-import rehypeUnwrapImages from "rehype-unwrap-images";
-import rehypeDanishSlug from "@/lib/mdx/rehype-danish-slug";
-import rehypeInternalLinks from "lib/internal-linking/rehype-internal-links";
-import { loadLinkConfig } from "lib/internal-linking/config";
+import { buildToolPageMdxOptions } from "@/lib/mdx/build-tool-page-mdx-options";
 import RelatedToolsSection from "@/components/features/RelatedToolsSection";
 import { TableOfContents } from "@/components/features/blog-og-ordbog/TableOfContents";
 import { extractTableOfContents } from "@/lib/utils";
@@ -64,7 +60,6 @@ export default async function MRScanPage() {
   ];
 
   const pageContent = await getPageContent("mr-scanning");
-  const linkConfig = loadLinkConfig();
   const currentPagePath = "/mr-scanning";
   const headings = extractTableOfContents(pageContent);
 
@@ -165,16 +160,7 @@ export default async function MRScanPage() {
             <MDXRemote
               source={pageContent}
               components={mdxComponents}
-              options={{
-                mdxOptions: {
-                  remarkPlugins: [remarkGfm],
-                  rehypePlugins: [
-                    rehypeDanishSlug,
-                    rehypeUnwrapImages,
-                    [rehypeInternalLinks, { linkConfig, currentPagePath }],
-                  ],
-                },
-              }}
+              options={buildToolPageMdxOptions(currentPagePath)}
             />
           </div>
         </div>
