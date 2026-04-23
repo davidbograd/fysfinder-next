@@ -1,7 +1,7 @@
 // Admin dashboard UI for searching clinics/users and confirming ownership transfers.
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   getClinicOwnerForAdmin,
   searchClinicsForAdmin,
@@ -53,6 +53,7 @@ export function AdminClinicOwnershipSection() {
   const [clinicQuery, setClinicQuery] = useState("");
   const [clinicResults, setClinicResults] = useState<ClinicSearchResult[]>([]);
   const [isSearchingClinics, setIsSearchingClinics] = useState(false);
+  const [isClinicPopoverOpen, setIsClinicPopoverOpen] = useState(false);
   const [selectedClinic, setSelectedClinic] = useState<ClinicSearchResult | null>(null);
   const [ownerState, setOwnerState] = useState<CurrentOwnerState | null>(null);
   const [isLoadingOwner, setIsLoadingOwner] = useState(false);
@@ -60,10 +61,13 @@ export function AdminClinicOwnershipSection() {
   const [userQuery, setUserQuery] = useState("");
   const [userResults, setUserResults] = useState<UserSearchResult[]>([]);
   const [isSearchingUsers, setIsSearchingUsers] = useState(false);
+  const [isUserPopoverOpen, setIsUserPopoverOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<UserSearchResult | null>(null);
 
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const clinicSearchContainerRef = useRef<HTMLDivElement | null>(null);
+  const userSearchContainerRef = useRef<HTMLDivElement | null>(null);
 
   const canTransfer = Boolean(selectedClinic && selectedUser);
   const selectedClinicAddress = useMemo(() => {
@@ -80,10 +84,12 @@ export function AdminClinicOwnershipSection() {
     const trimmedQuery = clinicQuery.trim();
     if (!trimmedQuery) {
       setClinicResults([]);
+      setIsClinicPopoverOpen(false);
       return;
     }
 
     setIsSearchingClinics(true);
+    setIsClinicPopoverOpen(true);
     try {
       const result = await searchClinicsForAdmin(trimmedQuery);
       if ("error" in result) {
@@ -93,9 +99,11 @@ export function AdminClinicOwnershipSection() {
           variant: "destructive",
         });
         setClinicResults([]);
+        setIsClinicPopoverOpen(false);
         return;
       }
       setClinicResults(result.clinics);
+      setIsClinicPopoverOpen(true);
     } catch {
       toast({
         title: "Uventet fejl",
@@ -103,6 +111,7 @@ export function AdminClinicOwnershipSection() {
         variant: "destructive",
       });
       setClinicResults([]);
+      setIsClinicPopoverOpen(false);
     } finally {
       setIsSearchingClinics(false);
     }
@@ -112,6 +121,8 @@ export function AdminClinicOwnershipSection() {
     setSelectedClinic(clinic);
     setSelectedUser(null);
     setUserResults([]);
+    setIsUserPopoverOpen(false);
+    setIsClinicPopoverOpen(false);
     setIsLoadingOwner(true);
     try {
       const ownerResult = await getClinicOwnerForAdmin(clinic.clinics_id);
@@ -141,10 +152,12 @@ export function AdminClinicOwnershipSection() {
     const trimmedQuery = userQuery.trim();
     if (!trimmedQuery) {
       setUserResults([]);
+      setIsUserPopoverOpen(false);
       return;
     }
 
     setIsSearchingUsers(true);
+    setIsUserPopoverOpen(true);
     try {
       const result = await searchUsersForAdmin(trimmedQuery);
       if ("error" in result) {
@@ -154,9 +167,11 @@ export function AdminClinicOwnershipSection() {
           variant: "destructive",
         });
         setUserResults([]);
+        setIsUserPopoverOpen(false);
         return;
       }
       setUserResults(result.users);
+      setIsUserPopoverOpen(true);
     } catch {
       toast({
         title: "Uventet fejl",
@@ -164,6 +179,7 @@ export function AdminClinicOwnershipSection() {
         variant: "destructive",
       });
       setUserResults([]);
+      setIsUserPopoverOpen(false);
     } finally {
       setIsSearchingUsers(false);
     }
@@ -211,6 +227,29 @@ export function AdminClinicOwnershipSection() {
     }
   };
 
+  useEffect(() => {
+    const handleOutsideMouseDown = (event: MouseEvent) => {
+      const targetNode = event.target as Node;
+      if (
+        clinicSearchContainerRef.current &&
+        !clinicSearchContainerRef.current.contains(targetNode)
+      ) {
+        setIsClinicPopoverOpen(false);
+      }
+      if (
+        userSearchContainerRef.current &&
+        !userSearchContainerRef.current.contains(targetNode)
+      ) {
+        setIsUserPopoverOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideMouseDown);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideMouseDown);
+    };
+  }, []);
+
   return (
     <Card>
       <CardHeader>
@@ -224,36 +263,66 @@ export function AdminClinicOwnershipSection() {
           <section className="space-y-4 rounded-xl border bg-gray-50/60 p-4">
             <h3 className="text-base font-semibold text-gray-900">Vælg klinik</h3>
             <Label htmlFor="clinic-owner-clinic-search">Søg klinik</Label>
-            <div className="flex gap-3">
-              <Input
-                id="clinic-owner-clinic-search"
-                value={clinicQuery}
-                onChange={(event) => setClinicQuery(event.target.value)}
-                placeholder="Søg på kliniknavn eller by"
-                aria-label="Søg efter klinik"
-              />
-              <Button type="button" onClick={handleClinicSearch} disabled={isSearchingClinics}>
-                {isSearchingClinics ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                ) : (
-                  <Search className="h-4 w-4" />
-                )}
-                <span className="ml-2">Søg</span>
-              </Button>
-            </div>
+            <div className="relative" ref={clinicSearchContainerRef}>
+              <div className="flex gap-3">
+                <Input
+                  id="clinic-owner-clinic-search"
+                  value={clinicQuery}
+                  onChange={(event) => setClinicQuery(event.target.value)}
+                  placeholder="Søg på kliniknavn eller by"
+                  aria-label="Søg efter klinik"
+                  onFocus={() => {
+                    if (clinicResults.length > 0 || isSearchingClinics) {
+                      setIsClinicPopoverOpen(true);
+                    }
+                  }}
+                  onBlur={(event) => {
+                    const nextFocusedElement = event.relatedTarget as Node | null;
+                    if (
+                      nextFocusedElement &&
+                      clinicSearchContainerRef.current?.contains(nextFocusedElement)
+                    ) {
+                      return;
+                    }
+                    setIsClinicPopoverOpen(false);
+                  }}
+                />
+                <Button type="button" onClick={handleClinicSearch} disabled={isSearchingClinics}>
+                  {isSearchingClinics ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <Search className="h-4 w-4" />
+                  )}
+                  <span className="ml-2">Søg</span>
+                </Button>
+              </div>
 
-            <div className="grid gap-2">
-              {clinicResults.map((clinic) => (
-                <button
-                  key={clinic.clinics_id}
-                  type="button"
-                  onClick={() => handleClinicSelect(clinic)}
-                  className="flex min-h-10 items-center justify-between rounded-full border bg-white px-4 py-3 text-left transition-colors hover:bg-gray-50"
-                >
-                  <span className="font-medium text-gray-900">{clinic.klinikNavn}</span>
-                  <span className="text-sm text-gray-500">{clinic.lokation || "Ukendt by"}</span>
-                </button>
-              ))}
+              {isClinicPopoverOpen && (
+                <div className="absolute left-0 right-0 z-20 mt-2 max-h-72 overflow-y-auto rounded-xl border bg-white p-2 shadow-lg">
+                  {isSearchingClinics ? (
+                    <p className="flex items-center px-2 py-2 text-sm text-gray-600">
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Søger klinikker...
+                    </p>
+                  ) : clinicResults.length > 0 ? (
+                    <div className="grid gap-2">
+                      {clinicResults.map((clinic) => (
+                        <button
+                          key={clinic.clinics_id}
+                          type="button"
+                          onClick={() => handleClinicSelect(clinic)}
+                          className="flex min-h-10 items-center justify-between rounded-full border bg-white px-4 py-3 text-left transition-colors hover:bg-gray-50"
+                        >
+                          <span className="font-medium text-gray-900">{clinic.klinikNavn}</span>
+                          <span className="text-sm text-gray-500">{clinic.lokation || "Ukendt by"}</span>
+                        </button>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="px-2 py-2 text-sm text-gray-600">Ingen klinikker matcher din søgning</p>
+                  )}
+                </div>
+              )}
             </div>
 
             {selectedClinic && (
@@ -314,40 +383,76 @@ export function AdminClinicOwnershipSection() {
           <section className="space-y-4 rounded-xl border bg-brand-beige/40 p-4">
             <h3 className="text-base font-semibold text-gray-900">Hvem skal være den nye ejer?</h3>
             <Label htmlFor="clinic-owner-user-search">Søg bruger</Label>
-            <div className="flex gap-3">
-              <Input
-                id="clinic-owner-user-search"
-                value={userQuery}
-                onChange={(event) => setUserQuery(event.target.value)}
-                placeholder="Søg på navn eller email"
-                disabled={!selectedClinic}
-                aria-label="Søg efter bruger"
-              />
-              <Button
-                type="button"
-                onClick={handleUserSearch}
-                disabled={!selectedClinic || isSearchingUsers}
-              >
-                {isSearchingUsers ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                ) : (
-                  <Search className="h-4 w-4" />
-                )}
-                <span className="ml-2">Søg</span>
-              </Button>
-            </div>
-            <div className="grid gap-2">
-              {userResults.map((user) => (
-                <button
-                  key={user.id}
+            <div className="relative" ref={userSearchContainerRef}>
+              <div className="flex gap-3">
+                <Input
+                  id="clinic-owner-user-search"
+                  value={userQuery}
+                  onChange={(event) => setUserQuery(event.target.value)}
+                  placeholder="Søg på navn eller email"
+                  disabled={!selectedClinic}
+                  aria-label="Søg efter bruger"
+                  onFocus={() => {
+                    if (userResults.length > 0 || isSearchingUsers) {
+                      setIsUserPopoverOpen(true);
+                    }
+                  }}
+                  onBlur={(event) => {
+                    const nextFocusedElement = event.relatedTarget as Node | null;
+                    if (
+                      nextFocusedElement &&
+                      userSearchContainerRef.current?.contains(nextFocusedElement)
+                    ) {
+                      return;
+                    }
+                    setIsUserPopoverOpen(false);
+                  }}
+                />
+                <Button
                   type="button"
-                  onClick={() => setSelectedUser(user)}
-                  className="flex min-h-10 items-center justify-between rounded-full border bg-white px-4 py-3 text-left transition-colors hover:bg-gray-50"
+                  onClick={handleUserSearch}
+                  disabled={!selectedClinic || isSearchingUsers}
                 >
-                  <span className="font-medium text-gray-900">{user.full_name}</span>
-                  <span className="text-sm text-gray-600">{user.email}</span>
-                </button>
-              ))}
+                  {isSearchingUsers ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <Search className="h-4 w-4" />
+                  )}
+                  <span className="ml-2">Søg</span>
+                </Button>
+              </div>
+
+              {isUserPopoverOpen && (
+                <div className="absolute left-0 right-0 z-20 mt-2 max-h-72 overflow-y-auto rounded-xl border bg-white p-2 shadow-lg">
+                  {isSearchingUsers ? (
+                    <p className="flex items-center px-2 py-2 text-sm text-gray-600">
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Søger brugere...
+                    </p>
+                  ) : userResults.length > 0 ? (
+                    <div className="grid gap-2">
+                      {userResults.map((user) => (
+                        <button
+                          key={user.id}
+                          type="button"
+                          onClick={() => {
+                            setSelectedUser(user);
+                            setIsUserPopoverOpen(false);
+                          }}
+                          className="flex min-h-10 items-center justify-between rounded-full border bg-white px-4 py-3 text-left transition-colors hover:bg-gray-50"
+                        >
+                          <span className="font-medium text-gray-900">{user.full_name}</span>
+                          <span className="text-sm text-gray-600">{user.email}</span>
+                        </button>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="px-2 py-2 text-sm text-gray-600">
+                      Ingen bruger med emailen {userQuery.trim()}
+                    </p>
+                  )}
+                </div>
+              )}
             </div>
 
             <div className="rounded-xl border bg-white p-4">

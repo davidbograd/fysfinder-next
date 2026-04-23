@@ -1,10 +1,12 @@
 const mockGetUser = jest.fn();
 const mockIsAdminEmail = jest.fn();
 const mockClinicSingle = jest.fn();
-const mockUserSingle = jest.fn();
+const mockUserMaybeSingle = jest.fn();
 const mockOwnerSelectEq = jest.fn();
 const mockOwnerDeleteEq = jest.fn();
 const mockOwnerInsert = jest.fn();
+const mockAuthAdminListUsers = jest.fn();
+const mockAuthAdminGetUserById = jest.fn();
 const mockRevalidatePath = jest.fn();
 
 jest.mock("next/cache", () => ({
@@ -25,6 +27,12 @@ jest.mock("@/lib/admin", () => ({
 
 jest.mock("@supabase/supabase-js", () => ({
   createClient: () => ({
+    auth: {
+      admin: {
+        listUsers: (...args: unknown[]) => mockAuthAdminListUsers(...args),
+        getUserById: (...args: unknown[]) => mockAuthAdminGetUserById(...args),
+      },
+    },
     from: (table: string) => {
       if (table === "clinics") {
         return {
@@ -40,7 +48,7 @@ jest.mock("@supabase/supabase-js", () => ({
         return {
           select: () => ({
             eq: () => ({
-              single: (...args: unknown[]) => mockUserSingle(...args),
+              maybeSingle: (...args: unknown[]) => mockUserMaybeSingle(...args),
             }),
           }),
         };
@@ -70,10 +78,12 @@ describe("admin clinic owner actions", () => {
     mockGetUser.mockReset();
     mockIsAdminEmail.mockReset();
     mockClinicSingle.mockReset();
-    mockUserSingle.mockReset();
+    mockUserMaybeSingle.mockReset();
     mockOwnerSelectEq.mockReset();
     mockOwnerDeleteEq.mockReset();
     mockOwnerInsert.mockReset();
+    mockAuthAdminListUsers.mockReset();
+    mockAuthAdminGetUserById.mockReset();
     mockRevalidatePath.mockReset();
   });
 
@@ -83,7 +93,7 @@ describe("admin clinic owner actions", () => {
     });
     mockIsAdminEmail.mockReturnValue(true);
     mockClinicSingle.mockResolvedValue({ data: { clinics_id: "clinic-1" }, error: null });
-    mockUserSingle.mockResolvedValue({ data: { id: "user-new" }, error: null });
+    mockUserMaybeSingle.mockResolvedValue({ data: { id: "user-new" }, error: null });
     mockOwnerSelectEq.mockResolvedValue({
       data: [{ user_id: "user-old", clinic_id: "clinic-1" }],
       error: null,
@@ -116,7 +126,7 @@ describe("admin clinic owner actions", () => {
     });
     mockIsAdminEmail.mockReturnValue(true);
     mockClinicSingle.mockResolvedValue({ data: { clinics_id: "clinic-1" }, error: null });
-    mockUserSingle.mockResolvedValue({ data: { id: "user-1" }, error: null });
+    mockUserMaybeSingle.mockResolvedValue({ data: { id: "user-1" }, error: null });
     mockOwnerSelectEq.mockResolvedValue({
       data: [{ user_id: "user-1", clinic_id: "clinic-1" }],
       error: null,

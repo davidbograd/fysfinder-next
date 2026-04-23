@@ -104,14 +104,81 @@ export async function searchUsersForAdmin(
     .select("id, full_name, email")
     .or(`full_name.ilike.%${trimmedQuery}%,email.ilike.%${trimmedQuery}%`)
     .order("full_name", { ascending: true })
-    .limit(20);
+    .limit(50);
 
   if (error) {
     console.error("Error searching users for admin ownership tool:", error);
     return { error: "Kunne ikke søge efter brugere" };
   }
 
-  return { users: users || [] };
+  const mergedUsers = new Map<string, AdminUserSearchResult>();
+  for (const user of users || []) {
+    const email = user.email || "";
+    if (!email) {
+      continue;
+    }
+    mergedUsers.set(user.id, {
+      id: user.id,
+      full_name: user.full_name || email,
+      email,
+    });
+  }
+
+  const loweredQuery = trimmedQuery.toLowerCase();
+  const authPerPage = 200;
+  const maxAuthPages = 20;
+
+  for (let page = 1; page <= maxAuthPages; page += 1) {
+    const { data: authUsersData, error: authUsersError } =
+      await serviceSupabase.auth.admin.listUsers({
+        page,
+        perPage: authPerPage,
+      });
+
+    if (authUsersError) {
+      console.error("Error searching auth users for admin ownership tool:", authUsersError);
+      break;
+    }
+
+    const authUsers = authUsersData.users || [];
+    for (const authUser of authUsers) {
+      const email = authUser.email || "";
+      if (!email) {
+        continue;
+      }
+      const metadataName =
+        typeof authUser.user_metadata?.full_name === "string"
+          ? authUser.user_metadata.full_name
+          : typeof authUser.user_metadata?.name === "string"
+            ? authUser.user_metadata.name
+            : "";
+      const haystack = `${email} ${metadataName}`.toLowerCase();
+      if (!haystack.includes(loweredQuery)) {
+        continue;
+      }
+      if (mergedUsers.has(authUser.id)) {
+        continue;
+      }
+      mergedUsers.set(authUser.id, {
+        id: authUser.id,
+        full_name: metadataName || email,
+        email,
+      });
+    }
+
+    if (mergedUsers.size >= 20) {
+      break;
+    }
+    if (authUsers.length < authPerPage) {
+      break;
+    }
+  }
+
+  const sortedUsers = Array.from(mergedUsers.values())
+    .sort((a, b) => a.full_name.localeCompare(b.full_name, "da-DK"))
+    .slice(0, 20);
+
+  return { users: sortedUsers };
 }
 
 export async function getClinicOwnerForAdmin(
@@ -212,7 +279,7 @@ export async function setClinicOwnerForAdmin(input: {
 
   const serviceSupabase = getServiceClient();
 
-  const [clinicResult, userResult, currentOwnersResult] = await Promise.all([
+  const [clinicResult, userProfileResult, currentOwnersResult] = await Promise.all([
     serviceSupabase
       .from("clinics")
       .select("clinics_id")
@@ -222,7 +289,7 @@ export async function setClinicOwnerForAdmin(input: {
       .from("user_profiles")
       .select("id")
       .eq("id", newOwnerUserId)
-      .single(),
+      .maybeSingle(),
     serviceSupabase
       .from("clinic_owners")
       .select("user_id, clinic_id")
@@ -233,8 +300,17 @@ export async function setClinicOwnerForAdmin(input: {
     return { error: "Klinikken findes ikke" };
   }
 
-  if (userResult.error || !userResult.data) {
-    return { error: "Brugeren findes ikke" };
+  if (userProfileResult.error) {
+    console.error("Error validating user profile for ownership transfer:", userProfileResult.error);
+    return { error: "Kunne ikke validere bruger" };
+  }
+
+  if (!userProfileResult.data) {
+    const { data: authUserData, error: authUserError } =
+      await serviceSupabase.auth.admin.getUserById(newOwnerUserId);
+    if (authUserError || !authUserData.user) {
+      return { error: "Brugeren findes ikke" };
+    }
   }
 
   if (currentOwnersResult.error) {
