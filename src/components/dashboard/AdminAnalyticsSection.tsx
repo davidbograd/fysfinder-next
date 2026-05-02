@@ -6,27 +6,12 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Spinner } from "@/components/ui/spinner";
-import { Eye, Phone, Globe, Mail, CalendarCheck, Activity } from "lucide-react";
+import { Eye, Activity, TrendingUp } from "lucide-react";
 import {
   getAggregateAnalytics,
   type AggregateAnalytics,
 } from "@/app/actions/admin-stats";
-
-interface StatItemProps {
-  icon: React.ReactNode;
-  value: number;
-  label: string;
-}
-
-const StatItem = ({ icon, value, label }: StatItemProps) => (
-  <div className="flex items-center gap-2">
-    <div className="rounded-md bg-gray-50 p-1.5 text-gray-400">{icon}</div>
-    <span className="text-sm font-semibold text-gray-900 tabular-nums">
-      {value.toLocaleString("da-DK")}
-    </span>
-    <span className="text-sm text-gray-500">{label}</span>
-  </div>
-);
+import { AdminSuburbLeadsSection } from "@/components/dashboard/AdminSuburbLeadsSection";
 
 export const AdminAnalyticsSection = () => {
   const [stats, setStats] = useState<AggregateAnalytics | null>(null);
@@ -70,8 +55,7 @@ export const AdminAnalyticsSection = () => {
           </div>
         ) : stats ? (
           <div className="space-y-4">
-            {/* Summary row */}
-            <div className="flex items-center gap-6 pb-3 border-b border-gray-100">
+            <div className="flex items-center gap-6 border-b border-gray-100 pb-3">
               <div>
                 <p className="text-2xl font-bold text-gray-900 tabular-nums">
                   {stats.totalEvents.toLocaleString("da-DK")}
@@ -85,58 +69,80 @@ export const AdminAnalyticsSection = () => {
                 <p className="text-xs text-gray-500">klinikker med aktivitet</p>
               </div>
             </div>
-
-            {/* Visninger */}
-            <div className="space-y-1.5">
-              <div className="flex items-center gap-2">
-                <div className="rounded-md bg-gray-50 p-1.5 text-gray-400">
-                  <Eye className="h-4 w-4" />
+            <div className="grid gap-6 md:grid-cols-2">
+              <div className="rounded-xl border border-gray-100 bg-gray-50/60 p-4 text-left">
+                <div className="flex items-center gap-2">
+                  <div className="rounded-md bg-gray-50 p-1.5 text-gray-400">
+                    <Eye className="h-4 w-4" />
+                  </div>
+                  <span className="text-sm font-medium text-gray-700">Visninger</span>
                 </div>
-                <span className="text-sm font-semibold text-gray-900 tabular-nums">
+                <p className="mt-3 text-3xl font-bold text-gray-900 tabular-nums">
                   {(stats.listImpressions + stats.profileViews).toLocaleString("da-DK")}
-                </span>
-                <span className="text-sm font-medium text-gray-700">
-                  Visninger
-                </span>
+                </p>
+                <div className="mt-3 space-y-1.5 pl-1 text-sm">
+                  <p className="text-gray-500">
+                    <span className="font-semibold text-gray-700 tabular-nums">
+                      {stats.listImpressions.toLocaleString("da-DK")}
+                    </span>{" "}
+                    i søgeresultater
+                  </p>
+                  <p className="text-gray-500">
+                    <span className="font-semibold text-gray-700 tabular-nums">
+                      {stats.profileViews.toLocaleString("da-DK")}
+                    </span>{" "}
+                    på kliniksider
+                  </p>
+                </div>
               </div>
-              <div className="flex items-center gap-2 pl-9">
-                <span className="text-sm tabular-nums text-gray-500">
-                  {stats.listImpressions.toLocaleString("da-DK")}
-                </span>
-                <span className="text-sm text-gray-400">i søgeresultater</span>
-              </div>
-              <div className="flex items-center gap-2 pl-9">
-                <span className="text-sm tabular-nums text-gray-500">
-                  {stats.profileViews.toLocaleString("da-DK")}
-                </span>
-                <span className="text-sm text-gray-400">på kliniksider</span>
+
+              <div className="rounded-xl border border-gray-100 bg-gray-50/60 p-4 text-left">
+                <div className="flex items-center gap-2">
+                  <div className="rounded-md bg-gray-50 p-1.5 text-gray-400">
+                    <TrendingUp className="h-4 w-4" />
+                  </div>
+                  <span className="text-sm font-medium text-gray-700">Lead klik</span>
+                </div>
+                <p className="mt-3 text-3xl font-bold text-gray-900 tabular-nums">
+                  {(
+                    stats.phoneClicks +
+                    stats.websiteClicks +
+                    stats.emailClicks +
+                    stats.bookingClicks
+                  ).toLocaleString("da-DK")}
+                </p>
+                <div className="mt-3 space-y-1.5 pl-1 text-sm">
+                  <p className="text-gray-500">
+                    <span className="font-semibold text-gray-700 tabular-nums">
+                      {stats.phoneClicks.toLocaleString("da-DK")}
+                    </span>{" "}
+                    vist tlf nummer
+                  </p>
+                  <p className="text-gray-500">
+                    <span className="font-semibold text-gray-700 tabular-nums">
+                      {stats.websiteClicks.toLocaleString("da-DK")}
+                    </span>{" "}
+                    website klik
+                  </p>
+                  <p className="text-gray-500">
+                    <span className="font-semibold text-gray-700 tabular-nums">
+                      {stats.emailClicks.toLocaleString("da-DK")}
+                    </span>{" "}
+                    email klik
+                  </p>
+                  {stats.bookingClicks > 0 && (
+                    <p className="text-gray-500">
+                      <span className="font-semibold text-gray-700 tabular-nums">
+                        {stats.bookingClicks.toLocaleString("da-DK")}
+                      </span>{" "}
+                      booking klik
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
-
-            {/* Contact metrics */}
-            <div className="space-y-2">
-              <StatItem
-                icon={<Phone className="h-4 w-4" />}
-                value={stats.phoneClicks}
-                label="Vist tlf nummer"
-              />
-              <StatItem
-                icon={<Globe className="h-4 w-4" />}
-                value={stats.websiteClicks}
-                label="Website klik"
-              />
-              <StatItem
-                icon={<Mail className="h-4 w-4" />}
-                value={stats.emailClicks}
-                label="Email klik"
-              />
-              {stats.bookingClicks > 0 && (
-                <StatItem
-                  icon={<CalendarCheck className="h-4 w-4" />}
-                  value={stats.bookingClicks}
-                  label="Booking klik"
-                />
-              )}
+            <div className="border-t border-gray-100 pt-4">
+              <AdminSuburbLeadsSection variant="inline" />
             </div>
           </div>
         ) : (

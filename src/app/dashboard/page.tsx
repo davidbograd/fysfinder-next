@@ -12,7 +12,6 @@ import { isAdminEmail } from "@/lib/admin";
 import { AdminClaimsSection } from "@/components/dashboard/AdminClaimsSection";
 import { AdminStatsSection } from "@/components/dashboard/AdminStatsSection";
 import { AdminAnalyticsSection } from "@/components/dashboard/AdminAnalyticsSection";
-import { AdminSuburbLeadsSection } from "@/components/dashboard/AdminSuburbLeadsSection";
 import { UserClaimsSection } from "@/components/dashboard/UserClaimsSection";
 import { getOwnedClinics } from "@/app/actions/clinic-management";
 import { OwnedClinicCard } from "@/components/dashboard/OwnedClinicCard";
@@ -559,29 +558,6 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
 
         {/* Admin Claims Section - Full Width for Admins */}
         {isAdmin && (
-          <Card className="md:col-span-2 lg:col-span-3 border-purple-200 bg-purple-50/40">
-            <CardHeader className="pb-3">
-              <CardTitle className="flex items-center gap-2 text-gray-900">
-                <UserCog className="h-5 w-5 text-purple-700" />
-                Klinik-ejerskab
-              </CardTitle>
-              <CardDescription>
-                Tildel eller overdrag ejerskab af en klinik til en anden bruger.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Button asChild size="sm" className="inline-flex items-center gap-2">
-                <Link href="/dashboard/admin/clinic-owners">
-                  Åbn ejerskabsværktøj
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </Button>
-            </CardContent>
-          </Card>
-        )}
-
-        {/* Admin Claims Section - Full Width for Admins */}
-        {isAdmin && (
           <div className="md:col-span-2 lg:col-span-3">
             <AdminClaimsSection />
           </div>
@@ -601,11 +577,27 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
           </div>
         )}
 
-        {/* Admin Suburb Leads Section - Full Width for Admins */}
+        {/* Admin Ownership Section - Full Width for Admins */}
         {isAdmin && (
-          <div className="md:col-span-2 lg:col-span-3">
-            <AdminSuburbLeadsSection />
-          </div>
+          <Card className="md:col-span-2 lg:col-span-3 border-purple-200 bg-purple-50/40">
+            <CardHeader className="pb-3">
+              <CardTitle className="flex items-center gap-2 text-gray-900">
+                <UserCog className="h-5 w-5 text-purple-700" />
+                Klinik-ejerskab
+              </CardTitle>
+              <CardDescription>
+                Tildel eller overdrag ejerskab af en klinik til en anden bruger.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button asChild size="sm" className="inline-flex items-center gap-2">
+                <Link href="/dashboard/admin/clinic-owners">
+                  Åbn ejerskabsværktøj
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </Button>
+            </CardContent>
+          </Card>
         )}
 
         {/* Divider after admin sections */}
