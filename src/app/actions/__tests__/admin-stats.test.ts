@@ -28,7 +28,7 @@ jest.mock("@supabase/supabase-js", () => ({
   }),
 }));
 
-import { getSuburbAnalytics } from "../admin-stats";
+import { getClinicAdminAnalytics, getSuburbAnalytics } from "../admin-stats";
 
 describe("admin stats actions", () => {
   beforeEach(() => {
@@ -127,5 +127,84 @@ describe("admin stats actions", () => {
     const result = await getSuburbAnalytics(90);
 
     expect(result.period?.startDate).toBe("2026-02-26T11:48:09.840Z");
+  });
+
+  it("fetches clinic analytics through the database aggregation RPC", async () => {
+    mockRpc.mockResolvedValue({
+      data: [
+        {
+          clinic_id: "clinic-1",
+          clinic_name: "Fysio Vejle",
+          suburb: "Vejle",
+          lead_clicks: 44,
+          phone_clicks: 12,
+          website_clicks: 20,
+          email_clicks: 4,
+          booking_clicks: 8,
+          views: 321,
+          list_impressions: 250,
+          profile_views: 71,
+        },
+      ],
+      error: null,
+    });
+
+    const result = await getClinicAdminAnalytics(30, {
+      limit: 20,
+      sortBy: "views",
+      sortDirection: "asc",
+    });
+
+    expect(mockRpc).toHaveBeenCalledWith(
+      "get_clinic_admin_event_counts",
+      expect.objectContaining({
+        p_limit: 20,
+        p_offset: 0,
+        p_sort_by: "views",
+        p_sort_dir: "asc",
+        p_verified_only: false,
+      })
+    );
+    expect(result.rows).toEqual([
+      {
+        clinicId: "clinic-1",
+        clinicName: "Fysio Vejle",
+        suburb: "Vejle",
+        leadClicks: 44,
+        phoneClicks: 12,
+        websiteClicks: 20,
+        emailClicks: 4,
+        bookingClicks: 8,
+        views: 321,
+        listImpressions: 250,
+        profileViews: 71,
+      },
+    ]);
+  });
+
+  it("passes verified-only filtering to the clinic aggregation RPC", async () => {
+    await getClinicAdminAnalytics(30, {
+      verifiedOnly: true,
+    });
+
+    expect(mockRpc).toHaveBeenCalledWith(
+      "get_clinic_admin_event_counts",
+      expect.objectContaining({
+        p_verified_only: true,
+      })
+    );
+  });
+
+  it("returns a clear error when the clinic aggregation RPC is missing", async () => {
+    const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation(() => {});
+    mockRpc.mockResolvedValue({
+      data: null,
+      error: { code: "PGRST202", message: "function missing" },
+    });
+
+    await expect(getClinicAdminAnalytics(30)).resolves.toEqual({
+      error: "Mangler databasefunktion til klinikdata",
+    });
+    consoleErrorSpy.mockRestore();
   });
 });

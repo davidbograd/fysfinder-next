@@ -5,7 +5,7 @@ import Link from "next/link";
 import { BarChart3 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Spinner } from "@/components/ui/spinner";
+import { Skeleton } from "@/components/ui/skeleton";
 import { getSuburbAnalytics, type SuburbAnalyticsRow } from "@/app/actions/admin-stats";
 import { useToast } from "@/hooks/use-toast";
 
@@ -59,21 +59,54 @@ export const AdminSuburbLeadsSection = ({
     </div>
   );
 
-  const tableContent = isLoading ? (
-    <div className="flex items-center justify-center py-6">
-      <Spinner size="md" className="text-gray-400" />
+  const tableHeader = (
+    <div className="grid grid-cols-[minmax(0,1fr)_88px_72px_78px_64px] gap-2 px-3 text-xs font-medium uppercase tracking-wide text-gray-500">
+      <span>Bydel</span>
+      <span className="text-right">Lead klik</span>
+      <span className="text-right">Tlf</span>
+      <span className="text-right">Website</span>
+      <span className="text-right">Email</span>
     </div>
+  );
+
+  const analyticsLink = (
+    <Button
+      asChild
+      type="button"
+      className="mt-3 h-10 rounded-full bg-brand-primary px-5 text-sm font-semibold text-white hover:bg-brand-primary/90"
+    >
+      <Link href="/dashboard/admin/analytics">Se alle</Link>
+    </Button>
+  );
+
+  const loadingRows = (
+    <div className="space-y-2" role="status" aria-label="Bydata indlæses">
+      {tableHeader}
+      {Array.from({ length: 3 }).map((_, index) => (
+        <div
+          key={index}
+          className="grid grid-cols-[minmax(0,1fr)_88px_72px_78px_64px] items-center gap-2 rounded-lg border border-gray-100 px-3 py-2"
+        >
+          <div className="flex min-w-0 items-center gap-3">
+            <Skeleton className="h-4 w-5 shrink-0 rounded-full" />
+            <Skeleton className="h-4 w-28" />
+          </div>
+          <Skeleton className="ml-auto h-4 w-10" />
+          <Skeleton className="ml-auto h-4 w-8" />
+          <Skeleton className="ml-auto h-4 w-10" />
+          <Skeleton className="ml-auto h-4 w-8" />
+        </div>
+      ))}
+    </div>
+  );
+
+  const tableContent = isLoading ? (
+    loadingRows
   ) : rows.length === 0 ? (
     <p className="text-sm text-gray-500">Ingen bydata endnu.</p>
   ) : (
     <div className="space-y-2">
-      <div className="grid grid-cols-[minmax(0,1fr)_88px_72px_78px_64px] gap-2 px-3 text-xs font-medium uppercase tracking-wide text-gray-500">
-        <span>Bydel</span>
-        <span className="text-right">Lead klik</span>
-        <span className="text-right">Tlf</span>
-        <span className="text-right">Website</span>
-        <span className="text-right">Email</span>
-      </div>
+      {tableHeader}
       {rows.map((row, index) => (
         <div
           key={row.suburb}
@@ -99,14 +132,6 @@ export const AdminSuburbLeadsSection = ({
           </span>
         </div>
       ))}
-      <Button
-        asChild
-        type="button"
-        size="sm"
-        className="mt-3 rounded-full bg-brand-primary text-white hover:bg-brand-primary/90"
-      >
-        <Link href="/dashboard/admin/suburb-analytics">Se alle</Link>
-      </Button>
     </div>
   );
 
@@ -115,6 +140,7 @@ export const AdminSuburbLeadsSection = ({
       <div className="space-y-4">
         {titleRow}
         {tableContent}
+        {analyticsLink}
       </div>
     );
   }
@@ -122,7 +148,12 @@ export const AdminSuburbLeadsSection = ({
   return (
     <Card>
       <CardHeader className="pb-3">{titleRow}</CardHeader>
-      <CardContent>{tableContent}</CardContent>
+      <CardContent>
+        <div className="space-y-4">
+          {tableContent}
+          {analyticsLink}
+        </div>
+      </CardContent>
     </Card>
   );
 };

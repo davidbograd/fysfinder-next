@@ -1,7 +1,7 @@
 "use server";
 
 import { createClient } from "@/app/utils/supabase/server";
-import { createClient as createServiceClient } from "@supabase/supabase-js";
+import { createClient as createServiceClient, type SupabaseClient } from "@supabase/supabase-js";
 import { isAdminEmail } from "@/lib/admin";
 
 /**
@@ -146,6 +146,20 @@ export interface SuburbAnalyticsPeriod {
   oldestEventDate: string | null;
 }
 
+export interface ClinicAdminAnalyticsRow {
+  clinicId: string;
+  clinicName: string;
+  suburb: string | null;
+  leadClicks: number;
+  phoneClicks: number;
+  websiteClicks: number;
+  emailClicks: number;
+  bookingClicks: number;
+  views: number;
+  listImpressions: number;
+  profileViews: number;
+}
+
 type SuburbSortKey = "leadClicks" | "views";
 type SuburbSortDirection = "asc" | "desc";
 
@@ -153,7 +167,52 @@ interface GetSuburbAnalyticsOptions {
   limit?: number;
   sortBy?: SuburbSortKey;
   sortDirection?: SuburbSortDirection;
+  verifiedOnly?: boolean;
 }
+
+type EventPeriodRows = Array<{ created_at: string }>;
+
+const getAnalyticsPeriod = async (
+  serviceSupabase: SupabaseClient,
+  startDateIso: string | null,
+  endDateIso: string
+): Promise<{ period?: SuburbAnalyticsPeriod; error?: string }> => {
+  const [
+    { data: oldestEventRows, error: oldestEventError },
+    { data: latestEventRows, error: latestEventError },
+  ] = await Promise.all([
+    serviceSupabase
+      .from("clinic_events")
+      .select("created_at")
+      .order("created_at", { ascending: true })
+      .limit(1),
+    serviceSupabase
+      .from("clinic_events")
+      .select("created_at")
+      .order("created_at", { ascending: false })
+      .limit(1),
+  ]);
+
+  if (oldestEventError || latestEventError) {
+    console.error("Error fetching analytics period:", oldestEventError || latestEventError);
+    return { error: "Fejl ved hentning af periode" };
+  }
+
+  const oldestEventDate = (oldestEventRows as EventPeriodRows | null)?.[0]?.created_at || null;
+  const latestEventDate = (latestEventRows as EventPeriodRows | null)?.[0]?.created_at || null;
+  const effectiveStartDate =
+    startDateIso && oldestEventDate && new Date(startDateIso) < new Date(oldestEventDate)
+      ? oldestEventDate
+      : startDateIso || oldestEventDate;
+
+  return {
+    period: {
+      startDate: effectiveStartDate,
+      endDate: latestEventDate || endDateIso,
+      oldestEventDate,
+    },
+  };
+};
 
 /**
  * Get aggregate analytics across all clinics (admin only)
@@ -262,38 +321,10 @@ export async function getSuburbAnalytics(
   const sortDirection = options.sortDirection || "desc";
   const rpcSortBy = sortBy === "views" ? "views" : "lead_clicks";
 
-  const [
-    { data: oldestEventRows, error: oldestEventError },
-    { data: latestEventRows, error: latestEventError },
-  ] = await Promise.all([
-    serviceSupabase
-      .from("clinic_events")
-      .select("created_at")
-      .order("created_at", { ascending: true })
-      .limit(1),
-    serviceSupabase
-      .from("clinic_events")
-      .select("created_at")
-      .order("created_at", { ascending: false })
-      .limit(1),
-  ]);
-
-  if (oldestEventError || latestEventError) {
-    console.error("Error fetching suburb analytics period:", oldestEventError || latestEventError);
-    return { error: "Fejl ved hentning af periode" };
+  const periodResult = await getAnalyticsPeriod(serviceSupabase, startDateIso, endDateIso);
+  if (periodResult.error || !periodResult.period) {
+    return { error: periodResult.error || "Fejl ved hentning af periode" };
   }
-
-  const oldestEventDate = oldestEventRows?.[0]?.created_at || null;
-  const latestEventDate = latestEventRows?.[0]?.created_at || null;
-  const effectiveStartDate =
-    startDateIso && oldestEventDate && new Date(startDateIso) < new Date(oldestEventDate)
-      ? oldestEventDate
-      : startDateIso || oldestEventDate;
-  const period: SuburbAnalyticsPeriod = {
-    startDate: effectiveStartDate,
-    endDate: latestEventDate || endDateIso,
-    oldestEventDate,
-  };
 
   const { data, error } = await serviceSupabase.rpc("get_suburb_event_counts", {
     p_start_date: startDateIso,
@@ -331,7 +362,7 @@ export async function getSuburbAnalytics(
         listImpressions: Number(row.list_impressions || 0),
         profileViews: Number(row.profile_views || 0),
       })) || [];
-    return { rows, period };
+    return { rows, period: periodResult.period };
   }
 
   if (error.code !== "PGRST202") {
@@ -341,5 +372,102 @@ export async function getSuburbAnalytics(
 
   console.error("Missing get_suburb_event_counts RPC:", error);
   return { error: "Mangler databasefunktion til bydata" };
+}
+
+/**
+ * Get clinic-level analytics across all clinics (admin only)
+ */
+export async function getClinicAdminAnalytics(
+  days: number | null = 30,
+  options: GetSuburbAnalyticsOptions = {}
+): Promise<{ rows?: ClinicAdminAnalyticsRow[]; period?: SuburbAnalyticsPeriod; error?: string }> {
+  const supabase = await createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return { error: "Ikke logget ind" };
+  }
+
+  if (!isAdminEmail(user.email)) {
+    return { error: "Ingen adgang - kun administratorer" };
+  }
+
+  const serviceSupabase = createServiceClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+
+  const startDateIso =
+    typeof days === "number"
+      ? (() => {
+          const startDate = new Date();
+          startDate.setDate(startDate.getDate() - days);
+          return startDate.toISOString();
+        })()
+      : null;
+  const endDateIso = new Date().toISOString();
+  const sortBy = options.sortBy || "leadClicks";
+  const sortDirection = options.sortDirection || "desc";
+  const rpcSortBy = sortBy === "views" ? "views" : "lead_clicks";
+
+  const periodResult = await getAnalyticsPeriod(serviceSupabase, startDateIso, endDateIso);
+  if (periodResult.error || !periodResult.period) {
+    return { error: periodResult.error || "Fejl ved hentning af periode" };
+  }
+
+  const { data, error } = await serviceSupabase.rpc("get_clinic_admin_event_counts", {
+    p_start_date: startDateIso,
+    p_end_date: endDateIso,
+    p_limit: typeof options.limit === "number" ? options.limit : null,
+    p_offset: 0,
+    p_sort_by: rpcSortBy,
+    p_sort_dir: sortDirection,
+    p_verified_only: options.verifiedOnly === true,
+  });
+
+  if (!error) {
+    const rows =
+      (
+        data as
+          | {
+              clinic_id: string;
+              clinic_name: string | null;
+              suburb: string | null;
+              lead_clicks: number;
+              phone_clicks: number;
+              website_clicks: number;
+              email_clicks: number;
+              booking_clicks: number;
+              views: number;
+              list_impressions: number;
+              profile_views: number;
+            }[]
+          | null
+      )?.map((row) => ({
+        clinicId: row.clinic_id,
+        clinicName: row.clinic_name || "Ukendt klinik",
+        suburb: row.suburb,
+        leadClicks: Number(row.lead_clicks || 0),
+        phoneClicks: Number(row.phone_clicks || 0),
+        websiteClicks: Number(row.website_clicks || 0),
+        emailClicks: Number(row.email_clicks || 0),
+        bookingClicks: Number(row.booking_clicks || 0),
+        views: Number(row.views || 0),
+        listImpressions: Number(row.list_impressions || 0),
+        profileViews: Number(row.profile_views || 0),
+      })) || [];
+    return { rows, period: periodResult.period };
+  }
+
+  if (error.code !== "PGRST202") {
+    console.error("Error fetching clinic analytics via RPC:", error);
+    return { error: "Fejl ved hentning af klinikdata" };
+  }
+
+  console.error("Missing get_clinic_admin_event_counts RPC:", error);
+  return { error: "Mangler databasefunktion til klinikdata" };
 }
 

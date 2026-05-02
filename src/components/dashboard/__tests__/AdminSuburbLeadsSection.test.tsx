@@ -13,6 +13,10 @@ jest.mock("@/hooks/use-toast", () => ({
 }));
 
 describe("AdminSuburbLeadsSection", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   it("renders lead breakdown columns and CTA below table", async () => {
     (getSuburbAnalytics as jest.Mock).mockResolvedValue({
       rows: [
@@ -46,6 +50,18 @@ describe("AdminSuburbLeadsSection", () => {
     expect(leadCell).toHaveClass("text-right");
 
     const seeAllLink = screen.getByRole("link", { name: "Se alle" });
-    expect(seeAllLink).toHaveAttribute("href", "/dashboard/admin/suburb-analytics");
+    expect(seeAllLink).toHaveAttribute("href", "/dashboard/admin/analytics");
+  });
+
+  it("shows skeleton rows and CTA while suburb data is loading", () => {
+    (getSuburbAnalytics as jest.Mock).mockReturnValue(new Promise(() => {}));
+
+    render(<AdminSuburbLeadsSection variant="inline" />);
+
+    expect(screen.getByRole("status", { name: "Bydata indlæses" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Se alle" })).toHaveAttribute(
+      "href",
+      "/dashboard/admin/analytics"
+    );
   });
 });
