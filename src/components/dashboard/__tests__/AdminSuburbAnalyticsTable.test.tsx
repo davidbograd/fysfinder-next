@@ -11,6 +11,8 @@ describe("AdminSuburbAnalyticsTable", () => {
       emailClicks: 2,
       bookingClicks: 3,
       views: 200,
+      listImpressions: 150,
+      profileViews: 50,
     },
     {
       suburb: "Rødekro",
@@ -20,6 +22,8 @@ describe("AdminSuburbAnalyticsTable", () => {
       emailClicks: 3,
       bookingClicks: 4,
       views: 120,
+      listImpressions: 95,
+      profileViews: 25,
     },
     {
       suburb: "Padborg",
@@ -29,12 +33,20 @@ describe("AdminSuburbAnalyticsTable", () => {
       emailClicks: 1,
       bookingClicks: 1,
       views: 350,
+      listImpressions: 300,
+      profileViews: 50,
     },
   ];
 
   const getFirstSuburb = () => {
     const tableRows = screen.getAllByRole("row");
-    const firstDataRow = tableRows[1];
+    const firstDataRow = tableRows.find((row) => {
+      const firstCell = within(row).queryAllByRole("cell")[0];
+      return firstCell && firstCell.textContent !== "Total";
+    });
+    if (!firstDataRow) {
+      throw new Error("Could not find first suburb row");
+    }
     return within(firstDataRow).getAllByRole("cell")[0].textContent;
   };
 
@@ -60,11 +72,19 @@ describe("AdminSuburbAnalyticsTable", () => {
     fireEvent.click(screen.getByRole("button", { name: /telefon/i }));
     expect(getFirstSuburb()).toBe("Rødekro");
 
+    fireEvent.click(screen.getByRole("checkbox", { name: "Vis Email" }));
     fireEvent.click(screen.getByRole("button", { name: /email/i }));
     expect(getFirstSuburb()).toBe("Rødekro");
 
+    fireEvent.click(screen.getByRole("checkbox", { name: "Vis Booking" }));
     fireEvent.click(screen.getByRole("button", { name: /booking/i }));
     expect(getFirstSuburb()).toBe("Rødekro");
+
+    fireEvent.click(screen.getByRole("button", { name: /i søgeresultater/i }));
+    expect(getFirstSuburb()).toBe("Padborg");
+
+    fireEvent.click(screen.getByRole("button", { name: /på kliniksider/i }));
+    expect(getFirstSuburb()).toBe("Padborg");
   });
 
   it("shows the lead click breakdown columns", () => {
@@ -72,8 +92,10 @@ describe("AdminSuburbAnalyticsTable", () => {
 
     expect(screen.getAllByText("Telefon").length).toBeGreaterThan(0);
     expect(screen.getAllByText("Website").length).toBeGreaterThan(0);
-    expect(screen.getAllByText("Email").length).toBeGreaterThan(0);
-    expect(screen.getAllByText("Booking").length).toBeGreaterThan(0);
+    expect(screen.queryByRole("button", { name: /^email$/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /^booking$/i })).not.toBeInTheDocument();
+    expect(screen.getAllByText("I søgeresultater").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("På kliniksider").length).toBeGreaterThan(0);
   });
 
   it("toggles breakdown columns off", () => {
@@ -92,7 +114,10 @@ describe("AdminSuburbAnalyticsTable", () => {
 
     const totalRow = screen.getByText("Total").closest("tr");
     expect(totalRow).not.toBeNull();
+    const bodyRows = screen.getAllByRole("row");
+    expect(within(bodyRows[1]).getByText("Total")).toBeInTheDocument();
     expect(within(totalRow as HTMLTableRowElement).getByText("43")).toBeInTheDocument();
     expect(within(totalRow as HTMLTableRowElement).getByText("670")).toBeInTheDocument();
+    expect(within(totalRow as HTMLTableRowElement).getByText("545")).toBeInTheDocument();
   });
 });

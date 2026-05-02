@@ -47,6 +47,8 @@ describe("admin stats actions", () => {
           email_clicks: 5,
           booking_clicks: 15,
           views: 888,
+          list_impressions: 640,
+          profile_views: 248,
         },
       ],
       error: null,
@@ -88,6 +90,8 @@ describe("admin stats actions", () => {
         emailClicks: 5,
         bookingClicks: 15,
         views: 888,
+        listImpressions: 640,
+        profileViews: 248,
       },
     ]);
     expect(result.period).toEqual({

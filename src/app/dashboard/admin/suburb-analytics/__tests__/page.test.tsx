@@ -37,7 +37,19 @@ describe("AdminSuburbAnalyticsPage", () => {
     });
     mockIsAdminEmail.mockReturnValue(true);
     mockGetSuburbAnalytics.mockResolvedValue({
-      rows: [],
+      rows: [
+        {
+          suburb: "Aabenraa",
+          leadClicks: 42,
+          phoneClicks: 20,
+          websiteClicks: 15,
+          emailClicks: 5,
+          bookingClicks: 2,
+          views: 300,
+          listImpressions: 220,
+          profileViews: 80,
+        },
+      ],
       period: {
         startDate: "2026-02-26T11:48:09.840Z",
         endDate: "2026-05-02T06:50:19.348Z",
@@ -64,5 +76,15 @@ describe("AdminSuburbAnalyticsPage", () => {
     expect(
       screen.getByRole("link", { name: /all time/i })
     ).toHaveAttribute("href", "/dashboard/admin/suburb-analytics?days=all");
+  });
+
+  it("does not render top summary cards", async () => {
+    const Page = (await import("../page")).default;
+    const ui = await Page({ searchParams: Promise.resolve({ days: "7" }) });
+    render(ui);
+
+    expect(mockGetSuburbAnalytics).toHaveBeenCalledWith(7);
+    expect(screen.queryByText("Visninger")).not.toBeInTheDocument();
+    expect(screen.queryByText("Lead klik")).not.toBeInTheDocument();
   });
 });

@@ -136,6 +136,8 @@ export interface SuburbAnalyticsRow {
   emailClicks: number;
   bookingClicks: number;
   views: number;
+  listImpressions: number;
+  profileViews: number;
 }
 
 export interface SuburbAnalyticsPeriod {
@@ -314,6 +316,8 @@ export async function getSuburbAnalytics(
               email_clicks: number;
               booking_clicks: number;
               views: number;
+              list_impressions: number;
+              profile_views: number;
             }[]
           | null
       )?.map((row) => ({
@@ -324,6 +328,8 @@ export async function getSuburbAnalytics(
         emailClicks: Number(row.email_clicks || 0),
         bookingClicks: Number(row.booking_clicks || 0),
         views: Number(row.views || 0),
+        listImpressions: Number(row.list_impressions || 0),
+        profileViews: Number(row.profile_views || 0),
       })) || [];
     return { rows, period };
   }

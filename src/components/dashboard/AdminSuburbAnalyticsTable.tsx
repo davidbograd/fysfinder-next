@@ -6,7 +6,6 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -21,9 +20,17 @@ type SortKey =
   | "websiteClicks"
   | "emailClicks"
   | "bookingClicks"
-  | "views";
+  | "views"
+  | "listImpressions"
+  | "profileViews";
 type SortDirection = "asc" | "desc";
-type BreakdownKey = "phoneClicks" | "websiteClicks" | "emailClicks" | "bookingClicks";
+type BreakdownKey =
+  | "phoneClicks"
+  | "websiteClicks"
+  | "emailClicks"
+  | "bookingClicks"
+  | "listImpressions"
+  | "profileViews";
 
 interface AdminSuburbAnalyticsTableProps {
   rows: SuburbAnalyticsRow[];
@@ -31,11 +38,17 @@ interface AdminSuburbAnalyticsTableProps {
 
 const formatNumber = (value: number) => value.toLocaleString("da-DK");
 
-const BREAKDOWN_COLUMNS: Array<{ key: BreakdownKey; label: string }> = [
-  { key: "phoneClicks", label: "Telefon" },
-  { key: "websiteClicks", label: "Website" },
-  { key: "emailClicks", label: "Email" },
-  { key: "bookingClicks", label: "Booking" },
+const BREAKDOWN_COLUMNS: Array<{
+  key: BreakdownKey;
+  label: string;
+  parent: "leadClicks" | "views";
+}> = [
+  { key: "phoneClicks", label: "Telefon", parent: "leadClicks" },
+  { key: "websiteClicks", label: "Website", parent: "leadClicks" },
+  { key: "emailClicks", label: "Email", parent: "leadClicks" },
+  { key: "bookingClicks", label: "Booking", parent: "leadClicks" },
+  { key: "listImpressions", label: "I søgeresultater", parent: "views" },
+  { key: "profileViews", label: "På kliniksider", parent: "views" },
 ];
 
 export const AdminSuburbAnalyticsTable = ({ rows }: AdminSuburbAnalyticsTableProps) => {
@@ -46,8 +59,10 @@ export const AdminSuburbAnalyticsTable = ({ rows }: AdminSuburbAnalyticsTablePro
   >({
     phoneClicks: true,
     websiteClicks: true,
-    emailClicks: true,
-    bookingClicks: true,
+    emailClicks: false,
+    bookingClicks: false,
+    listImpressions: true,
+    profileViews: true,
   });
 
   const handleSort = (nextKey: SortKey) => {
@@ -103,6 +118,8 @@ export const AdminSuburbAnalyticsTable = ({ rows }: AdminSuburbAnalyticsTablePro
           emailClicks: acc.emailClicks + row.emailClicks,
           bookingClicks: acc.bookingClicks + row.bookingClicks,
           views: acc.views + row.views,
+          listImpressions: acc.listImpressions + row.listImpressions,
+          profileViews: acc.profileViews + row.profileViews,
         }),
         {
           leadClicks: 0,
@@ -111,6 +128,8 @@ export const AdminSuburbAnalyticsTable = ({ rows }: AdminSuburbAnalyticsTablePro
           emailClicks: 0,
           bookingClicks: 0,
           views: 0,
+          listImpressions: 0,
+          profileViews: 0,
         }
       ),
     [rows]
@@ -140,16 +159,17 @@ export const AdminSuburbAnalyticsTable = ({ rows }: AdminSuburbAnalyticsTablePro
         ))}
       </div>
 
-      <Table>
-        <TableHeader>
+      <div className="overflow-hidden rounded-xl border border-border bg-white">
+      <Table className="mt-0 [&_th]:border-x-0 [&_td]:border-x-0 [&_th]:bg-zinc-600 [&_tbody]:bg-white [&_tfoot]:bg-white">
+        <TableHeader className="[&_tr]:border-b-zinc-500">
           <TableRow>
-            <TableHead>Bydel</TableHead>
-            <TableHead>
+            <TableHead className="h-10 text-xs font-medium uppercase tracking-wide text-white">Bydel</TableHead>
+            <TableHead className="h-10">
               <Button
                 type="button"
                 variant="ghost"
                 size="sm"
-                className="h-auto rounded-full px-0 py-0 text-white hover:bg-transparent hover:text-white"
+                className="h-auto rounded-md px-0 py-0 text-xs font-medium uppercase tracking-wide text-white hover:bg-white/10 hover:text-white"
                 onClick={() => handleSort("leadClicks")}
               >
                 <span>Lead klik</span>
@@ -157,13 +177,13 @@ export const AdminSuburbAnalyticsTable = ({ rows }: AdminSuburbAnalyticsTablePro
               </Button>
             </TableHead>
             {BREAKDOWN_COLUMNS.map((column) =>
-              visibleBreakdownColumns[column.key] ? (
-                <TableHead key={column.key}>
+              column.parent === "leadClicks" && visibleBreakdownColumns[column.key] ? (
+                <TableHead key={column.key} className="h-10">
                   <Button
                     type="button"
                     variant="ghost"
                     size="sm"
-                    className="h-auto rounded-full px-0 py-0 text-white hover:bg-transparent hover:text-white"
+                    className="h-auto rounded-md px-0 py-0 text-[11px] font-normal uppercase tracking-wide text-white/70 hover:bg-transparent hover:text-white/85"
                     onClick={() => handleSort(column.key)}
                   >
                     <span>{column.label}</span>
@@ -172,51 +192,80 @@ export const AdminSuburbAnalyticsTable = ({ rows }: AdminSuburbAnalyticsTablePro
                 </TableHead>
               ) : null
             )}
-            <TableHead>
+            <TableHead className="h-10">
               <Button
                 type="button"
                 variant="ghost"
                 size="sm"
-                className="h-auto rounded-full px-0 py-0 text-white hover:bg-transparent hover:text-white"
+                className="h-auto rounded-md px-0 py-0 text-xs font-medium uppercase tracking-wide text-white hover:bg-white/10 hover:text-white"
                 onClick={() => handleSort("views")}
               >
                 <span>Visninger</span>
                 <span className="ml-1">{renderSortIndicator("views")}</span>
               </Button>
             </TableHead>
+            {BREAKDOWN_COLUMNS.map((column) =>
+              column.parent === "views" && visibleBreakdownColumns[column.key] ? (
+                <TableHead key={column.key} className="h-10">
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    className="h-auto rounded-md px-0 py-0 text-[11px] font-normal uppercase tracking-wide text-white/70 hover:bg-transparent hover:text-white/85"
+                    onClick={() => handleSort(column.key)}
+                  >
+                    <span>{column.label}</span>
+                    <span className="ml-1">{renderSortIndicator(column.key)}</span>
+                  </Button>
+                </TableHead>
+              ) : null
+            )}
           </TableRow>
         </TableHeader>
         <TableBody>
-          {sortedRows.map((row) => (
-            <TableRow key={row.suburb}>
-              <TableCell className="font-medium">{row.suburb}</TableCell>
-              <TableCell className="tabular-nums">{formatNumber(row.leadClicks)}</TableCell>
-              {BREAKDOWN_COLUMNS.map((column) =>
-                visibleBreakdownColumns[column.key] ? (
-                  <TableCell key={column.key} className="tabular-nums">
-                    {formatNumber(row[column.key])}
-                  </TableCell>
-                ) : null
-              )}
-              <TableCell className="tabular-nums">{formatNumber(row.views)}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-        <TableFooter>
-          <TableRow>
+          <TableRow className="bg-zinc-50/80 font-medium">
             <TableCell>Total</TableCell>
-            <TableCell className="tabular-nums">{formatNumber(totals.leadClicks)}</TableCell>
+            <TableCell className="font-semibold tabular-nums">{formatNumber(totals.leadClicks)}</TableCell>
             {BREAKDOWN_COLUMNS.map((column) =>
-              visibleBreakdownColumns[column.key] ? (
-                <TableCell key={column.key} className="tabular-nums">
+              column.parent === "leadClicks" && visibleBreakdownColumns[column.key] ? (
+                <TableCell key={column.key} className="bg-zinc-100/80 text-gray-700 tabular-nums">
                   {formatNumber(totals[column.key])}
                 </TableCell>
               ) : null
             )}
-            <TableCell className="tabular-nums">{formatNumber(totals.views)}</TableCell>
+            <TableCell className="font-semibold tabular-nums">{formatNumber(totals.views)}</TableCell>
+            {BREAKDOWN_COLUMNS.map((column) =>
+              column.parent === "views" && visibleBreakdownColumns[column.key] ? (
+                <TableCell key={column.key} className="bg-zinc-100/80 text-gray-700 tabular-nums">
+                  {formatNumber(totals[column.key])}
+                </TableCell>
+              ) : null
+            )}
           </TableRow>
-        </TableFooter>
+          {sortedRows.map((row) => (
+            <TableRow key={row.suburb}>
+              <TableCell className="font-medium">{row.suburb}</TableCell>
+              <TableCell className="font-semibold tabular-nums">{formatNumber(row.leadClicks)}</TableCell>
+              {BREAKDOWN_COLUMNS.map((column) =>
+                column.parent === "leadClicks" && visibleBreakdownColumns[column.key] ? (
+                  <TableCell key={column.key} className="bg-gray-50/60 text-gray-600 tabular-nums">
+                    {formatNumber(row[column.key])}
+                  </TableCell>
+                ) : null
+              )}
+              <TableCell className="font-semibold tabular-nums">{formatNumber(row.views)}</TableCell>
+              {BREAKDOWN_COLUMNS.map((column) =>
+                column.parent === "views" && visibleBreakdownColumns[column.key] ? (
+                  <TableCell key={column.key} className="bg-gray-50/60 text-gray-600 tabular-nums">
+                    {formatNumber(row[column.key])}
+                  </TableCell>
+                ) : null
+              )}
+            </TableRow>
+          ))}
+        </TableBody>
       </Table>
+      </div>
     </div>
   );
 };
