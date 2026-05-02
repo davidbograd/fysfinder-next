@@ -12,6 +12,7 @@ import { isAdminEmail } from "@/lib/admin";
 import { AdminClaimsSection } from "@/components/dashboard/AdminClaimsSection";
 import { AdminStatsSection } from "@/components/dashboard/AdminStatsSection";
 import { AdminAnalyticsSection } from "@/components/dashboard/AdminAnalyticsSection";
+import { AdminSuburbLeadsSection } from "@/components/dashboard/AdminSuburbLeadsSection";
 import { UserClaimsSection } from "@/components/dashboard/UserClaimsSection";
 import { getOwnedClinics } from "@/app/actions/clinic-management";
 import { OwnedClinicCard } from "@/components/dashboard/OwnedClinicCard";
@@ -597,6 +598,13 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
         {isAdmin && (
           <div className="md:col-span-2 lg:col-span-3">
             <AdminAnalyticsSection />
+          </div>
+        )}
+
+        {/* Admin Suburb Leads Section - Full Width for Admins */}
+        {isAdmin && (
+          <div className="md:col-span-2 lg:col-span-3">
+            <AdminSuburbLeadsSection />
           </div>
         )}
 

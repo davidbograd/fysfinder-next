@@ -52,6 +52,9 @@ jest.mock("@/components/dashboard/AdminStatsSection", () => ({
 jest.mock("@/components/dashboard/AdminAnalyticsSection", () => ({
   AdminAnalyticsSection: () => null,
 }));
+jest.mock("@/components/dashboard/AdminSuburbLeadsSection", () => ({
+  AdminSuburbLeadsSection: () => null,
+}));
 jest.mock("@/components/dashboard/UserClaimsSection", () => ({
   UserClaimsSection: () => null,
 }));
