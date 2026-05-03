@@ -1,6 +1,6 @@
 Hej 👋
 
-Joachim fra Fysfinder her.
+Joachim Bograd her.
 
 Jeg vil gerne dele et tal, som viser værdien af nye patienter:
 
@@ -29,10 +29,8 @@ Jo tydeligere profilen er, jo større er chancen for, at de kontakter jer.
 Skriv endelig, hvis I har spørgsmål. Jeg svarer selv.
 
 Bedste hilsner
-Joachim fra Fysfinder
+Joachim Bograd
 
 ---
 
 Vil I ikke modtage flere e-mails som denne fra Fysfinder? Afmeld: {{{RESEND_UNSUBSCRIBE_URL}}}
-
-Det påvirker ikke jeres konto eller klinikprofil på Fysfinder — kun denne type tip-mail.

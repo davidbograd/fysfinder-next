@@ -22,10 +22,8 @@ Det tager kun få minutter, og gør en reel forskel for, om patienter vælger je
 Hvis noget driller, så svar bare på denne mail. Jeg hjælper gerne.
 
 Bedste hilsner
-Joachim fra Fysfinder
+Joachim Bograd
 
 ---
 
 Vil I ikke modtage flere e-mails som denne fra Fysfinder? Afmeld: {{{RESEND_UNSUBSCRIBE_URL}}}
-
-Det påvirker ikke jeres konto eller klinikprofil på Fysfinder — kun denne type tip-mail.

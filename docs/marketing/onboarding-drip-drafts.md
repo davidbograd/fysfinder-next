@@ -69,7 +69,7 @@ Det tager kun få minutter, og gør en reel forskel for, om patienter vælger je
 Hvis noget driller, så svar bare på denne mail. Jeg hjælper gerne.
 
 Bedste hilsner  
-Joachim fra Fysfinder
+Joachim Bograd
 
 ---
 
@@ -84,7 +84,7 @@ Joachim fra Fysfinder
 
 Hej 👋
 
-Joachim fra Fysfinder her.
+Joachim Bograd her.
 
 Jeg vil gerne dele et tal, som viser værdien af nye patienter:
 
@@ -113,7 +113,7 @@ Jo tydeligere profilen er, jo større er chancen for, at de kontakter jer.
 Skriv endelig, hvis I har spørgsmål. Jeg svarer selv.
 
 Bedste hilsner  
-Joachim fra Fysfinder
+Joachim Bograd
 
 ---
 
@@ -141,7 +141,7 @@ Har I spørgsmål til formuleringen — eller om Fysfinder overhovedet giver men
 👉 **Gå til jeres klinikprofil**
 
 Bedste hilsner  
-Joachim fra Fysfinder
+Joachim Bograd
 
 ---
 
@@ -177,7 +177,7 @@ Følgende er **allerede oprettet** i jeres Resend-konto. Automationen er **slåe
 
 **Canonical templates in repo:** `docs/marketing/resend-onboarding-day0.html` / `resend-onboarding-day3.html` (HTML) and matching **`resend-onboarding-day0.txt` / `resend-onboarding-day3.txt`** (plain text). **Afmeld:** i automations-skabeloner bruges **`{{{RESEND_UNSUBSCRIBE_URL}}}`** (f.eks. link «Afmeld her»). Push: `PATCH .../templates/{id}` med `html`, `text`, `from` og `reply_to` som under *Fra / reply-to*, derefter `POST .../publish`; `RESEND_API_KEY` i `**.env.local**`. Ved **403 / Cloudflare**: tilføj **`User-Agent`**.
 
-**Fra / reply-to i automation-trin:** `Joachim fra Fysfinder <kontakt@fysfinder.dk>`, reply-to `kontakt@fysfinder.dk` (ret i Resend ved behov).
+**Fra / reply-to i automation-trin:** `Joachim Bograd <kontakt@fysfinder.dk>`, reply-to `kontakt@fysfinder.dk` (ret i Resend ved behov).
 
 **Implementering (app + produktion):**
 
@@ -192,7 +192,7 @@ Følgende er **allerede oprettet** i jeres Resend-konto. Automationen er **slåe
 
 - **Trigger:** Kun efter godkendt klinik + ejerskab — se *Hvornår starter drippet?*  
 - Koordinér med **godkendelsesmailen** (`sendClinicApprovalEmailToUser` i `src/lib/email.ts`).  
-- Afsender (marketing): `Joachim fra Fysfinder <kontakt@fysfinder.dk>` på verificeret domæne.  
+- Afsender (marketing): `Joachim Bograd <kontakt@fysfinder.dk>` på verificeret domæne.  
 - Juridisk: samtykke / afmelding for marketing-e-mails.  
 - Teknisk: idempotens via `onboarding_drip_started_at` + Resend-automation (delay + send).
 
