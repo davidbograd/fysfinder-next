@@ -4,6 +4,7 @@ import { createClient } from "@/app/utils/supabase/server";
 import { createClient as createServiceClient } from "@supabase/supabase-js";
 import { isAdminEmail } from "@/lib/admin";
 import { sendClinicApprovalEmailToUser, sendClinicRejectionEmailToUser } from "@/lib/email";
+import { triggerClinicOwnerOnboardingDrip } from "@/lib/resend-onboarding-drip";
 import {
   syncClinicFromGoogleMapsUrlOnApprove,
   type GoogleSyncResult,
@@ -167,7 +168,9 @@ export async function approveClaim(
     .insert({
       user_id: claim.user_id,
       clinic_id: claim.clinic_id,
-    });
+    })
+    .select("user_id, clinic_id")
+    .single();
 
   if (ownershipError) {
     console.error("Error creating ownership:", ownershipError);
@@ -213,6 +216,15 @@ export async function approveClaim(
       "Failed to send claim approval email to user:",
       claimApprovalEmailResult.error
     );
+  }
+
+  if (!ownershipError) {
+    await triggerClinicOwnerOnboardingDrip(serviceSupabase, {
+      userId: claim.user_id,
+      clinicId: claim.clinic_id,
+      ownerEmail: claim.email,
+      displayName: claim.fulde_navn ?? null,
+    });
   }
 
   const mapsUrl = options?.googleMapsUrl?.trim();
@@ -451,7 +463,9 @@ export async function approveClinicCreationRequest(
     .insert({
       user_id: request.user_id,
       clinic_id: createdClinic.clinics_id,
-    });
+    })
+    .select("user_id, clinic_id")
+    .single();
 
   if (ownershipError) {
     console.error("Error creating ownership for clinic request:", ownershipError);
@@ -504,6 +518,13 @@ export async function approveClinicCreationRequest(
       creationApprovalEmailResult.error
     );
   }
+
+  await triggerClinicOwnerOnboardingDrip(serviceSupabase, {
+    userId: request.user_id,
+    clinicId: createdClinic.clinics_id,
+    ownerEmail: request.requester_email,
+    displayName: request.requester_name ?? null,
+  });
 
   const mapsUrl = options?.googleMapsUrl?.trim();
   if (!mapsUrl) {

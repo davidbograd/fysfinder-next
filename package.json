@@ -79,7 +79,7 @@
     "react-leaflet": "^5.0.0",
     "rehype-unwrap-images": "^1.0.0",
     "remark-gfm": "^4.0.1",
-    "resend": "^6.5.2",
+    "resend": "^6.12.2",
     "stripe": "^22.0.0",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",

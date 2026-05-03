@@ -14,6 +14,7 @@ const mockClinicsUpdateEq = jest.fn();
 const mockSendClinicApprovalEmailToUser = jest.fn();
 const mockSendClinicRejectionEmailToUser = jest.fn();
 const mockSyncClinicFromGoogleMapsUrlOnApprove = jest.fn();
+const mockTriggerClinicOwnerOnboardingDrip = jest.fn();
 
 const mockClinicsInsert = jest.fn((payload: unknown) => ({
   select: () => ({
@@ -43,6 +44,11 @@ jest.mock("@/lib/email", () => ({
 jest.mock("@/lib/google-places/approve-bootstrap-sync", () => ({
   syncClinicFromGoogleMapsUrlOnApprove: (...args: unknown[]) =>
     mockSyncClinicFromGoogleMapsUrlOnApprove(...args),
+}));
+
+jest.mock("@/lib/resend-onboarding-drip", () => ({
+  triggerClinicOwnerOnboardingDrip: (...args: unknown[]) =>
+    mockTriggerClinicOwnerOnboardingDrip(...args),
 }));
 
 jest.mock("@supabase/supabase-js", () => ({
@@ -93,7 +99,11 @@ jest.mock("@supabase/supabase-js", () => ({
 
       if (table === "clinic_owners") {
         return {
-          insert: (...args: unknown[]) => mockClinicOwnersInsert(...args),
+          insert: (payload: unknown) => ({
+            select: () => ({
+              single: () => mockClinicOwnersInsert(payload),
+            }),
+          }),
         };
       }
 
@@ -144,6 +154,8 @@ describe("admin clinic creation request actions", () => {
     mockSendClinicRejectionEmailToUser.mockReset();
     mockSyncClinicFromGoogleMapsUrlOnApprove.mockReset();
     mockSyncClinicFromGoogleMapsUrlOnApprove.mockResolvedValue({ ok: true });
+    mockTriggerClinicOwnerOnboardingDrip.mockReset();
+    mockTriggerClinicOwnerOnboardingDrip.mockResolvedValue(undefined);
   });
 
   it("approves request by creating clinic and owner relation", async () => {
@@ -172,7 +184,10 @@ describe("admin clinic creation request actions", () => {
       data: { clinics_id: "clinic-new" },
       error: null,
     });
-    mockClinicOwnersInsert.mockResolvedValue({ error: null });
+    mockClinicOwnersInsert.mockResolvedValue({
+      data: { user_id: "user-1", clinic_id: "clinic-new" },
+      error: null,
+    });
     mockInsurancesSelect.mockResolvedValue({
       data: [{ insurance_id: "ins-1" }],
       error: null,
@@ -208,6 +223,15 @@ describe("admin clinic creation request actions", () => {
       recipient_email: "owner@example.com",
       recipient_name: undefined,
     });
+    expect(mockTriggerClinicOwnerOnboardingDrip).toHaveBeenCalledWith(
+      expect.anything(),
+      expect.objectContaining({
+        userId: "user-1",
+        clinicId: "clinic-new",
+        ownerEmail: "owner@example.com",
+        displayName: null,
+      })
+    );
     expect(mockSyncClinicFromGoogleMapsUrlOnApprove).not.toHaveBeenCalled();
   });
 
@@ -237,7 +261,10 @@ describe("admin clinic creation request actions", () => {
       data: { clinics_id: "clinic-maps" },
       error: null,
     });
-    mockClinicOwnersInsert.mockResolvedValue({ error: null });
+    mockClinicOwnersInsert.mockResolvedValue({
+      data: { user_id: "user-1", clinic_id: "clinic-maps" },
+      error: null,
+    });
     mockInsurancesSelect.mockResolvedValue({
       data: [{ insurance_id: "ins-1" }],
       error: null,
@@ -283,7 +310,10 @@ describe("admin clinic creation request actions", () => {
       data: { clinics_id: "clinic-fail" },
       error: null,
     });
-    mockClinicOwnersInsert.mockResolvedValue({ error: null });
+    mockClinicOwnersInsert.mockResolvedValue({
+      data: { user_id: "user-1", clinic_id: "clinic-fail" },
+      error: null,
+    });
     mockInsurancesSelect.mockResolvedValue({
       data: [{ insurance_id: "ins-1" }],
       error: null,
@@ -376,7 +406,10 @@ describe("admin clinic creation request actions", () => {
     });
     mockClaimUpdateEq.mockResolvedValue({ error: null });
     mockClinicsUpdateEq.mockResolvedValue({ error: null });
-    mockClinicOwnersInsert.mockResolvedValue({ error: null });
+    mockClinicOwnersInsert.mockResolvedValue({
+      data: { user_id: "user-1", clinic_id: "clinic-1" },
+      error: null,
+    });
     mockInsurancesSelect.mockResolvedValue({
       data: [{ insurance_id: "ins-1" }],
       error: null,
@@ -393,7 +426,50 @@ describe("admin clinic creation request actions", () => {
       recipient_email: "owner@example.com",
       recipient_name: "Clinic Owner",
     });
+    expect(mockTriggerClinicOwnerOnboardingDrip).toHaveBeenCalledWith(
+      expect.anything(),
+      expect.objectContaining({
+        userId: "user-1",
+        clinicId: "clinic-1",
+        ownerEmail: "owner@example.com",
+        displayName: "Clinic Owner",
+      })
+    );
     expect(mockSyncClinicFromGoogleMapsUrlOnApprove).not.toHaveBeenCalled();
+  });
+
+  it("does not start onboarding drip when claim ownership insert fails", async () => {
+    mockGetUser.mockResolvedValue({
+      data: { user: { id: "admin-1", email: "admin@example.com" } },
+    });
+    mockIsAdminEmail.mockReturnValue(true);
+    mockClaimSingle.mockResolvedValue({
+      data: {
+        id: "claim-own-fail",
+        status: "pending",
+        clinic_id: "clinic-x",
+        user_id: "user-x",
+        email: "owner@example.com",
+        fulde_navn: "Owner",
+        klinik_navn: "Klinik",
+      },
+      error: null,
+    });
+    mockClaimUpdateEq.mockResolvedValue({ error: null });
+    mockClinicsUpdateEq.mockResolvedValue({ error: null });
+    mockClinicOwnersInsert.mockResolvedValue({ data: null, error: { message: "db" } });
+    mockInsurancesSelect.mockResolvedValue({
+      data: [{ insurance_id: "ins-1" }],
+      error: null,
+    });
+    mockClinicInsurancesDeleteEq.mockResolvedValue({ error: null });
+    mockClinicInsurancesInsert.mockResolvedValue({ error: null });
+    mockSendClinicApprovalEmailToUser.mockResolvedValue({ success: true });
+
+    const result = await approveClaim("claim-own-fail");
+
+    expect(result).toEqual({ success: true });
+    expect(mockTriggerClinicOwnerOnboardingDrip).not.toHaveBeenCalled();
   });
 
   it("runs Google sync when googleMapsUrl is provided on claim approval", async () => {
@@ -415,7 +491,10 @@ describe("admin clinic creation request actions", () => {
     });
     mockClaimUpdateEq.mockResolvedValue({ error: null });
     mockClinicsUpdateEq.mockResolvedValue({ error: null });
-    mockClinicOwnersInsert.mockResolvedValue({ error: null });
+    mockClinicOwnersInsert.mockResolvedValue({
+      data: { user_id: "user-1", clinic_id: "clinic-claim-maps" },
+      error: null,
+    });
     mockInsurancesSelect.mockResolvedValue({
       data: [{ insurance_id: "ins-1" }],
       error: null,
