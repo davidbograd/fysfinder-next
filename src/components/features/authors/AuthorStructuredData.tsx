@@ -13,8 +13,8 @@ export function AuthorStructuredData({ author }: AuthorStructuredDataProps) {
     familyName: author.familyName,
     jobTitle: author.jobTitle,
     description: author.description,
-    url: `https://fysfinder.dk/forfatter/${author.slug}`,
-    image: `https://fysfinder.dk${author.image}`,
+    url: `https://www.fysfinder.dk/forfatter/${author.slug}`,
+    image: `https://www.fysfinder.dk${author.image}`,
     ...(author.linkedinUrl && { sameAs: [author.linkedinUrl] }),
     alumniOf: {
       "@type": "EducationalOrganization",
@@ -50,7 +50,7 @@ export function AuthorStructuredData({ author }: AuthorStructuredDataProps) {
       founder: {
         "@type": "MedicalOrganization",
         name: "Fysfinder",
-        url: "https://fysfinder.dk",
+        url: "https://www.fysfinder.dk",
       },
     }),
     hasOccupation: {

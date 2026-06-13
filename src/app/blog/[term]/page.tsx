@@ -41,7 +41,7 @@ function BlogPostStructuredData({ term }: BlogPostStructuredDataProps) {
       affiliation: {
         "@type": "MedicalOrganization",
         name: "Fysfinder",
-        url: "https://fysfinder.dk",
+        url: "https://www.fysfinder.dk",
       },
     },
     about: {
@@ -58,11 +58,11 @@ function BlogPostStructuredData({ term }: BlogPostStructuredDataProps) {
     publisher: {
       "@type": "Organization",
       name: "Fysfinder",
-      url: "https://fysfinder.dk",
+      url: "https://www.fysfinder.dk",
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://fysfinder.dk/blog/${term.slug}`,
+      "@id": `https://www.fysfinder.dk/blog/${term.slug}`,
     },
   };
 

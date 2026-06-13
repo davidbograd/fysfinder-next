@@ -319,7 +319,7 @@ function HomeStructuredData({
     "@context": "https://schema.org",
     "@type": ["WebSite", "MedicalWebPage"],
     name: "Fysfinder",
-    url: "https://fysfinder.dk",
+    url: "https://www.fysfinder.dk",
     about: {
       "@type": "MedicalSpecialty",
       name: "Fysioterapi",
@@ -333,13 +333,13 @@ function HomeStructuredData({
     medicalAudience: "Patienter der søger fysioterapi",
     potentialAction: {
       "@type": "SearchAction",
-      target: "https://fysfinder.dk/{search_term_string}",
+      target: "https://www.fysfinder.dk/{search_term_string}",
       "query-input": "required name=search_term_string",
     },
     publisher: {
       "@type": ["Organization", "MedicalOrganization"],
       name: "Fysfinder",
-      url: "https://fysfinder.dk",
+      url: "https://www.fysfinder.dk",
       description: `Danmarks største oversigt over fysioterapeuter med ${totalClinics} klinikker`,
       medicalSpecialty: ["Fysioterapi", "Physical Therapy"],
       areaServed: regions.map((region) => ({

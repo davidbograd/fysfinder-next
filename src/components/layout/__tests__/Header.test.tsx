@@ -18,7 +18,7 @@ jest.mock("@/app/utils/supabase/client", () => ({
 
 describe("Header", () => {
   it("renders logo and navigation links", () => {
-    render(<Header />);
+    render(<Header totalClinics={0} specialtyCount={0} />);
 
     // Check logo link
     const logoLink = screen.getByRole("link", { name: "" });
@@ -27,6 +27,7 @@ describe("Header", () => {
     // Check navigation links
     expect(screen.getByText("Ordbog")).toBeInTheDocument();
     expect(screen.getByText("Værktøjer")).toBeInTheDocument();
+    expect(screen.getByText("Styrkeøvelser")).toBeInTheDocument();
 
     // Check navigation links have correct hrefs
     const ordbogLink = screen.getByText("Ordbog").closest("a");
@@ -34,5 +35,8 @@ describe("Header", () => {
 
     const toolsLink = screen.getByText("Værktøjer").closest("a");
     expect(toolsLink).toHaveAttribute("href", "/vaerktoejer");
+
+    const styrkeLink = screen.getByText("Styrkeøvelser").closest("a");
+    expect(styrkeLink).toHaveAttribute("href", "/styrkeoevelser");
   });
 });

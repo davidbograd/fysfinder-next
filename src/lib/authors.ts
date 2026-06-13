@@ -70,7 +70,7 @@ export const authors: Author[] = [
       {
         name: "Fysfinder",
         type: "MedicalOrganization",
-        url: "https://fysfinder.dk",
+        url: "https://www.fysfinder.dk",
         description: "Danmarks platform til at finde fysioterapeuter",
       },
       {
@@ -82,12 +82,12 @@ export const authors: Author[] = [
     workExamples: [
       {
         name: "Fysfinder Blog",
-        url: "https://fysfinder.dk/blog",
+        url: "https://www.fysfinder.dk/blog",
         description: "Faglige artikler om fysioterapi og sundhed",
       },
       {
         name: "Fysfinder Ordbog",
-        url: "https://fysfinder.dk/ordbog",
+        url: "https://www.fysfinder.dk/ordbog",
         description:
           "Faglig ordbog med fysioterapeutiske termer og forklaringer",
       },
@@ -147,7 +147,7 @@ export const authors: Author[] = [
       {
         name: "Fysfinder",
         type: "MedicalOrganization",
-        url: "https://fysfinder.dk",
+        url: "https://www.fysfinder.dk",
         description: "Danmarks platform til at finde fysioterapeuter",
       },
       {
@@ -164,12 +164,12 @@ export const authors: Author[] = [
     workExamples: [
       {
         name: "Fysfinder Blog",
-        url: "https://fysfinder.dk/blog",
+        url: "https://www.fysfinder.dk/blog",
         description: "Faglige artikler om fysioterapi og sundhed",
       },
       {
         name: "Fysfinder Ordbog",
-        url: "https://fysfinder.dk/ordbog",
+        url: "https://www.fysfinder.dk/ordbog",
         description:
           "Faglig ordbog med fysioterapeutiske termer og forklaringer",
       },
@@ -227,7 +227,7 @@ export const authors: Author[] = [
       {
         name: "Fysfinder",
         type: "MedicalOrganization",
-        url: "https://fysfinder.dk",
+        url: "https://www.fysfinder.dk",
         description: "Danmarks platform til at finde fysioterapeuter",
       },
       {
@@ -244,12 +244,12 @@ export const authors: Author[] = [
     workExamples: [
       {
         name: "Fysfinder Blog",
-        url: "https://fysfinder.dk/blog",
+        url: "https://www.fysfinder.dk/blog",
         description: "Faglige artikler om fysioterapi og sundhed",
       },
       {
         name: "Fysfinder Ordbog",
-        url: "https://fysfinder.dk/ordbog",
+        url: "https://www.fysfinder.dk/ordbog",
         description:
           "Faglig ordbog med fysioterapeutiske termer og forklaringer",
       },
@@ -290,7 +290,7 @@ export function getAuthorForStructuredData(
     affiliation: {
       "@type": "MedicalOrganization",
       name: "Fysfinder",
-      url: "https://fysfinder.dk",
+      url: "https://www.fysfinder.dk",
     },
   };
 }

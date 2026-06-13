@@ -3,6 +3,7 @@ import { blogMappings } from "./blog.config";
 import { ordbogMappings } from "./ordbog.config";
 import { locationMappings } from "./location.config";
 import { miscMappings } from "./misc.config";
+import { getStyrkeoevelserLinkMappings } from "@/lib/styrkeoevelser";
 
 /**
  * Loads the internal linking configuration.
@@ -17,6 +18,7 @@ export function loadLinkConfig(): LinkConfig {
       blog: blogMappings,
       location: locationMappings,
       misc: miscMappings,
+      styrkeoevelser: getStyrkeoevelserLinkMappings(),
     },
   };
 

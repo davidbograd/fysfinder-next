@@ -24,6 +24,8 @@ interface ContentEntryProps {
     href: string;
     text: string;
   };
+  /** When false, omit the bottom back link (caller can place it after extra sections). Default true. */
+  showBackLink?: boolean;
 }
 
 const getImageDimension = (value: unknown): number | undefined => {
@@ -41,7 +43,11 @@ const getImageDimension = (value: unknown): number | undefined => {
   return undefined;
 };
 
-export function ContentEntry({ term, backLink }: ContentEntryProps) {
+export function ContentEntry({
+  term,
+  backLink,
+  showBackLink = true,
+}: ContentEntryProps) {
   // Load link config
   const linkConfig = loadLinkConfig();
 
@@ -131,11 +137,13 @@ export function ContentEntry({ term, backLink }: ContentEntryProps) {
           }}
         />
       </div>
-      <div className="mt-8">
-        <Link href={backLink.href} className="text-logo-blue hover:underline">
-          &larr; {backLink.text}
-        </Link>
-      </div>
+      {showBackLink ? (
+        <div className="mt-8">
+          <Link href={backLink.href} className="text-logo-blue hover:underline">
+            &larr; {backLink.text}
+          </Link>
+        </div>
+      ) : null}
     </article>
   );
 }

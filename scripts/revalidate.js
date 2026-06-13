@@ -18,6 +18,8 @@ const paths = [
   '/klinik/*', // This will revalidate all clinic pages
   '/blog/*', // This will revalidate all blog pages
   '/ordbog/*', // This will revalidate all dictionary pages
+  '/styrkeoevelser',
+  '/styrkeoevelser/*',
   '/mr-scanning',
   '/dexa-scanning',
   '/vaerktoejer/*' // This will revalidate all tool pages
@@ -25,7 +27,7 @@ const paths = [
 
 async function revalidatePaths() {
   // Production URL - replace with your actual production URL
-  const baseUrl = 'https://fysfinder.dk';
+  const baseUrl = 'https://www.fysfinder.dk';
   
   // Get token from environment variable
   const token = process.env.REVALIDATE_TOKEN;

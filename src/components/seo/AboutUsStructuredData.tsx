@@ -14,10 +14,10 @@ export function AboutUsStructuredData({
     "@type": "AboutPage",
     mainEntity: {
       "@type": "Organization",
-      "@id": "https://fysfinder.dk",
+      "@id": "https://www.fysfinder.dk",
       name: "Fysfinder",
-      url: "https://fysfinder.dk",
-      logo: "https://fysfinder.dk/logo.png",
+      url: "https://www.fysfinder.dk",
+      logo: "https://www.fysfinder.dk/logo.png",
       description: "Danmarks platform til at finde fysioterapeuter",
       foundingDate: "2023",
       founders: founders.map((founder) => ({

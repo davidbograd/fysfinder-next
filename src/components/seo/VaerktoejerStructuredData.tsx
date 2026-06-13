@@ -26,7 +26,7 @@ export default function VaerktoejerStructuredData({
   toolType,
   calculatorType,
 }: StructuredDataProps) {
-  const baseUrl = "https://fysfinder.dk";
+  const baseUrl = "https://www.fysfinder.dk";
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",

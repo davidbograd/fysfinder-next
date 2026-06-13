@@ -43,7 +43,7 @@ function DictionaryTermStructuredData({
       affiliation: {
         "@type": "MedicalOrganization",
         name: "Fysfinder",
-        url: "https://fysfinder.dk",
+        url: "https://www.fysfinder.dk",
       },
     },
     about: {
@@ -60,11 +60,11 @@ function DictionaryTermStructuredData({
     publisher: {
       "@type": "Organization",
       name: "Fysfinder",
-      url: "https://fysfinder.dk",
+      url: "https://www.fysfinder.dk",
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://fysfinder.dk/ordbog/${term.slug}`,
+      "@id": `https://www.fysfinder.dk/ordbog/${term.slug}`,
     },
   };
 

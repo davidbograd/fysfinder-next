@@ -9,6 +9,10 @@ import * as pathModule from "path";
 import glob from "glob-promise";
 import { getBlogPosts } from "../src/lib/blog"; // Import getBlogPosts
 import { getAllAuthors } from "../src/lib/authors"; // Import getAllAuthors
+import {
+  getBodyPartSlugs,
+  getExerciseSlugs,
+} from "../src/lib/styrkeoevelser";
 
 config({ path: ".env.local" });
 
@@ -218,6 +222,10 @@ async function generateSitemaps() {
         loc: `${DOMAIN}/blog`,
         priority: 0.8,
       },
+      {
+        loc: `${DOMAIN}/styrkeoevelser`,
+        priority: 0.88,
+      },
       // Add author pages
       ...getAllAuthors().map((author) => ({
         loc: `${DOMAIN}/forfatter/${author.slug}`,
@@ -253,6 +261,16 @@ async function generateSitemaps() {
     const blogPostUrls = blogPosts.map((post) => ({
       loc: `${DOMAIN}/blog/${post.slug}`,
       priority: 0.6, // Assign appropriate priority
+    }));
+
+    const styrkeoevelserBodyPartUrls = getBodyPartSlugs().map((slug) => ({
+      loc: `${DOMAIN}/styrkeoevelser/${slug}`,
+      priority: 0.78,
+    }));
+
+    const styrkeoevelserExerciseUrls = getExerciseSlugs().map((slug) => ({
+      loc: `${DOMAIN}/styrkeoevelser/${slug}`,
+      priority: 0.62,
     }));
 
     // Dynamically discover tool URLs
@@ -371,6 +389,14 @@ async function generateSitemaps() {
       await generateSitemapXML(toolUrls)
     );
 
+    await fsPromises.writeFile(
+      "public/sitemap-styrkeoevelser.xml",
+      await generateSitemapXML([
+        ...styrkeoevelserBodyPartUrls,
+        ...styrkeoevelserExerciseUrls,
+      ])
+    );
+
     // Update sitemap index
     const sitemapFiles = [
       "sitemap-static.xml",
@@ -381,6 +407,7 @@ async function generateSitemaps() {
       "sitemap-ordbog.xml",
       "sitemap-blog-posts.xml", // Add blog posts sitemap to index
       "sitemap-vaerktoejer.xml", // Add tools sitemap to index
+      "sitemap-styrkeoevelser.xml",
     ];
 
     await fsPromises.writeFile(

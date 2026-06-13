@@ -23,7 +23,7 @@ function BlogStructuredData({ posts }: BlogStructuredDataProps) {
       affiliation: {
         "@type": "MedicalOrganization",
         name: "Fysfinder",
-        url: "https://fysfinder.dk",
+        url: "https://www.fysfinder.dk",
       },
     },
     about: {
@@ -43,7 +43,7 @@ function BlogStructuredData({ posts }: BlogStructuredDataProps) {
         name: post.title,
         description: post.description,
         datePublished: post.datePublished,
-        url: `https://fysfinder.dk/blog/${post.slug}`,
+        url: `https://www.fysfinder.dk/blog/${post.slug}`,
         author: authorData || {
           "@type": "Person",
           name: "Joachim Bograd",

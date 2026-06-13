@@ -32,14 +32,20 @@ export default function Footer() {
               Lær mere
             </p>
             <div className="space-y-2">
-              <Link href="/ordbog" className="block text-[18px] font-light leading-tight text-white hover:text-white/85">
-                Ordbog
-              </Link>
               <Link href="/vaerktoejer" className="block text-[18px] font-light leading-tight text-white hover:text-white/85">
                 Værktøjer
               </Link>
+              <Link href="/styrkeoevelser" className="block text-[18px] font-light leading-tight text-white hover:text-white/85">
+                Styrkeøvelser
+              </Link>
+              <Link href="/ordbog" className="block text-[18px] font-light leading-tight text-white hover:text-white/85">
+                Ordbog
+              </Link>
               <Link href="/blog" className="block text-[18px] font-light leading-tight text-white hover:text-white/85">
                 Blog
+              </Link>
+              <Link href="/om-os" className="block text-[18px] font-light leading-tight text-white hover:text-white/85">
+                Om os
               </Link>
             </div>
             </div>
@@ -48,9 +54,6 @@ export default function Footer() {
               Fysfinder
             </p>
             <div className="space-y-2">
-              <Link href="/om-os" className="block text-[18px] font-light leading-tight text-white hover:text-white/85">
-                Om os
-              </Link>
               <Link href="/samarbejdspartnere" className="block text-[18px] font-light leading-tight text-white hover:text-white/85">
                 Samarbejdspartnere
               </Link>

@@ -34,13 +34,15 @@ export default function Header({ totalClinics, specialtyCount }: HeaderProps) {
   const isSearchFirstDesktopVariant =
     pathname.startsWith("/ordbog") ||
     pathname.startsWith("/vaerktoejer") ||
+    pathname.startsWith("/styrkeoevelser") ||
     pathname.startsWith("/mr-scanning") ||
     pathname.startsWith("/dexa-scanning") ||
     pathname.startsWith("/blog") ||
     pathname.startsWith("/om-os");
   const informationalLinks = [
-    { href: "/ordbog", label: "Ordbog" },
     { href: "/vaerktoejer", label: "Værktøjer" },
+    { href: "/styrkeoevelser", label: "Styrkeøvelser" },
+    { href: "/ordbog", label: "Ordbog" },
     { href: "/blog", label: "Blog" },
     { href: "/om-os", label: "Om os" },
   ];
@@ -238,7 +240,7 @@ export default function Header({ totalClinics, specialtyCount }: HeaderProps) {
                     Mere
                     <ChevronDown className="h-4 w-4" />
                   </button>
-                  <div className="invisible absolute right-0 top-full z-50 mt-2 w-44 translate-y-1 rounded-2xl border border-[#e3e1d8] bg-[#f8f7f2] p-2 opacity-0 shadow-[0px_10px_24px_rgba(11,59,60,0.12)] transition-all group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+                  <div className="invisible absolute right-0 top-full z-50 mt-2 w-52 translate-y-1 rounded-2xl border border-[#e3e1d8] bg-[#f8f7f2] p-2 opacity-0 shadow-[0px_10px_24px_rgba(11,59,60,0.12)] transition-all group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
                     {informationalLinks.map((link) => (
                       <Link
                         key={link.href}

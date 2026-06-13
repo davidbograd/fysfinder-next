@@ -25,7 +25,7 @@ function DictionaryStructuredData({ terms }: DictionaryStructuredDataProps) {
       affiliation: {
         "@type": "MedicalOrganization",
         name: "Fysfinder",
-        url: "https://fysfinder.dk",
+        url: "https://www.fysfinder.dk",
       },
     },
     about: {
@@ -42,7 +42,7 @@ function DictionaryStructuredData({ terms }: DictionaryStructuredDataProps) {
       "@type": "MedicalWebPage",
       name: term.title,
       description: term.description,
-      url: `https://fysfinder.dk/ordbog/${term.slug}`,
+      url: `https://www.fysfinder.dk/ordbog/${term.slug}`,
       author: {
         "@type": "Person",
         name: "Joachim Bograd",

@@ -78,7 +78,7 @@ export async function sendClaimNotificationToAdmins(
         </ul>
         
         <p>
-          <a href="https://fysfinder.dk/dashboard" style="background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;">
+          <a href="https://www.fysfinder.dk/dashboard" style="background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;">
             Se anmodning i Dashboard
           </a>
         </p>
@@ -144,7 +144,7 @@ export async function sendClinicCreationNotificationToAdmins(
         </ul>
 
         <p>
-          <a href="https://fysfinder.dk/dashboard" style="background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;">
+          <a href="https://www.fysfinder.dk/dashboard" style="background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;">
             Se anmodning i Dashboard
           </a>
         </p>
@@ -193,7 +193,7 @@ export async function sendClinicApprovalEmailToUser(
         </p>
 
         <p style="margin-top: 24px;">
-          <a href="https://fysfinder.dk/dashboard" style="background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;">
+          <a href="https://www.fysfinder.dk/dashboard" style="background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;">
             Gå til Dashboard
           </a>
         </p>
@@ -297,7 +297,7 @@ export async function sendNewUserSignupNotificationToAdmins(
         </ul>
         
         <p style="margin-top: 24px;">
-          <a href="https://fysfinder.dk/dashboard" style="background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;">
+          <a href="https://www.fysfinder.dk/dashboard" style="background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;">
             Se Dashboard
           </a>
         </p>

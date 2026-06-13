@@ -35,10 +35,19 @@ const rehypeInternalLinks: Plugin<[RehypeInternalLinksOptions], Root> = (
     return undefined;
   }
 
-  // Prepare keyword map (similar to the old script)
+  // Prepare keyword map. On /styrkeoevelser/*, styrkeoevelser wins duplicate keywords (e.g. "Knæ");
+  // elsewhere ordbog/blog win over styrkeoevelser.
   const keywordMap = new Map<string, LinkMapping>();
-  for (const category in linkConfig.linkMappings) {
-    for (const mapping of linkConfig.linkMappings[category]) {
+  const categoryOrder: string[] = currentPagePath.startsWith("/styrkeoevelser")
+    ? ["ordbog", "blog", "location", "misc", "styrkeoevelser"]
+    : ["styrkeoevelser", "ordbog", "blog", "location", "misc"];
+
+  for (const category of categoryOrder) {
+    const mappings = linkConfig.linkMappings[category];
+    if (!mappings) {
+      continue;
+    }
+    for (const mapping of mappings) {
       for (const keyword of mapping.keywords) {
         keywordMap.set(keyword.toLowerCase(), mapping);
       }

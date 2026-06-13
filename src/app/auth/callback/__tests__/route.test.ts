@@ -43,18 +43,18 @@ describe("auth callback route", () => {
   });
 
   it("redirects to signin error when code is missing", async () => {
-    const response = await GET({ url: "https://fysfinder.dk/auth/callback" } as Request);
+    const response = await GET({ url: "https://www.fysfinder.dk/auth/callback" } as Request);
     expect(response.headers.get("location")).toBe(
-      "https://fysfinder.dk/auth/signin?error=callback_error"
+      "https://www.fysfinder.dk/auth/signin?error=callback_error"
     );
   });
 
   it("redirects to verify when Supabase returns an oauth-style error (e.g. otp_expired)", async () => {
     const response = await GET({
-      url: "https://fysfinder.dk/auth/callback?error=access_denied&error_code=otp_expired&next=%2Fdashboard",
+      url: "https://www.fysfinder.dk/auth/callback?error=access_denied&error_code=otp_expired&next=%2Fdashboard",
     } as Request);
     expect(response.headers.get("location")).toBe(
-      "https://fysfinder.dk/auth/verify?callbackError=otp_expired"
+      "https://www.fysfinder.dk/auth/verify?callbackError=otp_expired"
     );
     expect(mockExchangeCodeForSession).not.toHaveBeenCalled();
   });
@@ -74,11 +74,11 @@ describe("auth callback route", () => {
     mockCreateUserProfile.mockResolvedValue(undefined);
 
     const response = await GET({
-      url: "https://fysfinder.dk/auth/callback?code=abc",
+      url: "https://www.fysfinder.dk/auth/callback?code=abc",
     } as Request);
 
     expect(response.headers.get("location")).toBe(
-      "https://fysfinder.dk/auth/verify"
+      "https://www.fysfinder.dk/auth/verify"
     );
     expect(mockExchangeCodeForSession).toHaveBeenCalledWith("abc");
     expect(mockCreateUserProfile).not.toHaveBeenCalled();
@@ -100,11 +100,11 @@ describe("auth callback route", () => {
 
     const response = await GET(
       {
-        url: "https://fysfinder.dk/auth/callback?code=abc&next=/dashboard",
+        url: "https://www.fysfinder.dk/auth/callback?code=abc&next=/dashboard",
       } as Request
     );
 
-    expect(response.headers.get("location")).toBe("https://fysfinder.dk/dashboard");
+    expect(response.headers.get("location")).toBe("https://www.fysfinder.dk/dashboard");
     expect(mockExchangeCodeForSession).toHaveBeenCalledWith("abc");
     expect(mockCreateUserProfile).toHaveBeenCalled();
   });
