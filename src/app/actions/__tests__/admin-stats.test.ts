@@ -55,11 +55,11 @@ describe("admin stats actions", () => {
     });
     mockLimit
       .mockResolvedValueOnce({
-        data: [{ created_at: "2026-02-26T11:48:09.840Z" }],
+        data: [{ created_at: "2026-04-10T11:48:09.840Z" }],
         error: null,
       })
       .mockResolvedValueOnce({
-        data: [{ created_at: "2026-05-02T06:50:19.348Z" }],
+        data: [{ created_at: "2026-06-10T06:50:19.348Z" }],
         error: null,
       });
   });
@@ -95,9 +95,9 @@ describe("admin stats actions", () => {
       },
     ]);
     expect(result.period).toEqual({
-      startDate: "2026-02-26T11:48:09.840Z",
-      endDate: "2026-05-02T06:50:19.348Z",
-      oldestEventDate: "2026-02-26T11:48:09.840Z",
+      startDate: "2026-04-10T11:48:09.840Z",
+      endDate: "2026-06-10T06:50:19.348Z",
+      oldestEventDate: "2026-04-10T11:48:09.840Z",
     });
   });
 
@@ -105,11 +105,11 @@ describe("admin stats actions", () => {
     const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation(() => {});
     mockLimit
       .mockResolvedValueOnce({
-        data: [{ created_at: "2026-02-26T11:48:09.840Z" }],
+        data: [{ created_at: "2026-04-10T11:48:09.840Z" }],
         error: null,
       })
       .mockResolvedValueOnce({
-        data: [{ created_at: "2026-05-02T06:50:19.348Z" }],
+        data: [{ created_at: "2026-06-10T06:50:19.348Z" }],
         error: null,
       });
     mockRpc.mockResolvedValue({
@@ -126,7 +126,7 @@ describe("admin stats actions", () => {
   it("uses the oldest event date as displayed period start when requested range begins earlier", async () => {
     const result = await getSuburbAnalytics(90);
 
-    expect(result.period?.startDate).toBe("2026-02-26T11:48:09.840Z");
+    expect(result.period?.startDate).toBe("2026-04-10T11:48:09.840Z");
   });
 
   it("fetches clinic analytics through the database aggregation RPC", async () => {
