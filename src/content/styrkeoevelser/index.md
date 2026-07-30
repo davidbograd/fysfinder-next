@@ -1,6 +1,6 @@
 ---
 title: "Træningsøvelser - Find styrkeøvelser til træning af kroppen"
-metaTitle: "Se 50+ træningsøvelser | Find eksempler på styrkeøvelser »"
+metaTitle: "Se 100+ træningsøvelser | Find eksempler på styrkeøvelser »"
 description: "Oversigt over træningsøvelser på Fysfinder. Bliv klogere på effektiv træning af kroppen og find eksempler på styrkeøvelser til forskellige kropsdele."
 datePublished: 26/04/2026
 lastUpdated: 27/04/2026

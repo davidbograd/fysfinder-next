@@ -83,6 +83,27 @@ const nextConfig = {
         destination: '/blog',
         permanent: true,
       },
+      // Old /oevelser universe → /styrkeoevelser
+      {
+        source: '/oevelser',
+        destination: '/styrkeoevelser',
+        permanent: true,
+      },
+      {
+        source: '/oevelser/arme',
+        destination: '/styrkeoevelser/arm',
+        permanent: true,
+      },
+      {
+        source: '/oevelser/oevre-ryg',
+        destination: '/styrkeoevelser/ryg',
+        permanent: true,
+      },
+      {
+        source: '/oevelser/:slug',
+        destination: '/styrkeoevelser/:slug',
+        permanent: true,
+      },
     ];
   },
 }
