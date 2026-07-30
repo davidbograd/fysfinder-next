@@ -62,3 +62,7 @@ docs/*
 !docs/marketing/**
 
 # Logo cache images are committed to git (fetched via GitHub Action)
+
+# Leonardo image generation progress
+scripts/.styrkeoevelser-image-status.json
+scripts/.styrkeoevelser-image-run.log

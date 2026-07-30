@@ -85,15 +85,3 @@ Hvis du oplever smerter eller har en skulderskade, er det vigtigt at konsultere 
 3. Sænk langsomt armene tilbage til startpositionen.
 
 **Antal gentagelser**: 3 sæt af 10-15 gentagelser.
-
-### Rear delt flies
-
-**Hvorfor**: Denne øvelse styrker de bageste deltoide muskler og hjælper med at forbedre skulderens bageste styrke.
-
-**Sådan gør du**:
-
-1. Bøj dig forover med en vægt i hver hånd.
-2. Løft armene ud til siden, indtil de er parallelle med gulvet.
-3. Sænk langsomt armene tilbage til startpositionen.
-
-**Antal gentagelser**: 3 sæt af 10-15 gentagelser.

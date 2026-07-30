@@ -124,9 +124,15 @@ describe("admin stats actions", () => {
   });
 
   it("uses the oldest event date as displayed period start when requested range begins earlier", async () => {
-    const result = await getSuburbAnalytics(90);
-
-    expect(result.period?.startDate).toBe("2026-04-10T11:48:09.840Z");
+    // Freeze "now" so a 90-day window starts before the mocked oldest event.
+    jest.useFakeTimers();
+    jest.setSystemTime(Date.parse("2026-06-10T12:00:00.000Z"));
+    try {
+      const result = await getSuburbAnalytics(90);
+      expect(result.period?.startDate).toBe("2026-04-10T11:48:09.840Z");
+    } finally {
+      jest.useRealTimers();
+    }
   });
 
   it("fetches clinic analytics through the database aggregation RPC", async () => {

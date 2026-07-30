@@ -76,13 +76,13 @@ Hvis du oplever smerter eller har en skade i knæet, er det vigtigt at konsulter
 
 **Antal gentagelser**: 3 sæt af 12 gentagelser.
 
-### Legpress - lav fodstilling
+### Benpres – lav fodstilling
 
 **Hvorfor**: Denne øvelse styrker både quadriceps og glutealmusklerne, hvilket forbedrer knæets styrke.
 
 **Sådan gør du**:
 
-1. Sid i en leg press maskine med fødderne lavt på pladen.
+1. Sid i en benpresmaskine med fødderne lavt på pladen.
 2. Skub pladen væk ved at strække benene.
 3. Bøj knæene for at vende tilbage til startpositionen.
 

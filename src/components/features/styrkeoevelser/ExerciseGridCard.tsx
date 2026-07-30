@@ -43,7 +43,7 @@ export const ExerciseGridCard = ({
         aria-label={`${title} – gå til øvelse`}
       />
 
-      <div className="relative z-0 aspect-[4/3] w-full shrink-0 bg-gray-100">
+      <div className="relative z-0 aspect-square w-full shrink-0 bg-gray-100">
         {previewImage ? (
           <Image
             src={previewImage}

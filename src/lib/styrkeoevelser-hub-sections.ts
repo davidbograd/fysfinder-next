@@ -33,7 +33,7 @@ export const STYRKEOEVELSER_HUB_BODY_SECTIONS: StyrkeoevelserHubBodySection[] = 
     heading: "Træningsøvelser til arme",
     intro:
       "Styrkeøvelser til arme fokuserer typisk på biceps, triceps og underarme.",
-    matchSlugs: ["arme"],
+    matchSlugs: ["arm"],
   },
   {
     id: "hub-skuldre",
@@ -57,7 +57,7 @@ export const STYRKEOEVELSER_HUB_BODY_SECTIONS: StyrkeoevelserHubBodySection[] = 
     heading: "Træningsøvelser til ryg og lænd",
     intro:
       "Rygtræning styrker både den øvre og nedre ryg samt lænden, hvilket forbedrer kropsholdning og reducerer risikoen for skader. Se vores øvelser til træning af ryg og lænd.",
-    matchSlugs: ["ryg", "laend", "bagl"],
+    matchSlugs: ["ryg", "laend"],
   },
   {
     id: "hub-ben-hofte-knae",
@@ -65,7 +65,7 @@ export const STYRKEOEVELSER_HUB_BODY_SECTIONS: StyrkeoevelserHubBodySection[] = 
     heading: "Træningsøvelser til ben, hofte og knæ",
     intro:
       "Styrkelse af dine ben, hofte og knæ er vigtigt for både stabilitet, balance og mobilitet. Se vores ben, knæ og hofte styrkeøvelser, der hjælper med at forebygge skader og forbedre din præstation i andre aktiviteter.",
-    matchSlugs: ["ben", "hofte", "knae", "balde"],
+    matchSlugs: ["ben", "hofte", "knae"],
   },
   {
     id: "hub-mave-core",
@@ -73,7 +73,7 @@ export const STYRKEOEVELSER_HUB_BODY_SECTIONS: StyrkeoevelserHubBodySection[] = 
     heading: "Træningsøvelser til mave og core",
     intro:
       "En stærk core er alpha og omega for god kropskontrol, balance og styrke i hele kroppen. Se vores træningsøvelser til mave og core.",
-    matchSlugs: ["mave", "core"],
+    matchSlugs: ["mave"],
   },
   {
     id: "hub-fod-ankel",

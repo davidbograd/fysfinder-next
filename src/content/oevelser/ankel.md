@@ -36,7 +36,7 @@ Hvis du har en ankelskade eller lider af en sygdom, der påvirker anklen, er det
 
 **Antal gentagelser**: 3 sæt af 10-15 gentagelser.
 
-### Anterior tibialis raise
+### Tibialis anterior raise
 
 **Hvorfor**: Denne øvelse styrker musklerne på forsiden af underbenet og forbedrer ankelmobiliteten.
 

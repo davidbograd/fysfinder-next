@@ -6,6 +6,26 @@ import { formatDanishDate } from "@/lib/utils";
 import type { LinkMapping } from "lib/internal-linking/types";
 
 export const STYRKEOEVELSER_PATH = "/styrkeoevelser";
+
+const KROPSDELE_IMAGE_BASE = "/images/styrkeoevelser/kropsdele";
+
+/** Maps each body-part slug to its hero image path under `public/`. */
+export const BODY_PART_HERO_IMAGES: Record<string, string> = {
+  albue: `${KROPSDELE_IMAGE_BASE}/styrkeovelser-albue.jpg`,
+  haandled: `${KROPSDELE_IMAGE_BASE}/styrkeovelser-haandled.jpg`,
+  arm: `${KROPSDELE_IMAGE_BASE}/styrkeovelser-arme.jpg`,
+  bryst: `${KROPSDELE_IMAGE_BASE}/styrkeovelser-bryst.jpg`,
+  mave: `${KROPSDELE_IMAGE_BASE}/styrkeovelser-core-mave.jpg`,
+  fod: `${KROPSDELE_IMAGE_BASE}/styrkeovelser-fod.jpg`,
+  ankel: `${KROPSDELE_IMAGE_BASE}/styrkeovelser-ankel.jpg`,
+  hofte: `${KROPSDELE_IMAGE_BASE}/styrkeovelser-hofte.jpg`,
+  ben: `${KROPSDELE_IMAGE_BASE}/styrkeovelser-ben.jpg`,
+  knae: `${KROPSDELE_IMAGE_BASE}/styrkeovelser-knae.jpg`,
+  nakke: `${KROPSDELE_IMAGE_BASE}/styrkeovelser-nakke.jpg`,
+  ryg: `${KROPSDELE_IMAGE_BASE}/styrkeovelser-ryg.jpg`,
+  laend: `${KROPSDELE_IMAGE_BASE}/styrkeovelser-laend.jpg`,
+  skulder: `${KROPSDELE_IMAGE_BASE}/styrkeovelser-skulder.jpg`,
+};
 export const STYRKEOEVELSER_SITE_URL = "https://www.fysfinder.dk";
 export const DEFINED_TERM_SET_ID = `${STYRKEOEVELSER_SITE_URL}${STYRKEOEVELSER_PATH}#defined-term-set`;
 
@@ -20,7 +40,10 @@ const indexPath = path.join(contentRoot, "index.md");
 
 export type StyrkeoevelserBodyPart = {
   slug: string;
+  /** Short display name used in pills, breadcrumbs, and hub links (e.g. "Knæ"). */
   title: string;
+  /** Long-form page H1 (e.g. "Knæøvelser – Træningsøvelser til styrke af knæ"). Falls back to title if absent. */
+  h1?: string;
   description: string;
   content: string;
   metaTitle?: string;
@@ -79,6 +102,112 @@ function extractDescription(content: string): string {
   }
 
   return cleanParagraph;
+}
+
+/**
+ * Splits markdown body content into its first prose paragraph (the "lead",
+ * used in the body-part hero) and the remaining content (rendered as the SEO
+ * article). Skips leading blank lines and any heading blocks.
+ */
+export function splitLeadParagraph(content: string): {
+  lead: string;
+  rest: string;
+} {
+  const blocks = content.replace(/\r\n/g, "\n").split(/\n{2,}/);
+  const leadIndex = blocks.findIndex(
+    (block) => block.trim() !== "" && !block.trim().startsWith("#")
+  );
+
+  if (leadIndex === -1) {
+    return { lead: "", rest: content.trim() };
+  }
+
+  const lead = blocks[leadIndex].trim();
+  const rest = [...blocks.slice(0, leadIndex), ...blocks.slice(leadIndex + 1)]
+    .join("\n\n")
+    .trim();
+
+  return { lead, rest };
+}
+
+export type ExerciseHowTo = {
+  /** Section heading, e.g. "Lunges - Sådan gør du". */
+  heading: string;
+  /** Ordered list of instruction steps (markdown stripped of the "N." prefix). */
+  steps: string[];
+  /** Optional callout after the steps, e.g. "Antal gentagelser: …". */
+  note: { label: string; text: string } | null;
+};
+
+/**
+ * Splits exercise markdown into:
+ *  - `lead`: the first prose paragraph (hero),
+ *  - `howTo`: the "… Sådan gør du" section parsed into visual steps,
+ *  - `rest`: the remaining content (SEO article), with the lead and the
+ *    how-to section removed so nothing is rendered twice.
+ */
+export function parseExerciseHowTo(content: string): {
+  lead: string;
+  howTo: ExerciseHowTo | null;
+  rest: string;
+} {
+  const blocks = content.replace(/\r\n/g, "\n").split(/\n{2,}/);
+
+  const leadIndex = blocks.findIndex(
+    (block) => block.trim() !== "" && !block.trim().startsWith("#")
+  );
+  const lead = leadIndex === -1 ? "" : blocks[leadIndex].trim();
+
+  const headingIndex = blocks.findIndex((block) =>
+    /^##\s+.*Sådan gør du\s*$/i.test(block.trim())
+  );
+
+  let howTo: ExerciseHowTo | null = null;
+  const removedIndexes = new Set<number>();
+
+  if (headingIndex !== -1) {
+    const heading = blocks[headingIndex].trim().replace(/^#{1,6}\s+/, "");
+    const steps: string[] = [];
+    let note: ExerciseHowTo["note"] = null;
+    const sectionIndexes: number[] = [headingIndex];
+
+    for (let i = headingIndex + 1; i < blocks.length; i++) {
+      const trimmed = blocks[i].trim();
+      if (trimmed.startsWith("## ")) {
+        break;
+      }
+      sectionIndexes.push(i);
+
+      const orderedItems = trimmed
+        .split("\n")
+        .map((line) => line.trim())
+        .filter((line) => /^\d+\.\s+/.test(line));
+
+      if (orderedItems.length > 0) {
+        for (const item of orderedItems) {
+          steps.push(item.replace(/^\d+\.\s+/, "").trim());
+        }
+        continue;
+      }
+
+      const noteMatch = trimmed.match(/^\*\*(.+?):\*\*\s*([\s\S]*)$/);
+      if (noteMatch && !note) {
+        note = { label: noteMatch[1].trim(), text: noteMatch[2].trim() };
+      }
+    }
+
+    if (steps.length > 0) {
+      howTo = { heading, steps, note };
+      sectionIndexes.forEach((i) => removedIndexes.add(i));
+    }
+  }
+
+  const rest = blocks
+    .filter((_, index) => index !== leadIndex && !removedIndexes.has(index))
+    .join("\n\n")
+    .trim();
+
+  return { lead, howTo, rest };
 }
 
 function getTitleFromSlug(slug: string, frontmatterTitle?: string): string {
@@ -164,6 +293,7 @@ export function getBodyPart(slug: string): StyrkeoevelserBodyPart {
   return {
     slug,
     title,
+    h1: typeof data.h1 === "string" ? data.h1 : undefined,
     description:
       typeof data.description === "string"
         ? data.description

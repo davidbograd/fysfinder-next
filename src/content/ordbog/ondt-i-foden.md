@@ -44,7 +44,7 @@ Stå foran en væg og placer begge hænder mod væggen. Træd det ene ben frem m
 Sid på en stol og rul en lille bold eller en vandflaske under fodbuen frem og tilbage i 1–2 minutter. Det hjælper med at løsne bindevæv og mindske ømhed efter aktivitet.
 
 ### Hvordan styrker jeg fodens indre muskler?
-Sæt dig ned og prøv at løfte forfoden op mod tæerne uden at krumme tæerne – det kaldes "short foot"-øvelsen. Hold i 5–10 sekunder og slip. Gentag 10–15 gange. Du kan også lave tåkrøller ved at samle et viskestykke med tæerne for at øge muskelstyrken i forfoden.
+Sæt dig ned og prøv at løfte forfoden op mod tæerne uden at krumme tæerne, så du mærker en let aktivering i fodsålen. Hold i 5–10 sekunder og slip. Gentag 10–15 gange. Du kan også lave tåkrøller ved at samle et viskestykke med tæerne for at øge muskelstyrken i forfoden.
 
 ### Hvordan laver jeg excentriske tåhævninger mod achillesseneproblemer?
 Stå på kanten af et trappetrin med forfoden, løft dig op på begge tæer, og sænk langsomt den ene hæl under trinets niveau over 3–5 sekunder. Brug begge ben for at komme op igen. Lav 3 sæt af 12–15 gentagelser dagligt og øg gradvist intensiteten.

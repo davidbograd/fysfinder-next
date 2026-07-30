@@ -72,26 +72,14 @@ Hvis du oplever smerter eller har en skade i benene, er det vigtigt at konsulter
 
 **Antal gentagelser**: 3 sæt af 8-12 gentagelser.
 
-### Leg Press
+### Benpres
 
-**Hvorfor**: Leg press er en maskinøvelse, der isolerer benmusklerne og er skånsom for ryggen.
+**Hvorfor**: Benpres er en maskinøvelse, der isolerer benmusklerne og er skånsom for ryggen.
 
 **Sådan gør du**:
 
-1. Sid i leg press-maskinen med fødderne på platformen.
+1. Sid i benpresmaskinen med fødderne på platformen.
 2. Skub platformen væk ved at strække benene, men undgå at låse knæene.
 3. Sænk platformen kontrolleret tilbage til startpositionen.
 
 **Antal gentagelser**: 3 sæt af 10-15 gentagelser.
-
-### Standing calf raises
-
-**Hvorfor**: Denne øvelse styrker lægmusklerne og forbedrer ankelstabilitet.
-
-**Sådan gør du**:
-
-1. Stå med fødderne i hoftebredde.
-2. Løft hælene op, så du står på tæerne.
-3. Sænk hælene kontrolleret tilbage til gulvet.
-
-**Antal gentagelser**: 3 sæt af 15-20 gentagelser.
