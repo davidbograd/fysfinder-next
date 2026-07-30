@@ -131,7 +131,7 @@ export default function StyrkeoevelserHubPage() {
             <section
               key={sec.id}
               id={sec.id}
-              className="scroll-mt-32"
+              className="scroll-mt-[var(--styrke-hub-sticky-offset,8rem)]"
               aria-labelledby={`${sec.id}-heading`}
             >
               <div className="mb-2 flex flex-col gap-3 border-b border-gray-200 pb-2 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
@@ -184,7 +184,7 @@ export default function StyrkeoevelserHubPage() {
 
       <section
         id={STYRKEOEVELSER_HUB_ALLE_ANCHOR_ID}
-        className="mt-16 scroll-mt-32"
+        className="mt-16 scroll-mt-[var(--styrke-hub-sticky-offset,8rem)]"
         aria-labelledby="all-exercises-heading"
       >
         <h2

@@ -469,13 +469,22 @@ export function getRelatedExercises(
   return related.slice(0, limit);
 }
 
+/**
+ * Extra keywords for body-part pages when the hub copy uses a plural/inflected
+ * form that does not match the short `title` (e.g. title "Arm" vs text "arme").
+ * On `/styrkeoevelser/*`, these must beat ordbog synonyms for the same words.
+ */
+const BODY_PART_LINK_KEYWORD_EXTRAS: Record<string, string[]> = {
+  arm: ["arme", "Arme", "armene", "Armene"],
+};
+
 /** Keywords for internal auto-linking (sync; used from loadLinkConfig). */
 export function getStyrkeoevelserLinkMappings(): LinkMapping[] {
   const mappings: LinkMapping[] = [];
 
   for (const slug of getBodyPartSlugs()) {
     const bp = getBodyPart(slug);
-    const keywords = linkKeywordsFromTitle(bp.title);
+    const keywords = linkKeywordsFromTitle(bp.title, BODY_PART_LINK_KEYWORD_EXTRAS[slug]);
     mappings.push({
       keywords,
       destination: `${STYRKEOEVELSER_PATH}/${slug}`,
@@ -494,14 +503,28 @@ export function getStyrkeoevelserLinkMappings(): LinkMapping[] {
   return mappings;
 }
 
-function linkKeywordsFromTitle(title: string): string[] {
+function linkKeywordsFromTitle(
+  title: string,
+  extras: string[] = []
+): string[] {
   const trimmed = title.trim();
-  if (!trimmed) {
+  if (!trimmed && extras.length === 0) {
     return [];
   }
-  const lower = trimmed.charAt(0).toLowerCase() + trimmed.slice(1);
-  const upper = trimmed.charAt(0).toUpperCase() + trimmed.slice(1);
-  const variants = new Set<string>([trimmed, lower, upper]);
+  const variants = new Set<string>();
+  if (trimmed) {
+    const lower = trimmed.charAt(0).toLowerCase() + trimmed.slice(1);
+    const upper = trimmed.charAt(0).toUpperCase() + trimmed.slice(1);
+    variants.add(trimmed);
+    variants.add(lower);
+    variants.add(upper);
+  }
+  for (const extra of extras) {
+    const t = extra.trim();
+    if (t) {
+      variants.add(t);
+    }
+  }
   return Array.from(variants);
 }
 
