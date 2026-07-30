@@ -6,6 +6,8 @@ datePublished: 19/02/2025
 
 KORT: Fibromyalgi er en kronisk smertetilstand, der påvirker millioner af mennesker verden over, og som har en betydelig indflydelse på både fysisk og psykisk velbefindende. Selvom årsagerne til fibromyalgi ikke er fuldt forståede, mener forskere, at tilstanden skyldes en kompleks blanding af genetiske, neurologiske og miljømæssige faktorer. Denne artikel vil dykke ned i, hvad fibromyalgi er, hvordan den diagnosticeres, og hvordan man bedst kan håndtere symptomerne i hverdagen.
 
+Det kan hjælpe mange med [fysioterapi til fibromyalgi](https://fibrofys.dk/behandling/fysioterapi-til-fibromyalgi/), hvor det er muligt at få kompetent vejledning i håndtering.
+
 ## Hvad er fibromyalgi?
 
 Fibromyalgi karakteriseres ved udbredte muskelsmerter, træthed og en række andre symptomer, der ofte overlapper med andre sygdomme. Tilstanden påvirker især muskler og blødt væv og fører ofte til øget følsomhed over for smerte. Dette skyldes en fejlregulering i nervesystemet, hvilket medfører en forstærket smerterespons på stimuli, som ellers normalt ikke ville opfattes som smertefulde.
