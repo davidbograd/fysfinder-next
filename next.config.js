@@ -15,6 +15,9 @@ const nextConfig = {
       },
     ],
     qualities: [75, 100],
+    // Uploaded filenames are timestamped, so a changed image always gets a new URL.
+    // Long TTL keeps the optimizer from re-downloading originals from Supabase Storage.
+    minimumCacheTTL: 31536000,
   },
   redirects: async () => {
     return [

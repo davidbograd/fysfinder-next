@@ -50,6 +50,7 @@ import {
   type ClinicProfileCompletenessInput,
 } from "@/lib/clinic-profile-completeness";
 import { cn } from "@/lib/utils";
+import { STORAGE_CACHE_CONTROL_SECONDS } from "@/lib/storage-cache";
 import Image from "next/image";
 
 interface EditClinicFormProps {
@@ -438,6 +439,7 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
         .from("clinic-team-pics")
         .upload(fileName, file, {
           contentType: file.type,
+          cacheControl: STORAGE_CACHE_CONTROL_SECONDS,
           upsert: false,
         });
 
@@ -509,6 +511,7 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
         .from("clinic-team-pics")
         .upload(fileName, file, {
           contentType: file.type,
+          cacheControl: STORAGE_CACHE_CONTROL_SECONDS,
           upsert: false,
         });
 

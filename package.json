@@ -34,7 +34,8 @@
     "update:imports": "node scripts/update-imports.mjs",
     "revalidate": "node scripts/revalidate.js",
     "stripe:listen": "stripe listen --forward-to localhost:3000/api/stripe/webhook",
-    "populate:postal": "tsx scripts/populate-postal-codes.ts"
+    "populate:postal": "tsx scripts/populate-postal-codes.ts",
+    "storage:cache-headers": "tsx scripts/backfill-storage-cache-headers.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0",
