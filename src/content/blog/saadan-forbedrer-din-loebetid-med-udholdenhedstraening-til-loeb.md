@@ -1,11 +1,21 @@
 ---
-title: "Sådan forbedrer du din løbetid med udholdenhedstræning til løb"
-metaTitle: "Sådan forbedrer du din løbetid med udholdenhedstræning til løb"
+title: Sådan forbedrer du din løbetid med udholdenhedstræning til løb
+metaTitle: Sådan forbedrer du din løbetid med udholdenhedstræning til løb
 datePublished: 07-06-2025
 lastUpdated: 07-06-2025
 previewImage: /images/blog/udholdenhed_loeb_intro.png
 previewImageAlt: Illustration af udholdenhedstræning til løb
 author: anders-hammer
+related:
+  - type: blog
+    slug: 5-gode-oevelser-til-udholdenhedstraening
+    title: 5 gode øvelser til udholdenhedstræning
+  - type: page
+    slug: /vaerktoejer/pace-beregner
+    title: Pace beregner
+  - type: ordbog
+    slug: udholdenhedstraening
+    title: Udholdenhedstræning
 ---
 
 ![Illustration af udholdenhedstraening til loeb](/images/blog/udholdenhed_loeb_intro.png)

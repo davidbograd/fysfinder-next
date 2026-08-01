@@ -5,6 +5,16 @@ datePublished: 29-04-2025
 lastUpdated: 30-04-2025
 previewImage: /images/blog/meniskskade_trin.png
 previewImageAlt: Illustration af genoptræning efter meniskskade
+related:
+  - type: ordbog
+    slug: menisk-skade
+    title: Meniskskade
+  - type: ordbog
+    slug: knae
+    title: Knæ
+  - type: styrkeoevelser
+    slug: knae
+    title: Knæøvelser
 ---
 
 ![Illustration af genoptræning efter meniskskade](/images/blog/meniskskade_trin.png)

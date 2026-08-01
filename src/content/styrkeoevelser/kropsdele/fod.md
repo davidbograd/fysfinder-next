@@ -4,8 +4,14 @@ metaTitle: Fodøvelser → Gode øvelser til styrke og træning af fod
 datePublished: 13/06/2026
 lastUpdated: 13/06/2026
 h1: Fodøvelser – Træningsøvelser til styrke af fod
+related:
+  - type: ordbog
+    slug: fod
+    title: Fod – anatomi og behandling
+  - type: ordbog
+    slug: haelspore
+    title: Hælspore
 ---
-
 
 Fødderne er fundamentet for næsten al bevægelse i hverdagen – fra gang og løb til balance, hop og retningsskift. Med målrettede fodøvelser kan du styrke musklerne omkring fod, ankel og underben, forbedre stabiliteten og mindske risikoen for overbelastning. Øvelserne her kan bruges både som forebyggende træning, som del af genoptræning eller som supplement til sport og almindelig styrketræning.
 

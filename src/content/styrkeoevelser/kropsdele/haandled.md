@@ -4,8 +4,14 @@ metaTitle: Håndledøvelser → Gode øvelser til styrke og træning af håndled
 datePublished: 13/06/2026
 lastUpdated: 13/06/2026
 h1: Håndledøvelser – Træningsøvelser til styrke af håndled
+related:
+  - type: ordbog
+    slug: haandled
+    title: Håndled – anatomi og behandling
+  - type: ordbog
+    slug: karpaltunnelsyndrom
+    title: Karpaltunnelsyndrom
 ---
-
 
 Håndleddet er en lille, men vigtig del af kroppen, som bruges i alt fra arbejde ved computer og løft i hverdagen til sport, styrketræning og genoptræning efter skade. Med målrettede håndledøvelser kan du styrke musklerne omkring håndled, underarm og fingre, forbedre grebsstyrken og øge stabiliteten i leddet.
 

@@ -1,8 +1,18 @@
 ---
-title: "Menisk skade – typer, symptomer og behandling"
-lastUpdated: "13/09/2025"
-metaTitle: "Menisk skade → typer, symptomer og behandling"
-datePublished: "13/09/2025"
+title: 'Menisk skade – typer, symptomer og behandling'
+lastUpdated: 13/09/2025
+metaTitle: 'Menisk skade → typer, symptomer og behandling'
+datePublished: 13/09/2025
+related:
+  - type: ordbog
+    slug: knae
+    title: Knæ
+  - type: styrkeoevelser
+    slug: knae
+    title: Knæøvelser
+  - type: blog
+    slug: 5-trin-genoptraening-meniskskade
+    title: 5 trin til at komme tilbage efter en meniskskade
 ---
 
 En meniskskade (ofte skrevet som menisk skade eller meniskskade) er en skade på en af de to bruskskiver i knæet, som ligger mellem lårbenet og skinnebenet. Meniskerne hjælper med at fordele vægten i knæet, dæmpe stød og stabilisere leddet. Når en menisk rives eller slides, kan det give smerte, hævelse, nedsat bevægelighed og i nogle tilfælde låsninger i knæet. Her får du en enkel, praktisk guide til, hvordan meniskskader opstår, hvilke symptomer du skal være opmærksom på, og hvilke behandlingsmuligheder der findes — skrevet i et sprog, der er let at forstå.

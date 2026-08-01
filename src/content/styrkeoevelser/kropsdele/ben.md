@@ -4,8 +4,17 @@ metaTitle: Benøvelser → Gode øvelser til styrke og træning af ben
 datePublished: 13/06/2026
 lastUpdated: 13/06/2026
 h1: Benøvelser – Træningsøvelser til styrke af ben
+related:
+  - type: ordbog
+    slug: ben
+    title: Ben – anatomi og behandling
+  - type: ordbog
+    slug: skinnebensbetaendelse
+    title: Skinnebensbetændelse
+  - type: blog
+    slug: saadan-slipper-du-af-med-skinnebensbetaendelse
+    title: Sådan slipper du af med din skinnebensbetændelse
 ---
-
 
 Stærke ben er vigtige for både hverdag, sport og forebyggelse af skader. Uanset om du vil genoptræne efter en skade, blive stærkere i underkroppen eller forbedre din balance og stabilitet, kan de rette benøvelser gøre en stor forskel. Her finder du en overskuelig guide til effektive øvelser for benene, som kan tilpasses forskellige niveauer.
 

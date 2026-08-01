@@ -4,8 +4,14 @@ metaTitle: Armøvelser → Gode øvelser til styrke og træning af arme
 datePublished: 13/06/2026
 lastUpdated: 13/06/2026
 h1: Armøvelser – Træningsøvelser til styrke af arm
+related:
+  - type: ordbog
+    slug: arm
+    title: Arm – anatomi og behandling
+  - type: ordbog
+    slug: tennisalbue
+    title: Tennisalbue
 ---
-
 
 Stærke arme gør hverdagen lettere, uanset om du løfter indkøbsposer, arbejder fysisk, dyrker sport eller ønsker bedre kontrol i overkroppen. Med de rette armøvelser kan du styrke både biceps, triceps, underarme og de omkringliggende muskler i skuldre og øvre ryg. Her finder du konkrete øvelser til armtræning samt gode råd til sikker træning, genoptræning og forebyggelse af skader.
 

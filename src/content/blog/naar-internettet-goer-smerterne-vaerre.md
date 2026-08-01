@@ -1,12 +1,25 @@
 ---
-title: "Når internettet gør smerterne værre: Hvorfor du skal være kritisk over for online råd om rygproblemer"
-metaTitle: "Når internettet gør smerterne værre: Hvorfor du skal være kritisk over for online råd om rygproblemer"
+title: >-
+  Når internettet gør smerterne værre: Hvorfor du skal være kritisk over for
+  online råd om rygproblemer
+metaTitle: >-
+  Når internettet gør smerterne værre: Hvorfor du skal være kritisk over for
+  online råd om rygproblemer
 datePublished: 06-05-2025
 lastUpdated: 06-05-2025
 previewImage: /images/blog/internetsmerter_intro.png
 previewImageAlt: Illustration af hvordan internettet goer smerter vaerre
+related:
+  - type: ordbog
+    slug: ryg
+    title: Ryg
+  - type: blog
+    slug: diskusprolaps-6-myter
+    title: 'Diskusprolaps: 6 myter der forhindrer din bedring'
+  - type: blog
+    slug: Har-din-mr-scanning-skjulte-konsekvenser
+    title: Har din MR-scanning skjulte konsekvenser?
 ---
-
 
 ![Illustration af hvordan internettet goer smerter vaerre](/images/blog/internetsmerter_intro.png)
 

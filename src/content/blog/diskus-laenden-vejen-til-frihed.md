@@ -1,10 +1,23 @@
 ---
-title: "Diskusprolaps i lænden: Vejen tilbage til tillid og bevægelse"
-metaTitle: "Diskusprolaps i lænden: Vejen tilbage til tillid og bevægelse"
+title: 'Diskusprolaps i lænden: Vejen tilbage til tillid og bevægelse'
+metaTitle: 'Diskusprolaps i lænden: Vejen tilbage til tillid og bevægelse'
 datePublished: 02-06-2025
 lastUpdated: 02-06-2025
 previewImage: /images/blog/diskus_frihed_intro.png
 previewImageAlt: Illustration af diskusprolaps i laenden
+related:
+  - type: ordbog
+    slug: discusprolaps-i-ryggen
+    title: Diskusprolaps i ryggen
+  - type: ordbog
+    slug: laendesmerter
+    title: Lændesmerter
+  - type: styrkeoevelser
+    slug: laend
+    title: Lændøvelser
+  - type: blog
+    slug: diskusprolaps-6-myter
+    title: 'Diskusprolaps: 6 myter der forhindrer din bedring'
 ---
 
 ![Illustration af diskusprolaps i laenden](/images/blog/diskus_frihed_intro.png)

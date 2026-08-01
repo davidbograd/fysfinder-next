@@ -4,8 +4,17 @@ metaTitle: Albueøvelser → Gode øvelser til styrke og træning af albue
 datePublished: 13/06/2026
 lastUpdated: 13/06/2026
 h1: Albueøvelser – Træningsøvelser til styrke af albue
+related:
+  - type: ordbog
+    slug: albue
+    title: Albue – anatomi og behandling
+  - type: ordbog
+    slug: tennisalbue
+    title: Tennisalbue
+  - type: blog
+    slug: traen-din-tennisalbue-vaek-med-3-vigtige-oevelser
+    title: Træn din tennisalbue væk med 3 vigtige øvelser
 ---
-
 
 Albueøvelser kan være relevante for dig, der vil styrke musklerne omkring albuen, forbedre stabilitet i armen eller genoptræne efter irritation, overbelastning eller skade. Albuen er tæt forbundet med både skulder, underarm, håndled og hånd, og derfor handler effektiv træning ofte om at styrke hele området omkring leddet.
 

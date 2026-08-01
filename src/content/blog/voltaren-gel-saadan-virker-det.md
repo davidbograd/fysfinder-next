@@ -1,10 +1,20 @@
 ---
-title: "Voltaren gel – virker det, og hvordan bruger man det?"
-metaTitle: "Voltaren gel – virker det, og hvordan bruger man det?"
+title: 'Voltaren gel – virker det, og hvordan bruger man det?'
+metaTitle: 'Voltaren gel – virker det, og hvordan bruger man det?'
 datePublished: 06-05-2025
 lastUpdated: 06-05-2025
 previewImage: /images/blog/voltaren_intro.png
 previewImageAlt: Illustration af Voltaren gel
+related:
+  - type: ordbog
+    slug: inflammation
+    title: Inflammation
+  - type: ordbog
+    slug: smerter-i-skulder-og-overarm
+    title: Smerter i skulder og overarm
+  - type: page
+    slug: /find/fysioterapeut/danmark
+    title: Find fysioterapeut
 ---
 
 ![Illustration af Voltaren gel](/images/blog/voltaren_intro.png)

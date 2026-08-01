@@ -4,8 +4,17 @@ metaTitle: Knæøvelser → Gode øvelser til styrke og træning af knæ
 datePublished: 13/06/2026
 lastUpdated: 13/06/2026
 h1: Knæøvelser – Træningsøvelser til styrke af knæ
+related:
+  - type: ordbog
+    slug: knae
+    title: Knæ – anatomi og skader
+  - type: ordbog
+    slug: menisk-skade
+    title: Meniskskade
+  - type: blog
+    slug: 5-trin-genoptraening-meniskskade
+    title: 5 trin til at komme tilbage efter en meniskskade
 ---
-
 
 Knæet er et af kroppens mest belastede led og spiller en vigtig rolle i alt fra gang og løb til trappegang, sport og styrketræning. Gode knæøvelser kan hjælpe med at styrke musklerne omkring knæet, forbedre stabiliteten og mindske risikoen for overbelastning og skader.
 

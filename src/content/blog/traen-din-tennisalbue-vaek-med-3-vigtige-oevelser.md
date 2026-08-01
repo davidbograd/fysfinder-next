@@ -1,10 +1,20 @@
 ---
-title: "Træn din tennisalbue væk med 3 vigtige øvelser"
-metaTitle: "Få de bedste øvelser til tennisalbue her | Læs mere ->"
+title: Træn din tennisalbue væk med 3 vigtige øvelser
+metaTitle: Få de bedste øvelser til tennisalbue her | Læs mere ->
 datePublished: 18-07-2025
 lastUpdated: 18-07-2025
 previewImage: /images/blog/tennisalbue_oevelser_intro.png
 previewImageAlt: Illustration af tennisalbue
+related:
+  - type: ordbog
+    slug: tennisalbue
+    title: Tennisalbue
+  - type: ordbog
+    slug: albue
+    title: Albue
+  - type: styrkeoevelser
+    slug: albue
+    title: Albueøvelser
 ---
 
 ![Illustration af tennisalbue](/images/blog/tennisalbue_oevelser_intro.png)

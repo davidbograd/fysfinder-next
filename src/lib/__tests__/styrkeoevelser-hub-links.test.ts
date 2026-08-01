@@ -29,6 +29,17 @@ describe("styrkeøvelser hub body-part links", () => {
     expect(keywords).toEqual(expect.arrayContaining(["arm", "arme", "armene"]));
   });
 
+  it("maps skulder inflections (incl. skuldre) to the skulder body-part page", () => {
+    const skulder = getStyrkeoevelserLinkMappings().find(
+      (m) => m.destination === "/styrkeoevelser/skulder"
+    );
+    expect(skulder).toBeDefined();
+    const keywords = (skulder?.keywords ?? []).map((k) => k.toLowerCase());
+    expect(keywords).toEqual(
+      expect.arrayContaining(["skulder", "skulderen", "skuldre", "skuldrene"])
+    );
+  });
+
   it("resolveActiveHubSectionId selects the last section that crossed the sticky line", () => {
     const sections = [
       { id: "hub-arme", top: -40 },

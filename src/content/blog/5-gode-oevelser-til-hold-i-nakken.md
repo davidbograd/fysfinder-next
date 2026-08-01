@@ -1,10 +1,20 @@
 ---
-title: "5 gode øvelser til hold i nakken"
-metaTitle: "5 gode øvelser til hold i nakken"
+title: 5 gode øvelser til hold i nakken
+metaTitle: 5 gode øvelser til hold i nakken
 datePublished: 21-05-2025
 lastUpdated: 21-05-2025
 previewImage: /images/blog/hold_nakken_oevelser_intro.png
 previewImageAlt: Illustration af hold i nakken
+related:
+  - type: ordbog
+    slug: hold-i-nakken
+    title: Hold i nakken
+  - type: styrkeoevelser
+    slug: nakke
+    title: Nakkeøvelser
+  - type: blog
+    slug: behandling-af-hold-i-nakken
+    title: Behandling af hold i nakken
 ---
 
 ![Illustration af hold i nakken](/images/blog/hold_nakken_oevelser_intro.png)

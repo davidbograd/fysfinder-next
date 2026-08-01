@@ -5,6 +5,7 @@ import { AuthorCard } from "@/components/features/blog-og-ordbog/AuthorCard";
 import { TableOfContents } from "@/components/features/blog-og-ordbog/TableOfContents";
 import { getAuthorForStructuredData } from "@/lib/authors";
 import { calculateReadingTime, extractTableOfContents } from "@/lib/utils";
+import { resolveRelatedLinks } from "@/lib/related-content";
 import { Metadata } from "next";
 import { Calendar, Clock } from "lucide-react";
 
@@ -155,6 +156,10 @@ export default async function BlogPostPage({
           <AuthorCard authorSlug={post.author} />
           <ContentEntry
             term={post}
+            relatedLinks={resolveRelatedLinks(
+              post.related,
+              `/blog/${post.slug}`
+            )}
             backLink={{
               href: "/blog",
               text: "Tilbage til blog",

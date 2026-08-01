@@ -5,6 +5,16 @@ datePublished: 01-05-2025
 lastUpdated: 01-05-2025
 previewImage: /images/blog/smerte_traening_intro.png
 previewImageAlt: Illustration af smerte under træning
+related:
+  - type: blog
+    slug: 7-myter-smerte
+    title: 7 myter om smerter
+  - type: blog
+    slug: 5-indsigter-smertebehandling
+    title: 5 indsigter i opdateret smertebehandling
+  - type: page
+    slug: /styrkeoevelser
+    title: Styrkeøvelser
 ---
 
 

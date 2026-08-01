@@ -1,10 +1,23 @@
 ---
-title: "7 facts om ondt i balden og benet – er det iskias?"
-metaTitle: "7 facts om ondt i balden og benet – er det iskias?"
+title: 7 facts om ondt i balden og benet – er det iskias?
+metaTitle: 7 facts om ondt i balden og benet – er det iskias?
 datePublished: 08-05-2025
 lastUpdated: 08-05-2025
 previewImage: /images/blog/iskias_balde_intro.png
 previewImageAlt: Illustration af ondt i balden og benet
+related:
+  - type: ordbog
+    slug: iskias
+    title: Iskias
+  - type: ordbog
+    slug: piriformis-syndrom
+    title: Piriformis-syndrom
+  - type: styrkeoevelser
+    slug: ryg
+    title: Rygøvelser
+  - type: styrkeoevelser
+    slug: hofte
+    title: Hofteøvelser
 ---
 
 ![Illustration af ondt i balden og benet](/images/blog/iskias_balde_intro.png)

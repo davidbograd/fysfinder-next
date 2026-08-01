@@ -4,8 +4,14 @@ metaTitle: Hofteøvelser → Gode øvelser til styrke og træning af hofte
 datePublished: 13/06/2026
 lastUpdated: 13/06/2026
 h1: Hofteøvelser – Træningsøvelser til styrke af hofte
+related:
+  - type: ordbog
+    slug: hofte
+    title: Hofte – anatomi og behandling
+  - type: ordbog
+    slug: hofte-impingement
+    title: Hofte-impingement
 ---
-
 
 Hofteøvelser kan hjælpe dig med at opbygge styrke, stabilitet og bedre bevægelighed omkring hoften. En stærk hofte er vigtig i alt fra gang, løb og trappegang til sport, styrketræning og daglige aktiviteter. Her får du en overskuelig guide til hofteøvelser, der kan bruges som del af almindelig træning, genoptræning eller forebyggelse af skader.
 

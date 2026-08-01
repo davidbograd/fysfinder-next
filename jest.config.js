@@ -5,6 +5,7 @@ export default {
   moduleNameMapper: {
     '\\.svg$': '<rootDir>/src/test/mocks/fileMock.ts',
     '^@/(.*)$': '<rootDir>/src/$1',
+    '^lib/(.*)$': '<rootDir>/lib/$1',
     '^@supabase/supabase-js$': '<rootDir>/src/test/mocks/supabase-js.ts',
     '\\.(css|less|sass|scss)$': 'identity-obj-proxy',
   },

@@ -1,10 +1,20 @@
 ---
-title: "5 gode øvelser til udholdenhedstræning"
-metaTitle: "5 gode øvelser til udholdenhedstræning"
+title: 5 gode øvelser til udholdenhedstræning
+metaTitle: 5 gode øvelser til udholdenhedstræning
 datePublished: 13-05-2025
 lastUpdated: 13-05-2025
 previewImage: /images/blog/udholdenhed_oevelser_intro.png
 previewImageAlt: Illustration af udholdenhedstraening
+related:
+  - type: blog
+    slug: saadan-forbedrer-din-loebetid-med-udholdenhedstraening-til-loeb
+    title: Sådan forbedrer du din løbetid med udholdenhedstræning til løb
+  - type: ordbog
+    slug: udholdenhedstraening
+    title: Udholdenhedstræning
+  - type: page
+    slug: /styrkeoevelser
+    title: Styrkeøvelser
 ---
 
 ![Illustration af udholdenhedstraening](/images/blog/udholdenhed_oevelser_intro.png)

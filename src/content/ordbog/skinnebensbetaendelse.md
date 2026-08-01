@@ -1,8 +1,18 @@
 ---
-title: "Skinnebensbetændelse"
-lastUpdated: "12/10/2025"
-metaTitle: "Skinnebensbetændelse → årsager, symptomer og behandling"
-datePublished: "13/09/2025"
+title: Skinnebensbetændelse
+lastUpdated: 12/10/2025
+metaTitle: 'Skinnebensbetændelse → årsager, symptomer og behandling'
+datePublished: 13/09/2025
+related:
+  - type: ordbog
+    slug: ben
+    title: Ben
+  - type: styrkeoevelser
+    slug: ben
+    title: Benøvelser
+  - type: blog
+    slug: saadan-slipper-du-af-med-skinnebensbetaendelse
+    title: Sådan slipper du af med din skinnebensbetændelse
 ---
 
 Har du smerter langs indersiden af skinnebenet når du løber, går eller står i længere tid? Det kan være skinnebensbetændelse, også kaldet shin splints eller med det medicinske navn medial tibial stress syndrome (MTSS). Her får du en enkel forklaring på, hvad det er, hvad der typisk forårsager det, hvordan det føles, og hvilke behandlings- og forebyggelsesmuligheder der virker bedst — især fra et fysioterapeutisk perspektiv.

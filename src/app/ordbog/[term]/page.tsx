@@ -8,6 +8,7 @@ import {
   extractTableOfContents,
   formatDanishDate,
 } from "@/lib/utils";
+import { resolveRelatedLinks } from "@/lib/related-content";
 import { Metadata } from "next";
 import { Calendar, Clock } from "lucide-react";
 
@@ -133,6 +134,10 @@ export default async function DictionaryTermPage({
           <AuthorCard />
           <ContentEntry
             term={term}
+            relatedLinks={resolveRelatedLinks(
+              term.related,
+              `/ordbog/${term.slug}`
+            )}
             backLink={{
               href: "/ordbog",
               text: "Tilbage til ordbog",

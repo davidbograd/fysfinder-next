@@ -1,10 +1,17 @@
 ---
-title: Sov dig slank, stærk og smertefri - er det muligt?
-metaTitle: Sov dig slank, stærk og smertefri - er det muligt?
+title: 'Sov dig slank, stærk og smertefri - er det muligt?'
+metaTitle: 'Sov dig slank, stærk og smertefri - er det muligt?'
 datePublished: 24-04-2025
 lastUpdated: 24-04-2025
 previewImage: /images/articles/Søvn_intro.webp
-previewImageAlt: Illustration af søvns effekt på træning, vægttab og smerte
+previewImageAlt: 'Illustration af søvns effekt på træning, vægttab og smerte'
+related:
+  - type: ordbog
+    slug: soevnoptimering-for-restitution
+    title: Søvnoptimering for restitution
+  - type: blog
+    slug: skal-traening-goere-ondt-for-at-virke
+    title: Skal træning gøre ondt for at virke?
 ---
 
 ![Illustration af søvns effekt på træning, vægttab og smerte](/images/articles/Søvn_intro.webp)

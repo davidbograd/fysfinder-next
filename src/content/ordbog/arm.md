@@ -2,6 +2,13 @@
 lastUpdated: 19/02/2025
 metaTitle: Arm – Hvad er armen? Læs om skader og behandlinger
 datePublished: 19/02/2025
+related:
+  - type: styrkeoevelser
+    slug: arm
+    title: Armøvelser
+  - type: ordbog
+    slug: tennisalbue
+    title: Tennisalbue
 ---
 
 Armen er en kompleks del af menneskekroppen, der spiller en afgørende rolle i vores daglige aktiviteter. Den består af flere knogler, muskler, sener og nerver, der arbejder sammen for at muliggøre bevægelse og funktion. I fysioterapi er forståelsen af armens anatomi og funktion essentiel for at kunne behandle skader og forbedre mobiliteten.

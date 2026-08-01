@@ -1,11 +1,21 @@
 ---
-title: "5 bedste øvelser til spinalstenose"
-metaTitle: "Få de bedste øvelser til spinalstenose her | Læs mere ->"
+title: 5 bedste øvelser til spinalstenose
+metaTitle: Få de bedste øvelser til spinalstenose her | Læs mere ->
 datePublished: 10-07-2025
 lastUpdated: 10-07-2025
 previewImage: /images/blog/spinalstenose_intro.png
 previewImageAlt: Illustration af spinalstenose
 author: anders-hammer
+related:
+  - type: ordbog
+    slug: spinalstenose-i-ryggen
+    title: Spinalstenose i ryggen
+  - type: ordbog
+    slug: spinalstenose-i-nakken
+    title: Spinalstenose i nakken
+  - type: styrkeoevelser
+    slug: ryg
+    title: Rygøvelser
 ---
 
 ![Illustration af spinalstenose](/images/blog/spinalstenose_intro.png)

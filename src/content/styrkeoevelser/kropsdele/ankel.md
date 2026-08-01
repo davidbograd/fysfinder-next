@@ -4,8 +4,14 @@ metaTitle: Ankeløvelser → Gode øvelser til styrke og træning af ankel
 datePublished: 13/06/2026
 lastUpdated: 13/06/2026
 h1: Ankeløvelser – Træningsøvelser til styrke af ankel
+related:
+  - type: ordbog
+    slug: ankel
+    title: Ankel – anatomi og behandling
+  - type: ordbog
+    slug: forstuvning
+    title: Forstuvning
 ---
-
 
 Ankeløvelser kan hjælpe dig med at styrke musklerne omkring anklen, forbedre balancen og øge stabiliteten i fod og underben. Det er relevant både for dig, der vil forebygge skader, genoptræne efter en forstuvning eller bare gerne vil have stærkere ankler i hverdagen og under sport.
 

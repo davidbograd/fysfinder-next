@@ -1,11 +1,21 @@
 ---
 title: Hvor meget protein behøver du for at bygge muskler?
-metaTitle: Hvor meget protein har du egentlig brug for, hvis du vil bygge muskler?
+metaTitle: 'Hvor meget protein har du egentlig brug for, hvis du vil bygge muskler?'
 datePublished: 01-05-2025
 lastUpdated: 02-05-2025
 previewImage: /images/blog/protein_traening_intro.png
 previewImageAlt: Illustration af hvor meget protein man skal have for at bygge muskler
 author: anders-hammer
+related:
+  - type: blog
+    slug: kan-du-bygge-muskelmasse-uden-kalorieoverskud
+    title: Kan du opbygge muskelmasse uden kalorieoverskud?
+  - type: page
+    slug: /vaerktoejer/kalorieberegner
+    title: Kalorieberegner
+  - type: page
+    slug: /styrkeoevelser
+    title: Styrkeøvelser
 ---
 
 ![Illustration af hvor meget protein man skal have for at bygge muskler](/images/blog/protein_traening_intro.png)

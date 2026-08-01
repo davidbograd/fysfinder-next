@@ -4,8 +4,14 @@ metaTitle: Maveøvelser → Gode øvelser til styrke og træning af mave
 datePublished: 13/06/2026
 lastUpdated: 13/06/2026
 h1: Maveøvelser – Træningsøvelser til styrke af mave
+related:
+  - type: ordbog
+    slug: mave
+    title: Mave – anatomi og behandling
+  - type: ordbog
+    slug: core-traening-for-rygstabilitet
+    title: Core-træning for rygstabilitet
 ---
-
 
 En stærk mave handler om meget mere end synlige mavemuskler. Mavemusklerne er en vigtig del af din core og hjælper med at stabilisere kroppen, beskytte ryggen og skabe kraft i både træning og hverdag. Her finder du effektive maveøvelser, der kan bruges til styrke, stabilitet og genoptræning – uanset om du træner hjemme, i fitnesscenter eller som del af et rehabiliteringsforløb.
 

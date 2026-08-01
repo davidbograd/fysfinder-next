@@ -6,6 +6,16 @@ lastUpdated: 7-06-2025
 previewImage: /images/blog/myter_smerte_intro.png
 previewImageAlt: Illustration af myter om smertebehandling
 author: natasja-sorensen
+related:
+  - type: blog
+    slug: 5-indsigter-smertebehandling
+    title: 5 indsigter i opdateret smertebehandling
+  - type: blog
+    slug: skal-traening-goere-ondt-for-at-virke
+    title: Skal træning gøre ondt for at virke?
+  - type: ordbog
+    slug: kroniske-smerter
+    title: Kroniske smerter
 ---
 
 ![Illustration af myter om smerter](/images/blog/myter_smerte_intro.png)

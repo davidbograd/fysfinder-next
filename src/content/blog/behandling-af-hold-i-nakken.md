@@ -1,10 +1,23 @@
 ---
-title: "Behandling af hold i nakken"
-metaTitle: "Behandling af hold i nakken"
+title: Behandling af hold i nakken
+metaTitle: Behandling af hold i nakken
 datePublished: 17-06-2025
 lastUpdated: 17-06-2025
 previewImage: /images/blog/behandling_nakke_intro.png
 previewImageAlt: Illustration af henvisning til fysioterapi
+related:
+  - type: ordbog
+    slug: hold-i-nakken
+    title: Hold i nakken
+  - type: ordbog
+    slug: nakke
+    title: Nakke
+  - type: styrkeoevelser
+    slug: nakke
+    title: Nakkeøvelser
+  - type: blog
+    slug: 5-gode-oevelser-til-hold-i-nakken
+    title: 5 gode øvelser til hold i nakken
 ---
 
 ![Illustration af behandling af hold i nakken](/images/blog/behandling_nakke_intro.png)

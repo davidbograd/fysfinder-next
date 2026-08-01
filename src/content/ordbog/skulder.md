@@ -2,6 +2,19 @@
 lastUpdated: 19/02/2025
 metaTitle: Skulder – Hvad er en skulder? Læs om behandling og øvelser
 datePublished: 19/02/2025
+related:
+  - type: styrkeoevelser
+    slug: skulder
+    title: Skulderøvelser
+  - type: ordbog
+    slug: skuldersmerter
+    title: Skuldersmerter
+  - type: ordbog
+    slug: frossen-skulder
+    title: Frossen skulder
+  - type: blog
+    slug: Hvorfor-alt-du-troede-om-frossen-skulder-maaske-er-forkert
+    title: 'Hvorfor alt, du troede om frossen skulder, måske er forkert'
 ---
 
 Skulderen er en kompleks del af kroppen, der spiller en afgørende rolle i vores bevægelse og funktion. Den består af flere knogler, muskler og sener, der arbejder sammen for at give os en bred vifte af bevægelser. Skulderproblemer kan påvirke vores dagligdag og livskvalitet, hvilket gør det vigtigt at forstå de forskellige aspekter af skulderens anatomi og behandling.

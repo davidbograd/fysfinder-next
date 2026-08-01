@@ -1,8 +1,8 @@
 import type { Root, Element, Text } from "hast";
 import type { Plugin } from "unified";
-import { visit, EXIT, CONTINUE } from "unist-util-visit";
-import type { LinkConfig, LinkMapping } from "./types.js"; // Assuming types.ts is compatible
-import { toString } from "hast-util-to-string";
+import { visit, CONTINUE } from "unist-util-visit";
+import type { LinkConfig } from "./types";
+import { buildKeywordMap } from "./build-keyword-map";
 import { h } from "hastscript";
 
 interface RehypeInternalLinksOptions {
@@ -35,24 +35,8 @@ const rehypeInternalLinks: Plugin<[RehypeInternalLinksOptions], Root> = (
     return undefined;
   }
 
-  // Prepare keyword map. On /styrkeoevelser/*, styrkeoevelser wins duplicate keywords (e.g. "Knæ");
-  // elsewhere ordbog/blog win over styrkeoevelser.
-  const keywordMap = new Map<string, LinkMapping>();
-  const categoryOrder: string[] = currentPagePath.startsWith("/styrkeoevelser")
-    ? ["ordbog", "blog", "location", "misc", "styrkeoevelser"]
-    : ["styrkeoevelser", "ordbog", "blog", "location", "misc"];
-
-  for (const category of categoryOrder) {
-    const mappings = linkConfig.linkMappings[category];
-    if (!mappings) {
-      continue;
-    }
-    for (const mapping of mappings) {
-      for (const keyword of mapping.keywords) {
-        keywordMap.set(keyword.toLowerCase(), mapping);
-      }
-    }
-  }
+  // Category order + body-part silo (see build-keyword-map.ts).
+  const keywordMap = buildKeywordMap(linkConfig, currentPagePath);
 
   // Pre-compile regexes for keywords
   const keywordRegexMap = new Map<string, RegExp>();

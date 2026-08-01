@@ -4,8 +4,17 @@ metaTitle: Rygøvelser → Gode øvelser til styrke og træning af ryg
 datePublished: 13/06/2026
 lastUpdated: 13/06/2026
 h1: Rygøvelser – Træningsøvelser til styrke af ryg
+related:
+  - type: ordbog
+    slug: ryg
+    title: Ryg – anatomi og behandling
+  - type: ordbog
+    slug: discusprolaps-i-ryggen
+    title: Diskusprolaps i ryggen
+  - type: blog
+    slug: diskusprolaps-6-myter
+    title: 'Diskusprolaps: 6 myter der forhindrer din bedring'
 ---
-
 
 En stærk ryg er vigtig for både hverdag, arbejde og træning. Ryggen hjælper dig med at holde en god kropsholdning, løfte korrekt, bevæge dig frit og forebygge gener i nakke, skuldre og lænd. Her finder du konkrete rygøvelser, der kan bruges til styrketræning, genoptræning og generel vedligeholdelse af rygmuskulaturen.
 

@@ -1,6 +1,16 @@
 ---
 lastUpdated: 27/05/2025
 datePublished: 19/02/2025
+related:
+  - type: ordbog
+    slug: ryg
+    title: Ryg
+  - type: styrkeoevelser
+    slug: laend
+    title: Lændøvelser
+  - type: blog
+    slug: diskus-laenden-vejen-til-frihed
+    title: 'Diskusprolaps i lænden: Vejen tilbage til tillid og bevægelse'
 ---
 
 ![Illustration af lændesmerter](/images/articles/Lændesmerter_intro.webp)

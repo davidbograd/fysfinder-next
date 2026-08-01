@@ -4,6 +4,9 @@ import matter from "gray-matter";
 import { deslugify } from "@/app/utils/slugify";
 import { formatDanishDate } from "@/lib/utils";
 import type { LinkMapping } from "lib/internal-linking/types";
+import { BODY_PART_HEAD_KEYWORDS } from "lib/internal-linking/body-part-overlap";
+import type { RelatedContentItem } from "@/lib/related-content";
+import { parseRelatedFrontmatter } from "@/lib/related-content";
 
 export const STYRKEOEVELSER_PATH = "/styrkeoevelser";
 
@@ -47,6 +50,8 @@ export type StyrkeoevelserBodyPart = {
   description: string;
   content: string;
   metaTitle?: string;
+  /** Curated "Se også" links from frontmatter. */
+  related: RelatedContentItem[];
   lastUpdated: string;
   datePublished: string;
 };
@@ -300,6 +305,7 @@ export function getBodyPart(slug: string): StyrkeoevelserBodyPart {
         : extractDescription(markdownContent),
     content: processMarkdownImages(markdownContent),
     metaTitle: typeof data.metaTitle === "string" ? data.metaTitle : undefined,
+    related: parseRelatedFrontmatter(data),
     lastUpdated:
       typeof data.lastUpdated === "string"
         ? data.lastUpdated
@@ -474,8 +480,9 @@ export function getRelatedExercises(
  * form that does not match the short `title` (e.g. title "Arm" vs text "arme").
  * On `/styrkeoevelser/*`, these must beat ordbog synonyms for the same words.
  */
+/** Inflection extras for body-part auto-link keywords (overlap set + any extras). */
 const BODY_PART_LINK_KEYWORD_EXTRAS: Record<string, string[]> = {
-  arm: ["arme", "Arme", "armene", "Armene"],
+  ...BODY_PART_HEAD_KEYWORDS,
 };
 
 /** Keywords for internal auto-linking (sync; used from loadLinkConfig). */

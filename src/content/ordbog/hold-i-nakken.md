@@ -2,6 +2,19 @@
 lastUpdated: 27/05/2025
 metaTitle: Hold i nakken – Hvad er hold i nakken? Symptomer/behandling
 datePublished: 19/02/2025
+related:
+  - type: ordbog
+    slug: nakke
+    title: Nakke
+  - type: styrkeoevelser
+    slug: nakke
+    title: Nakkeøvelser
+  - type: blog
+    slug: behandling-af-hold-i-nakken
+    title: Behandling af hold i nakken
+  - type: blog
+    slug: 5-gode-oevelser-til-hold-i-nakken
+    title: 5 gode øvelser til hold i nakken
 ---
 
 ![Illustration af hold i nakken](/images/articles/hold-i-nakken-intro.webp)

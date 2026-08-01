@@ -1,10 +1,20 @@
 ---
-title: "Kan du opbygge muskelmasse uden kalorieoverskud?"
-metaTitle: "Kan du opbygge muskelmasse uden kalorieoverskud?"
+title: Kan du opbygge muskelmasse uden kalorieoverskud?
+metaTitle: Kan du opbygge muskelmasse uden kalorieoverskud?
 datePublished: 11-05-2025
 lastUpdated: 11-05-2025
 previewImage: /images/blog/muskelmasse_opbygning_intro.png
 previewImageAlt: Illustration af at opbygge muskelmasse
+related:
+  - type: blog
+    slug: hvor-meget-protein-hvis-du-vil-bygge-muskler
+    title: Hvor meget protein behøver du for at bygge muskler?
+  - type: page
+    slug: /vaerktoejer/kalorieberegner
+    title: Kalorieberegner
+  - type: page
+    slug: /styrkeoevelser
+    title: Styrkeøvelser
 ---
 
 ![Illustration af at opbygge muskelmasse](/images/blog/muskelmasse_opbygning_intro.png)

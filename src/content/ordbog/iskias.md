@@ -2,6 +2,19 @@
 lastUpdated: 08/05/2025
 metaTitle: Iskias – Hvad er iskias? Læs om symptomer og behandling
 datePublished: 19/02/2025
+related:
+  - type: ordbog
+    slug: ryg
+    title: Ryg
+  - type: ordbog
+    slug: piriformis-syndrom
+    title: Piriformis-syndrom
+  - type: styrkeoevelser
+    slug: ryg
+    title: Rygøvelser
+  - type: blog
+    slug: 7-facts-om-ondt-i-balle-og-ben
+    title: 7 facts om ondt i balden og benet – er det iskias?
 ---
 
 ![Illustration af iskias-smerter](/images/articles/iskias_intro.png)

@@ -4,8 +4,17 @@ metaTitle: Nakkeøvelser → Gode øvelser til styrke og træning af nakke
 datePublished: 13/06/2026
 lastUpdated: 13/06/2026
 h1: Nakkeøvelser – Træningsøvelser til styrke af nakke
+related:
+  - type: ordbog
+    slug: nakke
+    title: Nakke – anatomi og behandling
+  - type: ordbog
+    slug: hold-i-nakken
+    title: Hold i nakken
+  - type: blog
+    slug: 5-gode-oevelser-til-hold-i-nakken
+    title: 5 gode øvelser til hold i nakken
 ---
-
 
 Nakken spiller en vigtig rolle i alt fra kropsholdning og hovedbevægelser til stabilitet i skuldre og øvre ryg. Med de rette nakkeøvelser kan du styrke musklerne omkring nakke, skuldre og øvre ryg, hvilket kan være relevant både ved forebyggelse, genoptræning og generel styrketræning.
 

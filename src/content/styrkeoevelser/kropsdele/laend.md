@@ -4,8 +4,17 @@ metaTitle: Lændøvelser → Gode øvelser til styrke og træning af lænd
 datePublished: 13/06/2026
 lastUpdated: 13/06/2026
 h1: Lændøvelser – Træningsøvelser til styrke af lænd
+related:
+  - type: ordbog
+    slug: laendesmerter
+    title: Lændesmerter
+  - type: ordbog
+    slug: ryg
+    title: Ryg
+  - type: blog
+    slug: diskus-laenden-vejen-til-frihed
+    title: 'Diskusprolaps i lænden: Vejen tilbage til tillid og bevægelse'
 ---
-
 
 En stærk og velfungerende lænd er vigtig for både hverdag, arbejde og sport. Lænden er en central del af kroppens stabilitet og spiller en stor rolle, når du løfter, bøjer dig, går, løber eller sidder i længere tid. Med de rette lændøvelser kan du styrke musklerne omkring ryg, hofter og mave, forbedre din kropskontrol og mindske risikoen for overbelastning.
 

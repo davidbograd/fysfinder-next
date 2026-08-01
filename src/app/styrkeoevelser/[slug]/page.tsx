@@ -17,6 +17,8 @@ import {
   StyrkeoevelserExerciseStructuredData,
 } from "@/components/features/styrkeoevelser/StyrkeoevelserStructuredData";
 import { StyrkeoevelserMdxBody } from "@/components/features/styrkeoevelser/StyrkeoevelserMdxBody";
+import { RelatedContentSection } from "@/components/features/blog-og-ordbog/RelatedContentSection";
+import { resolveRelatedLinks } from "@/lib/related-content";
 import {
   STYRKEOEVELSER_PATH,
   STYRKEOEVELSER_SITE_URL,
@@ -230,6 +232,9 @@ export default async function StyrkeoevelserSlugPage({
           <TableOfContents headings={headings} />
           <div className="flex-1 max-w-2xl">
             <StyrkeoevelserMdxBody source={rest} currentPagePath={currentPath} />
+            <RelatedContentSection
+              links={resolveRelatedLinks(bp.related, currentPath)}
+            />
           </div>
         </div>
       </div>

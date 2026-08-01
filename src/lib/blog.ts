@@ -2,6 +2,10 @@ import { readFileSync } from "fs";
 import { join } from "path";
 import matter from "gray-matter";
 import { readdirSync } from "fs";
+import {
+  parseRelatedFrontmatter,
+  type RelatedContentItem,
+} from "@/lib/related-content";
 
 export interface BlogPost {
   slug: string;
@@ -14,6 +18,7 @@ export interface BlogPost {
   previewImage: string;
   previewImageAlt: string;
   author?: string; // Author slug, defaults to joachim-bograd
+  related: RelatedContentItem[];
 }
 
 function parseDanishDate(dateStr: string): Date {
@@ -45,6 +50,7 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
           data.previewImage || "/images/articles/default-preview.webp",
         previewImageAlt: data.previewImageAlt || data.title,
         author: data.author || "joachim-bograd", // Default to joachim-bograd
+        related: parseRelatedFrontmatter(data),
       } as BlogPost;
     })
     // Sort by date, newest first
@@ -79,5 +85,6 @@ export async function getBlogPost(slug: string): Promise<BlogPost> {
     previewImage: data.previewImage || "/images/articles/default-preview.webp",
     previewImageAlt: data.previewImageAlt || data.title,
     author: data.author || "joachim-bograd", // Default to joachim-bograd
+    related: parseRelatedFrontmatter(data),
   };
 }

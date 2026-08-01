@@ -1,10 +1,20 @@
 ---
-title: "Hvorfor alt, du troede om frossen skulder, måske er forkert"
-metaTitle: "Hvorfor alt, du troede om frossen skulder, måske er forkert"
+title: 'Hvorfor alt, du troede om frossen skulder, måske er forkert'
+metaTitle: 'Hvorfor alt, du troede om frossen skulder, måske er forkert'
 datePublished: 12-05-2025
 lastUpdated: 12-05-2025
 previewImage: /images/blog/frossen_skulder_am_intro.png
 previewImageAlt: Illustration af frossen skulder
+related:
+  - type: ordbog
+    slug: frossen-skulder
+    title: Frossen skulder
+  - type: ordbog
+    slug: skulder
+    title: Skulder
+  - type: styrkeoevelser
+    slug: skulder
+    title: Skulderøvelser
 ---
 
 ![Illustration af frossen skulder](/images/blog/frossen_skulder_am_intro.png)

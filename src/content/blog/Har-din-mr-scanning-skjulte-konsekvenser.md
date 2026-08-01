@@ -1,10 +1,20 @@
 ---
-title: "Har din MR-scanning skjulte konsekvenser?"
-metaTitle: "Har din MR-scanning skjulte konsekvenser?"
+title: Har din MR-scanning skjulte konsekvenser?
+metaTitle: Har din MR-scanning skjulte konsekvenser?
 datePublished: 01-06-2025
 lastUpdated: 04-06-2025
 previewImage: /images/blog/mrscanning_konsekvenser_intro.png
 previewImageAlt: Illustration af MR-scanning
+related:
+  - type: page
+    slug: /mr-scanning
+    title: MR-scanning oversætter
+  - type: ordbog
+    slug: ryg
+    title: Ryg
+  - type: blog
+    slug: naar-internettet-goer-smerterne-vaerre
+    title: Når internettet gør smerterne værre
 ---
 
 ![Illustration af MR-scanning](/images/blog/mrscanning_konsekvenser_intro.png)

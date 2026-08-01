@@ -1,10 +1,23 @@
 ---
-title: "Diskusprolaps: 6 myter der forhindrer din bedring"
-metaTitle: "Diskusprolaps: 6 myter der forhindrer din bedring"
+title: 'Diskusprolaps: 6 myter der forhindrer din bedring'
+metaTitle: 'Diskusprolaps: 6 myter der forhindrer din bedring'
 datePublished: 29-04-2025
 lastUpdated: 29-04-2025
 previewImage: /images/blog/diskusprolaps_myter.png
 previewImageAlt: Illustration af myter om diskusprolaps
+related:
+  - type: ordbog
+    slug: discusprolaps-i-ryggen
+    title: Diskusprolaps i ryggen
+  - type: styrkeoevelser
+    slug: ryg
+    title: Rygøvelser
+  - type: styrkeoevelser
+    slug: laend
+    title: Lændøvelser
+  - type: blog
+    slug: diskus-laenden-vejen-til-frihed
+    title: 'Diskusprolaps i lænden: Vejen tilbage til tillid og bevægelse'
 ---
 
 ![Illustration af myter om diskusprolaps](/images/blog/diskusprolaps_myter.png)

@@ -2,6 +2,16 @@
 lastUpdated: 19/02/2025
 metaTitle: Knæ – Hvad er knæet? Læs om skader og behandlinger
 datePublished: 19/02/2025
+related:
+  - type: styrkeoevelser
+    slug: knae
+    title: Knæøvelser
+  - type: ordbog
+    slug: menisk-skade
+    title: Meniskskade
+  - type: blog
+    slug: 5-trin-genoptraening-meniskskade
+    title: 5 trin til at komme tilbage efter en meniskskade
 ---
 
 Knæet er et komplekst led, der spiller en afgørende rolle i vores bevægelse og daglige aktiviteter. Det forbinder lårbenet (femur) med skinnebenet (tibia) og er ansvarligt for at muliggøre bevægelse som at gå, løbe og hoppe. Knæet er også udsat for skader og slid, hvilket gør det vigtigt at forstå dets funktion og de behandlinger, der er tilgængelige.

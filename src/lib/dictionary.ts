@@ -3,6 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 import { deslugify } from "@/app/utils/slugify";
 import { formatDanishDate } from "@/lib/utils";
+import { parseRelatedFrontmatter } from "@/lib/related-content";
 
 const dictionaryDir = path.join(process.cwd(), "src/content/ordbog");
 
@@ -93,5 +94,6 @@ export async function getDictionaryTerm(slug: string) {
     lastUpdated: data.lastUpdated || formatDanishDate(new Date()),
     datePublished: data.datePublished || "19/02/2025",
     metaTitle: data.metaTitle || `${title} - hvad er ${title.toLowerCase()}?`,
+    related: parseRelatedFrontmatter(data),
   };
 }

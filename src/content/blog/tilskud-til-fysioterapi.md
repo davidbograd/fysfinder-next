@@ -1,11 +1,18 @@
 ---
-title: "Tilskud til fysioterapi i Danmark: Hvad du har ret til, og hvordan du får det"
-metaTitle: "Alt om tilskud til fysioterapi | Tilskud med eller uden henvisning"
+title: 'Tilskud til fysioterapi i Danmark: Hvad du har ret til, og hvordan du får det'
+metaTitle: Alt om tilskud til fysioterapi | Tilskud med eller uden henvisning
 datePublished: 15-06-2025
 lastUpdated: 15-06-2025
 previewImage: /images/blog/tilskud_intro.png
 previewImageAlt: Illustration af tilskud til fysioterapi
 author: natasja-sorensen
+related:
+  - type: blog
+    slug: alt_du_skal_vide_om_henvisning_til_fysioterapi
+    title: Alt du skal vide om henvisning til fysioterapi
+  - type: page
+    slug: /find/fysioterapeut/danmark
+    title: Find fysioterapeut
 ---
 
 ![Illustration af tilskud til fysioterapi](/images/blog/tilskud_intro.png)

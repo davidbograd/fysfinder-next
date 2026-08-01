@@ -2,6 +2,16 @@
 lastUpdated: 19/02/2025
 metaTitle: Spinalstenose i ryggen – Hvad er spinalstenose? Læs mere
 datePublished: 19/02/2025
+related:
+  - type: ordbog
+    slug: ryg
+    title: Ryg
+  - type: styrkeoevelser
+    slug: ryg
+    title: Rygøvelser
+  - type: blog
+    slug: 5-bedste-oevelser-til-spinalstenose
+    title: 5 bedste øvelser til spinalstenose
 ---
 
 Spinalstenose i ryggen refererer til en indsnævring af rygmarvskanalen, som kan føre til tryk på rygmarven og nerverne. Dette kan forårsage smerte, svaghed og følelsesløshed i ryggen og lemmerne. Det er en tilstand, der ofte opstår med alderen, men kan også være forårsaget af skader eller medfødte misdannelser.

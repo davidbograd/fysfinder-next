@@ -1,10 +1,20 @@
 ---
-title: "Sådan slipper du af med din skinnebensbetændelse"
-metaTitle: "Bliv fri for skinnebensbetændelse | Læs mere"
+title: Sådan slipper du af med din skinnebensbetændelse
+metaTitle: Bliv fri for skinnebensbetændelse | Læs mere
 datePublished: 06-07-2025
 lastUpdated: 06-07-2025
 previewImage: /images/blog/skinneben_intro.png
 previewImageAlt: Illustration af hvordan man undgår skinnebensbetaendelse
+related:
+  - type: ordbog
+    slug: skinnebensbetaendelse
+    title: Skinnebensbetændelse
+  - type: styrkeoevelser
+    slug: ben
+    title: Benøvelser
+  - type: styrkeoevelser
+    slug: ankel
+    title: Ankeløvelser
 ---
 
 ![Illustration af hvordan man undgår skinnebensbetaendelse](/images/blog/skinneben_intro.png)

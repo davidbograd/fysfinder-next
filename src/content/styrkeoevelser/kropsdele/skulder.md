@@ -4,8 +4,17 @@ metaTitle: Skulderøvelser → Gode øvelser til styrke og træning af skulder
 datePublished: 13/06/2026
 lastUpdated: 13/06/2026
 h1: Skulderøvelser – Træningsøvelser til styrke af skulder
+related:
+  - type: ordbog
+    slug: skulder
+    title: Skulder – anatomi og behandling
+  - type: ordbog
+    slug: frossen-skulder
+    title: Frossen skulder
+  - type: blog
+    slug: Hvorfor-alt-du-troede-om-frossen-skulder-maaske-er-forkert
+    title: 'Hvorfor alt, du troede om frossen skulder, måske er forkert'
 ---
-
 
 Skulderen er et af kroppens mest bevægelige led, og netop derfor stiller den store krav til styrke, stabilitet og kontrol. Gode skulderøvelser kan hjælpe dig med at opbygge stærkere skuldre, forbedre din kropsholdning og forebygge overbelastning i både træning, arbejde og hverdag.
 

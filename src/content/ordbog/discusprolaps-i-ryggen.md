@@ -2,6 +2,22 @@
 lastUpdated: 27/05/2025
 metaTitle: Discusprolaps i ryggen – Hvad er discusprolaps? Læs mere
 datePublished: 19/02/2025
+related:
+  - type: ordbog
+    slug: ryg
+    title: Ryg
+  - type: styrkeoevelser
+    slug: ryg
+    title: Rygøvelser
+  - type: styrkeoevelser
+    slug: laend
+    title: Lændøvelser
+  - type: blog
+    slug: diskusprolaps-6-myter
+    title: 'Diskusprolaps: 6 myter der forhindrer din bedring'
+  - type: blog
+    slug: diskus-laenden-vejen-til-frihed
+    title: 'Diskusprolaps i lænden: Vejen tilbage til tillid og bevægelse'
 ---
 
 ![Illustration af discusprolaps i ryggen](/images/articles/discusprolaps-ryggen-intro.png)

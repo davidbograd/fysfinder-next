@@ -5,6 +5,16 @@ datePublished: 30-04-2025
 lastUpdated: 30-04-2025
 previewImage: /images/blog/smertebehandling_indsigt_intro.png
 previewImageAlt: Illustration af indsigter i smertebehandling
+related:
+  - type: blog
+    slug: 7-myter-smerte
+    title: 7 myter om smerter
+  - type: blog
+    slug: skal-traening-goere-ondt-for-at-virke
+    title: Skal træning gøre ondt for at virke?
+  - type: ordbog
+    slug: kroniske-smerter
+    title: Kroniske smerter
 ---
 
 ![Illustration af indsigter i smertebehandling](/images/blog/smertebehandling_indsigt_intro.png)

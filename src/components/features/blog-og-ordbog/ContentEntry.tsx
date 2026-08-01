@@ -11,6 +11,8 @@ import rehypeDanishSlug from "@/lib/mdx/rehype-danish-slug";
 // Internal linking imports
 import { loadLinkConfig } from "lib/internal-linking/config";
 import rehypeInternalLinks from "lib/internal-linking/rehype-internal-links";
+import { RelatedContentSection } from "@/components/features/blog-og-ordbog/RelatedContentSection";
+import type { ResolvedRelatedLink } from "@/lib/related-content";
 
 interface ContentTerm {
   slug: string;
@@ -26,6 +28,8 @@ interface ContentEntryProps {
   };
   /** When false, omit the bottom back link (caller can place it after extra sections). Default true. */
   showBackLink?: boolean;
+  /** Curated cross-links shown after the article body. */
+  relatedLinks?: ResolvedRelatedLink[];
 }
 
 const getImageDimension = (value: unknown): number | undefined => {
@@ -47,6 +51,7 @@ export function ContentEntry({
   term,
   backLink,
   showBackLink = true,
+  relatedLinks = [],
 }: ContentEntryProps) {
   // Load link config
   const linkConfig = loadLinkConfig();
@@ -137,6 +142,7 @@ export function ContentEntry({
           }}
         />
       </div>
+      <RelatedContentSection links={relatedLinks} />
       {showBackLink ? (
         <div className="mt-8">
           <Link href={backLink.href} className="text-logo-blue hover:underline">

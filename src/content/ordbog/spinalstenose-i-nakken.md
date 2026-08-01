@@ -2,6 +2,16 @@
 lastUpdated: 19/02/2025
 metaTitle: Spinalstenose i nakken – Hvad er spinalstenose i nakken?
 datePublished: 19/02/2025
+related:
+  - type: ordbog
+    slug: nakke
+    title: Nakke
+  - type: styrkeoevelser
+    slug: nakke
+    title: Nakkeøvelser
+  - type: blog
+    slug: 5-bedste-oevelser-til-spinalstenose
+    title: 5 bedste øvelser til spinalstenose
 ---
 
 Spinalstenose i nakken, også kendt som cervikal spinalstenose, er en tilstand, hvor rygmarvskanalen i nakken bliver indsnævret. Dette kan føre til tryk på rygmarven og nerverne, hvilket kan forårsage smerte, svaghed og følelsesløshed i arme og ben. Det er en tilstand, der ofte opstår med alderen, men kan også være forårsaget af skader eller medfødte misdannelser.

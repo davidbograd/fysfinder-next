@@ -4,8 +4,14 @@ metaTitle: Brystøvelser → Gode øvelser til styrke og træning af bryst
 datePublished: 13/06/2026
 lastUpdated: 13/06/2026
 h1: Brystøvelser – Træningsøvelser til styrke af bryst
+related:
+  - type: ordbog
+    slug: bryst
+    title: Bryst – anatomi og behandling
+  - type: ordbog
+    slug: brystmuskulatur
+    title: Brystmuskulatur
 ---
-
 
 Brystøvelser kan hjælpe dig med at opbygge styrke, stabilitet og bedre kontrol i overkroppen. Et stærkt bryst spiller en vigtig rolle i mange daglige bevægelser, for eksempel når du skubber, løfter eller støtter dig med armene. Her får du en overskuelig guide til effektive øvelser for brystet, som kan bruges både til almindelig styrketræning, genoptræning og forebyggelse af skader.
 

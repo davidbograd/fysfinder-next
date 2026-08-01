@@ -1,10 +1,17 @@
 ---
-title: "Alt du skal vide om henvisning til fysioterapi"
-metaTitle: "Alt du skal vide om henvisning til fysioterapi"
+title: Alt du skal vide om henvisning til fysioterapi
+metaTitle: Alt du skal vide om henvisning til fysioterapi
 datePublished: 12-06-2025
 lastUpdated: 12-06-2025
 previewImage: /images/blog/henvisning_intro.png
 previewImageAlt: Illustration af henvisning til fysioterapi
+related:
+  - type: blog
+    slug: tilskud-til-fysioterapi
+    title: Tilskud til fysioterapi i Danmark
+  - type: page
+    slug: /find/fysioterapeut/danmark
+    title: Find fysioterapeut
 ---
 
 ![Illustration af henvisning til fysioterapi](/images/blog/henvisning_intro.png)
