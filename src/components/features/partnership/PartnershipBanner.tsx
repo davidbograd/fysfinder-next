@@ -47,5 +47,22 @@ export function PartnershipBanner({ specialtySlug }: PartnershipBannerProps) {
     );
   }
 
+  if (specialtySlug === "skoliose") {
+    return (
+      <div className="mb-4 flex flex-wrap items-center gap-4 sm:gap-8">
+        <Image
+          src="/images/samarbejdspartnere/dansk-skoliose-forening.png"
+          alt="Dansk Skoliose Forening"
+          width={1000}
+          height={508}
+          className="w-full sm:max-w-[240px] h-auto"
+        />
+        <p className="text-gray-600 w-full sm:w-auto sm:flex-1">
+          I samarbejde med Dansk Skoliose Forening.
+        </p>
+      </div>
+    );
+  }
+
   return null;
 }

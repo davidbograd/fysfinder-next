@@ -12,25 +12,28 @@ export function PartnerStrip() {
           </h2>
         </div>
 
-        <div className="flex w-full flex-wrap items-center gap-6 sm:w-auto sm:gap-10">
-          <div className="w-full max-w-full sm:w-auto">
-            <Image
-              src="/images/samarbejdspartnere/FAKS-logo-med-hele-navn.png"
-              alt="FAKS logo"
-              width={260}
-              height={80}
-              className="h-auto w-full max-w-[300px] sm:w-auto sm:max-w-[360px]"
-            />
-          </div>
-          <div className="w-full max-w-full sm:w-auto">
-            <Image
-              src="/images/samarbejdspartnere/hovedpine-foreningen.png"
-              alt="Hovedpineforeningen logo"
-              width={340}
-              height={120}
-              className="h-auto w-full max-w-[300px] sm:w-auto sm:max-w-[360px]"
-            />
-          </div>
+        <div className="flex w-full flex-col items-start gap-6 lg:w-auto lg:items-center">
+          <Image
+            src="/images/samarbejdspartnere/FAKS-logo-med-hele-navn.png"
+            alt="FAKS logo"
+            width={260}
+            height={80}
+            className="h-auto w-full max-w-[260px]"
+          />
+          <Image
+            src="/images/samarbejdspartnere/hovedpine-foreningen.png"
+            alt="Hovedpineforeningen logo"
+            width={340}
+            height={120}
+            className="h-auto w-full max-w-[230px]"
+          />
+          <Image
+            src="/images/samarbejdspartnere/dansk-skoliose-forening.png"
+            alt="Dansk Skoliose Forening logo"
+            width={1000}
+            height={508}
+            className="h-auto w-full max-w-[200px]"
+          />
         </div>
       </div>
     </section>

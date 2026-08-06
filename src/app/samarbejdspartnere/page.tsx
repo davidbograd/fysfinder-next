@@ -55,6 +55,19 @@ export default function PartnersPage() {
       ],
       website: "https://www.hovedpineforeningen.dk",
     },
+    {
+      id: "dansk-skoliose-forening",
+      name: "Dansk Skoliose Forening",
+      logo: "/images/samarbejdspartnere/dansk-skoliose-forening.png",
+      description: [
+        "Dansk Skoliose Forening er en landsdækkende patientforening, skabt og drevet af frivillige. Foreningen har til formål at støtte og rådgive patienter og pårørende med skoliose (skæv ryg), Morbus Scheuermann (krum ryg) og spondylolistese (fremadglidning af en hvirvel).",
+
+        "Foreningen samler sine medlemmer til erfaringsudveksling og netværk ved en række årlige arrangementer. Som medlem får man råd og vejledning om livet med skoliose og Morbus Scheuermann via foreningens nyhedsbrev, Rygsøjlen, der formidler den nyeste viden om behandling og forskning samt personlige beretninger fra andre medlemmer.",
+
+        "Gennem vores samarbejde med Dansk Skoliose Forening kan vi tilbyde skolioseramte nem adgang til at finde fysioterapeuter, der har specialiseret sig i behandling af skoliose.",
+      ],
+      website: "https://skoliose.dk",
+    },
   ];
 
   const breadcrumbItems = [
