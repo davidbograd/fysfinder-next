@@ -633,13 +633,16 @@ export default async function LocationPage({
     ...(specialtyName ? [{ text: specialtyName }] : []),
   ];
 
+  const cityPreposition = data.city.location_preposition ?? "i";
+  const cityLocationPhrase = `${cityPreposition} ${data.city.bynavn}`;
+
   const { h1, h2 } = generateHeadings(
     isOnline ? "online" : data.city.bynavn,
     specialtyName,
-    filters
+    filters,
+    // "online" already reads as a location phrase, so it takes no preposition
+    isOnline ? null : cityPreposition
   );
-  const cityPreposition = data.city.location_preposition ?? "i";
-  const cityLocationPhrase = `${cityPreposition} ${data.city.bynavn}`;
 
   return (
     <div className="w-full">

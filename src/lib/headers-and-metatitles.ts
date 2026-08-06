@@ -13,10 +13,17 @@ export interface HeadingResult {
   h2: string | null;
 }
 
+/**
+ * A city's Danish preposition. `null` means the location reads correctly on its
+ * own and must not be prefixed at all (e.g. "online").
+ */
+export type LocationPreposition = "i" | "på" | null;
+
 function getLocationPhrase(
   locationName: string,
-  locationPreposition?: "i" | "på"
+  locationPreposition?: LocationPreposition
 ): string {
+  if (locationPreposition === null) return locationName;
   const preposition = locationPreposition === "på" ? "på" : "i";
   return `${preposition} ${locationName}`;
 }
@@ -28,11 +35,13 @@ function getLocationPhrase(
 export function generateHeadings(
   locationName: string,
   specialtyName?: string,
-  filters?: HeadingFilters
+  filters?: HeadingFilters,
+  locationPreposition?: LocationPreposition
 ): HeadingResult {
   const hasYdernummer = filters?.ydernummer;
   const hasHandicap = filters?.handicap;
   const filterCount = (hasYdernummer ? 1 : 0) + (hasHandicap ? 1 : 0);
+  const locationPhrase = getLocationPhrase(locationName, locationPreposition);
 
   // Base text components
   const specialtyText = specialtyName
@@ -45,20 +54,20 @@ export function generateHeadings(
 
   if (filterCount === 0) {
     // No filters: Classic H1 only
-    h1 = `Find og sammenlign fysioterapeuter ${locationName}${specialtyText}`;
+    h1 = `Find og sammenlign fysioterapeuter ${locationPhrase}${specialtyText}`;
   } else if (filterCount === 1) {
     // Single filter: Unique H1 for that specific filter
     if (hasYdernummer) {
-      h1 = `Find fysioterapeuter ${locationName}${specialtyText} med ydernummer`;
+      h1 = `Find fysioterapeuter med ydernummer ${locationPhrase}${specialtyText}`;
       h2 = "Tilbyder vederlagsfri fysioterapi & henvisning fra læge";
     } else {
       // hasHandicap must be true since filterCount === 1 - no H2 for handicap only
-      h1 = `Find fysioterapeuter ${locationName}${specialtyText} med handicapadgang`;
+      h1 = `Find fysioterapeuter med handicapadgang ${locationPhrase}${specialtyText}`;
       h2 = null;
     }
   } else {
     // Multiple filters: Classic H1 + descriptive H2
-    h1 = `Find og sammenlign fysioterapeuter ${locationName}${specialtyText}`;
+    h1 = `Find og sammenlign fysioterapeuter ${locationPhrase}${specialtyText}`;
 
     const filterTexts: string[] = [];
     if (hasYdernummer)
@@ -86,7 +95,7 @@ export function generateMetaTitle(
   specialtyName?: string,
   filters?: HeadingFilters,
   clinicCount?: number,
-  locationPreposition?: "i" | "på"
+  locationPreposition?: LocationPreposition
 ): string {
   const hasYdernummer = filters?.ydernummer;
   const hasHandicap = filters?.handicap;
@@ -120,7 +129,7 @@ export function generateMetaTitle(
       if (specialtyName) {
         return `${specialtyPrefix}fysioterapi ${locationPhrase} | Ydernummer (vederlagsfri)`;
       } else {
-        return `Fysioterapi ${locationName} | Ydernummer (vederlagsfri behandling)`;
+        return `Find fysioterapeuter med ydernummer ${locationPhrase} →`;
       }
     } else {
       // hasHandicap must be true since filterCount === 1
@@ -145,9 +154,15 @@ export function generateMetaTitle(
  */
 export function generateLocationHeading(
   locationName: string,
-  filters?: HeadingFilters
+  filters?: HeadingFilters,
+  locationPreposition?: LocationPreposition
 ): HeadingResult {
-  return generateHeadings(locationName, undefined, filters);
+  return generateHeadings(
+    locationName,
+    undefined,
+    filters,
+    locationPreposition
+  );
 }
 
 /**
@@ -156,9 +171,15 @@ export function generateLocationHeading(
 export function generateSpecialtyHeading(
   locationName: string,
   specialtyName: string,
-  filters?: HeadingFilters
+  filters?: HeadingFilters,
+  locationPreposition?: LocationPreposition
 ): HeadingResult {
-  return generateHeadings(locationName, specialtyName, filters);
+  return generateHeadings(
+    locationName,
+    specialtyName,
+    filters,
+    locationPreposition
+  );
 }
 
 /**
@@ -168,7 +189,7 @@ export function generateLocationMetaTitle(
   locationName: string,
   filters?: HeadingFilters,
   clinicCount?: number,
-  locationPreposition?: "i" | "på"
+  locationPreposition?: LocationPreposition
 ): string {
   return generateMetaTitle(
     locationName,
@@ -187,7 +208,7 @@ export function generateSpecialtyMetaTitle(
   specialtyName: string,
   filters?: HeadingFilters,
   clinicCount?: number,
-  locationPreposition?: "i" | "på"
+  locationPreposition?: LocationPreposition
 ): string {
   return generateMetaTitle(
     locationName,
