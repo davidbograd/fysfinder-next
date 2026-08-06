@@ -97,7 +97,7 @@ export async function generateMetadata({
 
   if (isExerciseSlug(slug)) {
     const ex = getExercise(slug);
-    const title = ex.metaTitle ?? `${ex.title} – styrkeøvelse | Fysfinder`;
+    const title = ex.metaTitle ?? `${ex.title} styrkeøvelse | Sådan gør du →`;
     const canonical = `${STYRKEOEVELSER_SITE_URL}${STYRKEOEVELSER_PATH}/${slug}`;
     const ogImagePath = ex.previewImage ?? DEFAULT_OG_IMAGE;
     const ogImageAlt = ex.previewImage
