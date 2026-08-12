@@ -7,7 +7,8 @@ type ExerciseHowToStepsProps = {
   /**
    * Rendered beside the steps — the demo video when the exercise has one.
    * Sits under the shared heading so the footage reads as part of the
-   * how-to rather than a separate section.
+   * how-to rather than a separate section, and leads the row so it stays
+   * above the steps once the grid collapses on narrow screens.
    */
   media?: ReactNode;
   className?: string;
@@ -68,8 +69,8 @@ export const ExerciseHowToSteps = ({
 
       {media ? (
         <div className="grid gap-10 lg:grid-cols-2 lg:items-start lg:gap-12">
-          {stepsColumn}
           {media}
+          {stepsColumn}
         </div>
       ) : (
         stepsColumn
