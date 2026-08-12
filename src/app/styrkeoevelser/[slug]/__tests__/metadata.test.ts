@@ -22,4 +22,23 @@ describe("styrkeoevelser exercise metadata", () => {
       "Armøvelser → Gode øvelser til styrke og træning af arme"
     );
   });
+
+  it("keeps unlisted exercises out of the index while leaving them reachable", async () => {
+    const metadata = await generateMetadata({
+      params: Promise.resolve({ slug: "squat-physitrack-test" }),
+    });
+
+    expect(metadata.robots).toMatchObject({ index: false, follow: false });
+    expect(metadata.alternates?.canonical).toBe(
+      "https://www.fysfinder.dk/styrkeoevelser/squat-physitrack-test"
+    );
+  });
+
+  it("leaves normal exercises indexable", async () => {
+    const metadata = await generateMetadata({
+      params: Promise.resolve({ slug: "squat" }),
+    });
+
+    expect(metadata.robots).toBeUndefined();
+  });
 });

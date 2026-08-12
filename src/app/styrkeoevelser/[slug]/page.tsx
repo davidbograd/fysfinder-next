@@ -110,6 +110,9 @@ export async function generateMetadata({
       alternates: {
         canonical,
       },
+      ...(ex.unlisted
+        ? { robots: { index: false, follow: false, nocache: true } }
+        : {}),
       openGraph: {
         title,
         description: ex.description,
@@ -303,13 +306,31 @@ export default async function StyrkeoevelserSlugPage({
           <Breadcrumbs items={breadcrumbItems} />
         </div>
 
-        {/* 2. How-to steps */}
-        {howTo ? <ExerciseHowToSteps howTo={howTo} /> : null}
-
-        {ex.videoUrl ? (
+        {/* 2. How-to steps, sharing their heading with the demo video */}
+        {howTo ? (
+          <ExerciseHowToSteps
+            howTo={howTo}
+            media={
+              ex.videoUrl ? (
+                <ExerciseVideoSection
+                  videoUrl={ex.videoUrl}
+                  title={ex.videoName ?? ex.title}
+                  posterUrl={ex.videoThumbnailUrl}
+                  attribution={ex.videoAttribution}
+                  attributionLogo={ex.videoAttributionLogo}
+                  className="lg:sticky lg:top-24"
+                />
+              ) : undefined
+            }
+          />
+        ) : ex.videoUrl ? (
           <ExerciseVideoSection
             videoUrl={ex.videoUrl}
             title={ex.videoName ?? ex.title}
+            posterUrl={ex.videoThumbnailUrl}
+            attribution={ex.videoAttribution}
+            attributionLogo={ex.videoAttributionLogo}
+            className="mt-16"
           />
         ) : null}
 

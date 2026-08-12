@@ -11,7 +11,7 @@ import { getBlogPosts } from "../src/lib/blog"; // Import getBlogPosts
 import { getAllAuthors } from "../src/lib/authors"; // Import getAllAuthors
 import {
   getBodyPartSlugs,
-  getExerciseSlugs,
+  getListedExerciseSlugs,
 } from "../src/lib/styrkeoevelser";
 
 config({ path: ".env.local" });
@@ -268,7 +268,7 @@ async function generateSitemaps() {
       priority: 0.78,
     }));
 
-    const styrkeoevelserExerciseUrls = getExerciseSlugs().map((slug) => ({
+    const styrkeoevelserExerciseUrls = getListedExerciseSlugs().map((slug) => ({
       loc: `${DOMAIN}/styrkeoevelser/${slug}`,
       priority: 0.62,
     }));

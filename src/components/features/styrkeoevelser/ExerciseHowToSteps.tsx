@@ -1,21 +1,27 @@
+import type { ReactNode } from "react";
 import type { ExerciseHowTo } from "@/lib/styrkeoevelser";
+import { cn } from "@/lib/utils";
 
 type ExerciseHowToStepsProps = {
   howTo: ExerciseHowTo;
+  /**
+   * Rendered beside the steps — the demo video when the exercise has one.
+   * Sits under the shared heading so the footage reads as part of the
+   * how-to rather than a separate section.
+   */
+  media?: ReactNode;
+  className?: string;
 };
 
-export const ExerciseHowToSteps = ({ howTo }: ExerciseHowToStepsProps) => {
+export const ExerciseHowToSteps = ({
+  howTo,
+  media,
+  className,
+}: ExerciseHowToStepsProps) => {
   const { heading, steps, note } = howTo;
 
-  return (
-    <section className="mt-16" aria-labelledby="how-to-heading">
-      <h2
-        id="how-to-heading"
-        className="mb-8 border-b-2 border-gray-200 pb-2 text-2xl font-semibold text-gray-800"
-      >
-        {heading}
-      </h2>
-
+  const stepsColumn = (
+    <div>
       <ol className="space-y-4">
         {steps.map((step, index) => {
           const isLast = index === steps.length - 1;
@@ -48,6 +54,26 @@ export const ExerciseHowToSteps = ({ howTo }: ExerciseHowToStepsProps) => {
           </p>
         </div>
       ) : null}
+    </div>
+  );
+
+  return (
+    <section className={cn("mt-16", className)} aria-labelledby="how-to-heading">
+      <h2
+        id="how-to-heading"
+        className="mb-8 border-b-2 border-gray-200 pb-2 text-2xl font-semibold text-gray-800"
+      >
+        {heading}
+      </h2>
+
+      {media ? (
+        <div className="grid gap-10 lg:grid-cols-2 lg:items-start lg:gap-12">
+          {stepsColumn}
+          {media}
+        </div>
+      ) : (
+        stepsColumn
+      )}
     </section>
   );
 };

@@ -71,6 +71,16 @@ export type StyrkeoevelserExercise = {
   videoUrl?: string;
   videoName?: string;
   videoThumbnailUrl?: string;
+  /** Rights/credit line rendered under the video, e.g. for licensed third-party footage. */
+  videoAttribution?: string;
+  /** Rights holder whose logo is shown with the video (e.g. `physitrack`). */
+  videoAttributionLogo?: string;
+  /**
+   * Reachable at its own URL, but kept out of every listing, the related grid,
+   * auto internal links and the sitemap, and served with `noindex`. Used for
+   * pages we want to share by direct link only.
+   */
+  unlisted?: boolean;
   /** Card / listing image under `public/` (e.g. `/images/styrkeoevelser/foo.png`). */
   previewImage?: string;
   previewImageAlt?: string;
@@ -270,8 +280,14 @@ export function getBodyPartSlugs(): string[] {
   return listMdSlugs(kropsdeleDir);
 }
 
+/** Every exercise that has a page, including unlisted ones. Use for routing. */
 export function getExerciseSlugs(): string[] {
   return listMdSlugs(ovelserDir);
+}
+
+/** Exercises that may appear in listings, internal links and the sitemap. */
+export function getListedExerciseSlugs(): string[] {
+  return getExerciseSlugs().filter((slug) => !getExercise(slug).unlisted);
 }
 
 function assertNoSlugCollision(): void {
@@ -352,6 +368,15 @@ export function getExercise(slug: string): StyrkeoevelserExercise {
       typeof data.videoThumbnailUrl === "string"
         ? data.videoThumbnailUrl
         : undefined,
+    videoAttribution:
+      typeof data.videoAttribution === "string"
+        ? data.videoAttribution
+        : undefined,
+    videoAttributionLogo:
+      typeof data.videoAttributionLogo === "string"
+        ? data.videoAttributionLogo
+        : undefined,
+    unlisted: data.unlisted === true,
     previewImage:
       typeof data.previewImage === "string" ? data.previewImage : undefined,
     previewImageAlt:
@@ -433,7 +458,7 @@ export function getAllExercisesList(): Array<{
   equipment?: string;
   difficulty?: StyrkeoevelserDifficulty;
 }> {
-  return getExerciseSlugs()
+  return getListedExerciseSlugs()
     .map((slug) => {
       const ex = getExercise(slug);
       return {
@@ -498,7 +523,7 @@ export function getStyrkeoevelserLinkMappings(): LinkMapping[] {
     });
   }
 
-  for (const slug of getExerciseSlugs()) {
+  for (const slug of getListedExerciseSlugs()) {
     const ex = getExercise(slug);
     const keywords = linkKeywordsFromTitle(ex.title);
     mappings.push({
