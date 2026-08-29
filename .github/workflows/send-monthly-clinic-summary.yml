@@ -1,0 +1,59 @@
+name: Send monthly clinic summary
+
+on:
+  schedule:
+    - cron: "0 7 2 * *" # 2nd of each month at 07:00 UTC
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Print recipients without sending"
+        type: boolean
+        default: true
+      preview_to:
+        description: "Send one sample to this email (skips live blast)"
+        type: string
+        required: false
+      period:
+        description: "Override period YYYY-MM (default: previous month)"
+        type: string
+        required: false
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Send monthly clinic summaries
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          ADMIN_EMAILS: ${{ secrets.ADMIN_EMAILS }}
+          EMAIL_UNSUBSCRIBE_SECRET: ${{ secrets.EMAIL_UNSUBSCRIBE_SECRET }}
+          NEXT_PUBLIC_SITE_URL: https://www.fysfinder.dk
+          DRY_RUN_INPUT: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run || 'false' }}
+          PREVIEW_TO: ${{ github.event_name == 'workflow_dispatch' && inputs.preview_to || '' }}
+          PERIOD: ${{ github.event_name == 'workflow_dispatch' && inputs.period || '' }}
+        run: |
+          args=""
+          if [ "$DRY_RUN_INPUT" = "true" ]; then
+            args="$args --dry-run"
+          fi
+          if [ -n "$PREVIEW_TO" ]; then
+            args="$args --preview-to=$PREVIEW_TO"
+          fi
+          if [ -n "$PERIOD" ]; then
+            args="$args --period=$PERIOD"
+          fi
+          npm run email:monthly-clinic-summary -- $args

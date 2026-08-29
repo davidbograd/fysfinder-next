@@ -1,3 +1,6 @@
+// Admin analytics page: clinic and suburb activity tables with day-range filters.
+// Updated: helper copy refers to "interaktioner" instead of "lead klik".
+
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import Link from "next/link";
@@ -135,7 +138,7 @@ export default async function AdminAnalyticsPage({
         <h1 className="text-3xl font-bold tracking-tight text-gray-900">Aktivitets data</h1>
         <p className="mt-2 text-sm text-gray-600">
           Se aktivitet fordelt på bydele eller klinikker. Sorter tabellen ved at klikke på
-          kolonneoverskrifterne for lead klik eller visninger.
+          kolonneoverskrifterne for interaktioner eller visninger.
         </p>
       </div>
 

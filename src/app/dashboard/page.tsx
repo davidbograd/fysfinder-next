@@ -1,5 +1,5 @@
 // Dashboard page for clinic owners and admins.
-// Updated: includes booking clicks in lead KPI totals plus an admin entry card for clinic ownership management.
+// Updated: renamed the lead KPI label from "Lead klik" to "Interaktioner".
 
 import { redirect } from "next/navigation";
 import { createClient } from "@/app/utils/supabase/server";
@@ -301,7 +301,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                         {totalLeadClicks.toLocaleString("da-DK")}
                       </p>
                       <p className="text-xl font-medium tracking-tight text-gray-500">
-                        Lead klik
+                        Interaktioner
                       </p>
                     </div>
                     <p className="text-sm leading-relaxed text-gray-600">

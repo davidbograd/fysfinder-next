@@ -1,5 +1,6 @@
 // Admin-only aggregate analytics across all clinics
 // Shows platform-wide event totals for the last 30 days
+// Updated: contact KPI label is "Interaktioner" instead of "Lead klik".
 
 "use client";
 
@@ -101,7 +102,7 @@ export const AdminAnalyticsSection = () => {
                   <div className="rounded-md bg-gray-50 p-1.5 text-gray-400">
                     <TrendingUp className="h-4 w-4" />
                   </div>
-                  <span className="text-sm font-medium text-gray-700">Lead klik</span>
+                  <span className="text-sm font-medium text-gray-700">Interaktioner</span>
                 </div>
                 <p className="mt-3 text-3xl font-bold text-gray-900 tabular-nums">
                   {(

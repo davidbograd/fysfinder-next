@@ -44,13 +44,22 @@ https://console.developers.google.com/apis/api/places.googleapis.com/overview
 
 ### `backfill-clinic-coordinates.ts`
 
-- **Purpose**: One-time backfill to store clinic `latitude` + `longitude` from existing `google_place_id` values.
+- **Purpose**: Backfill clinic `latitude` + `longitude` from the clinic address via DAWA. Does not use Google Place location, so a shared Maps listing can stay attached to several clinics.
 - **Usage**: `npm run google:coords` or with options:
   ```bash
   npm run google:coords -- --dry-run
   npm run google:coords -- --limit 100
   ```
 - **When to run**: After `google:backfill`, and before enabling marker-based map views on location pages.
+
+### `repair-shared-place-coordinates.ts`
+
+- **Purpose**: Rewrite map pins for clinics that share one Google Place ID across different postcodes. Keeps Place IDs and Maps URLs; geocodes each clinic from its own address.
+- **Usage**: `npm run coords:repair-shared` (dry-run) or:
+  ```bash
+  npm run coords:repair-shared -- --apply
+  npm run coords:repair-shared -- --apply --limit 10
+  ```
 
 ### `update-clinic-google-data.ts`
 
@@ -77,6 +86,17 @@ https://console.developers.google.com/apis/api/places.googleapis.com/overview
 
 - **Purpose**: Updates import statements across the codebase
 - **Usage**: `npm run update:imports`
+
+### `send-monthly-clinic-summary.ts`
+
+- **Purpose**: Emails each clinic owner a previous-month performance summary (interaktioner + visninger) plus a profile-attention nudge
+- **Usage**:
+  ```bash
+  npm run email:monthly-clinic-summary -- --dry-run
+  npm run email:monthly-clinic-summary -- --preview-to=you@example.com
+  npm run email:monthly-clinic-summary -- --period=2026-07
+  ```
+- **Schedule**: GitHub Action on the 2nd of each month (`send-monthly-clinic-summary.yml`)
 
 ### `revalidate.js`
 

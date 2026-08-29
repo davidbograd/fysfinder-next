@@ -1,4 +1,13 @@
+/**
+ * After admin approval, enrich a clinic from a Google Maps URL.
+ * Shared Place IDs are allowed; map coordinates always come from the clinic address.
+ */
+
 import type { SupabaseClient } from "@supabase/supabase-js";
+import {
+  geocodeDanishAddress,
+  type GeocodedCoordinates,
+} from "@/lib/geocoding/geocode-danish-address";
 
 const DAY_COLUMNS = [
   "mandag",
@@ -48,7 +57,6 @@ const PLACE_DETAILS_FIELD_MASK = [
   "internationalPhoneNumber",
   "websiteUri",
   "googleMapsUri",
-  "location",
 ].join(",");
 
 const TEXT_SEARCH_FIELD_MASK =
@@ -79,7 +87,6 @@ interface PlaceDetails {
   internationalPhoneNumber?: string;
   websiteUri?: string;
   googleMapsUri?: string;
-  location?: { latitude?: number; longitude?: number };
 }
 
 interface TextSearchPlace {
@@ -470,6 +477,61 @@ const fetchClinicRowForSync = async (
 };
 
 /**
+ * Builds the clinic update from Google Place metadata plus independently
+ * geocoded clinic-address coordinates. Never copies Place location.
+ */
+export function buildClinicGooglePlaceUpdate(options: {
+  placeId: string;
+  details: PlaceDetails;
+  clinic: ClinicRowForSync;
+  addressCoordinates: GeocodedCoordinates | null;
+}): Record<string, unknown> {
+  const { placeId, details, clinic, addressCoordinates } = options;
+  const updateData: Record<string, unknown> = {
+    google_place_id: placeId,
+  };
+
+  if (details.googleMapsUri) {
+    updateData.google_maps_url_cid = details.googleMapsUri;
+  }
+
+  if (details.rating !== undefined && details.rating !== null) {
+    updateData.avgRating = details.rating;
+  }
+
+  if (details.userRatingCount !== undefined && details.userRatingCount !== null) {
+    updateData.ratingCount = details.userRatingCount;
+  }
+
+  if (addressCoordinates) {
+    updateData.latitude = addressCoordinates.latitude;
+    updateData.longitude = addressCoordinates.longitude;
+  }
+
+  if (areAllWeekdayHoursUnsetInDb(clinic)) {
+    const descriptions = details.regularOpeningHours?.weekdayDescriptions;
+    if (descriptions && descriptions.length > 0) {
+      const hours = parseOpeningHoursFromGoogleDescriptions(descriptions);
+      if (hasAnyNonClosedParsedHour(hours)) {
+        for (const day of DAY_COLUMNS) {
+          updateData[day] = hours[day];
+        }
+      }
+    }
+  }
+
+  if (isNullishOrBlank(clinic.tlf) && details.internationalPhoneNumber) {
+    updateData.tlf = details.internationalPhoneNumber.replace(/\s+/g, " ").trim();
+  }
+
+  if (isNullishOrBlank(clinic.website) && details.websiteUri) {
+    updateData.website = details.websiteUri;
+  }
+
+  return updateData;
+}
+
+/**
  * After admin approval, enrich `clinics` from Google Places using a Maps URL.
  * Does not throw — returns structured result for UI toasts.
  */
@@ -538,48 +600,18 @@ export const syncClinicFromGoogleMapsUrlOnApprove = async (
       };
     }
 
-    const updateData: Record<string, unknown> = {};
-    updateData.google_place_id = placeId;
+    const addressCoordinates = await geocodeDanishAddress({
+      adresse: clinic.adresse,
+      postnummer: clinic.postnummer,
+      lokation: clinic.lokation,
+    });
 
-    if (details.googleMapsUri) {
-      updateData.google_maps_url_cid = details.googleMapsUri;
-    }
-
-    if (details.rating !== undefined && details.rating !== null) {
-      updateData.avgRating = details.rating;
-    }
-
-    if (details.userRatingCount !== undefined && details.userRatingCount !== null) {
-      updateData.ratingCount = details.userRatingCount;
-    }
-
-    const lat = details.location?.latitude;
-    const lng = details.location?.longitude;
-    if (typeof lat === "number" && typeof lng === "number") {
-      updateData.latitude = lat;
-      updateData.longitude = lng;
-    }
-
-    if (areAllWeekdayHoursUnsetInDb(clinic)) {
-      const descriptions = details.regularOpeningHours?.weekdayDescriptions;
-      if (descriptions && descriptions.length > 0) {
-        const hours = parseOpeningHoursFromGoogleDescriptions(descriptions);
-        if (hasAnyNonClosedParsedHour(hours)) {
-          for (const day of DAY_COLUMNS) {
-            updateData[day] = hours[day];
-          }
-        }
-      }
-    }
-
-    if (isNullishOrBlank(clinic.tlf) && details.internationalPhoneNumber) {
-      updateData.tlf = details.internationalPhoneNumber.replace(/\s+/g, " ").trim();
-    }
-
-    if (isNullishOrBlank(clinic.website) && details.websiteUri) {
-      updateData.website = details.websiteUri;
-    }
-
+    const updateData = buildClinicGooglePlaceUpdate({
+      placeId,
+      details,
+      clinic,
+      addressCoordinates,
+    });
     updateData.updated_at = new Date().toISOString();
 
     const { error: updateError } = await supabase
