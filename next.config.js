@@ -1,3 +1,8 @@
+// Next config, including one-time clinic duplicate slug redirects.
+// Updated: spreads clinic-duplicate-redirects.js after the existing content redirects.
+
+import clinicDuplicateRedirects from "./clinic-duplicate-redirects.js";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: ['next-mdx-remote'],
@@ -107,6 +112,7 @@ const nextConfig = {
         destination: '/styrkeoevelser/:slug',
         permanent: true,
       },
+      ...clinicDuplicateRedirects,
     ];
   },
 }

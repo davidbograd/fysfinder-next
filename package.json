@@ -34,6 +34,8 @@
     "google:backfill": "tsx scripts/backfill-google-place-ids.ts",
     "google:coords": "tsx scripts/backfill-clinic-coordinates.ts",
     "google:update": "tsx scripts/update-clinic-google-data.ts",
+    "dedupe:clinics": "tsx scripts/dedupe-clinics/classify.ts",
+    "dedupe:clinics:apply": "tsx scripts/dedupe-clinics/apply.ts",
     "update:imports": "node scripts/update-imports.mjs",
     "revalidate": "node scripts/revalidate.js",
     "stripe:listen": "stripe listen --forward-to localhost:3000/api/stripe/webhook",
