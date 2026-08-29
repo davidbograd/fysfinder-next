@@ -40,7 +40,7 @@ describe("AdminSuburbLeadsSection", () => {
     });
 
     expect(screen.queryByText("Sidste 30 dage")).not.toBeInTheDocument();
-    expect(screen.getByText("Lead klik")).toBeInTheDocument();
+    expect(screen.getByText("Interaktioner")).toBeInTheDocument();
     expect(screen.getByText("Tlf")).toBeInTheDocument();
     expect(screen.getByText("Website")).toBeInTheDocument();
     expect(screen.getByText("Email")).toBeInTheDocument();

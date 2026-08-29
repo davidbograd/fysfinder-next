@@ -123,7 +123,7 @@ describe("DashboardPage auth gate", () => {
     const ui = await DashboardPage({ searchParams: Promise.resolve({}) });
     render(ui);
 
-    expect(screen.getAllByText("Lead klik").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Interaktioner").length).toBeGreaterThan(0);
     expect(screen.getAllByText("Booking klik").length).toBeGreaterThan(0);
     expect(screen.getByText("45")).toBeInTheDocument();
   });

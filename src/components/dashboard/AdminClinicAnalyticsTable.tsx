@@ -1,3 +1,6 @@
+// Sortable clinic analytics table for the admin dashboard.
+// Updated: sortable contact column is labeled "Interaktioner".
+
 "use client";
 
 import { useMemo, useState } from "react";
@@ -174,7 +177,7 @@ export const AdminClinicAnalyticsTable = ({ rows }: AdminClinicAnalyticsTablePro
                   className="h-auto rounded-full px-0 py-0 text-xs font-medium uppercase tracking-wide text-white hover:bg-white/10 hover:text-white"
                   onClick={() => handleSort("leadClicks")}
                 >
-                  <span>Lead klik</span>
+                  <span>Interaktioner</span>
                   <span className="ml-1">{renderSortIndicator("leadClicks")}</span>
                 </Button>
               </TableHead>

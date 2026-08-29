@@ -1,3 +1,6 @@
+// Admin suburb ranking by contact interactions.
+// Updated: column and heading use "Interaktioner" instead of "Lead klik".
+
 "use client";
 
 import { useEffect, useState } from "react";
@@ -54,7 +57,7 @@ export const AdminSuburbLeadsSection = ({
     <div className="flex items-center justify-between gap-3">
       <CardTitle className="flex items-center gap-2 text-base">
         <BarChart3 className="h-4 w-4 text-muted-foreground" />
-        Top bydele efter lead klik
+        Top bydele efter interaktioner
       </CardTitle>
     </div>
   );
@@ -62,7 +65,7 @@ export const AdminSuburbLeadsSection = ({
   const tableHeader = (
     <div className="grid grid-cols-[minmax(0,1fr)_88px_72px_78px_64px] gap-2 px-3 text-xs font-medium uppercase tracking-wide text-gray-500">
       <span>Bydel</span>
-      <span className="text-right">Lead klik</span>
+      <span className="text-right">Interaktioner</span>
       <span className="text-right">Tlf</span>
       <span className="text-right">Website</span>
       <span className="text-right">Email</span>

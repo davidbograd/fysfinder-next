@@ -164,6 +164,6 @@ describe("AdminAnalyticsPage", () => {
 
     expect(mockGetSuburbAnalytics).toHaveBeenCalledWith(7);
     expect(screen.queryByText("Visninger")).not.toBeInTheDocument();
-    expect(screen.queryByText("Lead klik")).not.toBeInTheDocument();
+    expect(screen.queryByText("Interaktioner")).not.toBeInTheDocument();
   });
 });

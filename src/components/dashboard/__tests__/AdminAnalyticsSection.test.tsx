@@ -11,7 +11,7 @@ jest.mock("@/components/dashboard/AdminSuburbLeadsSection", () => ({
 }));
 
 describe("AdminAnalyticsSection", () => {
-  it("shows side-by-side visninger and lead klik breakdowns", async () => {
+  it("shows side-by-side visninger and interaktioner breakdowns", async () => {
     (getAggregateAnalytics as jest.Mock).mockResolvedValue({
       error: null,
       stats: {
@@ -32,7 +32,7 @@ describe("AdminAnalyticsSection", () => {
       expect(screen.getByText("Visninger")).toBeInTheDocument();
     });
 
-    expect(screen.getByText("Lead klik")).toBeInTheDocument();
+    expect(screen.getByText("Interaktioner")).toBeInTheDocument();
     expect(screen.getByText("i søgeresultater")).toBeInTheDocument();
     expect(screen.getByText("på kliniksider")).toBeInTheDocument();
     expect(screen.getByText("vist tlf nummer")).toBeInTheDocument();
