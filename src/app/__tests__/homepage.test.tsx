@@ -58,6 +58,14 @@ describe("HomePage", () => {
 
     expect(screen.getByText("Find fysioterapeut efter område")).toBeInTheDocument();
     expect(screen.getByText("RegionList mock")).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: "klinikker med ydernummer" })
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole("link", {
+        name: "behandling med tilskud fra den offentlige sygesikring",
+      })
+    ).not.toBeInTheDocument();
   });
 
   it("renders graceful fallback when data fetching fails", async () => {

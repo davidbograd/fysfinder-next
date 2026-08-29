@@ -176,14 +176,8 @@ function ValuePropsSection() {
             Nem adgang til tilskudsberettiget behandling
           </h3>
           <p className="text-[#5a6663] mt-3">
-            Find hurtigt klinikker, der tilbyder{" "}
-            <Link
-              href="https://www.fysfinder.dk/find/fysioterapeut/danmark?ydernummer=true"
-              className="font-medium text-[#0b5b43] underline underline-offset-2 hover:text-[#084c39] transition-colors"
-            >
-              behandling med tilskud fra den offentlige sygesikring
-            </Link>
-            . Tjek for{" "}
+            Find hurtigt klinikker, der tilbyder behandling med tilskud fra den
+            offentlige sygesikring. Tjek for{" "}
             <Link
               href="https://www.fysfinder.dk/find/fysioterapeut/danmark?ydernummer=true"
               className="font-medium text-[#0b5b43] underline underline-offset-2 hover:text-[#084c39] transition-colors"
