@@ -33,6 +33,7 @@
     "fetch:physio": "tsx scripts/fetch-physiotherapists-google-maps.ts",
     "google:backfill": "tsx scripts/backfill-google-place-ids.ts",
     "google:coords": "tsx scripts/backfill-clinic-coordinates.ts",
+    "coords:repair-shared": "tsx scripts/repair-shared-place-coordinates.ts",
     "google:update": "tsx scripts/update-clinic-google-data.ts",
     "update:imports": "node scripts/update-imports.mjs",
     "revalidate": "node scripts/revalidate.js",
