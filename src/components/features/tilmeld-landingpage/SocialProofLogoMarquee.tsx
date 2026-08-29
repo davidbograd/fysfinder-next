@@ -1,8 +1,9 @@
 "use client";
 
-// Updated: 2026-08-29 - Show carousel chips only after a logo loads; hide failures. Shortened TræningsHulen.
+// Updated: 2026-08-30 - Scroll the strip by a measured pixel offset so iOS Safari animates it.
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { getMarqueeDurationSeconds } from "./marquee-timing";
 
 interface ClinicLogoItem {
   name: string;
@@ -42,9 +43,95 @@ export function SocialProofLogoMarquee({
 }: SocialProofLogoMarqueeProps) {
   const [logoLoadFailed, setLogoLoadFailed] = useState<Record<string, boolean>>({});
   const [logoReady, setLogoReady] = useState<Record<string, boolean>>({});
+  const [loopDistance, setLoopDistance] = useState(0);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const settleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const logoDevToken = process.env.NEXT_PUBLIC_LOGO_DEV_PUBLISHABLE_KEY;
 
   const items = useMemo(() => [...clinicLogos, ...clinicLogos], []);
+
+  const measureLoopDistance = useCallback(() => {
+    const track = trackRef.current;
+    const viewport = track?.parentElement;
+    if (!track || !viewport) return;
+
+    const firstCopy = track.querySelector<HTMLElement>('[data-marquee-copy="0"]');
+    const secondCopy = track.querySelector<HTMLElement>('[data-marquee-copy="1"]');
+    if (!firstCopy || !secondCopy) {
+      setLoopDistance(0);
+      return;
+    }
+
+    // Both chips live inside the animated track, so the gap between them is the
+    // loop length regardless of whatever transform is currently in flight.
+    const distance = Math.round(
+      secondCopy.getBoundingClientRect().left -
+        firstCopy.getBoundingClientRect().left
+    );
+
+    // Nothing worth scrolling until the loaded logos are wider than the strip.
+    setLoopDistance(distance > viewport.clientWidth ? distance : 0);
+  }, []);
+
+  // Logos arrive one by one and each one widens the strip, so wait for the width
+  // to settle before committing to a distance.
+  const scheduleMeasure = useCallback(() => {
+    if (settleTimerRef.current) {
+      clearTimeout(settleTimerRef.current);
+    }
+
+    settleTimerRef.current = setTimeout(() => {
+      settleTimerRef.current = null;
+      measureLoopDistance();
+    }, 250);
+  }, [measureLoopDistance]);
+
+  useEffect(() => {
+    scheduleMeasure();
+  }, [scheduleMeasure, logoReady, logoLoadFailed]);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    const observer = new ResizeObserver(scheduleMeasure);
+    observer.observe(track);
+
+    return () => {
+      observer.disconnect();
+      if (settleTimerRef.current) {
+        clearTimeout(settleTimerRef.current);
+      }
+    };
+  }, [scheduleMeasure]);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track || loopDistance <= 0) return;
+    if (typeof track.animate !== "function") return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const durationMs = getMarqueeDurationSeconds(loopDistance) * 1000;
+    if (durationMs <= 0) return;
+
+    // Keep this an absolute pixel offset. A percentage (translateX(-50%)) resolves
+    // against the track's own width, which browsers disagree on for a max-content
+    // flex row inside a clipped parent — iOS Safari ended up not scrolling at all.
+    const animation = track.animate(
+      [
+        { transform: "translate3d(0px, 0px, 0px)" },
+        { transform: `translate3d(${-loopDistance}px, 0px, 0px)` },
+      ],
+      {
+        duration: durationMs,
+        easing: "linear",
+        iterations: Infinity,
+      }
+    );
+
+    return () => animation.cancel();
+  }, [loopDistance]);
 
   function buildLogoPath(website: string) {
     if (!logoDevToken) return null;
@@ -82,7 +169,7 @@ export function SocialProofLogoMarquee({
         </div>
         <div className="relative overflow-hidden rounded-full">
           <div
-            className={`pointer-events-none absolute inset-y-0 left-0 z-10 w-20 rounded-l-full bg-gradient-to-r md:w-28 ${
+            className={`pointer-events-none absolute inset-y-0 left-0 z-10 w-12 rounded-l-full bg-gradient-to-r md:w-28 ${
               embedded
                 ? "from-brand-beige/95 via-brand-beige/70 to-transparent"
                 : "from-white/95 via-white/70 to-transparent"
@@ -90,14 +177,17 @@ export function SocialProofLogoMarquee({
             aria-hidden="true"
           />
           <div
-            className={`pointer-events-none absolute inset-y-0 right-0 z-10 w-20 rounded-r-full bg-gradient-to-l md:w-28 ${
+            className={`pointer-events-none absolute inset-y-0 right-0 z-10 w-12 rounded-r-full bg-gradient-to-l md:w-28 ${
               embedded
                 ? "from-brand-beige/95 via-brand-beige/70 to-transparent"
                 : "from-white/95 via-white/70 to-transparent"
             }`}
             aria-hidden="true"
           />
-          <div className="marquee-track flex min-w-max items-center gap-4">
+          <div
+            ref={trackRef}
+            className="marquee-track flex min-w-max items-center gap-4 will-change-transform"
+          >
             {items.map((item, index) => {
               const logoPath = buildLogoPath(item.website);
               if (!logoPath || logoLoadFailed[item.website]) {
@@ -109,6 +199,7 @@ export function SocialProofLogoMarquee({
               return (
               <div
                 key={`${item.website}-${index}`}
+                data-marquee-copy={index < clinicLogos.length ? "0" : "1"}
                 className={
                   isReady
                     ? "flex items-center gap-3 rounded-md border border-gray-200 bg-white p-3"
@@ -141,21 +232,6 @@ export function SocialProofLogoMarquee({
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        .marquee-track {
-          animation: marquee 170s linear infinite;
-        }
-
-        @keyframes marquee {
-          from {
-            transform: translateX(0);
-          }
-          to {
-            transform: translateX(-50%);
-          }
-        }
-      `}</style>
     </Wrapper>
   );
 }

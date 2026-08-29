@@ -1,6 +1,7 @@
-// Updated: 2026-08-29 - Verifies clinics without a loadable logo are omitted from the carousel.
-import { fireEvent, render, screen } from "@testing-library/react";
+// Updated: 2026-08-30 - Adds coverage for the measured pixel scroll animation.
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { SocialProofLogoMarquee } from "../SocialProofLogoMarquee";
+import { MARQUEE_SPEED_PX_PER_SECOND } from "../marquee-timing";
 
 describe("SocialProofLogoMarquee", () => {
   it("renders the default clinic-owner heading", () => {
@@ -60,5 +61,127 @@ describe("SocialProofLogoMarquee", () => {
     expect(screen.getAllByText("Copenhagen Physio").length).toBeGreaterThan(0);
 
     process.env.NEXT_PUBLIC_LOGO_DEV_PUBLISHABLE_KEY = previousToken;
+  });
+});
+
+describe("SocialProofLogoMarquee scroll animation", () => {
+  const LOOP_DISTANCE = 4424;
+  const VIEWPORT_WIDTH = 390;
+
+  let animate: jest.Mock;
+  let previousToken: string | undefined;
+  let previousAnimate: typeof Element.prototype.animate | undefined;
+
+  function loadEveryLogo(container: HTMLElement) {
+    container.querySelectorAll("img").forEach((image) => {
+      fireEvent.load(image);
+    });
+  }
+
+  function settleMeasurement() {
+    act(() => {
+      jest.advanceTimersByTime(500);
+    });
+  }
+
+  beforeEach(() => {
+    previousToken = process.env.NEXT_PUBLIC_LOGO_DEV_PUBLISHABLE_KEY;
+    process.env.NEXT_PUBLIC_LOGO_DEV_PUBLISHABLE_KEY = "pk_test_token";
+
+    jest.useFakeTimers();
+
+    animate = jest.fn(() => ({ cancel: jest.fn() }));
+    previousAnimate = Element.prototype.animate;
+    Element.prototype.animate = animate as unknown as typeof Element.prototype.animate;
+
+    // jsdom has no layout, so stand in for the two measurements the component takes.
+    jest
+      .spyOn(HTMLElement.prototype, "getBoundingClientRect")
+      .mockImplementation(function mockRect(this: HTMLElement) {
+        const left = this.dataset.marqueeCopy === "1" ? LOOP_DISTANCE : 0;
+        return { left, x: left, width: 0, height: 0 } as DOMRect;
+      });
+
+    Object.defineProperty(HTMLElement.prototype, "clientWidth", {
+      configurable: true,
+      get: () => VIEWPORT_WIDTH,
+    });
+  });
+
+  afterEach(() => {
+    jest.useRealTimers();
+    jest.restoreAllMocks();
+
+    if (previousAnimate) {
+      Element.prototype.animate = previousAnimate;
+    } else {
+      Reflect.deleteProperty(Element.prototype, "animate");
+    }
+
+    Reflect.deleteProperty(HTMLElement.prototype, "clientWidth");
+    process.env.NEXT_PUBLIC_LOGO_DEV_PUBLISHABLE_KEY = previousToken;
+  });
+
+  it("scrolls by an absolute pixel offset rather than a percentage", () => {
+    const { container } = render(<SocialProofLogoMarquee embedded />);
+
+    loadEveryLogo(container);
+    settleMeasurement();
+
+    expect(animate).toHaveBeenCalled();
+
+    const [keyframes] = animate.mock.calls.at(-1) as [Keyframe[]];
+
+    expect(keyframes[0].transform).toBe("translate3d(0px, 0px, 0px)");
+    expect(keyframes[1].transform).toBe(`translate3d(-${LOOP_DISTANCE}px, 0px, 0px)`);
+    // A percentage offset here is what stopped the strip scrolling on iOS Safari.
+    expect(keyframes[1].transform).not.toContain("%");
+  });
+
+  it("loops forever at the configured speed", () => {
+    const { container } = render(<SocialProofLogoMarquee embedded />);
+
+    loadEveryLogo(container);
+    settleMeasurement();
+
+    const [, options] = animate.mock.calls.at(-1) as [
+      Keyframe[],
+      KeyframeAnimationOptions,
+    ];
+
+    expect(options.duration).toBeCloseTo(
+      (LOOP_DISTANCE / MARQUEE_SPEED_PX_PER_SECOND) * 1000
+    );
+    expect(options.iterations).toBe(Infinity);
+    expect(options.easing).toBe("linear");
+  });
+
+  it("does not animate when the strip is narrower than the viewport", () => {
+    jest
+      .spyOn(HTMLElement.prototype, "getBoundingClientRect")
+      .mockImplementation(function mockRect(this: HTMLElement) {
+        const left = this.dataset.marqueeCopy === "1" ? 100 : 0;
+        return { left, x: left, width: 0, height: 0 } as DOMRect;
+      });
+
+    const { container } = render(<SocialProofLogoMarquee embedded />);
+
+    loadEveryLogo(container);
+    settleMeasurement();
+
+    expect(animate).not.toHaveBeenCalled();
+  });
+
+  it("stays still when the visitor prefers reduced motion", () => {
+    jest.spyOn(window, "matchMedia").mockReturnValue({
+      matches: true,
+    } as unknown as MediaQueryList);
+
+    const { container } = render(<SocialProofLogoMarquee embedded />);
+
+    loadEveryLogo(container);
+    settleMeasurement();
+
+    expect(animate).not.toHaveBeenCalled();
   });
 });
