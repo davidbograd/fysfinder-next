@@ -1,15 +1,15 @@
-// Updated: 2026-04-06 - Rebuilt hero with new conversion copy, visual clinic search input, and trust USP list.
+// Updated: 2026-08-29 - Trust list now uses cumulative users instead of monthly visitors.
 import { Button } from "@/components/ui/button";
 import { Check, Eye, Globe, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import { FORMATTED_MONTHLY_VISITORS_DK } from "@/lib/siteMetrics";
+import { FORMATTED_TOTAL_USERS_DK } from "@/lib/siteMetrics";
 import { SocialProofLogoMarquee } from "@/components/features/tilmeld-landingpage/SocialProofLogoMarquee";
 import VerifiedCheck from "@/assets/icons/verified-check.svg";
 
 const trustPoints = [
-  `+${FORMATTED_MONTHLY_VISITORS_DK} månedlige besøgende`,
+  `+${FORMATTED_TOTAL_USERS_DK} har brugt Fysfinder`,
   "+800 månedlige patienthenvendelser",
   "+3 månedlige nye patienter pr. klinik",
 ];
