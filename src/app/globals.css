@@ -1,4 +1,4 @@
-/* Updated: 2026-03-21 - Added smooth anchor scrolling for in-page search helper links */
+/* Updated: 2026-08-29 - Clip horizontal overflow from full-bleed w-dvw sections. */
 @import "leaflet/dist/leaflet.css";
 
 @tailwind base;
@@ -97,8 +97,10 @@
        Note: scroll-behavior is intentionally NOT set to `smooth` globally, because it would
        cause the Next.js App Router's scroll-to-top on route change to animate from the old
        scroll position, making navigations feel laggy. When smooth scrolling is wanted for
-       specific in-page interactions, call `scrollIntoView({ behavior: "smooth" })` directly. */
-    @apply scroll-pt-20;
+       specific in-page interactions, call `scrollIntoView({ behavior: "smooth" })` directly.
+       overflow-x: clip contains full-bleed `w-dvw` sections (100dvw includes the scrollbar)
+       without creating a scroll container, so position:sticky keeps working. */
+    @apply scroll-pt-20 overflow-x-clip;
   }
 
   body {

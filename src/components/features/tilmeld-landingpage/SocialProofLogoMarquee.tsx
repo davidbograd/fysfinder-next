@@ -1,6 +1,6 @@
 "use client";
 
-// Added: 2026-04-06 - Introduced continuously moving clinic "logo" marquee for social proof.
+// Updated: 2026-08-29 - Show carousel chips only after a logo loads; hide failures. Shortened TræningsHulen.
 import Image from "next/image";
 import { useMemo, useState } from "react";
 
@@ -11,12 +11,13 @@ interface ClinicLogoItem {
 
 interface SocialProofLogoMarqueeProps {
   embedded?: boolean;
+  heading?: string;
 }
 
 const clinicLogos: ClinicLogoItem[] = [
   { name: "Fysioterapeuterne Østerbro", website: "https://fysioterapeuterneoesterbro.dk" },
-  { name: "TræningsHulen | Holdtræning, Sundhed & Fysioterapi", website: "https://traeningshulen.dk" },
-  { name: "Svendborgsund Fysioterapiklinik og Træningscenter", website: "https://www.svendborgsundfysioterapi.dk/" },
+  { name: "TræningsHulen | Sundhed & Fysioterapi", website: "https://traeningshulen.dk" },
+  { name: "Svendborgsund Fysioterapiklinik", website: "https://www.svendborgsundfysioterapi.dk/" },
   { name: "Aalborg Smerte- og Sportsklinik", website: "https://smerteogsport.dk/" },
   { name: "JustHealth - Kiropraktik & Idrætsklinik", website: "https://justhealth.dk/" },
   { name: "Fysio360", website: "www.fysio360.dk" },
@@ -27,14 +28,20 @@ const clinicLogos: ClinicLogoItem[] = [
   { name: "Tune Fysioterapi", website: "https://tunefysioterapi.dk" },
   { name: "Kokkedal Fysioterapi", website: "https://kokkedalfys.dk/" },
   { name: "JL Sportsklinik", website: "https://jlsportsklinik.dk/" },
-  { name: "Fysiopuls", website: "https://fysiopuls.dk/" },
-  { name: "Copenhagen Physio - Din Fysioterapeut i København og Valby", website: "http://www.copenhagenphysio.dk/" },
+  { name: "Copenhagen Physio", website: "https://www.copenhagenphysio.dk/" },
   { name: "Fysioterapi og træning", website: "http://www.fysionygade.dk/" },
   { name: "Fysioterapeut Patrycja Los", website: "https://plfysio.dk/" },
+  { name: "Hjernerystelsesfyssen", website: "https://hjernerystelsesfyssen.dk" },
+  { name: "RygCenter Skjern", website: "https://rygcenterskjern.dk/" },
+  { name: "Værløse Hareskov Fysioterapi", website: "http://www.fys-bassin.dk/" },
 ];
 
-export function SocialProofLogoMarquee({ embedded = false }: SocialProofLogoMarqueeProps) {
+export function SocialProofLogoMarquee({
+  embedded = false,
+  heading = "De bruger allerede Fysfinder",
+}: SocialProofLogoMarqueeProps) {
   const [logoLoadFailed, setLogoLoadFailed] = useState<Record<string, boolean>>({});
+  const [logoReady, setLogoReady] = useState<Record<string, boolean>>({});
   const logoDevToken = process.env.NEXT_PUBLIC_LOGO_DEV_PUBLISHABLE_KEY;
 
   const items = useMemo(() => [...clinicLogos, ...clinicLogos], []);
@@ -59,7 +66,7 @@ export function SocialProofLogoMarquee({ embedded = false }: SocialProofLogoMarq
     <Wrapper
       className={`w-full py-6 ${
         embedded
-          ? "relative left-1/2 w-dvw -translate-x-1/2 bg-transparent"
+          ? "overflow-x-clip bg-transparent"
           : "border-y border-gray-200 bg-white"
       }`}
     >
@@ -70,8 +77,8 @@ export function SocialProofLogoMarquee({ embedded = false }: SocialProofLogoMarq
             : "mx-auto w-full max-w-[1440px] overflow-hidden px-5 sm:px-6 lg:px-8"
         }
       >
-        <div className="mb-3 text-center text-sm font-medium text-gray-500">
-          De bruger allerede Fysfinder
+        <div className="mb-3 px-4 text-center text-sm font-medium text-balance text-gray-500">
+          {heading}
         </div>
         <div className="relative overflow-hidden rounded-full">
           <div
@@ -93,32 +100,41 @@ export function SocialProofLogoMarquee({ embedded = false }: SocialProofLogoMarq
           <div className="marquee-track flex min-w-max items-center gap-4">
             {items.map((item, index) => {
               const logoPath = buildLogoPath(item.website);
-              const hasLogo = Boolean(logoPath) && !logoLoadFailed[item.website];
+              if (!logoPath || logoLoadFailed[item.website]) {
+                return null;
+              }
+
+              const isReady = Boolean(logoReady[item.website]);
 
               return (
               <div
                 key={`${item.website}-${index}`}
-                className="flex items-center gap-3 rounded-md border border-gray-200 bg-white p-3"
+                className={
+                  isReady
+                    ? "flex items-center gap-3 rounded-md border border-gray-200 bg-white p-3"
+                    : "pointer-events-none h-0 w-0 overflow-hidden"
+                }
+                aria-hidden={!isReady}
               >
-                {hasLogo && logoPath ? (
-                  <div className="h-8 w-8 overflow-hidden rounded-sm bg-white">
-                    <Image
-                      src={logoPath}
-                      alt={`${item.name} logo`}
-                      width={32}
-                      height={32}
-                      className="h-full w-full object-contain"
-                      onError={() =>
-                        setLogoLoadFailed((prev) => ({ ...prev, [item.website]: true }))
-                      }
-                    />
-                  </div>
-                ) : (
-                  <div className="flex h-8 w-8 items-center justify-center rounded-sm bg-white text-sm font-semibold text-gray-500">
-                    {item.name.charAt(0)}
-                  </div>
-                )}
-                <span className="text-sm font-medium text-gray-700">{item.name}</span>
+                <div className="h-8 w-8 overflow-hidden rounded-sm bg-white">
+                  <Image
+                    src={logoPath}
+                    alt={`${item.name} logo`}
+                    width={32}
+                    height={32}
+                    unoptimized
+                    className="h-full w-full object-contain"
+                    onLoad={() =>
+                      setLogoReady((prev) => ({ ...prev, [item.website]: true }))
+                    }
+                    onError={() =>
+                      setLogoLoadFailed((prev) => ({ ...prev, [item.website]: true }))
+                    }
+                  />
+                </div>
+                {isReady ? (
+                  <span className="text-sm font-medium text-gray-700">{item.name}</span>
+                ) : null}
               </div>
               );
             })}

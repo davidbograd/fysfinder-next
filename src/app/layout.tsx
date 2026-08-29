@@ -1,5 +1,5 @@
 // Root layout
-// Updated: 2026-03-25 - Added homepage-equivalent clinic and specialty metrics fetch for header mobile overlay datapoints
+// Updated: 2026-08-29 - Clip horizontal overflow from full-bleed w-dvw page sections.
 
 import type { Metadata } from "next";
 import "./globals.css";
@@ -83,7 +83,7 @@ export default async function RootLayout({
       <body className="flex flex-col min-h-screen font-sans">
         <Header totalClinics={totalClinics} specialtyCount={specialtyCount} />
         <EmailVerificationBanner />
-        <main className="flex-grow">
+        <main className="flex-grow overflow-x-clip">
           <div className="max-w-[1440px] mx-auto px-5 sm:px-6 lg:px-8">
             {children}
           </div>

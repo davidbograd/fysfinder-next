@@ -1,5 +1,5 @@
 // Homepage component with graceful error handling
-// Updated: 2026-04-06 - Reused shared PartnerStrip component across homepage and tilmeld
+// Updated: 2026-08-29 - Homepage hero logo carousel uses patient-facing heading copy.
 
 import React from "react";
 import { Metadata } from "next";
@@ -10,6 +10,7 @@ import { FAQ } from "@/components/features/blog-og-ordbog/FAQ";
 import { SearchInterface } from "@/components/search/SearchInterface";
 import { RegionList } from "@/components/features/search/RegionList";
 import { HeroDataPoints } from "@/components/features/search/HeroDataPoints";
+import { SocialProofLogoMarquee } from "@/components/features/tilmeld-landingpage/SocialProofLogoMarquee";
 import { PartnerStrip } from "@/components/features/shared/PartnerStrip";
 import {
   fetchCitiesWithCounts,
@@ -41,7 +42,8 @@ function HeroSection({
       id="top-search"
       className="relative mt-0 left-1/2 -translate-x-1/2 w-dvw max-w-none overflow-x-clip"
     >
-      <div className="w-full min-h-[80vh] bg-brand-beige rounded-b-[32px] overflow-hidden flex items-center">
+      <div className="flex w-full min-h-[80vh] flex-col overflow-hidden rounded-b-[32px] bg-brand-beige">
+        <div className="flex flex-1 items-center">
         <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-6 lg:px-8 py-16 sm:py-20">
           <div className="grid gap-6 xl:gap-14 xl:grid-cols-[1fr_450px] items-center">
           <div className="space-y-5 min-w-0">
@@ -139,6 +141,11 @@ function HeroSection({
           </div>
           </div>
         </div>
+        </div>
+        <SocialProofLogoMarquee
+          embedded
+          heading="Den nemme måde at finde en lokal fysioterapeut"
+        />
       </div>
     </section>
   );
