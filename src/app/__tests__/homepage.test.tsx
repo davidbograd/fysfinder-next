@@ -1,4 +1,4 @@
-// Added: 2026-03-30 - MVP coverage for homepage success and fallback rendering.
+// Updated: 2026-08-29 - Asserts the homepage hero shows the clinic logo carousel heading.
 import { render, screen } from "@testing-library/react";
 
 const mockFetchCitiesWithCounts = jest.fn();
@@ -57,7 +57,18 @@ describe("HomePage", () => {
     render(await HomePage());
 
     expect(screen.getByText("Find fysioterapeut efter område")).toBeInTheDocument();
+    expect(
+      screen.getByText("Den nemme måde at finde en lokal fysioterapeut")
+    ).toBeInTheDocument();
     expect(screen.getByText("RegionList mock")).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: "klinikker med ydernummer" })
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole("link", {
+        name: "behandling med tilskud fra den offentlige sygesikring",
+      })
+    ).not.toBeInTheDocument();
   });
 
   it("renders graceful fallback when data fetching fails", async () => {

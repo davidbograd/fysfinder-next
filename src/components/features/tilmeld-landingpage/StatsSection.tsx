@@ -1,6 +1,7 @@
 // Stats section with centralized traffic metric from shared site constants.
+// Updated: 2026-08-29 - Visitor stat is now cumulative users, not monthly.
 import { fetchCitiesWithCounts } from "@/app/utils/cityUtils";
-import { FORMATTED_MONTHLY_VISITORS_DK } from "@/lib/siteMetrics";
+import { FORMATTED_TOTAL_USERS_DK } from "@/lib/siteMetrics";
 
 export async function StatsSection() {
   const cities = await fetchCitiesWithCounts();
@@ -12,9 +13,9 @@ export async function StatsSection() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
           <div className="space-y-2">
             <h3 className="text-4xl font-bold">
-              {FORMATTED_MONTHLY_VISITORS_DK}+
+              +{FORMATTED_TOTAL_USERS_DK}
             </h3>
-            <p className="text-gray-600">månedlige besøgende</p>
+            <p className="text-gray-600">har brugt Fysfinder</p>
           </div>
           <div className="space-y-2">
             <h3 className="text-4xl font-bold">{totalClinics}</h3>

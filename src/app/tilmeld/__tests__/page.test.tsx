@@ -1,4 +1,4 @@
-// Added: 2026-04-06 - Added regression test for remade /tilmeld page core sections.
+// Updated: 2026-08-29 - Asserts the tilmeld hero shows the cumulative user count.
 import { render, screen } from "@testing-library/react";
 import ClinicOwnerPage from "../page";
 
@@ -18,6 +18,7 @@ describe("/tilmeld page", () => {
         name: /Fysfinder FAQ/i,
       })
     ).toBeInTheDocument();
+    expect(screen.getByText("+81.000 har brugt Fysfinder")).toBeInTheDocument();
     expect(
       screen.queryByRole("button", {
         name: /Opgrader til Premium \(kommer snart\)/i,

@@ -66,3 +66,7 @@ docs/*
 # Leonardo image generation progress
 scripts/.styrkeoevelser-image-status.json
 scripts/.styrkeoevelser-image-run.log
+
+# One-time clinic duplicate merge backups and generated review list
+scripts/dedupe-clinics/backups/
+scripts/dedupe-clinics/review-report.md
