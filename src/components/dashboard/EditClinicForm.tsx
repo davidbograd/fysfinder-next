@@ -9,7 +9,8 @@
  * - Pricing (førsteKons, opfølgning)
  * - Specialties (max 10)
  * - Insurances (all selected by default)
- * Note: klinikNavn and postnummer are NOT editable
+ * Note: klinikNavn and postnummer are NOT editable.
+ * Address edits re-geocode map pins from the clinic address, not Google Place.
  */
 
 import { useMemo, useRef, useState } from "react";

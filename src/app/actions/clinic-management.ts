@@ -1,5 +1,5 @@
 // Clinic management actions for owned clinics and admin overrides.
-// Updated: profile completeness on owned clinics; adds explicit guard that team-member management stays available for free users.
+// Updated: refresh map coordinates from the clinic address when owners edit adresse.
 
 "use server";
 
@@ -13,6 +13,7 @@ import {
   isPremiumListingActive,
 } from "@/lib/clinic-entitlements";
 import { computeClinicProfileCompleteness } from "@/lib/clinic-profile-completeness";
+import { geocodeDanishAddress } from "@/lib/geocoding/geocode-danish-address";
 
 async function canManageClinic(
   supabase: Awaited<ReturnType<typeof createClient>>,
@@ -346,12 +347,41 @@ export async function updateClinic(
     process.env.SUPABASE_SERVICE_ROLE_KEY!
   );
 
+  const updatePayload: Record<string, unknown> = {
+    ...data,
+    updated_at: new Date().toISOString(),
+  };
+
+  if (data.adresse !== undefined) {
+    const { data: currentClinic } = await serviceSupabase
+      .from("clinics")
+      .select("adresse, postnummer, lokation")
+      .eq("clinics_id", clinicId)
+      .single();
+
+    const nextAdresse = data.adresse ?? null;
+    const currentAdresse = currentClinic?.adresse ?? null;
+
+    if (nextAdresse !== currentAdresse) {
+      try {
+        const coordinates = await geocodeDanishAddress({
+          adresse: nextAdresse,
+          postnummer: currentClinic?.postnummer ?? null,
+          lokation: currentClinic?.lokation ?? null,
+        });
+        if (coordinates) {
+          updatePayload.latitude = coordinates.latitude;
+          updatePayload.longitude = coordinates.longitude;
+        }
+      } catch (geocodeError) {
+        console.error("Address geocode failed during clinic update:", geocodeError);
+      }
+    }
+  }
+
   const { error: updateError } = await serviceSupabase
     .from("clinics")
-    .update({
-      ...data,
-      updated_at: new Date().toISOString(),
-    })
+    .update(updatePayload)
     .eq("clinics_id", clinicId);
 
   if (updateError) {

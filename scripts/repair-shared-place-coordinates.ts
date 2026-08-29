@@ -1,9 +1,13 @@
 /**
- * Backfill clinic latitude/longitude from the clinic address via DAWA.
- * Does not use Google Place location, so shared listings keep their own pins.
+ * Repair map pins for clinics that share a Google Place ID across different postcodes.
+ * Keeps google_place_id and Maps URLs; rewrites latitude/longitude from each clinic address.
+ *
+ * Dry-run by default. Pass --apply to write.
  *
  * Usage:
- *   tsx scripts/backfill-clinic-coordinates.ts [--dry-run] [--limit N]
+ *   tsx scripts/repair-shared-place-coordinates.ts
+ *   tsx scripts/repair-shared-place-coordinates.ts --apply
+ *   tsx scripts/repair-shared-place-coordinates.ts --apply --limit 10
  */
 
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
@@ -11,6 +15,7 @@ import dotenv from "dotenv";
 import { dirname, resolve } from "path";
 import { fileURLToPath } from "url";
 import { geocodeDanishAddress } from "../src/lib/geocoding/geocode-danish-address";
+import { selectClinicsSharingPlaceIdAcrossPostcodes } from "../src/lib/geocoding/shared-place-coordinates";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -28,47 +33,40 @@ interface Clinic {
   adresse: string | null;
   postnummer: number | null;
   lokation: string | null;
+  google_place_id: string | null;
+  google_maps_url_cid: string | null;
   latitude: number | null;
   longitude: number | null;
 }
 
 const parseArgs = () => {
   const args = process.argv.slice(2);
-  const dryRun = args.includes("--dry-run");
+  const apply = args.includes("--apply");
   const limitIdx = args.indexOf("--limit");
   const limit = limitIdx !== -1 ? parseInt(args[limitIdx + 1], 10) : undefined;
-  return { dryRun, limit };
+  return { apply, limit };
 };
 
-async function fetchTargetClinics(
-  supabase: SupabaseClient,
-  limit?: number
-): Promise<Clinic[]> {
+async function fetchClinicsWithPlaceIds(supabase: SupabaseClient): Promise<Clinic[]> {
   const PAGE_SIZE = 1000;
   const all: Clinic[] = [];
   let from = 0;
 
   while (true) {
-    const to =
-      limit !== undefined
-        ? Math.min(from + PAGE_SIZE - 1, limit - 1)
-        : from + PAGE_SIZE - 1;
-
     const { data, error } = await supabase
       .from("clinics")
-      .select("clinics_id, klinikNavn, adresse, postnummer, lokation, latitude, longitude")
-      .or("latitude.is.null,longitude.is.null")
+      .select(
+        "clinics_id, klinikNavn, adresse, postnummer, lokation, google_place_id, google_maps_url_cid, latitude, longitude"
+      )
+      .not("google_place_id", "is", null)
       .order("klinikNavn")
-      .range(from, to);
+      .range(from, from + PAGE_SIZE - 1);
 
     if (error) throw error;
     if (!data || data.length === 0) break;
 
     all.push(...(data as unknown as Clinic[]));
-
-    if (limit !== undefined && all.length >= limit) break;
     if (data.length < PAGE_SIZE) break;
-
     from += PAGE_SIZE;
   }
 
@@ -79,7 +77,7 @@ const delay = (ms: number) =>
   new Promise((resolveDelay) => setTimeout(resolveDelay, ms));
 
 async function main() {
-  const { dryRun, limit } = parseArgs();
+  const { apply, limit } = parseArgs();
 
   if (!SUPABASE_URL || !SUPABASE_KEY) {
     console.error(
@@ -89,25 +87,32 @@ async function main() {
   }
 
   const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
-  const clinics = await fetchTargetClinics(supabase, limit);
+  const clinics = await fetchClinicsWithPlaceIds(supabase);
+  const targets = selectClinicsSharingPlaceIdAcrossPostcodes(clinics).slice(
+    0,
+    limit ?? Number.POSITIVE_INFINITY
+  );
 
-  if (clinics.length === 0) {
-    console.log("All clinics already have coordinates.");
+  if (targets.length === 0) {
+    console.log("No shared-Place-ID clinics with different postcodes found.");
     return;
   }
 
-  console.log(`Found ${clinics.length} clinics missing coordinates.`);
+  console.log(
+    `Found ${targets.length} clinics sharing a Place ID across different postcodes.`
+  );
+  console.log(`Mode: ${apply ? "APPLY" : "DRY RUN"}`);
 
   const stats = {
-    total: clinics.length,
+    total: targets.length,
     updated: 0,
     skipped: 0,
     errors: 0,
   };
 
-  for (let index = 0; index < clinics.length; index++) {
-    const clinic = clinics[index];
-    const tag = `[${index + 1}/${clinics.length}]`;
+  for (let index = 0; index < targets.length; index++) {
+    const clinic = targets[index];
+    const tag = `[${index + 1}/${targets.length}]`;
 
     try {
       const coordinates = await geocodeDanishAddress({
@@ -118,12 +123,22 @@ async function main() {
 
       if (!coordinates) {
         stats.skipped++;
-        console.log(`${tag} WARN No coordinates for "${clinic.klinikNavn}"`);
+        console.log(
+          `${tag} WARN No address coordinates for "${clinic.klinikNavn}" (${clinic.adresse}, ${clinic.postnummer} ${clinic.lokation})`
+        );
         await delay(API_DELAY_MS);
         continue;
       }
 
-      if (!dryRun) {
+      const samePin =
+        clinic.latitude === coordinates.latitude &&
+        clinic.longitude === coordinates.longitude;
+
+      console.log(
+        `${tag} ${samePin ? "KEEP" : "MOVE"} ${clinic.klinikNavn}: ${clinic.adresse}, ${clinic.postnummer} ${clinic.lokation} → ${coordinates.latitude.toFixed(6)}, ${coordinates.longitude.toFixed(6)} (place ${clinic.google_place_id})`
+      );
+
+      if (apply && !samePin) {
         const { error: updateError } = await supabase
           .from("clinics")
           .update({
@@ -139,9 +154,6 @@ async function main() {
       }
 
       stats.updated++;
-      console.log(
-        `${tag} OK ${clinic.klinikNavn}: ${coordinates.latitude.toFixed(6)}, ${coordinates.longitude.toFixed(6)}`
-      );
     } catch (error) {
       stats.errors++;
       const message = error instanceof Error ? error.message : String(error);
@@ -156,7 +168,7 @@ async function main() {
   console.log(`Updated: ${stats.updated}`);
   console.log(`Skipped: ${stats.skipped}`);
   console.log(`Errors: ${stats.errors}`);
-  console.log(`Mode: ${dryRun ? "DRY RUN" : "LIVE"}`);
+  console.log("Place IDs and Maps URLs were left unchanged.");
 }
 
 main()
