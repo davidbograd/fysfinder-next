@@ -1,6 +1,6 @@
 /**
  * Danish monthly clinic summary email: HTML/text builder and Resend send helper.
- * Updated: hide website/phone/email rows when the clinic does not have that channel.
+ * Updated: show dashboard-style "X af 7" profile progress on incomplete clinics.
  */
 
 import { existsSync, readFileSync } from "fs";
@@ -9,16 +9,15 @@ import { Resend } from "resend";
 import { getAdminEmails } from "@/lib/admin";
 import { buildUnsubscribeUrl } from "@/lib/email-unsubscribe";
 import {
+  buildMonthlySummaryClinicProfileNudge,
   buildMonthlySummaryOpeningLine,
   buildMonthlySummarySubject,
   clinicViewCount,
   formatMonthOverMonthChange,
-  getMonthlySummaryProfileCta,
   type MonthlySummaryClinicView,
 } from "@/lib/monthly-clinic-summary";
 
 const SITE_URL = "https://www.fysfinder.dk";
-const DASHBOARD_URL = `${SITE_URL}/dashboard`;
 const LOGO_CID = "fysfinder-logo";
 const LOGO_WIDTH = 167;
 const LOGO_HEIGHT = 34;
@@ -161,8 +160,72 @@ function optionalCountLine(
   return [`${formatCount(count)} ${label}`];
 }
 
-function renderProfileNudge(profileUrl: string): string {
-  return `<p style="margin:0;font-size:16px;line-height:1.6;color:#333333;">En komplet profil gør det lettere for patienter at vælge din klinik. <a href="${escapeHtml(profileUrl)}" style="color:#104534;font-weight:bold;text-decoration:underline;">Opdater</a></p>`;
+function profileBarFilledColor(completedCount: number): string {
+  if (completedCount <= 3) {
+    return "#f97316";
+  }
+  if (completedCount <= 5) {
+    return "#eab308";
+  }
+  return "#16a34a";
+}
+
+function renderProfileProgressBar(
+  completedCount: number,
+  totalCount: number
+): string {
+  const filled = profileBarFilledColor(completedCount);
+  const cells = Array.from({ length: totalCount }, (_, index) => {
+    const isFilled = index < completedCount;
+    const paddingRight = index === totalCount - 1 ? "0" : "6px";
+    return `<td style="padding:0 ${paddingRight} 0 0;width:${Math.round(100 / totalCount)}%;">
+<div style="height:10px;line-height:10px;font-size:0;background-color:${isFilled ? filled : "#f2f1ec"};border-radius:999px;">&nbsp;</div>
+</td>`;
+  });
+  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:8px 0 10px 0;"><tr>${cells.join("")}</tr></table>`;
+}
+
+function renderClinicProfileNudge(clinic: MonthlySummaryClinicView): string {
+  const nudge = buildMonthlySummaryClinicProfileNudge(clinic);
+  if (!nudge) {
+    return "";
+  }
+
+  const profileUrl = clinicEditUrl(clinic.clinicId);
+  const body = nudge.body
+    ? `<p style="margin:0 0 8px 0;font-size:16px;line-height:1.55;color:#104534;">${escapeHtml(nudge.body)}</p>`
+    : "";
+
+  return `<tr><td style="padding:16px 0 4px 0;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f8f7f2;border-radius:12px;">
+<tr>
+<td style="padding:16px 18px;font-family:Arial,Helvetica,sans-serif;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td style="font-size:16px;line-height:1.4;color:#111111;font-weight:bold;">Klinikprofil</td>
+<td align="right" style="font-size:16px;line-height:1.4;color:#333333;font-variant-numeric:tabular-nums;">${escapeHtml(nudge.progressLabel)}</td>
+</tr>
+</table>
+${renderProfileProgressBar(nudge.completedCount, nudge.totalCount)}
+${body}
+<p style="margin:0;font-size:16px;line-height:1.55;color:#104534;"><a href="${escapeHtml(profileUrl)}" style="color:#104534;font-weight:bold;text-decoration:underline;">Opdater</a></p>
+</td>
+</tr>
+</table>
+</td></tr>`;
+}
+
+function clinicProfileNudgeText(clinic: MonthlySummaryClinicView): string[] {
+  const nudge = buildMonthlySummaryClinicProfileNudge(clinic);
+  if (!nudge) {
+    return [];
+  }
+  const lines = [`Klinikprofil: ${nudge.progressLabel}`];
+  if (nudge.body) {
+    lines.push(nudge.body);
+  }
+  lines.push(`Opdater: ${clinicEditUrl(clinic.clinicId)}`);
+  return lines;
 }
 
 function bookingLabel(count: number): string {
@@ -223,6 +286,7 @@ function renderClinicSection(clinic: MonthlySummaryClinicView): string {
         ${renderOptionalCountRow(clinic.hasEmail, clinic.stats.emailClicks, "kopierede din e-mail")}
         ${renderBookingRow(clinic)}
         ${renderPremiumUpsellRow(clinic)}
+        ${renderClinicProfileNudge(clinic)}
       </table>
     </td>
   </tr>
@@ -237,10 +301,6 @@ export function buildMonthlyClinicSummaryEmail(
     input.clinics,
     input.monthLabelDa
   );
-  const profileCta = getMonthlySummaryProfileCta(input.clinics);
-  const profileUrl = profileCta.clinicId
-    ? clinicEditUrl(profileCta.clinicId)
-    : DASHBOARD_URL;
   const clinicHtml = input.clinics
     .map((clinic) => renderClinicSection(clinic))
     .join(
@@ -269,13 +329,6 @@ export function buildMonthlyClinicSummaryEmail(
 ${renderLogo()}
 <p style="margin:0 0 24px 0;font-size:16px;line-height:1.6;color:#333333;">${escapeHtml(opening)}</p>
 ${clinicHtml}
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:24px 0 0 0;">
-<tr>
-<td style="border-top:1px solid #e5e7eb;padding-top:24px;">
-${renderProfileNudge(profileUrl)}
-</td>
-</tr>
-</table>
 <p style="margin:24px 0;font-size:16px;line-height:1.6;color:#333333;">Har du spørgsmål til dine tal eller din profil, er du altid velkommen til at skrive. Jeg svarer selv.</p>
 <p style="margin:0 0 4px 0;font-size:16px;line-height:1.6;color:#333333;"><strong>Joachim Bograd</strong> fra Fysfinder</p>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:32px;">
@@ -320,6 +373,7 @@ ${renderProfileNudge(profileUrl)}
         ),
         `${formatCount(clinic.stats.bookingClicks)} ${bookingLabel(clinic.stats.bookingClicks)}`,
         ...premiumUpsellText(clinic),
+        ...clinicProfileNudgeText(clinic),
       ].join("\n");
     })
     .join("\n\n");
@@ -328,8 +382,6 @@ ${renderProfileNudge(profileUrl)}
     opening,
     "",
     clinicText,
-    "",
-    `En komplet profil gør det lettere for patienter at vælge din klinik. Opdater: ${profileUrl}`,
     "",
     "Har du spørgsmål til dine tal eller din profil, er du altid velkommen til at skrive. Jeg svarer selv.",
     "",

@@ -11,7 +11,9 @@ Fysio Nord: https://www.fysfinder.dk/klinik/fysio-nord
 0 bookinger*
 *Vil du også modtage bookinger direkte fra Fysfinder? Direkte booking er inkluderet med Premium.
 
-En komplet profil gør det lettere for patienter at vælge din klinik. Opdater: https://www.fysfinder.dk/dashboard/clinic/c1/edit
+Klinikprofil: 6 af 7
+Tilføj f.eks. specialer.
+Opdater: https://www.fysfinder.dk/dashboard/clinic/c1/edit
 
 Har du spørgsmål til dine tal eller din profil, er du altid velkommen til at skrive. Jeg svarer selv.
 

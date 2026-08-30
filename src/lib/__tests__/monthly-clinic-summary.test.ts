@@ -1,7 +1,13 @@
+/**
+ * Pure helpers for monthly clinic summary emails.
+ * Updated: per-clinic "X af 7" profile progress for incomplete profiles.
+ */
+
 import { CLINIC_PROFILE_CONTACT_NO_INFO_WARNING_DA } from "../clinic-profile-completeness";
 import type { ClinicStats } from "../clinic-stats";
 import {
   buildMonthlySummaryAttentionParagraphs,
+  buildMonthlySummaryClinicProfileNudge,
   buildMonthlySummaryOpeningLine,
   buildMonthlySummarySubject,
   decideMonthlySummaryAction,
@@ -159,6 +165,45 @@ describe("buildMonthlySummaryAttentionParagraphs", () => {
     expect(paragraphs[0]).toMatch(/specialer og by/i);
     expect(paragraphs[0]).toMatch(/\bdu\b/);
     expect(paragraphs.join(" ")).not.toMatch(/\b(I|jer|jeres)\b/);
+  });
+});
+
+describe("buildMonthlySummaryClinicProfileNudge", () => {
+  it("returns X af 7 and a missing-fields nudge when the profile is incomplete", () => {
+    const nudge = buildMonthlySummaryClinicProfileNudge({
+      clinicId: "c1",
+      clinicName: "Fysio Nord",
+      missingKeys: ["specialties", "openingHours"],
+      stats: emptyStats(),
+    });
+
+    expect(nudge?.progressLabel).toBe("5 af 7");
+    expect(nudge?.completedCount).toBe(5);
+    expect(nudge?.totalCount).toBe(7);
+    expect(nudge?.body).toMatch(/specialer/i);
+  });
+
+  it("uses the contact warning when contact is missing", () => {
+    const nudge = buildMonthlySummaryClinicProfileNudge({
+      clinicId: "c1",
+      clinicName: "Fysio Nord",
+      missingKeys: ["contact", "specialties"],
+      stats: emptyStats(),
+    });
+
+    expect(nudge?.progressLabel).toBe("5 af 7");
+    expect(nudge?.body).toBe(CLINIC_PROFILE_CONTACT_NO_INFO_WARNING_DA);
+  });
+
+  it("returns null when the profile is complete", () => {
+    expect(
+      buildMonthlySummaryClinicProfileNudge({
+        clinicId: "c1",
+        clinicName: "Fysio Nord",
+        missingKeys: [],
+        stats: emptyStats(),
+      })
+    ).toBeNull();
   });
 });
 

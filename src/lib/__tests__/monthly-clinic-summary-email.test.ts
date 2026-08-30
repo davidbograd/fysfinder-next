@@ -1,3 +1,8 @@
+/**
+ * Monthly clinic summary HTML/text: opening, stats, booking upsell, and profile progress.
+ * Updated: incomplete clinics show dashboard-style X af 7 progress.
+ */
+
 jest.mock("resend", () => ({
   Resend: jest.fn(),
 }));
@@ -94,10 +99,11 @@ describe("buildMonthlyClinicSummaryEmail", () => {
     );
     expect(content.html).toContain("Direkte booking er inkluderet med");
     expect(content.html).toContain("/dashboard/clinic/c1/premium");
-    expect(content.html).toContain(
-      "En komplet profil gør det lettere for patienter at vælge din klinik."
-    );
+    expect(content.html).toContain("Klinikprofil");
+    expect(content.html).toContain("6 af 7");
+    expect(content.html).toContain("Tilføj f.eks. specialer.");
     expect(content.html).toContain(">Opdater</a>");
+    expect(content.html).not.toContain("En komplet profil gør det lettere for patienter at vælge din klinik.");
     expect(content.html).not.toContain("mere komplet");
     expect(content.html).not.toContain("Opdater klinikprofil");
     expect(content.html).not.toContain("Tilføj specialer");
@@ -113,8 +119,10 @@ describe("buildMonthlyClinicSummaryEmail", () => {
     expect(content.html).toContain("Har du spørgsmål");
     expect(content.html).toContain("Vil du ikke modtage");
     expect(content.html).toContain("/dashboard/clinic/c1/edit");
+    expect(content.html).not.toContain("/dashboard/clinic/c2/edit");
     expect(content.html).toContain("/api/email/unsubscribe");
     expect(content.text).toContain("Fysio Nord");
+    expect(content.text).toContain("Klinikprofil: 6 af 7");
     expect(content.text).toContain("klikkede videre til dit website");
     expect(content.html.indexOf("klinikvisninger")).toBeLessThan(
       content.html.indexOf("klikkede videre til dit website")
@@ -122,9 +130,12 @@ describe("buildMonthlyClinicSummaryEmail", () => {
     expect(content.html.indexOf("kopierede din e-mail")).toBeLessThan(
       content.html.indexOf("Vil du også modtage bookinger")
     );
-    expect(content.html.lastIndexOf("Vil du også modtage bookinger")).toBeLessThan(
-      content.html.indexOf("En komplet profil")
-    );
+    const nord = content.html.indexOf("Fysio Nord");
+    const syd = content.html.indexOf("Fysio Syd");
+    const progress = content.html.indexOf("6 af 7");
+    expect(progress).toBeGreaterThan(nord);
+    expect(progress).toBeLessThan(syd);
+    expect(content.html.match(/af 7/g)?.length).toBe(1);
   });
 
   it("can show a month-over-month view change and zero bookings with a Premium upsell", () => {
@@ -158,6 +169,7 @@ describe("buildMonthlyClinicSummaryEmail", () => {
     expect(content.html).toContain("↑ 22% fra juli");
     expect(content.html).toContain("bookinger*");
     expect(content.html).toContain("Vil du også modtage bookinger");
+    expect(content.html).toContain("6 af 7");
     expect(content.html).toContain("Opdater");
     expect(content.html).not.toContain("Tilføj åbningstider");
   });
@@ -199,6 +211,8 @@ describe("buildMonthlyClinicSummaryEmail", () => {
 
     expect(content.html).not.toContain("Hej");
     expect(content.text.startsWith("I august")).toBe(true);
+    expect(content.html).not.toContain("Klinikprofil");
+    expect(content.html).not.toContain("af 7");
   });
 
   it("shows actual bookings without the Premium asterisk or upsell", () => {
@@ -253,5 +267,43 @@ describe("buildMonthlyClinicSummaryEmail", () => {
     expect(content.text).toContain("viste dit telefonnummer");
     expect(content.text).not.toContain("klikkede videre til dit website");
     expect(content.text).not.toContain("kopierede din e-mail");
+  });
+
+  it("shows dashboard-style profile progress and the contact warning when contact is missing", () => {
+    const content = buildMonthlyClinicSummaryEmail({
+      recipientEmail: "owner@example.com",
+      monthLabelDa: "august",
+      unsubscribeUrl: "https://www.fysfinder.dk/api/email/unsubscribe?email=x&token=y",
+      clinics: [
+        {
+          clinicId: "c1",
+          clinicName: "Fysio Nord",
+          missingKeys: [
+            "contact",
+            "pricing",
+            "specialties",
+            "about",
+            "openingHours",
+            "team",
+            "insurances",
+          ],
+          hasWebsite: false,
+          hasPhone: false,
+          hasEmail: false,
+          stats: stats({
+            totalContactClicks: 0,
+            listImpressions: 4,
+            profileViews: 0,
+          }),
+        },
+      ],
+    });
+
+    expect(content.html).toContain("0 af 7");
+    expect(content.html).toContain(
+      "Din klinik har ingen kontaktoplysninger. Patienter har ingen mulighed for at kontakte dig."
+    );
+    expect(content.html).toContain("/dashboard/clinic/c1/edit");
+    expect(content.text).toContain("Klinikprofil: 0 af 7");
   });
 });

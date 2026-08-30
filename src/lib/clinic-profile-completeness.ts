@@ -1,6 +1,6 @@
 /**
  * Profile completeness for owned clinics (dashboard checklist).
- * Contact: at least one of e-mail, phone, or website counts as complete.
+ * Updated: helpers so the monthly email can show the same "X af 7" progress.
  */
 
 export type ClinicProfileChecklistKey =
@@ -28,6 +28,24 @@ const CHECKLIST_KEYS: ClinicProfileChecklistKey[] = [
   "pricing",
   "insurances",
 ];
+
+export const CLINIC_PROFILE_CHECKLIST_COUNT = CHECKLIST_KEYS.length;
+
+export function clinicProfileProgressFromMissingKeys(
+  missingKeys: ClinicProfileChecklistKey[]
+): Pick<ClinicProfileCompleteness, "completedCount" | "totalCount"> {
+  const totalCount = CHECKLIST_KEYS.length;
+  return {
+    completedCount: Math.max(0, totalCount - missingKeys.length),
+    totalCount,
+  };
+}
+
+export function formatClinicProfileProgressDa(
+  result: Pick<ClinicProfileCompleteness, "completedCount" | "totalCount">
+): string {
+  return `${result.completedCount} af ${result.totalCount}`;
+}
 
 /**
  * Order for recommending what to add next (dashboard nudge + tooltip list).

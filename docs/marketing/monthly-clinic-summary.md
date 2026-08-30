@@ -38,7 +38,9 @@ I [måned] blev din klinik set **[N] gange**, og **[N] patienter** tog næste sk
 
 *Vil du også modtage bookinger direkte fra Fysfinder? Direkte booking er inkluderet med Premium.
 
-En komplet profil gør det lettere for patienter at vælge din klinik. **Opdater**
+Klinikprofil: 6 af 7
+Tilføj f.eks. specialer.
+Opdater
 
 Har du spørgsmål til dine tal eller din profil, er du altid velkommen til at skrive. Jeg svarer selv.
 
@@ -53,7 +55,7 @@ Har du spørgsmål til dine tal eller din profil, er du altid velkommen til at s
 - Emne: *Sådan klarede din klinik sig på Fysfinder i [måned]*
 - Vis kun website-, telefon- og e-mail-tal, hvis klinikken har den oplysning.
 - `0 bookinger*` plus en tydelig Premium-boks, så det er tydeligt at direkte booking mangler.
-- Profil-nudge: *En komplet profil … Opdater* (link).
+- Ufuldstændig profil: *Klinikprofil: X af 7* under klinikkens tal (samme tælling som dashboard). Komplette profiler får ingen nudge.
 - Senere: vis måned-til-måned, f.eks. `44 klinikvisninger ↑ 22% fra juli`.
 
 ---

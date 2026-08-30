@@ -1,6 +1,12 @@
+/**
+ * Profile completeness scoring: contact, about, hours, specialties, team, pricing, insurances.
+ * Updated: covers the shared "X af 7" progress label used in email and dashboard.
+ */
+
 import {
   CLINIC_PROFILE_RECOMMENDATION_ORDER,
   computeClinicProfileCompleteness,
+  formatClinicProfileProgressDa,
   getClinicProfileCompletenessAriaDa,
   getClinicProfileCompletenessNudgeDa,
 } from "../clinic-profile-completeness";
@@ -244,5 +250,13 @@ describe("getClinicProfileCompletenessAriaDa", () => {
         missingKeys: ["contact", "about", "team"],
       })
     ).toBe("3 af 7 trin fuldført på klinikprofilen");
+  });
+});
+
+describe("formatClinicProfileProgressDa", () => {
+  it("matches the dashboard X af 7 label", () => {
+    expect(
+      formatClinicProfileProgressDa({ completedCount: 1, totalCount: 7 })
+    ).toBe("1 af 7");
   });
 });

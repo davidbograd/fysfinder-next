@@ -1,5 +1,6 @@
 /**
  * Pure helpers for monthly clinic summary emails: grouping, skip rules, copy, and CTAs.
+ * Updated: per-clinic "X af 7" profile progress for incomplete profiles.
  */
 
 import { wasOwnedDuringPeriod } from "@/lib/calendar-month";
@@ -7,6 +8,8 @@ import type { ClinicProfileChecklistKey } from "@/lib/clinic-profile-completenes
 import {
   CLINIC_PROFILE_CONTACT_NO_INFO_WARNING_DA,
   CLINIC_PROFILE_RECOMMENDATION_ORDER,
+  clinicProfileProgressFromMissingKeys,
+  formatClinicProfileProgressDa,
   getClinicProfileCompletenessNudgeDa,
   sortMissingKeysByRecommendation,
 } from "@/lib/clinic-profile-completeness";
@@ -122,6 +125,34 @@ export function buildMonthlySummaryOpeningLine(
       : `${clicks.toLocaleString("da-DK")} patienter`;
 
   return `I ${monthLabelDa} blev ${whose} set ${times}, og ${patients} tog næste skridt ved at klikke videre.`;
+}
+
+export interface MonthlySummaryClinicProfileNudge {
+  progressLabel: string;
+  completedCount: number;
+  totalCount: number;
+  body: string;
+}
+
+export function buildMonthlySummaryClinicProfileNudge(
+  clinic: MonthlySummaryClinicView
+): MonthlySummaryClinicProfileNudge | null {
+  if (clinic.missingKeys.length === 0) {
+    return null;
+  }
+
+  const progress = clinicProfileProgressFromMissingKeys(clinic.missingKeys);
+  const missingContact = clinic.missingKeys.includes("contact");
+  const body = missingContact
+    ? CLINIC_PROFILE_CONTACT_NO_INFO_WARNING_DA
+    : getClinicProfileCompletenessNudgeDa(clinic.missingKeys);
+
+  return {
+    progressLabel: formatClinicProfileProgressDa(progress),
+    completedCount: progress.completedCount,
+    totalCount: progress.totalCount,
+    body,
+  };
 }
 
 export function getMonthlySummaryProfileCta(
