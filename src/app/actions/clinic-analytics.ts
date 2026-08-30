@@ -1,5 +1,6 @@
 // Server action for fetching per-clinic analytics.
-// Updated: uses shared ClinicStats mapper so dashboard and monthly emails stay in sync.
+// Updated: stop re-exporting ClinicStats — "use server" files may only export async
+// functions, and Turbopack fails the production build on type re-exports.
 
 "use server";
 
@@ -10,8 +11,6 @@ import {
   type ClinicEventCount,
   type ClinicStats,
 } from "@/lib/clinic-stats";
-
-export type { ClinicStats };
 
 /**
  * Get analytics stats for a single clinic (only if user owns it)

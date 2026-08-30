@@ -1,5 +1,6 @@
 // Dashboard page for clinic owners and admins.
-// Updated: renamed the lead KPI label from "Lead klik" to "Interaktioner".
+// Updated: import ClinicStats from the shared lib so the "use server" analytics
+// module is not treated as exporting a type.
 
 import { redirect } from "next/navigation";
 import { createClient } from "@/app/utils/supabase/server";
@@ -15,10 +16,8 @@ import { AdminAnalyticsSection } from "@/components/dashboard/AdminAnalyticsSect
 import { UserClaimsSection } from "@/components/dashboard/UserClaimsSection";
 import { getOwnedClinics } from "@/app/actions/clinic-management";
 import { OwnedClinicCard } from "@/components/dashboard/OwnedClinicCard";
-import {
-  ClinicStats,
-  getAllOwnedClinicAnalytics,
-} from "@/app/actions/clinic-analytics";
+import { getAllOwnedClinicAnalytics } from "@/app/actions/clinic-analytics";
+import type { ClinicStats } from "@/lib/clinic-stats";
 import { getClinicDashboardUplift } from "@/app/actions/dashboard-uplift";
 import { getUserClaims } from "@/app/actions/user-claims";
 import { Suspense } from "react";

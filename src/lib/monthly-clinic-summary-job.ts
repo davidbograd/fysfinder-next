@@ -1,6 +1,7 @@
 /**
  * Monthly clinic summary job: load owners, apply skip rules, send Resend emails.
- * Updated: pass website/phone/email flags so the email only reports channels the clinic has.
+ * Updated: cast ownership rows via unknown — the nested clinics select is not in
+ * generated Supabase types, so a direct assertion fails `next build`.
  */
 
 import type { SupabaseClient } from "@supabase/supabase-js";
@@ -178,7 +179,7 @@ export async function runMonthlyClinicSummary(
     );
   }
 
-  const ownerships = (ownershipsResult.data || []) as OwnershipRow[];
+  const ownerships = (ownershipsResult.data || []) as unknown as OwnershipRow[];
   const totalInsuranceTypesCount = insuranceCountResult.count ?? 0;
   const grouped = groupRowsByOwner(
     ownerships.map((row) => ({

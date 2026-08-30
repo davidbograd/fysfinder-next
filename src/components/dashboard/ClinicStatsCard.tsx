@@ -1,5 +1,5 @@
-// Dashboard component showing analytics stats for a single clinic
-// Fetches data via server action and displays key metrics
+// Dashboard component showing analytics stats for a single clinic.
+// Updated: import ClinicStats from the shared lib, not the "use server" actions file.
 
 "use client";
 
@@ -7,10 +7,8 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Spinner } from "@/components/ui/spinner";
 import { Eye, Phone, Globe, Mail, CalendarCheck } from "lucide-react";
-import {
-  getClinicAnalytics,
-  type ClinicStats,
-} from "@/app/actions/clinic-analytics";
+import { getClinicAnalytics } from "@/app/actions/clinic-analytics";
+import type { ClinicStats } from "@/lib/clinic-stats";
 
 interface ClinicStatsCardProps {
   clinicId: string;
