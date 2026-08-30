@@ -1,12 +1,12 @@
 # Månedlig klinik-opsamling (kladder)
 
-Automatisk e-mail til **klinikejere på Fysfinder** den 2. i hver måned. Mål: vise den værdi klinikken fik i den måned, der lige er afsluttet, og minde om hvordan de får flere henvendelser.
+Automatisk e-mail til **klinikejere på Fysfinder** den 2. i hver måned. Mål: give et hurtigt bevis på, at Fysfinder hjælper potentielle patienter med at finde klinikken og tage næste skridt.
 
-**Tone:** Joachim, enkelt sprog, personligt, nemt at svare tilbage.  
+**Tone:** Joachim, troværdigt og enkelt. Ikke salgsagtigt, og overdriv ikke tallene.  
 **Brand:** Fysfinder  
 **Fra:** Joachim Bograd `<kontakt@fysfinder.dk>`  
-**Emne:** *Dine resultater på Fysfinder: August*  
-**Preheader:** Se hvor mange potentielle patienter der fandt og viste interesse for din klinik.
+**Emne:** *Sådan klarede din klinik sig på Fysfinder i august*  
+**Preheader:** Samme som åbningslinjen, f.eks. *I august blev din klinik set 44 gange, og 5 patienter tog næste skridt ved at klikke videre.*
 
 ---
 
@@ -22,49 +22,39 @@ Automatisk e-mail til **klinikejere på Fysfinder** den 2. i hver måned. Mål: 
 
 ## Brødtekst (plain)
 
-Hej [navn]
-
-Her er dit månedlige overblik fra Fysfinder. Se, hvordan potentielle patienter har fundet og interageret med din klinik i [måned].
+I [måned] blev din klinik set **[N] gange**, og **[N] patienter** tog næste skridt ved at klikke videre.
 
 ### [Kliniknavn]
 
-Din klinik er blevet vist **[N] gange**, og **[N] patienter tog næste skridt** ved at klikke videre fra din profil. Se detaljer i [dit dashboard](https://www.fysfinder.dk/dashboard).
+**[N] klinikvisninger**  
+**[N]** visninger i søgeresultater  
+**[N]** profilvisninger
 
----
-
-## [N] patientinteraktioner
-
-Patienter, der har taget næste skridt fra din profil.
-
-**[N]** besøgte dit website  
+**[N] tog næste skridt**  
+**[N]** klikkede videre til dit website  
 **[N]** viste dit telefonnummer  
 **[N]** kopierede din e-mail  
-**[N]** booking via Fysfinder*
+**[N]** bookinger*
 
-\*Booking via Fysfinder kræver Premium. Opgrader her.
+*Vil du også modtage bookinger direkte fra Fysfinder? Direkte booking er inkluderet med Premium.
 
----
+En komplet profil gør det lettere for patienter at vælge din klinik. **Opdater**
 
-## [N] klinikvisninger
+Har du spørgsmål til dine tal eller din profil, er du altid velkommen til at skrive. Jeg svarer selv.
 
-Så mange gange blev din klinik vist til potentielle patienter på Fysfinder.
-
-**[N]** visninger i søgeresultater  
-**[N]** visninger af din klinikprofil
+**Joachim Bograd** fra Fysfinder
 
 ---
 
-### Få flere patienthenvendelser
+## Copy-regler
 
-En komplet profil på Fysfinder gør det lettere for patienter at vælge jer.
-
-**Opdater din profil nu →**
-
-Har I spørgsmål til dine tal eller profil, er du altid velkomne til at skrive. Jeg svarer selv.
-
-Bedste hilsner  
-**Joachim Bograd**  
-Fysfinder
+- Sprog: **du/din** konsekvent. Ikke I/jer.
+- Ingen Hej. Åbningslinjen: visninger først, derefter næste skridt.
+- Emne: *Sådan klarede din klinik sig på Fysfinder i [måned]*
+- Vis kun website-, telefon- og e-mail-tal, hvis klinikken har den oplysning.
+- `0 bookinger*` plus en tydelig Premium-boks, så det er tydeligt at direkte booking mangler.
+- Profil-nudge: *En komplet profil … Opdater* (link).
+- Senere: vis måned-til-måned, f.eks. `44 klinikvisninger ↑ 22% fra juli`.
 
 ---
 

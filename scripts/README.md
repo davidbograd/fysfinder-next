@@ -96,7 +96,7 @@ https://console.developers.google.com/apis/api/places.googleapis.com/overview
   npm run email:monthly-clinic-summary -- --preview-to=you@example.com
   npm run email:monthly-clinic-summary -- --period=2026-07
   ```
-- **Schedule**: GitHub Action on the 2nd of each month (`send-monthly-clinic-summary.yml`)
+- **Schedule**: GitHub Action on the 2nd of each month at 07:00 UTC (`send-monthly-clinic-summary.yml`). Scheduled runs send for real. Manual dispatch defaults to `--dry-run`.
 
 ### `revalidate.js`
 

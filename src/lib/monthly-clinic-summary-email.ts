@@ -1,17 +1,27 @@
 /**
  * Danish monthly clinic summary email: HTML/text builder and Resend send helper.
- * Updated: clinic summary sits under the name; profile tips are a short CTA only.
+ * Updated: hide website/phone/email rows when the clinic does not have that channel.
  */
 
+import { existsSync, readFileSync } from "fs";
+import { join } from "path";
 import { Resend } from "resend";
 import { getAdminEmails } from "@/lib/admin";
-import { titleCaseDanishMonth } from "@/lib/calendar-month";
 import { buildUnsubscribeUrl } from "@/lib/email-unsubscribe";
-import type { MonthlySummaryClinicView } from "@/lib/monthly-clinic-summary";
+import {
+  buildMonthlySummaryOpeningLine,
+  buildMonthlySummarySubject,
+  clinicViewCount,
+  formatMonthOverMonthChange,
+  getMonthlySummaryProfileCta,
+  type MonthlySummaryClinicView,
+} from "@/lib/monthly-clinic-summary";
 
-const DASHBOARD_URL = "https://www.fysfinder.dk/dashboard";
-const PREHEADER =
-  "Se hvor mange potentielle patienter der fandt og viste interesse for din klinik.";
+const SITE_URL = "https://www.fysfinder.dk";
+const DASHBOARD_URL = `${SITE_URL}/dashboard`;
+const LOGO_CID = "fysfinder-logo";
+const LOGO_WIDTH = 167;
+const LOGO_HEIGHT = 34;
 const FROM_OWNER = "Joachim Bograd <kontakt@fysfinder.dk>";
 const REPLY_TO = "kontakt@fysfinder.dk";
 const FROM_TRANSACTIONAL = "Fysfinder <noreply@fysfinder.dk>";
@@ -42,128 +52,177 @@ function formatCount(value: number): string {
   return value.toLocaleString("da-DK");
 }
 
-function greetingLine(recipientName?: string | null): string {
-  const first = recipientName?.trim().split(/\s+/)[0];
-  return first ? `Hej ${first}` : "Hej";
+function getLogoAttachment():
+  | {
+      filename: string;
+      content: Buffer;
+      contentId: string;
+      contentType: string;
+    }
+  | undefined {
+  const logoPath = join(process.cwd(), "public/images/email/fysfinder-logo.png");
+  if (!existsSync(logoPath)) {
+    return undefined;
+  }
+
+  return {
+    filename: "fysfinder-logo.png",
+    content: readFileSync(logoPath),
+    contentId: LOGO_CID,
+    contentType: "image/png",
+  };
+}
+
+function renderLogo(): string {
+  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 24px 0;">
+<tr>
+<td>
+<a href="${SITE_URL}" style="text-decoration:none;">
+<img src="cid:${LOGO_CID}" alt="Fysfinder" width="${LOGO_WIDTH}" height="${LOGO_HEIGHT}" style="display:block;border:0;outline:none;text-decoration:none;width:${LOGO_WIDTH}px;height:auto;max-width:167px;" />
+</a>
+</td>
+</tr>
+</table>`;
+}
+
+function clinicPublicUrl(slug?: string): string | null {
+  const trimmed = slug?.trim();
+  if (!trimmed) {
+    return null;
+  }
+  return `${SITE_URL}/klinik/${encodeURIComponent(trimmed)}`;
 }
 
 function clinicEditUrl(clinicId: string): string {
   return `https://www.fysfinder.dk/dashboard/clinic/${clinicId}/edit`;
 }
 
+function renderClinicName(clinic: MonthlySummaryClinicView): string {
+  const name = escapeHtml(clinic.clinicName);
+  const url = clinicPublicUrl(clinic.clinicSlug);
+  if (!url) {
+    return name;
+  }
+  return `<a href="${escapeHtml(url)}" style="color:#104534;text-decoration:underline;">${name}</a>`;
+}
+
 function clinicPremiumUrl(clinicId: string): string {
   return `https://www.fysfinder.dk/dashboard/clinic/${clinicId}/premium`;
 }
 
-function clinicTotals(clinic: MonthlySummaryClinicView): {
-  interactions: number;
-  views: number;
-} {
-  return {
-    interactions: clinic.stats.totalContactClicks,
-    views: clinic.stats.profileViews + clinic.stats.listImpressions,
-  };
+function nextStepHeading(count: number): string {
+  return `${formatCount(count)} tog næste skridt`;
 }
 
-function interactionHeading(count: number): string {
-  return count === 1 ? "1 patientinteraktion" : `${formatCount(count)} patientinteraktioner`;
+function viewHeading(clinic: MonthlySummaryClinicView): string {
+  const views = clinicViewCount(clinic);
+  const base =
+    views === 1
+      ? "1 klinikvisning"
+      : `${formatCount(views)} klinikvisninger`;
+  const change = formatMonthOverMonthChange(
+    clinic.comparison?.viewsChangePercent,
+    clinic.comparison?.previousMonthLabelDa
+  );
+  return change ? `${base} ${change}` : base;
 }
 
-function viewHeading(count: number): string {
-  return count === 1 ? "1 klinikvisning" : `${formatCount(count)} klinikvisninger`;
-}
-
-function timesLabel(count: number): string {
-  return count === 1 ? "1 gang" : `${formatCount(count)} gange`;
-}
-
-function nextStepLabel(count: number): string {
-  return count === 1
-    ? "1 patient tog næste skridt"
-    : `${formatCount(count)} patienter tog næste skridt`;
+function renderHeadlineRow(text: string): string {
+  return `<tr><td style="padding:16px 0 4px 0;font-family:Arial,Helvetica,sans-serif;font-size:20px;line-height:1.4;color:#111111;font-weight:bold;">${escapeHtml(text)}</td></tr>`;
 }
 
 function renderCountRow(count: number, label: string): string {
-  return `<tr><td style="padding:3px 0;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.6;color:#333333;"><strong>${formatCount(count)}</strong> ${escapeHtml(label)}</td></tr>`;
+  return `<tr><td style="padding:2px 0;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.6;color:#333333;"><strong>${formatCount(count)}</strong> ${escapeHtml(label)}</td></tr>`;
 }
 
-function renderCta(href: string, label: string): string {
-  return `<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:16px 0 8px 0;">
-<tr><td bgcolor="#104534" style="background-color:#104534;border-radius:9999px;text-align:center;">
-<a href="${escapeHtml(href)}" style="display:inline-block;padding:14px 28px;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.5;color:#ffffff;text-decoration:none;border-radius:9999px;">${escapeHtml(label)}</a>
-</td></tr>
-</table>`;
+function shouldShowContactChannel(enabled?: boolean): boolean {
+  return enabled !== false;
 }
 
-function clinicSummarySentenceHtml(
-  views: number,
-  interactions: number
+function renderOptionalCountRow(
+  enabled: boolean | undefined,
+  count: number,
+  label: string
 ): string {
-  return `Din klinik er blevet vist <strong>${escapeHtml(timesLabel(views))}</strong>, og <strong>${escapeHtml(nextStepLabel(interactions))}</strong> ved at klikke videre fra din profil. Se detaljer i <a href="${DASHBOARD_URL}" style="color:#104534;text-decoration:underline;">dit dashboard</a>.`;
+  if (!shouldShowContactChannel(enabled)) {
+    return "";
+  }
+  return renderCountRow(count, label);
 }
 
-function clinicSummarySentenceText(
-  views: number,
-  interactions: number
-): string {
-  return `Din klinik er blevet vist ${timesLabel(views)}, og ${nextStepLabel(interactions)} ved at klikke videre fra din profil. Se detaljer i dit dashboard: ${DASHBOARD_URL}`;
+function optionalCountLine(
+  enabled: boolean | undefined,
+  count: number,
+  label: string
+): string[] {
+  if (!shouldShowContactChannel(enabled)) {
+    return [];
+  }
+  return [`${formatCount(count)} ${label}`];
+}
+
+function renderProfileNudge(profileUrl: string): string {
+  return `<p style="margin:0;font-size:16px;line-height:1.6;color:#333333;">En komplet profil gør det lettere for patienter at vælge din klinik. <a href="${escapeHtml(profileUrl)}" style="color:#104534;font-weight:bold;text-decoration:underline;">Opdater</a></p>`;
+}
+
+function bookingLabel(count: number): string {
+  if (count <= 0) {
+    return "bookinger*";
+  }
+  return count === 1 ? "booking" : "bookinger";
+}
+
+function renderBookingRow(clinic: MonthlySummaryClinicView): string {
+  return renderCountRow(clinic.stats.bookingClicks, bookingLabel(clinic.stats.bookingClicks));
+}
+
+function renderPremiumUpsellRow(clinic: MonthlySummaryClinicView): string {
+  if (clinic.stats.bookingClicks > 0) {
+    return "";
+  }
+
+  const premiumUrl = clinicPremiumUrl(clinic.clinicId);
+  return `<tr><td style="padding:16px 0 4px 0;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f8f7f2;border-radius:12px;">
+<tr>
+<td style="padding:16px 18px;border-left:4px solid #104534;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.55;color:#104534;">
+<strong>*Vil du også modtage bookinger direkte fra Fysfinder?</strong><br />
+Direkte booking er inkluderet med <a href="${escapeHtml(premiumUrl)}" style="color:#104534;font-weight:bold;text-decoration:underline;">Premium</a>.
+</td>
+</tr>
+</table>
+</td></tr>`;
+}
+
+function premiumUpsellText(clinic: MonthlySummaryClinicView): string[] {
+  if (clinic.stats.bookingClicks > 0) {
+    return [];
+  }
+  return [
+    "*Vil du også modtage bookinger direkte fra Fysfinder? Direkte booking er inkluderet med Premium.",
+  ];
 }
 
 function renderClinicSection(clinic: MonthlySummaryClinicView): string {
-  const { interactions, views } = clinicTotals(clinic);
-  const premiumUrl = clinicPremiumUrl(clinic.clinicId);
   return `
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 8px 0;">
   <tr>
     <td style="padding-bottom:8px;font-family:Arial,Helvetica,sans-serif;font-size:18px;line-height:1.4;color:#104534;font-weight:bold;">
-      ${escapeHtml(clinic.clinicName)}
-    </td>
-  </tr>
-  <tr>
-    <td style="padding:0 0 16px 0;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.6;color:#333333;">
-      ${clinicSummarySentenceHtml(views, interactions)}
-    </td>
-  </tr>
-  <tr>
-    <td style="border-top:1px solid #e5e7eb;padding-top:24px;font-family:Arial,Helvetica,sans-serif;font-size:22px;line-height:1.4;color:#111111;font-weight:bold;">
-      ${escapeHtml(interactionHeading(interactions))}
-    </td>
-  </tr>
-  <tr>
-    <td style="padding:8px 0 12px 0;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.6;color:#333333;">
-      Patienter, der har taget næste skridt fra din profil.
+      ${renderClinicName(clinic)}
     </td>
   </tr>
   <tr>
     <td>
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
-        ${renderCountRow(clinic.stats.websiteClicks, "besøgte dit website")}
-        ${renderCountRow(clinic.stats.phoneClicks, "viste dit telefonnummer")}
-        ${renderCountRow(clinic.stats.emailClicks, "kopierede din e-mail")}
-        ${renderCountRow(clinic.stats.bookingClicks, "booking via Fysfinder*")}
-      </table>
-    </td>
-  </tr>
-  <tr>
-    <td style="padding:12px 0 24px 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;color:#6b7280;">
-      *Booking via Fysfinder kræver Premium. <a href="${escapeHtml(premiumUrl)}" style="color:#104534;text-decoration:underline;">Opgrader her</a>.
-    </td>
-  </tr>
-  <tr>
-    <td style="border-top:1px solid #e5e7eb;padding-top:24px;font-family:Arial,Helvetica,sans-serif;font-size:22px;line-height:1.4;color:#111111;font-weight:bold;">
-      ${escapeHtml(viewHeading(views))}
-    </td>
-  </tr>
-  <tr>
-    <td style="padding:8px 0 12px 0;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.6;color:#333333;">
-      Så mange gange blev din klinik vist til potentielle patienter på Fysfinder.
-    </td>
-  </tr>
-  <tr>
-    <td style="padding-bottom:8px;">
-      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+        ${renderHeadlineRow(viewHeading(clinic))}
         ${renderCountRow(clinic.stats.listImpressions, "visninger i søgeresultater")}
-        ${renderCountRow(clinic.stats.profileViews, "visninger af din klinikprofil")}
+        ${renderCountRow(clinic.stats.profileViews, "profilvisninger")}
+        ${renderHeadlineRow(nextStepHeading(clinic.stats.totalContactClicks))}
+        ${renderOptionalCountRow(clinic.hasWebsite, clinic.stats.websiteClicks, "klikkede videre til dit website")}
+        ${renderOptionalCountRow(clinic.hasPhone, clinic.stats.phoneClicks, "viste dit telefonnummer")}
+        ${renderOptionalCountRow(clinic.hasEmail, clinic.stats.emailClicks, "kopierede din e-mail")}
+        ${renderBookingRow(clinic)}
+        ${renderPremiumUpsellRow(clinic)}
       </table>
     </td>
   </tr>
@@ -173,12 +232,14 @@ function renderClinicSection(clinic: MonthlySummaryClinicView): string {
 export function buildMonthlyClinicSummaryEmail(
   input: MonthlyClinicSummaryEmailInput
 ): MonthlyClinicSummaryEmailContent {
-  const monthTitle = titleCaseDanishMonth(input.monthLabelDa);
-  const subject = `Dine resultater på Fysfinder: ${monthTitle}`;
-  const greeting = greetingLine(input.recipientName);
-  const primaryClinicId = input.clinics[0]?.clinicId;
-  const profileUrl = primaryClinicId
-    ? clinicEditUrl(primaryClinicId)
+  const subject = buildMonthlySummarySubject(input.clinics, input.monthLabelDa);
+  const opening = buildMonthlySummaryOpeningLine(
+    input.clinics,
+    input.monthLabelDa
+  );
+  const profileCta = getMonthlySummaryProfileCta(input.clinics);
+  const profileUrl = profileCta.clinicId
+    ? clinicEditUrl(profileCta.clinicId)
     : DASHBOARD_URL;
   const clinicHtml = input.clinics
     .map((clinic) => renderClinicSection(clinic))
@@ -196,7 +257,7 @@ export function buildMonthlyClinicSummaryEmail(
 <body style="margin:0;padding:0;background-color:#f6f6f6;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f6f6f6;">
 <tr>
-<td style="font-size:1px;line-height:1px;padding:0;margin:0;color:#f6f6f6;font-family:Arial,Helvetica,sans-serif;max-height:0;overflow:hidden;mso-hide:all;">${escapeHtml(PREHEADER)}&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;</td>
+<td style="font-size:1px;line-height:1px;padding:0;margin:0;color:#f6f6f6;font-family:Arial,Helvetica,sans-serif;max-height:0;overflow:hidden;mso-hide:all;">${escapeHtml(opening)}&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;</td>
 </tr>
 </table>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f6f6f6;">
@@ -205,24 +266,22 @@ export function buildMonthlyClinicSummaryEmail(
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;background-color:#ffffff;">
 <tr>
 <td style="padding:32px 24px;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.6;color:#333333;">
-<p style="margin:0 0 16px 0;font-size:16px;line-height:1.6;color:#333333;">${escapeHtml(greeting)}</p>
-<p style="margin:0 0 24px 0;font-size:16px;line-height:1.6;color:#333333;">Her er dit månedlige overblik fra Fysfinder. Se, hvordan potentielle patienter har fundet og interageret med din klinik i ${escapeHtml(input.monthLabelDa)}.</p>
+${renderLogo()}
+<p style="margin:0 0 24px 0;font-size:16px;line-height:1.6;color:#333333;">${escapeHtml(opening)}</p>
 ${clinicHtml}
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:24px 0 0 0;">
 <tr>
 <td style="border-top:1px solid #e5e7eb;padding-top:24px;">
-<p style="margin:0 0 12px 0;font-size:18px;line-height:1.4;color:#104534;font-weight:bold;">Få flere patienthenvendelser</p>
-<p style="margin:0 0 16px 0;font-size:16px;line-height:1.6;color:#333333;">En komplet profil på Fysfinder gør det lettere for patienter at vælge jer.</p>
-${renderCta(profileUrl, "Opdater din profil nu →")}
+${renderProfileNudge(profileUrl)}
 </td>
 </tr>
 </table>
-<p style="margin:24px 0;font-size:16px;line-height:1.6;color:#333333;">Har I spørgsmål til dine tal eller profil, er du altid velkomne til at skrive. Jeg svarer selv.</p>
-<p style="margin:0 0 4px 0;font-size:16px;line-height:1.6;color:#333333;">Bedste hilsner<br /><strong>Joachim Bograd</strong><br />Fysfinder</p>
+<p style="margin:24px 0;font-size:16px;line-height:1.6;color:#333333;">Har du spørgsmål til dine tal eller din profil, er du altid velkommen til at skrive. Jeg svarer selv.</p>
+<p style="margin:0 0 4px 0;font-size:16px;line-height:1.6;color:#333333;"><strong>Joachim Bograd</strong> fra Fysfinder</p>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:32px;">
 <tr>
 <td style="padding-top:24px;border-top:1px solid #e5e7eb;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;color:#6b7280;">
-<p style="margin:0;">Vil I ikke modtage denne månedlige opsummering fra Fysfinder? <a href="${escapeHtml(input.unsubscribeUrl)}" style="color:#104534;text-decoration:underline;">Afmeld her</a>.</p>
+<p style="margin:0;">Vil du ikke modtage denne månedlige opsummering fra Fysfinder? <a href="${escapeHtml(input.unsubscribeUrl)}" style="color:#104534;text-decoration:underline;">Afmeld her</a>.</p>
 </td>
 </tr>
 </table>
@@ -237,45 +296,46 @@ ${renderCta(profileUrl, "Opdater din profil nu →")}
 
   const clinicText = input.clinics
     .map((clinic) => {
-      const { interactions, views } = clinicTotals(clinic);
+      const publicUrl = clinicPublicUrl(clinic.clinicSlug);
       return [
-        clinic.clinicName,
-        clinicSummarySentenceText(views, interactions),
-        "",
-        interactionHeading(interactions),
-        "Patienter, der har taget næste skridt fra din profil.",
-        `${formatCount(clinic.stats.websiteClicks)} besøgte dit website`,
-        `${formatCount(clinic.stats.phoneClicks)} viste dit telefonnummer`,
-        `${formatCount(clinic.stats.emailClicks)} kopierede din e-mail`,
-        `${formatCount(clinic.stats.bookingClicks)} booking via Fysfinder*`,
-        "*Booking via Fysfinder kræver Premium. Opgrader her.",
-        "",
-        viewHeading(views),
-        "Så mange gange blev din klinik vist til potentielle patienter på Fysfinder.",
+        publicUrl ? `${clinic.clinicName}: ${publicUrl}` : clinic.clinicName,
+        viewHeading(clinic),
         `${formatCount(clinic.stats.listImpressions)} visninger i søgeresultater`,
-        `${formatCount(clinic.stats.profileViews)} visninger af din klinikprofil`,
+        `${formatCount(clinic.stats.profileViews)} profilvisninger`,
+        nextStepHeading(clinic.stats.totalContactClicks),
+        ...optionalCountLine(
+          clinic.hasWebsite,
+          clinic.stats.websiteClicks,
+          "klikkede videre til dit website"
+        ),
+        ...optionalCountLine(
+          clinic.hasPhone,
+          clinic.stats.phoneClicks,
+          "viste dit telefonnummer"
+        ),
+        ...optionalCountLine(
+          clinic.hasEmail,
+          clinic.stats.emailClicks,
+          "kopierede din e-mail"
+        ),
+        `${formatCount(clinic.stats.bookingClicks)} ${bookingLabel(clinic.stats.bookingClicks)}`,
+        ...premiumUpsellText(clinic),
       ].join("\n");
     })
     .join("\n\n");
 
   const text = [
-    greeting,
-    "",
-    `Her er dit månedlige overblik fra Fysfinder. Se, hvordan potentielle patienter har fundet og interageret med din klinik i ${input.monthLabelDa}.`,
+    opening,
     "",
     clinicText,
     "",
-    "Få flere patienthenvendelser",
-    "En komplet profil på Fysfinder gør det lettere for patienter at vælge jer.",
-    `Opdater din profil nu → ${profileUrl}`,
+    `En komplet profil gør det lettere for patienter at vælge din klinik. Opdater: ${profileUrl}`,
     "",
-    "Har I spørgsmål til dine tal eller profil, er du altid velkomne til at skrive. Jeg svarer selv.",
+    "Har du spørgsmål til dine tal eller din profil, er du altid velkommen til at skrive. Jeg svarer selv.",
     "",
-    "Bedste hilsner",
-    "Joachim Bograd",
-    "Fysfinder",
+    "Joachim Bograd fra Fysfinder",
     "",
-    `Vil I ikke modtage denne månedlige opsummering fra Fysfinder? Afmeld her: ${input.unsubscribeUrl}`,
+    `Vil du ikke modtage denne månedlige opsummering fra Fysfinder? Afmeld her: ${input.unsubscribeUrl}`,
   ].join("\n");
 
   return { subject, html, text };
@@ -297,6 +357,7 @@ export async function sendMonthlyClinicSummaryEmail(
   });
 
   try {
+    const logoAttachment = getLogoAttachment();
     const { data, error } = await resend.emails.send({
       from: FROM_OWNER,
       replyTo: REPLY_TO,
@@ -304,6 +365,7 @@ export async function sendMonthlyClinicSummaryEmail(
       subject: content.subject,
       html: content.html,
       text: content.text,
+      ...(logoAttachment ? { attachments: [logoAttachment] } : {}),
     });
 
     if (error) {

@@ -1,5 +1,6 @@
 /**
  * Monthly clinic summary job: load owners, apply skip rules, send Resend emails.
+ * Updated: pass website/phone/email flags so the email only reports channels the clinic has.
  */
 
 import type { SupabaseClient } from "@supabase/supabase-js";
@@ -49,6 +50,7 @@ export interface MonthlySummaryRunResult {
 interface OwnershipClinicRow {
   clinics_id: string;
   klinikNavn: string | null;
+  klinikNavnSlug: string | null;
   verified_email: string | null;
   email: string | null;
   tlf: string | null;
@@ -64,6 +66,7 @@ interface OwnershipClinicRow {
   førsteKons: string | null;
   opfølgning: string | null;
   ydernummer: boolean | null;
+  logo_url: string | null;
   clinic_specialties?: Array<{ specialty_id: string }> | null;
   clinic_team_members?: Array<{ id: string }> | null;
   clinic_insurances?: Array<{ insurance_id: string }> | null;
@@ -141,6 +144,7 @@ export async function runMonthlyClinicSummary(
         clinics:clinic_id (
           clinics_id,
           klinikNavn,
+          klinikNavnSlug,
           verified_email,
           email,
           tlf,
@@ -156,6 +160,7 @@ export async function runMonthlyClinicSummary(
           førsteKons,
           opfølgning,
           ydernummer,
+          logo_url,
           clinic_specialties ( specialty_id ),
           clinic_team_members ( id ),
           clinic_insurances ( insurance_id )
@@ -281,7 +286,12 @@ export async function runMonthlyClinicSummary(
       clinics.push({
         clinicId: clinic.clinics_id,
         clinicName: clinic.klinikNavn?.trim() || "Klinik",
+        clinicSlug: clinic.klinikNavnSlug?.trim() || undefined,
         missingKeys: completeness.missingKeys,
+        hasLogo: Boolean(clinic.logo_url?.trim()),
+        hasWebsite: Boolean(clinic.website?.trim()),
+        hasPhone: Boolean(clinic.tlf?.trim()),
+        hasEmail: Boolean(clinic.email?.trim()),
         stats: mapEventCountsToClinicStats(
           clinic.clinics_id,
           bounds.monthLabelDa,

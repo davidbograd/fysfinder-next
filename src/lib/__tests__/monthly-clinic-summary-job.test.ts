@@ -23,6 +23,7 @@ const ownershipRow = {
   clinics: {
     clinics_id: "c1",
     klinikNavn: "Fysio Nord",
+    klinikNavnSlug: "fysio-nord",
     verified_email: "verified@example.com",
     email: "clinic@example.com",
     tlf: "123",
@@ -38,6 +39,7 @@ const ownershipRow = {
     førsteKons: "600",
     opfølgning: "400",
     ydernummer: true,
+    logo_url: "https://example.com/logo.png",
     clinic_specialties: [{ specialty_id: "s1" }],
     clinic_team_members: [{ id: "t1" }],
     clinic_insurances: [{ insurance_id: "i1" }],

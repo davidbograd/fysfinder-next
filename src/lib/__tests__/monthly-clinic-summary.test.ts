@@ -2,8 +2,12 @@ import { CLINIC_PROFILE_CONTACT_NO_INFO_WARNING_DA } from "../clinic-profile-com
 import type { ClinicStats } from "../clinic-stats";
 import {
   buildMonthlySummaryAttentionParagraphs,
+  buildMonthlySummaryOpeningLine,
+  buildMonthlySummarySubject,
   decideMonthlySummaryAction,
   filterClinicsOwnedInPeriod,
+  formatMonthOverMonthChange,
+  getMonthlySummaryProfileCta,
   groupRowsByOwner,
   resolveOwnerEmail,
 } from "../monthly-clinic-summary";
@@ -153,5 +157,85 @@ describe("buildMonthlySummaryAttentionParagraphs", () => {
     ]);
 
     expect(paragraphs[0]).toMatch(/specialer og by/i);
+    expect(paragraphs[0]).toMatch(/\bdu\b/);
+    expect(paragraphs.join(" ")).not.toMatch(/\b(I|jer|jeres)\b/);
+  });
+});
+
+describe("monthly summary subject, opening, CTA, and MoM", () => {
+  it("uses a stable monthly subject and a views-plus-next-step opening", () => {
+    const clinics = [
+      {
+        clinicId: "c1",
+        clinicName: "Fysio Nord",
+        missingKeys: [],
+        stats: emptyStats({
+          websiteClicks: 5,
+          totalContactClicks: 5,
+          listImpressions: 40,
+          profileViews: 4,
+        }),
+      },
+    ];
+
+    expect(buildMonthlySummarySubject(clinics, "august")).toBe(
+      "Sådan klarede din klinik sig på Fysfinder i august"
+    );
+    expect(buildMonthlySummaryOpeningLine(clinics, "august")).toBe(
+      "I august blev din klinik set 44 gange, og 5 patienter tog næste skridt ved at klikke videre."
+    );
+  });
+
+  it("uses dine klinikker in the subject when the owner has more than one clinic", () => {
+    expect(
+      buildMonthlySummarySubject(
+        [
+          {
+            clinicId: "c1",
+            clinicName: "Fysio Nord",
+            missingKeys: [],
+            stats: emptyStats({ websiteClicks: 1, totalContactClicks: 1 }),
+          },
+          {
+            clinicId: "c2",
+            clinicName: "Fysio Syd",
+            missingKeys: [],
+            stats: emptyStats({ clinicId: "c2" }),
+          },
+        ],
+        "august"
+      )
+    ).toBe("Sådan klarede dine klinikker sig på Fysfinder i august");
+  });
+
+  it("picks a specific profile CTA from the highest-priority missing field", () => {
+    expect(
+      getMonthlySummaryProfileCta([
+        {
+          clinicId: "c1",
+          clinicName: "Fysio Nord",
+          missingKeys: ["specialties", "openingHours"],
+          stats: emptyStats(),
+        },
+      ])
+    ).toEqual({ label: "Tilføj specialer →", clinicId: "c1" });
+
+    expect(
+      getMonthlySummaryProfileCta([
+        {
+          clinicId: "c2",
+          clinicName: "Fysio Syd",
+          missingKeys: [],
+          hasLogo: false,
+          stats: emptyStats(),
+        },
+      ])
+    ).toEqual({ label: "Tilføj billeder →", clinicId: "c2" });
+  });
+
+  it("formats month-over-month view changes for later emails", () => {
+    expect(formatMonthOverMonthChange(22.4, "juli")).toBe("↑ 22% fra juli");
+    expect(formatMonthOverMonthChange(-8.1, "juli")).toBe("↓ 8% fra juli");
+    expect(formatMonthOverMonthChange(null, "juli")).toBe("");
   });
 });

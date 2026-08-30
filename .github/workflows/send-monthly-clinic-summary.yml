@@ -1,8 +1,11 @@
+# Sends each clinic owner a previous-month summary on the 2nd.
+# Cron is 07:00 UTC (09:00 Denmark in summer, 08:00 in winter).
+# Scheduled runs send for real. Manual runs default to dry-run.
 name: Send monthly clinic summary
 
 on:
   schedule:
-    - cron: "0 7 2 * *" # 2nd of each month at 07:00 UTC
+    - cron: "0 7 2 * *"
   workflow_dispatch:
     inputs:
       dry_run:
@@ -18,9 +21,17 @@ on:
         type: string
         required: false
 
+concurrency:
+  group: send-monthly-clinic-summary
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
 jobs:
   send:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
       - uses: actions/checkout@v4
@@ -42,7 +53,7 @@ jobs:
           ADMIN_EMAILS: ${{ secrets.ADMIN_EMAILS }}
           EMAIL_UNSUBSCRIBE_SECRET: ${{ secrets.EMAIL_UNSUBSCRIBE_SECRET }}
           NEXT_PUBLIC_SITE_URL: https://www.fysfinder.dk
-          DRY_RUN_INPUT: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run || 'false' }}
+          DRY_RUN_INPUT: ${{ github.event_name == 'schedule' && 'false' || inputs.dry_run }}
           PREVIEW_TO: ${{ github.event_name == 'workflow_dispatch' && inputs.preview_to || '' }}
           PERIOD: ${{ github.event_name == 'workflow_dispatch' && inputs.period || '' }}
         run: |
