@@ -87,6 +87,17 @@ https://console.developers.google.com/apis/api/places.googleapis.com/overview
 - **Purpose**: Updates import statements across the codebase
 - **Usage**: `npm run update:imports`
 
+### `send-monthly-clinic-summary.ts`
+
+- **Purpose**: Emails each clinic owner a previous-month performance summary (interaktioner + visninger) plus a profile-attention nudge
+- **Usage**:
+  ```bash
+  npm run email:monthly-clinic-summary -- --dry-run
+  npm run email:monthly-clinic-summary -- --preview-to=you@example.com
+  npm run email:monthly-clinic-summary -- --period=2026-07
+  ```
+- **Schedule**: GitHub Action on the 2nd of each month at 07:00 UTC (`send-monthly-clinic-summary.yml`). Scheduled runs send for real. Manual dispatch defaults to `--dry-run`.
+
 ### `revalidate.js`
 
 - **Purpose**: Handles revalidation of pages/cache

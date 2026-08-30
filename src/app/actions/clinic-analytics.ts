@@ -1,27 +1,17 @@
-// Server action for fetching per-clinic analytics
-// Verifies clinic ownership before returning stats
+// Server action for fetching per-clinic analytics.
+// Updated: uses shared ClinicStats mapper so dashboard and monthly emails stay in sync.
 
 "use server";
 
 import { createClient } from "@/app/utils/supabase/server";
 import { createClient as createServiceClient } from "@supabase/supabase-js";
+import {
+  mapEventCountsToClinicStats,
+  type ClinicEventCount,
+  type ClinicStats,
+} from "@/lib/clinic-stats";
 
-interface EventCount {
-  event_type: string;
-  count: number;
-}
-
-export interface ClinicStats {
-  clinicId: string;
-  period: string;
-  profileViews: number;
-  listImpressions: number;
-  phoneClicks: number;
-  websiteClicks: number;
-  emailClicks: number;
-  bookingClicks: number;
-  totalContactClicks: number;
-}
+export type { ClinicStats };
 
 /**
  * Get analytics stats for a single clinic (only if user owns it)
@@ -74,28 +64,12 @@ export async function getClinicAnalytics(
     return { error: "Fejl ved hentning af statistik" };
   }
 
-  const counts = (data as EventCount[]) || [];
-  const getCount = (type: string) =>
-    counts.find((c) => c.event_type === type)?.count || 0;
-
-  const phoneClicks = getCount("phone_click");
-  const websiteClicks = getCount("website_click");
-  const emailClicks = getCount("email_click");
-  const bookingClicks = getCount("booking_click");
-
   return {
-    stats: {
+    stats: mapEventCountsToClinicStats(
       clinicId,
-      period: `${days} dage`,
-      profileViews: getCount("profile_view"),
-      listImpressions: getCount("list_impression"),
-      phoneClicks,
-      websiteClicks,
-      emailClicks,
-      bookingClicks,
-      totalContactClicks:
-        phoneClicks + websiteClicks + emailClicks + bookingClicks,
-    },
+      `${days} dage`,
+      (data as ClinicEventCount[]) || []
+    ),
   };
 }
 
@@ -132,7 +106,6 @@ export async function getAllOwnedClinicAnalytics(
 
   const results: Record<string, ClinicStats> = {};
 
-  // Fetch stats for each clinic in parallel
   const promises = clinicIds.map(async (clinicId: string) => {
     const serviceSupabase = createServiceClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -156,27 +129,11 @@ export async function getAllOwnedClinicAnalytics(
       return;
     }
 
-    const counts = (data as EventCount[]) || [];
-    const getCount = (type: string) =>
-      counts.find((c) => c.event_type === type)?.count || 0;
-
-    const phoneClicks = getCount("phone_click");
-    const websiteClicks = getCount("website_click");
-    const emailClicks = getCount("email_click");
-    const bookingClicks = getCount("booking_click");
-
-    results[clinicId] = {
+    results[clinicId] = mapEventCountsToClinicStats(
       clinicId,
-      period: `${days} dage`,
-      profileViews: getCount("profile_view"),
-      listImpressions: getCount("list_impression"),
-      phoneClicks,
-      websiteClicks,
-      emailClicks,
-      bookingClicks,
-      totalContactClicks:
-        phoneClicks + websiteClicks + emailClicks + bookingClicks,
-    };
+      `${days} dage`,
+      (data as ClinicEventCount[]) || []
+    );
   });
 
   await Promise.all(promises);

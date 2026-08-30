@@ -37,6 +37,7 @@
     "google:update": "tsx scripts/update-clinic-google-data.ts",
     "dedupe:clinics": "tsx scripts/dedupe-clinics/classify.ts",
     "dedupe:clinics:apply": "tsx scripts/dedupe-clinics/apply.ts",
+    "email:monthly-clinic-summary": "tsx scripts/send-monthly-clinic-summary.ts",
     "update:imports": "node scripts/update-imports.mjs",
     "revalidate": "node scripts/revalidate.js",
     "stripe:listen": "stripe listen --forward-to localhost:3000/api/stripe/webhook",

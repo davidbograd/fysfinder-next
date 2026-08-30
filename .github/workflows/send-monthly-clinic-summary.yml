@@ -1,0 +1,70 @@
+# Sends each clinic owner a previous-month summary on the 2nd.
+# Cron is 07:00 UTC (09:00 Denmark in summer, 08:00 in winter).
+# Scheduled runs send for real. Manual runs default to dry-run.
+name: Send monthly clinic summary
+
+on:
+  schedule:
+    - cron: "0 7 2 * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Print recipients without sending"
+        type: boolean
+        default: true
+      preview_to:
+        description: "Send one sample to this email (skips live blast)"
+        type: string
+        required: false
+      period:
+        description: "Override period YYYY-MM (default: previous month)"
+        type: string
+        required: false
+
+concurrency:
+  group: send-monthly-clinic-summary
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Send monthly clinic summaries
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          ADMIN_EMAILS: ${{ secrets.ADMIN_EMAILS }}
+          EMAIL_UNSUBSCRIBE_SECRET: ${{ secrets.EMAIL_UNSUBSCRIBE_SECRET }}
+          NEXT_PUBLIC_SITE_URL: https://www.fysfinder.dk
+          DRY_RUN_INPUT: ${{ github.event_name == 'schedule' && 'false' || inputs.dry_run }}
+          PREVIEW_TO: ${{ github.event_name == 'workflow_dispatch' && inputs.preview_to || '' }}
+          PERIOD: ${{ github.event_name == 'workflow_dispatch' && inputs.period || '' }}
+        run: |
+          args=""
+          if [ "$DRY_RUN_INPUT" = "true" ]; then
+            args="$args --dry-run"
+          fi
+          if [ -n "$PREVIEW_TO" ]; then
+            args="$args --preview-to=$PREVIEW_TO"
+          fi
+          if [ -n "$PERIOD" ]; then
+            args="$args --period=$PERIOD"
+          fi
+          npm run email:monthly-clinic-summary -- $args
