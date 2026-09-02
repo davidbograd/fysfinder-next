@@ -26,7 +26,11 @@ import { SearchInterface } from "@/components/search/SearchInterface";
 import { PartnershipBanner } from "@/components/features/partnership/PartnershipBanner";
 import { SeoContent } from "@/components/seo/SeoContent";
 import { orderSpecialties } from "@/lib/clinic-utils";
-import { getRankingPolicy, sortClinicsByPolicy } from "@/lib/clinic-entitlements";
+import {
+  getPrimaryRankingContext,
+  getRankingPolicy,
+  sortClinicsByPolicy,
+} from "@/lib/clinic-entitlements";
 
 // Heading generation utility
 import {
@@ -105,16 +109,6 @@ function mapDBClinicToClinic(dbClinic: DBClinicResponse): Clinic {
     premium_listing: dbClinic.premium_listings?.[0] || null,
   };
   return clinic;
-}
-
-function getPrimaryRankingContext(
-  locationSlug: string,
-  specialtySlug?: string
-): "danmark" | "online" | "city" | "city-specialty" {
-  if (locationSlug === "danmark") return "danmark";
-  if (locationSlug === "online") return "online";
-  if (specialtySlug) return "city-specialty";
-  return "city";
 }
 
 function applyClinicFilters(url: string, filters?: LocationFilters): string {

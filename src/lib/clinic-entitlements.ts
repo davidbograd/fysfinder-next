@@ -5,6 +5,7 @@ import { PremiumListing } from "@/app/types";
 
 export type RankingContext =
   | "danmark"
+  | "danmark-specialty"
   | "online"
   | "city"
   | "city-specialty"
@@ -18,7 +19,8 @@ interface RankingPolicy {
 interface RankingClinic {
   avgRating: number | null;
   ratingCount: number | null;
-  premium_listing?: PremiumListing | null;
+  // Only the active-window dates are read here, so callers need not carry a full listing.
+  premium_listing?: Pick<PremiumListing, "start_date" | "end_date"> | null;
   verified_klinik?: boolean | null;
 }
 
@@ -32,7 +34,11 @@ interface VerifiedStatusCarrier {
 }
 
 const RANKING_POLICY_BY_CONTEXT: Record<RankingContext, RankingPolicy> = {
+  // The unfiltered Danmark listing is a nationwide roll-up of every clinic, so it stays
+  // purely rating-ranked. A specialty filter narrows it to a comparable shortlist, which
+  // is a placement premium clinics pay for.
   danmark: { prioritizePremium: false, prioritizeVerifiedSignedUp: false },
+  "danmark-specialty": { prioritizePremium: true, prioritizeVerifiedSignedUp: false },
   online: { prioritizePremium: true, prioritizeVerifiedSignedUp: false },
   city: { prioritizePremium: true, prioritizeVerifiedSignedUp: true },
   "city-specialty": { prioritizePremium: true, prioritizeVerifiedSignedUp: true },
@@ -42,6 +48,21 @@ const RANKING_POLICY_BY_CONTEXT: Record<RankingContext, RankingPolicy> = {
 export const FEATURE_FLAGS = {
   verifiedPriorityInCityListings: true,
 } as const;
+
+/**
+ * Maps a location page URL to its ranking context. Kept beside the policy table so the
+ * danmark vs. danmark-specialty distinction stays visible in one place.
+ */
+export function getPrimaryRankingContext(
+  locationSlug: string,
+  specialtySlug?: string
+): RankingContext {
+  if (locationSlug === "danmark")
+    return specialtySlug ? "danmark-specialty" : "danmark";
+  if (locationSlug === "online") return "online";
+  if (specialtySlug) return "city-specialty";
+  return "city";
+}
 
 export function getRankingPolicy(context: RankingContext): RankingPolicy {
   const policy = RANKING_POLICY_BY_CONTEXT[context];
