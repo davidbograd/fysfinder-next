@@ -4,6 +4,7 @@
 import {
   canAccessNearbyCityRanking,
   canAccessTeamMembersFeature,
+  getPrimaryRankingContext,
   getRankingPolicy,
   sortClinicsByPolicy,
 } from "@/lib/clinic-entitlements";
@@ -91,6 +92,49 @@ describe("clinic entitlement policies", () => {
 
     const sorted = sortClinicsByPolicy(clinics, getRankingPolicy("danmark"));
     expect(sorted[0].id).toBe("non-premium-higher-rating");
+  });
+
+  test("danmark-specialty policy ranks premium first even without any reviews", () => {
+    // Regression: a premium clinic with no Google rating yet sorted last on
+    // /find/fysioterapeut/danmark/<specialty>, because the page fell back to the
+    // unfiltered danmark policy and `avgRating || 0` scored it zero.
+    const clinics = [
+      {
+        id: "non-premium-rated",
+        avgRating: 5,
+        ratingCount: 90,
+        premium_listing: null,
+        verified_klinik: false,
+      },
+      {
+        id: "premium-unrated",
+        avgRating: null,
+        ratingCount: null,
+        premium_listing: {
+          start_date: "2025-01-01T00:00:00.000Z",
+          end_date: "2999-01-01T00:00:00.000Z",
+        },
+        verified_klinik: true,
+      },
+    ];
+
+    const sorted = sortClinicsByPolicy(
+      clinics,
+      getRankingPolicy(getPrimaryRankingContext("danmark", "fibromyalgi"))
+    );
+    expect(sorted[0].id).toBe("premium-unrated");
+  });
+
+  test("ranking context maps location and specialty slugs", () => {
+    expect(getPrimaryRankingContext("danmark")).toBe("danmark");
+    expect(getPrimaryRankingContext("danmark", "fibromyalgi")).toBe(
+      "danmark-specialty"
+    );
+    expect(getPrimaryRankingContext("online", "fibromyalgi")).toBe("online");
+    expect(getPrimaryRankingContext("aarhus")).toBe("city");
+    expect(getPrimaryRankingContext("aarhus", "fibromyalgi")).toBe(
+      "city-specialty"
+    );
   });
 
   test("online policy keeps premium ordering behavior", () => {
