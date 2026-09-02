@@ -100,9 +100,12 @@ export const AdminStatsSection = () => {
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">{stats.premiumCount}</div>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-xs text-muted-foreground mb-4">
             Klinikker med aktivt premium abonnement
           </p>
+          <Button asChild variant="outline" size="sm" className="w-full">
+            <Link href="/dashboard/admin/premium">Se alle</Link>
+          </Button>
         </CardContent>
       </Card>
     </div>
