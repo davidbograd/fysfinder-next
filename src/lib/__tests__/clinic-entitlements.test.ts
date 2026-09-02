@@ -6,6 +6,8 @@ import {
   canAccessTeamMembersFeature,
   getPrimaryRankingContext,
   getRankingPolicy,
+  isPremiumListingActive,
+  resolvePremiumListing,
   sortClinicsByPolicy,
 } from "@/lib/clinic-entitlements";
 
@@ -160,6 +162,64 @@ describe("clinic entitlement policies", () => {
 
     const sorted = sortClinicsByPolicy(clinics, getRankingPolicy("online"));
     expect(sorted[0].id).toBe("premium-lower-rating");
+  });
+
+  test("premium listing resolution prefers the active listing over array order", () => {
+    // Regression: a clinic that renewed holds an expired listing and an active one, and
+    // the database returned the expired one first. Taking [0] marked a paying clinic as
+    // non-premium, dropping it out of premium ranking on cities it still pays for.
+    const expired = {
+      id: "expired",
+      start_date: "2025-04-03T00:00:00.000Z",
+      end_date: "2025-08-16T00:00:00.000Z",
+    };
+    const active = {
+      id: "active",
+      start_date: "2025-08-16T00:00:00.000Z",
+      end_date: "2999-01-01T00:00:00.000Z",
+    };
+
+    expect(resolvePremiumListing([expired, active])?.id).toBe("active");
+    expect(resolvePremiumListing([active, expired])?.id).toBe("active");
+    expect(isPremiumListingActive(resolvePremiumListing([expired, active]))).toBe(
+      true
+    );
+  });
+
+  test("premium listing resolution handles empty and fully expired sets", () => {
+    const expired = {
+      id: "expired",
+      start_date: "2025-04-03T00:00:00.000Z",
+      end_date: "2025-08-16T00:00:00.000Z",
+    };
+
+    expect(resolvePremiumListing([])).toBeNull();
+    expect(resolvePremiumListing(null)).toBeNull();
+    expect(resolvePremiumListing(undefined)).toBeNull();
+    // No active listing, so the clinic must not read as premium anywhere.
+    expect(isPremiumListingActive(resolvePremiumListing([expired]))).toBe(false);
+  });
+
+  test("only clinics with an active listing survive the city premium filter", () => {
+    // The premium query scopes premium_listings to one city in SQL, then the page keeps a
+    // clinic only if what is left is active. These are the two real shapes that broke:
+    // a clinic whose premium period ended, and one that renewed into a new listing.
+    const endedLastYear = {
+      start_date: "2025-04-03T00:00:00.000Z",
+      end_date: "2025-07-03T00:00:00.000Z",
+    };
+    const renewal = {
+      start_date: "2025-08-16T00:00:00.000Z",
+      end_date: "2999-01-01T00:00:00.000Z",
+    };
+
+    const belongsOnCityPage = (listings: typeof endedLastYear[]) =>
+      isPremiumListingActive(resolvePremiumListing(listings));
+
+    // Lapsed clinic, still linked to a city it used to pay for.
+    expect(belongsOnCityPage([endedLastYear])).toBe(false);
+    // Renewed clinic whose old listing also covered this city and sorts first.
+    expect(belongsOnCityPage([endedLastYear, renewal])).toBe(true);
   });
 
   test("nearby-city ranking access is premium-only", () => {

@@ -89,6 +89,20 @@ export function hasVerifiedSignupPriority(
   return Boolean(clinic.verified_klinik);
 }
 
+/**
+ * Picks the listing that decides a clinic's premium status. A clinic can hold several
+ * listings (an expired one plus a renewal), and the database returns them in no
+ * meaningful order, so never rely on the first element: an active listing must win over
+ * a stale one or a paying clinic silently loses its premium treatment. Falls back to the
+ * first listing so callers still see the historical listing when none is active.
+ */
+export function resolvePremiumListing<
+  T extends Pick<PremiumListing, "start_date" | "end_date">
+>(listings: T[] | null | undefined): T | null {
+  if (!listings || listings.length === 0) return null;
+  return listings.find((listing) => isPremiumListingActive(listing)) ?? listings[0];
+}
+
 export function canAccessNearbyCityRanking(carrier: PremiumAccessCarrier): boolean {
   if (carrier.premium_listing) return isPremiumListingActive(carrier.premium_listing);
   if (!carrier.premium_listings || carrier.premium_listings.length === 0) return false;

@@ -29,6 +29,8 @@ import { orderSpecialties } from "@/lib/clinic-utils";
 import {
   getPrimaryRankingContext,
   getRankingPolicy,
+  isPremiumListingActive,
+  resolvePremiumListing,
   sortClinicsByPolicy,
 } from "@/lib/clinic-entitlements";
 
@@ -106,7 +108,7 @@ function mapDBClinicToClinic(dbClinic: DBClinicResponse): Clinic {
     team_members: dbClinic.clinic_team_members || [],
     insurances: dbClinic.clinic_insurances?.map((ci) => ci.insurance) || [],
     extraServices: dbClinic.clinic_services?.map((cs) => cs.service) || [],
-    premium_listing: dbClinic.premium_listings?.[0] || null,
+    premium_listing: resolvePremiumListing(dbClinic.premium_listings),
   };
   return clinic;
 }
@@ -308,7 +310,12 @@ async function fetchCityLocationData(
   ]);
 
   const clinics = mapValidClinics(clinicsData);
-  const premiumClinics = mapValidClinics(premiumClinicsData);
+  // premium_listing_locations rows outlive the listing that created them, so this query
+  // still matches clinics whose premium period has ended. Without this check they keep
+  // appearing in cities they no longer pay for, instead of only their own city page.
+  const premiumClinics = mapValidClinics(premiumClinicsData).filter((clinic) =>
+    isPremiumListingActive(clinic.premium_listing)
+  );
   const allClinics = [
     ...premiumClinics,
     ...clinics.filter(

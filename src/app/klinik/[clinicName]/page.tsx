@@ -18,6 +18,7 @@ import { ClinicLocation } from "@/components/features/clinic/ClinicLocation";
 import { ClinicAbout } from "@/components/features/clinic/ClinicAbout";
 import { TrackProfileView } from "@/components/tracking/TrackProfileView";
 import { CACHE_TAGS, CACHE_TIMES } from "@/lib/cache-config";
+import { resolvePremiumListing } from "@/lib/clinic-entitlements";
 
 async function fetchClinicBySlug(clinicSlug: string): Promise<Clinic | null> {
   try {
@@ -52,7 +53,7 @@ async function fetchClinicBySlug(clinicSlug: string): Promise<Clinic | null> {
     clinic.team_members = [];
     clinic.insurances = [];
     clinic.extraServices = [];
-    clinic.premium_listing = clinic.premium_listings?.[0] || null; // Set premium_listing from the array
+    clinic.premium_listing = resolvePremiumListing(clinic.premium_listings);
     delete clinic.premium_listings; // Clean up the array since we don't need it anymore
 
     // Safely handle specialties
