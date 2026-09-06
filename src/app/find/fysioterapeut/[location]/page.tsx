@@ -11,6 +11,7 @@ import { SpecialtiesList } from "@/components/features/specialty/SpecialtiesList
 import { ClinicsList } from "@/components/features/clinic/ClinicsList";
 import { NoResultsFound } from "@/app/find/fysioterapeut/[location]/components/NoResultsFound";
 import { NearbyClinicsList } from "@/app/find/fysioterapeut/[location]/components/NearbyClinicsList";
+import { ClinicSignupCta } from "@/app/find/fysioterapeut/[location]/components/ClinicSignupCta";
 import { LocationClinicsMap } from "@/app/find/fysioterapeut/[location]/components/LocationClinicsMap";
 import { LocationStructuredData } from "@/components/seo/LocationStructuredData";
 import { SearchInterface } from "@/components/search/SearchInterface";
@@ -336,16 +337,27 @@ export default async function LocationPage({
         </div>
       )}
 
-      {!isOnline && data.clinics.length > 0 && (
-        <NearbyClinicsList
-          clinics={data.nearbyClinicsList}
-          nearbyCities={data.nearbyCities}
-          cityName={data.city.bynavn}
-          trackingContextCityId={data.city.id}
-          specialtySlug={resolvedParams.specialty}
-          specialtyName={specialtyName}
-        />
-      )}
+      {!isOnline &&
+        data.clinics.length > 0 &&
+        data.nearbyClinicsList.length > 0 && (
+          // Same grid template as the listing above, so nearby cards match its width.
+          <div className="mt-12 grid gap-6 xl:grid-cols-[minmax(0,1fr)_420px]">
+            <div className="space-y-4">
+              <NearbyClinicsList
+                clinics={data.nearbyClinicsList}
+                nearbyCities={data.nearbyCities}
+                cityName={data.city.bynavn}
+                trackingContextCityId={data.city.id}
+                specialtySlug={resolvedParams.specialty}
+                specialtyName={specialtyName}
+              />
+            </div>
+
+            <div className="self-start">
+              <ClinicSignupCta cityLocationPhrase={cityLocationPhrase} />
+            </div>
+          </div>
+        )}
 
       {data.city.seo_tekst && !resolvedParams.specialty && (
         <SeoContent
