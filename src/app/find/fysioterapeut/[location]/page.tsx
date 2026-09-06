@@ -94,6 +94,9 @@ export default async function LocationPage({
 }: LocationPageProps) {
   const resolvedParams = await params;
   const resolvedSearchParams = await searchParams;
+  if (resolvedSearchParams.previewError === "1") {
+    throw new Error("Preview page error state");
+  }
   const filters = parseFilters(resolvedSearchParams);
 
   const data = await fetchLocationData(
@@ -353,7 +356,7 @@ export default async function LocationPage({
               />
             </div>
 
-            <div className="self-start">
+            <div className="self-start xl:sticky xl:top-24">
               <ClinicSignupCta cityLocationPhrase={cityLocationPhrase} />
             </div>
           </div>
