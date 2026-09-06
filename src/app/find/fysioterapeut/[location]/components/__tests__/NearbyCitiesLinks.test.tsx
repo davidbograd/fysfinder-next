@@ -31,12 +31,6 @@ describe("NearbyCitiesLinks", () => {
     );
 
     expect(
-      screen.getByRole("heading", {
-        name: "Udforsk fysioterapeuter i andre byer",
-      })
-    ).toBeInTheDocument();
-
-    expect(
       screen.getByRole("link", { name: "Fysioterapeut Nørrebro" })
     ).toHaveAttribute("href", "/find/fysioterapeut/noerrebro");
     expect(

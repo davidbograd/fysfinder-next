@@ -1,12 +1,12 @@
-// Location-page error boundary. Uses the shared branded PageErrorState.
-// Updated: 2026-09-06 - Green pill buttons via PageErrorState instead of blue rounded-md.
+// Root error boundary so non-location routes get the same branded error UI.
+// Added: 2026-09-06 - Matches the location-page error state (green pill buttons).
 
 "use client";
 
 import { useEffect } from "react";
 import { PageErrorState } from "@/components/layout/PageErrorState";
 
-export default function LocationError({
+export default function RootError({
   error,
   reset,
 }: {
