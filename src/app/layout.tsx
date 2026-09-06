@@ -1,5 +1,5 @@
 // Root layout
-// Updated: 2026-09-06 - Load Google Analytics only after cookie consent.
+// Updated: 2026-09-06 - Load used Manrope weights, delay Analytics until consent, and pass specialties into the header.
 
 import type { Metadata } from "next";
 import "./globals.css";
@@ -16,7 +16,8 @@ import AgentationDevtools from "@/components/dev/AgentationDevtools";
 
 const manrope = Manrope({
   subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "600", "700", "800"],
+  // 200 and 800 are unused; keep 300 (footer/partner labels) through 700 (headings).
+  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-manrope",
 });
 
@@ -65,14 +66,16 @@ export default async function RootLayout({
 }>) {
   let totalClinics = 0;
   let specialtyCount = 0;
+  let specialties: Awaited<ReturnType<typeof fetchSpecialties>> = [];
 
   try {
-    const [cities, specialties] = await Promise.all([
+    const [cities, fetchedSpecialties] = await Promise.all([
       fetchCitiesWithCounts(),
       fetchSpecialties(),
     ]);
 
     totalClinics = cities.reduce((sum, city) => sum + city.clinic_count, 0);
+    specialties = fetchedSpecialties || [];
     specialtyCount = specialties.length;
   } catch (error) {
     console.error("Layout metrics fetch error:", error);
@@ -81,7 +84,11 @@ export default async function RootLayout({
   return (
     <html lang="da" className={manrope.variable}>
       <body className="flex flex-col min-h-screen font-sans">
-        <Header totalClinics={totalClinics} specialtyCount={specialtyCount} />
+        <Header
+          totalClinics={totalClinics}
+          specialtyCount={specialtyCount}
+          specialties={specialties}
+        />
         <EmailVerificationBanner />
         <main className="flex-grow overflow-x-clip">
           <div className="max-w-[1440px] mx-auto px-5 sm:px-6 lg:px-8">

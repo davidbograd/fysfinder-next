@@ -1,4 +1,4 @@
-// Added: 2026-03-30 - MVP coverage for SearchInterface submit navigation behavior.
+// Updated: 2026-09-06 - Location-page filter checkboxes navigate immediately.
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { SearchInterface } from "../SearchInterface";
@@ -49,6 +49,45 @@ describe("SearchInterface", () => {
 
     expect(global.__TEST_ROUTER_MOCKS__.push).toHaveBeenCalledWith(
       "/find/fysioterapeut/danmark"
+    );
+  });
+
+  it("applies ydernummer immediately on location pages", async () => {
+    const user = userEvent.setup();
+
+    render(
+      <SearchInterface
+        specialties={[]}
+        citySlug="aarhus-c"
+        defaultSearchValue="Aarhus C"
+        showFilters
+      />
+    );
+
+    await user.click(screen.getByRole("checkbox", { name: "Ydernummer" }));
+
+    expect(global.__TEST_ROUTER_MOCKS__.push).toHaveBeenCalledWith(
+      "/find/fysioterapeut/aarhus-c?ydernummer=true"
+    );
+  });
+
+  it("applies handicapadgang immediately on location pages", async () => {
+    const user = userEvent.setup();
+
+    render(
+      <SearchInterface
+        specialties={[]}
+        citySlug="aarhus-c"
+        defaultSearchValue="Aarhus C"
+        showFilters
+        initialFilters={{ ydernummer: true }}
+      />
+    );
+
+    await user.click(screen.getByRole("checkbox", { name: "Handicapadgang" }));
+
+    expect(global.__TEST_ROUTER_MOCKS__.push).toHaveBeenCalledWith(
+      "/find/fysioterapeut/aarhus-c?handicap=true&ydernummer=true"
     );
   });
 });

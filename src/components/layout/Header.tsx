@@ -1,4 +1,4 @@
-// Updated: 2026-03-26 - Moves desktop info links to right-side CTA area and adds a "Mere" dropdown for search-first desktop pages
+// Updated: 2026-09-06 - Pass server specialties into header search so the specialty field does not refetch.
 "use client";
 
 import Link from "next/link";
@@ -14,13 +14,19 @@ import { useToast } from "@/hooks/use-toast";
 import { HeaderSearchBar } from "@/components/layout/HeaderSearchBar";
 import { SearchInterface } from "@/components/search/SearchInterface";
 import { HeroDataPoints } from "@/components/features/search/HeroDataPoints";
+import type { Specialty } from "@/app/utils/cityUtils";
 
 interface HeaderProps {
   totalClinics: number;
   specialtyCount: number;
+  specialties?: Specialty[];
 }
 
-export default function Header({ totalClinics, specialtyCount }: HeaderProps) {
+export default function Header({
+  totalClinics,
+  specialtyCount,
+  specialties = [],
+}: HeaderProps) {
   const pathname = usePathname() ?? "";
   const router = useRouter();
   const { toast } = useToast();
@@ -205,7 +211,10 @@ export default function Header({ totalClinics, specialtyCount }: HeaderProps) {
 
             {/* Left side navigation */}
             {isSearchFirstDesktopVariant ? (
-              <HeaderSearchBar className="hidden min-[1241px]:block" />
+              <HeaderSearchBar
+                className="hidden min-[1241px]:block"
+                specialties={specialties}
+              />
             ) : (
               <nav className="hidden md:flex items-center space-x-6">
                 {isLoggedIn ? (
@@ -449,7 +458,7 @@ export default function Header({ totalClinics, specialtyCount }: HeaderProps) {
                       Find fysioterapeut
                     </h2>
                     <SearchInterface
-                      specialties={[]}
+                      specialties={specialties}
                       defaultSearchValue=""
                       citySlug="danmark"
                       showFilters={false}

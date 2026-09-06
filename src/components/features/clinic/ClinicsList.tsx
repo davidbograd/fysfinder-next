@@ -9,7 +9,7 @@ import ClinicListingCard from "./ClinicListingCard";
 import { Button } from "@/components/ui/button";
 import { orderSpecialties } from "@/lib/clinic-utils";
 import { LOCATION_LIST_PAGE_SIZE } from "@/lib/location-listing";
-import { loadMoreLocationClinics } from "@/app/find/fysioterapeut/[location]/load-more-clinics";
+import { loadMoreLocationClinics } from "@/app/actions/load-more-location-clinics";
 import type { LocationFilters } from "@/app/find/fysioterapeut/filter-utils";
 
 interface ClinicsListProps {

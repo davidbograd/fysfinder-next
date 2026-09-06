@@ -1,9 +1,10 @@
-// Updated: 2026-03-24 - Added cached specialty loading, aligned focus behavior, and improved combobox accessibility semantics
+// Updated: 2026-09-06 - Use server-provided specialties when present; fold Danish letters and submit the first match on Enter.
 "use client";
 
 import { useState, useEffect, useRef } from "react";
 import { useSearch } from "../SearchProvider";
 import { createClient } from "@/app/utils/supabase/client";
+import { rankSearchItems } from "@/lib/search-matching";
 
 interface Specialty {
   specialty_id: string;
@@ -14,6 +15,7 @@ interface Specialty {
 interface SpecialtySearchProps {
   placeholder?: string;
   className?: string;
+  specialties?: Specialty[];
 }
 
 let specialtiesCache: Specialty[] | null = null;
@@ -56,8 +58,9 @@ async function getCachedSpecialties(): Promise<Specialty[]> {
 export const SpecialtySearch: React.FC<SpecialtySearchProps> = ({
   placeholder = "Alle specialer",
   className = "",
+  specialties: initialSpecialties,
 }) => {
-  const { state, dispatch } = useSearch();
+  const { state, dispatch, navigateToSearch } = useSearch();
   const [specialties, setSpecialties] = useState<Specialty[]>([]);
   const [filteredSpecialties, setFilteredSpecialties] = useState<Specialty[]>(
     []
@@ -81,8 +84,16 @@ export const SpecialtySearch: React.FC<SpecialtySearchProps> = ({
     latestSearchTermRef.current = searchTerm;
   }, [searchTerm]);
 
-  // Load specialties on component mount
+  // Load specialties from the server list when provided; otherwise fetch once per session.
   useEffect(() => {
+    if (initialSpecialties && initialSpecialties.length > 0) {
+      specialtiesCache = initialSpecialties;
+      setSpecialties(initialSpecialties);
+      setFilteredSpecialties(initialSpecialties);
+      setIsLoading(false);
+      return;
+    }
+
     const loadSpecialties = async () => {
       setIsLoading(true);
       try {
@@ -97,7 +108,7 @@ export const SpecialtySearch: React.FC<SpecialtySearchProps> = ({
     };
 
     loadSpecialties();
-  }, []);
+  }, [initialSpecialties?.length]);
 
   // Initialize display value from state
   useEffect(() => {
@@ -115,16 +126,21 @@ export const SpecialtySearch: React.FC<SpecialtySearchProps> = ({
       return;
     }
 
-    const filtered = specialties.filter((specialty) =>
-      specialty.specialty_name.toLowerCase().includes(searchTerm.toLowerCase())
+    setFilteredSpecialties(
+      rankSearchItems(
+        specialties,
+        searchTerm,
+        (specialty) =>
+          `${specialty.specialty_name} ${specialty.specialty_name_slug}`
+      )
     );
-    setFilteredSpecialties(filtered);
   }, [searchTerm, specialties]);
 
   // Handle input change
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearchTerm(value);
+    dispatch({ type: "SET_SPECIALTY_DRAFT", payload: value });
 
     // Clear current specialty if user is typing something new
     if (state.specialty && value !== state.specialty.name) {
@@ -152,9 +168,11 @@ export const SpecialtySearch: React.FC<SpecialtySearchProps> = ({
 
       dispatch({ type: "SET_SPECIALTY", payload: specialtyQuery });
       setSearchTerm(specialty.specialty_name);
+      dispatch({ type: "SET_SPECIALTY_DRAFT", payload: specialty.specialty_name });
     } else {
       // "All specialties" selected
       dispatch({ type: "SET_SPECIALTY", payload: null });
+      dispatch({ type: "SET_SPECIALTY_DRAFT", payload: "" });
       setSearchTerm("");
     }
 
@@ -165,10 +183,43 @@ export const SpecialtySearch: React.FC<SpecialtySearchProps> = ({
 
   // Handle keyboard navigation
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      if (searchTerm && filteredSpecialties.length > 0 && selectedIndex <= 0) {
+        handleSpecialtySelect(filteredSpecialties[0]);
+        void navigateToSearch({
+          specialty: {
+            name: filteredSpecialties[0].specialty_name,
+            slug: filteredSpecialties[0].specialty_name_slug,
+            id: filteredSpecialties[0].specialty_id,
+          },
+        });
+        return;
+      }
+      if (showDropdown && selectedIndex >= 0) {
+        const allOptions = [null, ...filteredSpecialties];
+        if (selectedIndex < allOptions.length) {
+          const selected = allOptions[selectedIndex];
+          handleSpecialtySelect(selected);
+          void navigateToSearch({
+            specialty: selected
+              ? {
+                  name: selected.specialty_name,
+                  slug: selected.specialty_name_slug,
+                  id: selected.specialty_id,
+                }
+              : null,
+          });
+          return;
+        }
+      }
+      void navigateToSearch();
+      return;
+    }
+
     if (!showDropdown) return;
 
-    // Include "All specialties" option in navigation
-    const allOptions = [null, ...filteredSpecialties]; // null represents "All specialties"
+    const allOptions = [null, ...filteredSpecialties];
 
     switch (e.key) {
       case "ArrowDown":
@@ -180,12 +231,6 @@ export const SpecialtySearch: React.FC<SpecialtySearchProps> = ({
       case "ArrowUp":
         e.preventDefault();
         setSelectedIndex((prev) => (prev > 0 ? prev - 1 : 0));
-        break;
-      case "Enter":
-        e.preventDefault();
-        if (selectedIndex >= 0 && selectedIndex < allOptions.length) {
-          handleSpecialtySelect(allOptions[selectedIndex]);
-        }
         break;
       case "Escape":
         setShowDropdown(false);
@@ -228,13 +273,17 @@ export const SpecialtySearch: React.FC<SpecialtySearchProps> = ({
       // If no specialty is selected and search term doesn't match any specialty exactly,
       // clear the search term
       if (!latestSpecialtyRef.current && latestSearchTermRef.current) {
-        const exactMatch = specialties.find(
-          (s) =>
-            s.specialty_name.toLowerCase() ===
-            latestSearchTermRef.current.toLowerCase()
-        );
-        if (!exactMatch) {
+        const rankedMatch = rankSearchItems(
+          specialties,
+          latestSearchTermRef.current,
+          (specialty) =>
+            `${specialty.specialty_name} ${specialty.specialty_name_slug}`
+        )[0];
+        if (rankedMatch) {
+          handleSpecialtySelect(rankedMatch);
+        } else {
           setSearchTerm("");
+          dispatch({ type: "SET_SPECIALTY_DRAFT", payload: "" });
         }
       }
     }, 200);

@@ -1,4 +1,4 @@
-// Updated: 2026-08-29 - Asserts the homepage hero shows the clinic logo carousel heading.
+// Updated: 2026-09-06 - Also asserts homepage JSON-LD no longer embeds the city tree.
 import { render, screen } from "@testing-library/react";
 
 const mockFetchCitiesWithCounts = jest.fn();
@@ -69,6 +69,10 @@ describe("HomePage", () => {
         name: "behandling med tilskud fra den offentlige sygesikring",
       })
     ).not.toBeInTheDocument();
+
+    const jsonLd = document.querySelector('script[type="application/ld+json"]');
+    expect(jsonLd?.textContent).toContain("WebSite");
+    expect(jsonLd?.textContent).not.toContain("Aarhus");
   });
 
   it("renders graceful fallback when data fetching fails", async () => {

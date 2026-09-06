@@ -1,5 +1,5 @@
 // Homepage component with graceful error handling
-// Updated: 2026-09-06 - Optimize hero images, slim JSON-LD, and keep ISR homepage payload smaller.
+// Updated: 2026-09-06 - Keep hero and Spar tid images unoptimized; slim JSON-LD.
 
 import React from "react";
 import { Metadata } from "next";
@@ -16,7 +16,6 @@ import {
   fetchCitiesWithCounts,
   fetchSpecialties,
   processCities,
-  type CityWithCount,
   type Specialty,
 } from "./utils/cityUtils";
 export const revalidate = 21600; // 6 hours ISR (must be a literal for Next.js segment config)
@@ -74,6 +73,8 @@ function HeroSection({
                 src="/images/homepage/physios-portraits/fysioterapeut-01.jpg"
                 alt="Fysioterapeut portræt"
                 fill
+                quality={100}
+                unoptimized
                 sizes="(max-width: 640px) 160px, (max-width: 1279px) 175px, 190px"
                 className="object-cover"
               />
@@ -95,7 +96,8 @@ function HeroSection({
                 src="/images/homepage/physios-portraits/fysioterapeut-02.jpg"
                 alt="Fysioterapeut portræt"
                 fill
-                priority
+                quality={100}
+                unoptimized
                 sizes="(max-width: 640px) 185px, (max-width: 1279px) 200px, 215px"
                 className="object-cover"
               />
@@ -117,6 +119,8 @@ function HeroSection({
                 src="/images/homepage/physios-portraits/fysioterapeut-03.jpg"
                 alt="Fysioterapeut portræt"
                 fill
+                quality={100}
+                unoptimized
                 sizes="(max-width: 640px) 160px, (max-width: 1279px) 175px, 190px"
                 className="object-cover"
               />
@@ -169,7 +173,6 @@ function ValuePropsSection() {
             alt="Spar tid illustration"
             width={420}
             height={420}
-            sizes="(max-width: 768px) 288px, 368px"
             className="absolute bottom-[-72px] left-1/2 md:left-[58%] lg:left-1/2 -translate-x-1/2 w-[288px] md:w-[368px] h-auto pointer-events-none select-none"
           />
         </article>

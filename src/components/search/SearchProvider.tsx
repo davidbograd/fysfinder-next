@@ -1,4 +1,4 @@
-// Updated: 2026-03-24 - Removed search-v2 URL dependency from shared provider and standardized URL updates to canonical search routes
+// Updated: 2026-09-06 - Resolve typed drafts on submit and accept filter overrides for instant location-page search.
 "use client";
 
 import React, {
@@ -7,9 +7,11 @@ import React, {
   useReducer,
   ReactNode,
   useCallback,
+  useRef,
 } from "react";
 import { useRouter } from "next/navigation";
 import { buildSearchUrl } from "@/utils/parameter-normalization";
+import { resolveSearchTarget } from "./resolveSearchTarget";
 
 // Types for search state
 export interface LocationQuery {
@@ -62,7 +64,9 @@ export interface PaginationState {
 export interface SearchState {
   // Search terms
   location: LocationQuery | null;
+  locationDraft: string;
   specialty: SpecialtyQuery | null;
+  specialtyDraft: string;
 
   // Filters
   filters: SearchFilters;
@@ -80,7 +84,9 @@ export interface SearchState {
 // Action types
 export type SearchAction =
   | { type: "SET_LOCATION"; payload: LocationQuery | null }
+  | { type: "SET_LOCATION_DRAFT"; payload: string }
   | { type: "SET_SPECIALTY"; payload: SpecialtyQuery | null }
+  | { type: "SET_SPECIALTY_DRAFT"; payload: string }
   | { type: "SET_FILTERS"; payload: SearchFilters }
   | { type: "SET_LOADING"; payload: boolean }
   | { type: "SET_SHOW_FILTERS"; payload: boolean }
@@ -92,7 +98,9 @@ export type SearchAction =
 // Initial state
 const initialState: SearchState = {
   location: null,
+  locationDraft: "",
   specialty: null,
+  specialtyDraft: "",
   filters: {},
   isLoading: false,
   showFilters: false,
@@ -116,11 +124,23 @@ function searchReducer(state: SearchState, action: SearchAction): SearchState {
       return {
         ...state,
         location: action.payload,
+        locationDraft: action.payload?.name ?? state.locationDraft,
+      };
+    case "SET_LOCATION_DRAFT":
+      return {
+        ...state,
+        locationDraft: action.payload,
       };
     case "SET_SPECIALTY":
       return {
         ...state,
         specialty: action.payload,
+        specialtyDraft: action.payload?.name ?? state.specialtyDraft,
+      };
+    case "SET_SPECIALTY_DRAFT":
+      return {
+        ...state,
+        specialtyDraft: action.payload,
       };
     case "SET_FILTERS":
       return {
@@ -182,6 +202,11 @@ export interface SearchContextType {
 
   // Search execution
   executeSearch: () => Promise<void>;
+  navigateToSearch: (overrides?: {
+    location?: LocationQuery | null;
+    specialty?: SpecialtyQuery | null;
+    filters?: SearchFilters;
+  }) => Promise<boolean>;
 
   // URL management
   updateURL: () => void;
@@ -196,6 +221,11 @@ interface SearchProviderProps {
   initialLocation?: LocationQuery | null;
   initialSpecialty?: SpecialtyQuery | null;
   initialFilters?: SearchFilters;
+  specialties?: {
+    specialty_id: string;
+    specialty_name: string;
+    specialty_name_slug: string;
+  }[];
 }
 
 export function SearchProvider({
@@ -203,12 +233,15 @@ export function SearchProvider({
   initialLocation = null,
   initialSpecialty = null,
   initialFilters = {},
+  specialties = [],
 }: SearchProviderProps) {
   // Create initial state with provided values
   const initState: SearchState = {
     ...initialState,
     location: initialLocation,
+    locationDraft: initialLocation?.name ?? "",
     specialty: initialSpecialty,
+    specialtyDraft: initialSpecialty?.name ?? "",
     filters: initialFilters,
   };
 
@@ -363,6 +396,55 @@ export function SearchProvider({
     router,
   ]); // Use stable dependencies
 
+  const specialtiesRef = useRef(specialties);
+  specialtiesRef.current = specialties;
+
+  const navigateToSearch = useCallback(
+    async (overrides?: {
+      location?: LocationQuery | null;
+      specialty?: SpecialtyQuery | null;
+      filters?: SearchFilters;
+    }) => {
+      const resolved = await resolveSearchTarget({
+        location:
+          overrides && "location" in overrides
+            ? overrides.location ?? null
+            : state.location,
+        locationDraft: state.locationDraft,
+        specialty:
+          overrides && "specialty" in overrides
+            ? overrides.specialty ?? null
+            : state.specialty,
+        specialtyDraft: state.specialtyDraft,
+        filters:
+          overrides && "filters" in overrides
+            ? overrides.filters ?? {}
+            : state.filters,
+        specialties: specialtiesRef.current,
+      });
+
+      if (!resolved.ok) return false;
+
+      if (resolved.location && resolved.location.slug !== state.location?.slug) {
+        dispatch({ type: "SET_LOCATION", payload: resolved.location });
+      }
+      if (resolved.specialty && resolved.specialty.slug !== state.specialty?.slug) {
+        dispatch({ type: "SET_SPECIALTY", payload: resolved.specialty });
+      }
+
+      router.push(resolved.url);
+      return true;
+    },
+    [
+      router,
+      state.filters,
+      state.location,
+      state.locationDraft,
+      state.specialty,
+      state.specialtyDraft,
+    ]
+  );
+
   const contextValue: SearchContextType = {
     state,
     dispatch,
@@ -379,6 +461,7 @@ export function SearchProvider({
     setHandicapAccess,
     clearAllFilters,
     executeSearch,
+    navigateToSearch,
     updateURL,
   };
 

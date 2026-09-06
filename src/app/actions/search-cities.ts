@@ -1,13 +1,40 @@
 "use server";
 
+// City typeahead for location search.
+// Updated: 2026-09-06 - Rank name matches with Danish folding, contains, and light typo tolerance.
+
 import { createClient } from "@/app/utils/supabase/server";
-import { SearchResult } from "@/app/types";
+import { slugify } from "@/app/utils/slugify";
+import { City, SearchResult } from "@/app/types";
+import { foldSearchText, rankSearchItems } from "@/lib/search-matching";
+
+function sanitizeIlikeValue(value: string): string {
+  return value.replace(/[%_,()]/g, " ").replace(/\s+/g, " ").trim();
+}
+
+function buildCityNameFilters(query: string): string | null {
+  const sanitized = sanitizeIlikeValue(query);
+  if (!sanitized) return null;
+
+  const slug = slugify(sanitized);
+  const prefix = foldSearchText(sanitized).slice(0, 2);
+  const filters = [
+    `bynavn.ilike.%${sanitized}%`,
+    `bynavn_slug.eq.${slug}`,
+    `bynavn_slug.ilike.%${slug}%`,
+  ];
+
+  if (prefix.length >= 2) {
+    filters.push(`bynavn_slug.ilike.${prefix}%`);
+  }
+
+  return filters.join(",");
+}
 
 export async function searchCities(query: string): Promise<SearchResult> {
   const supabase = await createClient();
   const cleanQuery = query.trim().toLowerCase();
 
-  // Return early if query is too short
   if (cleanQuery.length < 2) {
     return {
       exact_match: null,
@@ -16,15 +43,12 @@ export async function searchCities(query: string): Promise<SearchResult> {
   }
 
   try {
-    let matches: any[] = [];
+    let matches: City[] = [];
 
-    // Check if query is a full 4-digit postal code
     const isFullPostalCode = /^\d{4}$/.test(cleanQuery);
-    // Check if query is a partial postal code (1-3 digits)
     const isPartialPostalCode = /^\d{1,3}$/.test(cleanQuery);
 
     if (isFullPostalCode) {
-      // For full postal codes, use efficient exact match query
       const { data: postalMatches } = await supabase
         .from("cities")
         .select("*")
@@ -32,24 +56,31 @@ export async function searchCities(query: string): Promise<SearchResult> {
         .order("bynavn")
         .limit(10);
 
-      matches = postalMatches || [];
+      matches = (postalMatches as City[]) || [];
     } else if (isPartialPostalCode) {
-      // For partial postal codes, return a helpful prompt instead of searching
       return {
         exact_match: null,
         nearby_cities: [],
         prompt_message: `Skriv det fulde 4-cifrede postnummer (f.eks. 2100)`,
       };
     } else {
-      // For city names, search by city name
+      const orFilters = buildCityNameFilters(cleanQuery);
+      if (!orFilters) {
+        return { exact_match: null, nearby_cities: [] };
+      }
+
       const { data: cityMatches } = await supabase
         .from("cities")
         .select("*")
-        .or(`bynavn_slug.eq.${cleanQuery},` + `bynavn.ilike.${cleanQuery}%`)
+        .or(orFilters)
         .order("bynavn")
-        .limit(10);
+        .limit(40);
 
-      matches = cityMatches || [];
+      matches = rankSearchItems(
+        (cityMatches as City[]) || [],
+        cleanQuery,
+        (city) => `${city.bynavn} ${city.bynavn_slug}`
+      ).slice(0, 10);
     }
 
     if (!matches || matches.length === 0) {
@@ -59,15 +90,13 @@ export async function searchCities(query: string): Promise<SearchResult> {
       };
     }
 
-    // Find exact match if any
     const exactMatch = matches.find(
       (city) =>
         city.bynavn.toLowerCase() === cleanQuery ||
-        city.bynavn_slug === cleanQuery ||
-        city.postal_codes.some((code: string) => code === cleanQuery)
+        city.bynavn_slug === slugify(cleanQuery) ||
+        city.postal_codes.some((code) => code === cleanQuery)
     );
 
-    // If we have an exact match, find nearby cities
     if (exactMatch) {
       const { data: nearbyCities } = await supabase.rpc("get_nearby_cities", {
         origin_lat: exactMatch.latitude,
@@ -82,12 +111,11 @@ export async function searchCities(query: string): Promise<SearchResult> {
       };
     }
 
-    // If no exact match, return all partial matches as nearby cities
     return {
       exact_match: null,
       nearby_cities: matches.map((city) => ({
         ...city,
-        distance: -1, // Special value to indicate this is a search result, not a nearby city
+        distance: -1,
       })),
     };
   } catch (error) {

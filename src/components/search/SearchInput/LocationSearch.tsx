@@ -1,4 +1,4 @@
-// Updated: 2026-03-24 - Improved combobox accessibility semantics and active option tracking
+// Updated: 2026-09-06 - Enter picks the first suggestion and submits; typed text is kept as a draft for Find.
 "use client";
 
 import { useState, useEffect, useRef } from "react";
@@ -15,7 +15,7 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
   placeholder = "By eller postnummer",
   className = "",
 }) => {
-  const { state, dispatch } = useSearch();
+  const { state, dispatch, navigateToSearch } = useSearch();
   const [inputValue, setInputValue] = useState("");
   const [suggestions, setSuggestions] = useState<SearchResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -70,6 +70,7 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setInputValue(value);
+    dispatch({ type: "SET_LOCATION_DRAFT", payload: value });
 
     // If a location is currently selected and the user edits the input to a different value,
     // clear the selected location to allow specialty-only searches (e.g., Danmark pages)
@@ -113,12 +114,33 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
 
   // Handle keyboard navigation
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (!showDropdown || !suggestions) return;
-
     const allSuggestions = [
-      ...(suggestions.exact_match ? [suggestions.exact_match] : []),
-      ...suggestions.nearby_cities,
+      ...(suggestions?.exact_match ? [suggestions.exact_match] : []),
+      ...(suggestions?.nearby_cities ?? []),
     ];
+
+    if (e.key === "Enter") {
+      e.preventDefault();
+      if (showDropdown && allSuggestions.length > 0) {
+        const city =
+          selectedIndex >= 0 && allSuggestions[selectedIndex]
+            ? allSuggestions[selectedIndex]
+            : allSuggestions[0];
+        handleLocationSelect(city);
+        void navigateToSearch({
+          location: {
+            name: city.bynavn,
+            slug: city.bynavn_slug,
+            postalCodes: city.postal_codes,
+          },
+        });
+        return;
+      }
+      void navigateToSearch();
+      return;
+    }
+
+    if (!showDropdown || !suggestions) return;
 
     switch (e.key) {
       case "ArrowDown":
@@ -130,12 +152,6 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
       case "ArrowUp":
         e.preventDefault();
         setSelectedIndex((prev) => (prev > 0 ? prev - 1 : -1));
-        break;
-      case "Enter":
-        e.preventDefault();
-        if (selectedIndex >= 0 && allSuggestions[selectedIndex]) {
-          handleLocationSelect(allSuggestions[selectedIndex]);
-        }
         break;
       case "Escape":
         setShowDropdown(false);
@@ -239,6 +255,7 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
                 if (state.location) {
                   dispatch({ type: "SET_LOCATION", payload: null });
                 }
+                dispatch({ type: "SET_LOCATION_DRAFT", payload: "" });
                 setInputValue("");
                 setSuggestions(null);
                 setShowDropdown(false);

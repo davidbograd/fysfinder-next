@@ -1,4 +1,4 @@
-// Updated: 2026-03-24 - Reused centralized canonical search URL builder for inline submit behavior
+// Updated: 2026-09-06 - Location-page filter checkboxes apply immediately via navigation.
 "use client";
 
 import React, { useState, Suspense } from "react";
@@ -13,8 +13,6 @@ import { SpecialtySearch } from "./SearchInput/SpecialtySearch";
 import { SearchButton } from "./SearchButton";
 import { Checkbox } from "@/components/ui/checkbox";
 import { BookHeart, Search } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { buildSearchTargetUrlFromState } from "./buildSearchTargetUrl";
 
 interface SearchInterfaceProps {
   specialties: {
@@ -34,15 +32,13 @@ interface SearchInterfaceProps {
  */
 function InlineSearchButton() {
   const [isSearching, setIsSearching] = useState(false);
-  const router = useRouter();
-  const { state } = useSearch();
+  const { navigateToSearch } = useSearch();
 
   const handleClick = async () => {
     setIsSearching(true);
 
     try {
-      const targetUrl = buildSearchTargetUrlFromState(state);
-      router.push(targetUrl);
+      await navigateToSearch();
     } catch (error) {
       console.error("Search error:", error);
     } finally {
@@ -82,9 +78,23 @@ function InlineSearchButton() {
  * Simple filter toggles using SearchProvider
  */
 function SimpleFilters() {
-  const { state, setYdernummer, setHandicapAccess } = useSearch();
+  const { state, setFilters, setUnsearchedChanges, navigateToSearch } =
+    useSearch();
 
   const { ydernummer, handicap: handicapAccess } = state.filters;
+
+  const applyFilter = (key: "ydernummer" | "handicap", enabled: boolean) => {
+    const nextFilters = { ...state.filters };
+    if (enabled) {
+      nextFilters[key] = true;
+    } else {
+      delete nextFilters[key];
+    }
+
+    setFilters(nextFilters);
+    setUnsearchedChanges(false);
+    void navigateToSearch({ filters: nextFilters });
+  };
 
   return (
     <>
@@ -92,7 +102,9 @@ function SimpleFilters() {
         <Checkbox
           id="ydernummer"
           checked={ydernummer || false}
-          onCheckedChange={(checked) => setYdernummer(checked === true)}
+          onCheckedChange={(checked) =>
+            applyFilter("ydernummer", checked === true)
+          }
         />
         <label
           htmlFor="ydernummer"
@@ -106,7 +118,9 @@ function SimpleFilters() {
         <Checkbox
           id="handicap"
           checked={handicapAccess || false}
-          onCheckedChange={(checked) => setHandicapAccess(checked === true)}
+          onCheckedChange={(checked) =>
+            applyFilter("handicap", checked === true)
+          }
         />
         <label
           htmlFor="handicap"
@@ -122,7 +136,13 @@ function SimpleFilters() {
 /**
  * Inner component that uses SearchProvider context
  */
-function MigrationContent({ showFilters }: { showFilters: boolean }) {
+function MigrationContent({
+  showFilters,
+  specialties,
+}: {
+  showFilters: boolean;
+  specialties: SearchInterfaceProps["specialties"];
+}) {
   const isHomeVariant = !showFilters;
 
   return (
@@ -181,6 +201,7 @@ function MigrationContent({ showFilters }: { showFilters: boolean }) {
               <BookHeart className="w-6 h-6 text-[#8a9491] mr-3" />
             </div>
             <SpecialtySearch
+              specialties={specialties}
               className={`flex-1 border-0 bg-transparent focus:ring-0 focus:border-0 h-14 ${
                 isHomeVariant
                     ? "text-[18px] placeholder:text-[18px]"
@@ -267,8 +288,9 @@ export function SearchInterface({
         initialLocation={initialLocation}
         initialSpecialty={initialSpecialty}
         initialFilters={initialFilters}
+        specialties={specialties}
       >
-        <MigrationContent showFilters={showFilters} />
+        <MigrationContent showFilters={showFilters} specialties={specialties} />
       </SearchProvider>
     </Suspense>
   );

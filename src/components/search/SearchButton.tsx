@@ -1,11 +1,9 @@
 "use client";
-// Updated: 2026-03-24 - Switched to centralized canonical search URL builder
+// Updated: 2026-09-06 - Submit resolves typed search drafts instead of requiring a dropdown click.
 
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
 import { useSearch } from "./SearchProvider";
 import { Search } from "lucide-react";
-import { buildSearchTargetUrlFromState } from "./buildSearchTargetUrl";
 
 interface SearchButtonProps {
   text?: string;
@@ -19,25 +17,13 @@ export const SearchButton: React.FC<SearchButtonProps> = ({
   onSearchExecuted,
 }) => {
   const [isSearching, setIsSearching] = useState(false);
-  const router = useRouter();
-
-  // Get search state from context (includes filters!)
-  const { state } = useSearch();
+  const { navigateToSearch } = useSearch();
 
   const handleClick = async () => {
     setIsSearching(true);
 
     try {
-      const targetUrl = buildSearchTargetUrlFromState(state);
-
-      console.log("Executing search:", {
-        location: state.location,
-        specialty: state.specialty,
-        filters: state.filters,
-        targetUrl: targetUrl,
-      });
-
-      router.push(targetUrl);
+      await navigateToSearch();
     } catch (error) {
       console.error("Search error:", error);
       alert("Search failed. Please try again.");

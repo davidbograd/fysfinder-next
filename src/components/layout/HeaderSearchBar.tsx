@@ -1,21 +1,27 @@
-// Updated: 2026-03-25 - Kept header search bar desktop-focused while mobile overlay reuses SearchInterface
+// Updated: 2026-09-06 - Header search resolves typed drafts and can reuse server specialties.
 "use client";
 
 import { FormEvent, useState } from "react";
-import { useRouter } from "next/navigation";
 import { BookHeart, MapPin, Search } from "lucide-react";
 import { SearchProvider, useSearch } from "@/components/search/SearchProvider";
 import { LocationSearch } from "@/components/search/SearchInput/LocationSearch";
 import { SpecialtySearch } from "@/components/search/SearchInput/SpecialtySearch";
-import { buildSearchTargetUrlFromState } from "@/components/search/buildSearchTargetUrl";
 
 interface HeaderSearchBarProps {
   className?: string;
+  specialties?: {
+    specialty_id: string;
+    specialty_name: string;
+    specialty_name_slug: string;
+  }[];
 }
 
-function HeaderSearchBarContent() {
-  const router = useRouter();
-  const { state } = useSearch();
+function HeaderSearchBarContent({
+  specialties = [],
+}: {
+  specialties?: HeaderSearchBarProps["specialties"];
+}) {
+  const { navigateToSearch } = useSearch();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -24,8 +30,7 @@ function HeaderSearchBarContent() {
 
     setIsSubmitting(true);
     try {
-      const targetUrl = buildSearchTargetUrlFromState(state);
-      router.push(targetUrl);
+      await navigateToSearch();
     } finally {
       setIsSubmitting(false);
     }
@@ -48,6 +53,7 @@ function HeaderSearchBarContent() {
       <div className="flex w-[250px] min-w-[200px] items-center">
         <BookHeart className="ml-1 h-4 w-4 shrink-0 text-[#8a9491]" />
         <SpecialtySearch
+          specialties={specialties}
           placeholder="Alle specialer"
           className="h-11 py-2 pl-2 text-sm placeholder:text-sm"
         />
@@ -69,11 +75,14 @@ function HeaderSearchBarContent() {
   );
 }
 
-export function HeaderSearchBar({ className = "" }: HeaderSearchBarProps) {
+export function HeaderSearchBar({
+  className = "",
+  specialties = [],
+}: HeaderSearchBarProps) {
   return (
     <div className={className}>
-      <SearchProvider>
-        <HeaderSearchBarContent />
+      <SearchProvider specialties={specialties}>
+        <HeaderSearchBarContent specialties={specialties} />
       </SearchProvider>
     </div>
   );
