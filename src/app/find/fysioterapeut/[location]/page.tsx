@@ -94,9 +94,6 @@ export default async function LocationPage({
 }: LocationPageProps) {
   const resolvedParams = await params;
   const resolvedSearchParams = await searchParams;
-  if (resolvedSearchParams.previewError === "1") {
-    throw new Error("Preview page error state");
-  }
   const filters = parseFilters(resolvedSearchParams);
 
   const data = await fetchLocationData(
