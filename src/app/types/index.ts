@@ -190,10 +190,20 @@ export interface DBClinicResponse {
   logo_url?: string | null;
 }
 
+/** A town near the current one that has at least one clinic, used for internal linking. */
+export interface NearbyCity {
+  id: string;
+  bynavn: string;
+  bynavn_slug: string;
+  clinic_count: number;
+  distance: number;
+}
+
 export interface LocationPageData {
   city: City | null;
   clinics: Clinic[];
   nearbyClinicsList: ClinicWithDistance[];
+  nearbyCities: NearbyCity[];
   specialties: SpecialtyWithSeo[];
 }
 

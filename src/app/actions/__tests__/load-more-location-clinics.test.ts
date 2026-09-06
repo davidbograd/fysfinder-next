@@ -20,6 +20,7 @@ describe("loadMoreLocationClinics", () => {
     mockFetchLocationData.mockResolvedValue({
       city: null,
       nearbyClinicsList: [],
+      nearbyCities: [],
       specialties: [],
       clinics: Array.from({ length: 12 }, (_, index) => ({
         clinics_id: `clinic-${index + 1}`,

@@ -8,6 +8,7 @@ import {
   ClinicWithDistance,
   DBClinicResponse,
   LocationPageData,
+  NearbyCity,
   SpecialtyWithSeo,
 } from "@/app/types/index";
 import {
@@ -156,6 +157,7 @@ async function fetchDanmarkLocationData(
     city: null,
     clinics: sortClinicsByPolicy(clinics, primaryRankingPolicy),
     nearbyClinicsList: [],
+    nearbyCities: [],
     specialties,
   };
 }
@@ -211,6 +213,7 @@ async function fetchOnlineLocationData(
     city: finalCityObject,
     clinics: sortClinicsByPolicy(clinics, primaryRankingPolicy),
     nearbyClinicsList: [],
+    nearbyCities: [],
     specialties,
   };
 }
@@ -243,6 +246,7 @@ async function fetchCityLocationData(
       city: null,
       clinics: [],
       nearbyClinicsList: [],
+      nearbyCities: [],
       specialties,
     };
 
@@ -259,21 +263,38 @@ async function fetchCityLocationData(
   clinicsUrl = applyClinicFilters(clinicsUrl, filters);
   premiumClinicsUrl = applyClinicFilters(premiumClinicsUrl, filters);
 
-  const [clinicsData, premiumClinicsData, nearbyData] = await Promise.all([
-    fetchWithRetry(clinicsUrl, fetchOptions),
-    fetchWithRetry(premiumClinicsUrl, fetchOptions),
-    fetchWithRetry(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/rpc/get_nearby_clinics`, {
-      ...fetchOptions,
-      method: "POST",
-      headers: { ...headers, "Content-Type": "application/json" },
-      body: JSON.stringify({
-        origin_lat: city.latitude,
-        origin_lng: city.longitude,
-        max_distance_km: 10,
-        exclude_city_id: city.id,
+  const [clinicsData, premiumClinicsData, nearbyData, nearbyCitiesData] =
+    await Promise.all([
+      fetchWithRetry(clinicsUrl, fetchOptions),
+      fetchWithRetry(premiumClinicsUrl, fetchOptions),
+      fetchWithRetry(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/rpc/get_nearby_clinics`, {
+        ...fetchOptions,
+        method: "POST",
+        headers: { ...headers, "Content-Type": "application/json" },
+        body: JSON.stringify({
+          origin_lat: city.latitude,
+          origin_lng: city.longitude,
+          max_distance_km: 10,
+          exclude_city_id: city.id,
+        }),
       }),
-    }),
-  ]);
+      // Reaches further than the clinic list: these are internal links, so one town
+      // further out is still useful rather than misleading.
+      fetchWithRetry(
+        `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/rpc/get_nearby_cities_with_clinics`,
+        {
+          ...fetchOptions,
+          method: "POST",
+          headers: { ...headers, "Content-Type": "application/json" },
+          body: JSON.stringify({
+            origin_lat: city.latitude,
+            origin_lng: city.longitude,
+            max_distance_km: 20,
+            exclude_city_id: city.id,
+          }),
+        }
+      ).catch(() => []),
+    ]);
 
   const clinics = mapValidClinics(clinicsData);
   const premiumClinics = mapValidClinics(premiumClinicsData).filter((clinic) =>
@@ -299,6 +320,9 @@ async function fetchCityLocationData(
     city,
     clinics: sortClinicsByPolicy(allClinics, primaryRankingPolicy),
     nearbyClinicsList: sortClinicsByPolicy(nearbyClinicsList, nearbyRankingPolicy),
+    nearbyCities: Array.isArray(nearbyCitiesData)
+      ? (nearbyCitiesData as NearbyCity[])
+      : [],
     specialties,
   };
 }
@@ -344,6 +368,7 @@ async function fetchLocationDataUncached(
       city: null,
       clinics: [],
       nearbyClinicsList: [],
+      nearbyCities: [],
       specialties: [],
     };
   }
