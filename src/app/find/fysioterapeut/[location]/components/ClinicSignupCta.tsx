@@ -17,9 +17,9 @@ export function ClinicSignupCta({ cityLocationPhrase }: ClinicSignupCtaProps) {
         Driver du en klinik {cityLocationPhrase}?
       </h3>
       <p className="mt-2 text-pretty text-sm leading-relaxed text-gray-600">
-        Over {FORMATTED_TOTAL_USERS_DK} danskere har brugt Fysfinder til at
-        finde en fysioterapeut. Opret din klinik gratis, og bliv synlig for
-        patienter i dit område.
+        Få flere patienter gennem Fysfinder - Over {FORMATTED_TOTAL_USERS_DK}{" "}
+        danskere har allerede brugt Fysfinder til at finde en fysioterapeut.
+        Opret din klinik gratis, og bliv fundet af patienter i dit område.
       </p>
       <Button
         asChild
