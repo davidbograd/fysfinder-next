@@ -1,5 +1,6 @@
-// NearbyCitiesLinks - internal link cluster to nearby towns beside the nearby-clinics list.
-// Every link is rendered server-side so crawlers see the whole cluster.
+// NearbyCitiesLinks - internal link cluster to nearby towns, shown under the heading of the
+// nearby-clinics section. Every link is rendered server-side so crawlers see the whole
+// cluster.
 
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
@@ -13,10 +14,11 @@ export function NearbyCitiesLinks({ cities }: NearbyCitiesLinksProps) {
   if (cities.length === 0) return null;
 
   return (
-    <section>
-      <h2 className="text-lg font-semibold mb-2">
+    // h3 rather than h2: this sits inside the nearby-clinics section, under its heading.
+    <section className="mb-8">
+      <h3 className="text-lg font-semibold mb-2">
         Udforsk fysioterapeuter i andre byer
-      </h2>
+      </h3>
       <div className="flex flex-wrap gap-2">
         {cities.map((city) => (
           <Link

@@ -1,12 +1,14 @@
 // NearbyClinicsList component - Renders nearby clinics with distance.
 // Updated: forwards location tracking context so nearby interactions keep city attribution.
 
-import { ClinicWithDistance } from "@/app/types";
+import { ClinicWithDistance, NearbyCity } from "@/app/types";
 import ClinicListingCard from "../../../../../components/features/clinic/ClinicListingCard";
+import { NearbyCitiesLinks } from "./NearbyCitiesLinks";
 import { orderSpecialties } from "@/lib/clinic-utils";
 
 interface NearbyClinicsListProps {
   clinics: ClinicWithDistance[];
+  nearbyCities?: NearbyCity[];
   cityName: string;
   trackingContextCityId?: string;
   specialtySlug?: string;
@@ -15,6 +17,7 @@ interface NearbyClinicsListProps {
 
 export function NearbyClinicsList({
   clinics,
+  nearbyCities = [],
   cityName,
   trackingContextCityId,
   specialtySlug,
@@ -23,14 +26,15 @@ export function NearbyClinicsList({
   if (clinics.length === 0) return null;
 
   return (
-    // Top spacing lives on the grid wrapper in page.tsx so this column stays level
-    // with the town links beside it.
-    <div>
+    <div className="mt-12">
       <h2 className="text-xl font-semibold mb-6">
         {specialtyName
           ? `Andre ${specialtyName.toLowerCase()} klinikker i nærheden af ${cityName}`
           : `Andre klinikker i nærheden af ${cityName}`}
       </h2>
+
+      <NearbyCitiesLinks cities={nearbyCities} />
+
       <div className="space-y-4">
         {clinics.map((clinic) => (
           <ClinicListingCard
