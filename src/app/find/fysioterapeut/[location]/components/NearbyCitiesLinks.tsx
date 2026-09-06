@@ -30,7 +30,7 @@ export function NearbyCitiesLinks({ cities }: NearbyCitiesLinksProps) {
               variant="secondary"
               className="text-sm hover:bg-secondary/80 transition-colors cursor-pointer hover:shadow-sm"
             >
-              fysioterapeut {city.bynavn}
+              Fysioterapeut {city.bynavn}
             </Badge>
           </Link>
         ))}

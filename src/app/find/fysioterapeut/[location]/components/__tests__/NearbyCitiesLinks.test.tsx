@@ -1,4 +1,4 @@
-// Tests for the nearby-town link cluster shown beside the nearby-clinics list.
+// Tests for the nearby-town link cluster shown under the nearby-clinics heading.
 
 import { render, screen } from "@testing-library/react";
 import { NearbyCitiesLinks } from "../NearbyCitiesLinks";
@@ -37,10 +37,10 @@ describe("NearbyCitiesLinks", () => {
     ).toBeInTheDocument();
 
     expect(
-      screen.getByRole("link", { name: "fysioterapeut Nørrebro" })
+      screen.getByRole("link", { name: "Fysioterapeut Nørrebro" })
     ).toHaveAttribute("href", "/find/fysioterapeut/noerrebro");
     expect(
-      screen.getByRole("link", { name: "fysioterapeut Hellerup" })
+      screen.getByRole("link", { name: "Fysioterapeut Hellerup" })
     ).toHaveAttribute("href", "/find/fysioterapeut/hellerup");
   });
 
