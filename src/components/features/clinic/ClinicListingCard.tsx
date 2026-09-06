@@ -42,7 +42,7 @@ interface Props {
   specialties?: {
     specialty_name: string;
     specialty_id: string;
-  }[];
+  }[] | null;
   team_members?: TeamMember[];
   premium_listing?: PremiumListing | null;
   handicapadgang?: boolean | null;
@@ -64,13 +64,16 @@ const ClinicListingCard: React.FC<Props> = ({
   logo_url,
   tlf,
   distance,
-  specialties = [],
+  // Nullable, not just optional: a default only covers undefined, and clinics with no
+  // specialties arrive as null.
+  specialties: specialtiesProp,
   team_members = [],
   premium_listing,
   handicapadgang,
   verified_klinik,
   trackingContextCityId,
 }) => {
+  const specialties = specialtiesProp ?? [];
   const MAX_VISIBLE_MEMBERS = 5;
   const hasMoreMembers = team_members.length > MAX_VISIBLE_MEMBERS;
   const visibleMembers = team_members.slice(0, MAX_VISIBLE_MEMBERS);

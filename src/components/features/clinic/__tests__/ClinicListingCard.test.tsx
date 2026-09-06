@@ -56,6 +56,13 @@ describe("ClinicListingCard", () => {
     expect(screen.getByText("Børnefysioterapi")).toBeInTheDocument();
   });
 
+  it("still renders when a clinic has no specialties at all", () => {
+    // Regression: get_nearby_clinics returned null (not []) for these, and a default
+    // parameter only covers undefined, so the card threw and took the page down.
+    render(<ClinicListingCard {...mockClinic} specialties={null} />);
+    expect(screen.getByText("Fysioterapi Klinikken")).toBeInTheDocument();
+  });
+
   it("shows distance when provided", () => {
     render(<ClinicListingCard {...mockClinic} distance={2.5} />);
     expect(screen.getByText(/2.5/)).toBeInTheDocument();
