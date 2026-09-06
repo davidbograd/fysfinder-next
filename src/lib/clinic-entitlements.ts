@@ -50,6 +50,45 @@ export const FEATURE_FLAGS = {
 } as const;
 
 /**
+ * Prior used to shrink a clinic's Google rating toward the corpus average. Ranking on the
+ * raw average alone let a single 5-star review outrank a clinic with hundreds of reviews
+ * at 4.9, which is the opposite of what a user searching for a clinic wants.
+ *
+ * RATING_PRIOR_MEAN is the average rating across all rated clinics, and RATING_PRIOR_WEIGHT
+ * is the number of imaginary reviews at that average every clinic is credited with, so a
+ * rating only moves the score as far as its review count justifies. The weight is set to the
+ * median review count of rated clinics, meaning the typical clinic is judged half on its own
+ * reviews and half on the prior. Raise it to trust low-volume ratings less.
+ *
+ * Both values were measured over the clinics table; re-derive them if the corpus shifts:
+ *   SELECT avg("avgRating"), percentile_cont(0.5) WITHIN GROUP (ORDER BY "ratingCount")
+ *   FROM clinics WHERE "ratingCount" > 0;
+ */
+export const RATING_PRIOR_MEAN = 4.7;
+export const RATING_PRIOR_WEIGHT = 10;
+
+/**
+ * Bayesian average of a clinic's rating against the corpus prior. Returns null for clinics
+ * with no reviews so callers can rank them below every rated clinic rather than handing them
+ * the prior mean, which would seat an unreviewed clinic in mid-table above rated competitors.
+ */
+export function getWeightedRatingScore(
+  avgRating: number | string | null | undefined,
+  ratingCount: number | string | null | undefined
+): number | null {
+  // The nearby-clinics RPC returns these Postgres numerics as strings.
+  const rating = Number(avgRating);
+  const count = Number(ratingCount);
+  if (!Number.isFinite(rating) || !Number.isFinite(count)) return null;
+  if (count <= 0 || rating <= 0) return null;
+
+  return (
+    (count * rating + RATING_PRIOR_WEIGHT * RATING_PRIOR_MEAN) /
+    (count + RATING_PRIOR_WEIGHT)
+  );
+}
+
+/**
  * Maps a location page URL to its ranking context. Kept beside the policy table so the
  * danmark vs. danmark-specialty distinction stays visible in one place.
  */
@@ -131,12 +170,18 @@ export function sortClinicsByPolicy<T extends RankingClinic>(
       if (aVerified !== bVerified) return bVerified ? 1 : -1;
     }
 
-    const ratingA = a.avgRating || 0;
-    const ratingB = b.avgRating || 0;
-    if (ratingA !== ratingB) return ratingB - ratingA;
+    const scoreA = getWeightedRatingScore(a.avgRating, a.ratingCount);
+    const scoreB = getWeightedRatingScore(b.avgRating, b.ratingCount);
 
-    const countA = a.ratingCount || 0;
-    const countB = b.ratingCount || 0;
+    // Unrated clinics have no score and rank below every rated clinic.
+    if (scoreA === null || scoreB === null) {
+      if (scoreA !== scoreB) return scoreA === null ? 1 : -1;
+    } else if (scoreA !== scoreB) {
+      return scoreB - scoreA;
+    }
+
+    const countA = Number(a.ratingCount) || 0;
+    const countB = Number(b.ratingCount) || 0;
     return countB - countA;
   });
 }

@@ -6,6 +6,7 @@ import {
   canAccessTeamMembersFeature,
   getPrimaryRankingContext,
   getRankingPolicy,
+  getWeightedRatingScore,
   isPremiumListingActive,
   resolvePremiumListing,
   sortClinicsByPolicy,
@@ -125,6 +126,103 @@ describe("clinic entitlement policies", () => {
       getRankingPolicy(getPrimaryRankingContext("danmark", "fibromyalgi"))
     );
     expect(sorted[0].id).toBe("premium-unrated");
+  });
+
+  test("a handful of perfect reviews does not outrank a well-reviewed clinic", () => {
+    // Regression: ranking on the raw average put a single 5-star review above a clinic
+    // with 100 reviews at 4.9, so the top of every location page was the least-proven
+    // clinic. Scores are shrunk toward the corpus average by review count instead.
+    const clinics = [
+      { id: "one-perfect-review", avgRating: 5, ratingCount: 1 },
+      { id: "five-perfect-reviews", avgRating: 5, ratingCount: 5 },
+      { id: "hundred-reviews-4-9", avgRating: 4.9, ratingCount: 100 },
+    ];
+
+    const sorted = sortClinicsByPolicy(clinics, getRankingPolicy("danmark"));
+
+    expect(sorted.map((clinic) => clinic.id)).toEqual([
+      "hundred-reviews-4-9",
+      "five-perfect-reviews",
+      "one-perfect-review",
+    ]);
+  });
+
+  test("enough perfect reviews still beats a slightly lower rating", () => {
+    // The weighting must not collapse into ranking by review count: a clinic with a
+    // convincing number of 5-star reviews should still lead a larger 4.5-rated one.
+    const clinics = [
+      { id: "many-reviews-4-5", avgRating: 4.5, ratingCount: 300 },
+      { id: "forty-perfect-reviews", avgRating: 5, ratingCount: 40 },
+    ];
+
+    const sorted = sortClinicsByPolicy(clinics, getRankingPolicy("danmark"));
+    expect(sorted[0].id).toBe("forty-perfect-reviews");
+  });
+
+  test("unrated clinics rank below every rated clinic", () => {
+    // The prior mean is only a pull toward the average, never a score of its own — a
+    // clinic with no reviews must not land mid-table above rated competitors.
+    const clinics = [
+      { id: "unrated", avgRating: null, ratingCount: null },
+      { id: "mediocre-but-rated", avgRating: 3.2, ratingCount: 40 },
+      { id: "zero-count", avgRating: 4.9, ratingCount: 0 },
+    ];
+
+    const sorted = sortClinicsByPolicy(clinics, getRankingPolicy("danmark"));
+    expect(sorted[0].id).toBe("mediocre-but-rated");
+    expect(sorted.map((clinic) => clinic.id).slice(1).sort()).toEqual([
+      "unrated",
+      "zero-count",
+    ]);
+  });
+
+  test("weighted score handles the string numerics the nearby RPC returns", () => {
+    // get_nearby_clinics serializes avgRating/ratingCount as strings; before the weighting
+    // they were compared with `-`, which coerced silently. The score must not read NaN.
+    expect(getWeightedRatingScore("4.9", "100")).toBeCloseTo(4.882, 3);
+    expect(getWeightedRatingScore("5", "1")).toBeCloseTo(4.727, 3);
+    expect(getWeightedRatingScore(null, null)).toBeNull();
+    expect(getWeightedRatingScore("ikke et tal", "10")).toBeNull();
+
+    const sorted = sortClinicsByPolicy(
+      [
+        { id: "one-perfect-review", avgRating: "5", ratingCount: "1" },
+        { id: "hundred-reviews-4-9", avgRating: "4.9", ratingCount: "100" },
+      ] as unknown as Array<{
+        id: string;
+        avgRating: number | null;
+        ratingCount: number | null;
+      }>,
+      getRankingPolicy("danmark")
+    );
+    expect(sorted[0].id).toBe("hundred-reviews-4-9");
+  });
+
+  test("premium placement still outranks the weighted score", () => {
+    // Weighting changes how clinics compare on reviews only; it must not demote a paying
+    // clinic below a better-reviewed free one on the contexts premium is sold for.
+    const clinics = [
+      {
+        id: "free-well-reviewed",
+        avgRating: 4.9,
+        ratingCount: 200,
+        premium_listing: null,
+        verified_klinik: false,
+      },
+      {
+        id: "premium-few-reviews",
+        avgRating: 4.2,
+        ratingCount: 3,
+        premium_listing: {
+          start_date: "2025-01-01T00:00:00.000Z",
+          end_date: "2999-01-01T00:00:00.000Z",
+        },
+        verified_klinik: false,
+      },
+    ];
+
+    const sorted = sortClinicsByPolicy(clinics, getRankingPolicy("city"));
+    expect(sorted[0].id).toBe("premium-few-reviews");
   });
 
   test("ranking context maps location and specialty slugs", () => {
