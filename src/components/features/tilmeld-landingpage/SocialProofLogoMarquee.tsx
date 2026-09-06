@@ -1,8 +1,9 @@
 "use client";
 
-// Updated: 2026-08-30 - Scroll the strip by a measured pixel offset so iOS Safari animates it.
+// Updated: 2026-09-06 - Optimize logo.dev images and lazy-load logos outside the first few chips.
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { buildLogoDevUrl, getWebsiteDomainForLogo } from "@/lib/clinic-logo";
 import { getMarqueeDurationSeconds } from "./marquee-timing";
 
 interface ClinicLogoItem {
@@ -135,16 +136,9 @@ export function SocialProofLogoMarquee({
 
   function buildLogoPath(website: string) {
     if (!logoDevToken) return null;
-
-    const logoDomain = website
-      .trim()
-      .replace(/^https?:\/\//i, "")
-      .replace(/^www\./i, "")
-      .split("/")[0]
-      .split("?")[0]
-      .toLowerCase();
-
-    return `https://img.logo.dev/${logoDomain}?token=${logoDevToken}&size=64&format=png&fallback=404&retina=true`;
+    const logoDomain = getWebsiteDomainForLogo(website);
+    if (!logoDomain) return null;
+    return buildLogoDevUrl(logoDomain, logoDevToken);
   }
 
   const Wrapper = embedded ? "div" : "section";
@@ -195,6 +189,8 @@ export function SocialProofLogoMarquee({
               }
 
               const isReady = Boolean(logoReady[item.website]);
+              const uniqueIndex = index % clinicLogos.length;
+              const isPriorityLogo = uniqueIndex < 4 && index < clinicLogos.length;
 
               return (
               <div
@@ -213,7 +209,8 @@ export function SocialProofLogoMarquee({
                     alt={`${item.name} logo`}
                     width={32}
                     height={32}
-                    unoptimized
+                    sizes="32px"
+                    priority={isPriorityLogo}
                     className="h-full w-full object-contain"
                     onLoad={() =>
                       setLogoReady((prev) => ({ ...prev, [item.website]: true }))

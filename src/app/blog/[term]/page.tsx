@@ -1,3 +1,6 @@
+// Blog post page
+// Updated: 2026-09-06 - Drop duplicate articleBody from JSON-LD to shrink HTML.
+
 import { ContentEntry } from "@/components/features/blog-og-ordbog/ContentEntry";
 import { getBlogPost, getBlogPosts } from "@/lib/blog";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
@@ -55,7 +58,6 @@ function BlogPostStructuredData({ term }: BlogPostStructuredDataProps) {
     },
     specialty: "Fysioterapi",
     medicalAudience: "Patienter og sundhedsprofessionelle",
-    articleBody: term.content,
     publisher: {
       "@type": "Organization",
       name: "Fysfinder",

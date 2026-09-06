@@ -1,37 +1,25 @@
 "use client";
 
+// Updated: 2026-09-06 - Accept precomputed specialty counts so find pages do not serialize every clinic.
+
 import { useState } from "react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { City, Clinic, SpecialtyWithSeo } from "@/app/types";
+import { City, SpecialtyWithSeo } from "@/app/types";
 
 interface SpecialtiesListProps {
   city: City;
-  clinics: Clinic[];
   specialties: SpecialtyWithSeo[];
+  specialtyMatchCounts: Record<string, number>;
 }
 
 export function SpecialtiesList({
   city,
-  clinics,
   specialties,
+  specialtyMatchCounts,
 }: SpecialtiesListProps) {
   const [showAll, setShowAll] = useState(false);
-
-  // Count matches for each specialty
-  const specialtyMatchCounts = specialties.reduce<Record<string, number>>(
-    (acc, specialty) => {
-      const matchCount = clinics.filter((clinic) =>
-        clinic.specialties.some(
-          (s) => s.specialty_name_slug === specialty.specialty_name_slug
-        )
-      ).length;
-      acc[specialty.specialty_id.toString()] = matchCount;
-      return acc;
-    },
-    {}
-  );
 
   // Sort specialties by match count
   const sortedSpecialties = [...specialties]

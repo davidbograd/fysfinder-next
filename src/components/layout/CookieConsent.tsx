@@ -1,7 +1,14 @@
+// Cookie consent banner for analytics opt-in.
+// Updated: 2026-09-06 - Notify the analytics loader when the visitor accepts cookies.
+
 "use client";
 
 import { useEffect, useState } from "react";
 import CookieConsent from "react-cookie-consent";
+import {
+  COOKIE_CONSENT_ACCEPTED_EVENT,
+  COOKIE_CONSENT_COOKIE_NAME,
+} from "@/lib/cookie-consent";
 
 interface CookiePreferences {
   necessary: boolean; // Always true
@@ -18,9 +25,8 @@ export function CookieConsentBanner() {
   }, []);
 
   const handleAccept = () => {
-    // Enable all cookies
     if (typeof window !== "undefined") {
-      // Initialize Google Analytics
+      window.dispatchEvent(new Event(COOKIE_CONSENT_ACCEPTED_EVENT));
       window.gtag?.("consent", "update", {
         analytics_storage: "granted",
         ad_storage: "granted",
@@ -51,7 +57,7 @@ export function CookieConsentBanner() {
       onDecline={handleDecline}
       buttonText="Acceptér alle cookies"
       declineButtonText="Kun nødvendige"
-      cookieName="fysfinder-cookie-consent"
+      cookieName={COOKIE_CONSENT_COOKIE_NAME}
       expires={150}
       disableStyles={true}
       containerClasses="fixed left-1/2 -translate-x-1/2 bottom-4 max-w-4xl w-full mx-auto bg-white rounded-lg shadow-xl p-4 text-sm flex flex-col sm:flex-row items-center gap-4 sm:items-center sm:justify-between sm:m-4"

@@ -1,3 +1,6 @@
+// Dictionary term page
+// Updated: 2026-09-06 - Drop duplicate articleBody from JSON-LD to shrink HTML.
+
 import { ContentEntry } from "@/components/features/blog-og-ordbog/ContentEntry";
 import { getDictionaryTerm, getDictionaryTerms } from "@/lib/dictionary";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
@@ -57,7 +60,6 @@ function DictionaryTermStructuredData({
     },
     specialty: "Fysioterapi",
     medicalAudience: "Patienter og sundhedsprofessionelle",
-    articleBody: term.content,
     publisher: {
       "@type": "Organization",
       name: "Fysfinder",

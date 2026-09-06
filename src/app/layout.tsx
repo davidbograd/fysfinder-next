@@ -1,13 +1,13 @@
 // Root layout
-// Updated: 2026-08-29 - Clip horizontal overflow from full-bleed w-dvw page sections.
+// Updated: 2026-09-06 - Load Google Analytics only after cookie consent.
 
 import type { Metadata } from "next";
 import "./globals.css";
 import { Manrope } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import Script from "next/script";
 import { CookieConsentBanner } from "@/components/layout/CookieConsent";
+import { GoogleAnalytics } from "@/components/layout/GoogleAnalytics";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Toaster } from "@/components/ui/toaster";
 import { EmailVerificationBanner } from "@/components/layout/EmailVerificationBanner";
@@ -91,20 +91,7 @@ export default async function RootLayout({
         <Footer />
         <CookieConsentBanner />
         <Toaster />
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-BH38ZB6HYH"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-BH38ZB6HYH', {
-              'consent_mode': 'advanced'
-            });
-          `}
-        </Script>
+        <GoogleAnalytics />
         <AgentationDevtools />
         <SpeedInsights />
       </body>

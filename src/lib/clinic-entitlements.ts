@@ -50,27 +50,30 @@ export const FEATURE_FLAGS = {
 } as const;
 
 /**
- * Prior used to shrink a clinic's Google rating toward the corpus average. Ranking on the
- * raw average alone let a single 5-star review outrank a clinic with hundreds of reviews
- * at 4.9, which is the opposite of what a user searching for a clinic wants.
- *
- * RATING_PRIOR_MEAN is the average rating across all rated clinics, and RATING_PRIOR_WEIGHT
- * is the number of imaginary reviews at that average every clinic is credited with, so a
- * rating only moves the score as far as its review count justifies. The weight is set to the
- * median review count of rated clinics, meaning the typical clinic is judged half on its own
- * reviews and half on the prior. Raise it to trust low-volume ratings less.
- *
- * Both values were measured over the clinics table; re-derive them if the corpus shifts:
- *   SELECT avg("avgRating"), percentile_cont(0.5) WITHIN GROUP (ORDER BY "ratingCount")
- *   FROM clinics WHERE "ratingCount" > 0;
+ * Confidence level the ranking demands of a rating, as a z-score. Raising it makes the
+ * ranking trust thin review counts less, pushing clinics with a handful of reviews further
+ * down; lowering it moves the ranking back toward the face-value rating.
  */
-export const RATING_PRIOR_MEAN = 4.7;
-export const RATING_PRIOR_WEIGHT = 10;
+export const RATING_CONFIDENCE_Z = 1;
+
+const MIN_STARS = 1;
+const MAX_STARS = 5;
 
 /**
- * Bayesian average of a clinic's rating against the corpus prior. Returns null for clinics
- * with no reviews so callers can rank them below every rated clinic rather than handing them
- * the prior mean, which would seat an unreviewed clinic in mid-table above rated competitors.
+ * Lower bound of the Wilson score interval for a clinic's rating: roughly "the rating we
+ * are confident this clinic is at least worth", so a rating counts for as much as its
+ * review volume can support. Ranking on the raw average let a single 5-star review outrank
+ * a clinic with 100 reviews at 4.9.
+ *
+ * The property that matters is monotonicity in review count: for a given rating, more
+ * reviews can only ever raise the score. A Bayesian average toward the corpus mean does not
+ * have it — shrinkage works in both directions, so among clinics rated below the mean the
+ * ones with fewest reviews got the largest lift, and a 4.3 with 15 reviews outranked a 4.4
+ * with 59. Anchoring at the bottom of the interval instead removes that whole class of
+ * inversion.
+ *
+ * Returns null for clinics with no reviews so callers can rank them below every rated
+ * clinic rather than scoring them as though they had been reviewed.
  */
 export function getWeightedRatingScore(
   avgRating: number | string | null | undefined,
@@ -82,10 +85,23 @@ export function getWeightedRatingScore(
   if (!Number.isFinite(rating) || !Number.isFinite(count)) return null;
   if (count <= 0 || rating <= 0) return null;
 
-  return (
-    (count * rating + RATING_PRIOR_WEIGHT * RATING_PRIOR_MEAN) /
-    (count + RATING_PRIOR_WEIGHT)
+  // Wilson works on a success rate, so map the star average onto 0-1. Clamped because a
+  // rating outside the star range would otherwise put a negative under the square root.
+  const proportion = Math.min(
+    Math.max((rating - MIN_STARS) / (MAX_STARS - MIN_STARS), 0),
+    1
   );
+
+  const z = RATING_CONFIDENCE_Z;
+  const zSquared = z * z;
+  const centre = proportion + zSquared / (2 * count);
+  const margin =
+    z *
+    Math.sqrt(
+      (proportion * (1 - proportion) + zSquared / (4 * count)) / count
+    );
+
+  return (centre - margin) / (1 + zSquared / count);
 }
 
 /**

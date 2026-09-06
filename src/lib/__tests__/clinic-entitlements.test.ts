@@ -147,6 +147,39 @@ describe("clinic entitlement policies", () => {
     ]);
   });
 
+  test("more reviews never costs a clinic rank at a given rating", () => {
+    // Regression: shrinking toward the corpus mean lifted below-average clinics the most
+    // when they had fewest reviews, so a 4.3 with 15 reviews sat above a 4.4 with 59 on
+    // Østerbro. Scoring the bottom of the confidence interval keeps review count strictly
+    // in a clinic's favour.
+    const clinics = [
+      { id: "parkens-4-3-of-15", avgRating: 4.3, ratingCount: 15 },
+      { id: "fysiodanmark-4-4-of-59", avgRating: 4.4, ratingCount: 59 },
+      { id: "seeberg-4-7-of-13", avgRating: 4.7, ratingCount: 13 },
+    ];
+
+    const sorted = sortClinicsByPolicy(clinics, getRankingPolicy("danmark"));
+
+    expect(sorted.map((clinic) => clinic.id)).toEqual([
+      "seeberg-4-7-of-13",
+      "fysiodanmark-4-4-of-59",
+      "parkens-4-3-of-15",
+    ]);
+  });
+
+  test("scoring is monotonic in review count across the rating range", () => {
+    // Guards the property directly rather than through one example: at any rating, above
+    // or below the corpus average, adding reviews must not lower the score.
+    for (const rating of [1.5, 3, 4.3, 4.7, 5]) {
+      for (const count of [1, 2, 5, 10, 50, 200]) {
+        const score = getWeightedRatingScore(rating, count);
+        const scoreWithMore = getWeightedRatingScore(rating, count * 2);
+        expect(score).not.toBeNull();
+        expect(scoreWithMore!).toBeGreaterThanOrEqual(score!);
+      }
+    }
+  });
+
   test("enough perfect reviews still beats a slightly lower rating", () => {
     // The weighting must not collapse into ranking by review count: a clinic with a
     // convincing number of 5-star reviews should still lead a larger 4.5-rated one.
@@ -179,8 +212,8 @@ describe("clinic entitlement policies", () => {
   test("weighted score handles the string numerics the nearby RPC returns", () => {
     // get_nearby_clinics serializes avgRating/ratingCount as strings; before the weighting
     // they were compared with `-`, which coerced silently. The score must not read NaN.
-    expect(getWeightedRatingScore("4.9", "100")).toBeCloseTo(4.882, 3);
-    expect(getWeightedRatingScore("5", "1")).toBeCloseTo(4.727, 3);
+    expect(getWeightedRatingScore("4.9", "100")).toBeCloseTo(0.9541, 4);
+    expect(getWeightedRatingScore("5", "1")).toBeCloseTo(0.5, 4);
     expect(getWeightedRatingScore(null, null)).toBeNull();
     expect(getWeightedRatingScore("ikke et tal", "10")).toBeNull();
 

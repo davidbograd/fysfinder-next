@@ -1,5 +1,5 @@
 // Homepage component with graceful error handling
-// Updated: 2026-08-29 - Homepage hero logo carousel uses patient-facing heading copy.
+// Updated: 2026-09-06 - Optimize hero images, slim JSON-LD, and keep ISR homepage payload smaller.
 
 import React from "react";
 import { Metadata } from "next";
@@ -17,7 +17,6 @@ import {
   fetchSpecialties,
   processCities,
   type CityWithCount,
-  type RegionData,
   type Specialty,
 } from "./utils/cityUtils";
 export const revalidate = 21600; // 6 hours ISR (must be a literal for Next.js segment config)
@@ -75,8 +74,6 @@ function HeroSection({
                 src="/images/homepage/physios-portraits/fysioterapeut-01.jpg"
                 alt="Fysioterapeut portræt"
                 fill
-                quality={100}
-                unoptimized
                 sizes="(max-width: 640px) 160px, (max-width: 1279px) 175px, 190px"
                 className="object-cover"
               />
@@ -98,8 +95,7 @@ function HeroSection({
                 src="/images/homepage/physios-portraits/fysioterapeut-02.jpg"
                 alt="Fysioterapeut portræt"
                 fill
-                quality={100}
-                unoptimized
+                priority
                 sizes="(max-width: 640px) 185px, (max-width: 1279px) 200px, 215px"
                 className="object-cover"
               />
@@ -121,8 +117,6 @@ function HeroSection({
                 src="/images/homepage/physios-portraits/fysioterapeut-03.jpg"
                 alt="Fysioterapeut portræt"
                 fill
-                quality={100}
-                unoptimized
                 sizes="(max-width: 640px) 160px, (max-width: 1279px) 175px, 190px"
                 className="object-cover"
               />
@@ -175,6 +169,7 @@ function ValuePropsSection() {
             alt="Spar tid illustration"
             width={420}
             height={420}
+            sizes="(max-width: 768px) 288px, 368px"
             className="absolute bottom-[-72px] left-1/2 md:left-[58%] lg:left-1/2 -translate-x-1/2 w-[288px] md:w-[368px] h-auto pointer-events-none select-none"
           />
         </article>
@@ -309,13 +304,9 @@ function ClinicCtaSection() {
 
 interface HomeStructuredDataProps {
   totalClinics: number;
-  regions: RegionData[];
 }
 
-function HomeStructuredData({
-  totalClinics,
-  regions,
-}: HomeStructuredDataProps) {
+function HomeStructuredData({ totalClinics }: HomeStructuredDataProps) {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": ["WebSite", "MedicalWebPage"],
@@ -343,25 +334,10 @@ function HomeStructuredData({
       url: "https://www.fysfinder.dk",
       description: `Danmarks største oversigt over fysioterapeuter med ${totalClinics} klinikker`,
       medicalSpecialty: ["Fysioterapi", "Physical Therapy"],
-      areaServed: regions.map((region) => ({
-        "@type": "State",
-        name: region.name,
-        containsPlace: region.cities.map((city) => ({
-          "@type": "City",
-          name: city.bynavn,
-          containsPlace: {
-            "@type": ["LocalBusiness", "MedicalClinic"],
-            name: `Fysioterapeuter i ${city.bynavn}`,
-            numberOfItems: city.clinic_count,
-            medicalSpecialty: "Physical Therapy",
-            address: {
-              "@type": "PostalAddress",
-              addressLocality: city.bynavn,
-              addressCountry: "DK",
-            },
-          },
-        })),
-      })),
+      areaServed: {
+        "@type": "Country",
+        name: "Denmark",
+      },
     },
   };
 
@@ -420,7 +396,7 @@ export default async function HomePage() {
 
     return (
       <>
-        <HomeStructuredData totalClinics={totalClinics} regions={regions} />
+        <HomeStructuredData totalClinics={totalClinics} />
         <div className="space-y-20 pb-8">
           <HeroSection totalClinics={totalClinics} specialties={specialties} />
           <ValuePropsSection />

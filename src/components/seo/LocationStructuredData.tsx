@@ -1,9 +1,24 @@
-import { City, Clinic } from "@/app/types";
+// LocationStructuredData
+// Updated: 2026-09-06 - Cap ItemList JSON-LD so large city/Danmark pages stay small.
+
+import { City } from "@/app/types";
 import { slugify } from "@/app/utils/slugify";
+import { LOCATION_JSON_LD_ITEM_LIMIT } from "@/lib/location-listing";
+
+interface LocationStructuredDataClinic {
+  klinikNavn: string;
+  klinikNavnSlug: string;
+  lokation: string;
+  postnummer: number;
+  adresse: string;
+  avgRating: number;
+  ratingCount: number;
+  specialties: Array<{ specialty_name: string }>;
+}
 
 export interface LocationStructuredDataProps {
   city?: City | null;
-  clinics: Clinic[];
+  clinics: LocationStructuredDataClinic[];
   specialtyName?: string | null;
   isDanmarkPage?: boolean;
 }
@@ -60,7 +75,8 @@ export function LocationStructuredData({
     // List of Clinics
     mainEntity: {
       "@type": "ItemList",
-      itemListElement: clinics.map((clinic, index) => ({
+      numberOfItems: clinics.length,
+      itemListElement: clinics.slice(0, LOCATION_JSON_LD_ITEM_LIMIT).map((clinic, index) => ({
         "@type": "ListItem",
         position: index + 1,
         item: {

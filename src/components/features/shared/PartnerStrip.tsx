@@ -1,4 +1,5 @@
 // Added: 2026-04-06 - Extracted shared partner strip so homepage and tilmeld reuse the same associations section.
+// Updated: 2026-09-06 - Pass accurate sizes so partner logos are not downloaded at source resolution.
 import Image from "next/image";
 
 export function PartnerStrip() {
@@ -18,6 +19,7 @@ export function PartnerStrip() {
             alt="FAKS logo"
             width={260}
             height={80}
+            sizes="(max-width: 640px) 260px, 210px"
             className="h-auto w-full max-w-[260px] sm:w-auto sm:max-w-[210px]"
           />
           <Image
@@ -25,13 +27,15 @@ export function PartnerStrip() {
             alt="Hovedpineforeningen logo"
             width={340}
             height={120}
+            sizes="(max-width: 640px) 230px, 200px"
             className="h-auto w-full max-w-[230px] sm:w-auto sm:max-w-[200px]"
           />
           <Image
             src="/images/samarbejdspartnere/dansk-skoliose-forening.png"
             alt="Dansk Skoliose Forening logo"
-            width={1000}
-            height={508}
+            width={400}
+            height={203}
+            sizes="(max-width: 640px) 200px, 165px"
             className="h-auto w-full max-w-[200px] sm:w-auto sm:max-w-[165px]"
           />
         </div>

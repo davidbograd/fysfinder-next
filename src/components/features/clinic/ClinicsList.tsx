@@ -1,5 +1,5 @@
 // ClinicsList component - Renders a paginated list of clinic cards
-// Updated: forwards optional city context for suburb-level analytics attribution
+// Updated: 2026-09-06 - Load extra clinics from the server instead of hydrating the full list.
 
 "use client";
 
@@ -8,29 +8,52 @@ import { Clinic } from "@/app/types";
 import ClinicListingCard from "./ClinicListingCard";
 import { Button } from "@/components/ui/button";
 import { orderSpecialties } from "@/lib/clinic-utils";
+import { LOCATION_LIST_PAGE_SIZE } from "@/lib/location-listing";
+import { loadMoreLocationClinics } from "@/app/find/fysioterapeut/[location]/load-more-clinics";
+import type { LocationFilters } from "@/app/find/fysioterapeut/filter-utils";
 
 interface ClinicsListProps {
-  clinics: Clinic[];
+  initialClinics: Clinic[];
   totalClinics: number;
+  locationSlug: string;
   specialtySlug?: string;
-  itemsPerPage?: number;
+  filters?: LocationFilters;
   trackingContextCityId?: string;
 }
 
 export function ClinicsList({
-  clinics,
+  initialClinics,
   totalClinics,
+  locationSlug,
   specialtySlug,
-  itemsPerPage = 10,
+  filters,
   trackingContextCityId,
 }: ClinicsListProps) {
-  const [displayCount, setDisplayCount] = useState(itemsPerPage);
+  const [clinics, setClinics] = useState(initialClinics);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [loadError, setLoadError] = useState(false);
+  const hasMore = clinics.length < totalClinics;
 
-  const visibleClinics = clinics.slice(0, displayCount);
-  const hasMore = displayCount < clinics.length;
+  const loadMore = async () => {
+    if (isLoadingMore || !hasMore) return;
 
-  const loadMore = () => {
-    setDisplayCount((prev) => Math.min(prev + itemsPerPage, clinics.length));
+    setIsLoadingMore(true);
+    setLoadError(false);
+
+    try {
+      const nextClinics = await loadMoreLocationClinics({
+        locationSlug,
+        specialtySlug,
+        filters,
+        offset: clinics.length,
+      });
+      setClinics((current) => [...current, ...nextClinics]);
+    } catch (error) {
+      console.error("Failed to load more clinics:", error);
+      setLoadError(true);
+    } finally {
+      setIsLoadingMore(false);
+    }
   };
 
   return (
@@ -42,7 +65,7 @@ export function ClinicsList({
       </h3>
 
       <div className="space-y-4">
-        {visibleClinics.map((clinic: Clinic) => (
+        {clinics.map((clinic: Clinic) => (
           <ClinicListingCard
             key={clinic.clinics_id}
             clinicId={clinic.clinics_id}
@@ -72,10 +95,16 @@ export function ClinicsList({
           <Button
             onClick={loadMore}
             variant="outline"
-            className="min-w-[200px]"
+            disabled={isLoadingMore}
+            className="min-w-[200px] rounded-full"
           >
-            Vis flere klinikker
+            {isLoadingMore ? "Indlæser..." : "Vis flere klinikker"}
           </Button>
+          {loadError ? (
+            <p className="mt-2 text-sm text-gray-500">
+              Kunne ikke hente flere klinikker. Prøv igen.
+            </p>
+          ) : null}
         </div>
       )}
     </div>

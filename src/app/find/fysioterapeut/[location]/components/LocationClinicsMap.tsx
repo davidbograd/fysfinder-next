@@ -1,13 +1,14 @@
 // LocationClinicsMap
-// Updated: allows customizing map scope label per route context
+// Updated: 2026-09-06 - Accept slim map-marker clinic payloads.
 
 "use client";
 
 import dynamic from "next/dynamic";
-import { City, Clinic } from "@/app/types";
+import { City } from "@/app/types";
+import { LocationMapClinic } from "@/lib/location-listing";
 
 interface LocationClinicsMapProps {
-  clinics: Clinic[];
+  clinics: LocationMapClinic[];
   city: City;
   resultsScopeLabel?: string;
 }

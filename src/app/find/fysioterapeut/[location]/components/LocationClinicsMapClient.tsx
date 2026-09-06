@@ -1,9 +1,10 @@
 // LocationClinicsMapClient
-// Updated: uses custom Fysfinder pin asset for map markers
+// Updated: 2026-09-06 - Load Leaflet CSS here and accept slim map-marker payloads.
 
 "use client";
 
-import { City, Clinic } from "@/app/types";
+import { City } from "@/app/types";
+import { LocationMapClinic } from "@/lib/location-listing";
 import L from "leaflet";
 import { Info } from "lucide-react";
 import Link from "next/link";
@@ -15,15 +16,16 @@ import {
   TileLayer,
   useMap,
 } from "react-leaflet";
+import "./location-map.css";
 
 interface LocationClinicsMapClientProps {
-  clinics: Clinic[];
+  clinics: LocationMapClinic[];
   city: City;
   resultsScopeLabel?: string;
 }
 
 interface MappableClinic {
-  clinic: Clinic;
+  clinic: LocationMapClinic;
   latitude: number;
   longitude: number;
 }
@@ -57,7 +59,7 @@ function toFiniteNumber(value: unknown): number | null {
   return null;
 }
 
-function getClinicCoordinates(clinic: Clinic): { latitude: number; longitude: number } | null {
+function getClinicCoordinates(clinic: LocationMapClinic): { latitude: number; longitude: number } | null {
   const coordinatePairs: Array<[unknown, unknown]> = [
     [clinic.latitude, clinic.longitude],
     [clinic.clinic_latitude, clinic.clinic_longitude],
