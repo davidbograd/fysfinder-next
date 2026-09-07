@@ -38,6 +38,9 @@ export default function Footer() {
               <Link href="/styrkeoevelser" className="block text-[18px] font-light leading-tight text-white hover:text-white/85">
                 Styrkeøvelser
               </Link>
+              <Link href="/symptomer" className="block text-[18px] font-light leading-tight text-white hover:text-white/85">
+                Symptomer
+              </Link>
               <Link href="/ordbog" className="block text-[18px] font-light leading-tight text-white hover:text-white/85">
                 Ordbog
               </Link>

@@ -13,6 +13,11 @@ import {
   getBodyPartSlugs,
   getListedExerciseSlugs,
 } from "../src/lib/styrkeoevelser";
+import {
+  SYMPTOMER_PATH,
+  getActiveBodyAreaSlugs,
+  getActiveConditionParams,
+} from "../src/lib/symptomer";
 
 config({ path: ".env.local" });
 
@@ -273,6 +278,18 @@ async function generateSitemaps() {
       priority: 0.62,
     }));
 
+    const symptomerUrls = [
+      { loc: `${DOMAIN}${SYMPTOMER_PATH}`, priority: 0.85 },
+      ...getActiveBodyAreaSlugs().map((slug) => ({
+        loc: `${DOMAIN}${SYMPTOMER_PATH}/${slug}`,
+        priority: 0.8,
+      })),
+      ...getActiveConditionParams().map(({ bodyArea, condition }) => ({
+        loc: `${DOMAIN}${SYMPTOMER_PATH}/${bodyArea}/${condition}`,
+        priority: 0.72,
+      })),
+    ];
+
     // Dynamically discover tool URLs
     const toolUrls: Array<{ loc: string; priority: number }> = [];
 
@@ -397,6 +414,11 @@ async function generateSitemaps() {
       ])
     );
 
+    await fsPromises.writeFile(
+      "public/sitemap-symptomer.xml",
+      await generateSitemapXML(symptomerUrls)
+    );
+
     // Update sitemap index
     const sitemapFiles = [
       "sitemap-static.xml",
@@ -408,6 +430,7 @@ async function generateSitemaps() {
       "sitemap-blog-posts.xml", // Add blog posts sitemap to index
       "sitemap-vaerktoejer.xml", // Add tools sitemap to index
       "sitemap-styrkeoevelser.xml",
+      "sitemap-symptomer.xml",
     ];
 
     await fsPromises.writeFile(
