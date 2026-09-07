@@ -1,6 +1,7 @@
 // Added: 2026-09-07 - Public lookup API for the symptom universe: body-area/condition resolution, relation lookups, URL builders and exercise/reviewer joins.
 
 import {
+  BODY_PART_HERO_IMAGES,
   getAllExercisesList,
   type StyrkeoevelserDifficulty,
 } from "@/lib/styrkeoevelser";
@@ -39,6 +40,27 @@ export function getActiveBodyAreaSlugs(): string[] {
 /** Returns the body area only if it is active, so routes stay in sync with navigation. */
 export function getActiveBodyArea(slug: string): ActiveBodyArea | undefined {
   return getActiveBodyAreas().find((area) => area.slug === slug);
+}
+
+/**
+ * Body-area slugs whose illustration lives under a different key in
+ * `BODY_PART_HERO_IMAGES`. Only needed where the two universes disagree on
+ * naming — matching slugs resolve automatically.
+ */
+const BODY_AREA_IMAGE_OVERRIDES: Record<string, string> = {};
+
+/**
+ * The anatomical illustration for a body area, reusing the `/styrkeoevelser`
+ * body-part artwork so the two universes stay visually consistent and we do not
+ * ship a second copy of the same images. Returns `undefined` when no
+ * illustration exists for the area rather than substituting a different body
+ * part, since a wrong illustration is worse than none on a health page.
+ */
+export function getBodyAreaImage(bodyAreaSlug: string): string | undefined {
+  return (
+    BODY_AREA_IMAGE_OVERRIDES[bodyAreaSlug] ??
+    BODY_PART_HERO_IMAGES[bodyAreaSlug]
+  );
 }
 
 /* -------------------------------------------------------------------------- */
