@@ -44,9 +44,6 @@ export default function Footer() {
               <Link href="/blog" className="block text-[18px] font-light leading-tight text-white hover:text-white/85">
                 Blog
               </Link>
-              <Link href="/om-os" className="block text-[18px] font-light leading-tight text-white hover:text-white/85">
-                Om os
-              </Link>
             </div>
             </div>
             <div className="w-fit shrink-0">
@@ -54,6 +51,9 @@ export default function Footer() {
               Fysfinder
             </p>
             <div className="space-y-2">
+              <Link href="/om-os" className="block text-[18px] font-light leading-tight text-white hover:text-white/85">
+                Om os
+              </Link>
               <Link href="/samarbejdspartnere" className="block text-[18px] font-light leading-tight text-white hover:text-white/85">
                 Samarbejdspartnere
               </Link>
