@@ -1,12 +1,12 @@
 // Cookie consent banner for analytics opt-in.
-// Updated: 2026-09-06 - Notify the analytics loader when the visitor accepts cookies.
+// Updated: 2026-09-10 - Update gtag Consent Mode when the visitor accepts or declines.
 
 "use client";
 
 import { useEffect, useState } from "react";
 import CookieConsent from "react-cookie-consent";
 import {
-  COOKIE_CONSENT_ACCEPTED_EVENT,
+  applyGtagConsentUpdate,
   COOKIE_CONSENT_COOKIE_NAME,
 } from "@/lib/cookie-consent";
 
@@ -25,27 +25,11 @@ export function CookieConsentBanner() {
   }, []);
 
   const handleAccept = () => {
-    if (typeof window !== "undefined") {
-      window.dispatchEvent(new Event(COOKIE_CONSENT_ACCEPTED_EVENT));
-      window.gtag?.("consent", "update", {
-        analytics_storage: "granted",
-        ad_storage: "granted",
-        ad_user_data: "granted",
-        ad_personalization: "granted",
-      });
-    }
+    applyGtagConsentUpdate(true);
   };
 
   const handleDecline = () => {
-    // Only enable necessary cookies
-    if (typeof window !== "undefined") {
-      window.gtag?.("consent", "update", {
-        analytics_storage: "denied",
-        ad_storage: "denied",
-        ad_user_data: "denied",
-        ad_personalization: "denied",
-      });
-    }
+    applyGtagConsentUpdate(false);
   };
 
   if (!mounted) return null;

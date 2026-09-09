@@ -1,5 +1,5 @@
 // Root layout
-// Updated: 2026-09-06 - Load used Manrope weights, delay Analytics until consent, and pass specialties into the header.
+// Updated: 2026-09-10 - Load used Manrope weights, load Analytics with Consent Mode, and pass specialties into the header.
 
 import type { Metadata } from "next";
 import "./globals.css";

@@ -1,6 +1,11 @@
-// Updated: 2026-09-06 - Covers granted/denied parsing of the consent cookie.
+// Updated: 2026-09-10 - Covers granted/denied cookie parsing and gtag consent updates.
 
-import { hasGrantedAnalyticsConsent } from "../cookie-consent";
+import {
+  applyGtagConsentUpdate,
+  DENIED_ANALYTICS_CONSENT,
+  GRANTED_ANALYTICS_CONSENT,
+  hasGrantedAnalyticsConsent,
+} from "../cookie-consent";
 
 describe("hasGrantedAnalyticsConsent", () => {
   it("returns true only for an accepted consent cookie", () => {
@@ -20,5 +25,20 @@ describe("hasGrantedAnalyticsConsent", () => {
       false
     );
     expect(hasGrantedAnalyticsConsent("unrelated=true")).toBe(false);
+  });
+});
+
+describe("applyGtagConsentUpdate", () => {
+  it("updates gtag consent to granted or denied", () => {
+    const gtag = jest.fn();
+    window.gtag = gtag;
+
+    applyGtagConsentUpdate(true);
+    expect(gtag).toHaveBeenCalledWith("consent", "update", GRANTED_ANALYTICS_CONSENT);
+
+    applyGtagConsentUpdate(false);
+    expect(gtag).toHaveBeenCalledWith("consent", "update", DENIED_ANALYTICS_CONSENT);
+
+    delete window.gtag;
   });
 });

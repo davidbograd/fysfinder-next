@@ -1,34 +1,38 @@
-// Loads Google Analytics only after the visitor has accepted analytics cookies.
-// Updated: 2026-09-06 - Avoid downloading gtag.js on every anonymous first visit.
+// Loads Google Analytics on every visit with Consent Mode v2 defaults.
+// Updated: 2026-09-10 - Always load gtag; deny storage until the visitor accepts cookies.
 
 "use client";
 
 import Script from "next/script";
-import { useEffect, useState } from "react";
 import {
-  COOKIE_CONSENT_ACCEPTED_EVENT,
-  hasGrantedAnalyticsConsent,
+  COOKIE_CONSENT_COOKIE_NAME,
+  DENIED_ANALYTICS_CONSENT,
+  GRANTED_ANALYTICS_CONSENT,
 } from "@/lib/cookie-consent";
 
-const GA_MEASUREMENT_ID = "G-BH38ZB6HYH";
+export const GA_MEASUREMENT_ID = "G-BH38ZB6HYH";
+
+export function getGtagBootstrapScript(measurementId: string): string {
+  const defaultConsent = {
+    ...DENIED_ANALYTICS_CONSENT,
+    wait_for_update: 500,
+  };
+
+  return `
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', ${JSON.stringify(defaultConsent)});
+    if (document.cookie.split(';').some(function (part) {
+      return part.trim() === '${COOKIE_CONSENT_COOKIE_NAME}=true';
+    })) {
+      gtag('consent', 'update', ${JSON.stringify(GRANTED_ANALYTICS_CONSENT)});
+    }
+    gtag('js', new Date());
+    gtag('config', '${measurementId}');
+  `;
+}
 
 export function GoogleAnalytics() {
-  const [isEnabled, setIsEnabled] = useState(false);
-
-  useEffect(() => {
-    if (hasGrantedAnalyticsConsent(document.cookie)) {
-      setIsEnabled(true);
-    }
-
-    const handleAccepted = () => setIsEnabled(true);
-    window.addEventListener(COOKIE_CONSENT_ACCEPTED_EVENT, handleAccepted);
-    return () => {
-      window.removeEventListener(COOKIE_CONSENT_ACCEPTED_EVENT, handleAccepted);
-    };
-  }, []);
-
-  if (!isEnabled) return null;
-
   return (
     <>
       <Script
@@ -36,12 +40,7 @@ export function GoogleAnalytics() {
         strategy="afterInteractive"
       />
       <Script id="google-analytics" strategy="afterInteractive">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', '${GA_MEASUREMENT_ID}');
-        `}
+        {getGtagBootstrapScript(GA_MEASUREMENT_ID)}
       </Script>
     </>
   );
