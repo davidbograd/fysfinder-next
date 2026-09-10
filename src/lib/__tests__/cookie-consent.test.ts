@@ -4,6 +4,7 @@ import {
   applyGtagConsentUpdate,
   DENIED_ANALYTICS_CONSENT,
   GRANTED_ANALYTICS_CONSENT,
+  hasDeclinedAnalyticsConsent,
   hasGrantedAnalyticsConsent,
 } from "../cookie-consent";
 
@@ -25,6 +26,18 @@ describe("hasGrantedAnalyticsConsent", () => {
       false
     );
     expect(hasGrantedAnalyticsConsent("unrelated=true")).toBe(false);
+  });
+});
+
+describe("hasDeclinedAnalyticsConsent", () => {
+  it("returns true only for an explicit decline cookie", () => {
+    expect(hasDeclinedAnalyticsConsent("fysfinder-cookie-consent=false")).toBe(
+      true
+    );
+    expect(hasDeclinedAnalyticsConsent("")).toBe(false);
+    expect(hasDeclinedAnalyticsConsent("fysfinder-cookie-consent=true")).toBe(
+      false
+    );
   });
 });
 

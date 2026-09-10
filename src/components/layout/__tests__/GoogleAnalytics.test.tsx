@@ -1,4 +1,4 @@
-// Updated: 2026-09-10 - gtag always loads; storage stays denied until the consent cookie is true.
+// Updated: 2026-09-10 - gtag always loads; storage is granted unless the visitor declined cookies.
 
 import { render, screen } from "@testing-library/react";
 import {
@@ -33,15 +33,14 @@ describe("GoogleAnalytics", () => {
     ).toBeInTheDocument();
   });
 
-  it("defaults Consent Mode storage to denied and grants it for returning accepted visitors", () => {
+  it("defaults Consent Mode storage to granted and denies it only after an explicit decline", () => {
     const script = getGtagBootstrapScript(GA_MEASUREMENT_ID);
 
     expect(script).toContain("'consent', 'default'");
-    expect(script).toContain('"analytics_storage":"denied"');
-    expect(script).toContain('"ad_storage":"denied"');
-    expect(script).toContain(`'config', '${GA_MEASUREMENT_ID}'`);
-    expect(script).toContain(`${COOKIE_CONSENT_COOKIE_NAME}=true`);
-    expect(script).toContain("'consent', 'update'");
     expect(script).toContain('"analytics_storage":"granted"');
+    expect(script).toContain(`'config', '${GA_MEASUREMENT_ID}'`);
+    expect(script).toContain(`${COOKIE_CONSENT_COOKIE_NAME}=false`);
+    expect(script).toContain("'consent', 'update'");
+    expect(script).toContain('"analytics_storage":"denied"');
   });
 });

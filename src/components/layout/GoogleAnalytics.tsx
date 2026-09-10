@@ -1,7 +1,6 @@
-// Loads Google Analytics on every visit with Consent Mode v2 defaults.
-// Updated: 2026-09-10 - Always load gtag; deny storage until the visitor accepts cookies.
-
-"use client";
+// Loads Google Analytics on every visit. Consent Mode defaults to granted so
+// unanswered banners still appear in GA Realtime, matching pre-weekend measurement.
+// Updated: 2026-09-10 - Deny storage only after an explicit "Kun nødvendige" choice.
 
 import Script from "next/script";
 import {
@@ -14,7 +13,7 @@ export const GA_MEASUREMENT_ID = "G-BH38ZB6HYH";
 
 export function getGtagBootstrapScript(measurementId: string): string {
   const defaultConsent = {
-    ...DENIED_ANALYTICS_CONSENT,
+    ...GRANTED_ANALYTICS_CONSENT,
     wait_for_update: 500,
   };
 
@@ -23,9 +22,9 @@ export function getGtagBootstrapScript(measurementId: string): string {
     function gtag(){dataLayer.push(arguments);}
     gtag('consent', 'default', ${JSON.stringify(defaultConsent)});
     if (document.cookie.split(';').some(function (part) {
-      return part.trim() === '${COOKIE_CONSENT_COOKIE_NAME}=true';
+      return part.trim() === '${COOKIE_CONSENT_COOKIE_NAME}=false';
     })) {
-      gtag('consent', 'update', ${JSON.stringify(GRANTED_ANALYTICS_CONSENT)});
+      gtag('consent', 'update', ${JSON.stringify(DENIED_ANALYTICS_CONSENT)});
     }
     gtag('js', new Date());
     gtag('config', '${measurementId}');
