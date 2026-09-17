@@ -1,3 +1,9 @@
+import { ToolSlug } from "@/lib/tools/registry";
+import {
+  resolvePublishedToolRating,
+  ToolRatingStats,
+} from "@/lib/tools/tool-ratings";
+
 interface StructuredDataProps {
   type: "overview" | "tool";
   name: string;
@@ -15,6 +21,8 @@ interface StructuredDataProps {
   }[];
   toolType?: "calculator" | "translator" | "screening";
   calculatorType?: "bmi" | "calorie" | "rm" | "other";
+  toolSlug?: ToolSlug;
+  ratingStats?: ToolRatingStats;
 }
 
 export default function VaerktoejerStructuredData({
@@ -25,8 +33,19 @@ export default function VaerktoejerStructuredData({
   tools,
   toolType,
   calculatorType,
+  toolSlug,
+  ratingStats,
 }: StructuredDataProps) {
   const baseUrl = "https://www.fysfinder.dk";
+
+  // Published rating for this tool, or null when it has not earned one yet.
+  const publishedRating = toolSlug
+    ? resolvePublishedToolRating(toolSlug, ratingStats)
+    : null;
+
+  const aggregateRating = publishedRating
+    ? { "@type": "AggregateRating", ...publishedRating }
+    : null;
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -73,6 +92,11 @@ export default function VaerktoejerStructuredData({
             "@type": "Audience",
             audienceType: "Sundhedsinteresserede",
           },
+          // Calculators carry their rating on the SoftwareApplication schema
+          // below, so it is only attached here for the non-calculator tools.
+          ...(toolType !== "calculator" && aggregateRating
+            ? { aggregateRating }
+            : {}),
         }
       : null;
 
@@ -244,13 +268,7 @@ export default function VaerktoejerStructuredData({
             price: "0",
             priceCurrency: "DKK",
           },
-          aggregateRating: {
-            "@type": "AggregateRating",
-            ratingValue: "4.8",
-            reviewCount: "150",
-            bestRating: "5",
-            worstRating: "1",
-          },
+          ...(aggregateRating ? { aggregateRating } : {}),
         }
       : null;
 

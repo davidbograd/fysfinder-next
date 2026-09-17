@@ -2,90 +2,12 @@ import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import VaerktoejerStructuredData from "@/components/seo/VaerktoejerStructuredData";
-
-interface Tool {
-  title: string;
-  description: string;
-  href: string;
-  imageUrl: string;
-  imageAlt: string;
-  type: string;
-}
-
-const tools: Tool[] = [
-  {
-    title: "MR-scanning oversætter",
-    description:
-      "Få din MR-scanning oversat til letforståeligt dansk og forstå din scanning bedre.",
-    href: "/mr-scanning",
-    imageUrl: "/images/mr-scanning/mr-scanning.png",
-    imageAlt: "MR-scanning maskine i et hospital miljø",
-    type: "Forstå din MR og DEXA scanning",
-  },
-  {
-    title: "DEXA-scan oversætter",
-    description:
-      "Få din DEXA-scanning oversat til letforståeligt dansk og forstå din knoglesundhed bedre.",
-    href: "/dexa-scanning",
-    imageUrl: "/images/dexa-scanning/dexa-scanning.jpeg",
-    imageAlt: "DEXA-scanning illustration",
-    type: "Forstå din MR og DEXA scanning",
-  },
-  {
-    title: "Test dine rygsmerter",
-    description:
-      "Vurder din risiko for langvarige rygsmerter. Få indsigt og anbefalinger til behandling.",
-    href: "/start-back-screening-tool",
-    imageUrl: "/images/vaerktoejer/ryg-smerter-survey.jpg",
-    imageAlt: "STarT Back Screening Tool illustration",
-    type: "Kropdele og smerter",
-  },
-  {
-    title: "Kalorieberegner",
-    description:
-      "Beregn dit daglige kaloriebehov baseret på din alder, vægt, højde og aktivitetsniveau.",
-    href: "/vaerktoejer/kalorieberegner",
-    imageUrl: "/images/vaerktoejer/kalorieberegner.png",
-    imageAlt: "Sunde fødevarer og målebånd der illustrerer kalorieopmåling",
-    type: "Kost & ernæring værktøjer",
-  },
-  {
-    title: "BMI-beregner",
-    description:
-      "Beregn dit BMI (Body Mass Index) og få indsigt i din vægtklassifikation baseret på vægt og højde.",
-    href: "/vaerktoejer/bmi-beregner",
-    imageUrl: "/images/vaerktoejer/bmi-beregner.png",
-    imageAlt: "BMI-beregner illustration med vægt og målebånd",
-    type: "Kost & ernæring værktøjer",
-  },
-  {
-    title: "Fedtprocent beregner",
-    description:
-      "Beregn din fedtprocent med Navy metoden baseret på simple målinger af din krop. Få indsigt i din kropssammensætning.",
-    href: "/vaerktoejer/fedtprocent-beregner",
-    imageUrl: "/images/vaerktoejer/fedtprocent-beregner.jpg",
-    imageAlt: "Fedtprocent beregner illustration med målebånd og sundhedsudstyr",
-    type: "Kost & ernæring værktøjer",
-  },
-  {
-    title: "Pace beregner",
-    description:
-      "Beregn din løbehastighed (pace) i min/km og hastighed i km/t. Find din forventede sluttid på populære distancer.",
-    href: "/vaerktoejer/pace-beregner",
-    imageUrl: "/images/vaerktoejer/pace-beregner.png",
-    imageAlt: "Pace beregner illustration med løber og stopur",
-    type: "Træning & bevægelse værktøjer",
-  },
-  {
-    title: "RM beregner",
-    description:
-      "Beregn din 1RM (one repetition maximum) og se anbefalet vægt til 1–10 repetitionsmaksimum. Optimer din styrketræning.",
-    href: "/vaerktoejer/rm-beregner",
-    imageUrl: "/images/vaerktoejer/1rm-beregner.jpg",
-    imageAlt: "RM beregner illustration med vægtstang og løfter",
-    type: "Træning & bevægelse værktøjer",
-  },
-];
+import {
+  groupToolsByCategory,
+  TOOL_CATEGORY_ORDER,
+  Tool,
+  tools,
+} from "@/lib/tools/registry";
 
 function ToolCard({ tool }: { tool: Tool }) {
   return (
@@ -117,20 +39,8 @@ export const metadata: Metadata = {
 export default function ToolsPage() {
   const breadcrumbItems = [{ text: "Værktøjer" }];
 
-  // Group tools by type
-  const groupedTools = tools.reduce<{ [type: string]: Tool[] }>((acc, tool) => {
-    if (!acc[tool.type]) acc[tool.type] = [];
-    acc[tool.type].push(tool);
-    return acc;
-  }, {});
-
-  // Define the order of sections
-  const sectionOrder = [
-    "Kost & ernæring værktøjer",
-    "Træning & bevægelse værktøjer",
-    "Forstå din MR og DEXA scanning",
-    "Kropsdele og smerter",
-  ];
+  const groupedTools = groupToolsByCategory();
+  const sectionOrder = TOOL_CATEGORY_ORDER;
 
   return (
     <div className="container mx-auto py-8">
@@ -166,13 +76,6 @@ export default function ToolsPage() {
                     værktøjer og beregnere. Beregn dine kalorier, lav kostplaner,
                     planlæg dine sunde måltider og find den rette balance til at
                     opnå dine mål.
-                  </p>
-                )}
-                {type === "Kropdele og smerter" && (
-                  <p className="text-gray-600 mb-6">
-                    Få hjælp til din genoptræning med vores fysioterapi-værktøjer.
-                    Fra skadesvurdering til genoptræningsplaner – udnyt vores
-                    værktøjer, der støtter dig mod bedring og styrkelse.
                   </p>
                 )}
                 {type === "Forstå din MR og DEXA scanning" && (

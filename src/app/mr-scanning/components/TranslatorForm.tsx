@@ -4,10 +4,10 @@ import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
-import { Loader2, ThumbsUp, ThumbsDown } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { FeedbackForm } from "./FeedbackForm";
+import { ToolFeedback } from "@/components/features/tools/ToolFeedback";
 
 const MAX_CHARS = 4000; // OpenAI has a token limit, so we'll limit characters
 
@@ -31,7 +31,6 @@ export function TranslatorForm() {
   const [isDebugMode, setIsDebugMode] = useState(false);
   const [loadingTime, setLoadingTime] = useState<number | null>(null);
   const loadStartTime = useRef<number | null>(null);
-  const [hasFeedback, setHasFeedback] = useState(false);
 
   const loadingStates = [
     { message: "Læser MR scanning", duration: 2500 },
@@ -194,25 +193,6 @@ export function TranslatorForm() {
   const charCount = input.length;
   const isNearLimit = charCount > MAX_CHARS * 0.9;
 
-  // Function to handle feedback
-  const handleFeedback = (isPositive: boolean) => {
-    // Track the event in Google Analytics
-    if (typeof window !== "undefined" && "gtag" in window) {
-      (window as any).gtag("event", "mr_translation_feedback", {
-        event_category: "MR Translation",
-        event_action: "Feedback",
-        event_label: isPositive ? "Positive" : "Negative",
-      });
-    }
-
-    setHasFeedback(true);
-
-    // If negative feedback, open survey in new tab
-    if (!isPositive) {
-      window.open("https://tally.so/r/3NON9l", "_blank");
-    }
-  };
-
   return (
     <div className="space-y-4 sm:space-y-6">
       {process.env.NODE_ENV === "development" && (
@@ -344,14 +324,8 @@ export function TranslatorForm() {
                 </div>
               </Card>
 
-              <div className="mt-6 bg-gray-100 rounded-lg">
-                {!hasFeedback ? (
-                  <FeedbackForm onReset={() => setHasFeedback(true)} />
-                ) : (
-                  <p className="text-center text-sm text-gray-600 p-4">
-                    Tak for din feedback!
-                  </p>
-                )}
+              <div className="mt-6">
+                <ToolFeedback toolSlug="mr-scanning" revealOn="mount" />
               </div>
 
               <div className="mt-6 text-center">
@@ -360,7 +334,6 @@ export function TranslatorForm() {
                     setTranslation("");
                     setInput("");
                     setLoadingTime(null);
-                    setHasFeedback(false);
                   }}
                   variant="outline"
                   className="min-w-[200px]"

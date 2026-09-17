@@ -316,11 +316,7 @@ async function generateSitemaps() {
     }
 
     // Discover standalone tool pages (pages that contain tool-related content)
-    const standaloneToolPages = [
-      "mr-scanning",
-      "dexa-scanning",
-      "start-back-screening-tool",
-    ];
+    const standaloneToolPages = ["mr-scanning", "dexa-scanning"];
 
     for (const toolPage of standaloneToolPages) {
       try {

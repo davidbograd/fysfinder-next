@@ -1,7 +1,8 @@
 "use client";
 
 // Pace calculator UI — time fields show timer / min / sek suffixes inside inputs.
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import { notifyToolCompleted } from "@/lib/tools/tool-completion";
 import { Calculator, Rabbit, Gauge, Clock } from "lucide-react";
 
 const presetDistances = [
@@ -175,6 +176,16 @@ export function PaceCalculator() {
       return { ...p, time: t };
     });
   }, [secPerKmTable]);
+
+  // Either mode producing a finite figure means the runner got their answer.
+  const hasResult =
+    (Number.isFinite(secPerKm) && secPerKm > 0) ||
+    Number.isFinite(expectedFinishSec);
+  useEffect(() => {
+    if (hasResult) {
+      notifyToolCompleted("pace-beregner");
+    }
+  }, [hasResult]);
 
   const handlePaceDistancePreset = (value: number) => {
     setPaceDistance(formatDanishNumber(value, 1));

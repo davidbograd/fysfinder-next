@@ -12,6 +12,10 @@ import { TableOfContents } from "@/components/features/blog-og-ordbog/TableOfCon
 import { extractTableOfContents } from "@/lib/utils";
 import { MdxProseTable } from "@/components/mdx/MdxProseTable";
 import { MDX_PROSE_TABLE_HEADER_WRAP } from "@/lib/mdx/mdx-prose-table-classnames";
+import { ToolFeedback } from "@/components/features/tools/ToolFeedback";
+import { getToolRatingStats } from "@/lib/tools/get-tool-rating-stats";
+
+export const revalidate = 86400; // 24 hours ISR (must be a literal for Next.js segment config)
 
 export const metadata: Metadata = {
   title: "BMI-beregner: Beregn og forstå dit Body Mass Index tal ✅",
@@ -58,7 +62,10 @@ export default async function BMICalculatorPage() {
     { text: "BMI-beregner" },
   ];
 
-  const pageContent = await getPageContent("bmi-beregner");
+  const [pageContent, ratingStats] = await Promise.all([
+    getPageContent("bmi-beregner"),
+    getToolRatingStats("bmi-beregner"),
+  ]);
   const currentPagePath = "/vaerktoejer/bmi-beregner";
   const headings = extractTableOfContents(pageContent);
 
@@ -74,6 +81,8 @@ export default async function BMICalculatorPage() {
             breadcrumbs={breadcrumbItems}
             toolType="calculator"
             calculatorType="bmi"
+            toolSlug="bmi-beregner"
+            ratingStats={ratingStats}
           />
           <div className="space-y-6 sm:space-y-8">
         <Breadcrumbs items={breadcrumbItems} />
@@ -93,8 +102,9 @@ export default async function BMICalculatorPage() {
           </p>
         </div>
 
-        <div className="pb-8">
+        <div className="space-y-6 pb-8">
           <BMICalculator />
+          <ToolFeedback toolSlug="bmi-beregner" />
         </div>
 
         <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-8">

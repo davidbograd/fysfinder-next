@@ -22,6 +22,7 @@ export const CACHE_TIMES = {
   SEARCH_RESULTS: 1 * 60 * 60,  // 1 hour
   SPECIALTIES: 7 * 24 * 60 * 60, // 7 days (rarely change)
   CITIES: 24 * 60 * 60,         // 24 hours
+  TOOL_PAGE: 24 * 60 * 60,      // 24 hours (tool ratings accumulate slowly)
 } as const;
 
 /**

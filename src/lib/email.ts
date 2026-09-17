@@ -37,11 +37,30 @@ interface ClinicApprovalEmailData {
   recipient_name?: string;
 }
 
+interface ToolFeedbackNotificationData {
+  tool_title: string;
+  tool_href: string;
+  feedback_text: string;
+}
+
 interface ClinicRejectionEmailData {
   clinic_name: string;
   recipient_email: string;
   rejection_reason: string;
   recipient_name?: string;
+}
+
+/**
+ * Escapes text that came from an anonymous visitor before interpolating it into
+ * an email body.
+ */
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 }
 
 /**
@@ -261,6 +280,64 @@ export async function sendClinicRejectionEmailToUser(
     return { success: true };
   } catch (error) {
     console.error("Error sending clinic rejection email:", error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Unknown error",
+    };
+  }
+}
+
+/**
+ * Send email notification to admins when a visitor reports that a tool could be
+ * better. Only the thumbs-down path sends mail; star ratings are silent.
+ */
+export async function sendToolFeedbackNotificationToAdmins(
+  data: ToolFeedbackNotificationData
+): Promise<{ success: boolean; error?: string }> {
+  const adminEmails = getAdminEmails();
+
+  if (adminEmails.length === 0) {
+    console.warn("No admin emails configured - skipping tool feedback notification");
+    return { success: true };
+  }
+
+  try {
+    const { error } = await resend.emails.send({
+      from: "Fysfinder <noreply@fysfinder.dk>",
+      to: adminEmails,
+      subject: `Feedback på værktøj: ${data.tool_title}`,
+      html: `
+        <h2>En bruger har givet feedback på et værktøj</h2>
+        <p>Værktøj: <strong>${escapeHtml(data.tool_title)}</strong></p>
+
+        <h3>Hvad kunne være bedre?</h3>
+        <blockquote style="margin: 0; padding: 12px 16px; border-left: 4px solid #e5e7eb; color: #374151; white-space: pre-wrap;">${escapeHtml(
+          data.feedback_text
+        )}</blockquote>
+
+        <p style="margin-top: 24px;">
+          <a href="https://www.fysfinder.dk${escapeHtml(
+            data.tool_href
+          )}" style="background-color: #104534; color: white; padding: 12px 24px; text-decoration: none; border-radius: 9999px; display: inline-block;">
+            Åbn værktøjet
+          </a>
+        </p>
+
+        <hr style="margin-top: 32px; border: none; border-top: 1px solid #e5e7eb;" />
+        <p style="color: #6b7280; font-size: 12px;">
+          Denne email er sendt automatisk fra Fysfinder.
+        </p>
+      `,
+    });
+
+    if (error) {
+      console.error("Failed to send tool feedback notification email:", error);
+      return { success: false, error: error.message };
+    }
+
+    return { success: true };
+  } catch (error) {
+    console.error("Error sending tool feedback notification:", error);
     return {
       success: false,
       error: error instanceof Error ? error.message : "Unknown error",

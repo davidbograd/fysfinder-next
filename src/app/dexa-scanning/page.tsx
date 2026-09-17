@@ -13,6 +13,9 @@ import { TableOfContents } from "@/components/features/blog-og-ordbog/TableOfCon
 import { extractTableOfContents } from "@/lib/utils";
 import { MdxProseTable } from "@/components/mdx/MdxProseTable";
 import { MDX_PROSE_TABLE_HEADER_WRAP } from "@/lib/mdx/mdx-prose-table-classnames";
+import { getToolRatingStats } from "@/lib/tools/get-tool-rating-stats";
+
+export const revalidate = 86400; // 24 hours ISR (must be a literal for Next.js segment config)
 
 export const metadata: Metadata = {
   title: "Oversæt DEXA-scanning rapport → Forstå dit DXA-resultat ✓",
@@ -61,7 +64,10 @@ export default async function DEXAScanPage() {
     { text: "DEXA-scanning Oversætter" },
   ];
 
-  const pageContent = await getPageContent("dexa-scanning");
+  const [pageContent, ratingStats] = await Promise.all([
+    getPageContent("dexa-scanning"),
+    getToolRatingStats("dexa-scanning"),
+  ]);
   const currentPagePath = "/dexa-scanning";
   const headings = extractTableOfContents(pageContent);
 
@@ -75,6 +81,8 @@ export default async function DEXAScanPage() {
             name="DEXA-scanning Oversætter"
             description="Oversæt din DEXA-scanning rapport til letforståeligt dansk"
             breadcrumbs={breadcrumbItems}
+            toolSlug="dexa-scanning"
+            ratingStats={ratingStats}
           />
           <div className="space-y-6 sm:space-y-8">
         <Breadcrumbs items={breadcrumbItems} />

@@ -25,16 +25,6 @@ export const miscMappings: LinkMapping[] = [
     destination: "/dexa-scanning",
   },
   {
-    keywords: [
-      "STarT Back",
-      "START Back",
-      "Start Back Screening",
-      "rygsmerte-test",
-      "test dine rygsmerter",
-    ],
-    destination: "/start-back-screening-tool",
-  },
-  {
     keywords: ["BMI-beregner", "BMI beregner", "BMI-beregningen"],
     destination: "/vaerktoejer/bmi-beregner",
   },

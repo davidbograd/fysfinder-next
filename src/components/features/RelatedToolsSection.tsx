@@ -1,86 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
-
-interface Tool {
-  title: string;
-  description: string;
-  href: string;
-  imageUrl: string;
-  imageAlt: string;
-  type: string;
-}
+import { tools as allTools } from "@/lib/tools/registry";
 
 interface RelatedToolsSectionProps {
   currentToolHref: string;
   title?: string;
   description?: string;
 }
-
-const allTools: Tool[] = [
-  {
-    title: "MR-scanning oversætter",
-    description:
-      "Få din MR-scanning oversat til letforståeligt dansk og forstå din scanning bedre.",
-    href: "/mr-scanning",
-    imageUrl: "/images/mr-scanning/mr-scanning.png",
-    imageAlt: "MR-scanning maskine i et hospital miljø",
-    type: "Forstå din MR og DEXA scanning",
-  },
-  {
-    title: "DEXA-scan oversætter",
-    description:
-      "Få din DEXA-scanning oversat til letforståeligt dansk og forstå din knoglesundhed bedre.",
-    href: "/dexa-scanning",
-    imageUrl: "/images/dexa-scanning/dexa-scanning.jpeg",
-    imageAlt: "DEXA-scanning illustration",
-    type: "Forstå din MR og DEXA scanning",
-  },
-  {
-    title: "Test dine rygsmerter",
-    description:
-      "Vurder din risiko for langvarige rygsmerter. Få indsigt og anbefalinger til behandling.",
-    href: "/start-back-screening-tool",
-    imageUrl: "/images/vaerktoejer/ryg-smerter-survey.jpg",
-    imageAlt: "STarT Back Screening Tool illustration",
-    type: "Kropdele og smerter",
-  },
-  {
-    title: "Kalorieberegner",
-    description:
-      "Beregn dit daglige kaloriebehov baseret på din alder, vægt, højde og aktivitetsniveau.",
-    href: "/vaerktoejer/kalorieberegner",
-    imageUrl: "/images/vaerktoejer/kalorieberegner.png",
-    imageAlt: "Sunde fødevarer og målebånd der illustrerer kalorieopmåling",
-    type: "Kost & ernæring værktøjer",
-  },
-  {
-    title: "BMI-beregner",
-    description:
-      "Beregn dit BMI (Body Mass Index) og få indsigt i din vægtklassifikation baseret på vægt og højde.",
-    href: "/vaerktoejer/bmi-beregner",
-    imageUrl: "/images/vaerktoejer/bmi-beregner.png",
-    imageAlt: "BMI-beregner illustration med vægt og målebånd",
-    type: "Kost & ernæring værktøjer",
-  },
-  {
-    title: "Fedtprocent beregner",
-    description:
-      "Beregn din fedtprocent med Navy metoden baseret på simple målinger af krop. Få indsigt i din kropssammensætning.",
-    href: "/vaerktoejer/fedtprocent-beregner",
-    imageUrl: "/images/vaerktoejer/fedtprocent-beregner.jpg",
-    imageAlt: "Fedtprocent beregner illustration med målebånd og sundhedsudstyr",
-    type: "Kost & ernæring værktøjer",
-  },
-  {
-    title: "Pace beregner",
-    description:
-      "Beregn din løbehastighed (pace) i min/km og hastighed i km/t. Find din forventede sluttid på populære distancer.",
-    href: "/vaerktoejer/pace-beregner",
-    imageUrl: "/images/vaerktoejer/pace-beregner.png",
-    imageAlt: "Pace beregner illustration med løber og stopur",
-    type: "Træning & bevægelse værktøjer",
-  },
-];
 
 const RelatedToolsSection = ({ 
   currentToolHref, 

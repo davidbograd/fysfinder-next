@@ -11,6 +11,7 @@ import {
   type Gender,
   type BodyFatResult,
 } from "@/lib/bodyFat";
+import { notifyToolCompleted } from "@/lib/tools/tool-completion";
 
 interface FormData {
   gender: Gender;
@@ -57,6 +58,10 @@ export const BodyFatCalculator = () => {
 
     setResult(calculationResult);
     setHasCalculated(true);
+
+    if (calculationResult.ok) {
+      notifyToolCompleted("fedtprocent-beregner");
+    }
   };
 
   const handleReset = () => {

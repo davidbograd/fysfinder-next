@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { Calculator, Info } from "lucide-react";
+import { notifyToolCompleted } from "@/lib/tools/tool-completion";
 
 interface BMIResult {
   bmi: number;
@@ -72,6 +73,7 @@ export function BMICalculator() {
         color: categoryInfo.color,
       });
       setIsCalculating(false);
+      notifyToolCompleted("bmi-beregner");
     }, 500);
   };
 

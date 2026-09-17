@@ -26,6 +26,27 @@ const nextConfig = {
   },
   redirects: async () => {
     return [
+      // STarT Back screening tool was deprecated and removed.
+      {
+        source: '/start-back-screening-tool',
+        destination: '/vaerktoejer',
+        permanent: true,
+      },
+      {
+        source: '/start-back-screening-tool/lav',
+        destination: '/vaerktoejer',
+        permanent: true,
+      },
+      {
+        source: '/start-back-screening-tool/medium',
+        destination: '/vaerktoejer',
+        permanent: true,
+      },
+      {
+        source: '/start-back-screening-tool/hoej',
+        destination: '/vaerktoejer',
+        permanent: true,
+      },
       {
         source: '/ordbog/artrose-slidgigt-',
         destination: '/ordbog/artrose-slidgigt',

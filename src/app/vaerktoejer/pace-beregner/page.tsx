@@ -11,6 +11,10 @@ import { buildToolPageMdxOptions } from "@/lib/mdx/build-tool-page-mdx-options";
 import { extractTableOfContents } from "@/lib/utils";
 import { MdxProseTable } from "@/components/mdx/MdxProseTable";
 import { MDX_PROSE_TABLE_HEADER_WRAP } from "@/lib/mdx/mdx-prose-table-classnames";
+import { ToolFeedback } from "@/components/features/tools/ToolFeedback";
+import { getToolRatingStats } from "@/lib/tools/get-tool-rating-stats";
+
+export const revalidate = 86400; // 24 hours ISR (must be a literal for Next.js segment config)
 
 export const metadata: Metadata = {
   title: "Pace beregner → Beregn din løbehastighed i min/km ✅",
@@ -57,7 +61,10 @@ export default async function PaceBeregnerPage() {
     { text: "Pace beregner" },
   ];
 
-  const pageContent = await getPageContent("pace-beregner");
+  const [pageContent, ratingStats] = await Promise.all([
+    getPageContent("pace-beregner"),
+    getToolRatingStats("pace-beregner"),
+  ]);
   const currentPagePath = "/vaerktoejer/pace-beregner";
   const headings = extractTableOfContents(pageContent);
 
@@ -72,6 +79,8 @@ export default async function PaceBeregnerPage() {
             description="Beregn din løbehastighed (pace) i min/km og hastighed i km/t"
             breadcrumbs={breadcrumbItems}
             toolType="calculator"
+            toolSlug="pace-beregner"
+            ratingStats={ratingStats}
           />
           <div className="space-y-6 sm:space-y-8">
             <Breadcrumbs items={breadcrumbItems} />
@@ -87,8 +96,9 @@ export default async function PaceBeregnerPage() {
               </p>
             </div>
 
-            <div className="pb-8">
+            <div className="space-y-6 pb-8">
               <PaceCalculator />
+              <ToolFeedback toolSlug="pace-beregner" />
             </div>
 
             <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-8">

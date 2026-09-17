@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Weight } from "lucide-react";
+import { notifyToolCompleted } from "@/lib/tools/tool-completion";
 
 // Percentage table for 1–10 RM (approximate values)
 const PERCENT_TABLE: Record<number, number> = {
@@ -103,6 +104,14 @@ export function RmBeregner() {
   const showError =
     hasInteracted &&
     (!parsedWeight || !parsedReps || parsedWeight <= 0 || parsedReps <= 0);
+
+  // The table is derived, so a usable 1RM is what counts as reaching a result.
+  const hasResult = Number.isFinite(oneRm) && rmRows.length > 0;
+  useEffect(() => {
+    if (hasResult) {
+      notifyToolCompleted("rm-beregner");
+    }
+  }, [hasResult]);
 
   const handleWeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;

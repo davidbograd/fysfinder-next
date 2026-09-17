@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { Calculator, Info } from "lucide-react";
+import { notifyToolCompleted } from "@/lib/tools/tool-completion";
 
 interface CalorieResult {
   bmr: number;
@@ -50,6 +51,7 @@ export function CalorieCalculator() {
         weightGain: Math.round(weightGain),
       });
       setIsCalculating(false);
+      notifyToolCompleted("kalorieberegner");
     }, 500);
   };
 
