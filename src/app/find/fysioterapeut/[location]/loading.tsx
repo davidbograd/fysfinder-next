@@ -1,41 +1,46 @@
+// Location-page loading skeleton.
+// Updated: 2026-09-17 - Match the live header + list/map layout so the skeleton is not stuck in a narrow centered column on desktop.
+
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Loading() {
   return (
-    <div className="container mx-auto px-4">
+    <div className="w-full">
       <div className="max-w-[800px] mx-auto">
-        {/* Breadcrumbs skeleton */}
-        <div className="flex items-center gap-2 mb-4">
+        {/* Breadcrumbs */}
+        <div className="flex items-center gap-2 mb-6">
           <Skeleton className="h-4 w-16" />
           <Skeleton className="h-4 w-4" />
           <Skeleton className="h-4 w-24" />
         </div>
 
-        {/* Title skeleton */}
-        <Skeleton className="h-9 w-3/4 mb-2" />
+        {/* Title and intro */}
+        <Skeleton className="mb-2 h-8 w-3/4 md:h-9" />
+        <Skeleton className="mb-4 h-5 w-2/3" />
+        <Skeleton className="mb-2 h-4 w-full" />
+        <Skeleton className="mb-8 h-4 w-5/6" />
 
-        {/* Description skeleton */}
-        <Skeleton className="h-4 w-full mb-4" />
-        <Skeleton className="h-4 w-5/6 mb-8" />
+        {/* Search bar and filters */}
+        <Skeleton className="mb-4 h-14 w-full rounded-xl md:rounded-full" />
+        <div className="flex gap-6">
+          <Skeleton className="h-4 w-24" />
+          <Skeleton className="h-4 w-32" />
+        </div>
+      </div>
 
-        {/* Search and filters skeleton */}
-        <div className="flex flex-col sm:flex-row gap-4 mb-8">
-          <div className="flex-1 relative">
-            <Skeleton className="h-10 w-full" />
-          </div>
-          <div className="sm:w-64">
-            <Skeleton className="h-10 w-full" />
+      {/* Results + map — same grid template as the loaded location page */}
+      <div className="mt-6 grid gap-6 xl:grid-cols-[minmax(0,1fr)_420px]">
+        <div>
+          <Skeleton className="mb-4 h-4 w-48" />
+          <div className="space-y-4">
+            {[1, 2, 3].map((i) => (
+              <Skeleton key={i} className="h-36 w-full rounded-lg" />
+            ))}
           </div>
         </div>
 
-        {/* Results count skeleton */}
-        <Skeleton className="h-4 w-48 mb-4" />
-
-        {/* Clinic cards skeleton */}
-        <div className="space-y-4">
-          {[1, 2, 3].map((i) => (
-            <Skeleton key={i} className="h-32 w-full" />
-          ))}
+        <div className="self-start xl:sticky xl:top-24">
+          <Skeleton className="h-[380px] w-full rounded-xl md:h-[520px]" />
         </div>
       </div>
     </div>
