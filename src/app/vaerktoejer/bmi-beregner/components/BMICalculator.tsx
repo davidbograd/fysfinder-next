@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { Calculator, Info } from "lucide-react";
 import { notifyToolCompleted } from "@/lib/tools/tool-completion";
+import { ToolRatingSummary } from "@/components/features/tools/ToolRatingSummary";
+import { PublishedToolRating } from "@/lib/tools/tool-ratings";
 
 interface BMIResult {
   bmi: number;
@@ -11,7 +13,11 @@ interface BMIResult {
   color: string;
 }
 
-export function BMICalculator() {
+interface BMICalculatorProps {
+  rating?: PublishedToolRating | null;
+}
+
+export function BMICalculator({ rating }: BMICalculatorProps) {
   const [weight, setWeight] = useState("");
   const [height, setHeight] = useState("");
   const [result, setResult] = useState<BMIResult | null>(null);
@@ -103,9 +109,12 @@ export function BMICalculator() {
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-6">
-      <div className="flex items-center gap-3 mb-6">
-        <Calculator className="w-6 h-6 text-logo-blue" />
-        <h2 className="text-2xl font-semibold text-gray-900">BMI-beregner</h2>
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+        <div className="flex items-center gap-3">
+          <Calculator className="w-6 h-6 text-logo-blue" />
+          <h2 className="text-2xl font-semibold text-gray-900">BMI-beregner</h2>
+        </div>
+        <ToolRatingSummary rating={rating} />
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">

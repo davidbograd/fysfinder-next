@@ -3,6 +3,8 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Weight } from "lucide-react";
 import { notifyToolCompleted } from "@/lib/tools/tool-completion";
+import { ToolRatingSummary } from "@/components/features/tools/ToolRatingSummary";
+import { PublishedToolRating } from "@/lib/tools/tool-ratings";
 
 // Percentage table for 1–10 RM (approximate values)
 const PERCENT_TABLE: Record<number, number> = {
@@ -56,7 +58,11 @@ const ResultCard = ({ title, value, icon }: ResultCardProps) => {
   );
 };
 
-export function RmBeregner() {
+interface RmBeregnerProps {
+  rating?: PublishedToolRating | null;
+}
+
+export function RmBeregner({ rating }: RmBeregnerProps) {
   const [weightInput, setWeightInput] = useState("");
   const [repsInput, setRepsInput] = useState("");
   const [hasInteracted, setHasInteracted] = useState(false);
@@ -128,12 +134,15 @@ export function RmBeregner() {
   return (
     <div className="w-full max-w-4xl mx-auto">
       <section className="bg-white border rounded-2xl shadow-sm p-4 md:p-6" aria-labelledby="rm-input-title">
-        <h3
-          id="rm-input-title"
-          className="text-lg md:text-xl font-semibold mb-4 text-gray-900"
-        >
-          Beregn din 1RM ud fra vægt og gentagelser
-        </h3>
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+          <h3
+            id="rm-input-title"
+            className="text-lg md:text-xl font-semibold text-gray-900"
+          >
+            Beregn din 1RM ud fra vægt og gentagelser
+          </h3>
+          <ToolRatingSummary rating={rating} />
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Vægt */}
           <div>

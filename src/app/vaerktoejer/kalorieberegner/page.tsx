@@ -15,6 +15,7 @@ import { MdxProseTable } from "@/components/mdx/MdxProseTable";
 import { MDX_PROSE_TABLE_HEADER_WRAP } from "@/lib/mdx/mdx-prose-table-classnames";
 import { ToolFeedback } from "@/components/features/tools/ToolFeedback";
 import { getToolRatingStats } from "@/lib/tools/get-tool-rating-stats";
+import { resolvePublishedToolRating } from "@/lib/tools/tool-ratings";
 
 export const revalidate = 86400; // 24 hours ISR (must be a literal for Next.js segment config)
 
@@ -67,6 +68,7 @@ export default async function CalorieCalculatorPage() {
     getPageContent("kalorieberegner"),
     getToolRatingStats("kalorieberegner"),
   ]);
+  const rating = resolvePublishedToolRating("kalorieberegner", ratingStats);
   const currentPagePath = "/vaerktoejer/kalorieberegner";
   const headings = extractTableOfContents(pageContent);
 
@@ -101,7 +103,7 @@ export default async function CalorieCalculatorPage() {
         </div>
 
         <div className="space-y-6 pb-8">
-          <CalorieCalculator />
+          <CalorieCalculator rating={rating} />
           <ToolFeedback toolSlug="kalorieberegner" />
         </div>
 

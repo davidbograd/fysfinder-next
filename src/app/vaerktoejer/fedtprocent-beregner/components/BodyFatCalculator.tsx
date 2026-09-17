@@ -12,6 +12,8 @@ import {
   type BodyFatResult,
 } from "@/lib/bodyFat";
 import { notifyToolCompleted } from "@/lib/tools/tool-completion";
+import { ToolRatingSummary } from "@/components/features/tools/ToolRatingSummary";
+import { PublishedToolRating } from "@/lib/tools/tool-ratings";
 
 interface FormData {
   gender: Gender;
@@ -31,7 +33,11 @@ const initialFormData: FormData = {
   weightKg: "",
 };
 
-export const BodyFatCalculator = () => {
+interface BodyFatCalculatorProps {
+  rating?: PublishedToolRating | null;
+}
+
+export const BodyFatCalculator = ({ rating }: BodyFatCalculatorProps) => {
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [result, setResult] = useState<BodyFatResult | null>(null);
   const [hasCalculated, setHasCalculated] = useState(false);
@@ -124,10 +130,13 @@ export const BodyFatCalculator = () => {
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Calculator className="h-5 w-5" />
-            Fedtprocent beregner
-          </CardTitle>
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <CardTitle className="flex items-center gap-2">
+              <Calculator className="h-5 w-5" />
+              Fedtprocent beregner
+            </CardTitle>
+            <ToolRatingSummary rating={rating} />
+          </div>
         </CardHeader>
         <CardContent className="space-y-6">
           {/* Gender Selection */}

@@ -13,6 +13,7 @@ import { MdxProseTable } from "@/components/mdx/MdxProseTable";
 import { MDX_PROSE_TABLE_HEADER_WRAP } from "@/lib/mdx/mdx-prose-table-classnames";
 import { ToolFeedback } from "@/components/features/tools/ToolFeedback";
 import { getToolRatingStats } from "@/lib/tools/get-tool-rating-stats";
+import { resolvePublishedToolRating } from "@/lib/tools/tool-ratings";
 
 export const revalidate = 86400; // 24 hours ISR (must be a literal for Next.js segment config)
 
@@ -65,6 +66,7 @@ export default async function RmBeregnerPage() {
     getPageContent("rm-beregner"),
     getToolRatingStats("rm-beregner"),
   ]);
+  const rating = resolvePublishedToolRating("rm-beregner", ratingStats);
   const currentPagePath = "/vaerktoejer/rm-beregner";
   const headings = extractTableOfContents(pageContent);
 
@@ -95,7 +97,7 @@ export default async function RmBeregnerPage() {
             </div>
 
             <div className="space-y-6 pb-8">
-              <RmBeregner />
+              <RmBeregner rating={rating} />
               <ToolFeedback toolSlug="rm-beregner" />
             </div>
 

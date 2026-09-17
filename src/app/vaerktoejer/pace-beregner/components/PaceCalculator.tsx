@@ -4,6 +4,8 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { notifyToolCompleted } from "@/lib/tools/tool-completion";
 import { Calculator, Rabbit, Gauge, Clock } from "lucide-react";
+import { ToolRatingSummary } from "@/components/features/tools/ToolRatingSummary";
+import { PublishedToolRating } from "@/lib/tools/tool-ratings";
 
 const presetDistances = [
   { label: "1 km", value: 1 },
@@ -108,7 +110,11 @@ const ResultCard = ({ title, value, icon }: ResultCardProps) => {
   );
 };
 
-export function PaceCalculator() {
+interface PaceCalculatorProps {
+  rating?: PublishedToolRating | null;
+}
+
+export function PaceCalculator({ rating }: PaceCalculatorProps) {
   // Inputs for mode 1: distance + time -> pace & km/t
   const [distanceKm, setDistanceKm] = useState<string>("");
   const [hh, setHh] = useState<string>("");
@@ -236,9 +242,14 @@ export function PaceCalculator() {
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-6 space-y-12">
-      <div className="flex items-center gap-3 mb-6">
-        <Calculator className="w-6 h-6 text-logo-blue" />
-        <h2 className="text-2xl font-semibold text-gray-900">Pace beregner</h2>
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+        <div className="flex items-center gap-3">
+          <Calculator className="w-6 h-6 text-logo-blue" />
+          <h2 className="text-2xl font-semibold text-gray-900">
+            Pace beregner
+          </h2>
+        </div>
+        <ToolRatingSummary rating={rating} />
       </div>
 
       {/* MODE 1: Distance + Time -> Pace & Speed */}

@@ -14,6 +14,7 @@ import { MdxProseTable } from "@/components/mdx/MdxProseTable";
 import { MDX_PROSE_TABLE_HEADER_WRAP } from "@/lib/mdx/mdx-prose-table-classnames";
 import { ToolFeedback } from "@/components/features/tools/ToolFeedback";
 import { getToolRatingStats } from "@/lib/tools/get-tool-rating-stats";
+import { resolvePublishedToolRating } from "@/lib/tools/tool-ratings";
 
 export const revalidate = 86400; // 24 hours ISR (must be a literal for Next.js segment config)
 
@@ -66,6 +67,7 @@ export default async function BMICalculatorPage() {
     getPageContent("bmi-beregner"),
     getToolRatingStats("bmi-beregner"),
   ]);
+  const rating = resolvePublishedToolRating("bmi-beregner", ratingStats);
   const currentPagePath = "/vaerktoejer/bmi-beregner";
   const headings = extractTableOfContents(pageContent);
 
@@ -103,7 +105,7 @@ export default async function BMICalculatorPage() {
         </div>
 
         <div className="space-y-6 pb-8">
-          <BMICalculator />
+          <BMICalculator rating={rating} />
           <ToolFeedback toolSlug="bmi-beregner" />
         </div>
 
