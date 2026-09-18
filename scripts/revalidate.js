@@ -20,8 +20,6 @@ const paths = [
   '/ordbog/*', // This will revalidate all dictionary pages
   '/styrkeoevelser',
   '/styrkeoevelser/*',
-  '/mr-scanning',
-  '/dexa-scanning',
   '/vaerktoejer/*' // This will revalidate all tool pages
 ];
 

@@ -18,8 +18,8 @@ const RelatedToolsSection = ({
     "/vaerktoejer/bmi-beregner": "/vaerktoejer/fedtprocent-beregner",
     "/vaerktoejer/kalorieberegner": "/vaerktoejer/bmi-beregner",
     "/vaerktoejer/fedtprocent-beregner": "/vaerktoejer/bmi-beregner",
-    "/mr-scanning": "/dexa-scanning",
-    "/dexa-scanning": "/mr-scanning",
+    "/vaerktoejer/mr-scanning": "/vaerktoejer/dexa-scanning",
+    "/vaerktoejer/dexa-scanning": "/vaerktoejer/mr-scanning",
   };
 
   // Filter out the current tool and sort to prioritize related tools

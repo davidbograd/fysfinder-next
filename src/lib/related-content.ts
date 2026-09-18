@@ -2,7 +2,7 @@ export type RelatedContentType =
   | "ordbog"
   | "blog"
   | "styrkeoevelser"
-  /** Absolute site path for hubs/tools (e.g. /vaerktoejer, /mr-scanning). */
+  /** Absolute site path for hubs/tools (e.g. /vaerktoejer, /vaerktoejer/mr-scanning). */
   | "page";
 
 export type RelatedContentItem = {

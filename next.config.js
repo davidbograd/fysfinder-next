@@ -133,6 +133,17 @@ const nextConfig = {
         destination: '/styrkeoevelser/:slug',
         permanent: true,
       },
+      // Scan translators moved under the /vaerktoejer tool namespace.
+      {
+        source: '/mr-scanning',
+        destination: '/vaerktoejer/mr-scanning',
+        permanent: true,
+      },
+      {
+        source: '/dexa-scanning',
+        destination: '/vaerktoejer/dexa-scanning',
+        permanent: true,
+      },
       ...clinicDuplicateRedirects,
     ];
   },

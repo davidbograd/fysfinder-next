@@ -315,28 +315,6 @@ async function generateSitemaps() {
       console.error("Error scanning vaerktoejer directory:", error);
     }
 
-    // Discover standalone tool pages (pages that contain tool-related content)
-    const standaloneToolPages = ["mr-scanning", "dexa-scanning"];
-
-    for (const toolPage of standaloneToolPages) {
-      try {
-        const pagePath = pathModule.join(
-          process.cwd(),
-          "src/app",
-          toolPage,
-          "page.tsx"
-        );
-        await fsPromises.access(pagePath);
-        toolUrls.push({
-          loc: `${DOMAIN}/${toolPage}`,
-          priority: 0.7,
-        });
-      } catch {
-        // Page doesn't exist, skip it
-        console.warn(`Standalone tool page ${toolPage} not found, skipping`);
-      }
-    }
-
     console.log(
       `Found ${toolUrls.length} tool pages:`,
       toolUrls.map((url) => url.loc)

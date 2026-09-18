@@ -41,8 +41,6 @@ export default function Header({
     pathname.startsWith("/ordbog") ||
     pathname.startsWith("/vaerktoejer") ||
     pathname.startsWith("/styrkeoevelser") ||
-    pathname.startsWith("/mr-scanning") ||
-    pathname.startsWith("/dexa-scanning") ||
     pathname.startsWith("/blog") ||
     pathname.startsWith("/om-os");
   const informationalLinks = [

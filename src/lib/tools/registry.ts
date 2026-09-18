@@ -40,7 +40,7 @@ export const tools: Tool[] = [
     feedbackName: "MR-oversætteren",
     description:
       "Få din MR-scanning oversat til letforståeligt dansk og forstå din scanning bedre.",
-    href: "/mr-scanning",
+    href: "/vaerktoejer/mr-scanning",
     imageUrl: "/images/mr-scanning/mr-scanning.png",
     imageAlt: "MR-scanning maskine i et hospital miljø",
     type: "Forstå din MR og DEXA scanning",
@@ -51,7 +51,7 @@ export const tools: Tool[] = [
     feedbackName: "DEXA-oversætteren",
     description:
       "Få din DEXA-scanning oversat til letforståeligt dansk og forstå din knoglesundhed bedre.",
-    href: "/dexa-scanning",
+    href: "/vaerktoejer/dexa-scanning",
     imageUrl: "/images/dexa-scanning/dexa-scanning.jpeg",
     imageAlt: "DEXA-scanning illustration",
     type: "Forstå din MR og DEXA scanning",

@@ -7,7 +7,7 @@ previewImage: /images/blog/mrscanning_konsekvenser_intro.png
 previewImageAlt: Illustration af MR-scanning
 related:
   - type: page
-    slug: /mr-scanning
+    slug: /vaerktoejer/mr-scanning
     title: MR-scanning oversætter
   - type: ordbog
     slug: ryg

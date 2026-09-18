@@ -38,7 +38,7 @@ Discusprolaps kan opstå af flere forskellige årsager, herunder almindelig aldr
 
 Diagnosen stilles typisk af en fysioterapeut eller læge gennem en grundig fysisk undersøgelse og vurdering af symptomer. Ofte suppleres undersøgelsen med billeddiagnostiske værktøjer som MR-scanning eller røntgen for at fastslå prolapsens placering og omfang.
 
-Det kan være en udfordring, at [forstå din MR-scanning](https://www.fysfinder.dk/mr-scanning), så det er altid en god idé at snakke med en sundhedsprofessionel
+Det kan være en udfordring, at [forstå din MR-scanning](https://www.fysfinder.dk/vaerktoejer/mr-scanning), så det er altid en god idé at snakke med en sundhedsprofessionel
 
 ## Behandlingsmuligheder ved discusprolaps i ryggen
 

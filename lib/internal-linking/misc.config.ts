@@ -12,7 +12,7 @@ export const miscMappings: LinkMapping[] = [
   },
   {
     keywords: ["MR scanning", "MR-scanning", "MR-scan", "MR scan", "MRI"],
-    destination: "/mr-scanning",
+    destination: "/vaerktoejer/mr-scanning",
   },
   {
     keywords: [
@@ -22,7 +22,7 @@ export const miscMappings: LinkMapping[] = [
       "DEXA scan",
       "dexa scanning",
     ],
-    destination: "/dexa-scanning",
+    destination: "/vaerktoejer/dexa-scanning",
   },
   {
     keywords: ["BMI-beregner", "BMI beregner", "BMI-beregningen"],

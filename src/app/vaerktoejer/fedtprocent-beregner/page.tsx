@@ -19,11 +19,11 @@ import { resolvePublishedToolRating } from "@/lib/tools/tool-ratings";
 export const revalidate = 86400; // 24 hours ISR (must be a literal for Next.js segment config)
 
 export const metadata: Metadata = {
-  title: "Fedtprocent beregner: Beregn din kropsfedt med Navy metoden ✅",
+  title: "Fedtprocent beregner: Beregn nemt din fedtprocent online →",
   description:
     "Beregn din fedtprocent med vores gratis fedtprocent beregner baseret på Navy metoden. Få indsigt i din kropssammensætning og sundhed.",
   openGraph: {
-    title: "Fedtprocent beregner: Beregn din kropsfedt med Navy metoden ✅",
+    title: "Fedtprocent beregner: Beregn nemt din fedtprocent online →",
     description:
       "Beregn din fedtprocent med vores gratis fedtprocent beregner baseret på Navy metoden. Få indsigt i din kropssammensætning og sundhed.",
     images: [

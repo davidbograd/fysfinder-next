@@ -68,7 +68,7 @@ export default async function DEXAScanPage() {
     getPageContent("dexa-scanning"),
     getToolRatingStats("dexa-scanning"),
   ]);
-  const currentPagePath = "/dexa-scanning";
+  const currentPagePath = "/vaerktoejer/dexa-scanning";
   const headings = extractTableOfContents(pageContent);
 
   return (
@@ -178,7 +178,7 @@ export default async function DEXAScanPage() {
           </div>
         </div>
         
-            <RelatedToolsSection currentToolHref="/dexa-scanning" />
+            <RelatedToolsSection currentToolHref="/vaerktoejer/dexa-scanning" />
           </div>
         </div>
       </div>

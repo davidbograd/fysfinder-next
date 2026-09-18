@@ -48,7 +48,7 @@ describe("related content helpers", () => {
         },
         {
           type: "page",
-          slug: "/mr-scanning",
+          slug: "/vaerktoejer/mr-scanning",
           title: "MR-scanning oversætter",
         },
       ],
@@ -57,7 +57,7 @@ describe("related content helpers", () => {
 
     expect(links).toEqual([
       { href: "/styrkeoevelser/skulder", title: "Skulderøvelser" },
-      { href: "/mr-scanning", title: "MR-scanning oversætter" },
+      { href: "/vaerktoejer/mr-scanning", title: "MR-scanning oversætter" },
     ]);
   });
 });

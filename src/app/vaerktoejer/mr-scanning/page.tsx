@@ -66,7 +66,7 @@ export default async function MRScanPage() {
     getPageContent("mr-scanning"),
     getToolRatingStats("mr-scanning"),
   ]);
-  const currentPagePath = "/mr-scanning";
+  const currentPagePath = "/vaerktoejer/mr-scanning";
   const headings = extractTableOfContents(pageContent);
 
   return (
@@ -173,7 +173,7 @@ export default async function MRScanPage() {
           </div>
         </div>
         
-            <RelatedToolsSection currentToolHref="/mr-scanning" />
+            <RelatedToolsSection currentToolHref="/vaerktoejer/mr-scanning" />
           </div>
         </div>
       </div>
