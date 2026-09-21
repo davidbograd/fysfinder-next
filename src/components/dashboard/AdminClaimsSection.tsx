@@ -114,11 +114,21 @@ export const AdminClaimsSection = () => {
     setGoogleMapsUrlByItemId((prev) => ({ ...prev, [itemId]: value }));
   };
 
+  /** Google-data kan ikke hentes uden link, så bed admin bekræfte det bevidst. */
+  const confirmApprovalWithoutGoogleMapsUrl = () =>
+    window.confirm(
+      "Der er ikke angivet en Google Maps-link. Klinikken bliver godkendt uden Google-data. Vil du fortsætte?"
+    );
+
   const handleApprove = async (claimId: string) => {
+    const trimmedMaps = googleMapsUrlByItemId[claimId]?.trim();
+    if (!trimmedMaps && !confirmApprovalWithoutGoogleMapsUrl()) {
+      return;
+    }
+
     const key = `claim-${claimId}`;
     setProcessingKey(key);
     try {
-      const trimmedMaps = googleMapsUrlByItemId[claimId]?.trim();
       const result = await approveClaim(claimId, {
         googleMapsUrl: trimmedMaps || undefined,
       });
@@ -207,10 +217,14 @@ export const AdminClaimsSection = () => {
   };
 
   const handleApproveCreationRequest = async (requestId: string) => {
+    const trimmedMaps = googleMapsUrlByItemId[requestId]?.trim();
+    if (!trimmedMaps && !confirmApprovalWithoutGoogleMapsUrl()) {
+      return;
+    }
+
     const key = `create-${requestId}`;
     setProcessingKey(key);
     try {
-      const trimmedMaps = googleMapsUrlByItemId[requestId]?.trim();
       const result = await approveClinicCreationRequest(requestId, {
         googleMapsUrl: trimmedMaps || undefined,
       });
