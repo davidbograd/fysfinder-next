@@ -97,12 +97,41 @@ describe("OpeningHoursEditor — editing", () => {
     expect(state().mon).toEqual([{ open: "08:00", close: "17:30" }]);
   });
 
-  it("adds a second range for a lunch break", () => {
+  it("starts a second range half an hour after the first ends and runs it for two hours", () => {
     render(<Harness initial={{ mon: [{ open: "08:00", close: "12:00" }] }} />);
 
     fireEvent.click(screen.getByText("Tilføj tidsrum"));
 
-    expect(state().mon).toHaveLength(2);
+    expect(state().mon).toEqual([
+      { open: "08:00", close: "12:00" },
+      { open: "12:30", close: "14:30" },
+    ]);
+  });
+
+  it("chains a third range off the second", () => {
+    render(<Harness initial={{ mon: [{ open: "08:00", close: "12:00" }] }} />);
+
+    fireEvent.click(screen.getByText("Tilføj tidsrum"));
+    fireEvent.click(screen.getByText("Tilføj tidsrum"));
+
+    expect(state().mon?.[2]).toEqual({ open: "15:00", close: "17:00" });
+  });
+
+  it("never pushes a new range past midnight", () => {
+    render(<Harness initial={{ mon: [{ open: "08:00", close: "23:00" }] }} />);
+
+    fireEvent.click(screen.getByText("Tilføj tidsrum"));
+
+    expect(state().mon?.[1]).toEqual({ open: "23:30", close: "24:00" });
+  });
+
+  it("keeps the new range valid even when the day already ends at 23:45", () => {
+    render(<Harness initial={{ mon: [{ open: "08:00", close: "23:45" }] }} />);
+
+    fireEvent.click(screen.getByText("Tilføj tidsrum"));
+
+    expect(state().mon?.[1]).toEqual({ open: "23:45", close: "24:00" });
+    expect(findInvalidDays(state())).toEqual([]);
   });
 
   it("offers add on the first range and remove on the extra ones", () => {

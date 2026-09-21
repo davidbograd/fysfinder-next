@@ -80,6 +80,36 @@ const TIME_OPTIONS: string[] = Array.from(
 /** Closing at midnight is "24:00", which is not a valid opening time. */
 const CLOSE_OPTIONS: string[] = [...TIME_OPTIONS.slice(1), "24:00"];
 
+const DAY_END_MINUTES = 24 * 60;
+/** A second slot on the same day is almost always the far side of a lunch break. */
+const BREAK_MINUTES = 30;
+const NEW_RANGE_MINUTES = 2 * 60;
+
+const toMinutes = (time: string): number => {
+  const [hours, minutes] = time.split(":").map(Number);
+  return hours * 60 + minutes;
+};
+
+const toTime = (minutes: number): string =>
+  `${pad(Math.floor(minutes / 60))}:${pad(minutes % 60)}`;
+
+/**
+ * Picks up half an hour after the previous slot ends and runs for two hours, clamped so a
+ * late finish cannot push the new slot past midnight.
+ */
+const nextRangeAfter = (previous: TimeRange | undefined): TimeRange => {
+  if (!previous) return { ...DEFAULT_RANGE };
+
+  const open = Math.min(
+    toMinutes(previous.close) + BREAK_MINUTES,
+    DAY_END_MINUTES - STEP_MINUTES
+  );
+  return {
+    open: toTime(open),
+    close: toTime(Math.min(open + NEW_RANGE_MINUTES, DAY_END_MINUTES)),
+  };
+};
+
 /** A range is invalid when it does not move forward in time; overnight is not a real case here. */
 export const isInvalidRange = (range: TimeRange): boolean =>
   Boolean(range.open) && Boolean(range.close) && range.close <= range.open;
@@ -167,7 +197,8 @@ export function OpeningHoursEditor({ value, onChange }: OpeningHoursEditorProps)
   };
 
   const addRange = (day: DayKey) => {
-    setDay(day, [...(value[day] ?? []), { ...DEFAULT_RANGE }]);
+    const ranges = value[day] ?? [];
+    setDay(day, [...ranges, nextRangeAfter(ranges[ranges.length - 1])]);
   };
 
   const removeRange = (day: DayKey, index: number) => {
