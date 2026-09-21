@@ -174,10 +174,48 @@ describe("OpeningHoursEditor — copy Monday", () => {
     expect(state().wed).toHaveLength(2);
   });
 
-  it("cannot copy an unspecified Monday", () => {
+  it("stays hidden while the weekdays already match, so it is never a no-op", () => {
+    render(<Harness initial={DEFAULT_OPENING_HOURS} />);
+
+    expect(screen.queryByText("Kopiér mandag til alle hverdage")).toBeNull();
+  });
+
+  it("stays hidden when Monday is unspecified", () => {
     render(<Harness initial={{}} />);
 
-    expect(screen.getByText("Kopiér mandag til alle hverdage").closest("button")).toBeDisabled();
+    expect(screen.queryByText("Kopiér mandag til alle hverdage")).toBeNull();
+  });
+
+  it("appears as soon as Monday diverges and disappears once the copy lands", () => {
+    render(<Harness initial={DEFAULT_OPENING_HOURS} />);
+
+    fireEvent.click(within(openListbox("Mandag lukker")).getByText("19:00"));
+    expect(screen.getByText("Kopiér mandag til alle hverdage")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText("Kopiér mandag til alle hverdage"));
+
+    expect(state().tue).toEqual([{ open: "08:00", close: "19:00" }]);
+    expect(screen.queryByText("Kopiér mandag til alle hverdage")).toBeNull();
+  });
+
+  it("appears when a weekday is closed but Monday is open", () => {
+    render(<Harness initial={{ ...DEFAULT_OPENING_HOURS, wed: [] }} />);
+
+    expect(screen.getByText("Kopiér mandag til alle hverdage")).toBeInTheDocument();
+  });
+
+  it("stays hidden when every weekday is closed", () => {
+    render(
+      <Harness initial={{ mon: [], tue: [], wed: [], thu: [], fri: [], sat: [], sun: [] }} />
+    );
+
+    expect(screen.queryByText("Kopiér mandag til alle hverdage")).toBeNull();
+  });
+
+  it("ignores the weekend when deciding whether to appear", () => {
+    render(<Harness initial={{ ...DEFAULT_OPENING_HOURS, sat: [{ open: "10:00", close: "14:00" }] }} />);
+
+    expect(screen.queryByText("Kopiér mandag til alle hverdage")).toBeNull();
   });
 });
 

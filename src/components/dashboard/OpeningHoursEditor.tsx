@@ -76,6 +76,26 @@ const statusOf = (ranges: TimeRange[] | undefined): DayStatus => {
   return "open";
 };
 
+const sameRanges = (
+  a: TimeRange[] | undefined,
+  b: TimeRange[] | undefined
+): boolean => {
+  if (a === undefined || b === undefined) return a === b;
+  return (
+    a.length === b.length &&
+    a.every((range, i) => range.open === b[i].open && range.close === b[i].close)
+  );
+};
+
+/**
+ * The weekdays start out identical, so offering the copy action straight away would be a
+ * no-op. It appears once Monday diverges from another weekday, which is the only moment
+ * it does anything.
+ */
+const canCopyMonday = (hours: OpeningHours): boolean =>
+  hours.mon !== undefined &&
+  WEEKDAYS.some((day) => day !== "mon" && !sameRanges(hours[day], hours.mon));
+
 /**
  * Existing data can sit off the quarter-hour grid (Google reports 08:20 for some places),
  * so the current value is always selectable even when it is not a generated option.
@@ -252,13 +272,12 @@ export function OpeningHoursEditor({ value, onChange }: OpeningHoursEditorProps)
               )}
             </div>
 
-            {day === "mon" && (
+            {day === "mon" && canCopyMonday(value) && (
               <div className="sm:pl-[6.75rem]">
                 <Button
                   type="button"
                   size="sm"
                   onClick={copyMondayToWeekdays}
-                  disabled={value.mon === undefined}
                   className="rounded-full"
                 >
                   <Copy className="mr-2 h-4 w-4" />

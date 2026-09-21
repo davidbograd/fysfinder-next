@@ -1270,9 +1270,7 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
         <CardHeader>
           <CardTitle>Åbningstider</CardTitle>
           <CardDescription className="text-pretty">
-            Vælg åbningstider for hver dag. Sæt en dag til{" "}
-            <strong>Lukket</strong>, hvis klinikken holder lukket, eller{" "}
-            <strong>Ikke angivet</strong>, hvis du ikke vil vise noget for den dag.
+            Vælg åbningstider for hver dag.
           </CardDescription>
         </CardHeader>
         <CardContent>
