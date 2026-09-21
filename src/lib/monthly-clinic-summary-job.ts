@@ -13,6 +13,7 @@ import {
   type CalendarMonthBounds,
 } from "@/lib/calendar-month";
 import { computeClinicProfileCompleteness } from "@/lib/clinic-profile-completeness";
+import type { OpeningHours } from "@/lib/opening-hours";
 import {
   mapEventCountsToClinicStats,
   type ClinicEventCount,
@@ -57,6 +58,7 @@ interface OwnershipClinicRow {
   tlf: string | null;
   website: string | null;
   om_os: string | null;
+  opening_hours: OpeningHours | null;
   mandag: string | null;
   tirsdag: string | null;
   onsdag: string | null;
@@ -151,6 +153,7 @@ export async function runMonthlyClinicSummary(
           tlf,
           website,
           om_os,
+          opening_hours,
           mandag,
           tirsdag,
           onsdag,
@@ -268,6 +271,7 @@ export async function runMonthlyClinicSummary(
         tlf: clinic.tlf,
         website: clinic.website,
         om_os: clinic.om_os,
+        opening_hours: clinic.opening_hours,
         mandag: clinic.mandag,
         tirsdag: clinic.tirsdag,
         onsdag: clinic.onsdag,

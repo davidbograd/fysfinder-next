@@ -1,21 +1,19 @@
 /**
- * Monthly update: refresh clinic data from Google Places API (New).
+ * Scheduled refresh of clinic data from the Google Places API (New).
  *
- * For every clinic that has a google_place_id, fetches the latest:
- *   - Rating & review count    (always updated)
- *   - Opening hours             (non-verified clinics only)
- *   - Phone number              (non-verified clinics only)
- *   - Website                   (non-verified clinics only)
- *   - Google Maps URL           (always updated)
+ * For every clinic with a google_place_id we refresh:
+ *   - Rating, review count, Maps URL, business status  (always)
+ *   - Opening hours, phone, website, wheelchair access  (unclaimed clinics only)
  *
- * Verified clinics (verified_klinik = true) only get their ratings
- * and Google Maps URL refreshed – the rest is managed by the owner.
+ * Verified clinics are owner-managed, so only the always-on fields are touched.
  *
  * Usage:
- *   tsx scripts/update-clinic-google-data.ts [--dry-run] [--limit N]
+ *   tsx scripts/update-clinic-google-data.ts [--dry-run] [--limit N] [--all]
  *
- * Cost: Place Details Enterprise SKU = $20 / 1,000 calls (first 1,000 free).
- *       For ~1,916 clinics: ~$18.32/month.
+ * Cost: Place Details Enterprise = $20/1,000 calls, with the first 1,000 free every
+ * calendar month. The default batch size keeps a monthly run inside that free tier, and
+ * clinics are processed least-recently-synced first so the whole table rotates through
+ * roughly every two months. Use --all for a one-off full refresh.
  */
 
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
@@ -23,6 +21,15 @@ import { Resend } from "resend";
 import dotenv from "dotenv";
 import { fileURLToPath } from "url";
 import { dirname, resolve } from "path";
+
+import {
+  buildClinicSyncUpdate,
+  isUnexpectedPlaceType,
+  type ClinicSyncRow,
+  type PlaceDetailsForSync,
+  type SyncChangeKind,
+} from "../src/lib/google-places/sync-clinic-update";
+import { LEGACY_DAY_COLUMNS } from "../src/lib/opening-hours";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -42,12 +49,22 @@ const ADMIN_EMAILS = (process.env.ADMIN_EMAILS || "")
   .map((e) => e.trim().toLowerCase())
   .filter((e) => e.length > 0);
 
-/** Delay between API calls (ms) */
+/** Delay between API calls (ms). */
 const API_DELAY_MS = 200;
 
+/** Place Details Enterprise calls that are free each calendar month. */
+const FREE_MONTHLY_CALLS = 1000;
+
+/** Default rotation size, kept under the free tier with headroom for admin-triggered syncs. */
+const DEFAULT_BATCH_SIZE = 800;
+
+const MAX_ATTEMPTS = 3;
+const RETRY_BASE_DELAY_MS = 500;
+
 /**
- * Fields to request from Place Details (New).
- * All of these are in the Enterprise SKU ($20/1K) or below.
+ * Every field here is Essentials, Pro or Enterprise, so the whole request bills at the
+ * Enterprise rate it would cost anyway for `rating` alone. `parkingOptions` is
+ * deliberately absent: it is Enterprise + Atmosphere and would push every call to $25/1K.
  */
 const FIELD_MASK = [
   "displayName",
@@ -56,172 +73,144 @@ const FIELD_MASK = [
   "userRatingCount",
   "regularOpeningHours",
   "internationalPhoneNumber",
+  "nationalPhoneNumber",
   "websiteUri",
   "googleMapsUri",
+  "accessibilityOptions",
+  "primaryType",
+  "types",
 ].join(",");
 
 // ---------------------------------------------------------------------------
 // Types
 // ---------------------------------------------------------------------------
 
-interface Clinic {
-  clinics_id: string;
-  klinikNavn: string;
-  google_place_id: string;
-  verified_klinik: boolean;
-  avgRating: number | null;
-  ratingCount: number | null;
-  mandag: string | null;
-  tirsdag: string | null;
-  onsdag: string | null;
-  torsdag: string | null;
-  fredag: string | null;
-  lørdag: string | null;
-  søndag: string | null;
-  tlf: string | null;
-  website: string | null;
-  google_maps_url_cid: string | null;
-}
-
-interface PlaceDetails {
-  displayName?: { text: string; languageCode: string };
-  businessStatus?: string;
-  rating?: number;
-  userRatingCount?: number;
-  regularOpeningHours?: {
-    weekdayDescriptions?: string[];
-    openNow?: boolean;
-  };
-  internationalPhoneNumber?: string;
-  websiteUri?: string;
-  googleMapsUri?: string;
-}
-
 interface Stats {
-  total: number;
+  clinics: number;
+  apiCalls: number;
   updated: number;
   unchanged: number;
   permanentlyClosed: number;
   errors: number;
-  changes: {
-    rating: number;
-    reviewCount: number;
-    hours: number;
-    phone: number;
-    website: number;
-    mapsUrl: number;
-  };
+  changes: Record<SyncChangeKind, number>;
 }
 
-// Day column names in the database, in Monday→Sunday order
-const DAY_COLUMNS = [
-  "mandag",
-  "tirsdag",
-  "onsdag",
-  "torsdag",
-  "fredag",
-  "lørdag",
-  "søndag",
-] as const;
-
-type DayColumn = (typeof DAY_COLUMNS)[number];
+const emptyChangeCounts = (): Record<SyncChangeKind, number> => ({
+  rating: 0,
+  reviewCount: 0,
+  hours: 0,
+  phone: 0,
+  website: 0,
+  mapsUrl: 0,
+  accessibility: 0,
+  businessStatus: 0,
+});
 
 // ---------------------------------------------------------------------------
-// CLI argument parsing
+// CLI
 // ---------------------------------------------------------------------------
 
 const parseArgs = () => {
   const args = process.argv.slice(2);
   const dryRun = args.includes("--dry-run");
+  const all = args.includes("--all");
   const limitIdx = args.indexOf("--limit");
-  const limit = limitIdx !== -1 ? parseInt(args[limitIdx + 1], 10) : undefined;
-  return { dryRun, limit };
+  const limit =
+    limitIdx !== -1 ? parseInt(args[limitIdx + 1], 10) : DEFAULT_BATCH_SIZE;
+
+  return { dryRun, all, limit: all ? undefined : limit };
 };
 
-// ---------------------------------------------------------------------------
-// Google Places API (New) – Place Details
-// ---------------------------------------------------------------------------
-
-const getPlaceDetails = async (placeId: string): Promise<PlaceDetails> => {
-  const url = `https://places.googleapis.com/v1/places/${placeId}`;
-
-  const response = await fetch(url, {
-    headers: {
-      "X-Goog-Api-Key": GOOGLE_API_KEY,
-      "X-Goog-FieldMask": FIELD_MASK,
-    },
-  });
-
-  if (!response.ok) {
-    const body = await response.text();
-    throw new Error(`Place Details API ${response.status}: ${body}`);
-  }
-
-  return response.json();
-};
+const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 // ---------------------------------------------------------------------------
-// Opening hours parser
+// Google Places API (New)
 // ---------------------------------------------------------------------------
+
+const isRetryableStatus = (status: number): boolean =>
+  status === 429 || status >= 500;
 
 /**
- * Parses the weekdayDescriptions array from Google into our DB columns.
- * Example input: ["mandag: 07.00–19.00", "tirsdag: 07.00–19.00", ...]
+ * `languageCode=da` is load-bearing: without it Google answers in English and any parser
+ * keyed on Danish weekday names silently produces "closed" for every day.
  */
-const parseOpeningHours = (
-  descriptions: string[] | undefined
-): Record<DayColumn, string> => {
-  const hours: Record<string, string> = {
-    mandag: "Lukket",
-    tirsdag: "Lukket",
-    onsdag: "Lukket",
-    torsdag: "Lukket",
-    fredag: "Lukket",
-    lørdag: "Lukket",
-    søndag: "Lukket",
-  };
+const getPlaceDetails = async (
+  placeId: string
+): Promise<PlaceDetailsForSync> => {
+  const url = new URL(
+    `https://places.googleapis.com/v1/places/${encodeURIComponent(placeId)}`
+  );
+  url.searchParams.set("languageCode", "da");
+  url.searchParams.set("regionCode", "DK");
 
-  if (!descriptions) return hours as Record<DayColumn, string>;
+  let lastError: Error | null = null;
 
-  for (const line of descriptions) {
-    const colonIdx = line.indexOf(":");
-    if (colonIdx === -1) continue;
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+    let response: Response;
 
-    const day = line.substring(0, colonIdx).trim().toLowerCase();
-    const value = line.substring(colonIdx + 1).trim();
-
-    if (day in hours) {
-      hours[day] = value || "Lukket";
+    try {
+      response = await fetch(url.toString(), {
+        headers: {
+          "X-Goog-Api-Key": GOOGLE_API_KEY,
+          "X-Goog-FieldMask": FIELD_MASK,
+        },
+      });
+    } catch (err) {
+      lastError = err instanceof Error ? err : new Error(String(err));
+      if (attempt === MAX_ATTEMPTS) break;
+      await delay(RETRY_BASE_DELAY_MS * 2 ** (attempt - 1));
+      continue;
     }
+
+    if (response.ok) {
+      return (await response.json()) as PlaceDetailsForSync;
+    }
+
+    lastError = new Error(
+      `Place Details API ${response.status}: ${await response.text()}`
+    );
+
+    // 4xx other than rate limiting will fail identically on a retry.
+    if (!isRetryableStatus(response.status)) throw lastError;
+    if (attempt === MAX_ATTEMPTS) break;
+
+    await delay(RETRY_BASE_DELAY_MS * 2 ** (attempt - 1));
   }
 
-  return hours as Record<DayColumn, string>;
+  throw lastError ?? new Error("Place Details API failed");
 };
 
 // ---------------------------------------------------------------------------
-// Supabase: paginated fetch
+// Supabase
 // ---------------------------------------------------------------------------
 
-const fetchClinicsWithPlaceId = async (
+const SELECT_COLUMNS = [
+  "clinics_id",
+  "klinikNavn",
+  "google_place_id",
+  "verified_klinik",
+  "avgRating",
+  "ratingCount",
+  "handicapadgang",
+  "tlf",
+  "website",
+  "google_maps_url_cid",
+  "google_business_status",
+  "opening_hours",
+  ...LEGACY_DAY_COLUMNS,
+].join(", ");
+
+/**
+ * Least-recently-synced first, so consecutive monthly runs rotate through the table
+ * instead of re-fetching the same clinics.
+ */
+const fetchClinicsForSync = async (
   supabase: SupabaseClient,
   limit?: number
-): Promise<Clinic[]> => {
+): Promise<ClinicSyncRow[]> => {
   const PAGE_SIZE = 1000;
-  const all: Clinic[] = [];
+  const all: ClinicSyncRow[] = [];
   let from = 0;
-
-  const columns = [
-    "clinics_id",
-    "klinikNavn",
-    "google_place_id",
-    "verified_klinik",
-    "avgRating",
-    "ratingCount",
-    ...DAY_COLUMNS,
-    "tlf",
-    "website",
-    "google_maps_url_cid",
-  ].join(", ");
 
   while (true) {
     const to =
@@ -229,17 +218,20 @@ const fetchClinicsWithPlaceId = async (
         ? Math.min(from + PAGE_SIZE - 1, limit - 1)
         : from + PAGE_SIZE - 1;
 
+    if (to < from) break;
+
     const { data, error } = await supabase
       .from("clinics")
-      .select(columns)
+      .select(SELECT_COLUMNS)
       .not("google_place_id", "is", null)
-      .order("klinikNavn")
+      .order("google_synced_at", { ascending: true, nullsFirst: true })
+      .order("clinics_id", { ascending: true })
       .range(from, to);
 
     if (error) throw error;
     if (!data || data.length === 0) break;
 
-    all.push(...(data as unknown as Clinic[]));
+    all.push(...(data as unknown as ClinicSyncRow[]));
 
     if (limit !== undefined && all.length >= limit) break;
     if (data.length < PAGE_SIZE) break;
@@ -250,182 +242,141 @@ const fetchClinicsWithPlaceId = async (
   return all;
 };
 
+/** One API call per distinct Place ID; 18 of ours are shared between two clinics. */
+const groupByPlaceId = (clinics: ClinicSyncRow[]): Map<string, ClinicSyncRow[]> => {
+  const groups = new Map<string, ClinicSyncRow[]>();
+  for (const clinic of clinics) {
+    const existing = groups.get(clinic.google_place_id);
+    if (existing) {
+      existing.push(clinic);
+    } else {
+      groups.set(clinic.google_place_id, [clinic]);
+    }
+  }
+  return groups;
+};
+
 // ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
 
-const delay = (ms: number) =>
-  new Promise((resolve) => setTimeout(resolve, ms));
-
 const main = async () => {
-  const { dryRun, limit } = parseArgs();
+  const { dryRun, all, limit } = parseArgs();
 
   if (!GOOGLE_API_KEY || !SUPABASE_URL || !SUPABASE_KEY) {
-    console.error(
-      "Missing required environment variables. Check .env.local for:"
-    );
-    console.error(
-      "  GOOGLE_PLACES_API_KEY, NEXT_PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY"
-    );
+    console.error("Missing required environment variables. Check .env.local for:");
+    console.error("  GOOGLE_PLACES_API_KEY, NEXT_PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY");
     process.exit(1);
   }
 
   const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
   console.log("╔══════════════════════════════════════╗");
-  console.log("║  Google Data – Monthly Update        ║");
+  console.log("║  Google Data – Scheduled Refresh     ║");
   console.log("╚══════════════════════════════════════╝");
   console.log(`Mode:  ${dryRun ? "DRY RUN (no DB writes)" : "LIVE"}`);
-  if (limit) console.log(`Limit: ${limit} clinics`);
+  console.log(`Scope: ${all ? "ALL clinics" : `oldest ${limit} by last sync`}`);
   console.log();
 
-  // ------------------------------------------------------------------
-  // 1. Fetch clinics
-  // ------------------------------------------------------------------
-
-  const clinics = await fetchClinicsWithPlaceId(supabase, limit);
+  const clinics = await fetchClinicsForSync(supabase, limit);
 
   if (clinics.length === 0) {
-    console.log(
-      "No clinics with Place IDs found. Run the backfill script first:"
-    );
+    console.log("No clinics with Place IDs found. Run the backfill script first:");
     console.log("  tsx scripts/backfill-google-place-ids.ts");
     return;
   }
 
-  console.log(
-    `Found ${clinics.length} clinics with Place IDs (${clinics.filter((c) => c.verified_klinik).length} verified).\n`
-  );
+  const groups = groupByPlaceId(clinics);
 
-  // ------------------------------------------------------------------
-  // 2. Process each clinic
-  // ------------------------------------------------------------------
+  console.log(
+    `Processing ${clinics.length} clinics across ${groups.size} distinct Place IDs ` +
+      `(${clinics.length - groups.size} duplicate call${clinics.length - groups.size === 1 ? "" : "s"} avoided).`
+  );
+  if (groups.size > FREE_MONTHLY_CALLS) {
+    console.log(
+      `⚠ ${groups.size} calls exceeds the ${FREE_MONTHLY_CALLS} free monthly calls; ` +
+        `${groups.size - FREE_MONTHLY_CALLS} will be billed.`
+    );
+  }
+  console.log();
 
   const stats: Stats = {
-    total: clinics.length,
+    clinics: clinics.length,
+    apiCalls: 0,
     updated: 0,
     unchanged: 0,
     permanentlyClosed: 0,
     errors: 0,
-    changes: {
-      rating: 0,
-      reviewCount: 0,
-      hours: 0,
-      phone: 0,
-      website: 0,
-      mapsUrl: 0,
-    },
+    changes: emptyChangeCounts(),
   };
 
   const closedClinics: string[] = [];
+  const needsReview: string[] = [];
+  const syncedAt = new Date().toISOString();
 
-  for (let i = 0; i < clinics.length; i++) {
-    const clinic = clinics[i];
-    const tag = `[${i + 1}/${clinics.length}]`;
+  let index = 0;
 
+  for (const [placeId, clinicsForPlace] of groups) {
+    index++;
+    const tag = `[${index}/${groups.size}]`;
+
+    let details: PlaceDetailsForSync;
     try {
-      const details = await getPlaceDetails(clinic.google_place_id);
+      details = await getPlaceDetails(placeId);
+      stats.apiCalls++;
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      console.error(`${tag} ✗ ${clinicsForPlace[0].klinikNavn}: ${msg}`);
+      stats.errors += clinicsForPlace.length;
 
-      // Flag permanently closed businesses
+      if (
+        msg.includes("SERVICE_DISABLED") ||
+        msg.includes("not activated") ||
+        msg.includes("has not been used") ||
+        msg.includes("it is disabled")
+      ) {
+        console.error("\n⛔ The Places API (New) is not enabled on your Google Cloud project.");
+        console.error("   Enable it at: https://console.developers.google.com/apis/api/places.googleapis.com/overview");
+        process.exit(1);
+      }
+
+      await delay(API_DELAY_MS);
+      continue;
+    }
+
+    if (isUnexpectedPlaceType(details)) {
+      needsReview.push(
+        `${clinicsForPlace[0].klinikNavn} – Place ID peger på "${details.primaryType ?? "ukendt"}"`
+      );
+    }
+
+    for (const clinic of clinicsForPlace) {
+      const { updateData, changes, changeKinds, suspiciousClosedAllWeek } =
+        buildClinicSyncUpdate({ clinic, details });
+
       if (details.businessStatus === "CLOSED_PERMANENTLY") {
         console.log(`${tag} ⚠ PERMANENTLY CLOSED: "${clinic.klinikNavn}"`);
         stats.permanentlyClosed++;
         closedClinics.push(clinic.klinikNavn);
-        await delay(API_DELAY_MS);
-        continue;
       }
 
-      // Build the update payload
-      const updateData: Record<string, unknown> = {};
-      const changes: string[] = [];
-
-      // ── Ratings (always update, even for verified clinics) ──
-
-      const newRating = details.rating ?? null;
-      const newRatingCount = details.userRatingCount ?? null;
-
-      if (newRating !== null && newRating !== Number(clinic.avgRating)) {
-        updateData.avgRating = newRating;
-        changes.push(`rating: ${clinic.avgRating ?? "–"} → ${newRating}`);
-        stats.changes.rating++;
-      }
-
-      if (
-        newRatingCount !== null &&
-        newRatingCount !== Number(clinic.ratingCount)
-      ) {
-        updateData.ratingCount = newRatingCount;
-        changes.push(
-          `reviews: ${clinic.ratingCount ?? "–"} → ${newRatingCount}`
+      if (suspiciousClosedAllWeek) {
+        needsReview.push(
+          `${clinic.klinikNavn} – Google melder lukket hele ugen, men vi har åbningstider`
         );
-        stats.changes.reviewCount++;
       }
 
-      // ── Google Maps URL (always update) ──
-
-      if (
-        details.googleMapsUri &&
-        details.googleMapsUri !== clinic.google_maps_url_cid
-      ) {
-        updateData.google_maps_url_cid = details.googleMapsUri;
-        stats.changes.mapsUrl++;
+      for (const kind of changeKinds) {
+        stats.changes[kind]++;
       }
 
-      // ── Contact & hours (non-verified clinics only) ──
+      // Recorded even when nothing changed, so the rotation moves on to other clinics.
+      updateData.google_synced_at = syncedAt;
 
-      if (!clinic.verified_klinik) {
-        // Opening hours
-        const hours = parseOpeningHours(
-          details.regularOpeningHours?.weekdayDescriptions
-        );
-        let hoursChanged = false;
-
-        for (const day of DAY_COLUMNS) {
-          const current = clinic[day] as string | null;
-          if (hours[day] && hours[day] !== current) {
-            updateData[day] = hours[day];
-            hoursChanged = true;
-          }
-        }
-
-        if (hoursChanged) {
-          changes.push("hours updated");
-          stats.changes.hours++;
-        }
-
-        // Phone
-        if (details.internationalPhoneNumber) {
-          const newPhone = details.internationalPhoneNumber
-            .replace(/\s+/g, " ")
-            .trim();
-          if (newPhone && newPhone !== clinic.tlf) {
-            updateData.tlf = newPhone;
-            changes.push(`phone: "${clinic.tlf ?? ""}" → "${newPhone}"`);
-            stats.changes.phone++;
-          }
-        }
-
-        // Website
-        if (details.websiteUri && details.websiteUri !== clinic.website) {
-          updateData.website = details.websiteUri;
-          changes.push("website updated");
-          stats.changes.website++;
-        }
+      const hasRealChange = changeKinds.length > 0 || "google_maps_url_cid" in updateData;
+      if (hasRealChange) {
+        updateData.updated_at = syncedAt;
       }
-
-      // ── Apply update ──
-
-      if (Object.keys(updateData).length === 0) {
-        stats.unchanged++;
-        // Log progress every 100 unchanged clinics
-        if (i % 100 === 0) {
-          console.log(`${tag} – "${clinic.klinikNavn}": no changes`);
-        }
-        await delay(API_DELAY_MS);
-        continue;
-      }
-
-      updateData.updated_at = new Date().toISOString();
 
       if (!dryRun) {
         const { error: updateError } = await supabase
@@ -434,39 +385,17 @@ const main = async () => {
           .eq("clinics_id", clinic.clinics_id);
 
         if (updateError) {
-          console.error(
-            `${tag} ✗ DB error for "${clinic.klinikNavn}":`,
-            updateError.message
-          );
+          console.error(`${tag} ✗ DB error for "${clinic.klinikNavn}": ${updateError.message}`);
           stats.errors++;
-          await delay(API_DELAY_MS);
           continue;
         }
       }
 
-      stats.updated++;
-      console.log(
-        `${tag} ✓ "${clinic.klinikNavn}": ${changes.join(", ")}`
-      );
-    } catch (err) {
-      const msg = err instanceof Error ? err.message : String(err);
-      console.error(`${tag} ✗ Error for "${clinic.klinikNavn}": ${msg}`);
-      stats.errors++;
-
-      // Stop immediately if the API is not enabled
-      if (
-        msg.includes("SERVICE_DISABLED") ||
-        msg.includes("not activated") ||
-        msg.includes("has not been used") ||
-        msg.includes("it is disabled")
-      ) {
-        console.error(
-          "\n⛔ The Places API (New) is not enabled on your Google Cloud project."
-        );
-        console.error(
-          "   Enable it at: https://console.developers.google.com/apis/api/places.googleapis.com/overview"
-        );
-        process.exit(1);
+      if (hasRealChange) {
+        stats.updated++;
+        console.log(`${tag} ✓ "${clinic.klinikNavn}": ${changes.join(", ") || "maps url"}`);
+      } else {
+        stats.unchanged++;
       }
     }
 
@@ -474,51 +403,52 @@ const main = async () => {
   }
 
   // ------------------------------------------------------------------
-  // 3. Summary
+  // Summary
   // ------------------------------------------------------------------
+
+  const billable = Math.max(0, stats.apiCalls - FREE_MONTHLY_CALLS);
+  const cost = (billable / 1000) * 20;
 
   console.log("\n╔══════════════════════════════════════╗");
   console.log("║  Summary                             ║");
   console.log("╚══════════════════════════════════════╝");
-  console.log(`Total processed:        ${stats.total}`);
+  console.log(`Clinics processed:      ${stats.clinics}`);
+  console.log(`API calls:              ${stats.apiCalls}`);
   console.log(`Updated:                ${stats.updated}`);
   console.log(`Unchanged:              ${stats.unchanged}`);
   console.log(`Permanently closed:     ${stats.permanentlyClosed}`);
   console.log(`Errors:                 ${stats.errors}`);
   console.log();
   console.log("Change breakdown:");
-  console.log(`  Rating changes:       ${stats.changes.rating}`);
-  console.log(`  Review count changes: ${stats.changes.reviewCount}`);
-  console.log(`  Hours changes:        ${stats.changes.hours}`);
-  console.log(`  Phone changes:        ${stats.changes.phone}`);
-  console.log(`  Website changes:      ${stats.changes.website}`);
-  console.log(`  Maps URL changes:     ${stats.changes.mapsUrl}`);
+  console.log(`  Rating:               ${stats.changes.rating}`);
+  console.log(`  Review count:         ${stats.changes.reviewCount}`);
+  console.log(`  Opening hours:        ${stats.changes.hours}`);
+  console.log(`  Phone:                ${stats.changes.phone}`);
+  console.log(`  Website:              ${stats.changes.website}`);
+  console.log(`  Maps URL:             ${stats.changes.mapsUrl}`);
+  console.log(`  Accessibility:        ${stats.changes.accessibility}`);
+  console.log(`  Business status:      ${stats.changes.businessStatus}`);
 
   if (closedClinics.length > 0) {
     console.log("\n── Permanently Closed Clinics ──");
-    for (const name of closedClinics) {
-      console.log(`  "${name}"`);
-    }
+    for (const name of closedClinics) console.log(`  "${name}"`);
+  }
+
+  if (needsReview.length > 0) {
+    console.log("\n── Needs Manual Review ──");
+    for (const note of needsReview) console.log(`  ${note}`);
   }
 
   if (dryRun) {
     console.log("\n(Dry run – no database changes were made)");
   }
 
-  // Cost estimate
-  const freeCap = 1000;
-  const billable = Math.max(0, stats.total - freeCap);
-  const cost = (billable / 1000) * 20;
   console.log(
-    `\nEstimated API cost: $${cost.toFixed(2)} (${stats.total} calls, ${billable} billable at $20/1K)`
+    `\nEstimated API cost: $${cost.toFixed(2)} (${stats.apiCalls} calls, ${billable} billable at $20/1K)`
   );
 
-  // ------------------------------------------------------------------
-  // 4. Send email report (skip in dry-run mode)
-  // ------------------------------------------------------------------
-
   if (!dryRun) {
-    await sendEmailReport(stats, closedClinics, cost);
+    await sendEmailReport(stats, closedClinics, needsReview, cost);
   }
 };
 
@@ -526,15 +456,21 @@ const main = async () => {
 // Email report
 // ---------------------------------------------------------------------------
 
+const escapeHtml = (value: string): string =>
+  value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+
 const sendEmailReport = async (
   stats: Stats,
   closedClinics: string[],
+  needsReview: string[],
   cost: number
 ) => {
   if (!RESEND_API_KEY || ADMIN_EMAILS.length === 0) {
-    console.log(
-      "\nSkipping email report (RESEND_API_KEY or ADMIN_EMAILS not configured)."
-    );
+    console.log("\nSkipping email report (RESEND_API_KEY or ADMIN_EMAILS not configured).");
     return;
   }
 
@@ -546,86 +482,68 @@ const sendEmailReport = async (
   });
 
   const hasErrors = stats.errors > 0;
-  const hasClosed = closedClinics.length > 0;
-  const statusEmoji = hasErrors ? "⚠️" : "✅";
-  const subject = `${statusEmoji} Google Data Update – ${date}`;
+  const subject = `${hasErrors ? "⚠️" : "✅"} Google Data Update – ${date}`;
 
-  const closedSection = hasClosed
-    ? `
-        <h3 style="color: #dc2626; margin-top: 24px;">⚠️ Permanent lukkede klinikker (${closedClinics.length})</h3>
-        <p style="color: #6b7280; font-size: 14px;">Disse klinikker er markeret som permanent lukkede af Google. Gennemgå dem manuelt.</p>
+  const listSection = (
+    title: string,
+    color: string,
+    intro: string,
+    items: string[]
+  ) =>
+    items.length === 0
+      ? ""
+      : `
+        <h3 style="color: ${color}; margin-top: 24px;">${title} (${items.length})</h3>
+        <p style="color: #6b7280; font-size: 14px;">${intro}</p>
         <ul style="font-size: 14px;">
-          ${closedClinics.map((name) => `<li>${name}</li>`).join("\n          ")}
-        </ul>`
-    : "";
+          ${items.map((i) => `<li>${escapeHtml(i)}</li>`).join("\n          ")}
+        </ul>`;
 
-  const errorSection = hasErrors
-    ? `<p style="color: #dc2626; font-weight: 600;">⚠️ ${stats.errors} fejl opstod under opdateringen. Tjek logs for detaljer.</p>`
-    : "";
+  const row = (label: string, value: number | string, shaded: boolean, color?: string) => `
+        <tr${shaded ? ' style="background-color: #f8fafc;"' : ""}>
+          <td style="padding: 8px 16px; border: 1px solid #e2e8f0;${color ? ` color: ${color}; font-weight: 600;` : ""}">${label}</td>
+          <td style="padding: 8px 16px; border: 1px solid #e2e8f0; text-align: right;">${value}</td>
+        </tr>`;
 
   const html = `
     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto;">
-      <h2 style="color: #1e293b;">Google Data – Månedlig Opdatering</h2>
+      <h2 style="color: #1e293b;">Google Data – Planlagt Opdatering</h2>
       <p style="color: #6b7280;">${date}</p>
 
-      ${errorSection}
+      ${hasErrors ? `<p style="color: #dc2626; font-weight: 600;">⚠️ ${stats.errors} fejl opstod under opdateringen. Tjek logs for detaljer.</p>` : ""}
 
       <table style="width: 100%; border-collapse: collapse; margin-top: 16px;">
-        <tr style="background-color: #f8fafc;">
-          <td style="padding: 10px 16px; border: 1px solid #e2e8f0; font-weight: 600;">Klinikker behandlet</td>
-          <td style="padding: 10px 16px; border: 1px solid #e2e8f0; text-align: right;">${stats.total}</td>
-        </tr>
-        <tr>
-          <td style="padding: 10px 16px; border: 1px solid #e2e8f0; font-weight: 600; color: #16a34a;">Opdateret</td>
-          <td style="padding: 10px 16px; border: 1px solid #e2e8f0; text-align: right;">${stats.updated}</td>
-        </tr>
-        <tr style="background-color: #f8fafc;">
-          <td style="padding: 10px 16px; border: 1px solid #e2e8f0; font-weight: 600;">Uændrede</td>
-          <td style="padding: 10px 16px; border: 1px solid #e2e8f0; text-align: right;">${stats.unchanged}</td>
-        </tr>
-        <tr>
-          <td style="padding: 10px 16px; border: 1px solid #e2e8f0; font-weight: 600; color: #dc2626;">Permanent lukkede</td>
-          <td style="padding: 10px 16px; border: 1px solid #e2e8f0; text-align: right;">${stats.permanentlyClosed}</td>
-        </tr>
-        <tr style="background-color: #f8fafc;">
-          <td style="padding: 10px 16px; border: 1px solid #e2e8f0; font-weight: 600; color: #dc2626;">Fejl</td>
-          <td style="padding: 10px 16px; border: 1px solid #e2e8f0; text-align: right;">${stats.errors}</td>
-        </tr>
+        ${row("Klinikker behandlet", stats.clinics, true)}
+        ${row("API-kald", stats.apiCalls, false)}
+        ${row("Opdateret", stats.updated, true, "#16a34a")}
+        ${row("Uændrede", stats.unchanged, false)}
+        ${row("Permanent lukkede", stats.permanentlyClosed, true, "#dc2626")}
+        ${row("Fejl", stats.errors, false, "#dc2626")}
       </table>
 
       <h3 style="margin-top: 24px; color: #1e293b;">Ændringer</h3>
       <table style="width: 100%; border-collapse: collapse;">
-        <tr style="background-color: #f8fafc;">
-          <td style="padding: 8px 16px; border: 1px solid #e2e8f0;">Bedømmelser ændret</td>
-          <td style="padding: 8px 16px; border: 1px solid #e2e8f0; text-align: right;">${stats.changes.rating}</td>
-        </tr>
-        <tr>
-          <td style="padding: 8px 16px; border: 1px solid #e2e8f0;">Anmeldelsestal ændret</td>
-          <td style="padding: 8px 16px; border: 1px solid #e2e8f0; text-align: right;">${stats.changes.reviewCount}</td>
-        </tr>
-        <tr style="background-color: #f8fafc;">
-          <td style="padding: 8px 16px; border: 1px solid #e2e8f0;">Åbningstider opdateret</td>
-          <td style="padding: 8px 16px; border: 1px solid #e2e8f0; text-align: right;">${stats.changes.hours}</td>
-        </tr>
-        <tr>
-          <td style="padding: 8px 16px; border: 1px solid #e2e8f0;">Telefonnumre opdateret</td>
-          <td style="padding: 8px 16px; border: 1px solid #e2e8f0; text-align: right;">${stats.changes.phone}</td>
-        </tr>
-        <tr style="background-color: #f8fafc;">
-          <td style="padding: 8px 16px; border: 1px solid #e2e8f0;">Hjemmesider opdateret</td>
-          <td style="padding: 8px 16px; border: 1px solid #e2e8f0; text-align: right;">${stats.changes.website}</td>
-        </tr>
+        ${row("Bedømmelser", stats.changes.rating, true)}
+        ${row("Anmeldelsestal", stats.changes.reviewCount, false)}
+        ${row("Åbningstider", stats.changes.hours, true)}
+        ${row("Telefonnumre", stats.changes.phone, false)}
+        ${row("Hjemmesider", stats.changes.website, true)}
+        ${row("Maps-links", stats.changes.mapsUrl, false)}
+        ${row("Handicapadgang", stats.changes.accessibility, true)}
+        ${row("Virksomhedsstatus", stats.changes.businessStatus, false)}
       </table>
 
-      ${closedSection}
+      ${listSection("⚠️ Permanent lukkede klinikker", "#dc2626", "Google markerer disse som permanent lukkede. Gennemgå dem manuelt.", closedClinics)}
+      ${listSection("🔍 Kræver manuel gennemgang", "#b45309", "Automatisk synkronisering blev sprunget over for disse.", needsReview)}
 
       <p style="margin-top: 24px; padding: 12px 16px; background-color: #f8fafc; border-radius: 8px; font-size: 14px; color: #6b7280;">
         API-omkostning: <strong>$${cost.toFixed(2)}</strong>
+        ${cost === 0 ? " (inden for det gratis månedlige forbrug)" : ""}
       </p>
 
       <hr style="margin-top: 32px; border: none; border-top: 1px solid #e5e7eb;" />
       <p style="color: #9ca3af; font-size: 12px;">
-        Denne email er sendt automatisk fra Fysfinder efter den månedlige Google Data opdatering.
+        Denne email er sendt automatisk fra Fysfinder efter den planlagte Google Data opdatering.
       </p>
     </div>
   `;
@@ -644,16 +562,9 @@ const sendEmailReport = async (
       console.log(`\nEmail report sent to: ${ADMIN_EMAILS.join(", ")}`);
     }
   } catch (err) {
-    console.error(
-      "Error sending email report:",
-      err instanceof Error ? err.message : err
-    );
+    console.error("Error sending email report:", err instanceof Error ? err.message : err);
   }
 };
-
-// ---------------------------------------------------------------------------
-// Run
-// ---------------------------------------------------------------------------
 
 main()
   .then(() => process.exit(0))

@@ -19,6 +19,10 @@ import { ClinicAbout } from "@/components/features/clinic/ClinicAbout";
 import { TrackProfileView } from "@/components/tracking/TrackProfileView";
 import { CACHE_TAGS, CACHE_TIMES } from "@/lib/cache-config";
 import { resolvePremiumListing } from "@/lib/clinic-entitlements";
+import {
+  openingHoursToSchemaOrg,
+  resolveClinicOpeningHours,
+} from "@/lib/opening-hours";
 
 async function fetchClinicBySlug(clinicSlug: string): Promise<Clinic | null> {
   try {
@@ -233,57 +237,18 @@ function ClinicStructuredData({ clinic }: ClinicStructuredDataProps) {
       addressLocality: clinic.lokation,
       addressCountry: "DK",
     },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: clinic.lokation?.split(",")[0],
-      longitude: clinic.lokation?.split(",")[1],
-    },
+    geo:
+      clinic.latitude != null && clinic.longitude != null
+        ? {
+            "@type": "GeoCoordinates",
+            latitude: clinic.latitude,
+            longitude: clinic.longitude,
+          }
+        : undefined,
 
-    // Opening Hours
-    openingHoursSpecification: [
-      clinic.mandag && {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: "Monday",
-        opens: clinic.mandag.split("-")[0]?.trim(),
-        closes: clinic.mandag.split("-")[1]?.trim(),
-      },
-      clinic.tirsdag && {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: "Tuesday",
-        opens: clinic.tirsdag.split("-")[0]?.trim(),
-        closes: clinic.tirsdag.split("-")[1]?.trim(),
-      },
-      clinic.onsdag && {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: "Wednesday",
-        opens: clinic.onsdag.split("-")[0]?.trim(),
-        closes: clinic.onsdag.split("-")[1]?.trim(),
-      },
-      clinic.torsdag && {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: "Thursday",
-        opens: clinic.torsdag.split("-")[0]?.trim(),
-        closes: clinic.torsdag.split("-")[1]?.trim(),
-      },
-      clinic.fredag && {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: "Friday",
-        opens: clinic.fredag.split("-")[0]?.trim(),
-        closes: clinic.fredag.split("-")[1]?.trim(),
-      },
-      clinic.lørdag && {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: "Saturday",
-        opens: clinic.lørdag.split("-")[0]?.trim(),
-        closes: clinic.lørdag.split("-")[1]?.trim(),
-      },
-      clinic.søndag && {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: "Sunday",
-        opens: clinic.søndag.split("-")[0]?.trim(),
-        closes: clinic.søndag.split("-")[1]?.trim(),
-      },
-    ].filter(Boolean),
+    openingHoursSpecification: openingHoursToSchemaOrg(
+      resolveClinicOpeningHours(clinic)
+    ),
   };
 
   return (

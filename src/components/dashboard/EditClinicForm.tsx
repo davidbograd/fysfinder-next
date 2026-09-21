@@ -21,6 +21,16 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  OpeningHoursEditor,
+  findInvalidDays,
+} from "@/components/dashboard/OpeningHoursEditor";
+import {
+  DAY_KEY_TO_DANISH_LABEL,
+  openingHoursToLegacyColumns,
+  resolveClinicOpeningHours,
+  type OpeningHours,
+} from "@/lib/opening-hours";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -230,13 +240,6 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
     website: normalizeWebsiteSuffixInput(clinic.website || ""),
     adresse: clinic.adresse || "",
     lokation: clinic.lokation || "",
-    mandag: clinic.mandag || "",
-    tirsdag: clinic.tirsdag || "",
-    onsdag: clinic.onsdag || "",
-    torsdag: clinic.torsdag || "",
-    fredag: clinic.fredag || "",
-    lørdag: clinic.lørdag || "",
-    søndag: clinic.søndag || "",
     hjemmetræning: clinic.hjemmetræning || "",
     holdtræning: clinic.holdtræning || "",
     parkering: clinic.parkering || "",
@@ -249,6 +252,12 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
     om_os: clinic.om_os || "",
     online_fysioterapeut: clinic.online_fysioterapeut ?? false,
   });
+
+  // Reads the structured column when present and parses the legacy day columns otherwise,
+  // so owners of not-yet-migrated clinics still see their existing hours.
+  const [openingHours, setOpeningHours] = useState<OpeningHours>(
+    () => resolveClinicOpeningHours(clinic) ?? {}
+  );
 
   const [selectedSpecialties, setSelectedSpecialties] = useState<string[]>(currentSpecialties);
   const [specialtySearchQuery, setSpecialtySearchQuery] = useState("");
@@ -581,13 +590,7 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
       tlf: formData.tlf,
       website: buildFullWebsiteUrlFromSuffix(formData.website),
       om_os: formData.om_os,
-      mandag: formData.mandag,
-      tirsdag: formData.tirsdag,
-      onsdag: formData.onsdag,
-      torsdag: formData.torsdag,
-      fredag: formData.fredag,
-      lørdag: formData.lørdag,
-      søndag: formData.søndag,
+      opening_hours: openingHours,
       førsteKons: formData.førsteKons,
       opfølgning: formData.opfølgning,
       ydernummer:
@@ -610,13 +613,7 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
     formData.tlf,
     formData.website,
     formData.om_os,
-    formData.mandag,
-    formData.tirsdag,
-    formData.onsdag,
-    formData.torsdag,
-    formData.fredag,
-    formData.lørdag,
-    formData.søndag,
+    openingHours,
     formData.førsteKons,
     formData.opfølgning,
     hasYdernummer,
@@ -631,6 +628,18 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const invalidHourDays = findInvalidDays(openingHours);
+    if (invalidHourDays.length > 0) {
+      toast({
+        title: "Kan ikke gemme",
+        description: `Tjek åbningstiderne for ${invalidHourDays
+          .map((day) => DAY_KEY_TO_DANISH_LABEL[day].toLowerCase())
+          .join(", ")}. Lukketidspunktet skal være efter åbningstidspunktet.`,
+        variant: "destructive",
+      });
+      return;
+    }
 
     const totalInsuranceTypesCount = insurances.length;
     const acceptedInsuranceCount = acceptsAllInsurances
@@ -675,13 +684,10 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
         tlf: cleanPhone,
         website: buildFullWebsiteUrlFromSuffix(formData.website) || null,
         adresse: formData.adresse || null,
-        mandag: formData.mandag || null,
-        tirsdag: formData.tirsdag || null,
-        onsdag: formData.onsdag || null,
-        torsdag: formData.torsdag || null,
-        fredag: formData.fredag || null,
-        lørdag: formData.lørdag || null,
-        søndag: formData.søndag || null,
+        opening_hours: openingHours,
+        opening_hours_source: "owner",
+        // Dual-write until every reader has moved to `opening_hours`.
+        ...openingHoursToLegacyColumns(openingHours),
         hjemmetræning: formData.hjemmetræning || null,
         holdtræning: formData.holdtræning || null,
         parkering: formData.parkering || null,
@@ -1262,29 +1268,13 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
         <CardHeader>
           <CardTitle>Åbningstider</CardTitle>
           <CardDescription className="text-pretty">
-            Indtast åbningstider for hver dag, f.eks{" "}
-            <code className="rounded bg-muted px-1 py-0.5 text-xs font-mono text-foreground">
-              09:00-17:00
-            </code>{" "}
-            eller{" "}
-            <code className="rounded bg-muted px-1 py-0.5 text-xs font-mono text-foreground">
-              Lukket
-            </code>
+            Vælg åbningstider for hver dag. Sæt en dag til{" "}
+            <strong>Lukket</strong>, hvis klinikken holder lukket, eller{" "}
+            <strong>Ikke angivet</strong>, hvis du ikke vil vise noget for den dag.
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {["mandag", "tirsdag", "onsdag", "torsdag", "fredag", "lørdag", "søndag"].map((day) => (
-              <div key={day} className="space-y-2">
-                <Label htmlFor={day} className="capitalize">{day}</Label>
-                <Input
-                  id={day}
-                  value={formData[day as keyof typeof formData] as string}
-                  onChange={(e) => handleInputChange(day, e.target.value)}
-                />
-              </div>
-            ))}
-          </div>
+        <CardContent>
+          <OpeningHoursEditor value={openingHours} onChange={setOpeningHours} />
         </CardContent>
       </Card>
 

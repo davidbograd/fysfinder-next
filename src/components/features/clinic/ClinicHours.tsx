@@ -7,21 +7,14 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import {
+  formatOpeningHoursDa,
+  hasAnyKnownOpeningHours,
+  resolveClinicOpeningHours,
+} from "@/lib/opening-hours";
 
 interface ClinicHoursProps {
   clinic: Clinic;
-}
-
-function hasAnyOpeningHours(clinic: Clinic): boolean {
-  return [
-    clinic.mandag,
-    clinic.tirsdag,
-    clinic.onsdag,
-    clinic.torsdag,
-    clinic.fredag,
-    clinic.lørdag,
-    clinic.søndag,
-  ].some((day) => day !== null);
 }
 
 function hasAccessInfo(clinic: Clinic): boolean {
@@ -51,27 +44,22 @@ function renderHandicapAccess(handicapadgang: boolean | null | undefined) {
 }
 
 export function ClinicHours({ clinic }: ClinicHoursProps) {
-  const openingHours = [
-    { day: "Mandag", hours: clinic.mandag },
-    { day: "Tirsdag", hours: clinic.tirsdag },
-    { day: "Onsdag", hours: clinic.onsdag },
-    { day: "Torsdag", hours: clinic.torsdag },
-    { day: "Fredag", hours: clinic.fredag },
-    { day: "Lørdag", hours: clinic.lørdag },
-    { day: "Søndag", hours: clinic.søndag },
-  ];
+  const openingHours = resolveClinicOpeningHours(clinic);
+  const rows = formatOpeningHoursDa(openingHours);
 
   return (
     <section className="py-8 border-b border-gray-200">
       <h2 className="text-2xl font-semibold mb-4">Åbningstider og adgang</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div>
-          {hasAnyOpeningHours(clinic) ? (
+          {hasAnyKnownOpeningHours(openingHours) ? (
             <div className="space-y-2">
-              {openingHours.map(({ day, hours }) => (
+              {rows.map(({ day, label, hours }) => (
                 <div key={day} className="flex justify-between">
-                  <span>{day}</span>
-                  <span className="font-semibold">{hours}</span>
+                  <span>{label}</span>
+                  <span className="font-semibold">
+                    {hours ?? <span className="text-gray-500">–</span>}
+                  </span>
                 </div>
               ))}
             </div>

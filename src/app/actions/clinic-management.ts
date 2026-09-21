@@ -14,6 +14,7 @@ import {
 } from "@/lib/clinic-entitlements";
 import { computeClinicProfileCompleteness } from "@/lib/clinic-profile-completeness";
 import { geocodeDanishAddress } from "@/lib/geocoding/geocode-danish-address";
+import type { OpeningHours } from "@/lib/opening-hours";
 
 async function canManageClinic(
   supabase: Awaited<ReturnType<typeof createClient>>,
@@ -69,6 +70,7 @@ export async function getOwnedClinics() {
         website,
         verified_klinik,
         om_os,
+        opening_hours,
         mandag,
         tirsdag,
         onsdag,
@@ -194,6 +196,7 @@ export async function getOwnedClinics() {
       tlf: clinic.tlf,
       website: clinic.website,
       om_os: clinic.om_os,
+      opening_hours: clinic.opening_hours,
       mandag: clinic.mandag,
       tirsdag: clinic.tirsdag,
       onsdag: clinic.onsdag,
@@ -299,13 +302,16 @@ export async function updateClinic(
     tlf?: string;
     website?: string;
     lokation?: string;
-    mandag?: string;
-    tirsdag?: string;
-    onsdag?: string;
-    torsdag?: string;
-    fredag?: string;
-    lørdag?: string;
-    søndag?: string;
+    /** Structured hours are the source of truth; the Danish day fields are dual-written. */
+    opening_hours?: OpeningHours | null;
+    opening_hours_source?: "google" | "owner" | "import";
+    mandag?: string | null;
+    tirsdag?: string | null;
+    onsdag?: string | null;
+    torsdag?: string | null;
+    fredag?: string | null;
+    lørdag?: string | null;
+    søndag?: string | null;
     hjemmetræning?: string;
     holdtræning?: string;
     parkering?: string;

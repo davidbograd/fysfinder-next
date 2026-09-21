@@ -8,45 +8,19 @@ import {
   geocodeDanishAddress,
   type GeocodedCoordinates,
 } from "@/lib/geocoding/geocode-danish-address";
+import {
+  hasAnyKnownOpeningHours,
+  isClosedAllWeek,
+  LEGACY_DAY_COLUMNS,
+  openingHoursToLegacyColumns,
+  parseGoogleOpeningHours,
+  type GoogleRegularOpeningHours,
+  type LegacyDayColumn,
+} from "@/lib/opening-hours";
 
-const DAY_COLUMNS = [
-  "mandag",
-  "tirsdag",
-  "onsdag",
-  "torsdag",
-  "fredag",
-  "lørdag",
-  "søndag",
-] as const;
+const DAY_COLUMNS = LEGACY_DAY_COLUMNS;
 
-type DayColumn = (typeof DAY_COLUMNS)[number];
-
-/** Maps API weekday label (English or Danish) to our DB column. */
-const WEEKDAY_LABEL_TO_COLUMN: Record<string, DayColumn> = {
-  mandag: "mandag",
-  tirsdag: "tirsdag",
-  onsdag: "onsdag",
-  torsdag: "torsdag",
-  fredag: "fredag",
-  lørdag: "lørdag",
-  lordag: "lørdag",
-  søndag: "søndag",
-  sondag: "søndag",
-  monday: "mandag",
-  tuesday: "tirsdag",
-  wednesday: "onsdag",
-  thursday: "torsdag",
-  friday: "fredag",
-  saturday: "lørdag",
-  sunday: "søndag",
-};
-
-const normalizeWeekdayLabel = (raw: string): string =>
-  raw
-    .trim()
-    .toLowerCase()
-    .replace(/\.$/, "")
-    .replace(/^[\d.\s•\-–—]+/, "");
+type DayColumn = LegacyDayColumn;
 
 const PLACE_DETAILS_FIELD_MASK = [
   "displayName",
@@ -80,10 +54,7 @@ interface PlaceDetails {
   businessStatus?: string;
   rating?: number;
   userRatingCount?: number;
-  regularOpeningHours?: {
-    weekdayDescriptions?: string[];
-    openNow?: boolean;
-  };
+  regularOpeningHours?: GoogleRegularOpeningHours;
   internationalPhoneNumber?: string;
   websiteUri?: string;
   googleMapsUri?: string;
@@ -116,44 +87,6 @@ interface ClinicRowForSync {
   tlf: string | null;
   website: string | null;
 }
-
-/**
- * Parses Places API `regularOpeningHours.weekdayDescriptions` into DB columns.
- * Google often returns English day names ("Monday: …") even for DK businesses unless `languageCode=da` is set — we map both EN and DA.
- */
-export const parseOpeningHoursFromGoogleDescriptions = (
-  descriptions: string[] | undefined
-): Record<DayColumn, string> => {
-  const hours: Record<string, string> = {
-    mandag: "Lukket",
-    tirsdag: "Lukket",
-    onsdag: "Lukket",
-    torsdag: "Lukket",
-    fredag: "Lukket",
-    lørdag: "Lukket",
-    søndag: "Lukket",
-  };
-
-  if (!descriptions?.length) return hours as Record<DayColumn, string>;
-
-  for (const line of descriptions) {
-    const colonIdx = line.indexOf(":");
-    if (colonIdx === -1) continue;
-
-    const dayRaw = line.substring(0, colonIdx);
-    const dayKey = normalizeWeekdayLabel(dayRaw);
-    const column = WEEKDAY_LABEL_TO_COLUMN[dayKey];
-    if (!column) continue;
-
-    const value = line.substring(colonIdx + 1).trim();
-    hours[column] = value || "Lukket";
-  }
-
-  return hours as Record<DayColumn, string>;
-};
-
-const hasAnyNonClosedParsedHour = (hours: Record<DayColumn, string>): boolean =>
-  DAY_COLUMNS.some((d) => hours[d] !== "Lukket");
 
 const isNullishOrBlank = (value: string | null | undefined): boolean => {
   if (value === null || value === undefined) return true;
@@ -508,15 +441,14 @@ export function buildClinicGooglePlaceUpdate(options: {
     updateData.longitude = addressCoordinates.longitude;
   }
 
+  // Only fills a blank profile, and never with an all-closed week — that pattern is the
+  // signature of a bad import rather than a real clinic.
   if (areAllWeekdayHoursUnsetInDb(clinic)) {
-    const descriptions = details.regularOpeningHours?.weekdayDescriptions;
-    if (descriptions && descriptions.length > 0) {
-      const hours = parseOpeningHoursFromGoogleDescriptions(descriptions);
-      if (hasAnyNonClosedParsedHour(hours)) {
-        for (const day of DAY_COLUMNS) {
-          updateData[day] = hours[day];
-        }
-      }
+    const hours = parseGoogleOpeningHours(details.regularOpeningHours);
+    if (hasAnyKnownOpeningHours(hours) && !isClosedAllWeek(hours)) {
+      updateData.opening_hours = hours;
+      updateData.opening_hours_source = "google";
+      Object.assign(updateData, openingHoursToLegacyColumns(hours));
     }
   }
 

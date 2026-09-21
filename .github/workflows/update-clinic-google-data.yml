@@ -2,7 +2,10 @@ name: Update Clinic Data from Google
 
 on:
   schedule:
-    - cron: "0 3 1 1,7 *" # Run on Jan 1 and Jul 1 at 3 AM UTC
+    # Monthly. Each run refreshes the ~800 least-recently-synced clinics, which stays
+    # inside the 1,000 free Place Details Enterprise calls per calendar month while
+    # rotating the whole table through roughly every two months.
+    - cron: "0 3 1 * *" # 1st of the month, 3 AM UTC
   workflow_dispatch: # Allow manual trigger
 
 jobs:
@@ -29,3 +32,11 @@ jobs:
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           ADMIN_EMAILS: ${{ secrets.ADMIN_EMAILS }}
+
+      # The sync writes straight to Postgres, so Next.js has no idea the data moved.
+      # Without this, refreshed hours sit behind the 24h ISR cache.
+      - name: Revalidate cached pages
+        if: ${{ env.REVALIDATE_TOKEN != '' }}
+        run: npm run revalidate
+        env:
+          REVALIDATE_TOKEN: ${{ secrets.REVALIDATE_TOKEN }}

@@ -3,6 +3,11 @@
  * Updated: helpers so the monthly email can show the same "X af 7" progress.
  */
 
+import {
+  hasAnyKnownOpeningHours,
+  type OpeningHours,
+} from "@/lib/opening-hours";
+
 export type ClinicProfileChecklistKey =
   | "contact"
   | "about"
@@ -123,6 +128,8 @@ export type ClinicProfileCompletenessInput = {
   tlf?: string | null;
   website?: string | null;
   om_os?: string | null;
+  /** Preferred source; the Danish day fields below are the legacy fallback. */
+  opening_hours?: OpeningHours | null;
   mandag?: string | null;
   tirsdag?: string | null;
   onsdag?: string | null;
@@ -163,6 +170,8 @@ const hasAbout = (input: ClinicProfileCompletenessInput): boolean =>
   aboutPlainText(input.om_os).length > 0;
 
 const hasOpeningHours = (input: ClinicProfileCompletenessInput): boolean => {
+  if (hasAnyKnownOpeningHours(input.opening_hours)) return true;
+
   const days = [
     input.mandag,
     input.tirsdag,

@@ -1,5 +1,7 @@
 // Shared application types
-// Updated: include city_id on clinic models for analytics attribution context
+// Updated: clinics carry structured `opening_hours`; the Danish day columns are legacy
+
+import type { OpeningHours } from "@/lib/opening-hours";
 
 export interface Clinic {
   clinics_id: string;
@@ -20,6 +22,7 @@ export interface Clinic {
   opfølgning: number;
   første_kons_minutter: number;
   opfølgning_minutter: number;
+  /** @deprecated Read via `resolveClinicOpeningHours`; `opening_hours` is the source of truth. */
   mandag: string;
   tirsdag: string;
   onsdag: string;
@@ -27,6 +30,8 @@ export interface Clinic {
   fredag: string;
   lørdag: string;
   søndag: string;
+  opening_hours?: OpeningHours | null;
+  opening_hours_source?: "google" | "owner" | "import" | null;
   parkering: string;
   handicapadgang: boolean | null;
   god_adgang_verificeret: boolean;
