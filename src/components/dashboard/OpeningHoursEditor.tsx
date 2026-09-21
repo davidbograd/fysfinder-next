@@ -11,8 +11,11 @@
  * renders in the browser's locale, so a visitor on an en-US machine gets an AM/PM picker.
  * Denmark never uses a 12-hour clock, so the value set is generated here instead.
  *
- * The three-way status per day matters: "Ikke angivet" and "Lukket" are different facts,
- * and collapsing them is what made ~800 clinics look permanently shut.
+ * The stored type keeps three states per day, because "we don't know" and "closed" are
+ * different facts and conflating them is what made ~800 clinics look permanently shut.
+ * The owner never sees the third one: someone who has opened this form is telling us what
+ * the week looks like, so every day is either open or closed. `toOwnerEditableHours`
+ * resolves the unknowns on the way in.
  */
 
 import { Button } from "@/components/ui/button";
@@ -33,7 +36,7 @@ import {
 } from "@/lib/opening-hours";
 import { Copy, Plus, X } from "lucide-react";
 
-type DayStatus = "unspecified" | "open" | "closed";
+type DayStatus = "open" | "closed";
 
 const DEFAULT_RANGE: TimeRange = { open: "08:00", close: "16:00" };
 
@@ -48,6 +51,20 @@ export const DEFAULT_OPENING_HOURS: OpeningHours = {
   fri: [{ ...DEFAULT_RANGE }],
   sat: [],
   sun: [],
+};
+
+/**
+ * Turns whatever is on record into something the binary editor can represent: a clinic with
+ * nothing known starts from a normal Danish week, and any individual day we happen not to
+ * know about becomes closed rather than a blank dropdown.
+ */
+export const toOwnerEditableHours = (
+  hours: OpeningHours | null | undefined
+): OpeningHours => {
+  const base = hours && Object.keys(hours).length > 0 ? hours : DEFAULT_OPENING_HOURS;
+  return Object.fromEntries(
+    DAY_KEYS.map((day) => [day, base[day] ?? []])
+  ) as OpeningHours;
 };
 
 const STEP_MINUTES = 15;
@@ -70,22 +87,12 @@ export const isInvalidRange = (range: TimeRange): boolean =>
 export const findInvalidDays = (hours: OpeningHours): DayKey[] =>
   DAY_KEYS.filter((day) => (hours[day] ?? []).some(isInvalidRange));
 
-const statusOf = (ranges: TimeRange[] | undefined): DayStatus => {
-  if (ranges === undefined) return "unspecified";
-  if (ranges.length === 0) return "closed";
-  return "open";
-};
+const statusOf = (ranges: TimeRange[] | undefined): DayStatus =>
+  ranges && ranges.length > 0 ? "open" : "closed";
 
-const sameRanges = (
-  a: TimeRange[] | undefined,
-  b: TimeRange[] | undefined
-): boolean => {
-  if (a === undefined || b === undefined) return a === b;
-  return (
-    a.length === b.length &&
-    a.every((range, i) => range.open === b[i].open && range.close === b[i].close)
-  );
-};
+const sameRanges = (a: TimeRange[] = [], b: TimeRange[] = []): boolean =>
+  a.length === b.length &&
+  a.every((range, i) => range.open === b[i].open && range.close === b[i].close);
 
 /**
  * The weekdays start out identical, so offering the copy action straight away would be a
@@ -93,7 +100,6 @@ const sameRanges = (
  * it does anything.
  */
 const canCopyMonday = (hours: OpeningHours): boolean =>
-  hours.mon !== undefined &&
   WEEKDAYS.some((day) => day !== "mon" && !sameRanges(hours[day], hours.mon));
 
 /**
@@ -140,18 +146,11 @@ interface OpeningHoursEditorProps {
 export function OpeningHoursEditor({ value, onChange }: OpeningHoursEditorProps) {
   const invalidDays = new Set(findInvalidDays(value));
 
-  const setDay = (day: DayKey, ranges: TimeRange[] | undefined) => {
-    const next: OpeningHours = { ...value };
-    if (ranges === undefined) {
-      delete next[day];
-    } else {
-      next[day] = ranges;
-    }
-    onChange(next);
+  const setDay = (day: DayKey, ranges: TimeRange[]) => {
+    onChange({ ...value, [day]: ranges });
   };
 
   const setStatus = (day: DayKey, status: DayStatus) => {
-    if (status === "unspecified") return setDay(day, undefined);
     if (status === "closed") return setDay(day, []);
     setDay(day, value[day]?.length ? value[day] : [{ ...DEFAULT_RANGE }]);
   };
@@ -213,7 +212,6 @@ export function OpeningHoursEditor({ value, onChange }: OpeningHoursEditorProps)
                 <SelectContent>
                   <SelectItem value="open">Åben</SelectItem>
                   <SelectItem value="closed">Lukket</SelectItem>
-                  <SelectItem value="unspecified">Ikke angivet</SelectItem>
                 </SelectContent>
               </Select>
 
@@ -265,11 +263,6 @@ export function OpeningHoursEditor({ value, onChange }: OpeningHoursEditorProps)
                 </div>
               )}
 
-              {status === "unspecified" && (
-                <p className="pt-2.5 text-xs text-gray-500">
-                  Vises ikke på din klinikside.
-                </p>
-              )}
             </div>
 
             {day === "mon" && canCopyMonday(value) && (

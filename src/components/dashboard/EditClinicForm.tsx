@@ -22,9 +22,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
-  DEFAULT_OPENING_HOURS,
   OpeningHoursEditor,
   findInvalidDays,
+  toOwnerEditableHours,
 } from "@/components/dashboard/OpeningHoursEditor";
 import {
   DAY_KEY_TO_DANISH_LABEL,
@@ -257,8 +257,8 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
   // Reads the structured column when present and parses the legacy day columns otherwise,
   // so owners of not-yet-migrated clinics still see their existing hours. Clinics with
   // nothing on record start from a normal Danish week rather than seven blank rows.
-  const [openingHours, setOpeningHours] = useState<OpeningHours>(
-    () => resolveClinicOpeningHours(clinic) ?? DEFAULT_OPENING_HOURS
+  const [openingHours, setOpeningHours] = useState<OpeningHours>(() =>
+    toOwnerEditableHours(resolveClinicOpeningHours(clinic))
   );
 
   const [selectedSpecialties, setSelectedSpecialties] = useState<string[]>(currentSpecialties);

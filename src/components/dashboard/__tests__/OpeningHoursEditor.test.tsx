@@ -5,6 +5,7 @@ import {
   OpeningHoursEditor,
   findInvalidDays,
   isInvalidRange,
+  toOwnerEditableHours,
 } from "../OpeningHoursEditor";
 import type { OpeningHours } from "@/lib/opening-hours";
 
@@ -83,7 +84,7 @@ describe("OpeningHoursEditor — defaults", () => {
     render(<Harness initial={DEFAULT_OPENING_HOURS} />);
 
     expect(screen.getAllByLabelText(/åbner$/)).toHaveLength(5);
-    expect(screen.queryByText("Vises ikke på din klinikside.")).toBeNull();
+    expect(screen.getAllByText("Lukket")).toHaveLength(2);
   });
 });
 
@@ -128,17 +129,54 @@ describe("OpeningHoursEditor — editing", () => {
 
     fireEvent.click(screen.getByLabelText("Mandag"));
     fireEvent.click(within(screen.getByRole("listbox")).getByText("Lukket"));
-
     expect(state().mon).toEqual([]);
-  });
-
-  it("removes the day entirely when set to unspecified", () => {
-    render(<Harness initial={DEFAULT_OPENING_HOURS} />);
 
     fireEvent.click(screen.getByLabelText("Mandag"));
-    fireEvent.click(within(screen.getByRole("listbox")).getByText("Ikke angivet"));
+    fireEvent.click(within(screen.getByRole("listbox")).getByText("Åben"));
+    expect(state().mon).toEqual([{ open: "08:00", close: "16:00" }]);
+  });
+});
 
-    expect(state().mon).toBeUndefined();
+describe("OpeningHoursEditor — owner-facing status is binary", () => {
+  it("offers only Åben and Lukket, never Ikke angivet", () => {
+    render(<Harness initial={DEFAULT_OPENING_HOURS} />);
+
+    const listbox = openListbox("Mandag");
+
+    expect(within(listbox).getByText("Åben")).toBeInTheDocument();
+    expect(within(listbox).getByText("Lukket")).toBeInTheDocument();
+    expect(within(listbox).queryByText("Ikke angivet")).toBeNull();
+  });
+
+  it("shows a day we know nothing about as closed rather than a blank dropdown", () => {
+    render(<Harness initial={toOwnerEditableHours({ mon: [{ open: "09:00", close: "17:00" }] })} />);
+
+    expect(screen.getAllByText("Lukket")).toHaveLength(6);
+  });
+});
+
+describe("toOwnerEditableHours", () => {
+  it("falls back to the default week when nothing is on record", () => {
+    expect(toOwnerEditableHours(null)).toEqual(DEFAULT_OPENING_HOURS);
+    expect(toOwnerEditableHours({})).toEqual(DEFAULT_OPENING_HOURS);
+  });
+
+  it("resolves only the unknown days, leaving known ones untouched", () => {
+    expect(toOwnerEditableHours({ mon: [{ open: "09:00", close: "17:00" }], tue: [] })).toEqual({
+      mon: [{ open: "09:00", close: "17:00" }],
+      tue: [],
+      wed: [],
+      thu: [],
+      fri: [],
+      sat: [],
+      sun: [],
+    });
+  });
+
+  it("keeps a genuinely all-closed week all closed", () => {
+    const allClosed = { mon: [], tue: [], wed: [], thu: [], fri: [], sat: [], sun: [] };
+
+    expect(toOwnerEditableHours(allClosed)).toEqual(allClosed);
   });
 });
 
@@ -180,7 +218,7 @@ describe("OpeningHoursEditor — copy Monday", () => {
     expect(screen.queryByText("Kopiér mandag til alle hverdage")).toBeNull();
   });
 
-  it("stays hidden when Monday is unspecified", () => {
+  it("stays hidden when the whole week is closed", () => {
     render(<Harness initial={{}} />);
 
     expect(screen.queryByText("Kopiér mandag til alle hverdage")).toBeNull();
