@@ -9,6 +9,11 @@ export const TOOL_SLUGS = [
   "fedtprocent-beregner",
   "pace-beregner",
   "rm-beregner",
+  "kondital-beregner",
+  "hoejdeberegner",
+  "hvilestofskifte-beregner",
+  "muskelmasse-beregner",
+  "proteinberegner",
 ] as const;
 
 export type ToolSlug = (typeof TOOL_SLUGS)[number];
@@ -110,6 +115,61 @@ export const tools: Tool[] = [
     imageUrl: "/images/vaerktoejer/1rm-beregner.jpg",
     imageAlt: "RM beregner illustration med vægtstang og løfter",
     type: "Træning & bevægelse værktøjer",
+  },
+  {
+    slug: "kondital-beregner",
+    title: "Kondital beregner",
+    feedbackName: "konditalberegneren",
+    description:
+      "Beregn dit kondital (VO2-max) ud fra din hvilepuls eller en Cooper-test, og se hvor du ligger for din alder og dit køn.",
+    href: "/vaerktoejer/kondital-beregner",
+    imageUrl: "/images/vaerktoejer/kondital-beregner-placeholder.png",
+    imageAlt: "Kondital beregner illustration",
+    type: "Træning & bevægelse værktøjer",
+  },
+  {
+    slug: "hoejdeberegner",
+    title: "Højdeberegner",
+    feedbackName: "højdeberegneren",
+    description:
+      "Beregn dit barns forventede sluthøjde ud fra forældrenes højde med midtforældre-metoden.",
+    href: "/vaerktoejer/hoejdeberegner",
+    imageUrl: "/images/vaerktoejer/hoejdeberegner-placeholder.png",
+    imageAlt: "Højdeberegner illustration",
+    type: "Kost & ernæring værktøjer",
+  },
+  {
+    slug: "hvilestofskifte-beregner",
+    title: "Hvilestofskifte beregner",
+    feedbackName: "hvilestofskifte-beregneren",
+    description:
+      "Udregn dit hvilestofskifte – det antal kalorier din krop bruger i hvile, før du lægger aktivitet oveni.",
+    href: "/vaerktoejer/hvilestofskifte-beregner",
+    imageUrl: "/images/vaerktoejer/hvilestofskifte-beregner-placeholder.png",
+    imageAlt: "Hvilestofskifte beregner illustration",
+    type: "Kost & ernæring værktøjer",
+  },
+  {
+    slug: "muskelmasse-beregner",
+    title: "Muskelmasse beregner",
+    feedbackName: "muskelmasseberegneren",
+    description:
+      "Estimer din muskelmasse – enten med målebånd eller ud fra højde, vægt, alder og køn.",
+    href: "/vaerktoejer/muskelmasse-beregner",
+    imageUrl: "/images/vaerktoejer/muskelmasse-beregner-placeholder.png",
+    imageAlt: "Muskelmasse beregner illustration",
+    type: "Kost & ernæring værktøjer",
+  },
+  {
+    slug: "proteinberegner",
+    title: "Proteinberegner",
+    feedbackName: "proteinberegneren",
+    description:
+      "Beregn hvor meget protein du har brug for om dagen ud fra din vægt, dit mål og dit aktivitetsniveau.",
+    href: "/vaerktoejer/proteinberegner",
+    imageUrl: "/images/vaerktoejer/proteinberegner-placeholder.png",
+    imageAlt: "Proteinberegner illustration",
+    type: "Kost & ernæring værktøjer",
   },
 ];
 

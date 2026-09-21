@@ -65,4 +65,47 @@ export const miscMappings: LinkMapping[] = [
     ],
     destination: "/vaerktoejer/rm-beregner",
   },
+  {
+    keywords: [
+      "kondital-beregner",
+      "kondital beregner",
+      "Kondital beregner",
+      "konditalberegner",
+      "beregn kondital",
+    ],
+    destination: "/vaerktoejer/kondital-beregner",
+  },
+  {
+    keywords: ["højdeberegner", "Højdeberegner", "højde beregner", "sluthøjde"],
+    destination: "/vaerktoejer/hoejdeberegner",
+  },
+  {
+    keywords: [
+      "hvilestofskifte-beregner",
+      "hvilestofskifte beregner",
+      "Hvilestofskifte beregner",
+      "hvilestofskifte",
+      "hvile-stofskifte",
+    ],
+    destination: "/vaerktoejer/hvilestofskifte-beregner",
+  },
+  {
+    keywords: [
+      "muskelmasse-beregner",
+      "muskelmasse beregner",
+      "Muskelmasse beregner",
+      "muskelmasseberegner",
+    ],
+    destination: "/vaerktoejer/muskelmasse-beregner",
+  },
+  {
+    keywords: [
+      "proteinberegner",
+      "Proteinberegner",
+      "protein-beregner",
+      "protein beregner",
+      "proteinbehov",
+    ],
+    destination: "/vaerktoejer/proteinberegner",
+  },
 ];

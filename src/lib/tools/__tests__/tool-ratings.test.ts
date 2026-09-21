@@ -99,4 +99,37 @@ describe("resolvePublishedToolRating", () => {
       expect(() => resolvePublishedToolRating(tool.slug)).not.toThrow();
     }
   });
+
+  it("starts the newest calculators at zero reviews and hides them until they reach the minimum", () => {
+    const newCalculators = [
+      "kondital-beregner",
+      "hoejdeberegner",
+      "hvilestofskifte-beregner",
+      "muskelmasse-beregner",
+      "proteinberegner",
+    ] as const;
+
+    for (const slug of newCalculators) {
+      expect(resolvePublishedToolRating(slug)).toBeNull();
+      expect(
+        resolvePublishedToolRating(slug, {
+          ratingCount: MIN_REAL_RATINGS_FOR_UNSEEDED_TOOL - 1,
+          ratingSum: 45,
+        })
+      ).toBeNull();
+
+      // At the minimum the published numbers are purely the real ones.
+      expect(
+        resolvePublishedToolRating(slug, {
+          ratingCount: MIN_REAL_RATINGS_FOR_UNSEEDED_TOOL,
+          ratingSum: 45,
+        })
+      ).toEqual({
+        ratingValue: "4.5",
+        reviewCount: "10",
+        bestRating: "5",
+        worstRating: "1",
+      });
+    }
+  });
 });
