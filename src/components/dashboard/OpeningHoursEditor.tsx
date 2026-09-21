@@ -5,7 +5,11 @@
  *
  * Replaces seven free-text inputs. Owners used to type whatever they liked, which is how
  * the database ended up holding "08.00–18.00", "08:00 – 17:00", "09:00-17:00" and "7-19"
- * side by side. Time inputs mean the value is always ISO HH:MM before it is saved.
+ * side by side.
+ *
+ * Times are dropdowns rather than `<input type="time">` on purpose: the native control
+ * renders in the browser's locale, so a visitor on an en-US machine gets an AM/PM picker.
+ * Denmark never uses a 12-hour clock, so the value set is generated here instead.
  *
  * The three-way status per day matters: "Ikke angivet" and "Lukket" are different facts,
  * and collapsing them is what made ~800 clinics look permanently shut.
@@ -27,7 +31,7 @@ import {
   type OpeningHours,
   type TimeRange,
 } from "@/lib/opening-hours";
-import { Plus, X } from "lucide-react";
+import { Copy, Plus, X } from "lucide-react";
 
 type DayStatus = "unspecified" | "open" | "closed";
 
@@ -35,11 +39,29 @@ const DEFAULT_RANGE: TimeRange = { open: "08:00", close: "16:00" };
 
 const WEEKDAYS: DayKey[] = ["mon", "tue", "wed", "thu", "fri"];
 
-const statusOf = (ranges: TimeRange[] | undefined): DayStatus => {
-  if (ranges === undefined) return "unspecified";
-  if (ranges.length === 0) return "closed";
-  return "open";
+/** What a clinic with no hours on record starts from when the owner opens the editor. */
+export const DEFAULT_OPENING_HOURS: OpeningHours = {
+  mon: [{ ...DEFAULT_RANGE }],
+  tue: [{ ...DEFAULT_RANGE }],
+  wed: [{ ...DEFAULT_RANGE }],
+  thu: [{ ...DEFAULT_RANGE }],
+  fri: [{ ...DEFAULT_RANGE }],
+  sat: [],
+  sun: [],
 };
+
+const STEP_MINUTES = 15;
+
+const pad = (n: number): string => String(n).padStart(2, "0");
+
+/** 00:00 … 23:45 in quarter-hour steps. */
+const TIME_OPTIONS: string[] = Array.from(
+  { length: (24 * 60) / STEP_MINUTES },
+  (_, i) => `${pad(Math.floor((i * STEP_MINUTES) / 60))}:${pad((i * STEP_MINUTES) % 60)}`
+);
+
+/** Closing at midnight is "24:00", which is not a valid opening time. */
+const CLOSE_OPTIONS: string[] = [...TIME_OPTIONS.slice(1), "24:00"];
 
 /** A range is invalid when it does not move forward in time; overnight is not a real case here. */
 export const isInvalidRange = (range: TimeRange): boolean =>
@@ -47,6 +69,48 @@ export const isInvalidRange = (range: TimeRange): boolean =>
 
 export const findInvalidDays = (hours: OpeningHours): DayKey[] =>
   DAY_KEYS.filter((day) => (hours[day] ?? []).some(isInvalidRange));
+
+const statusOf = (ranges: TimeRange[] | undefined): DayStatus => {
+  if (ranges === undefined) return "unspecified";
+  if (ranges.length === 0) return "closed";
+  return "open";
+};
+
+/**
+ * Existing data can sit off the quarter-hour grid (Google reports 08:20 for some places),
+ * so the current value is always selectable even when it is not a generated option.
+ */
+const optionsIncluding = (options: string[], value: string): string[] =>
+  value && !options.includes(value)
+    ? [...options, value].sort((a, b) => a.localeCompare(b))
+    : options;
+
+function TimeSelect({
+  value,
+  options,
+  label,
+  onChange,
+}: {
+  value: string;
+  options: string[];
+  label: string;
+  onChange: (next: string) => void;
+}) {
+  return (
+    <Select value={value} onValueChange={onChange}>
+      <SelectTrigger aria-label={label} className="h-10 w-[5.5rem] rounded-full px-3">
+        <SelectValue />
+      </SelectTrigger>
+      <SelectContent className="max-h-64">
+        {optionsIncluding(options, value).map((time) => (
+          <SelectItem key={time} value={time}>
+            {time}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  );
+}
 
 interface OpeningHoursEditorProps {
   value: OpeningHours;
@@ -88,8 +152,10 @@ export function OpeningHoursEditor({ value, onChange }: OpeningHoursEditorProps)
   };
 
   const removeRange = (day: DayKey, index: number) => {
-    const ranges = (value[day] ?? []).filter((_, i) => i !== index);
-    setDay(day, ranges.length > 0 ? ranges : []);
+    setDay(
+      day,
+      (value[day] ?? []).filter((_, i) => i !== index)
+    );
   };
 
   const copyMondayToWeekdays = () => {
@@ -104,22 +170,16 @@ export function OpeningHoursEditor({ value, onChange }: OpeningHoursEditorProps)
   };
 
   return (
-    <div className="space-y-4">
-      <div className="space-y-4">
-        {DAY_KEYS.map((day) => {
-          const ranges = value[day];
-          const status = statusOf(ranges);
-          const hasError = invalidDays.has(day);
+    <div className="space-y-5">
+      {DAY_KEYS.map((day) => {
+        const ranges = value[day];
+        const status = statusOf(ranges);
+        const hasError = invalidDays.has(day);
 
-          return (
-            <div
-              key={day}
-              className="grid grid-cols-1 gap-3 sm:grid-cols-[7rem_10rem_1fr] sm:items-start"
-            >
-              <Label
-                htmlFor={`${day}-status`}
-                className="pt-2 text-sm font-medium"
-              >
+        return (
+          <div key={day} className="space-y-3">
+            <div className="grid grid-cols-1 gap-x-3 gap-y-2 sm:grid-cols-[6rem_9rem_1fr] sm:items-start">
+              <Label htmlFor={`${day}-status`} className="pt-2.5 text-sm font-medium">
                 {DAY_KEY_TO_DANISH_LABEL[day]}
               </Label>
 
@@ -140,23 +200,31 @@ export function OpeningHoursEditor({ value, onChange }: OpeningHoursEditorProps)
               {status === "open" && (
                 <div className="space-y-2">
                   {(ranges ?? []).map((range, index) => (
-                    <div key={index} className="flex items-center gap-2">
-                      <input
-                        type="time"
-                        aria-label={`${DAY_KEY_TO_DANISH_LABEL[day]} åbner`}
+                    <div key={index} className="flex flex-wrap items-center gap-1.5">
+                      <TimeSelect
                         value={range.open}
-                        onChange={(e) => setTime(day, index, "open", e.target.value)}
-                        className="h-10 rounded-md border border-input bg-background px-3 py-2 text-sm"
+                        options={TIME_OPTIONS}
+                        label={`${DAY_KEY_TO_DANISH_LABEL[day]} åbner`}
+                        onChange={(next) => setTime(day, index, "open", next)}
                       />
                       <span className="text-gray-500">–</span>
-                      <input
-                        type="time"
-                        aria-label={`${DAY_KEY_TO_DANISH_LABEL[day]} lukker`}
+                      <TimeSelect
                         value={range.close}
-                        onChange={(e) => setTime(day, index, "close", e.target.value)}
-                        className="h-10 rounded-md border border-input bg-background px-3 py-2 text-sm"
+                        options={CLOSE_OPTIONS}
+                        label={`${DAY_KEY_TO_DANISH_LABEL[day]} lukker`}
+                        onChange={(next) => setTime(day, index, "close", next)}
                       />
-                      {(ranges ?? []).length > 1 && (
+
+                      {index === 0 ? (
+                        <button
+                          type="button"
+                          onClick={() => addRange(day)}
+                          className="ml-1 inline-flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-1.5 text-xs font-medium text-brand-primary hover:bg-brand-beige"
+                        >
+                          <Plus className="h-3.5 w-3.5" />
+                          Tilføj tidsrum
+                        </button>
+                      ) : (
                         <button
                           type="button"
                           onClick={() => removeRange(day, index)}
@@ -174,38 +242,33 @@ export function OpeningHoursEditor({ value, onChange }: OpeningHoursEditorProps)
                       Lukketidspunktet skal være efter åbningstidspunktet.
                     </p>
                   )}
-
-                  <button
-                    type="button"
-                    onClick={() => addRange(day)}
-                    className="inline-flex items-center gap-1 text-xs text-brand-primary hover:underline"
-                  >
-                    <Plus className="h-3 w-3" />
-                    Tilføj tidsrum (fx frokostlukket)
-                  </button>
                 </div>
               )}
 
               {status === "unspecified" && (
-                <p className="pt-2 text-xs text-gray-500">
+                <p className="pt-2.5 text-xs text-gray-500">
                   Vises ikke på din klinikside.
                 </p>
               )}
             </div>
-          );
-        })}
-      </div>
 
-      <Button
-        type="button"
-        variant="outline"
-        size="sm"
-        onClick={copyMondayToWeekdays}
-        disabled={value.mon === undefined}
-        className="rounded-full"
-      >
-        Kopiér mandag til alle hverdage
-      </Button>
+            {day === "mon" && (
+              <div className="sm:pl-[6.75rem]">
+                <Button
+                  type="button"
+                  size="sm"
+                  onClick={copyMondayToWeekdays}
+                  disabled={value.mon === undefined}
+                  className="rounded-full"
+                >
+                  <Copy className="mr-2 h-4 w-4" />
+                  Kopiér mandag til alle hverdage
+                </Button>
+              </div>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }

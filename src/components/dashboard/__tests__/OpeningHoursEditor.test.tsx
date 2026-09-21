@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, within } from "@testing-library/react";
 import {
+  DEFAULT_OPENING_HOURS,
   OpeningHoursEditor,
   findInvalidDays,
   isInvalidRange,
@@ -27,33 +28,83 @@ function Harness({ initial = {} }: { initial?: OpeningHours }) {
 const state = (): OpeningHours =>
   JSON.parse(screen.getByTestId("state").textContent || "{}");
 
-describe("OpeningHoursEditor", () => {
-  it("shows existing hours as time inputs", () => {
-    render(<Harness initial={{ mon: [{ open: "08:00", close: "18:00" }] }} />);
+const openListbox = (label: string) => {
+  fireEvent.click(screen.getByLabelText(label));
+  return screen.getByRole("listbox");
+};
 
-    expect(screen.getByLabelText("Mandag åbner")).toHaveValue("08:00");
-    expect(screen.getByLabelText("Mandag lukker")).toHaveValue("18:00");
+describe("OpeningHoursEditor — 24-hour clock", () => {
+  it("never offers AM or PM", () => {
+    render(<Harness initial={{ mon: [{ open: "08:00", close: "16:00" }] }} />);
+
+    const listbox = openListbox("Mandag åbner");
+
+    expect(listbox.textContent).not.toMatch(/\b(AM|PM)\b/i);
+    expect(within(listbox).getByText("13:00")).toBeInTheDocument();
   });
 
+  it("offers quarter-hour steps across the full day", () => {
+    render(<Harness initial={{ mon: [{ open: "08:00", close: "16:00" }] }} />);
+
+    const listbox = openListbox("Mandag åbner");
+
+    expect(within(listbox).getByText("00:00")).toBeInTheDocument();
+    expect(within(listbox).getByText("08:15")).toBeInTheDocument();
+    expect(within(listbox).getByText("23:45")).toBeInTheDocument();
+  });
+
+  it("keeps an off-grid time from Google selectable", () => {
+    render(<Harness initial={{ mon: [{ open: "08:20", close: "16:00" }] }} />);
+
+    const listbox = openListbox("Mandag åbner");
+
+    expect(within(listbox).getByText("08:20")).toBeInTheDocument();
+  });
+
+  it("offers 24:00 as a closing time but never as an opening time", () => {
+    render(<Harness initial={{ mon: [{ open: "08:00", close: "16:00" }] }} />);
+
+    expect(within(openListbox("Mandag lukker")).getByText("24:00")).toBeInTheDocument();
+    fireEvent.keyDown(screen.getByRole("listbox"), { key: "Escape" });
+
+    expect(within(openListbox("Mandag åbner")).queryByText("24:00")).toBeNull();
+  });
+});
+
+describe("OpeningHoursEditor — defaults", () => {
+  it("starts open on weekdays and closed at the weekend", () => {
+    expect(DEFAULT_OPENING_HOURS.mon).toEqual([{ open: "08:00", close: "16:00" }]);
+    expect(DEFAULT_OPENING_HOURS.fri).toEqual([{ open: "08:00", close: "16:00" }]);
+    expect(DEFAULT_OPENING_HOURS.sat).toEqual([]);
+    expect(DEFAULT_OPENING_HOURS.sun).toEqual([]);
+  });
+
+  it("renders those defaults as five open days and two closed ones", () => {
+    render(<Harness initial={DEFAULT_OPENING_HOURS} />);
+
+    expect(screen.getAllByLabelText(/åbner$/)).toHaveLength(5);
+    expect(screen.queryByText("Vises ikke på din klinikside.")).toBeNull();
+  });
+});
+
+describe("OpeningHoursEditor — editing", () => {
   it("writes ISO times, so owners cannot invent a new format", () => {
-    render(<Harness initial={{ mon: [{ open: "08:00", close: "18:00" }] }} />);
+    render(<Harness initial={{ mon: [{ open: "08:00", close: "16:00" }] }} />);
 
-    fireEvent.change(screen.getByLabelText("Mandag lukker"), {
-      target: { value: "16:30" },
-    });
+    fireEvent.click(within(openListbox("Mandag lukker")).getByText("17:30"));
 
-    expect(state().mon).toEqual([{ open: "08:00", close: "16:30" }]);
+    expect(state().mon).toEqual([{ open: "08:00", close: "17:30" }]);
   });
 
   it("adds a second range for a lunch break", () => {
     render(<Harness initial={{ mon: [{ open: "08:00", close: "12:00" }] }} />);
 
-    fireEvent.click(screen.getByText(/Tilføj tidsrum/));
+    fireEvent.click(screen.getByText("Tilføj tidsrum"));
 
     expect(state().mon).toHaveLength(2);
   });
 
-  it("removes a range again", () => {
+  it("offers add on the first range and remove on the extra ones", () => {
     render(
       <Harness
         initial={{
@@ -65,27 +116,72 @@ describe("OpeningHoursEditor", () => {
       />
     );
 
-    fireEvent.click(screen.getAllByLabelText("Fjern tidsrum for Mandag")[0]);
+    expect(screen.getAllByText("Tilføj tidsrum")).toHaveLength(1);
 
-    expect(state().mon).toEqual([{ open: "13:00", close: "17:00" }]);
+    fireEvent.click(screen.getByLabelText("Fjern tidsrum for Mandag"));
+
+    expect(state().mon).toEqual([{ open: "08:00", close: "12:00" }]);
   });
 
+  it("switches a day to closed and back", () => {
+    render(<Harness initial={DEFAULT_OPENING_HOURS} />);
+
+    fireEvent.click(screen.getByLabelText("Mandag"));
+    fireEvent.click(within(screen.getByRole("listbox")).getByText("Lukket"));
+
+    expect(state().mon).toEqual([]);
+  });
+
+  it("removes the day entirely when set to unspecified", () => {
+    render(<Harness initial={DEFAULT_OPENING_HOURS} />);
+
+    fireEvent.click(screen.getByLabelText("Mandag"));
+    fireEvent.click(within(screen.getByRole("listbox")).getByText("Ikke angivet"));
+
+    expect(state().mon).toBeUndefined();
+  });
+});
+
+describe("OpeningHoursEditor — copy Monday", () => {
   it("copies Monday across the weekdays but leaves the weekend alone", () => {
-    render(<Harness initial={{ mon: [{ open: "08:00", close: "18:00" }] }} />);
+    render(
+      <Harness initial={{ ...DEFAULT_OPENING_HOURS, mon: [{ open: "07:00", close: "19:00" }] }} />
+    );
 
     fireEvent.click(screen.getByText("Kopiér mandag til alle hverdage"));
 
     const next = state();
-    expect(next.fri).toEqual([{ open: "08:00", close: "18:00" }]);
-    expect(next.sat).toBeUndefined();
+    expect(next.tue).toEqual([{ open: "07:00", close: "19:00" }]);
+    expect(next.fri).toEqual([{ open: "07:00", close: "19:00" }]);
+    expect(next.sat).toEqual([]);
+    expect(next.sun).toEqual([]);
+  });
+
+  it("copies split shifts too", () => {
+    render(
+      <Harness
+        initial={{
+          mon: [
+            { open: "08:00", close: "12:00" },
+            { open: "13:00", close: "17:00" },
+          ],
+        }}
+      />
+    );
+
+    fireEvent.click(screen.getByText("Kopiér mandag til alle hverdage"));
+
+    expect(state().wed).toHaveLength(2);
   });
 
   it("cannot copy an unspecified Monday", () => {
     render(<Harness initial={{}} />);
 
-    expect(screen.getByText("Kopiér mandag til alle hverdage")).toBeDisabled();
+    expect(screen.getByText("Kopiér mandag til alle hverdage").closest("button")).toBeDisabled();
   });
+});
 
+describe("range validation helpers", () => {
   it("warns when a day closes before it opens", () => {
     render(<Harness initial={{ mon: [{ open: "18:00", close: "08:00" }] }} />);
 
@@ -94,14 +190,6 @@ describe("OpeningHoursEditor", () => {
     ).toBeInTheDocument();
   });
 
-  it("explains that unspecified days are not shown publicly", () => {
-    render(<Harness initial={{}} />);
-
-    expect(screen.getAllByText("Vises ikke på din klinikside.")).toHaveLength(7);
-  });
-});
-
-describe("range validation helpers", () => {
   it("rejects a close time at or before the open time", () => {
     expect(isInvalidRange({ open: "08:00", close: "08:00" })).toBe(true);
     expect(isInvalidRange({ open: "18:00", close: "08:00" })).toBe(true);
