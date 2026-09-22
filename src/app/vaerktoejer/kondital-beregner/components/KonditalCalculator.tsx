@@ -238,7 +238,7 @@ export function KonditalCalculator({ rating }: KonditalCalculatorProps) {
                         fem minutter – ikke lige efter kaffe eller træning.
                       </span>
                       <a
-                        href="https://www.youtube.com/watch?v=i58_MiLjAIg"
+                        href="https://www.youtube.com/watch?v=BSlRvD-CZSo"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="mt-1.5 inline-flex items-center gap-1 font-medium text-brand-primary underline underline-offset-2 hover:text-brand-primary/80"

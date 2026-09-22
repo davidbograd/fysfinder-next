@@ -126,7 +126,10 @@ describe("KonditalCalculator", () => {
     expect(screen.queryByLabelText(/Makspuls/)).not.toBeInTheDocument();
 
     const video = screen.getByRole("link", { name: /Se hvordan du tæller pulsen/ });
-    expect(video).toHaveAttribute("href", expect.stringContaining("youtube.com"));
+    expect(video).toHaveAttribute(
+      "href",
+      "https://www.youtube.com/watch?v=BSlRvD-CZSo"
+    );
     expect(video).toHaveAttribute("target", "_blank");
     expect(video).toHaveAttribute("rel", "noopener noreferrer");
   });
