@@ -1,3 +1,4 @@
+// Updated: 2026-09-28 - Set the SEO meta title and H1 from the finished kondital article.
 import { Metadata } from "next";
 import { ToolPageLayout } from "@/components/features/tools/ToolPageLayout";
 import { KonditalCalculator } from "./components/KonditalCalculator";
@@ -5,7 +6,7 @@ import { KonditalCalculator } from "./components/KonditalCalculator";
 export const revalidate = 86400; // 24 hours ISR (must be a literal for Next.js segment config)
 
 export const metadata: Metadata = {
-  title: "Kondital beregner → Beregn dit kondital (VO2-max) ✅",
+  title: "Kondital-beregner: Beregn nemt dit kondital (VO2 max) →",
   description:
     "Beregn dit kondital med Fysfinders gratis beregner. Brug din hvilepuls eller en Cooper-test, og se hvordan dit kondital ligger for din alder og dit køn.",
 };
@@ -14,7 +15,7 @@ export default function KonditalBeregnerPage() {
   return (
     <ToolPageLayout
       slug="kondital-beregner"
-      heading="Kondital beregner – hvordan beregner man kondital?"
+      heading="Kondital beregner: Beregn nemt dit kondital (VO2 max) ud fra hvilepuls eller løb"
       structuredDataDescription="Beregn dit kondital (VO2-max) ud fra din hvilepuls eller en Cooper-test"
       image={{
         src: "/images/vaerktoejer/kondital-beregner-placeholder.png",
