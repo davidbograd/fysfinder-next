@@ -4,6 +4,7 @@ export default {
   testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/'],
   moduleNameMapper: {
     '\\.svg$': '<rootDir>/src/test/mocks/fileMock.ts',
+    '\\.(png|jpe?g|webp|avif|gif)$': '<rootDir>/src/test/mocks/imageMock.ts',
     '^@/(.*)$': '<rootDir>/src/$1',
     '^lib/(.*)$': '<rootDir>/lib/$1',
     '^@supabase/supabase-js$': '<rootDir>/src/test/mocks/supabase-js.ts',

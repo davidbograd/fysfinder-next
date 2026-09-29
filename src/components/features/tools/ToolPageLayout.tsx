@@ -8,6 +8,7 @@ import { ToolFeedback } from "@/components/features/tools/ToolFeedback";
 import { MdxProseTable } from "@/components/mdx/MdxProseTable";
 import VaerktoejerStructuredData from "@/components/seo/VaerktoejerStructuredData";
 import { buildToolPageMdxOptions } from "@/lib/mdx/build-tool-page-mdx-options";
+import { getContentImageSize } from "@/lib/mdx/content-image-dimensions";
 import { MDX_PROSE_TABLE_HEADER_WRAP } from "@/lib/mdx/mdx-prose-table-classnames";
 import { getPageContent } from "@/lib/pageContent";
 import { getToolRatingStats } from "@/lib/tools/get-tool-rating-stats";
@@ -41,8 +42,26 @@ interface MdxImageProps {
 
 function buildMdxComponents(fallbackAlt: string) {
   return {
-    img: ({ src, alt }: MdxImageProps) =>
-      src ? (
+    img: ({ src, alt }: MdxImageProps) => {
+      if (!src) return null;
+
+      // Images with known dimensions keep their own aspect ratio, so a
+      // portrait infographic is not cropped into a landscape box.
+      const size = getContentImageSize(src);
+      if (size) {
+        return (
+          <Image
+            src={src}
+            alt={alt || fallbackAlt}
+            width={size.width}
+            height={size.height}
+            sizes="(max-width: 768px) 100vw, 768px"
+            className="w-full h-auto my-4 sm:my-6 rounded-xl ring-1 ring-black/10"
+          />
+        );
+      }
+
+      return (
         <div className="relative w-full aspect-[16/10] my-4 sm:my-6">
           <Image
             src={src}
@@ -51,7 +70,8 @@ function buildMdxComponents(fallbackAlt: string) {
             className="object-cover rounded-xl ring-1 ring-black/10"
           />
         </div>
-      ) : null,
+      );
+    },
     table: MdxProseTable,
   };
 }
