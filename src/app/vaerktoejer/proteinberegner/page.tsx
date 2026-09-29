@@ -1,13 +1,27 @@
+// Updated: 2026-09-29 - Use the page image as the Open Graph image, same as the older calculators.
 import { Metadata } from "next";
 import { ToolPageLayout } from "@/components/features/tools/ToolPageLayout";
 import { ProteinCalculator } from "./components/ProteinCalculator";
 
 export const revalidate = 86400; // 24 hours ISR (must be a literal for Next.js segment config)
 
+const title = "Proteinberegner → Beregn dit daglige proteinbehov ✅";
+const description =
+  "Beregn hvor meget protein du har brug for om dagen med Fysfinders gratis proteinberegner. Få dit behov i gram – både i alt og pr. måltid.";
+const image = {
+  url: "/images/vaerktoejer/proteinberegner-placeholder.png",
+  alt: "Proteinberegner illustration",
+};
+
 export const metadata: Metadata = {
-  title: "Proteinberegner → Beregn dit daglige proteinbehov ✅",
-  description:
-    "Beregn hvor meget protein du har brug for om dagen med Fysfinders gratis proteinberegner. Få dit behov i gram – både i alt og pr. måltid.",
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    images: [{ url: image.url, width: 1200, height: 630, alt: image.alt }],
+    type: "website",
+  },
 };
 
 export default function ProteinberegnerPage() {
@@ -16,10 +30,7 @@ export default function ProteinberegnerPage() {
       slug="proteinberegner"
       heading="Proteinberegner – hvor meget protein har du brug for?"
       structuredDataDescription="Beregn dit daglige proteinbehov ud fra vægt, mål og aktivitetsniveau"
-      image={{
-        src: "/images/vaerktoejer/proteinberegner-placeholder.png",
-        alt: "Proteinberegner illustration",
-      }}
+      image={{ src: image.url, alt: image.alt }}
       intro={
         <>
           <p className="text-gray-600 text-sm sm:text-base text-pretty">

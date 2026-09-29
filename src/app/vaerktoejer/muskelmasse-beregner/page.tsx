@@ -1,13 +1,27 @@
+// Updated: 2026-09-29 - Use the page image as the Open Graph image, same as the older calculators.
 import { Metadata } from "next";
 import { ToolPageLayout } from "@/components/features/tools/ToolPageLayout";
 import { MuscleMassCalculator } from "./components/MuscleMassCalculator";
 
 export const revalidate = 86400; // 24 hours ISR (must be a literal for Next.js segment config)
 
+const title = "Muskelmasse beregner → Beregn din muskelmasse i kg ✅";
+const description =
+  "Beregn din muskelmasse med Fysfinders gratis beregner. Brug målebånd for det mest præcise estimat – eller bare højde, vægt, alder og køn.";
+const image = {
+  url: "/images/vaerktoejer/muskelmasse-beregner-placeholder.png",
+  alt: "Muskelmasse beregner illustration",
+};
+
 export const metadata: Metadata = {
-  title: "Muskelmasse beregner → Beregn din muskelmasse i kg ✅",
-  description:
-    "Beregn din muskelmasse med Fysfinders gratis beregner. Brug målebånd for det mest præcise estimat – eller bare højde, vægt, alder og køn.",
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    images: [{ url: image.url, width: 1200, height: 630, alt: image.alt }],
+    type: "website",
+  },
 };
 
 export default function MuskelmasseBeregnerPage() {
@@ -16,10 +30,7 @@ export default function MuskelmasseBeregnerPage() {
       slug="muskelmasse-beregner"
       heading="Muskelmasse beregner – beregn din muskelmasse"
       structuredDataDescription="Estimer din muskelmasse ud fra målebånd eller højde, vægt, alder og køn"
-      image={{
-        src: "/images/vaerktoejer/muskelmasse-beregner-placeholder.png",
-        alt: "Muskelmasse beregner illustration",
-      }}
+      image={{ src: image.url, alt: image.alt }}
       intro={
         <>
           <p className="text-gray-600 text-sm sm:text-base text-pretty">
