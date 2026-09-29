@@ -1,5 +1,7 @@
 "use client";
 
+// Updated: 2026-09-29 - Compact weekly weight-loss dropdown sits inline in the result sentence.
+
 import React, { useState } from "react";
 import { Calculator, Info } from "lucide-react";
 import { notifyToolCompleted } from "@/lib/tools/tool-completion";
@@ -9,8 +11,21 @@ import { PublishedToolRating } from "@/lib/tools/tool-ratings";
 interface CalorieResult {
   bmr: number;
   tdee: number;
-  weightLoss: number;
   weightGain: number;
+}
+
+/** Dagligt kalorieunderskud pr. kg ugentligt vægttab. 0,5 kg/uge giver 500 kcal/dag, som før. */
+const DAILY_KCAL_DEFICIT_PER_KG_PER_WEEK = 1000;
+
+const WEEKLY_LOSS_OPTIONS = [
+  { value: "0.25", label: "0,25 kg" },
+  { value: "0.5", label: "0,5 kg" },
+  { value: "0.75", label: "0,75 kg" },
+  { value: "1", label: "1 kg" },
+] as const;
+
+function caloriesForWeeklyLoss(tdee: number, weeklyLossKg: string): number {
+  return tdee - Number(weeklyLossKg) * DAILY_KCAL_DEFICIT_PER_KG_PER_WEEK;
 }
 
 interface CalorieCalculatorProps {
@@ -23,6 +38,7 @@ export function CalorieCalculator({ rating }: CalorieCalculatorProps) {
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
   const [activityLevel, setActivityLevel] = useState("1.2");
+  const [weeklyLossKg, setWeeklyLossKg] = useState("0.5");
   const [result, setResult] = useState<CalorieResult | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
 
@@ -47,13 +63,11 @@ export function CalorieCalculator({ rating }: CalorieCalculatorProps) {
 
       const bmr = calculateBMR(w, h, a, gender);
       const tdee = bmr * activity;
-      const weightLoss = tdee - 500; // 500 calorie deficit for weight loss
       const weightGain = tdee + 300; // 300 calorie surplus for weight gain
 
       setResult({
         bmr: Math.round(bmr),
         tdee: Math.round(tdee),
-        weightLoss: Math.round(weightLoss),
         weightGain: Math.round(weightGain),
       });
       setIsCalculating(false);
@@ -255,11 +269,27 @@ export function CalorieCalculator({ rating }: CalorieCalculatorProps) {
             <div className="grid md:grid-cols-2 gap-4">
               <div className="bg-orange-50 p-4 rounded-lg border border-orange-200">
                 <h4 className="font-semibold text-gray-900 mb-2">Vægttab</h4>
-                <p className="text-xl font-bold text-orange-700">
-                  {result.weightLoss} kcal/dag
+                <p className="text-xl font-bold text-orange-700 tabular-nums">
+                  {caloriesForWeeklyLoss(result.tdee, weeklyLossKg)} kcal/dag
                 </p>
-                <p className="text-sm text-gray-600 mt-1">
-                  For at tabe ca. 0,5 kg om ugen
+                <p className="mt-1 flex flex-wrap items-center gap-x-1.5 text-sm text-gray-600">
+                  <span>For at tabe ca.</span>
+                  <label htmlFor="weekly-loss" className="sr-only">
+                    Vægttab pr. uge
+                  </label>
+                  <select
+                    id="weekly-loss"
+                    value={weeklyLossKg}
+                    onChange={(e) => setWeeklyLossKg(e.target.value)}
+                    className="h-7 rounded-md border border-orange-300 bg-white px-1.5 text-sm text-gray-900 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-logo-blue"
+                  >
+                    {WEEKLY_LOSS_OPTIONS.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                  <span>om ugen</span>
                 </p>
               </div>
 

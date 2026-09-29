@@ -1,4 +1,4 @@
-// Added: 2026-03-30 - MVP interaction test for calorie calculator result flow.
+// Updated: 2026-09-29 - Covers the inline weekly weight-loss dropdown updating the calorie result.
 import { render, screen, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { CalorieCalculator } from "../CalorieCalculator";
@@ -22,6 +22,22 @@ describe("CalorieCalculator", () => {
 
     expect(screen.getByText("Dine resultater")).toBeInTheDocument();
     expect(screen.getAllByText(/kcal\/dag/).length).toBeGreaterThan(0);
+
+    const weeklyLoss = screen.getByLabelText("Vægttab pr. uge");
+    expect(weeklyLoss).toHaveValue("0.5");
+    expect(weeklyLoss).toHaveDisplayValue("0,5 kg");
+    expect(screen.getByText("1542 kcal/dag")).toBeInTheDocument();
+    expect(screen.getByText("For at tabe ca.")).toBeInTheDocument();
+    expect(screen.getByText("om ugen")).toBeInTheDocument();
+
+    await user.selectOptions(weeklyLoss, "0.25");
+    expect(weeklyLoss).toHaveDisplayValue("0,25 kg");
+    expect(screen.getByText("1792 kcal/dag")).toBeInTheDocument();
+
+    await user.selectOptions(weeklyLoss, "1");
+    expect(weeklyLoss).toHaveDisplayValue("1 kg");
+    expect(screen.getByText("1042 kcal/dag")).toBeInTheDocument();
+
     jest.useRealTimers();
   });
 });
