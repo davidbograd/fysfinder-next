@@ -1,4 +1,5 @@
 // Single source of truth for the Fysfinder tools (værktøjer).
+// Updated: 2026-09-29 - Point the kondital-beregner card at the runner photo.
 // Previously duplicated between src/app/vaerktoejer/page.tsx and RelatedToolsSection.
 
 export const TOOL_SLUGS = [
@@ -123,8 +124,8 @@ export const tools: Tool[] = [
     description:
       "Beregn dit kondital (VO2-max) ud fra din hvilepuls eller en Cooper-test, og se hvor du ligger for din alder og dit køn.",
     href: "/vaerktoejer/kondital-beregner",
-    imageUrl: "/images/vaerktoejer/kondital-beregner-placeholder.png",
-    imageAlt: "Kondital beregner illustration",
+    imageUrl: "/images/vaerktoejer/kondital-beregner.jpg",
+    imageAlt: "Løber på en atletikbane i solnedgang",
     type: "Træning & bevægelse værktøjer",
   },
   {

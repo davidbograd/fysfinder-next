@@ -1,4 +1,4 @@
-// Updated: 2026-09-28 - Set the SEO meta title and H1 from the finished kondital article.
+// Updated: 2026-09-29 - Use the runner photo as the kondital-beregner image.
 import { Metadata } from "next";
 import { ToolPageLayout } from "@/components/features/tools/ToolPageLayout";
 import { KonditalCalculator } from "./components/KonditalCalculator";
@@ -18,8 +18,8 @@ export default function KonditalBeregnerPage() {
       heading="Kondital beregner: Beregn nemt dit kondital (VO2 max) ud fra hvilepuls eller løb"
       structuredDataDescription="Beregn dit kondital (VO2-max) ud fra din hvilepuls eller en Cooper-test"
       image={{
-        src: "/images/vaerktoejer/kondital-beregner-placeholder.png",
-        alt: "Kondital beregner illustration",
+        src: "/images/vaerktoejer/kondital-beregner.jpg",
+        alt: "Løber på en atletikbane i solnedgang",
       }}
       intro={
         <>
