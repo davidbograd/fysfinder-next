@@ -1,14 +1,27 @@
-// Updated: 2026-09-29 - Use the runner photo as the kondital-beregner image.
+// Updated: 2026-09-29 - Use the page photo as the Open Graph image, same as the older calculators.
 import { Metadata } from "next";
 import { ToolPageLayout } from "@/components/features/tools/ToolPageLayout";
 import { KonditalCalculator } from "./components/KonditalCalculator";
 
 export const revalidate = 86400; // 24 hours ISR (must be a literal for Next.js segment config)
 
+const title = "Kondital-beregner: Beregn nemt dit kondital (VO2 max) →";
+const description =
+  "Beregn dit kondital med Fysfinders gratis beregner. Brug din hvilepuls eller en Cooper-test, og se hvordan dit kondital ligger for din alder og dit køn.";
+const image = {
+  url: "/images/vaerktoejer/kondital-beregner.jpg",
+  alt: "Løber på en atletikbane i solnedgang",
+};
+
 export const metadata: Metadata = {
-  title: "Kondital-beregner: Beregn nemt dit kondital (VO2 max) →",
-  description:
-    "Beregn dit kondital med Fysfinders gratis beregner. Brug din hvilepuls eller en Cooper-test, og se hvordan dit kondital ligger for din alder og dit køn.",
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    images: [{ url: image.url, width: 1200, height: 630, alt: image.alt }],
+    type: "website",
+  },
 };
 
 export default function KonditalBeregnerPage() {
@@ -17,10 +30,7 @@ export default function KonditalBeregnerPage() {
       slug="kondital-beregner"
       heading="Kondital beregner: Beregn nemt dit kondital (VO2 max) ud fra hvilepuls eller løb"
       structuredDataDescription="Beregn dit kondital (VO2-max) ud fra din hvilepuls eller en Cooper-test"
-      image={{
-        src: "/images/vaerktoejer/kondital-beregner.jpg",
-        alt: "Løber på en atletikbane i solnedgang",
-      }}
+      image={{ src: image.url, alt: image.alt }}
       intro={
         <>
           <p className="text-gray-600 text-sm sm:text-base text-pretty">
