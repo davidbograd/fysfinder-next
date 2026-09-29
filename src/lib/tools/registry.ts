@@ -1,4 +1,5 @@
 // Single source of truth for the Fysfinder tools (værktøjer).
+// Updated: 2026-09-29 - Register the kondital calculator. The other new calculators stay off main until they are ready.
 // Previously duplicated between src/app/vaerktoejer/page.tsx and RelatedToolsSection.
 
 export const TOOL_SLUGS = [
@@ -9,6 +10,7 @@ export const TOOL_SLUGS = [
   "fedtprocent-beregner",
   "pace-beregner",
   "rm-beregner",
+  "kondital-beregner",
 ] as const;
 
 export type ToolSlug = (typeof TOOL_SLUGS)[number];
@@ -109,6 +111,17 @@ export const tools: Tool[] = [
     href: "/vaerktoejer/rm-beregner",
     imageUrl: "/images/vaerktoejer/1rm-beregner.jpg",
     imageAlt: "RM beregner illustration med vægtstang og løfter",
+    type: "Træning & bevægelse værktøjer",
+  },
+  {
+    slug: "kondital-beregner",
+    title: "Kondital beregner",
+    feedbackName: "konditalberegneren",
+    description:
+      "Beregn dit kondital (VO2-max) ud fra din hvilepuls eller en Cooper-test, og se hvor du ligger for din alder og dit køn.",
+    href: "/vaerktoejer/kondital-beregner",
+    imageUrl: "/images/vaerktoejer/kondital-beregner.jpg",
+    imageAlt: "Løber på en atletikbane i solnedgang",
     type: "Træning & bevægelse værktøjer",
   },
 ];

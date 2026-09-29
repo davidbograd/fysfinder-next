@@ -1,3 +1,4 @@
+// Updated: 2026-09-29 - Link "kondital beregner" to the published calculator.
 import type { LinkMapping } from "./types.js";
 
 export const miscMappings: LinkMapping[] = [
@@ -64,5 +65,15 @@ export const miscMappings: LinkMapping[] = [
       "rep max beregner",
     ],
     destination: "/vaerktoejer/rm-beregner",
+  },
+  {
+    keywords: [
+      "kondital-beregner",
+      "kondital beregner",
+      "Kondital beregner",
+      "konditalberegner",
+      "beregn kondital",
+    ],
+    destination: "/vaerktoejer/kondital-beregner",
   },
 ];
