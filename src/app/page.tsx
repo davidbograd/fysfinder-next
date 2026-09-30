@@ -266,7 +266,7 @@ function SpecialtyTeasers() {
         ))}
       </div>
       <p className="mt-4 text-base text-center text-[#5a6663]">
-        Du kan søge blandt alle 136 specialer i{" "}
+        Du kan søge blandt alle 137 specialer i{" "}
         <Link
           href="#top-search-specialty"
           className="font-medium text-[#0b5b43] underline underline-offset-2 hover:text-[#084c39] transition-colors"

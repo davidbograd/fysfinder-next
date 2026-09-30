@@ -17,6 +17,21 @@ describe("PartnershipBanner", () => {
     ).not.toBeInTheDocument();
   });
 
+  it("shows the Dansk Dystoniforening partnership on the dystoni specialty", () => {
+    render(<PartnershipBanner specialtySlug="dystoni" />);
+
+    expect(screen.getByAltText("Dansk Dystoniforening")).toHaveAttribute(
+      "src",
+      "/images/samarbejdspartnere/dansk-dystoniforening.jpg"
+    );
+    expect(
+      screen.getByText(/I samarbejde med Dansk Dystoniforening/)
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByText(/indebærer ikke en faglig vurdering/)
+    ).not.toBeInTheDocument();
+  });
+
   it("shows the Hovedpine Foreningen partnership on hovedpine and migraene", () => {
     const { unmount } = render(<PartnershipBanner specialtySlug="hovedpine" />);
     expect(screen.getByAltText("Hovedpine Foreningen")).toBeInTheDocument();

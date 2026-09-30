@@ -13,30 +13,38 @@ export function PartnerStrip() {
           </h2>
         </div>
 
-        <div className="flex w-full flex-col items-start gap-6 sm:w-auto sm:flex-row sm:items-center sm:gap-8">
+        <div className="flex w-full min-w-0 flex-col items-start gap-6 max-sm:grid max-sm:grid-cols-2 max-sm:items-center max-sm:justify-items-center max-sm:gap-x-6 max-sm:gap-y-8 sm:flex-row sm:flex-nowrap sm:items-center sm:gap-8">
           <Image
             src="/images/samarbejdspartnere/FAKS-logo-med-hele-navn.png"
             alt="FAKS logo"
             width={260}
             height={80}
-            sizes="(max-width: 640px) 260px, 210px"
-            className="h-auto w-full max-w-[260px] sm:w-auto sm:max-w-[210px]"
+            sizes="(max-width: 639px) 45vw, 210px"
+            className="h-auto w-full max-w-[260px] sm:w-auto sm:max-w-[210px] sm:shrink sm:min-w-0"
           />
           <Image
             src="/images/samarbejdspartnere/hovedpine-foreningen.png"
             alt="Hovedpineforeningen logo"
             width={340}
             height={120}
-            sizes="(max-width: 640px) 230px, 200px"
-            className="h-auto w-full max-w-[230px] sm:w-auto sm:max-w-[200px]"
+            sizes="(max-width: 639px) 45vw, 200px"
+            className="h-auto w-full max-w-[230px] sm:w-auto sm:max-w-[200px] sm:shrink sm:min-w-0"
           />
           <Image
             src="/images/samarbejdspartnere/dansk-skoliose-forening.png"
             alt="Dansk Skoliose Forening logo"
             width={400}
             height={203}
-            sizes="(max-width: 640px) 200px, 165px"
-            className="h-auto w-full max-w-[200px] sm:w-auto sm:max-w-[165px]"
+            sizes="(max-width: 639px) 45vw, 165px"
+            className="h-auto w-full max-w-[200px] sm:w-auto sm:max-w-[165px] sm:shrink sm:min-w-0"
+          />
+          <Image
+            src="/images/samarbejdspartnere/dansk-dystoniforening.jpg"
+            alt="Dansk Dystoniforening logo"
+            width={700}
+            height={270}
+            sizes="(max-width: 639px) 45vw, 200px"
+            className="h-auto w-full max-w-[230px] sm:w-auto sm:max-w-[200px] sm:shrink sm:min-w-0"
           />
         </div>
       </div>

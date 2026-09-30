@@ -26,6 +26,23 @@ export function PartnershipBanner({ specialtySlug }: PartnershipBannerProps) {
     );
   }
 
+  if (specialtySlug === "dystoni") {
+    return (
+      <div className="mb-4 flex flex-wrap items-center gap-4 sm:gap-8">
+        <Image
+          src="/images/samarbejdspartnere/dansk-dystoniforening.jpg"
+          alt="Dansk Dystoniforening"
+          width={700}
+          height={270}
+          className="h-auto w-full sm:max-w-[240px]"
+        />
+        <p className="w-full text-gray-600 sm:w-auto sm:flex-1">
+          I samarbejde med Dansk Dystoniforening.
+        </p>
+      </div>
+    );
+  }
+
   if (specialtySlug === "hovedpine" || specialtySlug === "migraene") {
     return (
       <div className="mb-4 flex flex-wrap items-center gap-4 sm:gap-8">
