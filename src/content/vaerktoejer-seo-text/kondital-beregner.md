@@ -92,7 +92,7 @@ Tabellerne nedenfor viser vejledende referenceværdier for kondital målt i ml/k
 | 60–69 år | &lt; 21 | 22–26 | 27–35 | 36–39 | &gt; 40 |
 | 70+ år | &lt; 19 | 20–24 | 25–32 | 33–37 | &gt; 38 |
 
-![Kondital-tabel: vejledende VO2 max i ml/kg/min for kvinder og mænd efter alder, fra meget lavt til meget højt](/images/vaerktoejer/kondital-tabel-alder-koen.png)
+![Kondital-tabel: vejledende VO2 max i ml/kg/min for kvinder og mænd efter alder](/images/vaerktoejer/kondital-tabel-alder-koen.png)
 
 Referenceværdier varierer mellem forskellige tabeller og befolkningsgrupper. De bør derfor først og fremmest bruges til at sætte dit resultat i perspektiv.
 
