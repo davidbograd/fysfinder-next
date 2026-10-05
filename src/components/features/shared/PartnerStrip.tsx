@@ -39,10 +39,10 @@ export function PartnerStrip() {
             className="h-auto w-full max-w-[200px] sm:w-auto sm:max-w-[165px] sm:shrink sm:min-w-0"
           />
           <Image
-            src="/images/samarbejdspartnere/dansk-dystoniforening.jpg"
+            src="/images/samarbejdspartnere/dansk-dystoniforening.png"
             alt="Dansk Dystoniforening logo"
-            width={700}
-            height={270}
+            width={1024}
+            height={342}
             sizes="(max-width: 639px) 45vw, 200px"
             className="h-auto w-full max-w-[230px] sm:w-auto sm:max-w-[200px] sm:shrink sm:min-w-0"
           />

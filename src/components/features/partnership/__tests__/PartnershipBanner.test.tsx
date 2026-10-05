@@ -22,7 +22,7 @@ describe("PartnershipBanner", () => {
 
     expect(screen.getByAltText("Dansk Dystoniforening")).toHaveAttribute(
       "src",
-      "/images/samarbejdspartnere/dansk-dystoniforening.jpg"
+      "/images/samarbejdspartnere/dansk-dystoniforening.png"
     );
     expect(
       screen.getByText(/I samarbejde med Dansk Dystoniforening/)

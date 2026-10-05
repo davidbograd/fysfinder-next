@@ -10,7 +10,7 @@ describe("PartnersPage", () => {
 
     expect(screen.getByAltText("Dansk Dystoniforening logo")).toHaveAttribute(
       "src",
-      "/images/samarbejdspartnere/dansk-dystoniforening.jpg"
+      "/images/samarbejdspartnere/dansk-dystoniforening.png"
     );
     expect(within(section).getByRole("link", { name: /dystoni\.dk/ })).toHaveAttribute(
       "href",

@@ -15,7 +15,7 @@ describe("PartnerStrip", () => {
     );
     expect(screen.getByAltText("Dansk Dystoniforening logo")).toHaveAttribute(
       "src",
-      "/images/samarbejdspartnere/dansk-dystoniforening.jpg"
+      "/images/samarbejdspartnere/dansk-dystoniforening.png"
     );
     expect(screen.getByAltText("FAKS logo").parentElement).toHaveClass(
       "max-sm:grid-cols-2",

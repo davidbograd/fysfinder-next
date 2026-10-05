@@ -71,7 +71,7 @@ export default function PartnersPage() {
     {
       id: "dansk-dystoniforening",
       name: "Dansk Dystoniforening",
-      logo: "/images/samarbejdspartnere/dansk-dystoniforening.jpg",
+      logo: "/images/samarbejdspartnere/dansk-dystoniforening.png",
       description: [
         "Dansk Dystoniforening er en landsdækkende interesseorganisation for mennesker med dystoni og deres pårørende. Dystoni er ufrivillige muskelspændinger, som kan give abnorme bevægelser og stillinger. Neurologer skønner, at omkring 3.000 danskere lever med dystoni.",
 

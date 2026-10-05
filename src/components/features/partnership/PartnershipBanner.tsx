@@ -30,10 +30,10 @@ export function PartnershipBanner({ specialtySlug }: PartnershipBannerProps) {
     return (
       <div className="mb-4 flex flex-wrap items-center gap-4 sm:gap-8">
         <Image
-          src="/images/samarbejdspartnere/dansk-dystoniforening.jpg"
+          src="/images/samarbejdspartnere/dansk-dystoniforening.png"
           alt="Dansk Dystoniforening"
-          width={700}
-          height={270}
+          width={1024}
+          height={342}
           className="h-auto w-full sm:max-w-[240px]"
         />
         <p className="w-full text-gray-600 sm:w-auto sm:flex-1">
