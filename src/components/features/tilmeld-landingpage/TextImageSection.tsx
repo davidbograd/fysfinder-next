@@ -1,4 +1,4 @@
-// Added: 2026-04-06 - Added text-plus-image section to position Fysfinder value proposition.
+// Updated: 2026-10-06 - Split the with/without comparison into its own section so the founder block can sit below the revenue calculator.
 import { ChartNoAxesCombined, CheckCircle2, Eye, MessageSquare, XCircle } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -89,8 +89,16 @@ export function TextImageSection() {
             </div>
           </div>
         </div>
+      </div>
+    </section>
+  );
+}
 
-        <div className="mt-20 md:mt-24">
+export function ComparisonSection() {
+  return (
+    <section className="w-full bg-background py-16 md:py-20">
+      <div className="mx-auto w-full max-w-[1440px] px-5 sm:px-6 lg:px-8">
+        <div>
           <div className="mx-auto mb-8 max-w-3xl text-center">
             <h2 className="text-[2rem] font-semibold leading-tight text-[#1f2b28]">
               Flere patienter - uden marketingbøvl

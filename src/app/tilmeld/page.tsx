@@ -1,11 +1,15 @@
-// Updated: 2026-04-18 - Added featured clinic testimonials below ClinicSearch (Sådan bliver du fundet…).
+// Updated: 2026-10-06 - Added revenue calculator section; founder block now follows it.
 import { Metadata } from "next";
 import { ReactNode } from "react";
 import { HeroSection } from "@/components/features/tilmeld-landingpage/HeroSection";
 import { ClinicSearch } from "@/components/features/tilmeld-landingpage/ClinicSearch";
 import { TilmeldClinicTestimonials } from "@/components/features/tilmeld-landingpage/TilmeldClinicTestimonials";
-import { TextImageSection } from "@/components/features/tilmeld-landingpage/TextImageSection";
+import {
+  ComparisonSection,
+  TextImageSection,
+} from "@/components/features/tilmeld-landingpage/TextImageSection";
 import { FeaturesSection } from "@/components/features/tilmeld-landingpage/FeaturesSection";
+import { RevenueCalculatorSection } from "@/components/features/tilmeld-landingpage/RevenueCalculatorSection";
 import { SignupCtaSplitSection } from "@/components/features/tilmeld-landingpage/SignupCtaSplitSection";
 import { FaqSection } from "@/components/features/tilmeld-landingpage/FaqSection";
 import { PartnerStrip } from "@/components/features/shared/PartnerStrip";
@@ -43,6 +47,12 @@ export default function ClinicOwnerPage() {
         <div className="mx-auto w-full max-w-[1440px] px-5 sm:px-6 lg:px-8">
           <PartnerStrip />
         </div>
+      </FullBleedSection>
+      <FullBleedSection>
+        <ComparisonSection />
+      </FullBleedSection>
+      <FullBleedSection>
+        <RevenueCalculatorSection />
       </FullBleedSection>
       <FullBleedSection>
         <TextImageSection />

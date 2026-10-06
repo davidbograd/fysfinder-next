@@ -25,4 +25,20 @@ describe("/tilmeld page", () => {
       })
     ).not.toBeInTheDocument();
   });
+
+  it("places the founder block below the revenue calculator", () => {
+    render(<ClinicOwnerPage />);
+
+    const calculator = screen.getByRole("heading", {
+      name: /Hvad koster de tomme tider/i,
+    });
+    const founder = screen.getByRole("heading", {
+      name: /Skabt af en fysioterapeut/i,
+    });
+
+    expect(
+      calculator.compareDocumentPosition(founder) &
+        Node.DOCUMENT_POSITION_FOLLOWING
+    ).toBeTruthy();
+  });
 });
