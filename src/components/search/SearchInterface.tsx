@@ -1,4 +1,4 @@
-// Updated: 2026-10-06 - Location-page filters render as pill chips inside the search card.
+// Updated: 2026-10-06 - Location-page filter chips sit in a tab attached below the search bar.
 "use client";
 
 import React, { useState, Suspense } from "react";
@@ -88,7 +88,7 @@ function FilterChip({
       role="checkbox"
       aria-checked={checked}
       onClick={() => onToggle(!checked)}
-      className={`inline-flex items-center gap-2 rounded-full border py-2 pl-2.5 pr-4 text-sm transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary/40 focus-visible:ring-offset-1 ${
+      className={`inline-flex items-center gap-2 rounded-full border py-1.5 pl-2 pr-3.5 text-sm transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary/40 focus-visible:ring-offset-1 ${
         checked
           ? "border-[#b9d3c7] bg-[#e8f1ec] text-brand-primary"
           : "border-[#d8ddd9] bg-white text-gray-700 hover:border-[#b9c3bf] hover:bg-[#f8f7f2]"
@@ -160,13 +160,7 @@ function MigrationContent({
   const isHomeVariant = !showFilters;
 
   return (
-    <div
-      className={
-        isHomeVariant
-          ? "space-y-4"
-          : "mb-4 rounded-2xl border border-[#e6e9e7] bg-white p-3 shadow-[0_1px_2px_rgba(15,23,42,0.04)] md:p-4"
-      }
-    >
+    <div className={isHomeVariant ? "space-y-4" : "mb-4"}>
       {/* Unified Search Bar */}
       <div className={isHomeVariant ? "mb-4" : ""}>
         <div
@@ -240,22 +234,21 @@ function MigrationContent({
       {/* Filters and Search Button Row */}
       {showFilters && (
         <>
+          {/* Inset by the bar's corner radius so the tab meets its flat bottom edge */}
+          <div
+            role="group"
+            aria-label="Filtre"
+            className="mx-3 flex flex-wrap gap-2 rounded-b-2xl border border-t-0 border-[#d8ddd9] bg-[#f2f1ec] px-2.5 pb-2.5 pt-2.5 md:mx-8"
+          >
+            <SimpleFilters />
+          </div>
+
           {/* Search Button (Mobile Only - Desktop uses inline button) */}
-          <div className="mt-3 flex md:hidden">
+          <div className="mt-4 flex md:hidden">
             <SearchButton
               text="Find"
               className="w-full bg-[#0b5b43] hover:bg-[#084c39] text-white px-8 py-3 rounded-full font-medium transition-colors duration-200 shadow-sm hover:shadow-md"
             />
-          </div>
-
-          <div className="mt-3 border-t border-[#eef0ee] pt-3 md:mt-4 md:pt-4">
-            <div
-              role="group"
-              aria-label="Filtre"
-              className="flex flex-wrap gap-2"
-            >
-              <SimpleFilters />
-            </div>
           </div>
         </>
       )}
