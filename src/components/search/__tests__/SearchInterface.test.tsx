@@ -1,4 +1,4 @@
-// Updated: 2026-09-06 - Location-page filter checkboxes navigate immediately.
+// Updated: 2026-10-06 - Location-page filter chips inside the search card.
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { SearchInterface } from "../SearchInterface";
@@ -64,7 +64,9 @@ describe("SearchInterface", () => {
       />
     );
 
-    await user.click(screen.getByRole("checkbox", { name: "Ydernummer" }));
+    await user.click(
+      screen.getByRole("checkbox", { name: "Med ydernummer" })
+    );
 
     expect(global.__TEST_ROUTER_MOCKS__.push).toHaveBeenCalledWith(
       "/find/fysioterapeut/aarhus-c?ydernummer=true"
@@ -89,5 +91,41 @@ describe("SearchInterface", () => {
     expect(global.__TEST_ROUTER_MOCKS__.push).toHaveBeenCalledWith(
       "/find/fysioterapeut/aarhus-c?handicap=true&ydernummer=true"
     );
+  });
+
+  it("shows active filter chips as checked and removes them on click", async () => {
+    const user = userEvent.setup();
+
+    render(
+      <SearchInterface
+        specialties={[]}
+        citySlug="holte"
+        defaultSearchValue="Holte"
+        showFilters
+        initialFilters={{ ydernummer: true }}
+      />
+    );
+
+    const ydernummerChip = screen.getByRole("checkbox", {
+      name: "Med ydernummer",
+    });
+    expect(ydernummerChip).toHaveAttribute("aria-checked", "true");
+    expect(
+      screen.getByRole("checkbox", { name: "Handicapadgang" })
+    ).toHaveAttribute("aria-checked", "false");
+
+    await user.click(ydernummerChip);
+
+    expect(global.__TEST_ROUTER_MOCKS__.push).toHaveBeenCalledWith(
+      "/find/fysioterapeut/holte"
+    );
+  });
+
+  it("does not render filter chips on the homepage variant", () => {
+    render(
+      <SearchInterface specialties={[]} citySlug="danmark" defaultSearchValue="" />
+    );
+
+    expect(screen.queryByRole("group", { name: "Filtre" })).toBeNull();
   });
 });

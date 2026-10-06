@@ -1,4 +1,4 @@
-// Updated: 2026-09-06 - Location-page filter checkboxes apply immediately via navigation.
+// Updated: 2026-10-06 - Location-page filters render as pill chips inside the search card.
 "use client";
 
 import React, { useState, Suspense } from "react";
@@ -11,8 +11,7 @@ import {
 import { LocationSearch } from "./SearchInput/LocationSearch";
 import { SpecialtySearch } from "./SearchInput/SpecialtySearch";
 import { SearchButton } from "./SearchButton";
-import { Checkbox } from "@/components/ui/checkbox";
-import { BookHeart, Search } from "lucide-react";
+import { BookHeart, Check, Search } from "lucide-react";
 
 interface SearchInterfaceProps {
   specialties: {
@@ -74,8 +73,44 @@ function InlineSearchButton() {
   );
 }
 
+function FilterChip({
+  label,
+  checked,
+  onToggle,
+}: {
+  label: string;
+  checked: boolean;
+  onToggle: (checked: boolean) => void;
+}) {
+  return (
+    <button
+      type="button"
+      role="checkbox"
+      aria-checked={checked}
+      onClick={() => onToggle(!checked)}
+      className={`inline-flex items-center gap-2 rounded-full border py-2 pl-2.5 pr-4 text-sm transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary/40 focus-visible:ring-offset-1 ${
+        checked
+          ? "border-[#b9d3c7] bg-[#e8f1ec] text-brand-primary"
+          : "border-[#d8ddd9] bg-white text-gray-700 hover:border-[#b9c3bf] hover:bg-[#f8f7f2]"
+      }`}
+    >
+      <span
+        aria-hidden="true"
+        className={`flex h-5 w-5 items-center justify-center rounded-full border transition-colors duration-150 ${
+          checked
+            ? "border-[#0b5b43] bg-[#0b5b43] text-white"
+            : "border-[#8a9491] bg-white text-transparent"
+        }`}
+      >
+        <Check className="h-3 w-3" strokeWidth={3} />
+      </span>
+      <span className="leading-none">{label}</span>
+    </button>
+  );
+}
+
 /**
- * Simple filter toggles using SearchProvider
+ * Filter chips using SearchProvider
  */
 function SimpleFilters() {
   const { state, setFilters, setUnsearchedChanges, navigateToSearch } =
@@ -98,37 +133,16 @@ function SimpleFilters() {
 
   return (
     <>
-      <div className="flex items-center space-x-2">
-        <Checkbox
-          id="ydernummer"
-          checked={ydernummer || false}
-          onCheckedChange={(checked) =>
-            applyFilter("ydernummer", checked === true)
-          }
-        />
-        <label
-          htmlFor="ydernummer"
-          className="text-sm text-gray-700 cursor-pointer"
-        >
-          Ydernummer
-        </label>
-      </div>
-
-      <div className="flex items-center space-x-2">
-        <Checkbox
-          id="handicap"
-          checked={handicapAccess || false}
-          onCheckedChange={(checked) =>
-            applyFilter("handicap", checked === true)
-          }
-        />
-        <label
-          htmlFor="handicap"
-          className="text-sm text-gray-700 cursor-pointer"
-        >
-          Handicapadgang
-        </label>
-      </div>
+      <FilterChip
+        label="Med ydernummer"
+        checked={ydernummer || false}
+        onToggle={(checked) => applyFilter("ydernummer", checked)}
+      />
+      <FilterChip
+        label="Handicapadgang"
+        checked={handicapAccess || false}
+        onToggle={(checked) => applyFilter("handicap", checked)}
+      />
     </>
   );
 }
@@ -146,9 +160,15 @@ function MigrationContent({
   const isHomeVariant = !showFilters;
 
   return (
-    <div className="space-y-4">
+    <div
+      className={
+        isHomeVariant
+          ? "space-y-4"
+          : "mb-4 rounded-2xl border border-[#e6e9e7] bg-white p-3 shadow-[0_1px_2px_rgba(15,23,42,0.04)] md:p-4"
+      }
+    >
       {/* Unified Search Bar */}
-      <div className="mb-4">
+      <div className={isHomeVariant ? "mb-4" : ""}>
         <div
           className={`flex flex-col md:flex-row bg-white border border-[#d8ddd9] rounded-xl md:rounded-full shadow-[0_1px_1px_rgba(15,23,42,0.05)] transition-shadow duration-200 ${
             isHomeVariant ? "max-w-[820px]" : ""
@@ -219,20 +239,25 @@ function MigrationContent({
 
       {/* Filters and Search Button Row */}
       {showFilters && (
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          {/* Filter Checkboxes */}
-          <div className="flex flex-wrap gap-6">
-            <SimpleFilters />
-          </div>
-
+        <>
           {/* Search Button (Mobile Only - Desktop uses inline button) */}
-          <div className="flex md:hidden">
+          <div className="mt-3 flex md:hidden">
             <SearchButton
               text="Find"
-              className="bg-[#0b5b43] hover:bg-[#084c39] text-white px-8 py-3 rounded-full font-medium transition-colors duration-200 shadow-sm hover:shadow-md"
+              className="w-full bg-[#0b5b43] hover:bg-[#084c39] text-white px-8 py-3 rounded-full font-medium transition-colors duration-200 shadow-sm hover:shadow-md"
             />
           </div>
-        </div>
+
+          <div className="mt-3 border-t border-[#eef0ee] pt-3 md:mt-4 md:pt-4">
+            <div
+              role="group"
+              aria-label="Filtre"
+              className="flex flex-wrap gap-2"
+            >
+              <SimpleFilters />
+            </div>
+          </div>
+        </>
       )}
 
       {/* Mobile Search Button for Homepage (when no filters) */}
