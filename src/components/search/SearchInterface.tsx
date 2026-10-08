@@ -1,4 +1,4 @@
-// Updated: 2026-10-06 - Location-page filter chips sit in a tab attached below the search bar.
+// Updated: 2026-10-08 - Online fysioterapi chip reroutes to the online location page.
 "use client";
 
 import React, { useState, Suspense } from "react";
@@ -11,6 +11,7 @@ import {
 import { LocationSearch } from "./SearchInput/LocationSearch";
 import { SpecialtySearch } from "./SearchInput/SpecialtySearch";
 import { SearchButton } from "./SearchButton";
+import { getOnlineToggleLocation, ONLINE_LOCATION } from "./buildSearchTargetUrl";
 import { BookHeart, Check, Search } from "lucide-react";
 
 interface SearchInterfaceProps {
@@ -117,6 +118,7 @@ function SimpleFilters() {
     useSearch();
 
   const { ydernummer, handicap: handicapAccess } = state.filters;
+  const isOnline = state.location?.slug === ONLINE_LOCATION.slug;
 
   const applyFilter = (key: "ydernummer" | "handicap", enabled: boolean) => {
     const nextFilters = { ...state.filters };
@@ -131,6 +133,11 @@ function SimpleFilters() {
     void navigateToSearch({ filters: nextFilters });
   };
 
+  const applyOnline = (enabled: boolean) => {
+    setUnsearchedChanges(false);
+    void navigateToSearch({ location: getOnlineToggleLocation(enabled) });
+  };
+
   return (
     <>
       <FilterChip
@@ -142,6 +149,11 @@ function SimpleFilters() {
         label="Handicapadgang"
         checked={handicapAccess || false}
         onToggle={(checked) => applyFilter("handicap", checked)}
+      />
+      <FilterChip
+        label="Online fysioterapi"
+        checked={isOnline}
+        onToggle={applyOnline}
       />
     </>
   );

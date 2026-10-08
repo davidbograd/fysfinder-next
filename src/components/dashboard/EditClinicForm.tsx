@@ -1225,10 +1225,13 @@ export const EditClinicForm = ({ clinic, specialties, insurances, teamMembers: i
                   }
                 />
                 <Label htmlFor="online_fysioterapeut" className="cursor-pointer">
-                  Online fysioterapeut
+                  Online fysioterapi
                 </Label>
               </div>
             </div>
+            <p className="text-xs text-gray-500">
+              Med online fysioterapi vises klinikken også på siden for online fysioterapi.
+            </p>
             
             {/* Hjemmetræning og Holdtræning (moved here) */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

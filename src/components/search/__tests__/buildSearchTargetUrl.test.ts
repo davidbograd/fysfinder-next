@@ -2,8 +2,16 @@
 import {
   buildSearchTargetUrl,
   buildSearchTargetUrlFromState,
+  getOnlineToggleLocation,
 } from "../buildSearchTargetUrl";
 import { SearchState } from "../SearchProvider";
+
+describe("getOnlineToggleLocation", () => {
+  it("routes to online when enabled and danmark when disabled", () => {
+    expect(getOnlineToggleLocation(true).slug).toBe("online");
+    expect(getOnlineToggleLocation(false).slug).toBe("danmark");
+  });
+});
 
 describe("buildSearchTargetUrl", () => {
   it("uses selected location slug when present", () => {

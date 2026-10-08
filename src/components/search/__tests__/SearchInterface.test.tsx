@@ -1,4 +1,4 @@
-// Updated: 2026-10-06 - Location-page filter chips inside the search card.
+// Updated: 2026-10-08 - Online fysioterapi chip rerouting.
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { SearchInterface } from "../SearchInterface";
@@ -118,6 +118,63 @@ describe("SearchInterface", () => {
 
     expect(global.__TEST_ROUTER_MOCKS__.push).toHaveBeenCalledWith(
       "/find/fysioterapeut/holte"
+    );
+  });
+
+  it("reroutes to the online page and keeps specialty and filters", async () => {
+    const user = userEvent.setup();
+
+    render(
+      <SearchInterface
+        specialties={[
+          {
+            specialty_id: "1",
+            specialty_name: "Sportsskader",
+            specialty_name_slug: "sportsskader",
+          },
+        ]}
+        currentSpecialty="sportsskader"
+        citySlug="aarhus"
+        defaultSearchValue="Aarhus"
+        showFilters
+        initialFilters={{ ydernummer: true }}
+      />
+    );
+
+    const onlineChip = screen.getByRole("checkbox", {
+      name: "Online fysioterapi",
+    });
+    expect(onlineChip).toHaveAttribute("aria-checked", "false");
+
+    await user.click(onlineChip);
+
+    expect(global.__TEST_ROUTER_MOCKS__.push).toHaveBeenCalledWith(
+      "/find/fysioterapeut/online/sportsskader?ydernummer=true"
+    );
+  });
+
+  it("shows online as checked on the online page and unchecking goes to danmark", async () => {
+    const user = userEvent.setup();
+
+    render(
+      <SearchInterface
+        specialties={[]}
+        citySlug="online"
+        defaultSearchValue="Online"
+        showFilters
+        initialFilters={{ handicap: true }}
+      />
+    );
+
+    const onlineChip = screen.getByRole("checkbox", {
+      name: "Online fysioterapi",
+    });
+    expect(onlineChip).toHaveAttribute("aria-checked", "true");
+
+    await user.click(onlineChip);
+
+    expect(global.__TEST_ROUTER_MOCKS__.push).toHaveBeenCalledWith(
+      "/find/fysioterapeut/danmark?handicap=true"
     );
   });
 
