@@ -296,10 +296,11 @@ describe("clinic entitlement policies", () => {
     expect(sorted[0].id).toBe("non-premium-higher-rating");
   });
 
-  test("sponsored listings are shown everywhere except the online page", () => {
+  test("sponsored labels follow the ranking policy", () => {
     expect(showsSponsoredListings("online")).toBe(false);
+    expect(showsSponsoredListings("danmark")).toBe(false);
+    expect(showsSponsoredListings("danmark", "fibromyalgi")).toBe(true);
     expect(showsSponsoredListings("aarhus")).toBe(true);
-    expect(showsSponsoredListings("danmark")).toBe(true);
   });
 
   test("premium listing resolution prefers the active listing over array order", () => {

@@ -45,7 +45,7 @@ export function ClinicsList({
   }
 
   const clinics = list.clinics;
-  const showSponsored = showsSponsoredListings(locationSlug);
+  const showSponsored = showsSponsoredListings(locationSlug, specialtySlug);
   const hasMore = clinics.length < totalClinics;
 
   const loadMore = async () => {
