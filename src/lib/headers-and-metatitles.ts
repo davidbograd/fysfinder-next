@@ -9,15 +9,15 @@ export interface HeadingFilters {
   online?: boolean;
 }
 
-/** "Online" qualifies the noun ("online fysioterapeuter"), so it is not counted as a tier filter. */
-function getPhysioNouns(online?: boolean) {
-  const prefix = online ? "online " : "";
-  return {
-    fysioterapi: `${prefix}fysioterapi`,
-    Fysioterapi: online ? "Online fysioterapi" : "Fysioterapi",
-    fysioterapeuter: `${prefix}fysioterapeuter`,
-    Fysioterapeuter: online ? "Online fysioterapeuter" : "Fysioterapeuter",
-  };
+const ONLINE_H2 = "Tilbyder online behandling og konsultation";
+const YDERNUMMER_H2 = "Tilbyder vederlagsfri fysioterapi & henvisning fra læge";
+
+function countFilters(filters?: HeadingFilters): number {
+  return (
+    (filters?.ydernummer ? 1 : 0) +
+    (filters?.handicap ? 1 : 0) +
+    (filters?.online ? 1 : 0)
+  );
 }
 
 export interface HeadingResult {
@@ -52,9 +52,9 @@ export function generateHeadings(
 ): HeadingResult {
   const hasYdernummer = filters?.ydernummer;
   const hasHandicap = filters?.handicap;
-  const filterCount = (hasYdernummer ? 1 : 0) + (hasHandicap ? 1 : 0);
+  const hasOnline = filters?.online;
+  const filterCount = countFilters(filters);
   const locationPhrase = getLocationPhrase(locationName, locationPreposition);
-  const { fysioterapeuter } = getPhysioNouns(filters?.online);
 
   // Base text components
   const specialtyText = specialtyName
@@ -66,29 +66,28 @@ export function generateHeadings(
   let h2: string | null = null;
 
   if (filterCount === 0) {
-    h1 = filters?.online
-      ? `Find ${fysioterapeuter} ${locationPhrase}${specialtyText}`
-      : `Find og sammenlign ${fysioterapeuter} ${locationPhrase}${specialtyText}`;
+    h1 = `Find og sammenlign fysioterapeuter ${locationPhrase}${specialtyText}`;
   } else if (filterCount === 1) {
     // Single filter: Unique H1 for that specific filter
     if (hasYdernummer) {
-      h1 = `Find ${fysioterapeuter} med ydernummer ${locationPhrase}${specialtyText}`;
-      h2 = "Tilbyder vederlagsfri fysioterapi & henvisning fra læge";
+      h1 = `Find fysioterapeuter med ydernummer ${locationPhrase}${specialtyText}`;
+      h2 = YDERNUMMER_H2;
+    } else if (hasOnline) {
+      h1 = `Find fysioterapeuter med online fysioterapi ${locationPhrase}${specialtyText}`;
+      h2 = ONLINE_H2;
     } else {
-      // hasHandicap must be true since filterCount === 1 - no H2 for handicap only
-      h1 = `Find ${fysioterapeuter} med handicapadgang ${locationPhrase}${specialtyText}`;
+      // No H2 for handicap only
+      h1 = `Find fysioterapeuter med handicapadgang ${locationPhrase}${specialtyText}`;
       h2 = null;
     }
   } else {
     // Multiple filters: Classic H1 + descriptive H2
-    h1 = `Find og sammenlign ${fysioterapeuter} ${locationPhrase}${specialtyText}`;
+    h1 = `Find og sammenlign fysioterapeuter ${locationPhrase}${specialtyText}`;
 
     const filterTexts: string[] = [];
-    if (hasYdernummer)
-      filterTexts.push(
-        "Tilbyder vederlagsfri fysioterapi & henvisning fra læge"
-      );
+    if (hasYdernummer) filterTexts.push(YDERNUMMER_H2);
     if (hasHandicap) filterTexts.push("Har handicapadgang");
+    if (hasOnline) filterTexts.push(ONLINE_H2);
     h2 = filterTexts.join(" · ");
   }
 
@@ -101,7 +100,7 @@ export function generateHeadings(
  *
  * @param locationName - The name of the location (city, region, etc.)
  * @param specialtyName - Optional specialty name for specialty pages
- * @param filters - Optional filters (ydernummer, handicap)
+ * @param filters - Optional filters (ydernummer, handicap, online)
  * @param clinicCount - Optional number of clinics (used for location-only pages with 2+ clinics)
  */
 export function generateMetaTitle(
@@ -113,10 +112,9 @@ export function generateMetaTitle(
 ): string {
   const hasYdernummer = filters?.ydernummer;
   const hasHandicap = filters?.handicap;
-  const filterCount = (hasYdernummer ? 1 : 0) + (hasHandicap ? 1 : 0);
+  const hasOnline = filters?.online;
+  const filterCount = countFilters(filters);
   const locationPhrase = getLocationPhrase(locationName, locationPreposition);
-  const { fysioterapi, Fysioterapi, fysioterapeuter, Fysioterapeuter } =
-    getPhysioNouns(filters?.online);
 
   // Base text components
   const specialtyPrefix = specialtyName ? `${specialtyName} ` : "";
@@ -124,7 +122,7 @@ export function generateMetaTitle(
   if (filterCount === 0) {
     // No filters
     if (specialtyName) {
-      return `${specialtyPrefix}${fysioterapi} ${locationPhrase} | Find fysioterapeuter ›`;
+      return `${specialtyPrefix}fysioterapi ${locationPhrase} | Find fysioterapeuter ›`;
     } else {
       // Add clinic count to title when 2+ clinics and no filters/specialty
       // This creates titles like "15 fysioterapi klinikker i København | Find fysioterapeuter"
@@ -134,33 +132,51 @@ export function generateMetaTitle(
           locationName.toLowerCase() === "danmark" && clinicCount >= 1000
             ? "1000+"
             : clinicCount.toString();
-        return `${countDisplay} ${fysioterapi} klinikker ${locationPhrase} | Find fysioterapeuter`;
+        return `${countDisplay} fysioterapi klinikker ${locationPhrase} | Find fysioterapeuter`;
       } else {
-        return `${Fysioterapi} klinikker ${locationPhrase} | Find fysioterapeuter ›`;
+        return `Fysioterapi klinikker ${locationPhrase} | Find fysioterapeuter ›`;
       }
     }
   } else if (filterCount === 1) {
     // Single filter
     if (hasYdernummer) {
       if (specialtyName) {
-        return `${specialtyPrefix}${fysioterapi} ${locationPhrase} | Ydernummer (vederlagsfri)`;
+        return `${specialtyPrefix}fysioterapi ${locationPhrase} | Ydernummer (vederlagsfri)`;
       } else {
-        return `Find ${fysioterapeuter} med ydernummer ${locationPhrase} →`;
+        return `Find fysioterapeuter med ydernummer ${locationPhrase} →`;
+      }
+    } else if (hasOnline) {
+      if (specialtyName) {
+        return `Find online ${specialtyName.toLowerCase()} fysioterapi ${locationPhrase} →`;
+      } else {
+        return `Find fysioterapeuter med online fysioterapi ${locationPhrase} →`;
       }
     } else {
       // hasHandicap must be true since filterCount === 1
       if (specialtyName) {
-        return `${specialtyPrefix}${fysioterapeuter} med handicapadgang ${locationPhrase}`;
+        return `${specialtyPrefix}fysioterapeuter med handicapadgang ${locationPhrase}`;
       } else {
-        return `${Fysioterapeuter} med handicapadgang ${locationPhrase}`;
+        return `Fysioterapeuter med handicapadgang ${locationPhrase}`;
       }
     }
   } else {
     // Multiple filters
+    if (hasOnline) {
+      const labels = [
+        hasYdernummer && "ydernummer",
+        hasHandicap && "handicapadgang",
+        "online",
+      ].filter(Boolean) as string[];
+      const label = labels.join(" & ");
+      const capitalizedLabel = label.charAt(0).toUpperCase() + label.slice(1);
+      return specialtyName
+        ? `${specialtyPrefix}fysioterapi ${locationPhrase} | ${capitalizedLabel}`
+        : `Fysioterapeuter ${locationPhrase} | ${capitalizedLabel}`;
+    }
     if (specialtyName) {
-      return `${specialtyPrefix}${fysioterapi} ${locationPhrase} | Med ydernummer`;
+      return `${specialtyPrefix}fysioterapi ${locationPhrase} | Med ydernummer`;
     } else {
-      return `${Fysioterapeuter} ${locationPhrase} | Ydernummer & handicapadgang`;
+      return `Fysioterapeuter ${locationPhrase} | Ydernummer & handicapadgang`;
     }
   }
 }

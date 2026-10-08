@@ -90,18 +90,13 @@ export async function generateMetadata({
       )?.specialty_name
     : undefined;
 
-  // A city's online listing also holds clinics from elsewhere, so its total is not a city count.
-  const showsClinicCount =
-    !filters.ydernummer &&
-    !filters.handicap &&
-    !specialtyName &&
-    (!filters.online || isDanmark);
-
   const title = generateMetaTitle(
     cityName,
     specialtyName,
     filters,
-    showsClinicCount ? data.clinics.length : undefined,
+    !filters.ydernummer && !filters.handicap && !filters.online && !specialtyName
+      ? data.clinics.length
+      : undefined,
     data.city?.location_preposition
   );
 
