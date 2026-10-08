@@ -112,6 +112,29 @@ describe("ClinicListingCard", () => {
     process.env.NEXT_PUBLIC_LOGO_DEV_PUBLISHABLE_KEY = previousToken;
   });
 
+  it("marks active premium clinics as sponsored unless sponsoring is hidden", () => {
+    const premium_listing = {
+      id: "premium-1",
+      start_date: "2025-01-01T00:00:00.000Z",
+      end_date: "2999-01-01T00:00:00.000Z",
+      booking_link: null,
+    };
+
+    const { rerender } = render(
+      <ClinicListingCard {...mockClinic} premium_listing={premium_listing} />
+    );
+    expect(screen.getByText("Sponsoreret")).toBeInTheDocument();
+
+    rerender(
+      <ClinicListingCard
+        {...mockClinic}
+        premium_listing={premium_listing}
+        showSponsored={false}
+      />
+    );
+    expect(screen.queryByText("Sponsoreret")).not.toBeInTheDocument();
+  });
+
   it("dispatches card hover event on mouse enter", async () => {
     const user = userEvent.setup();
     const dispatchSpy = jest.spyOn(window, "dispatchEvent");

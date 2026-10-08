@@ -48,6 +48,7 @@ interface Props {
   handicapadgang?: boolean | null;
   verified_klinik?: boolean | null;
   trackingContextCityId?: string;
+  showSponsored?: boolean;
 }
 
 const ClinicListingCard: React.FC<Props> = ({
@@ -72,6 +73,7 @@ const ClinicListingCard: React.FC<Props> = ({
   handicapadgang,
   verified_klinik,
   trackingContextCityId,
+  showSponsored = true,
 }) => {
   const specialties = specialtiesProp ?? [];
   const MAX_VISIBLE_MEMBERS = 5;
@@ -79,7 +81,7 @@ const ClinicListingCard: React.FC<Props> = ({
   const visibleMembers = team_members.slice(0, MAX_VISIBLE_MEMBERS);
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
   const [logoLoadFailed, setLogoLoadFailed] = useState(false);
-  const isPremium = isPremiumListingActive(premium_listing);
+  const isPremium = showSponsored && isPremiumListingActive(premium_listing);
   const logoPath = getClinicLogoDisplayUrl({
     logoUrl: logo_url,
     website,

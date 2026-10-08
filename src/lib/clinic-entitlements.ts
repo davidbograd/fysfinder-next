@@ -39,7 +39,8 @@ const RANKING_POLICY_BY_CONTEXT: Record<RankingContext, RankingPolicy> = {
   // is a placement premium clinics pay for.
   danmark: { prioritizePremium: false, prioritizeVerifiedSignedUp: false },
   "danmark-specialty": { prioritizePremium: true, prioritizeVerifiedSignedUp: false },
-  online: { prioritizePremium: true, prioritizeVerifiedSignedUp: false },
+  // Online listings carry no sponsored placement, so premium must not buy rank either.
+  online: { prioritizePremium: false, prioritizeVerifiedSignedUp: false },
   city: { prioritizePremium: true, prioritizeVerifiedSignedUp: true },
   "city-specialty": { prioritizePremium: true, prioritizeVerifiedSignedUp: true },
   nearby: { prioritizePremium: true, prioritizeVerifiedSignedUp: false },
@@ -117,6 +118,11 @@ export function getPrimaryRankingContext(
   if (locationSlug === "online") return "online";
   if (specialtySlug) return "city-specialty";
   return "city";
+}
+
+/** Whether listing cards on this location page may be marked and styled as sponsored. */
+export function showsSponsoredListings(locationSlug: string): boolean {
+  return locationSlug !== "online";
 }
 
 export function getRankingPolicy(context: RankingContext): RankingPolicy {

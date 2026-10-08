@@ -9,6 +9,7 @@ import ClinicListingCard from "./ClinicListingCard";
 import { Button } from "@/components/ui/button";
 import { orderSpecialties } from "@/lib/clinic-utils";
 import { LOCATION_LIST_PAGE_SIZE } from "@/lib/location-listing";
+import { showsSponsoredListings } from "@/lib/clinic-entitlements";
 import { loadMoreLocationClinics } from "@/app/actions/load-more-location-clinics";
 import type { LocationFilters } from "@/app/find/fysioterapeut/filter-utils";
 
@@ -44,6 +45,7 @@ export function ClinicsList({
   }
 
   const clinics = list.clinics;
+  const showSponsored = showsSponsoredListings(locationSlug);
   const hasMore = clinics.length < totalClinics;
 
   const loadMore = async () => {
@@ -103,6 +105,7 @@ export function ClinicsList({
             handicapadgang={clinic.handicapadgang}
             verified_klinik={clinic.verified_klinik}
             trackingContextCityId={trackingContextCityId}
+            showSponsored={showSponsored}
           />
         ))}
       </div>

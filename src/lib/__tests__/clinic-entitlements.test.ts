@@ -6,6 +6,7 @@ import {
   canAccessTeamMembersFeature,
   getPrimaryRankingContext,
   getRankingPolicy,
+  showsSponsoredListings,
   getWeightedRatingScore,
   isPremiumListingActive,
   resolvePremiumListing,
@@ -270,7 +271,7 @@ describe("clinic entitlement policies", () => {
     );
   });
 
-  test("online policy keeps premium ordering behavior", () => {
+  test("online policy ranks by rating without a premium boost", () => {
     const clinics = [
       {
         id: "non-premium-higher-rating",
@@ -292,7 +293,13 @@ describe("clinic entitlement policies", () => {
     ];
 
     const sorted = sortClinicsByPolicy(clinics, getRankingPolicy("online"));
-    expect(sorted[0].id).toBe("premium-lower-rating");
+    expect(sorted[0].id).toBe("non-premium-higher-rating");
+  });
+
+  test("sponsored listings are shown everywhere except the online page", () => {
+    expect(showsSponsoredListings("online")).toBe(false);
+    expect(showsSponsoredListings("aarhus")).toBe(true);
+    expect(showsSponsoredListings("danmark")).toBe(true);
   });
 
   test("premium listing resolution prefers the active listing over array order", () => {
