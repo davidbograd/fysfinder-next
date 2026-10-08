@@ -1,4 +1,4 @@
-// Updated: 2026-10-08 - Online fysioterapi chip rerouting.
+// Updated: 2026-10-08 - Online fysioterapi is a filter param, not a location.
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { SearchInterface } from "../SearchInterface";
@@ -121,7 +121,7 @@ describe("SearchInterface", () => {
     );
   });
 
-  it("reroutes to the online page and keeps specialty and filters", async () => {
+  it("adds the online filter and keeps the city, specialty, and other filters", async () => {
     const user = userEvent.setup();
 
     render(
@@ -149,20 +149,20 @@ describe("SearchInterface", () => {
     await user.click(onlineChip);
 
     expect(global.__TEST_ROUTER_MOCKS__.push).toHaveBeenCalledWith(
-      "/find/fysioterapeut/online/sportsskader?ydernummer=true"
+      "/find/fysioterapeut/aarhus/sportsskader?online=true&ydernummer=true"
     );
   });
 
-  it("shows online as checked on the online page and unchecking goes to danmark", async () => {
+  it("shows the online filter as checked and unchecking removes only that param", async () => {
     const user = userEvent.setup();
 
     render(
       <SearchInterface
         specialties={[]}
-        citySlug="online"
-        defaultSearchValue="Online"
+        citySlug="danmark"
+        defaultSearchValue="Danmark"
         showFilters
-        initialFilters={{ handicap: true }}
+        initialFilters={{ handicap: true, online: true }}
       />
     );
 

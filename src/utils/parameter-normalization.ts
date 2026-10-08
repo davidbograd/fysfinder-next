@@ -1,7 +1,7 @@
 import { SearchFilters } from "@/components/search/SearchProvider";
 
 // Parameter order for canonicalization (alphabetical)
-const CANONICAL_PARAM_ORDER = ["handicap", "ydernummer"] as const;
+const CANONICAL_PARAM_ORDER = ["handicap", "online", "ydernummer"] as const;
 
 /**
  * Normalizes URL search parameters to ensure consistent ordering
@@ -10,7 +10,6 @@ const CANONICAL_PARAM_ORDER = ["handicap", "ydernummer"] as const;
 export function normalizeSearchParams(params: URLSearchParams): string {
   const normalized = new URLSearchParams();
 
-  // Add parameters in canonical order
   CANONICAL_PARAM_ORDER.forEach((key) => {
     const value = params.get(key);
     if (value !== null) {
@@ -28,65 +27,15 @@ export function buildCanonicalUrl(
   basePath: string,
   filters: SearchFilters = {}
 ): string {
-  // Debug: buildCanonicalUrl called with basePath and filters
-
   const params = new URLSearchParams();
 
-  // Add filters in canonical order - only add if true, omit if false
-  if (filters.handicap === true) {
-    params.set("handicap", "true");
-  }
-  if (filters.ydernummer === true) {
-    params.set("ydernummer", "true");
-  }
+  // Only add filters that are on; a missing parameter means off.
+  CANONICAL_PARAM_ORDER.forEach((key) => {
+    if (filters[key] === true) params.set(key, "true");
+  });
 
   const normalizedParams = normalizeSearchParams(params);
-  const result = normalizedParams
-    ? `${basePath}?${normalizedParams}`
-    : basePath;
-
-  // Debug: buildCanonicalUrl completed
-  return result;
-}
-
-/**
- * Generates filter context for meta tags and UI display
- */
-export function getFilterContext(filters: SearchFilters): string {
-  const contexts: string[] = [];
-
-  if (filters.handicap === true) {
-    contexts.push("med handicapadgang");
-  }
-  if (filters.ydernummer === true) {
-    contexts.push("med ydernummer");
-  }
-
-  return contexts.length > 0 ? contexts.join(" og ") : "";
-}
-
-/**
- * Determines SEO strategy for filtered pages
- */
-export function getFilteredPageSEO(filters: SearchFilters): {
-  robots: string;
-  shouldIndex: boolean;
-} {
-  const activeFilters = Object.values(filters).filter(Boolean).length;
-
-  // Simple filters (1-2 parameters): indexable
-  if (activeFilters <= 2) {
-    return {
-      robots: "index, follow",
-      shouldIndex: true,
-    };
-  }
-
-  // Complex filters (3+ parameters): noindex
-  return {
-    robots: "noindex, follow",
-    shouldIndex: false,
-  };
+  return normalizedParams ? `${basePath}?${normalizedParams}` : basePath;
 }
 
 /**
@@ -97,31 +46,11 @@ export function parseFiltersFromURL(
 ): SearchFilters {
   const filters: SearchFilters = {};
 
-  const handicap = searchParams.get("handicap");
-  if (handicap === "true") {
-    filters.handicap = true;
-  }
-  // If parameter is missing or not "true", leave as undefined
-
-  const ydernummer = searchParams.get("ydernummer");
-  if (ydernummer === "true") {
-    filters.ydernummer = true;
-  }
-  // If parameter is missing or not "true", leave as undefined
+  CANONICAL_PARAM_ORDER.forEach((key) => {
+    if (searchParams.get(key) === "true") filters[key] = true;
+  });
 
   return filters;
-}
-
-/**
- * Checks if URL parameters are in canonical order
- */
-export function isCanonicalParameterOrder(params: URLSearchParams): boolean {
-  const currentOrder = Array.from(params.keys()).sort();
-  const expectedOrder = CANONICAL_PARAM_ORDER.filter((key) =>
-    params.has(key)
-  ).sort();
-
-  return JSON.stringify(currentOrder) === JSON.stringify(expectedOrder);
 }
 
 /**
@@ -140,4 +69,3 @@ export function buildSearchUrl(
 
   return buildCanonicalUrl(basePath, filters);
 }
-

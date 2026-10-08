@@ -34,7 +34,7 @@ export interface Clinic {
   opening_hours_source?: "google" | "owner" | "import" | null;
   parkering: string;
   handicapadgang: boolean | null;
-  /** Lists the clinic on /find/fysioterapeut/online and shows the "Online fysioterapi" badge. */
+  /** Matches the ?online=true search filter and shows the "Online fysioterapi" badge. */
   online_fysioterapeut?: boolean | null;
   god_adgang_verificeret: boolean;
   holdtræning: string;
@@ -162,7 +162,7 @@ export interface DBClinicResponse {
   søndag: string;
   parkering: string;
   handicapadgang: boolean | null;
-  /** Lists the clinic on /find/fysioterapeut/online and shows the "Online fysioterapi" badge. */
+  /** Matches the ?online=true search filter and shows the "Online fysioterapi" badge. */
   online_fysioterapeut?: boolean | null;
   god_adgang_verificeret: boolean;
   holdtræning: string;

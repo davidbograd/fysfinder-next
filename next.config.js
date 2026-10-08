@@ -144,6 +144,18 @@ const nextConfig = {
         destination: '/vaerktoejer/dexa-scanning',
         permanent: true,
       },
+      // Online moved from a location to a filter. Next.js merges any incoming
+      // filter params (e.g. ?ydernummer=true) into the destination query.
+      {
+        source: '/find/fysioterapeut/online',
+        destination: '/find/fysioterapeut/danmark?online=true',
+        permanent: true,
+      },
+      {
+        source: '/find/fysioterapeut/online/:specialty',
+        destination: '/find/fysioterapeut/danmark/:specialty?online=true',
+        permanent: true,
+      },
       // Clinic renames (slug regenerates from klinikNavn).
       {
         source: '/klinik/online-knaegenoptraening-med-fysioterapeut-andreas-bjerregaard',

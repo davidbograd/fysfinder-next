@@ -28,7 +28,7 @@ describe("ClinicServices", () => {
 
     expect(
       screen.getByRole("link", { name: "Online fysioterapi" }),
-    ).toHaveAttribute("href", "/find/fysioterapeut/online");
+    ).toHaveAttribute("href", "/find/fysioterapeut/danmark?online=true");
     expect(screen.getByText("Akupunktur")).toBeInTheDocument();
   });
 

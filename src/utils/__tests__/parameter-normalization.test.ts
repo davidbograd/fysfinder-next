@@ -34,4 +34,15 @@ describe("parameter-normalization", () => {
     );
     expect(filters).toEqual({ handicap: true });
   });
+
+  it("orders the online filter alphabetically between handicap and ydernummer", () => {
+    expect(
+      normalizeSearchParams(
+        new URLSearchParams("ydernummer=true&online=true&handicap=true")
+      )
+    ).toBe("handicap=true&online=true&ydernummer=true");
+    expect(buildSearchUrl("danmark", undefined, { online: true })).toBe(
+      "/find/fysioterapeut/danmark?online=true"
+    );
+  });
 });

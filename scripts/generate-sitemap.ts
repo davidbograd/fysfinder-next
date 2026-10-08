@@ -233,11 +233,14 @@ async function generateSitemaps() {
       })),
     ];
 
-    const cityUrls =
-      cities?.map((city: City) => ({
+    const cityUrls = [
+      ...(cities?.map((city: City) => ({
         loc: `${DOMAIN}/find/fysioterapeut/${city.bynavn_slug}`,
         priority: 0.8,
-      })) || [];
+      })) || []),
+      // Filtered landing page with its own SEO text (src/content/find-seo-text/online.md).
+      { loc: `${DOMAIN}/find/fysioterapeut/danmark?online=true`, priority: 0.8 },
+    ];
 
     const specialtyCoreUrls =
       specialties?.map((specialty: Specialty) => ({

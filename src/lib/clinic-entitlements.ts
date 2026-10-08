@@ -110,11 +110,12 @@ export function getWeightedRatingScore(
  */
 export function getPrimaryRankingContext(
   locationSlug: string,
-  specialtySlug?: string
+  specialtySlug?: string,
+  filters?: { online?: boolean }
 ): RankingContext {
+  if (filters?.online) return "online";
   if (locationSlug === "danmark")
     return specialtySlug ? "danmark-specialty" : "danmark";
-  if (locationSlug === "online") return "online";
   if (specialtySlug) return "city-specialty";
   return "city";
 }
@@ -125,10 +126,12 @@ export function getPrimaryRankingContext(
  */
 export function showsSponsoredListings(
   locationSlug: string,
-  specialtySlug?: string
+  specialtySlug?: string,
+  filters?: { online?: boolean }
 ): boolean {
-  return getRankingPolicy(getPrimaryRankingContext(locationSlug, specialtySlug))
-    .prioritizePremium;
+  return getRankingPolicy(
+    getPrimaryRankingContext(locationSlug, specialtySlug, filters)
+  ).prioritizePremium;
 }
 
 export function getRankingPolicy(context: RankingContext): RankingPolicy {

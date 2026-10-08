@@ -84,7 +84,23 @@ function applyClinicFilters(url: string, filters?: LocationFilters): string {
   let nextUrl = url;
   if (filters?.ydernummer) nextUrl += "&ydernummer=eq.true";
   if (filters?.handicap) nextUrl += "&handicapadgang=eq.true";
+  if (filters?.online) nextUrl += "&online_fysioterapeut=eq.true";
   return nextUrl;
+}
+
+/**
+ * Online clinics treat patients anywhere, so a city's online listing shows the clinics
+ * based in that city first and every other online clinic in Denmark after them.
+ */
+export function orderCityOnlineClinics<T extends { clinics_id: string }>(
+  localClinics: T[],
+  nationalClinics: T[]
+): T[] {
+  const localIds = new Set(localClinics.map((clinic) => clinic.clinics_id));
+  return [
+    ...localClinics,
+    ...nationalClinics.filter((clinic) => !localIds.has(clinic.clinics_id)),
+  ];
 }
 
 function mapValidClinics(clinicsData: unknown): Clinic[] {
@@ -162,60 +178,29 @@ async function fetchDanmarkLocationData(
   };
 }
 
-async function fetchOnlineLocationData(
-  context: LocationFetchContext
-): Promise<LocationPageData> {
-  const { specialtiesUrl, fetchOptions, specialtySlug, filters, primaryRankingPolicy } =
-    context;
+async function fetchCityOnlineClinics(
+  context: LocationFetchContext,
+  city: City
+): Promise<Clinic[]> {
+  const { fetchOptions, specialtySlug, filters, primaryRankingPolicy } = context;
 
-  let clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order),premium_listings(id,start_date,end_date,booking_link)`;
-  const specialtyFilter = specialtySlug
-    ? `&filtered_specialties.specialties.specialty_name_slug=eq.${specialtySlug}`
-    : "";
+  const select = specialtySlug
+    ? `select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order),premium_listings(id,start_date,end_date,booking_link),filtered_specialties:clinic_specialties!inner(specialty:specialties!inner(specialty_name_slug))&filtered_specialties.specialties.specialty_name_slug=eq.${specialtySlug}`
+    : `select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order),premium_listings(id,start_date,end_date,booking_link)`;
+  const nationalUrl = applyClinicFilters(
+    `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?${select}`,
+    filters
+  );
 
-  if (specialtySlug) {
-    clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order),premium_listings(id,start_date,end_date,booking_link),filtered_specialties:clinic_specialties!inner(specialty:specialties!inner(specialty_name_slug))${specialtyFilter}`;
-  }
-
-  clinicsUrl += "&online_fysioterapeut=eq.true";
-  clinicsUrl = applyClinicFilters(clinicsUrl, filters);
-
-  const [specialties, cityDataResult, clinicsData] = await Promise.all([
-    fetchWithRetry(specialtiesUrl, fetchOptions) as Promise<SpecialtyWithSeo[]>,
-    (fetchWithRetry(
-      `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/cities?bynavn_slug=eq.online&select=*`,
-      fetchOptions
-    ) as Promise<City[]>).catch((error: unknown) => {
-      console.warn("Could not fetch city data for 'online' location:", error);
-      return null;
-    }),
-    fetchWithRetry(clinicsUrl, fetchOptions),
-  ]);
-
-  const cityForOnline = cityDataResult?.[0] || null;
-  const finalCityObject: City =
-    cityForOnline ||
-    ({
-      id: "online",
-      bynavn: "Online",
-      bynavn_slug: "online",
-      location_preposition: "i",
-      latitude: 0,
-      longitude: 0,
-      postal_codes: [],
-      betegnelse: "Online fysioterapi",
-      seo_tekst: undefined,
-    } as City);
-
-  const clinics = mapValidClinics(clinicsData);
-
-  return {
-    city: finalCityObject,
-    clinics: sortClinicsByPolicy(clinics, primaryRankingPolicy),
-    nearbyClinicsList: [],
-    nearbyCities: [],
-    specialties,
-  };
+  // One national query is enough: the city's own clinics are a subset of it.
+  const clinics = sortClinicsByPolicy(
+    mapValidClinics(await fetchWithRetry(nationalUrl, fetchOptions)),
+    primaryRankingPolicy
+  );
+  return orderCityOnlineClinics(
+    clinics.filter((clinic) => clinic.city_id === city.id),
+    clinics
+  );
 }
 
 async function fetchCityLocationData(
@@ -249,6 +234,16 @@ async function fetchCityLocationData(
       nearbyCities: [],
       specialties,
     };
+
+  if (filters?.online) {
+    return {
+      city,
+      clinics: await fetchCityOnlineClinics(context, city),
+      nearbyClinicsList: [],
+      nearbyCities: [],
+      specialties,
+    };
+  }
 
   let clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order),premium_listings(id,start_date,end_date,booking_link)&city_id=eq.${city.id}`;
   if (specialtySlug) {
@@ -342,7 +337,7 @@ async function fetchLocationDataUncached(
     next: { revalidate: CACHE_TIMES.LOCATION_PAGE },
   };
   const primaryRankingPolicy = getRankingPolicy(
-    getPrimaryRankingContext(locationSlug, specialtySlug)
+    getPrimaryRankingContext(locationSlug, specialtySlug, filters)
   );
   const nearbyRankingPolicy = getRankingPolicy("nearby");
 
@@ -361,7 +356,6 @@ async function fetchLocationDataUncached(
     };
 
     if (locationSlug === "danmark") return fetchDanmarkLocationData(context);
-    if (locationSlug === "online") return fetchOnlineLocationData(context);
     return fetchCityLocationData(context);
   } catch {
     return {
@@ -379,15 +373,14 @@ const fetchLocationDataCached = cache(
     locationSlug: string,
     specialtySlug: string | undefined,
     ydernummer: boolean,
-    handicap: boolean
+    handicap: boolean,
+    online: boolean
   ): Promise<LocationPageData> => {
-    const filters =
-      ydernummer || handicap
-        ? {
-            ...(ydernummer ? { ydernummer: true } : {}),
-            ...(handicap ? { handicap: true } : {}),
-          }
-        : undefined;
+    const filters: LocationFilters = {
+      ...(ydernummer ? { ydernummer: true } : {}),
+      ...(handicap ? { handicap: true } : {}),
+      ...(online ? { online: true } : {}),
+    };
 
     return fetchLocationDataUncached(locationSlug, specialtySlug, filters);
   }
@@ -396,12 +389,14 @@ const fetchLocationDataCached = cache(
 export async function fetchLocationData(
   locationSlug: string,
   specialtySlug?: string,
-  filters?: { ydernummer?: boolean; handicap?: boolean }
+  filters?: LocationFilters
 ): Promise<LocationPageData> {
+  // Primitive arguments so React's cache() dedupes calls with equal filters.
   return fetchLocationDataCached(
     locationSlug,
     specialtySlug,
     Boolean(filters?.ydernummer),
-    Boolean(filters?.handicap)
+    Boolean(filters?.handicap),
+    Boolean(filters?.online)
   );
 }

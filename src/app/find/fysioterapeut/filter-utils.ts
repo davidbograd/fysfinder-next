@@ -2,6 +2,7 @@
 export interface LocationFilters {
   ydernummer?: boolean;
   handicap?: boolean;
+  online?: boolean;
 }
 
 export function parseFilters(
@@ -10,5 +11,6 @@ export function parseFilters(
   const filters: LocationFilters = {};
   if (searchParams?.ydernummer === "true") filters.ydernummer = true;
   if (searchParams?.handicap === "true") filters.handicap = true;
+  if (searchParams?.online === "true") filters.online = true;
   return filters;
 }

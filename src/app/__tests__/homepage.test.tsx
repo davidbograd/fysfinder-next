@@ -65,6 +65,9 @@ describe("HomePage", () => {
       screen.getByRole("link", { name: "klinikker med ydernummer" })
     ).toBeInTheDocument();
     expect(
+      screen.getByRole("link", { name: "online fysioterapi" })
+    ).toHaveAttribute("href", "/find/fysioterapeut/danmark?online=true");
+    expect(
       screen.queryByRole("link", {
         name: "behandling med tilskud fra den offentlige sygesikring",
       })

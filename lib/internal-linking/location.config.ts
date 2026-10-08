@@ -8,7 +8,7 @@ export const locationMappings: LinkMapping[] = [
       "Fysioterapi Online",
       "Online fysioterapi",
     ],
-    destination: "/find/fysioterapeut/online",
+    destination: "/find/fysioterapeut/danmark?online=true",
   },
   {
     keywords: [

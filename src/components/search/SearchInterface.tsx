@@ -1,17 +1,17 @@
-// Updated: 2026-10-08 - Online fysioterapi chip reroutes to the online location page.
+// Updated: 2026-10-08 - Online fysioterapi is a ?online=true filter chip like the others.
 "use client";
 
 import React, { useState, Suspense } from "react";
 import {
   SearchProvider,
   LocationQuery,
+  SearchFilters,
   SpecialtyQuery,
   useSearch,
 } from "./SearchProvider";
 import { LocationSearch } from "./SearchInput/LocationSearch";
 import { SpecialtySearch } from "./SearchInput/SpecialtySearch";
 import { SearchButton } from "./SearchButton";
-import { getOnlineToggleLocation, ONLINE_LOCATION } from "./buildSearchTargetUrl";
 import { BookHeart, Check, Search } from "lucide-react";
 
 interface SearchInterfaceProps {
@@ -24,7 +24,7 @@ interface SearchInterfaceProps {
   citySlug: string;
   defaultSearchValue?: string;
   showFilters?: boolean;
-  initialFilters?: { ydernummer?: boolean; handicap?: boolean };
+  initialFilters?: SearchFilters;
 }
 
 /**
@@ -116,10 +116,9 @@ function FilterChip({
 function SimpleFilters() {
   const { state, setFilters, navigateToSearch } = useSearch();
 
-  const { ydernummer, handicap: handicapAccess } = state.filters;
-  const isOnline = state.location?.slug === ONLINE_LOCATION.slug;
+  const { ydernummer, handicap: handicapAccess, online } = state.filters;
 
-  const applyFilter = (key: "ydernummer" | "handicap", enabled: boolean) => {
+  const applyFilter = (key: keyof SearchFilters, enabled: boolean) => {
     const nextFilters = { ...state.filters };
     if (enabled) {
       nextFilters[key] = true;
@@ -129,10 +128,6 @@ function SimpleFilters() {
 
     setFilters(nextFilters);
     void navigateToSearch({ filters: nextFilters });
-  };
-
-  const applyOnline = (enabled: boolean) => {
-    void navigateToSearch({ location: getOnlineToggleLocation(enabled) });
   };
 
   return (
@@ -149,8 +144,8 @@ function SimpleFilters() {
       />
       <FilterChip
         label="Online fysioterapi"
-        checked={isOnline}
-        onToggle={applyOnline}
+        checked={online || false}
+        onToggle={(checked) => applyFilter("online", checked)}
       />
     </>
   );

@@ -264,7 +264,12 @@ describe("clinic entitlement policies", () => {
     expect(getPrimaryRankingContext("danmark", "fibromyalgi")).toBe(
       "danmark-specialty"
     );
-    expect(getPrimaryRankingContext("online", "fibromyalgi")).toBe("online");
+    expect(
+      getPrimaryRankingContext("danmark", "fibromyalgi", { online: true })
+    ).toBe("online");
+    expect(getPrimaryRankingContext("aarhus", undefined, { online: true })).toBe(
+      "online"
+    );
     expect(getPrimaryRankingContext("aarhus")).toBe("city");
     expect(getPrimaryRankingContext("aarhus", "fibromyalgi")).toBe(
       "city-specialty"
@@ -297,10 +302,12 @@ describe("clinic entitlement policies", () => {
   });
 
   test("sponsored labels follow the ranking policy", () => {
-    expect(showsSponsoredListings("online")).toBe(false);
     expect(showsSponsoredListings("danmark")).toBe(false);
     expect(showsSponsoredListings("danmark", "fibromyalgi")).toBe(true);
     expect(showsSponsoredListings("aarhus")).toBe(true);
+    expect(showsSponsoredListings("aarhus", "fibromyalgi", { online: true })).toBe(
+      false
+    );
   });
 
   test("premium listing resolution prefers the active listing over array order", () => {

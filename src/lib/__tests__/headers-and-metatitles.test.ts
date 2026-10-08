@@ -1,6 +1,7 @@
 import {
   generateHeadings,
   generateLocationMetaTitle,
+  generateMetaTitle,
   generateSpecialtyMetaTitle,
 } from "@/lib/headers-and-metatitles";
 
@@ -71,6 +72,23 @@ describe("generateHeadings location phrase", () => {
   it("defaults to 'i' for Danmark, which has no city row", () => {
     expect(generateHeadings("Danmark").h1).toBe(
       "Find og sammenlign fysioterapeuter i Danmark"
+    );
+  });
+});
+
+describe("online filter wording", () => {
+  it("names online physios in the H1 for Danmark and cities", () => {
+    expect(generateHeadings("Danmark", undefined, { online: true }).h1).toBe(
+      "Find online fysioterapeuter i Danmark"
+    );
+    expect(
+      generateHeadings("Aarhus", undefined, { online: true, ydernummer: true }, "i").h1
+    ).toBe("Find online fysioterapeuter med ydernummer i Aarhus");
+  });
+
+  it("counts online clinics in the Danmark meta title", () => {
+    expect(generateMetaTitle("Danmark", undefined, { online: true }, 26)).toBe(
+      "26 online fysioterapi klinikker i Danmark | Find fysioterapeuter"
     );
   });
 });

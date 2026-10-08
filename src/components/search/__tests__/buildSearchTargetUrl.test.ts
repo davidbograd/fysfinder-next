@@ -1,15 +1,5 @@
 // Added: 2026-03-30 - MVP coverage for search target URL derivation from state.
-import {
-  buildSearchTargetUrl,
-  getOnlineToggleLocation,
-} from "../buildSearchTargetUrl";
-
-describe("getOnlineToggleLocation", () => {
-  it("routes to online when enabled and danmark when disabled", () => {
-    expect(getOnlineToggleLocation(true).slug).toBe("online");
-    expect(getOnlineToggleLocation(false).slug).toBe("danmark");
-  });
-});
+import { buildSearchTargetUrl } from "../buildSearchTargetUrl";
 
 describe("buildSearchTargetUrl", () => {
   it("uses selected location slug when present", () => {
@@ -37,8 +27,10 @@ describe("buildSearchTargetUrl", () => {
     expect(
       buildSearchTargetUrl({
         locationSlug: "aarhus",
-        filters: { handicap: true, ydernummer: true },
+        filters: { handicap: true, online: true, ydernummer: true },
       })
-    ).toBe("/find/fysioterapeut/aarhus?handicap=true&ydernummer=true");
+    ).toBe(
+      "/find/fysioterapeut/aarhus?handicap=true&online=true&ydernummer=true"
+    );
   });
 });

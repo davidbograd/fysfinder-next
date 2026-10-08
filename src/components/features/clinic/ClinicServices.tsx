@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Clinic } from "@/app/types";
 import Link from "next/link";
+import { buildSearchUrl } from "@/utils/parameter-normalization";
 
 interface ClinicServicesProps {
   clinic: Clinic;
@@ -17,7 +18,7 @@ export function ClinicServices({ clinic }: ClinicServicesProps) {
         <div className="flex flex-wrap gap-2">
           {isOnline && (
             <Link
-              href="/find/fysioterapeut/online"
+              href={buildSearchUrl("danmark", undefined, { online: true })}
               className="transition-transform hover:scale-105"
             >
               <Badge

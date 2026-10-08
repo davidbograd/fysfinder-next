@@ -26,6 +26,7 @@ export interface SpecialtyQuery {
 export interface SearchFilters {
   ydernummer?: boolean;
   handicap?: boolean;
+  online?: boolean;
 }
 
 export interface SearchState {

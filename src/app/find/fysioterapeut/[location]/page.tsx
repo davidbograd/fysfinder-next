@@ -5,7 +5,7 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { deslugify, slugify } from "@/app/utils/slugify";
 import { Metadata } from "next";
 import { SpecialtyWithSeo } from "@/app/types/index";
-import { notFound, redirect } from "next/navigation";
+import { notFound, permanentRedirect, redirect } from "next/navigation";
 
 import { SpecialtiesList } from "@/components/features/specialty/SpecialtiesList";
 import { ClinicsList } from "@/components/features/clinic/ClinicsList";
@@ -22,13 +22,18 @@ import {
   generateMetaTitle,
 } from "@/lib/headers-and-metatitles";
 import { createStaticClient } from "@/app/utils/supabase/static";
-import { parseFilters } from "@/app/find/fysioterapeut/filter-utils";
+import {
+  LocationFilters,
+  parseFilters,
+} from "@/app/find/fysioterapeut/filter-utils";
 import { fetchLocationData } from "@/app/find/fysioterapeut/[location]/fetch-location-data";
 import {
   getLocationMapClinics,
   getSpecialtyMatchCounts,
   LOCATION_LIST_PAGE_SIZE,
 } from "@/lib/location-listing";
+import { getFindSeoText } from "@/lib/find-seo-text";
+import { buildSearchUrl } from "@/utils/parameter-normalization";
 
 export const revalidate = 86400; // 24 hours ISR (must be a literal for Next.js segment config)
 export { fetchLocationData };
@@ -38,6 +43,21 @@ const supabase = createStaticClient();
 export async function generateStaticParams() {
   const { data: cities } = await supabase.from("cities").select("bynavn");
   return cities?.map((city) => ({ location: slugify(city.bynavn) })) || [];
+}
+
+/**
+ * Online used to be a location (/find/fysioterapeut/online). next.config.js redirects the
+ * lowercase URLs; this catches any other casing so no old link ends on a 404.
+ */
+function redirectLegacyOnlineLocation(
+  location: string,
+  specialty: string | undefined,
+  filters: LocationFilters
+) {
+  if (location.toLowerCase() !== "online") return;
+  permanentRedirect(
+    buildSearchUrl("danmark", specialty, { ...filters, online: true })
+  );
 }
 
 export async function generateMetadata({
@@ -50,6 +70,11 @@ export async function generateMetadata({
   const resolvedParams = await params;
   const resolvedSearchParams = await searchParams;
   const filters = parseFilters(resolvedSearchParams);
+  redirectLegacyOnlineLocation(
+    resolvedParams.location,
+    resolvedParams.specialty,
+    filters
+  );
 
   const data = await fetchLocationData(
     resolvedParams.location,
@@ -57,6 +82,7 @@ export async function generateMetadata({
     filters
   );
   const cityName = data.city?.bynavn || deslugify(resolvedParams.location);
+  const isDanmark = resolvedParams.location === "danmark";
 
   const specialtyName = resolvedParams.specialty
     ? data.specialties?.find(
@@ -64,19 +90,26 @@ export async function generateMetadata({
       )?.specialty_name
     : undefined;
 
+  // A city's online listing also holds clinics from elsewhere, so its total is not a city count.
+  const showsClinicCount =
+    !filters.ydernummer &&
+    !filters.handicap &&
+    !specialtyName &&
+    (!filters.online || isDanmark);
+
   const title = generateMetaTitle(
     cityName,
     specialtyName,
     filters,
-    !filters.ydernummer && !filters.handicap && !specialtyName
-      ? data.clinics.length
-      : undefined,
+    showsClinicCount ? data.clinics.length : undefined,
     data.city?.location_preposition
   );
 
   return {
     title,
-    description: `Find og sammenlign ${cityName} fysioterapeuter. Se anbefalinger, fysioterapi specialer, priser, åbningstider og mere. Start her →`,
+    description: filters.online
+      ? `Find og sammenlign online fysioterapeuter${isDanmark ? "" : ` i ${cityName}`}. Få behandling hjemmefra via video. Se anbefalinger, specialer og priser. Start her →`
+      : `Find og sammenlign ${cityName} fysioterapeuter. Se anbefalinger, fysioterapi specialer, priser, åbningstider og mere. Start her →`,
   };
 }
 
@@ -95,6 +128,11 @@ export default async function LocationPage({
   const resolvedParams = await params;
   const resolvedSearchParams = await searchParams;
   const filters = parseFilters(resolvedSearchParams);
+  redirectLegacyOnlineLocation(
+    resolvedParams.location,
+    resolvedParams.specialty,
+    filters
+  );
 
   const data = await fetchLocationData(
     resolvedParams.location,
@@ -103,11 +141,19 @@ export default async function LocationPage({
   );
   const specialties = data.specialties;
   const visibleClinics = data.clinics.slice(0, LOCATION_LIST_PAGE_SIZE);
-  const mapClinics = getLocationMapClinics(data.clinics);
+  // A city's online listing continues with clinics from other cities; only its own belong on the map.
+  const localClinics =
+    filters.online && data.city
+      ? data.clinics.filter((clinic) => clinic.city_id === data.city?.id)
+      : data.clinics;
+  const mapClinics = getLocationMapClinics(localClinics);
 
-  const currentPagePath = resolvedParams.specialty
-    ? `/find/fysioterapeut/${resolvedParams.location}/${resolvedParams.specialty}`
-    : `/find/fysioterapeut/${resolvedParams.location}`;
+  // Includes filters so SEO text never links to the page it is shown on.
+  const currentPagePath = buildSearchUrl(
+    resolvedParams.location,
+    resolvedParams.specialty,
+    filters
+  );
 
   const specialty = resolvedParams.specialty
     ? specialties.find(
@@ -117,7 +163,7 @@ export default async function LocationPage({
     : null;
 
   if (resolvedParams.specialty && !specialty) {
-    redirect(`/find/fysioterapeut/${resolvedParams.location}`);
+    redirect(buildSearchUrl(resolvedParams.location, undefined, filters));
   }
 
   const specialtyName = specialty?.specialty_name;
@@ -134,6 +180,11 @@ export default async function LocationPage({
       postal_codes: [],
       betegnelse: "Fysioterapeuter i Danmark",
     };
+    const filterSeoText = await getFindSeoText({
+      location: resolvedParams.location,
+      specialty: resolvedParams.specialty,
+      filters,
+    });
 
     return (
       <div className="w-full">
@@ -163,7 +214,8 @@ export default async function LocationPage({
 
           <p className="text-gray-600 mb-8">
             {data.clinics.length >= 1000 ? "1000+" : data.clinics.length}{" "}
-            fysioterapi klinikker i Danmark.
+            {filters.online ? "online fysioterapi" : "fysioterapi"} klinikker i
+            Danmark.
             <span className="hidden md:inline">
               {" "}
               Sammenlign anmeldelser, specialer og mere.
@@ -221,18 +273,27 @@ export default async function LocationPage({
             />
           </div>
         )}
+
+        {filterSeoText && (
+          <div className="max-w-[800px] mx-auto">
+            <SeoContent
+              source={filterSeoText}
+              currentPagePath={currentPagePath}
+            />
+          </div>
+        )}
       </div>
     );
   }
 
   if (!data.city) return notFound();
 
-  const isOnline = resolvedParams.location.toLowerCase() === "online";
+  const isOnline = filters.online === true;
 
   const breadcrumbItems = [
     { text: "Forside", link: "/" },
     {
-      text: isOnline ? "Online" : data.city.bynavn,
+      text: data.city.bynavn,
       ...(resolvedParams.specialty && {
         link: `/find/fysioterapeut/${resolvedParams.location}`,
       }),
@@ -242,12 +303,16 @@ export default async function LocationPage({
 
   const cityPreposition = data.city.location_preposition ?? "i";
   const cityLocationPhrase = `${cityPreposition} ${data.city.bynavn}`;
+  const clinicCountText = isOnline
+    ? `${localClinics.length} online fysioterapi klinikker ${cityLocationPhrase} og ${data.clinics.length - localClinics.length} i resten af Danmark.`
+    : `${data.clinics.length} fysioterapi klinikker ${cityLocationPhrase}.`;
+  const showMap = mapClinics.length > 0;
 
   const { h1, h2 } = generateHeadings(
-    isOnline ? "online" : data.city.bynavn,
+    data.city.bynavn,
     specialtyName,
     filters,
-    isOnline ? null : cityPreposition
+    cityPreposition
   );
 
   return (
@@ -270,29 +335,25 @@ export default async function LocationPage({
         )}
 
         <p className="text-gray-600 mb-8">
-          {isOnline
-            ? `${data.clinics.length} online fysioterapi klinikker.`
-            : `${data.clinics.length} fysioterapi klinikker ${cityLocationPhrase}.`}
+          {clinicCountText}
           <span className="hidden md:inline">
             {" "}
             Sammenlign anmeldelser, specialer og mere.
           </span>
         </p>
 
-        {!isOnline && (
-          <PartnershipBanner specialtySlug={resolvedParams.specialty} />
-        )}
+        <PartnershipBanner specialtySlug={resolvedParams.specialty} />
 
         <SearchInterface
           specialties={specialties}
           currentSpecialty={resolvedParams.specialty}
           citySlug={resolvedParams.location}
-          defaultSearchValue={isOnline ? "Online" : data.city.bynavn}
+          defaultSearchValue={data.city.bynavn}
           showFilters={true}
           initialFilters={filters}
         />
 
-        {!resolvedParams.specialty && data.clinics.length > 0 && data.city && (
+        {!isOnline && !resolvedParams.specialty && data.clinics.length > 0 && (
           <SpecialtiesList
             city={data.city}
             specialties={specialties}
@@ -307,7 +368,7 @@ export default async function LocationPage({
       {data.clinics.length === 0 ? (
         <div className="max-w-[800px] mx-auto">
           <NoResultsFound
-            cityName={isOnline ? "Online" : data.city.bynavn}
+            cityName={data.city.bynavn}
             specialtyName={specialtyName}
             locationSlug={resolvedParams.location}
           />
@@ -315,7 +376,7 @@ export default async function LocationPage({
       ) : (
         <div
           className={`mt-6 grid gap-6 ${
-            isOnline ? "" : "xl:grid-cols-[minmax(0,1fr)_420px]"
+            showMap ? "xl:grid-cols-[minmax(0,1fr)_420px]" : ""
           }`}
         >
           <div className="space-y-4">
@@ -329,7 +390,7 @@ export default async function LocationPage({
             />
           </div>
 
-          {!isOnline && (
+          {showMap && (
             <div className="self-start xl:sticky xl:top-24">
               <LocationClinicsMap clinics={mapClinics} city={data.city} />
             </div>

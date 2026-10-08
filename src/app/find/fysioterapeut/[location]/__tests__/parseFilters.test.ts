@@ -3,9 +3,12 @@ import { parseFilters } from "../../filter-utils";
 
 describe("parseFilters", () => {
   it("maps true query params to enabled filters", () => {
-    expect(parseFilters({ ydernummer: "true", handicap: "true" })).toEqual({
+    expect(
+      parseFilters({ ydernummer: "true", handicap: "true", online: "true" })
+    ).toEqual({
       ydernummer: true,
       handicap: true,
+      online: true,
     });
   });
 

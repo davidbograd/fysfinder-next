@@ -12,6 +12,7 @@ import { RegionList } from "@/components/features/search/RegionList";
 import { HeroDataPoints } from "@/components/features/search/HeroDataPoints";
 import { SocialProofLogoMarquee } from "@/components/features/tilmeld-landingpage/SocialProofLogoMarquee";
 import { PartnerStrip } from "@/components/features/shared/PartnerStrip";
+import { buildSearchUrl } from "@/utils/parameter-normalization";
 import {
   fetchCitiesWithCounts,
   fetchSpecialties,
@@ -166,7 +167,15 @@ function ValuePropsSection() {
             Spar tid på at finde den rette behandler
           </h3>
           <p className="text-[#5a6663] mt-3 max-w-[88%]">
-          Slut med at ringe rundt. Find og book den rette fysioterapeut på få minutter.
+            Slut med at ringe rundt. Find og book den rette fysioterapeut på få
+            minutter. Du kan også finde{" "}
+            <Link
+              href={buildSearchUrl("danmark", undefined, { online: true })}
+              className="font-medium text-[#0b5b43] underline underline-offset-2 hover:text-[#084c39] transition-colors"
+            >
+              online fysioterapi
+            </Link>
+            .
           </p>
           <Image
             src="/images/homepage/spar-tid-fysfinder.png"
