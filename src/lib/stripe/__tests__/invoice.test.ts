@@ -34,7 +34,7 @@ describe("getInvoiceSubscriptionId", () => {
     const invoice = {
       parent: null,
       subscription: "sub_legacy",
-    } as Stripe.Invoice;
+    } as unknown as Stripe.Invoice;
     expect(getInvoiceSubscriptionId(invoice)).toBe("sub_legacy");
   });
 

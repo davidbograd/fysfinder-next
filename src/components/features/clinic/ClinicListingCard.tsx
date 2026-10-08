@@ -80,20 +80,16 @@ const ClinicListingCard: React.FC<Props> = ({
   const hasMoreMembers = team_members.length > MAX_VISIBLE_MEMBERS;
   const visibleMembers = team_members.slice(0, MAX_VISIBLE_MEMBERS);
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
-  const [logoLoadFailed, setLogoLoadFailed] = useState(false);
+  const [failedLogoPath, setFailedLogoPath] = useState<string | null>(null);
   const isPremium = showSponsored && isPremiumListingActive(premium_listing);
   const logoPath = getClinicLogoDisplayUrl({
     logoUrl: logo_url,
     website,
   });
-  const hasLogo = Boolean(logoPath) && !logoLoadFailed;
+  const hasLogo = Boolean(logoPath) && failedLogoPath !== logoPath;
   const cardRef = useRef<HTMLDivElement>(null);
   const hasTrackedImpression = useRef(false);
   const [isMapHighlighted, setIsMapHighlighted] = useState(false);
-
-  useEffect(() => {
-    setLogoLoadFailed(false);
-  }, [logoPath]);
 
   useEffect(() => {
     if (!clinicId || hasTrackedImpression.current || !cardRef.current) return;
@@ -194,7 +190,7 @@ const ClinicListingCard: React.FC<Props> = ({
                     width={64}
                     height={64}
                     className="w-full h-full object-contain"
-                    onError={() => setLogoLoadFailed(true)}
+                    onError={() => setFailedLogoPath(logoPath ?? null)}
                   />
                 </div>
               ) : (

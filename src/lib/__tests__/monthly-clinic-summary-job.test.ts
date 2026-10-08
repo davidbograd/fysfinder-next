@@ -24,7 +24,7 @@ const ownershipRow = {
     clinics_id: "c1",
     klinikNavn: "Fysio Nord",
     klinikNavnSlug: "fysio-nord",
-    verified_email: "verified@example.com",
+    verified_email: "verified@example.com" as string | null,
     email: "clinic@example.com",
     tlf: "123",
     website: "https://example.com",

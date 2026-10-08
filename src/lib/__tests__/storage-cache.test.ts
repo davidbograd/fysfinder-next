@@ -15,7 +15,7 @@ describe("Supabase Storage egress guards", () => {
 
     // The optimizer uses max(minimumCacheTTL, upstream max-age). If minimumCacheTTL
     // regressed to the Next default, originals would be re-fetched from Supabase.
-    expect(nextConfig.images.minimumCacheTTL).toBeGreaterThanOrEqual(
+    expect(nextConfig.images?.minimumCacheTTL).toBeGreaterThanOrEqual(
       Number(STORAGE_CACHE_CONTROL_SECONDS)
     );
   });

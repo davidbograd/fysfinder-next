@@ -78,9 +78,10 @@ jest.mock("@supabase/supabase-js", () => ({
             }),
           }),
           update: (payload: unknown) => ({
-            eq: (...args: unknown[]) => mockClinicsUpdateEq(payload, ...args),
+            eq: (...args: unknown[]) =>
+              mockClinicsUpdateEq(payload, ...(args as [])),
           }),
-          insert: (...args: unknown[]) => mockClinicsInsert(...args),
+          insert: (payload: unknown) => mockClinicsInsert(payload),
         };
       }
 

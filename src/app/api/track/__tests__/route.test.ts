@@ -16,7 +16,7 @@ jest.mock("next/server", () => ({
 }));
 
 jest.mock("@supabase/supabase-js", () => ({
-  createClient: (...args: unknown[]) => mockCreateClient(...args),
+  createClient: (...args: unknown[]) => mockCreateClient(...(args as [])),
 }));
 
 function createMockRequest({

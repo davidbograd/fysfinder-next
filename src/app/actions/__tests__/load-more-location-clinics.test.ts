@@ -25,7 +25,7 @@ describe("loadMoreLocationClinics", () => {
       clinics: Array.from({ length: 12 }, (_, index) => ({
         clinics_id: `clinic-${index + 1}`,
       })),
-    } as Awaited<ReturnType<typeof fetchLocationData>>);
+    } as unknown as Awaited<ReturnType<typeof fetchLocationData>>);
 
     const clinics = await loadMoreLocationClinics({
       locationSlug: "aarhus",

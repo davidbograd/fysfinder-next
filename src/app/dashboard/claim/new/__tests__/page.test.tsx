@@ -3,7 +3,7 @@ import { render } from "@testing-library/react";
 const mockRedirect = jest.fn();
 const mockGetUser = jest.fn();
 const mockProfileSingle = jest.fn();
-const mockCreateClinicRequestPage = jest.fn(() => null);
+const mockCreateClinicRequestPage = jest.fn((_props?: unknown) => null);
 
 jest.mock("next/navigation", () => ({
   redirect: (...args: unknown[]) => mockRedirect(...args),
@@ -62,7 +62,10 @@ describe("CreateClaimNewPage", () => {
 
     render(ui);
 
-    const props = mockCreateClinicRequestPage.mock.calls[0][0];
+    const props = mockCreateClinicRequestPage.mock.calls[0]?.[0] as {
+      userProfile: { full_name: string; email: string };
+      initialCity: { id: string; name: string; slug: string; postalCode: string };
+    };
     expect(props.userProfile).toEqual({
       full_name: "Test Person",
       email: "auth@example.com",

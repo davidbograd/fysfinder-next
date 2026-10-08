@@ -10,7 +10,7 @@ declare global {
   namespace jest {
     interface Matchers<R> {
       toBeInTheDocument(): R;
-      toHaveClass(className: string): R;
+      toHaveClass(...classNames: Array<string | RegExp>): R;
       toBeVisible(): R;
       toBeDisabled(): R;
       toHaveValue(value: string): R;
