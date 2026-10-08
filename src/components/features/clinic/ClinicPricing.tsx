@@ -28,9 +28,9 @@ export function ClinicPricing({ clinic }: ClinicPricingProps) {
             <div className="flex items-center justify-between">
               <span>Første konsult (30 min)</span>
               <div className="text-right">
-                <div className="font-semibold">514,47 kr</div>
+                <div className="font-semibold">536,67 kr</div>
                 <div className="text-sm text-gray-500">
-                  Med lægehenvisning: 312,28 kr
+                  Med lægehenvisning: 325,76 kr
                 </div>
               </div>
             </div>
@@ -39,9 +39,9 @@ export function ClinicPricing({ clinic }: ClinicPricingProps) {
             <div className="flex items-center justify-between">
               <span>Standard konsult (30 min)</span>
               <div className="text-right">
-                <div className="font-semibold">327,12 kr</div>
+                <div className="font-semibold">341,24 kr</div>
                 <div className="text-sm text-gray-500">
-                  Med lægehenvisning: 198,56 kr
+                  Med lægehenvisning: 207,13 kr
                 </div>
               </div>
             </div>

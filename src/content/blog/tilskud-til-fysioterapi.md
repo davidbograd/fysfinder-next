@@ -52,14 +52,14 @@ Denne form for kommunalt tilskud kræver en konkret vurdering fra en fagperson i
 Priserne på fysioterapi afhænger af, hvilken type konsultation du får, og om du har en henvisning fra lægen. Med en henvisning og behandling hos en fysioterapeut med overenskomst med sygesikringen ser priserne sådan ud:
 
 **Første konsultation**  
- Fuldt honorar: 513,70 kr.  
- Offentligt tilskud: 201,88 kr.  
- **Din egenbetaling: 311,82 kr.**
+ Fuldt honorar: 536,67 kr.  
+ Offentligt tilskud: 210,91 kr.  
+ **Din egenbetaling: 325,76 kr.**
 
 **Efterfølgende individuel konsultation**  
- Fuldt honorar: 326,63 kr.  
- Offentligt tilskud: 128,37 kr.  
- **Din egenbetaling: 198,26 kr.**
+ Fuldt honorar: 341,24 kr.  
+ Offentligt tilskud: 134,11 kr.  
+ **Din egenbetaling: 207,13 kr.**
 
 Hvis du derudover er medlem af Sygeforsikringen "danmark", kan du få yderligere tilskud – hvilket kan sænke egenbetalingen betydeligt. Er du pensionist med helbredstillæg, kan du i nogle tilfælde få dækket det meste af patientandelen.
 
