@@ -177,7 +177,7 @@ async function fetchOnlineLocationData(
     clinicsUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/clinics?select=*,clinic_specialties(specialty:specialties(specialty_id,specialty_name,specialty_name_slug)),clinic_team_members(id,name,role,image_url,display_order),premium_listings(id,start_date,end_date,booking_link),filtered_specialties:clinic_specialties!inner(specialty:specialties!inner(specialty_name_slug))${specialtyFilter}`;
   }
 
-  clinicsUrl += "&or=(lokationSlug.eq.online,online_fysioterapeut.eq.true)";
+  clinicsUrl += "&online_fysioterapeut=eq.true";
   clinicsUrl = applyClinicFilters(clinicsUrl, filters);
 
   const [specialties, cityDataResult, clinicsData] = await Promise.all([
