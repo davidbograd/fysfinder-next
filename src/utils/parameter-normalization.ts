@@ -141,20 +141,3 @@ export function buildSearchUrl(
   return buildCanonicalUrl(basePath, filters);
 }
 
-/**
- * DEV-ONLY: Builds URL for isolated search-v2 routes during development.
- * Production search navigation should use buildSearchUrl().
- */
-export function buildSearchV2Url(
-  location: string,
-  specialty?: string,
-  filters: SearchFilters = {}
-): string {
-  let basePath = `/search-v2/find/${location}`;
-
-  if (specialty) {
-    basePath += `/${specialty}`;
-  }
-
-  return buildCanonicalUrl(basePath, filters);
-}

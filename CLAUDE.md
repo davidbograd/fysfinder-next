@@ -39,7 +39,6 @@ src/
     dashboard/    # Dashboard-specific components
     features/     # Clinic cards, FAQ, etc.
   lib/
-    search-service.ts        # Clinic search (singleton)
     clinic-entitlements.ts   # Free vs. premium access logic
     stripe/                  # Stripe client + premium sync
     email.ts                 # Resend email integration

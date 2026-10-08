@@ -76,7 +76,6 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
     // clear the selected location to allow specialty-only searches (e.g., Danmark pages)
     if (state.location && value !== state.location.name) {
       dispatch({ type: "SET_LOCATION", payload: null });
-      dispatch({ type: "SET_UNSEARCHED_CHANGES", payload: true });
     }
 
     // Clear previous timeout
@@ -107,9 +106,6 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
     setShowDropdown(false);
     setSuggestions(null);
     setSelectedIndex(-1);
-
-    // Mark that user has made changes
-    dispatch({ type: "SET_UNSEARCHED_CHANGES", payload: true });
   };
 
   // Handle keyboard navigation
@@ -260,7 +256,6 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
                 setSuggestions(null);
                 setShowDropdown(false);
                 setSelectedIndex(-1);
-                dispatch({ type: "SET_UNSEARCHED_CHANGES", payload: true });
                 // Refocus input for quick re-entry
                 inputRef.current?.focus();
               }}

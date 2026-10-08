@@ -1,10 +1,8 @@
 // Added: 2026-03-30 - MVP coverage for search target URL derivation from state.
 import {
   buildSearchTargetUrl,
-  buildSearchTargetUrlFromState,
   getOnlineToggleLocation,
 } from "../buildSearchTargetUrl";
-import { SearchState } from "../SearchProvider";
 
 describe("getOnlineToggleLocation", () => {
   it("routes to online when enabled and danmark when disabled", () => {
@@ -34,23 +32,13 @@ describe("buildSearchTargetUrl", () => {
   it("falls back to danmark without location or specialty", () => {
     expect(buildSearchTargetUrl({})).toBe("/find/fysioterapeut/danmark");
   });
-});
 
-describe("buildSearchTargetUrlFromState", () => {
-  it("builds canonical URL from provider state", () => {
-    const state = {
-      location: { name: "Aarhus", slug: "aarhus" },
-      specialty: null,
-      filters: { handicap: true, ydernummer: true },
-      isLoading: false,
-      showFilters: false,
-      hasUnsearchedChanges: false,
-      results: { clinics: [], totalCount: 0, hasMore: false },
-      pagination: { currentPage: 1, pageSize: 20, totalPages: 0 },
-    } as SearchState;
-
-    expect(buildSearchTargetUrlFromState(state)).toBe(
-      "/find/fysioterapeut/aarhus?handicap=true&ydernummer=true"
-    );
+  it("keeps active filters on the canonical URL", () => {
+    expect(
+      buildSearchTargetUrl({
+        locationSlug: "aarhus",
+        filters: { handicap: true, ydernummer: true },
+      })
+    ).toBe("/find/fysioterapeut/aarhus?handicap=true&ydernummer=true");
   });
 });

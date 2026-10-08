@@ -114,8 +114,7 @@ function FilterChip({
  * Filter chips using SearchProvider
  */
 function SimpleFilters() {
-  const { state, setFilters, setUnsearchedChanges, navigateToSearch } =
-    useSearch();
+  const { state, setFilters, navigateToSearch } = useSearch();
 
   const { ydernummer, handicap: handicapAccess } = state.filters;
   const isOnline = state.location?.slug === ONLINE_LOCATION.slug;
@@ -129,12 +128,10 @@ function SimpleFilters() {
     }
 
     setFilters(nextFilters);
-    setUnsearchedChanges(false);
     void navigateToSearch({ filters: nextFilters });
   };
 
   const applyOnline = (enabled: boolean) => {
-    setUnsearchedChanges(false);
     void navigateToSearch({ location: getOnlineToggleLocation(enabled) });
   };
 

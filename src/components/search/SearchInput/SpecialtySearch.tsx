@@ -145,12 +145,6 @@ export const SpecialtySearch: React.FC<SpecialtySearchProps> = ({
     // Clear current specialty if user is typing something new
     if (state.specialty && value !== state.specialty.name) {
       dispatch({ type: "SET_SPECIALTY", payload: null });
-      dispatch({ type: "SET_UNSEARCHED_CHANGES", payload: true });
-    }
-
-    // Mark unsearched changes when user starts typing and no specialty is selected
-    if (!state.specialty) {
-      dispatch({ type: "SET_UNSEARCHED_CHANGES", payload: true });
     }
 
     setShowDropdown(true);
@@ -178,7 +172,6 @@ export const SpecialtySearch: React.FC<SpecialtySearchProps> = ({
 
     setShowDropdown(false);
     setSelectedIndex(-1);
-    dispatch({ type: "SET_UNSEARCHED_CHANGES", payload: true });
   };
 
   // Handle keyboard navigation

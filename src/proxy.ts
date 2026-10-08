@@ -9,32 +9,6 @@ import { shouldRefreshAuthSession } from "@/lib/auth-proxy";
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // DEV-ONLY: handle isolated search-v2 find route canonicalization.
-  if (pathname.startsWith("/search-v2/find/")) {
-    const searchParams = request.nextUrl.searchParams;
-    const handicap = searchParams.get("handicap");
-    const ydernummer = searchParams.get("ydernummer");
-
-    if (handicap || ydernummer) {
-      const canonicalParams = new URLSearchParams();
-      if (handicap) {
-        canonicalParams.set("handicap", handicap);
-      }
-      if (ydernummer) {
-        canonicalParams.set("ydernummer", ydernummer);
-      }
-
-      const currentParamString = searchParams.toString();
-      const canonicalParamString = canonicalParams.toString();
-
-      if (currentParamString !== canonicalParamString) {
-        const redirectUrl = new URL(request.url);
-        redirectUrl.search = canonicalParamString;
-        return NextResponse.redirect(redirectUrl, 301);
-      }
-    }
-  }
-
   if (!shouldRefreshAuthSession(pathname, request.cookies.getAll())) {
     return NextResponse.next();
   }

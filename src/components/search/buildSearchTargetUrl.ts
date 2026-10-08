@@ -1,5 +1,5 @@
 // Added: 2026-03-24 - Centralized canonical search URL building for location/specialty/filter combinations
-import { LocationQuery, SearchFilters, SearchState } from "./SearchProvider";
+import { LocationQuery, SearchFilters } from "./SearchProvider";
 import { buildSearchUrl } from "@/utils/parameter-normalization";
 
 export const ONLINE_LOCATION: LocationQuery = { name: "Online", slug: "online" };
@@ -24,12 +24,4 @@ export function buildSearchTargetUrl({
   if (locationSlug) return buildSearchUrl(locationSlug, specialtySlug || undefined, filters);
   if (specialtySlug) return buildSearchUrl("danmark", specialtySlug, filters);
   return buildSearchUrl("danmark", undefined, filters);
-}
-
-export function buildSearchTargetUrlFromState(state: SearchState): string {
-  return buildSearchTargetUrl({
-    locationSlug: state.location?.slug,
-    specialtySlug: state.specialty?.slug,
-    filters: state.filters,
-  });
 }
