@@ -7,35 +7,36 @@ interface ClinicServicesProps {
 }
 
 export function ClinicServices({ clinic }: ClinicServicesProps) {
+  const extraServices = clinic.extraServices ?? [];
+  const isOnline = clinic.online_fysioterapeut === true;
+
   return (
     <section className="py-8 border-b border-gray-200">
       <h2 className="text-2xl font-semibold mb-2">Ekstra ydelser</h2>
-      {clinic.extraServices && clinic.extraServices.length > 0 ? (
+      {isOnline || extraServices.length > 0 ? (
         <div className="flex flex-wrap gap-2">
-          {clinic.extraServices.map((service) =>
-            service.service_name === "Online fysioterapi" ? (
-              <Link
-                key={service.service_id}
-                href="/find/fysioterapeut/online"
-                className="transition-transform hover:scale-105"
-              >
-                <Badge
-                  variant="secondary"
-                  className="text-sm hover:bg-secondary/80 transition-colors cursor-pointer hover:shadow-sm"
-                >
-                  {service.service_name}
-                </Badge>
-              </Link>
-            ) : (
+          {isOnline && (
+            <Link
+              href="/find/fysioterapeut/online"
+              className="transition-transform hover:scale-105"
+            >
               <Badge
-                key={service.service_id}
                 variant="secondary"
-                className="text-sm"
+                className="text-sm hover:bg-secondary/80 transition-colors cursor-pointer hover:shadow-sm"
               >
-                {service.service_name}
+                Online fysioterapi
               </Badge>
-            )
+            </Link>
           )}
+          {extraServices.map((service) => (
+            <Badge
+              key={service.service_id}
+              variant="secondary"
+              className="text-sm"
+            >
+              {service.service_name}
+            </Badge>
+          ))}
         </div>
       ) : (
         <p className="text-gray-600">Ingen ekstra ydelser tilføjet.</p>
