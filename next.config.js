@@ -144,6 +144,12 @@ const nextConfig = {
         destination: '/vaerktoejer/dexa-scanning',
         permanent: true,
       },
+      // Clinic renames (slug regenerates from klinikNavn).
+      {
+        source: '/klinik/online-knaegenoptraening-med-fysioterapeut-andreas-bjerregaard',
+        destination: '/klinik/fysioterapeut-andreas-bjerregaard',
+        permanent: true,
+      },
       ...clinicDuplicateRedirects,
     ];
   },
