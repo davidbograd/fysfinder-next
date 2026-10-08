@@ -1,6 +1,6 @@
 // Updated: 2026-09-06 - Loads extra clinics from the server instead of hydrating the full list.
 
-import { render, screen } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ClinicsList } from "../ClinicsList";
 import { Clinic } from "@/app/types";
@@ -89,5 +89,66 @@ describe("ClinicsList", () => {
       offset: 10,
     });
     expect(await screen.findByText("Klinik 11")).toBeInTheDocument();
+  });
+
+  it("replaces the list when the page re-renders with filtered clinics", () => {
+    const { rerender } = render(
+      <ClinicsList
+        initialClinics={[makeClinic(1), makeClinic(2)]}
+        totalClinics={2}
+        locationSlug="aarhus"
+      />
+    );
+
+    expect(screen.getByText("Klinik 1")).toBeInTheDocument();
+
+    rerender(
+      <ClinicsList
+        initialClinics={[makeClinic(3)]}
+        totalClinics={1}
+        locationSlug="aarhus"
+        filters={{ ydernummer: true }}
+      />
+    );
+
+    expect(screen.getByText("Klinik 3")).toBeInTheDocument();
+    expect(screen.queryByText("Klinik 1")).not.toBeInTheDocument();
+    expect(screen.queryByText("Klinik 2")).not.toBeInTheDocument();
+  });
+
+  it("drops a load-more response that resolves after the filters changed", async () => {
+    const user = userEvent.setup();
+    let resolveLoadMore: (clinics: Clinic[]) => void = () => {};
+    mockLoadMoreLocationClinics.mockReturnValue(
+      new Promise<Clinic[]>((resolve) => {
+        resolveLoadMore = resolve;
+      })
+    );
+
+    const { rerender } = render(
+      <ClinicsList
+        initialClinics={[makeClinic(1)]}
+        totalClinics={2}
+        locationSlug="aarhus"
+      />
+    );
+
+    await user.click(screen.getByRole("button", { name: "Vis flere klinikker" }));
+
+    rerender(
+      <ClinicsList
+        initialClinics={[makeClinic(3)]}
+        totalClinics={1}
+        locationSlug="aarhus"
+        filters={{ handicap: true }}
+      />
+    );
+
+    await act(async () => {
+      resolveLoadMore([makeClinic(2)]);
+    });
+
+    expect(screen.getByText("Klinik 3")).toBeInTheDocument();
+    expect(screen.queryByText("Klinik 2")).not.toBeInTheDocument();
   });
 });

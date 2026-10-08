@@ -1,5 +1,5 @@
 // ClinicsList component - Renders a paginated list of clinic cards
-// Updated: 2026-09-06 - Load extra clinics from the server instead of hydrating the full list.
+// Updated: 2026-10-08 - Reset the list when filters change the server-rendered first page.
 
 "use client";
 
@@ -29,14 +29,27 @@ export function ClinicsList({
   filters,
   trackingContextCityId,
 }: ClinicsListProps) {
-  const [clinics, setClinics] = useState(initialClinics);
+  // Filter changes re-render the page with a new first page but keep this
+  // instance mounted, so the list must reset whenever initialClinics changes.
+  const [list, setList] = useState({
+    source: initialClinics,
+    clinics: initialClinics,
+  });
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [loadError, setLoadError] = useState(false);
+
+  if (list.source !== initialClinics) {
+    setList({ source: initialClinics, clinics: initialClinics });
+    setLoadError(false);
+  }
+
+  const clinics = list.clinics;
   const hasMore = clinics.length < totalClinics;
 
   const loadMore = async () => {
     if (isLoadingMore || !hasMore) return;
 
+    const requestSource = list.source;
     setIsLoadingMore(true);
     setLoadError(false);
 
@@ -47,7 +60,11 @@ export function ClinicsList({
         filters,
         offset: clinics.length,
       });
-      setClinics((current) => [...current, ...nextClinics]);
+      setList((current) =>
+        current.source === requestSource
+          ? { ...current, clinics: [...current.clinics, ...nextClinics] }
+          : current
+      );
     } catch (error) {
       console.error("Failed to load more clinics:", error);
       setLoadError(true);
