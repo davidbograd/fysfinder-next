@@ -106,7 +106,7 @@ export async function generateMetadata({
   return {
     title,
     description: filters.online
-      ? `Find og sammenlign online fysioterapeuter${isDanmark ? "" : ` i ${cityName}`}. Få behandling hjemmefra via video. Se anbefalinger, specialer og priser. Start her →`
+      ? `Find og sammenlign online fysioterapeuter${isDanmark ? "" : ` ${data.city?.location_preposition ?? "i"} ${cityName}`}. Få behandling hjemmefra via video. Se anbefalinger, specialer og priser. Start her →`
       : `Find og sammenlign ${cityName} fysioterapeuter. Se anbefalinger, fysioterapi specialer, priser, åbningstider og mere. Start her →`,
   };
 }
@@ -381,6 +381,7 @@ export default async function LocationPage({
         <div className="max-w-[800px] mx-auto">
           <NoResultsFound
             cityName={data.city.bynavn}
+            cityPreposition={cityPreposition}
             specialtyName={specialtyName}
             locationSlug={resolvedParams.location}
           />
