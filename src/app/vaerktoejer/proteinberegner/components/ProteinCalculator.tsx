@@ -21,6 +21,8 @@ import {
 } from "@/components/features/tools/ToolResult";
 import {
   computeProteinNeed,
+  LactationStatus,
+  PregnancyStatus,
   ProteinActivity,
   ProteinGoal,
   ProteinResult,
@@ -42,7 +44,7 @@ type FieldKey = "weightKg" | "age";
 
 const GOALS = [
   { value: "vaegttab" as ProteinGoal, label: "Vægttab" },
-  { value: "vedligehold" as ProteinGoal, label: "Vedligehold" },
+  { value: "vedligehold" as ProteinGoal, label: "Vedligehold vægt" },
   { value: "muskelopbygning" as ProteinGoal, label: "Muskelopbygning" },
 ];
 
@@ -67,6 +69,37 @@ const ACTIVITY_SUMMARY: Record<ProteinActivity, string> = {
   haard: "hård træning",
 };
 
+const YES_NO = [
+  { value: "nej" as const, label: "Nej" },
+  { value: "ja" as const, label: "Ja" },
+];
+
+const PREGNANCY_OPTIONS: { value: PregnancyStatus; label: string }[] = [
+  { value: "nej", label: "Nej" },
+  { value: "trimester1", label: "Ja, i 1. trimester" },
+  { value: "trimester2", label: "Ja, i 2. trimester" },
+  { value: "trimester3", label: "Ja, i 3. trimester" },
+];
+
+const LACTATION_OPTIONS: { value: LactationStatus; label: string }[] = [
+  { value: "nej", label: "Nej" },
+  { value: "fuld", label: "Ja, fuld amning (kun modermælk)" },
+  { value: "delvis", label: "Ja, delvis amning (barn får også anden mad)" },
+];
+
+const PREGNANCY_SUMMARY: Record<PregnancyStatus, string | null> = {
+  nej: null,
+  trimester1: "gravid, 1. trimester",
+  trimester2: "gravid, 2. trimester",
+  trimester3: "gravid, 3. trimester",
+};
+
+const LACTATION_SUMMARY: Record<LactationStatus, string | null> = {
+  nej: null,
+  fuld: "fuld amning",
+  delvis: "delvis amning",
+};
+
 function describeProfile(
   profile: Extract<ProteinResult, { ok: true }>["profile"]
 ): string {
@@ -75,11 +108,30 @@ function describeProfile(
     `${formatCompact(profile.weightKg)} kg`,
     GOAL_SUMMARY[profile.goal],
     ACTIVITY_SUMMARY[profile.activity],
-  ].join(" · ");
+    PREGNANCY_SUMMARY[profile.pregnancy],
+    LACTATION_SUMMARY[profile.lactation],
+  ]
+    .filter(Boolean)
+    .join(" · ");
+}
+
+function describeExtraProtein(
+  result: Extract<ProteinResult, { ok: true }>
+): string {
+  const parts: string[] = [];
+  if (result.pregnancyExtraGrams > 0) {
+    parts.push(`${result.pregnancyExtraGrams} g for graviditet`);
+  }
+  if (result.lactationExtraGrams > 0) {
+    parts.push(`${result.lactationExtraGrams} g for amning`);
+  }
+  return parts.join(" og ");
 }
 
 const SELECT_CLASSES =
   "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2";
+
+const MEAL_COUNTS = [2, 3, 4, 5, 6];
 
 const PROTEIN_SOURCES = [
   { food: "Kyllingebryst", portion: "100 g", grams: 23 },
@@ -101,7 +153,11 @@ export function ProteinCalculator({ rating }: ProteinCalculatorProps) {
   const [age, setAge] = useState("");
   const [goal, setGoal] = useState<ProteinGoal>("vedligehold");
   const [activity, setActivity] = useState<ProteinActivity>("moderat");
-  const [mealsPerDay, setMealsPerDay] = useState("4");
+  const [mealsPerDay, setMealsPerDay] = useState("3");
+  const [isPregnantOrBreastfeeding, setIsPregnantOrBreastfeeding] =
+    useState(false);
+  const [pregnancy, setPregnancy] = useState<PregnancyStatus>("nej");
+  const [lactation, setLactation] = useState<LactationStatus>("nej");
   const [result, setResult] = useState<ProteinResult | null>(null);
 
   const [fieldErrors, setFieldErrors] = useState<FieldErrors<FieldKey>>({});
@@ -131,6 +187,8 @@ export function ProteinCalculator({ rating }: ProteinCalculatorProps) {
       goal,
       activity,
       mealsPerDay,
+      pregnancy: isPregnantOrBreastfeeding ? pregnancy : "nej",
+      lactation: isPregnantOrBreastfeeding ? lactation : "nej",
     });
 
     setResult(calculation);
@@ -181,51 +239,95 @@ export function ProteinCalculator({ rating }: ProteinCalculatorProps) {
               />
             </div>
 
-            <ToolChoiceGroup
-              label="Mål"
-              options={GOALS}
-              value={goal}
-              onChange={setGoal}
-            />
+            <div className="space-y-2">
+              <Label htmlFor="protein-activity">Aktivitetsniveau</Label>
+              <select
+                id="protein-activity"
+                value={activity}
+                onChange={(event) =>
+                  setActivity(event.target.value as ProteinActivity)
+                }
+                className={SELECT_CLASSES}
+              >
+                {ACTIVITIES.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div className="space-y-2">
-                <Label htmlFor="protein-activity">Aktivitetsniveau</Label>
-                <select
-                  id="protein-activity"
-                  value={activity}
-                  onChange={(event) =>
-                    setActivity(event.target.value as ProteinActivity)
-                  }
-                  className={SELECT_CLASSES}
-                >
-                  {ACTIVITIES.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
+            <div className="space-y-2">
+              <Label htmlFor="protein-goal">Mål</Label>
+              <select
+                id="protein-goal"
+                value={goal}
+                onChange={(event) => setGoal(event.target.value as ProteinGoal)}
+                className={SELECT_CLASSES}
+              >
+                {GOALS.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="protein-meals">Måltider om dagen</Label>
-                <select
-                  id="protein-meals"
-                  value={mealsPerDay}
-                  onChange={(event) => setMealsPerDay(event.target.value)}
-                  className={SELECT_CLASSES}
-                >
-                  {[2, 3, 4, 5, 6].map((count) => (
-                    <option key={count} value={String(count)}>
-                      {count} måltider
-                    </option>
-                  ))}
-                </select>
-                <p className="text-xs text-gray-500 text-pretty">
-                  Gange om dagen du spiser protein – fx skyr eller en shake
-                  tæller med, mens kaffe og frugt ikke gør.
-                </p>
-              </div>
+            <div className="space-y-4 border-t border-gray-100 pt-4">
+              <ToolChoiceGroup
+                label="Er du gravid eller ammer du?"
+                className="w-full max-w-sm"
+                options={YES_NO}
+                value={isPregnantOrBreastfeeding ? "ja" : "nej"}
+                onChange={(value) =>
+                  setIsPregnantOrBreastfeeding(value === "ja")
+                }
+              />
+              {isPregnantOrBreastfeeding && (
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="space-y-2">
+                    <Label htmlFor="protein-pregnancy">Er du gravid?</Label>
+                    <select
+                      id="protein-pregnancy"
+                      value={pregnancy}
+                      onChange={(event) =>
+                        setPregnancy(event.target.value as PregnancyStatus)
+                      }
+                      className={SELECT_CLASSES}
+                    >
+                      {PREGNANCY_OPTIONS.map((option) => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </select>
+                    {pregnancy !== "nej" && (
+                      <p className="text-xs text-gray-500 text-pretty">
+                        Brug din vægt fra før graviditeten – tillægget for
+                        graviditet lægges oven i.
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="protein-lactation">Ammer du?</Label>
+                    <select
+                      id="protein-lactation"
+                      value={lactation}
+                      onChange={(event) =>
+                        setLactation(event.target.value as LactationStatus)
+                      }
+                      className={SELECT_CLASSES}
+                    >
+                      {LACTATION_OPTIONS.map((option) => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              )}
             </div>
 
             <div className="pt-2">
@@ -265,15 +367,40 @@ export function ProteinCalculator({ rating }: ProteinCalculatorProps) {
                   items={[
                     {
                       label: "Pr. måltid",
-                      value: `${formatInteger(result.gramsPerMeal)} g`,
-                      caption: `Fordelt på ${result.mealsPerDay} måltider`,
+                      value: `${formatInteger(
+                        result.gramsPerDayTarget / Number(mealsPerDay)
+                      )} g`,
+                      caption: (
+                        <>
+                          Fordelt på{" "}
+                          <select
+                            aria-label="Måltider om dagen"
+                            value={mealsPerDay}
+                            onChange={(event) =>
+                              setMealsPerDay(event.target.value)
+                            }
+                            className="rounded-full border border-gray-300 bg-white px-2 py-0.5 text-xs font-medium text-gray-900 tabular-nums focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                          >
+                            {MEAL_COUNTS.map((count) => (
+                              <option key={count} value={String(count)}>
+                                {count}
+                              </option>
+                            ))}
+                          </select>{" "}
+                          måltider
+                        </>
+                      ),
                     },
                     {
                       label: "Pr. kg kropsvægt",
                       value: `${formatDecimal(
                         result.gramsPerKgLow
                       )}–${formatDecimal(result.gramsPerKgHigh)} g`,
-                      caption: "Dit anbefalede niveau",
+                      caption:
+                        result.pregnancyExtraGrams + result.lactationExtraGrams >
+                        0
+                          ? "Før tillæg for graviditet og amning"
+                          : "Dit anbefalede niveau",
                     },
                     {
                       label: "Energi fra protein",
@@ -290,6 +417,20 @@ export function ProteinCalculator({ rating }: ProteinCalculatorProps) {
                       mere protein til at sætte den samme muskelopbygning i
                       gang. Derfor er anbefalingen hævet i forhold til en yngre
                       person med samme vægt og aktivitetsniveau.
+                    </p>
+                  </div>
+                )}
+
+                {result.pregnancyExtraGrams + result.lactationExtraGrams >
+                  0 && (
+                  <div className="rounded-xl bg-brand-beige p-4">
+                    <p className="text-sm text-brand-primary text-pretty">
+                      <strong>Justeret for graviditet og amning:</strong>{" "}
+                      Resultatet indeholder {describeExtraProtein(result)} om
+                      dagen ud over dit almindelige behov, som anbefalet i de
+                      nordiske næringsstofanbefalinger (NNR 2023). Er du i
+                      tvivl, så spørg din jordemoder, læge eller en klinisk
+                      diætist.
                     </p>
                   </div>
                 )}

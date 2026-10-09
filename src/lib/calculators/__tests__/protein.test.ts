@@ -78,6 +78,37 @@ describe("computeProteinNeed", () => {
     });
   });
 
+  it("adds the NNR 2023 grams for pregnancy and breastfeeding on top of the daily values", () => {
+    const base = {
+      weightKg: "64",
+      age: "30",
+      goal: "vedligehold",
+      activity: "stillesiddende",
+      mealsPerDay: "4",
+    } as const;
+
+    const notPregnant = computeProteinNeed(base);
+    const thirdTrimester = computeProteinNeed({ ...base, pregnancy: "trimester3" });
+    const fullBreastfeeding = computeProteinNeed({ ...base, lactation: "fuld" });
+    const partialBreastfeeding = computeProteinNeed({ ...base, lactation: "delvis" });
+
+    if (
+      !notPregnant.ok ||
+      !thirdTrimester.ok ||
+      !fullBreastfeeding.ok ||
+      !partialBreastfeeding.ok
+    ) {
+      throw new Error("expected results");
+    }
+
+    expect(notPregnant).toMatchObject({ pregnancyExtraGrams: 0, lactationExtraGrams: 0 });
+    expect(thirdTrimester.gramsPerDayTarget).toBe(notPregnant.gramsPerDayTarget + 28);
+    expect(thirdTrimester.gramsPerDayLow).toBe(notPregnant.gramsPerDayLow + 28);
+    expect(thirdTrimester.gramsPerKgLow).toBe(notPregnant.gramsPerKgLow);
+    expect(fullBreastfeeding.gramsPerDayTarget).toBe(notPregnant.gramsPerDayTarget + 19);
+    expect(partialBreastfeeding.gramsPerDayTarget).toBe(notPregnant.gramsPerDayTarget + 13);
+  });
+
   it("rejects weights and meal counts it cannot work with", () => {
     const base = {
       age: "30",

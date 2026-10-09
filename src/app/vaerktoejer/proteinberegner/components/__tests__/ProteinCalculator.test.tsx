@@ -17,7 +17,7 @@ describe("ProteinCalculator", () => {
     render(<ProteinCalculator />);
 
     await fillProfile(user);
-    await user.click(screen.getByRole("button", { name: "Muskelopbygning" }));
+    await user.selectOptions(screen.getByLabelText("Mål"), "muskelopbygning");
     await user.selectOptions(
       screen.getByLabelText("Aktivitetsniveau"),
       "haard"
@@ -38,20 +38,27 @@ describe("ProteinCalculator", () => {
     ).toBeInTheDocument();
   });
 
-  it("splits the target across the chosen number of meals", async () => {
+  it("lets the visitor change the number of meals in the result", async () => {
     const user = userEvent.setup();
     render(<ProteinCalculator />);
 
+    expect(screen.getByLabelText("Mål")).toHaveValue("vedligehold");
+
+    expect(screen.queryByLabelText("Måltider om dagen")).not.toBeInTheDocument();
+
     await fillProfile(user);
-    await user.click(screen.getByRole("button", { name: "Muskelopbygning" }));
+    await user.selectOptions(screen.getByLabelText("Mål"), "muskelopbygning");
     await user.selectOptions(screen.getByLabelText("Aktivitetsniveau"), "haard");
-    await user.selectOptions(screen.getByLabelText("Måltider om dagen"), "5");
     await user.click(
       screen.getByRole("button", { name: "Beregn proteinbehov" })
     );
 
+    expect(screen.getByLabelText("Måltider om dagen")).toHaveValue("3");
+    expect(screen.getByText("53 g")).toBeInTheDocument();
+
+    await user.selectOptions(screen.getByLabelText("Måltider om dagen"), "5");
+
     expect(screen.getByText("32 g")).toBeInTheDocument();
-    expect(screen.getByText("Fordelt på 5 måltider")).toBeInTheDocument();
   });
 
   it("raises a sedentary visitor over 65 above the usual floor and says so", async () => {
@@ -69,6 +76,68 @@ describe("ProteinCalculator", () => {
 
     expect(screen.getByText(/Justeret for alder/)).toBeInTheDocument();
     expect(screen.getByText("1,2–1,5 g")).toBeInTheDocument();
+  });
+
+  it("only asks about trimester and breastfeeding after the visitor says yes", async () => {
+    const user = userEvent.setup();
+    render(<ProteinCalculator />);
+
+    const gate = screen.getByRole("group", {
+      name: "Er du gravid eller ammer du?",
+    });
+    expect(within(gate).getByRole("button", { name: "Nej" })).toHaveAttribute(
+      "aria-pressed",
+      "true"
+    );
+    expect(screen.queryByLabelText("Er du gravid?")).not.toBeInTheDocument();
+    expect(screen.queryByLabelText("Ammer du?")).not.toBeInTheDocument();
+
+    await user.click(within(gate).getByRole("button", { name: "Ja" }));
+
+    expect(screen.getByLabelText("Er du gravid?")).toHaveValue("nej");
+    expect(screen.getByLabelText("Ammer du?")).toHaveValue("nej");
+  });
+
+  it("adds the extra protein for pregnancy, and drops it again when switched back to no", async () => {
+    const user = userEvent.setup();
+    render(<ProteinCalculator />);
+
+    const gate = screen.getByRole("group", {
+      name: "Er du gravid eller ammer du?",
+    });
+    await user.click(within(gate).getByRole("button", { name: "Ja" }));
+
+    await fillProfile(user, { weight: "64", age: "30" });
+    await user.selectOptions(
+      screen.getByLabelText("Aktivitetsniveau"),
+      "stillesiddende"
+    );
+    await user.selectOptions(
+      screen.getByLabelText("Er du gravid?"),
+      "trimester3"
+    );
+    await user.click(
+      screen.getByRole("button", { name: "Beregn proteinbehov" })
+    );
+
+    // 0,8-1,0 g/kg × 64 kg = 58 g (rundet til 60) + 28 g i 3. trimester
+    expect(screen.getByText("88 g protein")).toBeInTheDocument();
+    expect(
+      screen.getByText(/28 g for graviditet om dagen/)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "30 år · 64 kg · vedligehold · stillesiddende · gravid, 3. trimester"
+      )
+    ).toBeInTheDocument();
+
+    await user.click(within(gate).getByRole("button", { name: "Nej" }));
+    await user.click(
+      screen.getByRole("button", { name: "Beregn proteinbehov" })
+    );
+
+    expect(screen.getByText("60 g protein")).toBeInTheDocument();
+    expect(screen.queryByText(/Justeret for graviditet/)).not.toBeInTheDocument();
   });
 
   it("leaves the same profile alone below 65", async () => {

@@ -5,6 +5,14 @@
 // ved styrketraening og muskelopbygning, og lidt hoejere under vaegttab, hvor
 // protein beskytter muskelmassen. Fra 65 aar haeves bundgraensen, fordi aeldre
 // har brug for mere protein for den samme muskelopbyggende effekt.
+//
+// Graviditet og amning laegges oven i som faste gram pr. dag efter NNR 2023
+// (https://pub.norden.org/nord2023-003/protein-.html og baggrundsrapporten
+// https://pmc.ncbi.nlm.nih.gov/articles/PMC10770649/), som DTU
+// Foedevareinstituttet bruger i sit notat om kost til gravide og ammende (2025):
+// +1/+9/+28 g i 1./2./3. trimester og +19 g ved fuld amning (0-6 mdr.) / +13 g
+// ved delvis amning (efter 6 mdr.). Tillaeggene gaelder oven i behovet ud fra
+// vaegten foer graviditeten.
 
 import { parseDecimal } from "./parse";
 
@@ -14,6 +22,21 @@ export type ProteinActivity =
   | "let"
   | "moderat"
   | "haard";
+export type PregnancyStatus = "nej" | "trimester1" | "trimester2" | "trimester3";
+export type LactationStatus = "nej" | "fuld" | "delvis";
+
+export const PREGNANCY_EXTRA_GRAMS: Record<PregnancyStatus, number> = {
+  nej: 0,
+  trimester1: 1,
+  trimester2: 9,
+  trimester3: 28,
+};
+
+export const LACTATION_EXTRA_GRAMS: Record<LactationStatus, number> = {
+  nej: 0,
+  fuld: 19,
+  delvis: 13,
+};
 
 export interface ProteinInput {
   weightKg: string;
@@ -21,6 +44,8 @@ export interface ProteinInput {
   goal: ProteinGoal;
   activity: ProteinActivity;
   mealsPerDay: string;
+  pregnancy?: PregnancyStatus;
+  lactation?: LactationStatus;
 }
 
 export interface ProteinError {
@@ -40,12 +65,17 @@ export interface ProteinSuccess {
   kcalFromProtein: number;
   /** True når 65+ har hævet bundgrænsen over det valgte niveau. */
   isSeniorAdjusted: boolean;
+  /** Gram pr. dag lagt oven i for graviditet og amning (indgår i dagsværdierne, ikke i g/kg). */
+  pregnancyExtraGrams: number;
+  lactationExtraGrams: number;
   /** De tolkede input, så resultatet kan gentage, hvad der blev regnet på. */
   profile: {
     age: number;
     weightKg: number;
     goal: ProteinGoal;
     activity: ProteinActivity;
+    pregnancy: PregnancyStatus;
+    lactation: LactationStatus;
   };
 }
 
@@ -124,10 +154,16 @@ export function computeProteinNeed(input: ProteinInput): ProteinResult {
     age
   );
 
-  const gramsPerDayLow = Math.round(low * weightKg);
-  const gramsPerDayHigh = Math.round(high * weightKg);
+  const pregnancy = input.pregnancy ?? "nej";
+  const lactation = input.lactation ?? "nej";
+  const pregnancyExtraGrams = PREGNANCY_EXTRA_GRAMS[pregnancy];
+  const lactationExtraGrams = LACTATION_EXTRA_GRAMS[lactation];
+  const extraGrams = pregnancyExtraGrams + lactationExtraGrams;
+
+  const gramsPerDayLow = Math.round(low * weightKg) + extraGrams;
+  const gramsPerDayHigh = Math.round(high * weightKg) + extraGrams;
   const gramsPerDayTarget =
-    Math.round(((low + high) / 2) * weightKg / 5) * 5;
+    Math.round(((low + high) / 2) * weightKg / 5) * 5 + extraGrams;
 
   return {
     ok: true,
@@ -140,11 +176,15 @@ export function computeProteinNeed(input: ProteinInput): ProteinResult {
     gramsPerMeal: Math.round(gramsPerDayTarget / mealsPerDay),
     kcalFromProtein: Math.round(gramsPerDayTarget * KCAL_PER_GRAM_PROTEIN),
     isSeniorAdjusted,
+    pregnancyExtraGrams,
+    lactationExtraGrams,
     profile: {
       age,
       weightKg,
       goal: input.goal,
       activity: input.activity,
+      pregnancy,
+      lactation,
     },
   };
 }

@@ -1,16 +1,16 @@
-// Updated: 2026-09-29 - Use the page image as the Open Graph image, same as the older calculators.
+// Updated: 2026-10-09 - Set the SEO meta title, H1 and page image from the finished protein article.
 import { Metadata } from "next";
 import { ToolPageLayout } from "@/components/features/tools/ToolPageLayout";
 import { ProteinCalculator } from "./components/ProteinCalculator";
 
 export const revalidate = 86400; // 24 hours ISR (must be a literal for Next.js segment config)
 
-const title = "Proteinberegner → Beregn dit daglige proteinbehov ✅";
+const title = "Proteinberegner | Beregn nemt dit daglige proteinbehov →";
 const description =
   "Beregn hvor meget protein du har brug for om dagen med Fysfinders gratis proteinberegner. Få dit behov i gram – både i alt og pr. måltid.";
 const image = {
-  url: "/images/vaerktoejer/proteinberegner-placeholder.png",
-  alt: "Proteinberegner illustration",
+  url: "/images/vaerktoejer/proteinberegner-proteinrig-mad.jpg",
+  alt: "Tallerken med proteinrig mad: kylling, laks, oksekød, æg, tofu, kikærter og quinoa",
 };
 
 export const metadata: Metadata = {
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     title,
     description,
-    images: [{ url: image.url, width: 1200, height: 630, alt: image.alt }],
+    images: [{ url: image.url, width: 1024, height: 571, alt: image.alt }],
     type: "website",
   },
 };
@@ -28,7 +28,7 @@ export default function ProteinberegnerPage() {
   return (
     <ToolPageLayout
       slug="proteinberegner"
-      heading="Proteinberegner – hvor meget protein har du brug for?"
+      heading="Proteinberegner: Beregn hvor meget protein du skal have om dagen"
       structuredDataDescription="Beregn dit daglige proteinbehov ud fra vægt, mål og aktivitetsniveau"
       image={{ src: image.url, alt: image.alt }}
       intro={
@@ -49,9 +49,9 @@ export default function ProteinberegnerPage() {
         <>
           <strong>OBS</strong>:{" "}
           <em>
-            Anbefalingerne gælder raske voksne. Har du nyresygdom, er gravid
-            eller følger en særlig diæt, så tal med din læge eller en klinisk
-            diætist, før du ændrer dit proteinindtag markant.
+            Anbefalingerne gælder raske voksne. Har du nyresygdom eller følger
+            en særlig diæt, så tal med din læge eller en klinisk diætist, før
+            du ændrer dit proteinindtag markant.
           </em>
         </>
       }
