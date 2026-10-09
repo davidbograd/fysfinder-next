@@ -1,9 +1,29 @@
-// Updated: 2026-09-29 - Covers the inline weekly weight-loss dropdown updating the calorie result.
+// Updated: 2026-10-09 - The calculate button stays enabled and names the missing fields.
 import { render, screen, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { CalorieCalculator } from "../CalorieCalculator";
 
 describe("CalorieCalculator", () => {
+  it("keeps the calculate button enabled and names the missing fields", async () => {
+    const user = userEvent.setup();
+    render(<CalorieCalculator />);
+
+    const submit = screen.getByRole("button", { name: "Beregn kalorier" });
+    expect(submit).toBeEnabled();
+
+    await user.type(screen.getByLabelText("Vægt (kg)"), "70");
+    await user.click(submit);
+
+    expect(screen.getByText("Udfyld højde")).toBeInTheDocument();
+    expect(screen.getByText("Udfyld alder")).toBeInTheDocument();
+    expect(screen.getByText("Vælg køn")).toBeInTheDocument();
+    expect(screen.queryByText("Udfyld vægt")).not.toBeInTheDocument();
+    expect(screen.queryByText("Dine resultater")).not.toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: "Mand" }));
+    expect(screen.queryByText("Vælg køn")).not.toBeInTheDocument();
+  });
+
   it("calculates and renders results for valid inputs", async () => {
     jest.useFakeTimers();
     const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });

@@ -10,7 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { ToolChoiceGroup } from "@/components/features/tools/ToolChoiceGroup";
+import { ToolGenderSelector } from "@/components/features/tools/ToolGenderSelector";
 import {
   ToolMethodOption,
   ToolMethodSelector,
@@ -67,11 +67,6 @@ const METHODS: ToolMethodOption<MuscleMassMethod>[] = [
     effort: "Tager et par minutter",
     precision: "Mest præcis",
   },
-];
-
-const GENDERS = [
-  { value: "male" as Gender, label: "Mand" },
-  { value: "female" as Gender, label: "Kvinde" },
 ];
 
 const initialForm = {
@@ -165,18 +160,14 @@ export function MuscleMassCalculator({ rating }: MuscleMassCalculatorProps) {
               />
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
-              <ToolChoiceGroup
-                label="Køn"
-                options={GENDERS}
-                value={gender}
-                error={fieldErrors.gender}
-                onChange={(value) => {
-                  setGender(value);
-                  clearError("gender");
-                }}
-              />
-            </div>
+            <ToolGenderSelector
+              value={gender}
+              error={fieldErrors.gender}
+              onChange={(value) => {
+                setGender(value);
+                clearError("gender");
+              }}
+            />
 
             <div className="grid gap-4 sm:grid-cols-2">
               <ToolNumberField

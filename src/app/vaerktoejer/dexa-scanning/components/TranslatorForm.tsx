@@ -262,7 +262,7 @@ export function TranslatorForm() {
               <div className="space-y-4">
                 <Button
                   onClick={handleTranslate}
-                  disabled={isLoading || !input.trim() || input.length < 10}
+                  disabled={isLoading}
                   className="w-full bg-logo-blue hover:bg-logo-blue/90 text-white"
                 >
                   {isLoading ? (

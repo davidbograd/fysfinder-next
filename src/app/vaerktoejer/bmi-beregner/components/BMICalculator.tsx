@@ -5,6 +5,17 @@ import { Calculator, Info } from "lucide-react";
 import { notifyToolCompleted } from "@/lib/tools/tool-completion";
 import { ToolRatingSummary } from "@/components/features/tools/ToolRatingSummary";
 import { PublishedToolRating } from "@/lib/tools/tool-ratings";
+import {
+  FieldErrors,
+  findMissingFields,
+  hasFieldErrors,
+} from "@/lib/calculators/required-fields";
+
+type FieldKey = "weight" | "height";
+
+const INPUT_CLASSES =
+  "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-logo-blue focus:border-transparent";
+const INPUT_ERROR_CLASSES = "border-red-400 focus:ring-red-400";
 
 interface BMIResult {
   bmi: number;
@@ -22,6 +33,10 @@ export function BMICalculator({ rating }: BMICalculatorProps) {
   const [height, setHeight] = useState("");
   const [result, setResult] = useState<BMIResult | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors<FieldKey>>({});
+
+  const clearError = (field: FieldKey) =>
+    setFieldErrors(({ [field]: _removed, ...rest }) => rest);
 
   const getBMICategory = (
     bmi: number
@@ -85,12 +100,18 @@ export function BMICalculator({ rating }: BMICalculatorProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (weight && height) {
-      calculateBMI();
+    const missing = findMissingFields<FieldKey>([
+      { key: "weight", label: "Vægt", value: weight },
+      { key: "height", label: "Højde", value: height },
+    ]);
+    if (hasFieldErrors(missing)) {
+      setFieldErrors(missing);
+      setResult(null);
+      return;
     }
+    setFieldErrors({});
+    calculateBMI();
   };
-
-  const isFormValid = weight && height;
 
   const getColorClasses = (color: string) => {
     switch (color) {
@@ -130,13 +151,23 @@ export function BMICalculator({ rating }: BMICalculatorProps) {
               id="weight"
               type="number"
               value={weight}
-              onChange={(e) => setWeight(e.target.value)}
+              onChange={(e) => {
+                setWeight(e.target.value);
+                clearError("weight");
+              }}
               placeholder="f.eks. 70"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-logo-blue focus:border-transparent"
+              aria-invalid={fieldErrors.weight ? true : undefined}
+              aria-describedby={fieldErrors.weight ? "weight-error" : undefined}
+              className={`${INPUT_CLASSES} ${fieldErrors.weight ? INPUT_ERROR_CLASSES : ""}`}
               min="30"
               max="300"
               step="0.1"
             />
+            {fieldErrors.weight && (
+              <p id="weight-error" className="mt-2 text-xs font-medium text-red-600">
+                {fieldErrors.weight}
+              </p>
+            )}
           </div>
 
           <div>
@@ -150,20 +181,30 @@ export function BMICalculator({ rating }: BMICalculatorProps) {
               id="height"
               type="number"
               value={height}
-              onChange={(e) => setHeight(e.target.value)}
+              onChange={(e) => {
+                setHeight(e.target.value);
+                clearError("height");
+              }}
               placeholder="f.eks. 175"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-logo-blue focus:border-transparent"
+              aria-invalid={fieldErrors.height ? true : undefined}
+              aria-describedby={fieldErrors.height ? "height-error" : undefined}
+              className={`${INPUT_CLASSES} ${fieldErrors.height ? INPUT_ERROR_CLASSES : ""}`}
               min="100"
               max="250"
               step="1"
             />
+            {fieldErrors.height && (
+              <p id="height-error" className="mt-2 text-xs font-medium text-red-600">
+                {fieldErrors.height}
+              </p>
+            )}
           </div>
         </div>
 
         <button
           type="submit"
-          disabled={!isFormValid || isCalculating}
-          className="w-full bg-logo-blue text-white py-3 px-4 rounded-md font-medium hover:bg-logo-blue/90 focus:outline-none focus:ring-2 focus:ring-logo-blue focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          disabled={isCalculating}
+          className="w-full bg-logo-blue text-white py-3 px-4 rounded-full font-medium hover:bg-logo-blue/90 focus:outline-none focus:ring-2 focus:ring-logo-blue focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           {isCalculating ? "Beregner..." : "Beregn BMI"}
         </button>

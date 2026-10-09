@@ -11,7 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { ToolChoiceGroup } from "@/components/features/tools/ToolChoiceGroup";
+import { ToolGenderSelector } from "@/components/features/tools/ToolGenderSelector";
 import { ToolNumberField } from "@/components/features/tools/ToolNumberField";
 import { ToolRatingSummary } from "@/components/features/tools/ToolRatingSummary";
 import {
@@ -40,11 +40,6 @@ import { notifyToolCompleted } from "@/lib/tools/tool-completion";
 import { PublishedToolRating } from "@/lib/tools/tool-ratings";
 
 type FieldKey = "gender" | keyof typeof initialForm;
-
-const GENDERS = [
-  { value: "male" as Gender, label: "Mand" },
-  { value: "female" as Gender, label: "Kvinde" },
-];
 
 const initialForm = { age: "", heightCm: "", weightKg: "" };
 
@@ -123,18 +118,14 @@ export function RestingMetabolicRateCalculator({
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid gap-4 sm:grid-cols-2">
-              <ToolChoiceGroup
-                label="Køn"
-                options={GENDERS}
-                value={gender}
-                error={fieldErrors.gender}
-                onChange={(value) => {
-                  setGender(value);
-                  clearError("gender");
-                }}
-              />
-            </div>
+            <ToolGenderSelector
+              value={gender}
+              error={fieldErrors.gender}
+              onChange={(value) => {
+                setGender(value);
+                clearError("gender");
+              }}
+            />
 
             <div className="grid gap-4 sm:grid-cols-2">
               <ToolNumberField

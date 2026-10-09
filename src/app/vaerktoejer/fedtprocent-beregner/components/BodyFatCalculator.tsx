@@ -5,15 +5,34 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Calculator, User } from "lucide-react";
+import { Calculator } from "lucide-react";
 import {
   computeBodyFatFromStrings,
   type Gender,
   type BodyFatResult,
 } from "@/lib/bodyFat";
 import { notifyToolCompleted } from "@/lib/tools/tool-completion";
+import { ToolGenderSelector } from "@/components/features/tools/ToolGenderSelector";
 import { ToolRatingSummary } from "@/components/features/tools/ToolRatingSummary";
 import { PublishedToolRating } from "@/lib/tools/tool-ratings";
+import {
+  FieldErrors,
+  findMissingFields,
+  hasFieldErrors,
+} from "@/lib/calculators/required-fields";
+
+type FieldKey = "gender" | "height" | "neck" | "waist" | "hip" | "weightKg";
+
+const INPUT_ERROR_CLASSES = "border-red-400 focus-visible:ring-red-400";
+
+function FieldError({ id, message }: { id: string; message?: string }) {
+  if (!message) return null;
+  return (
+    <p id={id} className="text-xs font-medium text-red-600">
+      {message}
+    </p>
+  );
+}
 
 interface FormData {
   gender: Gender;
@@ -41,17 +60,45 @@ export const BodyFatCalculator = ({ rating }: BodyFatCalculatorProps) => {
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [result, setResult] = useState<BodyFatResult | null>(null);
   const [hasCalculated, setHasCalculated] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors<FieldKey>>({});
 
-  const handleInputChange = (field: keyof FormData, value: string) => {
+  const clearError = (field: FieldKey) =>
+    setFieldErrors(({ [field]: _removed, ...rest }) => rest);
+
+  const handleInputChange = (field: Exclude<FieldKey, "gender">, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
+    clearError(field);
   };
 
   const handleGenderChange = (value: Gender) => {
     setFormData((prev) => ({ ...prev, gender: value }));
+    clearError("gender");
   };
 
+  const errorProps = (field: FieldKey) => ({
+    "aria-invalid": fieldErrors[field] ? true : undefined,
+    "aria-describedby": fieldErrors[field] ? `${field}-error` : undefined,
+    className: fieldErrors[field] ? INPUT_ERROR_CLASSES : undefined,
+  });
 
   const handleCalculate = () => {
+    const missing = findMissingFields<FieldKey>([
+      { key: "gender", label: "Køn", value: formData.gender, choice: true },
+      { key: "height", label: "Højde", value: formData.height },
+      { key: "neck", label: "Halsomkreds", value: formData.neck },
+      { key: "waist", label: "Taljeomkreds", value: formData.waist },
+      ...(formData.gender === "female"
+        ? [{ key: "hip" as const, label: "Hofteomkreds", value: formData.hip }]
+        : []),
+      { key: "weightKg", label: "Vægt", value: formData.weightKg },
+    ]);
+    if (hasFieldErrors(missing)) {
+      setFieldErrors(missing);
+      setResult(null);
+      return;
+    }
+    setFieldErrors({});
+
     const calculationResult = computeBodyFatFromStrings({
       gender: formData.gender,
       unit: "cm",
@@ -74,22 +121,7 @@ export const BodyFatCalculator = ({ rating }: BodyFatCalculatorProps) => {
     setFormData(initialFormData);
     setResult(null);
     setHasCalculated(false);
-  };
-
-  // Form validation
-  const isFormValid = () => {
-    // Gender is now required
-    if (!formData.gender) return false;
-    
-    const requiredFields = [formData.height, formData.neck, formData.waist, formData.weightKg];
-    const hasRequiredFields = requiredFields.every(field => field.trim() !== "");
-    
-    // For females, hip measurement is also required
-    if (formData.gender === "female") {
-      return hasRequiredFields && formData.hip.trim() !== "";
-    }
-    
-    return hasRequiredFields;
+    setFieldErrors({});
   };
 
   const getCategoryColor = (category: string) => {
@@ -139,37 +171,11 @@ export const BodyFatCalculator = ({ rating }: BodyFatCalculatorProps) => {
           </div>
         </CardHeader>
         <CardContent className="space-y-6">
-          {/* Gender Selection */}
-          <div className="space-y-3">
-            <Label className="text-sm font-medium flex items-center gap-2">
-              <User className="h-4 w-4" />
-              Køn
-            </Label>
-            <div className="flex gap-2">
-              <button
-                type="button"
-                onClick={() => handleGenderChange("male")}
-                className={`flex-1 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors h-10 px-6 border border-input bg-background hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ${
-                  formData.gender === "male"
-                    ? "bg-gray-800 text-white hover:bg-gray-800/90 hover:text-white"
-                    : ""
-                }`}
-              >
-                Mand
-              </button>
-              <button
-                type="button"
-                onClick={() => handleGenderChange("female")}
-                className={`flex-1 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors h-10 px-6 border border-input bg-background hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ${
-                  formData.gender === "female"
-                    ? "bg-gray-800 text-white hover:bg-gray-800/90 hover:text-white"
-                    : ""
-                }`}
-              >
-                Kvinde
-              </button>
-            </div>
-          </div>
+          <ToolGenderSelector
+            value={formData.gender}
+            error={fieldErrors.gender}
+            onChange={handleGenderChange}
+          />
 
           {/* Measurements */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -183,7 +189,9 @@ export const BodyFatCalculator = ({ rating }: BodyFatCalculatorProps) => {
                 placeholder="f.eks. 175"
                 value={formData.height}
                 onChange={(e) => handleInputChange("height", e.target.value)}
+                {...errorProps("height")}
               />
+              <FieldError id="height-error" message={fieldErrors.height} />
             </div>
 
             <div className="space-y-2">
@@ -196,7 +204,9 @@ export const BodyFatCalculator = ({ rating }: BodyFatCalculatorProps) => {
                 placeholder="f.eks. 38"
                 value={formData.neck}
                 onChange={(e) => handleInputChange("neck", e.target.value)}
+                {...errorProps("neck")}
               />
+              <FieldError id="neck-error" message={fieldErrors.neck} />
             </div>
 
             <div className="space-y-2">
@@ -209,7 +219,9 @@ export const BodyFatCalculator = ({ rating }: BodyFatCalculatorProps) => {
                 placeholder="f.eks. 85"
                 value={formData.waist}
                 onChange={(e) => handleInputChange("waist", e.target.value)}
+                {...errorProps("waist")}
               />
+              <FieldError id="waist-error" message={fieldErrors.waist} />
             </div>
 
             {formData.gender === "female" && (
@@ -223,7 +235,9 @@ export const BodyFatCalculator = ({ rating }: BodyFatCalculatorProps) => {
                   placeholder="f.eks. 95"
                   value={formData.hip}
                   onChange={(e) => handleInputChange("hip", e.target.value)}
+                  {...errorProps("hip")}
                 />
+                <FieldError id="hip-error" message={fieldErrors.hip} />
               </div>
             )}
 
@@ -237,16 +251,17 @@ export const BodyFatCalculator = ({ rating }: BodyFatCalculatorProps) => {
                 placeholder="f.eks. 70"
                 value={formData.weightKg}
                 onChange={(e) => handleInputChange("weightKg", e.target.value)}
+                {...errorProps("weightKg")}
               />
+              <FieldError id="weightKg-error" message={fieldErrors.weightKg} />
             </div>
           </div>
 
           {/* Action Buttons */}
           <div className="flex gap-3 pt-4">
             <Button 
-              onClick={handleCalculate} 
-              disabled={!isFormValid()}
-              className="flex-1 bg-logo-blue text-white hover:bg-logo-blue/90 focus:ring-2 focus:ring-logo-blue focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              onClick={handleCalculate}
+              className="flex-1 bg-logo-blue text-white hover:bg-logo-blue/90 focus:ring-2 focus:ring-logo-blue focus:ring-offset-2"
             >
               Beregn fedtprocent
             </Button>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useId } from "react";
+import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -50,16 +51,28 @@ export function ToolChoiceGroup<TValue extends string>({
             <Button
               key={option.value}
               type="button"
-              variant={isSelected ? "default" : "outline"}
+              variant="outline"
               aria-pressed={isSelected}
               onClick={() => onChange(option.value)}
               className={cn(
-                "min-w-[6rem] flex-1",
+                "min-w-[6rem] flex-1 gap-0 transition-colors duration-200",
                 isSelected &&
-                  "bg-brand-primary text-white hover:bg-brand-primary/90",
+                  "border-gray-800 bg-gray-800 text-white hover:bg-gray-800/90 hover:text-white",
                 error && !isSelected && "border-red-400"
               )}
             >
+              <span
+                aria-hidden
+                data-selected-check={isSelected ? "visible" : "hidden"}
+                className={cn(
+                  "inline-flex shrink-0 overflow-hidden transition-[width,margin,opacity,transform] duration-200 ease-out motion-reduce:transition-none",
+                  isSelected
+                    ? "mr-1.5 w-4 scale-100 opacity-100"
+                    : "mr-0 w-0 scale-50 opacity-0"
+                )}
+              >
+                <Check className="h-4 w-4 shrink-0" strokeWidth={2.5} />
+              </span>
               {option.label}
             </Button>
           );
