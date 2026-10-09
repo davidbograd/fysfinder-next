@@ -1,5 +1,5 @@
 // Location page - shared location rendering with city/specialty data fetching.
-// Updated: 2026-09-06 - Send only the first listing page, slim map markers, and capped JSON-LD to the client.
+// Updated: 2026-10-09 - Clinic signup CTA sits beside nearby clinics + SEO text (and on Danmark pages).
 
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { deslugify, slugify } from "@/app/utils/slugify";
@@ -11,7 +11,7 @@ import { SpecialtiesList } from "@/components/features/specialty/SpecialtiesList
 import { ClinicsList } from "@/components/features/clinic/ClinicsList";
 import { NoResultsFound } from "@/app/find/fysioterapeut/[location]/components/NoResultsFound";
 import { NearbyClinicsList } from "@/app/find/fysioterapeut/[location]/components/NearbyClinicsList";
-import { ClinicSignupCta } from "@/app/find/fysioterapeut/[location]/components/ClinicSignupCta";
+import { SignupCtaSidebarLayout } from "@/app/find/fysioterapeut/[location]/components/SignupCtaSidebarLayout";
 import { LocationClinicsMap } from "@/app/find/fysioterapeut/[location]/components/LocationClinicsMap";
 import { LocationStructuredData } from "@/components/seo/LocationStructuredData";
 import { SearchInterface } from "@/components/search/SearchInterface";
@@ -260,23 +260,21 @@ export default async function LocationPage({
           </div>
         )}
 
-        {resolvedParams.specialty && specialty?.seo_tekst && (
-          <div className="max-w-[800px] mx-auto">
+        <SignupCtaSidebarLayout cityLocationPhrase="i Danmark">
+          {resolvedParams.specialty && specialty?.seo_tekst && (
             <SeoContent
               source={specialty.seo_tekst}
               currentPagePath={currentPagePath}
             />
-          </div>
-        )}
+          )}
 
-        {filterSeoText && (
-          <div className="max-w-[800px] mx-auto">
+          {filterSeoText && (
             <SeoContent
               source={filterSeoText}
               currentPagePath={currentPagePath}
             />
-          </div>
-        )}
+          )}
+        </SignupCtaSidebarLayout>
       </div>
     );
   }
@@ -302,6 +300,13 @@ export default async function LocationPage({
     ? `${localClinics.length} online fysioterapi klinikker ${cityLocationPhrase} og ${data.clinics.length - localClinics.length} i resten af Danmark.`
     : `${data.clinics.length} fysioterapi klinikker ${cityLocationPhrase}.`;
   const showMap = mapClinics.length > 0;
+  const showNearbyClinics =
+    !isOnline &&
+    data.clinics.length > 0 &&
+    data.nearbyClinicsList.length > 0;
+  const showCitySeoText = Boolean(
+    data.city.seo_tekst && !resolvedParams.specialty
+  );
 
   const { h1, h2 } = generateHeadings(
     data.city.bynavn,
@@ -393,33 +398,26 @@ export default async function LocationPage({
         </div>
       )}
 
-      {!isOnline &&
-        data.clinics.length > 0 &&
-        data.nearbyClinicsList.length > 0 && (
-          // Same grid template as the listing above, so nearby cards match its width.
-          <div className="mt-12 grid gap-6 xl:grid-cols-[minmax(0,1fr)_420px]">
-            <div className="space-y-4">
-              <NearbyClinicsList
-                clinics={data.nearbyClinicsList}
-                nearbyCities={data.nearbyCities}
-                cityName={data.city.bynavn}
-                trackingContextCityId={data.city.id}
-                specialtySlug={resolvedParams.specialty}
-                specialtyName={specialtyName}
-              />
-            </div>
+      {(showNearbyClinics || showCitySeoText) && (
+        <SignupCtaSidebarLayout cityLocationPhrase={cityLocationPhrase}>
+          {showNearbyClinics && (
+            <NearbyClinicsList
+              clinics={data.nearbyClinicsList}
+              nearbyCities={data.nearbyCities}
+              cityName={data.city.bynavn}
+              trackingContextCityId={data.city.id}
+              specialtySlug={resolvedParams.specialty}
+              specialtyName={specialtyName}
+            />
+          )}
 
-            <div className="self-start xl:sticky xl:top-24">
-              <ClinicSignupCta cityLocationPhrase={cityLocationPhrase} />
-            </div>
-          </div>
-        )}
-
-      {data.city.seo_tekst && !resolvedParams.specialty && (
-        <SeoContent
-          source={data.city.seo_tekst}
-          currentPagePath={currentPagePath}
-        />
+          {showCitySeoText && data.city.seo_tekst && (
+            <SeoContent
+              source={data.city.seo_tekst}
+              currentPagePath={currentPagePath}
+            />
+          )}
+        </SignupCtaSidebarLayout>
       )}
     </div>
   );

@@ -26,7 +26,7 @@ export function NearbyClinicsList({
   if (clinics.length === 0) return null;
 
   return (
-    // Top spacing lives on the grid wrapper in page.tsx so this column stays level
+    // Top spacing lives on SignupCtaSidebarLayout so this column stays level
     // with the signup CTA beside it.
     <div>
       <h2 className="text-xl font-semibold mb-6">

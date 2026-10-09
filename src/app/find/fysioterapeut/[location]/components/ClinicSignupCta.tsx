@@ -1,5 +1,5 @@
 // ClinicSignupCta - sidebar prompt inviting clinic owners to list themselves, shown beside
-// the nearby-clinics list.
+// the nearby-clinics list and SEO text via SignupCtaSidebarLayout.
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
