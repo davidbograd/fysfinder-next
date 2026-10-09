@@ -16,7 +16,7 @@ export const BEST_RATING = 5;
 export const WORST_RATING = 1;
 
 /** Real ratings a baseline-free tool needs before we publish any rating for it. */
-export const MIN_REAL_RATINGS_FOR_UNSEEDED_TOOL = 10;
+export const MIN_REAL_RATINGS_FOR_UNSEEDED_TOOL = 3;
 
 interface RatingBaseline {
   ratingValue: number;

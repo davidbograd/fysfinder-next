@@ -93,7 +93,7 @@ describe("VaerktoejerStructuredData", () => {
         toolSlug="mr-scanning"
         ratingStats={{
           ratingCount: MIN_REAL_RATINGS_FOR_UNSEEDED_TOOL,
-          ratingSum: 48,
+          ratingSum: 14,
         }}
       />
     );
@@ -103,8 +103,8 @@ describe("VaerktoejerStructuredData", () => {
     expect(rated).toHaveLength(1);
     expect(rated[0]["@type"]).toBe("WebApplication");
     expect(rated[0].aggregateRating).toMatchObject({
-      ratingValue: "4.8",
-      reviewCount: "10",
+      ratingValue: "4.7",
+      reviewCount: "3",
     });
   });
 

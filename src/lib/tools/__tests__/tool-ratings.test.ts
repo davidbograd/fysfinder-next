@@ -57,7 +57,7 @@ describe("resolvePublishedToolRating", () => {
     expect(
       resolvePublishedToolRating("mr-scanning", {
         ratingCount: MIN_REAL_RATINGS_FOR_UNSEEDED_TOOL - 1,
-        ratingSum: 45,
+        ratingSum: 9,
       })
     ).toBeNull();
   });
@@ -65,12 +65,12 @@ describe("resolvePublishedToolRating", () => {
   it("publishes only genuine numbers once a baseline-free tool qualifies", () => {
     const published = resolvePublishedToolRating("mr-scanning", {
       ratingCount: MIN_REAL_RATINGS_FOR_UNSEEDED_TOOL,
-      ratingSum: 46,
+      ratingSum: 14,
     });
 
     expect(published).toEqual({
-      ratingValue: "4.6",
-      reviewCount: "10",
+      ratingValue: "4.7",
+      reviewCount: "3",
       bestRating: "5",
       worstRating: "1",
     });
@@ -114,7 +114,7 @@ describe("resolvePublishedToolRating", () => {
       expect(
         resolvePublishedToolRating(slug, {
           ratingCount: MIN_REAL_RATINGS_FOR_UNSEEDED_TOOL - 1,
-          ratingSum: 45,
+          ratingSum: 9,
         })
       ).toBeNull();
 
@@ -122,11 +122,11 @@ describe("resolvePublishedToolRating", () => {
       expect(
         resolvePublishedToolRating(slug, {
           ratingCount: MIN_REAL_RATINGS_FOR_UNSEEDED_TOOL,
-          ratingSum: 45,
+          ratingSum: 14,
         })
       ).toEqual({
-        ratingValue: "4.5",
-        reviewCount: "10",
+        ratingValue: "4.7",
+        reviewCount: "3",
         bestRating: "5",
         worstRating: "1",
       });
