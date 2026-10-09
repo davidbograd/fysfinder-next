@@ -5,8 +5,32 @@
 import React, { useState } from "react";
 import { Calculator, Info } from "lucide-react";
 import { notifyToolCompleted } from "@/lib/tools/tool-completion";
+import {
+  ToolGender,
+  ToolGenderSelector,
+} from "@/components/features/tools/ToolGenderSelector";
 import { ToolRatingSummary } from "@/components/features/tools/ToolRatingSummary";
 import { PublishedToolRating } from "@/lib/tools/tool-ratings";
+import {
+  FieldErrors,
+  findMissingFields,
+  hasFieldErrors,
+} from "@/lib/calculators/required-fields";
+
+type FieldKey = "weight" | "height" | "age" | "gender";
+
+const INPUT_CLASSES =
+  "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-logo-blue focus:border-transparent";
+const INPUT_ERROR_CLASSES = "border-red-400 focus:ring-red-400";
+
+function FieldError({ id, message }: { id: string; message?: string }) {
+  if (!message) return null;
+  return (
+    <p id={id} className="mt-2 text-xs font-medium text-red-600">
+      {message}
+    </p>
+  );
+}
 
 interface CalorieResult {
   bmr: number;
@@ -36,11 +60,23 @@ export function CalorieCalculator({ rating }: CalorieCalculatorProps) {
   const [weight, setWeight] = useState("");
   const [height, setHeight] = useState("");
   const [age, setAge] = useState("");
-  const [gender, setGender] = useState("");
+  const [gender, setGender] = useState<ToolGender | "">("");
   const [activityLevel, setActivityLevel] = useState("1.2");
   const [weeklyLossKg, setWeeklyLossKg] = useState("0.5");
   const [result, setResult] = useState<CalorieResult | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors<FieldKey>>({});
+
+  const clearError = (field: FieldKey) =>
+    setFieldErrors(({ [field]: _removed, ...rest }) => rest);
+
+  const inputClasses = (field: FieldKey) =>
+    `${INPUT_CLASSES} ${fieldErrors[field] ? INPUT_ERROR_CLASSES : ""}`;
+
+  const errorProps = (field: FieldKey) => ({
+    "aria-invalid": fieldErrors[field] ? true : undefined,
+    "aria-describedby": fieldErrors[field] ? `${field}-error` : undefined,
+  });
 
   // BMR beregning (Harris-Benedict formel)
   const calculateBMR = (w: number, h: number, a: number, g: string): number => {
@@ -77,12 +113,20 @@ export function CalorieCalculator({ rating }: CalorieCalculatorProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (weight && height && age && gender) {
-      calculateCalories();
+    const missing = findMissingFields<FieldKey>([
+      { key: "weight", label: "Vægt", value: weight },
+      { key: "height", label: "Højde", value: height },
+      { key: "age", label: "Alder", value: age },
+      { key: "gender", label: "Køn", value: gender, choice: true },
+    ]);
+    if (hasFieldErrors(missing)) {
+      setFieldErrors(missing);
+      setResult(null);
+      return;
     }
+    setFieldErrors({});
+    calculateCalories();
   };
-
-  const isFormValid = weight && height && age && gender;
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-6">
@@ -109,13 +153,18 @@ export function CalorieCalculator({ rating }: CalorieCalculatorProps) {
               id="weight"
               type="number"
               value={weight}
-              onChange={(e) => setWeight(e.target.value)}
+              onChange={(e) => {
+                setWeight(e.target.value);
+                clearError("weight");
+              }}
               placeholder="f.eks. 70"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-logo-blue focus:border-transparent"
+              {...errorProps("weight")}
+              className={inputClasses("weight")}
               min="30"
               max="300"
               step="0.1"
             />
+            <FieldError id="weight-error" message={fieldErrors.weight} />
           </div>
 
           <div>
@@ -129,13 +178,18 @@ export function CalorieCalculator({ rating }: CalorieCalculatorProps) {
               id="height"
               type="number"
               value={height}
-              onChange={(e) => setHeight(e.target.value)}
+              onChange={(e) => {
+                setHeight(e.target.value);
+                clearError("height");
+              }}
               placeholder="f.eks. 175"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-logo-blue focus:border-transparent"
+              {...errorProps("height")}
+              className={inputClasses("height")}
               min="100"
               max="250"
               step="1"
             />
+            <FieldError id="height-error" message={fieldErrors.height} />
           </div>
         </div>
 
@@ -151,44 +205,28 @@ export function CalorieCalculator({ rating }: CalorieCalculatorProps) {
               id="age"
               type="number"
               value={age}
-              onChange={(e) => setAge(e.target.value)}
+              onChange={(e) => {
+                setAge(e.target.value);
+                clearError("age");
+              }}
               placeholder="f.eks. 30"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-logo-blue focus:border-transparent"
+              {...errorProps("age")}
+              className={inputClasses("age")}
               min="15"
               max="100"
               step="1"
             />
+            <FieldError id="age-error" message={fieldErrors.age} />
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Køn
-            </label>
-            <div className="flex gap-2">
-              <button
-                type="button"
-                onClick={() => setGender("male")}
-                className={`flex-1 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors h-10 px-6 border border-input bg-background hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ${
-                  gender === "male"
-                    ? "bg-gray-800 text-white hover:bg-gray-800/90 hover:text-white"
-                    : ""
-                }`}
-              >
-                Mand
-              </button>
-              <button
-                type="button"
-                onClick={() => setGender("female")}
-                className={`flex-1 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors h-10 px-6 border border-input bg-background hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ${
-                  gender === "female"
-                    ? "bg-gray-800 text-white hover:bg-gray-800/90 hover:text-white"
-                    : ""
-                }`}
-              >
-                Kvinde
-              </button>
-            </div>
-          </div>
+          <ToolGenderSelector
+            value={gender}
+            error={fieldErrors.gender}
+            onChange={(value) => {
+              setGender(value);
+              clearError("gender");
+            }}
+          />
         </div>
 
         <div>
@@ -225,8 +263,8 @@ export function CalorieCalculator({ rating }: CalorieCalculatorProps) {
 
         <button
           type="submit"
-          disabled={!isFormValid || isCalculating}
-          className="w-full bg-logo-blue text-white py-3 px-4 rounded-md font-medium hover:bg-logo-blue/90 focus:outline-none focus:ring-2 focus:ring-logo-blue focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          disabled={isCalculating}
+          className="w-full bg-logo-blue text-white py-3 px-4 rounded-full font-medium hover:bg-logo-blue/90 focus:outline-none focus:ring-2 focus:ring-logo-blue focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           {isCalculating ? "Beregner..." : "Beregn kalorier"}
         </button>

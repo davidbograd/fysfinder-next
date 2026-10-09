@@ -76,4 +76,14 @@ export const miscMappings: LinkMapping[] = [
     ],
     destination: "/vaerktoejer/kondital-beregner",
   },
+  {
+    keywords: [
+      "proteinberegner",
+      "Proteinberegner",
+      "protein-beregner",
+      "protein beregner",
+      "proteinbehov",
+    ],
+    destination: "/vaerktoejer/proteinberegner",
+  },
 ];

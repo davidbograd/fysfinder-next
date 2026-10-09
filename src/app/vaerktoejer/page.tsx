@@ -5,8 +5,8 @@ import VaerktoejerStructuredData from "@/components/seo/VaerktoejerStructuredDat
 import {
   groupToolsByCategory,
   TOOL_CATEGORY_ORDER,
+  releasedTools,
   Tool,
-  tools,
 } from "@/lib/tools/registry";
 
 function ToolCard({ tool }: { tool: Tool }) {
@@ -49,7 +49,7 @@ export default function ToolsPage() {
         name="Gratis værktøjer og beregnere til bedre træning, kost og sundhed"
         description="Her finder du gratis værktøjer og beregnere til at forbedre din træning, kost og sundhed."
         breadcrumbs={breadcrumbItems}
-        tools={tools}
+        tools={releasedTools}
       />
       <div className="max-w-7xl mx-auto">
         <div className="mb-12">

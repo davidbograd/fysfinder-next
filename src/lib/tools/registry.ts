@@ -1,5 +1,5 @@
 // Single source of truth for the Fysfinder tools (værktøjer).
-// Updated: 2026-09-29 - Register the kondital calculator. The other new calculators stay off main until they are ready.
+// Updated: 2026-10-09 - Keep højde-, hvilestofskifte- and muskelmasseberegner unreleased.
 // Previously duplicated between src/app/vaerktoejer/page.tsx and RelatedToolsSection.
 
 export const TOOL_SLUGS = [
@@ -11,6 +11,10 @@ export const TOOL_SLUGS = [
   "pace-beregner",
   "rm-beregner",
   "kondital-beregner",
+  "hoejdeberegner",
+  "hvilestofskifte-beregner",
+  "muskelmasse-beregner",
+  "proteinberegner",
 ] as const;
 
 export type ToolSlug = (typeof TOOL_SLUGS)[number];
@@ -124,7 +128,67 @@ export const tools: Tool[] = [
     imageAlt: "Løber på en atletikbane i solnedgang",
     type: "Træning & bevægelse værktøjer",
   },
+  {
+    slug: "hoejdeberegner",
+    title: "Højdeberegner",
+    feedbackName: "højdeberegneren",
+    description:
+      "Beregn dit barns forventede sluthøjde ud fra forældrenes højde med midtforældre-metoden.",
+    href: "/vaerktoejer/hoejdeberegner",
+    imageUrl: "/images/vaerktoejer/hoejdeberegner-placeholder.png",
+    imageAlt: "Højdeberegner illustration",
+    type: "Kost & ernæring værktøjer",
+  },
+  {
+    slug: "hvilestofskifte-beregner",
+    title: "Hvilestofskifte beregner",
+    feedbackName: "hvilestofskifte-beregneren",
+    description:
+      "Udregn dit hvilestofskifte – det antal kalorier din krop bruger i hvile, før du lægger aktivitet oveni.",
+    href: "/vaerktoejer/hvilestofskifte-beregner",
+    imageUrl: "/images/vaerktoejer/hvilestofskifte-beregner-placeholder.png",
+    imageAlt: "Hvilestofskifte beregner illustration",
+    type: "Kost & ernæring værktøjer",
+  },
+  {
+    slug: "muskelmasse-beregner",
+    title: "Muskelmasse beregner",
+    feedbackName: "muskelmasseberegneren",
+    description:
+      "Estimer din muskelmasse – enten med målebånd eller ud fra højde, vægt, alder og køn.",
+    href: "/vaerktoejer/muskelmasse-beregner",
+    imageUrl: "/images/vaerktoejer/muskelmasse-beregner-placeholder.png",
+    imageAlt: "Muskelmasse beregner illustration",
+    type: "Kost & ernæring værktøjer",
+  },
+  {
+    slug: "proteinberegner",
+    title: "Proteinberegner",
+    feedbackName: "proteinberegneren",
+    description:
+      "Beregn hvor meget protein du har brug for om dagen ud fra din vægt, dit mål og dit aktivitetsniveau.",
+    href: "/vaerktoejer/proteinberegner",
+    imageUrl: "/images/vaerktoejer/proteinberegner-proteinrig-mad.jpg",
+    imageAlt: "Tallerken med proteinrig mad: kylling, laks, oksekød, æg, tofu, kikærter og quinoa",
+    type: "Kost & ernæring værktøjer",
+  },
 ];
+
+// Built but not launched yet: hidden from listings and the sitemap, and the
+// pages 404 in production. Remove a slug from here to launch the tool.
+export const UNRELEASED_TOOL_SLUGS: readonly ToolSlug[] = [
+  "hoejdeberegner",
+  "hvilestofskifte-beregner",
+  "muskelmasse-beregner",
+];
+
+export function isToolReleased(slug: ToolSlug): boolean {
+  return !UNRELEASED_TOOL_SLUGS.includes(slug);
+}
+
+export const releasedTools: Tool[] = tools.filter((tool) =>
+  isToolReleased(tool.slug)
+);
 
 export const TOOL_CATEGORY_ORDER: ToolCategory[] = [
   "Kost & ernæring værktøjer",
@@ -147,7 +211,7 @@ export function getToolBySlug(slug: ToolSlug): Tool {
 }
 
 export function groupToolsByCategory(): Record<string, Tool[]> {
-  return tools.reduce<Record<string, Tool[]>>((acc, tool) => {
+  return releasedTools.reduce<Record<string, Tool[]>>((acc, tool) => {
     if (!acc[tool.type]) acc[tool.type] = [];
     acc[tool.type].push(tool);
     return acc;

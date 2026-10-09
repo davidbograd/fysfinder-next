@@ -42,7 +42,7 @@ export function ToolPrimaryResult({
 export interface ToolStat {
   label: string;
   value: string;
-  caption?: string;
+  caption?: ReactNode;
 }
 
 interface ToolStatGridProps {
