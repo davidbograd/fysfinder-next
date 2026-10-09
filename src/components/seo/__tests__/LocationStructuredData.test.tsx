@@ -43,4 +43,27 @@ describe("LocationStructuredData", () => {
       LOCATION_JSON_LD_ITEM_LIMIT
     );
   });
+
+  it("uses the city's preposition in the WebPage name", () => {
+    render(
+      <LocationStructuredData
+        city={{
+          id: "1",
+          bynavn: "Nørrebro",
+          bynavn_slug: "noerrebro",
+          location_preposition: "på",
+          postal_codes: [],
+          latitude: 55.69,
+          longitude: 12.55,
+          betegnelse: "",
+        }}
+        clinics={[makeClinic(1)]}
+      />
+    );
+
+    const script = document.querySelector('script[type="application/ld+json"]');
+    const webPageSchema = JSON.parse(script!.innerHTML) as { name: string };
+
+    expect(webPageSchema.name).toBe("Fysioterapeuter på Nørrebro");
+  });
 });

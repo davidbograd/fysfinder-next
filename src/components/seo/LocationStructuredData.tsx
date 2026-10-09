@@ -35,6 +35,7 @@ export function LocationStructuredData({
     : `/find/fysioterapeut/${city?.bynavn_slug}`;
   const specialtyPath = specialtyName ? `/${slugify(specialtyName)}` : "";
   const currentUrl = `${baseUrl}${locationPath}${specialtyPath}`;
+  const cityPreposition = city?.location_preposition ?? "i";
 
   const webPageSchema = {
     "@context": "https://schema.org",
@@ -44,8 +45,8 @@ export function LocationStructuredData({
         ? `Fysioterapeuter i Danmark specialiseret i ${specialtyName}`
         : "Find og sammenlign fysioterapeuter i Danmark"
       : specialtyName
-      ? `Fysioterapeuter i ${city?.bynavn} specialiseret i ${specialtyName}`
-      : `Fysioterapeuter i ${city?.bynavn}`,
+      ? `Fysioterapeuter ${cityPreposition} ${city?.bynavn} specialiseret i ${specialtyName}`
+      : `Fysioterapeuter ${cityPreposition} ${city?.bynavn}`,
     url: currentUrl,
 
     about: {
