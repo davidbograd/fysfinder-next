@@ -9,6 +9,7 @@ import * as pathModule from "path";
 import glob from "glob-promise";
 import { getBlogPosts } from "../src/lib/blog"; // Import getBlogPosts
 import { getAllAuthors } from "../src/lib/authors"; // Import getAllAuthors
+import { UNRELEASED_TOOL_SLUGS } from "../src/lib/tools/registry";
 import {
   getBodyPartSlugs,
   getListedExerciseSlugs,
@@ -293,7 +294,10 @@ async function generateSitemaps() {
       });
 
       for (const item of vaerktoejerItems) {
-        if (item.isDirectory()) {
+        if (
+          item.isDirectory() &&
+          !(UNRELEASED_TOOL_SLUGS as readonly string[]).includes(item.name)
+        ) {
           // Check if the directory has a page.tsx file
           const pagePath = pathModule.join(
             vaerktoejerPath,

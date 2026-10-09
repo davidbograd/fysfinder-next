@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { tools as allTools } from "@/lib/tools/registry";
+import { releasedTools as allTools } from "@/lib/tools/registry";
 
 interface RelatedToolsSectionProps {
   currentToolHref: string;

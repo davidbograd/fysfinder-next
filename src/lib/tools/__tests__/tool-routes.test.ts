@@ -1,7 +1,12 @@
 // Added: 2026-09-18 - MR/DEXA translators moved under /vaerktoejer/{tool}.
 import fs from "fs";
 import path from "path";
-import { tools } from "@/lib/tools/registry";
+import {
+  isToolReleased,
+  releasedTools,
+  tools,
+  UNRELEASED_TOOL_SLUGS,
+} from "@/lib/tools/registry";
 
 type Redirect = {
   source: string;
@@ -31,6 +36,20 @@ describe("tool routes", () => {
       );
       expect(fs.existsSync(pagePath)).toBe(true);
     }
+  });
+
+  it("keeps unreleased tools out of listings and the static sitemap", () => {
+    const sitemap = fs.readFileSync(
+      path.join(process.cwd(), "public/sitemap-vaerktoejer.xml"),
+      "utf8"
+    );
+
+    for (const slug of UNRELEASED_TOOL_SLUGS) {
+      expect(isToolReleased(slug)).toBe(false);
+      expect(releasedTools.map((tool) => tool.slug)).not.toContain(slug);
+      expect(sitemap).not.toContain(`/vaerktoejer/${slug}<`);
+    }
+    expect(releasedTools.map((tool) => tool.slug)).toContain("proteinberegner");
   });
 
   it("permanently redirects the legacy scan URLs to their new paths", async () => {

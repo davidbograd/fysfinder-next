@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import RelatedToolsSection from "@/components/features/RelatedToolsSection";
@@ -12,7 +13,11 @@ import { getContentImageSize } from "@/lib/mdx/content-image-dimensions";
 import { MDX_PROSE_TABLE_HEADER_WRAP } from "@/lib/mdx/mdx-prose-table-classnames";
 import { getPageContent } from "@/lib/pageContent";
 import { getToolRatingStats } from "@/lib/tools/get-tool-rating-stats";
-import { getToolBySlug, ToolSlug } from "@/lib/tools/registry";
+import {
+  getToolBySlug,
+  isToolReleased,
+  ToolSlug,
+} from "@/lib/tools/registry";
 import {
   PublishedToolRating,
   resolvePublishedToolRating,
@@ -100,6 +105,10 @@ export async function ToolPageLayout({
   image,
   renderCalculator,
 }: ToolPageLayoutProps) {
+  if (!isToolReleased(slug) && process.env.NODE_ENV === "production") {
+    notFound();
+  }
+
   const tool = getToolBySlug(slug);
   const [pageContent, ratingStats] = await Promise.all([
     getPageContent(slug),

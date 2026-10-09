@@ -1,5 +1,5 @@
 // Single source of truth for the Fysfinder tools (værktøjer).
-// Updated: 2026-09-29 - Point the kondital-beregner card at the runner photo.
+// Updated: 2026-10-09 - Keep højde-, hvilestofskifte- and muskelmasseberegner unreleased.
 // Previously duplicated between src/app/vaerktoejer/page.tsx and RelatedToolsSection.
 
 export const TOOL_SLUGS = [
@@ -168,11 +168,27 @@ export const tools: Tool[] = [
     description:
       "Beregn hvor meget protein du har brug for om dagen ud fra din vægt, dit mål og dit aktivitetsniveau.",
     href: "/vaerktoejer/proteinberegner",
-    imageUrl: "/images/vaerktoejer/proteinberegner-placeholder.png",
-    imageAlt: "Proteinberegner illustration",
+    imageUrl: "/images/vaerktoejer/proteinberegner-proteinrig-mad.jpg",
+    imageAlt: "Tallerken med proteinrig mad: kylling, laks, oksekød, æg, tofu, kikærter og quinoa",
     type: "Kost & ernæring værktøjer",
   },
 ];
+
+// Built but not launched yet: hidden from listings and the sitemap, and the
+// pages 404 in production. Remove a slug from here to launch the tool.
+export const UNRELEASED_TOOL_SLUGS: readonly ToolSlug[] = [
+  "hoejdeberegner",
+  "hvilestofskifte-beregner",
+  "muskelmasse-beregner",
+];
+
+export function isToolReleased(slug: ToolSlug): boolean {
+  return !UNRELEASED_TOOL_SLUGS.includes(slug);
+}
+
+export const releasedTools: Tool[] = tools.filter((tool) =>
+  isToolReleased(tool.slug)
+);
 
 export const TOOL_CATEGORY_ORDER: ToolCategory[] = [
   "Kost & ernæring værktøjer",
@@ -195,7 +211,7 @@ export function getToolBySlug(slug: ToolSlug): Tool {
 }
 
 export function groupToolsByCategory(): Record<string, Tool[]> {
-  return tools.reduce<Record<string, Tool[]>>((acc, tool) => {
+  return releasedTools.reduce<Record<string, Tool[]>>((acc, tool) => {
     if (!acc[tool.type]) acc[tool.type] = [];
     acc[tool.type].push(tool);
     return acc;
