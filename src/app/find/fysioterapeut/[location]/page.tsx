@@ -52,11 +52,11 @@ export async function generateStaticParams() {
 function redirectLegacyOnlineLocation(
   location: string,
   specialty: string | undefined,
-  filters: LocationFilters
+  filters: LocationFilters,
 ) {
   if (location.toLowerCase() !== "online") return;
   permanentRedirect(
-    buildSearchUrl("danmark", specialty, { ...filters, online: true })
+    buildSearchUrl("danmark", specialty, { ...filters, online: true }),
   );
 }
 
@@ -73,20 +73,20 @@ export async function generateMetadata({
   redirectLegacyOnlineLocation(
     resolvedParams.location,
     resolvedParams.specialty,
-    filters
+    filters,
   );
 
   const data = await fetchLocationData(
     resolvedParams.location,
     resolvedParams.specialty,
-    filters
+    filters,
   );
   const cityName = data.city?.bynavn || deslugify(resolvedParams.location);
   const isDanmark = resolvedParams.location === "danmark";
 
   const specialtyName = resolvedParams.specialty
     ? data.specialties?.find(
-        (s) => s.specialty_name_slug === resolvedParams.specialty
+        (s) => s.specialty_name_slug === resolvedParams.specialty,
       )?.specialty_name
     : undefined;
 
@@ -94,10 +94,13 @@ export async function generateMetadata({
     cityName,
     specialtyName,
     filters,
-    !filters.ydernummer && !filters.handicap && !filters.online && !specialtyName
+    !filters.ydernummer &&
+      !filters.handicap &&
+      !filters.online &&
+      !specialtyName
       ? data.clinics.length
       : undefined,
-    data.city?.location_preposition
+    data.city?.location_preposition,
   );
 
   return {
@@ -126,13 +129,13 @@ export default async function LocationPage({
   redirectLegacyOnlineLocation(
     resolvedParams.location,
     resolvedParams.specialty,
-    filters
+    filters,
   );
 
   const data = await fetchLocationData(
     resolvedParams.location,
     resolvedParams.specialty,
-    filters
+    filters,
   );
   const specialties = data.specialties;
   const visibleClinics = data.clinics.slice(0, LOCATION_LIST_PAGE_SIZE);
@@ -147,13 +150,13 @@ export default async function LocationPage({
   const currentPagePath = buildSearchUrl(
     resolvedParams.location,
     resolvedParams.specialty,
-    filters
+    filters,
   );
 
   const specialty = resolvedParams.specialty
     ? specialties.find(
         (s: SpecialtyWithSeo) =>
-          s.specialty_name_slug === resolvedParams.specialty
+          s.specialty_name_slug === resolvedParams.specialty,
       )
     : null;
 
@@ -301,18 +304,27 @@ export default async function LocationPage({
     : `${data.clinics.length} fysioterapi klinikker ${cityLocationPhrase}.`;
   const showMap = mapClinics.length > 0;
   const showNearbyClinics =
-    !isOnline &&
-    data.clinics.length > 0 &&
-    data.nearbyClinicsList.length > 0;
+    !isOnline && data.clinics.length > 0 && data.nearbyClinicsList.length > 0;
   const showCitySeoText = Boolean(
-    data.city.seo_tekst && !resolvedParams.specialty
+    data.city.seo_tekst && !resolvedParams.specialty,
+  );
+  const showListingBesideCta = data.clinics.length > 0 && !showMap;
+  const clinicsList = (
+    <ClinicsList
+      initialClinics={visibleClinics}
+      totalClinics={data.clinics.length}
+      locationSlug={resolvedParams.location}
+      specialtySlug={resolvedParams.specialty}
+      filters={filters}
+      trackingContextCityId={data.city.id}
+    />
   );
 
   const { h1, h2 } = generateHeadings(
     data.city.bynavn,
     specialtyName,
     filters,
-    cityPreposition
+    cityPreposition,
   );
 
   return (
@@ -359,7 +371,7 @@ export default async function LocationPage({
             specialties={specialties}
             specialtyMatchCounts={getSpecialtyMatchCounts(
               data.clinics,
-              specialties
+              specialties,
             )}
           />
         )}
@@ -374,32 +386,27 @@ export default async function LocationPage({
           />
         </div>
       ) : (
-        <div
-          className={`mt-6 grid gap-6 ${
-            showMap ? "xl:grid-cols-[minmax(0,1fr)_420px]" : ""
-          }`}
-        >
-          <div className="space-y-4">
-            <ClinicsList
-              initialClinics={visibleClinics}
-              totalClinics={data.clinics.length}
-              locationSlug={resolvedParams.location}
-              specialtySlug={resolvedParams.specialty}
-              filters={filters}
-              trackingContextCityId={data.city.id}
-            />
-          </div>
+        showMap && (
+          <div className="mt-6 grid gap-6 xl:grid-cols-[minmax(0,1fr)_420px]">
+            <div className="space-y-4">{clinicsList}</div>
 
-          {showMap && (
             <div className="self-start xl:sticky xl:top-24">
               <LocationClinicsMap clinics={mapClinics} city={data.city} />
             </div>
-          )}
-        </div>
+          </div>
+        )
       )}
 
-      {(showNearbyClinics || showCitySeoText) && (
-        <SignupCtaSidebarLayout cityLocationPhrase={cityLocationPhrase}>
+      {/* Without a map, the listing joins this section so the signup CTA fills the right column from the top. */}
+      {(showListingBesideCta || showNearbyClinics || showCitySeoText) && (
+        <SignupCtaSidebarLayout
+          cityLocationPhrase={cityLocationPhrase}
+          className={showListingBesideCta ? "mt-6" : undefined}
+        >
+          {showListingBesideCta && (
+            <div className="space-y-4">{clinicsList}</div>
+          )}
+
           {showNearbyClinics && (
             <NearbyClinicsList
               clinics={data.nearbyClinicsList}

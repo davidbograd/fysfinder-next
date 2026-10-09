@@ -8,23 +8,34 @@ describe("SignupCtaSidebarLayout", () => {
     render(
       <SignupCtaSidebarLayout cityLocationPhrase="i Danmark">
         <p>SEO tekst om ydernummer</p>
-      </SignupCtaSidebarLayout>
+      </SignupCtaSidebarLayout>,
     );
 
     expect(screen.getByText("SEO tekst om ydernummer")).toBeInTheDocument();
     expect(
-      screen.getByRole("heading", { name: "Driver du en klinik i Danmark?" })
+      screen.getByRole("heading", { name: "Driver du en klinik i Danmark?" }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("link", { name: "Tilmeld din klinik" })
+      screen.getByRole("link", { name: "Tilmeld din klinik" }),
     ).toHaveAttribute("href", "/tilmeld");
+  });
+
+  it("lets the page tighten the top spacing when it replaces the map beside the listing", () => {
+    const { container } = render(
+      <SignupCtaSidebarLayout cityLocationPhrase="på Amager" className="mt-6">
+        <p>Klinikliste</p>
+      </SignupCtaSidebarLayout>,
+    );
+
+    expect(container.firstChild).toHaveClass("mt-6");
+    expect(container.firstChild).not.toHaveClass("mt-12");
   });
 
   it("still shows the CTA when there is no content to sit beside", () => {
     render(<SignupCtaSidebarLayout cityLocationPhrase="i Danmark" />);
 
     expect(
-      screen.getByRole("link", { name: "Tilmeld din klinik" })
+      screen.getByRole("link", { name: "Tilmeld din klinik" }),
     ).toBeInTheDocument();
   });
 });
