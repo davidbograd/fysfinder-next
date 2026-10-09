@@ -33,12 +33,12 @@ export default function HoejdeberegnerPage() {
       image={{ src: image.url, alt: image.alt }}
       intro={
         <>
-          <p className="text-gray-600 text-sm sm:text-base text-pretty">
+          <p className="text-gray-600 text-sm sm:text-base">
             Højde er i høj grad arveligt, og derfor kan man komme forbavsende
             tæt på et barns sluthøjde alene ud fra forældrenes højde. Indtast
             mors og fars højde, og få det forventede resultat med det samme.
           </p>
-          <p className="text-gray-600 text-sm sm:text-base text-pretty">
+          <p className="text-gray-600 text-sm sm:text-base">
             Beregneren viser både et enkelt tal og det interval, de fleste børn
             lander inden for.
           </p>

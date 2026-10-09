@@ -156,7 +156,7 @@ export async function ToolPageLayout({
 
             {note && (
               <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-8">
-                <p className="text-sm text-gray-700 text-pretty">{note}</p>
+                <p className="text-sm text-gray-700">{note}</p>
               </div>
             )}
 

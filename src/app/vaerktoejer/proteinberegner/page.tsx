@@ -33,13 +33,13 @@ export default function ProteinberegnerPage() {
       image={{ src: image.url, alt: image.alt }}
       intro={
         <>
-          <p className="text-gray-600 text-sm sm:text-base text-pretty">
+          <p className="text-gray-600 text-sm sm:text-base">
             Protein er det byggemateriale, kroppen bruger til at reparere og
             opbygge muskler. Hvor meget du har brug for afhænger af din vægt, om
             du træner, og om du er i gang med at tabe dig, holde vægten eller
             bygge muskel.
           </p>
-          <p className="text-gray-600 text-sm sm:text-base text-pretty">
+          <p className="text-gray-600 text-sm sm:text-base">
             Indtast dine oplysninger og få dit daglige proteinbehov – både som
             samlet mål og fordelt på dine måltider.
           </p>

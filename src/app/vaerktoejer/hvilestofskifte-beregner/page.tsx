@@ -33,13 +33,13 @@ export default function HvilestofskifteBeregnerPage() {
       image={{ src: image.url, alt: image.alt }}
       intro={
         <>
-          <p className="text-gray-600 text-sm sm:text-base text-pretty">
+          <p className="text-gray-600 text-sm sm:text-base">
             Dit hvilestofskifte er den energi, din krop bruger bare på at holde
             dig i live: vejrtrækning, hjerteslag, kropstemperatur og organernes
             arbejde. Det er langt den største del af dit daglige
             kalorieforbrug – også selvom du træner.
           </p>
-          <p className="text-gray-600 text-sm sm:text-base text-pretty">
+          <p className="text-gray-600 text-sm sm:text-base">
             Beregneren bruger Mifflin-St Jeor-ligningen, som i dag er den bedst
             validerede formel til hvilestofskifte hos raske voksne.
           </p>

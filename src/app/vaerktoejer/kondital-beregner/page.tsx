@@ -33,13 +33,13 @@ export default function KonditalBeregnerPage() {
       image={{ src: image.url, alt: image.alt }}
       intro={
         <>
-          <p className="text-gray-600 text-sm sm:text-base text-pretty">
+          <p className="text-gray-600 text-sm sm:text-base">
             Dit kondital fortæller, hvor meget ilt din krop kan optage og bruge
             pr. kilo kropsvægt i minuttet. Det er et af de bedste enkeltmål for
             din kondition – og et af de mål, der hænger tættest sammen med
             helbred og udholdenhed.
           </p>
-          <p className="text-gray-600 text-sm sm:text-base text-pretty">
+          <p className="text-gray-600 text-sm sm:text-base">
             Du kan beregne dit kondital på to måder her: med din hvilepuls, som
             ikke kræver nogen test, eller med en Cooper-test, hvor du løber så
             langt du kan på 12 minutter.

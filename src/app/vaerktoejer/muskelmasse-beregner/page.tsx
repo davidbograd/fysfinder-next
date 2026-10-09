@@ -33,13 +33,13 @@ export default function MuskelmasseBeregnerPage() {
       image={{ src: image.url, alt: image.alt }}
       intro={
         <>
-          <p className="text-gray-600 text-sm sm:text-base text-pretty">
+          <p className="text-gray-600 text-sm sm:text-base">
             Muskelmasse er den del af kroppen, der arbejder, når du løfter,
             løber og rejser dig fra en stol. Den fylder meget for både styrke,
             stofskifte og funktion – ikke mindst med alderen, hvor vi taber
             muskel, hvis vi ikke bruger den.
           </p>
-          <p className="text-gray-600 text-sm sm:text-base text-pretty">
+          <p className="text-gray-600 text-sm sm:text-base">
             Her kan du estimere din muskelmasse på to måder: uden målebånd,
             hvis du bare vil have et hurtigt tal, eller med målebånd, som giver
             det mest præcise resultat.
