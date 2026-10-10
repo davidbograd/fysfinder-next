@@ -1,4 +1,4 @@
-// Updated: 2026-10-10 - Collapsed "Afholdte kurser" section with muted past rows; condensed search and filter bar follows the reader once the full search area scrolls away; "Kursustype" filter renamed to "Eventtype"; date filter defaults to the covered year range.
+// Updated: 2026-10-10 - Added the Udbyder (organiser) filter alongside Område/Dato/Emne/Eventtype.
 "use client";
 
 import {
@@ -57,7 +57,7 @@ interface CourseOverviewProps {
   providerAbbreviations: Record<string, string>;
 }
 
-type ListFilterKey = "regions" | "months" | "topics" | "types";
+type ListFilterKey = "regions" | "months" | "topics" | "types" | "providers";
 
 // Site header height; the full search area counts as out of view once it slides under it.
 const SITE_HEADER_MARGIN = "-64px 0px 0px 0px";
@@ -77,7 +77,10 @@ export function CourseOverview({
   const fullSearchRef = useRef<HTMLDivElement>(null);
   const isFullSearchInView = useIsInView(fullSearchRef, SITE_HEADER_MARGIN);
   const deferredQuery = useDeferredValue(filters.query);
-  const filterOptions = useMemo(() => buildFilterOptions(courses), [courses]);
+  const filterOptions = useMemo(
+    () => buildFilterOptions(courses, providerAbbreviations),
+    [courses, providerAbbreviations],
+  );
 
   const monthGroups = useMemo(
     () =>
@@ -119,13 +122,15 @@ export function CourseOverview({
     filters.regions.length > 0 ||
     filters.months.length > 0 ||
     filters.topics.length > 0 ||
-    filters.types.length > 0;
+    filters.types.length > 0 ||
+    filters.providers.length > 0;
 
   const activeFilterCount =
     filters.regions.length +
     filters.months.length +
     filters.topics.length +
-    filters.types.length;
+    filters.types.length +
+    filters.providers.length;
 
   function updateQuery(query: string) {
     setFilters((current) => ({ ...current, query }));
@@ -513,6 +518,7 @@ function CopyLinkButton({ anchorId }: { anchorId: string }) {
 
 function buildFilterOptions(
   courses: Course[],
+  providerAbbreviations: Record<string, string>,
 ): Record<ListFilterKey, FilterOption[]> {
   const regions = new Set(courses.map(getCourseRegion));
   const typeCounts = new Map<string, number>();
@@ -535,6 +541,12 @@ function buildFilterOptions(
     types: Array.from(typeCounts.keys())
       .sort((a, b) => (typeCounts.get(b) ?? 0) - (typeCounts.get(a) ?? 0))
       .map((value) => ({ value, label: value })),
+    providers: Array.from(new Set(courses.map((course) => course.provider)))
+      .map((value) => ({
+        value,
+        label: getProviderName(value, providerAbbreviations),
+      }))
+      .sort((a, b) => a.label.localeCompare(b.label, "da")),
   };
 }
 
@@ -632,6 +644,14 @@ function CourseFilterControls({
         options={filterOptions.types}
         selected={filters.types}
         onChange={(values) => onChangeFilter("types", values)}
+      />
+      <CourseMultiSelectFilter
+        isCompact={isCompact}
+        label="Udbyder"
+        allLabel="Alle udbydere"
+        options={filterOptions.providers}
+        selected={filters.providers}
+        onChange={(values) => onChangeFilter("providers", values)}
       />
       {isFiltered && (
         <button

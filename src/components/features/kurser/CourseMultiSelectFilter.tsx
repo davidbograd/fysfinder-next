@@ -73,7 +73,7 @@ export function CourseMultiSelectFilter({
             aria-labelledby={`${labelId} ${valueId}`}
             className={cn(
               "flex w-full items-center justify-between gap-2 rounded-full border bg-white pl-4 pr-3 text-left text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary/20",
-              isCompact ? "h-9 sm:w-40" : "h-10 sm:w-44",
+              isCompact ? "h-9 sm:w-auto sm:max-w-40" : "h-10 sm:w-40",
               isActive
                 ? "border-brand-primary bg-brand-primary/5 font-medium text-brand-primary"
                 : "border-gray-200 text-[#1f2b28] hover:border-gray-300",
@@ -91,7 +91,7 @@ export function CourseMultiSelectFilter({
             />
           </button>
         </PopoverTrigger>
-        <PopoverContent className="max-h-80 w-64 overflow-y-auto">
+        <PopoverContent className="max-h-80 w-72 overflow-y-auto">
           <fieldset>
             <legend className="sr-only">{label}</legend>
             {options.map((option) => (

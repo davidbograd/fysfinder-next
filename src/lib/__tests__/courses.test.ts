@@ -1,4 +1,4 @@
-// Updated: 2026-10-10 - Also covers getPastCourses ordering.
+// Updated: 2026-10-10 - Also covers the provider filter.
 import {
   Course,
   EMPTY_COURSE_FILTERS,
@@ -248,6 +248,16 @@ describe("filterCourses", () => {
       filterCourses(
         courses,
         { ...EMPTY_COURSE_FILTERS, topics: ["Krop og psyke", "Børn"] },
+        abbreviations,
+      ).map((c) => c.id),
+    ).toEqual(["b"]);
+  });
+
+  it("filters by provider", () => {
+    expect(
+      filterCourses(
+        courses,
+        { ...EMPTY_COURSE_FILTERS, providers: ["Dansk Institut for BBAT"] },
         abbreviations,
       ).map((c) => c.id),
     ).toEqual(["b"]);

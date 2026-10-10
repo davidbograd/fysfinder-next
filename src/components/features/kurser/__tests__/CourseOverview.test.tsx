@@ -1,4 +1,4 @@
-// Updated: 2026-10-10 - Adds coverage for the collapsed "Afholdte kurser" section.
+// Updated: 2026-10-10 - Adds coverage for the Udbyder (organiser) filter.
 import { act, fireEvent, screen, within } from "@testing-library/react";
 import { renderWithProviders } from "@/test/test-utils";
 import { CourseOverview } from "../CourseOverview";
@@ -182,6 +182,17 @@ describe("CourseOverview", () => {
     expect(filterButton("Dato")).toHaveTextContent("Hele 2026–2027");
     expect(filterButton("Emne")).toHaveTextContent("Alle emner");
     expect(filterButton("Eventtype")).toHaveTextContent("Alle typer");
+    expect(filterButton("Udbyder")).toHaveTextContent("Alle udbydere");
+  });
+
+  it("filters by organiser using the full provider name", () => {
+    renderOverview();
+
+    toggleFilterOptions("Udbyder", [
+      "Dansk Selskab for Muskuloskeletal Fysioterapi (DSMF)",
+    ]);
+
+    expect(visibleCourseTitles()).toEqual(["Smerte 1"]);
   });
 
   it("searches by provider full name and topic", () => {

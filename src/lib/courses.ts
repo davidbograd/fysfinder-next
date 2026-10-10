@@ -1,4 +1,4 @@
-// Updated: 2026-10-10 - Added getPastCourses for the collapsed "Afholdte kurser" section.
+// Updated: 2026-10-10 - Added provider (Udbyder) filter.
 import courseData from "@/content/kurser/kurser.json";
 import { getCopenhagenDateParts } from "@/lib/calendar-month";
 import { slugify } from "@/app/utils/slugify";
@@ -461,6 +461,7 @@ export interface CourseFilters {
   months: string[];
   topics: string[];
   types: string[];
+  providers: string[];
 }
 
 export const EMPTY_COURSE_FILTERS: CourseFilters = {
@@ -469,6 +470,7 @@ export const EMPTY_COURSE_FILTERS: CourseFilters = {
   months: [],
   topics: [],
   types: [],
+  providers: [],
 };
 
 function normalizeSearchText(text: string): string {
@@ -513,6 +515,8 @@ export function filterCourses(
           filters.topics.includes(topic),
         )) &&
       (filters.types.length === 0 || filters.types.includes(course.type)) &&
+      (filters.providers.length === 0 ||
+        filters.providers.includes(course.provider)) &&
       matchesCourseSearch(course, filters.query, abbreviations)
     );
   });
