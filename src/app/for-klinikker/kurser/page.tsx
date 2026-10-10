@@ -93,7 +93,7 @@ export default function CoursesPage() {
           fysioterapeuter i Danmark – samlet ét sted.
         </p>
         <p className="mt-2 text-sm tabular-nums text-gray-500">
-          {upcomingCourses.length} kurser · {providerCount} udbydere · Opdateret{" "}
+          {upcomingCourses.length} kurser · {providerCount} udbydere · Sidst opdateret{" "}
           {formatCheckedOnDate(checked_on)}
         </p>
         <p className="mt-2 text-sm text-gray-600 xl:hidden">

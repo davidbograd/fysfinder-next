@@ -18,7 +18,7 @@ describe("/for-klinikker/kurser page", () => {
         name: /Kurser for fysioterapeuter/,
       }),
     ).toBeInTheDocument();
-    expect(screen.getByText(/Opdateret 8\. oktober 2026/)).toBeInTheDocument();
+    expect(screen.getByText(/Sidst opdateret 10\. oktober 2026/)).toBeInTheDocument();
     expect(
       screen.queryByRole("heading", { level: 2, name: /^Oktober 2026/ }),
     ).not.toBeInTheDocument();
