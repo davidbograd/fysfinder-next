@@ -28,7 +28,7 @@ src/
     klinik/       # Individual clinic detail pages
     dashboard/    # Clinic owner dashboard
     auth/         # Auth pages
-    tilmeld/      # Clinic registration flow
+    for-klinikker/ # Clinic owner landing page (clinic-facing section)
     ordbog/       # Medical glossary (MDX)
     blog/         # Articles (MDX)
     vaerktoejer/  # Health calculators

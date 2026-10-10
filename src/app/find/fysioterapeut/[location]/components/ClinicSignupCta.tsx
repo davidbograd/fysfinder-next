@@ -27,7 +27,7 @@ export function ClinicSignupCta({ cityLocationPhrase }: ClinicSignupCtaProps) {
         asChild
         className="mt-5 w-full bg-logo-blue text-white hover:bg-logo-blue/90"
       >
-        <Link href="/tilmeld">Tilmeld din klinik</Link>
+        <Link href="/for-klinikker">Tilmeld din klinik</Link>
       </Button>
     </aside>
   );

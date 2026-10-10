@@ -265,7 +265,7 @@ export default function Header({
                     variant="outline"
                     className="rounded-full border-[#cfd4d2] bg-[#f8f7f2] font-medium text-[#23302d] hover:bg-[#efeee8]"
                   >
-                    <Link href="/tilmeld">For klinikker</Link>
+                    <Link href="/for-klinikker">For klinikker</Link>
                   </Button>
                 )}
                 <UserMenu />
@@ -288,7 +288,7 @@ export default function Header({
                   variant="outline"
                   className="rounded-full border-[#cfd4d2] bg-[#f8f7f2] font-medium text-[#23302d] hover:bg-[#efeee8]"
                 >
-                  <Link href="/tilmeld">For klinikker</Link>
+                  <Link href="/for-klinikker">For klinikker</Link>
                 </Button>
                 <UserMenu />
               </>
@@ -408,7 +408,7 @@ export default function Header({
                         className="w-full rounded-full border-[#cfd4d2] bg-[#f8f7f2] font-medium text-[#23302d] hover:bg-[#efeee8]"
                         onClick={toggleMenu}
                       >
-                        <Link href="/tilmeld">For klinikker</Link>
+                        <Link href="/for-klinikker">For klinikker</Link>
                       </Button>
                       <div onClick={toggleMenu}>
                         <UserMenu fullWidth />

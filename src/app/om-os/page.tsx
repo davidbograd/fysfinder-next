@@ -196,7 +196,7 @@ export default function OmOsPage() {
                 <p className="pt-4">
                   Har du en klinik, der endnu ikke er på Fysfinder, eller ønsker
                   du at få opdateret dine oplysninger?{" "}
-                  <a href="/tilmeld" className="text-logo-blue hover:underline">
+                  <a href="/for-klinikker" className="text-logo-blue hover:underline">
                     Verificer eller tilmeld din klinik
                   </a>
                 </p>

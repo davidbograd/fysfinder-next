@@ -303,7 +303,7 @@ function ClinicCtaSection() {
             <li>- Skab en stærk digital tilstedeværelse</li>
           </ul>
           <Link
-            href="/tilmeld"
+            href="/for-klinikker"
             className="inline-flex mt-6 rounded-full bg-[#0b5b43] px-6 py-2.5 text-white text-sm font-medium hover:bg-[#084c39] transition-colors"
           >
             Kom i gang

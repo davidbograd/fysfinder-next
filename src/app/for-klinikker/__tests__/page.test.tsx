@@ -2,7 +2,7 @@
 import { render, screen } from "@testing-library/react";
 import ClinicOwnerPage from "../page";
 
-describe("/tilmeld page", () => {
+describe("/for-klinikker page", () => {
   it("renders key conversion sections and hides premium upsell", () => {
     render(<ClinicOwnerPage />);
 

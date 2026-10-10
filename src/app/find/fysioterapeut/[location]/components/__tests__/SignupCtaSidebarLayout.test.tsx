@@ -17,7 +17,7 @@ describe("SignupCtaSidebarLayout", () => {
     ).toBeInTheDocument();
     expect(
       screen.getByRole("link", { name: "Tilmeld din klinik" }),
-    ).toHaveAttribute("href", "/tilmeld");
+    ).toHaveAttribute("href", "/for-klinikker");
   });
 
   it("lets the page tighten the top spacing when it replaces the map beside the listing", () => {

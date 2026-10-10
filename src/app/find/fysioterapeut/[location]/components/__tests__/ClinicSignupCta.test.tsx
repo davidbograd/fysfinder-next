@@ -9,7 +9,7 @@ describe("ClinicSignupCta", () => {
 
     expect(
       screen.getByRole("link", { name: "Tilmeld din klinik" })
-    ).toHaveAttribute("href", "/tilmeld");
+    ).toHaveAttribute("href", "/for-klinikker");
   });
 
   it("addresses the visitor with the city's own preposition", () => {

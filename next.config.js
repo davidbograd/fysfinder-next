@@ -156,6 +156,12 @@ const nextConfig = {
         destination: '/find/fysioterapeut/danmark/:specialty?online=true',
         permanent: true,
       },
+      // Clinic owner landing page became the root of the clinic-facing section.
+      {
+        source: '/tilmeld',
+        destination: '/for-klinikker',
+        permanent: true,
+      },
       // Clinic renames (slug regenerates from klinikNavn).
       {
         source: '/klinik/online-knaegenoptraening-med-fysioterapeut-andreas-bjerregaard',

@@ -8,7 +8,7 @@ This SOP outlines the essential steps required to create a landing page for clin
 
 ### Setup
 
-- [ ] Create new page file at `src/app/tilmeld/page.tsx`
+- [ ] Create new page file at `src/app/for-klinikker/page.tsx`
 - [ ] Set up metadata for SEO optimization
 
 ### Hero Section
