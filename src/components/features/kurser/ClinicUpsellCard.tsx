@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 
 const SELLING_POINTS = [
   "Bliv fundet af patienter i dit område",
-  "Klar på 2 minutter",
-  "+81.000 har brugt Fysfinder",
+  "Fyld din kalender",
+  "+81.000 danskere har brugt Fysfinder",
 ];
 
 export function ClinicUpsellCard() {
