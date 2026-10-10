@@ -2,7 +2,9 @@
 import fs from "fs";
 import path from "path";
 import {
+  groupToolsByCategory,
   isToolReleased,
+  TOOL_CATEGORY_ORDER,
   releasedTools,
   tools,
   UNRELEASED_TOOL_SLUGS,
@@ -53,6 +55,15 @@ describe("tool routes", () => {
       expect(sitemap).not.toContain(`/vaerktoejer/${slug}<`);
     }
     expect(releasedTools.map((tool) => tool.slug)).toContain("proteinberegner");
+  });
+
+  it("lists BMI and fedtprocent under Sundhed & velvære as the second section", () => {
+    expect(TOOL_CATEGORY_ORDER[1]).toBe("Sundhed & velvære værktøjer");
+    expect(
+      groupToolsByCategory()["Sundhed & velvære værktøjer"].map(
+        (tool) => tool.slug
+      )
+    ).toEqual(["bmi-beregner", "fedtprocent-beregner"]);
   });
 
   it("permanently redirects the legacy scan URLs to their new paths", async () => {

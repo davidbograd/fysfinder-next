@@ -21,6 +21,7 @@ export type ToolSlug = (typeof TOOL_SLUGS)[number];
 
 export type ToolCategory =
   | "Kost & ernæring værktøjer"
+  | "Sundhed & velvære værktøjer"
   | "Træning & bevægelse værktøjer"
   | "Forstå din MR og DEXA scanning";
 
@@ -82,7 +83,7 @@ export const tools: Tool[] = [
     href: "/vaerktoejer/bmi-beregner",
     imageUrl: "/images/vaerktoejer/bmi-beregner.png",
     imageAlt: "BMI-beregner illustration med vægt og målebånd",
-    type: "Kost & ernæring værktøjer",
+    type: "Sundhed & velvære værktøjer",
   },
   {
     slug: "fedtprocent-beregner",
@@ -93,7 +94,7 @@ export const tools: Tool[] = [
     href: "/vaerktoejer/fedtprocent-beregner",
     imageUrl: "/images/vaerktoejer/fedtprocent-beregner.jpg",
     imageAlt: "Fedtprocent beregner illustration med målebånd og sundhedsudstyr",
-    type: "Kost & ernæring værktøjer",
+    type: "Sundhed & velvære værktøjer",
   },
   {
     slug: "pace-beregner",
@@ -192,6 +193,7 @@ export const releasedTools: Tool[] = tools.filter((tool) =>
 
 export const TOOL_CATEGORY_ORDER: ToolCategory[] = [
   "Kost & ernæring værktøjer",
+  "Sundhed & velvære værktøjer",
   "Træning & bevægelse værktøjer",
   "Forstå din MR og DEXA scanning",
 ];

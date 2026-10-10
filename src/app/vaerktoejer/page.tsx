@@ -78,6 +78,14 @@ export default function ToolsPage() {
                     opnå dine mål.
                   </p>
                 )}
+                {type === "Sundhed & velvære værktøjer" && (
+                  <p className="text-gray-600 mb-6">
+                    Opnå et sundere liv med vores værktøjer, der støtter dig med
+                    dit generelle velvære. Fra holdningsanalyse til
+                    livsstilsændringer, guider værktøjerne dig med at nå dit
+                    sundhedspotentiale.
+                  </p>
+                )}
                 {type === "Forstå din MR og DEXA scanning" && (
                   <div className="mb-6">
                     <p className="text-gray-600">
@@ -102,18 +110,6 @@ export default function ToolsPage() {
               </div>
             );
           })}
-        </div>
-        <div className="space-y-8 mt-16 max-w-prose mx-auto">
-          <div>
-            <h2 className="text-xl sm:text-2xl font-semibold mb-2">
-              Sundhed & velvære værktøjer
-            </h2>
-            <p className="text-gray-600">
-              Opnå et sundere liv med vores værktøjer, der støtter dig med dit
-              generelle velvære. Fra holdningsanalyse til livsstilsændringer,
-              guider værktøjerne dig med at nå dit sundhedspotentiale.
-            </p>
-          </div>
         </div>
       </div>
     </div>
