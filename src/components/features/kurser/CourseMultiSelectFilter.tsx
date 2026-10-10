@@ -1,8 +1,8 @@
-// Updated: 2026-10-10 - Added compact variant (visually hidden label, smaller trigger) for the condensed sticky filter bar.
+// Updated: 2026-10-10 - Optional search field inside the dropdown for long option lists (used by Udbyder).
 "use client";
 
-import { useId } from "react";
-import { ChevronDown } from "lucide-react";
+import { useId, useState } from "react";
+import { ChevronDown, Search } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   Popover,
@@ -18,6 +18,7 @@ export interface FilterOption {
 
 interface CourseMultiSelectFilterProps {
   isCompact?: boolean;
+  searchPlaceholder?: string;
   label: string;
   allLabel: string;
   options: FilterOption[];
@@ -27,6 +28,7 @@ interface CourseMultiSelectFilterProps {
 
 export function CourseMultiSelectFilter({
   isCompact = false,
+  searchPlaceholder,
   label,
   allLabel,
   options,
@@ -35,6 +37,13 @@ export function CourseMultiSelectFilter({
 }: CourseMultiSelectFilterProps) {
   const labelId = useId();
   const valueId = useId();
+  const [optionQuery, setOptionQuery] = useState("");
+  const normalisedQuery = optionQuery.trim().toLocaleLowerCase("da");
+  const visibleOptions = normalisedQuery
+    ? options.filter((option) =>
+        option.label.toLocaleLowerCase("da").includes(normalisedQuery),
+      )
+    : options;
   const selectedOptions = options.filter((option) =>
     selected.includes(option.value),
   );
@@ -66,7 +75,7 @@ export function CourseMultiSelectFilter({
       >
         {label}
       </span>
-      <Popover>
+      <Popover onOpenChange={(isOpen) => !isOpen && setOptionQuery("")}>
         <PopoverTrigger asChild>
           <button
             type="button"
@@ -92,9 +101,32 @@ export function CourseMultiSelectFilter({
           </button>
         </PopoverTrigger>
         <PopoverContent className="max-h-80 w-72 overflow-y-auto">
+          {searchPlaceholder && (
+            <div className="sticky -top-2 z-10 -mx-2 -mt-2 mb-1 bg-white p-2">
+              <div className="relative">
+                <Search
+                  aria-hidden="true"
+                  className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500"
+                />
+                <input
+                  type="search"
+                  aria-label={`Søg i ${label.toLocaleLowerCase("da")}`}
+                  placeholder={searchPlaceholder}
+                  value={optionQuery}
+                  onChange={(event) => setOptionQuery(event.target.value)}
+                  className="h-9 w-full rounded-full border border-gray-200 bg-white pl-9 pr-3 text-base text-[#1f2b28] placeholder:text-gray-500 focus:border-brand-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary/20 sm:text-sm"
+                />
+              </div>
+            </div>
+          )}
           <fieldset>
             <legend className="sr-only">{label}</legend>
-            {options.map((option) => (
+            {visibleOptions.length === 0 && (
+              <p className="px-2 py-2 text-sm text-gray-500">
+                Ingen resultater
+              </p>
+            )}
+            {visibleOptions.map((option) => (
               <label
                 key={option.value}
                 className="flex cursor-pointer items-center gap-3 rounded-lg px-2 py-2 text-sm text-[#1f2b28] hover:bg-brand-beige"

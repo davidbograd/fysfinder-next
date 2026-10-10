@@ -649,6 +649,7 @@ function CourseFilterControls({
         isCompact={isCompact}
         label="Udbyder"
         allLabel="Alle udbydere"
+        searchPlaceholder="Søg efter udbyder..."
         options={filterOptions.providers}
         selected={filters.providers}
         onChange={(values) => onChangeFilter("providers", values)}

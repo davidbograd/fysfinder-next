@@ -1,4 +1,4 @@
-// Updated: 2026-10-10 - Adds coverage for the Udbyder (organiser) filter.
+// Updated: 2026-10-10 - Adds coverage for the Udbyder filter and its dropdown search.
 import { act, fireEvent, screen, within } from "@testing-library/react";
 import { renderWithProviders } from "@/test/test-utils";
 import { CourseOverview } from "../CourseOverview";
@@ -193,6 +193,27 @@ describe("CourseOverview", () => {
     ]);
 
     expect(visibleCourseTitles()).toEqual(["Smerte 1"]);
+  });
+
+  it("narrows the organiser options with the dropdown search", () => {
+    renderOverview();
+    fireEvent.click(filterButton("Udbyder"));
+    const popover = screen.getByRole("dialog");
+
+    fireEvent.change(
+      within(popover).getByRole("searchbox", { name: "Søg i udbyder" }),
+      { target: { value: "akupunktur" } },
+    );
+    expect(
+      within(popover)
+        .getAllByRole("checkbox")
+        .map((box) => box.closest("label")?.textContent),
+    ).toEqual(["Dansk Selskab for Akupunktur i Fysioterapi (DSAF)"]);
+
+    fireEvent.change(within(popover).getByRole("searchbox"), {
+      target: { value: "findes ikke" },
+    });
+    expect(within(popover).getByText("Ingen resultater")).toBeInTheDocument();
   });
 
   it("searches by provider full name and topic", () => {
