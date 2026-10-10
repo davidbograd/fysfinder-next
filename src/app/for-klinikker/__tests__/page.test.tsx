@@ -1,4 +1,4 @@
-// Updated: 2026-08-29 - Asserts the tilmeld hero shows the cumulative user count.
+// Updated: 2026-10-10 - Asserts the courses teaser links to /for-klinikker/kurser.
 import { render, screen } from "@testing-library/react";
 import ClinicOwnerPage from "../page";
 
@@ -24,6 +24,18 @@ describe("/for-klinikker page", () => {
         name: /Opgrader til Premium \(kommer snart\)/i,
       })
     ).not.toBeInTheDocument();
+  });
+
+  it("links to the course agenda", () => {
+    render(<ClinicOwnerPage />);
+
+    expect(
+      screen.getByRole("heading", { level: 2, name: "Kurser for fysioterapeuter" })
+    ).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /Se alle kurser/ })).toHaveAttribute(
+      "href",
+      "/for-klinikker/kurser"
+    );
   });
 
   it("places the founder block below the revenue calculator", () => {

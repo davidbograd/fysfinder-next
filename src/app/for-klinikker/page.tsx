@@ -1,4 +1,4 @@
-// Updated: 2026-10-06 - Added revenue calculator section; founder block now follows it.
+// Updated: 2026-10-10 - Added courses teaser linking to /for-klinikker/kurser before the FAQ.
 import { Metadata } from "next";
 import { ReactNode } from "react";
 import { HeroSection } from "@/components/features/tilmeld-landingpage/HeroSection";
@@ -12,6 +12,7 @@ import { FeaturesSection } from "@/components/features/tilmeld-landingpage/Featu
 import { RevenueCalculatorSection } from "@/components/features/tilmeld-landingpage/RevenueCalculatorSection";
 import { SignupCtaSplitSection } from "@/components/features/tilmeld-landingpage/SignupCtaSplitSection";
 import { FaqSection } from "@/components/features/tilmeld-landingpage/FaqSection";
+import { CoursesTeaserSection } from "@/components/features/tilmeld-landingpage/CoursesTeaserSection";
 import { PartnerStrip } from "@/components/features/shared/PartnerStrip";
 
 export const metadata: Metadata = {
@@ -59,6 +60,9 @@ export default function ClinicOwnerPage() {
       </FullBleedSection>
       <FullBleedSection>
         <SignupCtaSplitSection />
+      </FullBleedSection>
+      <FullBleedSection>
+        <CoursesTeaserSection />
       </FullBleedSection>
       <FullBleedSection>
         <FaqSection />

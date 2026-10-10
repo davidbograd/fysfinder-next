@@ -2,10 +2,8 @@
 import { Metadata } from "next";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { CourseOverview } from "@/components/features/kurser/CourseOverview";
-import previewPastCourses from "@/content/kurser/preview-past-courses.json";
 import {
   COURSE_CONTACT_HREF,
-  Course,
   buildCourseEventSchema,
   courseDataset,
   formatCheckedOnDate,
@@ -36,12 +34,7 @@ const breadcrumbItems = [
 ];
 
 export default function CoursesPage() {
-  const { provider_abbreviations, checked_on } = courseDataset;
-  // Local preview data for the past-courses section: delete before shipping.
-  const courses: Course[] =
-    process.env.NODE_ENV === "development"
-      ? [...courseDataset.courses, ...previewPastCourses]
-      : courseDataset.courses;
+  const { courses, provider_abbreviations, checked_on } = courseDataset;
   const todayIso = getTodayIsoInCopenhagen();
   const upcomingCourses = getUpcomingCourses(courses, todayIso);
   const pastCourses = getPastCourses(courses, todayIso);

@@ -216,6 +216,10 @@ async function generateSitemaps() {
         priority: 0.8,
       },
       {
+        loc: `${DOMAIN}/for-klinikker/kurser`,
+        priority: 0.8,
+      },
+      {
         loc: `${DOMAIN}/samarbejdspartnere`,
         priority: 0.8,
       },
