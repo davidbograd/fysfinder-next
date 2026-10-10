@@ -1,4 +1,4 @@
-// Updated: 2026-10-10 - Adds coverage for the Udbyder filter and its dropdown search.
+// Updated: 2026-10-10 - Adds coverage for the clinic upsell card after the fifth course.
 import { act, fireEvent, screen, within } from "@testing-library/react";
 import { renderWithProviders } from "@/test/test-utils";
 import { CourseOverview } from "../CourseOverview";
@@ -410,6 +410,40 @@ describe("CourseOverview", () => {
 
     expect(
       screen.queryByRole("heading", { level: 2, name: /^Afholdte kurser/ }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("shows the clinic upsell right after the fifth visible course only", () => {
+    const manyCourses = Array.from({ length: 6 }, (_, index) =>
+      makeCourse({
+        id: `FFK-1${index}`,
+        title: `Kursus ${index + 1}`,
+        start_date: `2026-11-0${index + 1}`,
+      }),
+    );
+    const { rerender } = renderWithProviders(
+      <CourseOverview courses={manyCourses} providerAbbreviations={{}} />,
+    );
+
+    const upsell = screen.getByRole("complementary", {
+      name: "Tilmeld din klinik på Fysfinder",
+    });
+    const items = Array.from(upsell.closest("ul")!.children);
+    expect(items.indexOf(upsell.closest("li")!)).toBe(5);
+    expect(
+      within(upsell).getByRole("link", { name: /Tilmeld din klinik/ }),
+    ).toHaveAttribute("href", "/for-klinikker");
+
+    rerender(
+      <CourseOverview
+        courses={manyCourses.slice(0, 4)}
+        providerAbbreviations={{}}
+      />,
+    );
+    expect(
+      screen.queryByRole("complementary", {
+        name: "Tilmeld din klinik på Fysfinder",
+      }),
     ).not.toBeInTheDocument();
   });
 });

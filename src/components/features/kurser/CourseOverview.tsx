@@ -1,7 +1,8 @@
-// Updated: 2026-10-10 - Added the Udbyder (organiser) filter alongside Område/Dato/Emne/Eventtype.
+// Updated: 2026-10-10 - Clinic sign-up upsell card inserted after the fifth visible course.
 "use client";
 
 import {
+  Fragment,
   useCallback,
   useDeferredValue,
   useEffect,
@@ -50,6 +51,7 @@ import {
   FilterOption,
 } from "./CourseMultiSelectFilter";
 import { CourseMonthTimeline, TimelineMonth } from "./CourseMonthTimeline";
+import { ClinicUpsellCard } from "./ClinicUpsellCard";
 
 interface CourseOverviewProps {
   courses: Course[];
@@ -63,6 +65,8 @@ type ListFilterKey = "regions" | "months" | "topics" | "types" | "providers";
 const SITE_HEADER_MARGIN = "-64px 0px 0px 0px";
 
 const PAST_SECTION_ID = "afholdte-kurser";
+
+const UPSELL_AFTER_COURSE_COUNT = 5;
 
 export function CourseOverview({
   courses,
@@ -113,6 +117,9 @@ export function CourseOverview({
       })),
     [monthGroups],
   );
+  const upsellAfterCourseId = monthGroups.flatMap((group) => group.courses)[
+    UPSELL_AFTER_COURSE_COUNT - 1
+  ]?.id;
   const visibleCount = monthGroups.reduce(
     (sum, group) => sum + group.courses.length,
     0,
@@ -228,6 +235,7 @@ export function CourseOverview({
                 isCollapsed={collapsedMonths.has(group.id)}
                 onToggle={() => toggleMonth(group.id)}
                 providerAbbreviations={providerAbbreviations}
+                upsellAfterCourseId={upsellAfterCourseId}
               />
             ))}
           </div>
@@ -277,6 +285,7 @@ function CourseGroupSection({
   onToggle,
   providerAbbreviations,
   isPast = false,
+  upsellAfterCourseId,
   className,
 }: {
   id: string;
@@ -286,6 +295,7 @@ function CourseGroupSection({
   onToggle: () => void;
   providerAbbreviations: Record<string, string>;
   isPast?: boolean;
+  upsellAfterCourseId?: string;
   className?: string;
 }) {
   const listId = `${id}-kurser`;
@@ -329,13 +339,20 @@ function CourseGroupSection({
       </h2>
       <ul id={listId} hidden={isCollapsed} className="space-y-2">
         {courses.map((course) => (
-          <li key={course.id}>
-            <CourseItem
-              course={course}
-              providerAbbreviations={providerAbbreviations}
-              isPast={isPast}
-            />
-          </li>
+          <Fragment key={course.id}>
+            <li>
+              <CourseItem
+                course={course}
+                providerAbbreviations={providerAbbreviations}
+                isPast={isPast}
+              />
+            </li>
+            {course.id === upsellAfterCourseId && (
+              <li>
+                <ClinicUpsellCard />
+              </li>
+            )}
+          </Fragment>
         ))}
       </ul>
     </section>
