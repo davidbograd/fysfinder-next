@@ -1,5 +1,5 @@
 // Dictionary term page
-// Updated: 2026-09-06 - Drop duplicate articleBody from JSON-LD to shrink HTML.
+// Updated: 2026-10-11 - Page-specific Open Graph/Twitter text; image comes from opengraph-image.tsx.
 
 import { ContentEntry } from "@/components/features/blog-og-ordbog/ContentEntry";
 import { getDictionaryTerm, getDictionaryTerms } from "@/lib/dictionary";
@@ -93,10 +93,20 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { term: termSlug } = await params;
   const term = await getDictionaryTerm(termSlug);
+  const title =
+    term.metaTitle || `${term.title} - hvad er ${term.title.toLowerCase()}?`;
+  const description = `Lær alt om ${term.title.toLowerCase()} - årsager, symptomer og behandlingsmuligheder.`;
   return {
-    title:
-      term.metaTitle || `${term.title} - hvad er ${term.title.toLowerCase()}?`,
-    description: `Lær alt om ${term.title.toLowerCase()} - årsager, symptomer og behandlingsmuligheder.`,
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      locale: "da_DK",
+      siteName: "Fysfinder",
+    },
+    twitter: { card: "summary_large_image", title, description },
   };
 }
 

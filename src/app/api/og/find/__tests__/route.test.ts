@@ -4,19 +4,19 @@
 import { NextRequest } from "next/server";
 import { GET } from "../route";
 import { getLocationOgText } from "@/lib/og/location-og-content";
-import { renderLocationOgImage } from "@/lib/og/location-og-image";
+import { renderBrandOgImage } from "@/lib/og/brand-og-image";
 
 jest.mock("@/lib/og/location-og-content", () => ({
   ...jest.requireActual("@/lib/og/location-og-content"),
   getLocationOgText: jest.fn(),
 }));
-jest.mock("@/lib/og/location-og-image", () => ({
-  renderLocationOgImage: jest.fn(),
+jest.mock("@/lib/og/brand-og-image", () => ({
+  renderBrandOgImage: jest.fn(),
 }));
 
 const mockGetText = getLocationOgText as jest.MockedFunction<typeof getLocationOgText>;
-const mockRender = renderLocationOgImage as jest.MockedFunction<
-  typeof renderLocationOgImage
+const mockRender = renderBrandOgImage as jest.MockedFunction<
+  typeof renderBrandOgImage
 >;
 
 function request(query: string) {
@@ -46,7 +46,7 @@ describe("GET /api/og/find", () => {
     expect(response.status).toBe(200);
     expect(mockGetText).toHaveBeenCalledWith("danmark", undefined, { online: true });
     expect(mockRender).toHaveBeenCalledWith(
-      expect.objectContaining({ headline: expect.stringContaining("152") }),
+      { lines: ["Sammenlign 152 fysioterapiklinikker med online behandling"] },
       expect.objectContaining({ "Cache-Control": expect.stringContaining("s-maxage") })
     );
   });

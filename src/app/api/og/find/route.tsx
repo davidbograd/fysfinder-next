@@ -4,7 +4,7 @@
 import { NextRequest } from "next/server";
 import { parseFilters } from "@/app/find/fysioterapeut/filter-utils";
 import { getLocationOgText, hasGeneratedOgImage } from "@/lib/og/location-og-content";
-import { renderLocationOgImage } from "@/lib/og/location-og-image";
+import { renderBrandOgImage } from "@/lib/og/brand-og-image";
 
 /** Slugs are interpolated into Supabase REST URLs, so anything else is rejected. */
 const SLUG_PATTERN = /^[a-z0-9_-]{1,80}$/;
@@ -25,6 +25,9 @@ export async function GET(request: NextRequest) {
     return new Response("No generated image for this filter combination", { status: 404 });
   }
 
-  const text = await getLocationOgText(location, specialty, filters);
-  return renderLocationOgImage(text, { "Cache-Control": CACHE_CONTROL });
+  const { headline, specialtyLine } = await getLocationOgText(location, specialty, filters);
+  return renderBrandOgImage(
+    { lines: specialtyLine ? [headline, specialtyLine] : [headline] },
+    { "Cache-Control": CACHE_CONTROL }
+  );
 }

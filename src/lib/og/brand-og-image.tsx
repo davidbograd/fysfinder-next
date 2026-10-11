@@ -1,11 +1,18 @@
-// Renders the 1200×630 Open Graph image for location and specialty find pages.
-// Added: 2026-10-11
+// Renders the branded 1200×630 Open Graph image (logo, headline, physio cards) used by find pages and the ordbog.
+// Updated: 2026-10-11 - Generalised from the find-page image; optional "Ordbog"-style label.
 
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
-import type { LocationOgText } from "@/lib/og/location-og-text";
-import { LOCATION_OG_SIZE } from "@/lib/og/location-og-size";
+import { OG_IMAGE_SIZE } from "@/lib/og/og-image-size";
+
+export interface BrandOgImageContent {
+  /** Each entry renders as its own line in the headline style. */
+  lines: string[];
+  /** Small pill above the headline, e.g. "Ordbog". */
+  label?: string;
+  fontSize?: number;
+}
 
 const BRAND_PRIMARY = "#104534";
 const BRAND_CREAM = "#f8f7f2";
@@ -168,8 +175,8 @@ function PortraitCard({
   );
 }
 
-export async function renderLocationOgImage(
-  text: LocationOgText,
+export async function renderBrandOgImage(
+  { lines, label, fontSize = HEADLINE_STYLE.fontSize }: BrandOgImageContent,
   headers?: HeadersInit
 ): Promise<ImageResponse> {
   const { fontMedium, fontExtraBold, portraits } = await loadAssets();
@@ -205,10 +212,28 @@ export async function renderLocationOgImage(
               paddingBottom: 40,
             }}
           >
-            <div style={HEADLINE_STYLE}>{text.headline}</div>
-            {text.specialtyLine ? (
-              <div style={HEADLINE_STYLE}>{text.specialtyLine}</div>
+            {label ? (
+              <div style={{ display: "flex", marginBottom: 24 }}>
+                <div
+                  style={{
+                    display: "flex",
+                    padding: "8px 20px",
+                    borderRadius: 999,
+                    background: BRAND_PRIMARY,
+                    color: BRAND_CREAM,
+                    fontSize: 22,
+                    fontWeight: 800,
+                  }}
+                >
+                  {label}
+                </div>
+              </div>
             ) : null}
+            {lines.map((line) => (
+              <div key={line} style={{ ...HEADLINE_STYLE, fontSize }}>
+                {line}
+              </div>
+            ))}
           </div>
         </div>
 
@@ -245,7 +270,7 @@ export async function renderLocationOgImage(
       </div>
     ),
     {
-      ...LOCATION_OG_SIZE,
+      ...OG_IMAGE_SIZE,
       headers,
       fonts: [
         { name: "Manrope", data: fontMedium, weight: 500, style: "normal" },

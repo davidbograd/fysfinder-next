@@ -2,7 +2,7 @@
 // Updated: 2026-10-11 - Carries the per-page image so filtered URLs no longer share one image.
 
 import type { Metadata } from "next";
-import { LOCATION_OG_SIZE } from "@/lib/og/location-og-size";
+import { OG_IMAGE_SIZE } from "@/lib/og/og-image-size";
 
 export interface FindPageOgImage {
   url: string;
@@ -21,7 +21,7 @@ export function buildFindPageSocialMetadata(
       type: "website",
       locale: "da_DK",
       siteName: "Fysfinder",
-      images: [{ ...image, ...LOCATION_OG_SIZE }],
+      images: [{ ...image, ...OG_IMAGE_SIZE }],
     },
     twitter: {
       card: "summary_large_image",
