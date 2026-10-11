@@ -35,6 +35,7 @@ import {
 import { getFindSeoText } from "@/lib/find-seo-text";
 import { buildSearchUrl } from "@/utils/parameter-normalization";
 import { buildFindPageSocialMetadata } from "@/lib/og/find-page-social-metadata";
+import { resolveFindOgImage } from "@/lib/og/location-og-content";
 
 export const revalidate = 86400; // 24 hours ISR (must be a literal for Next.js segment config)
 export { fetchLocationData };
@@ -111,7 +112,16 @@ export async function generateMetadata({
   return {
     title,
     description,
-    ...buildFindPageSocialMetadata(title, description),
+    ...buildFindPageSocialMetadata(
+      title,
+      description,
+      resolveFindOgImage(
+        data,
+        resolvedParams.location,
+        resolvedParams.specialty,
+        filters,
+      ),
+    ),
   };
 }
 

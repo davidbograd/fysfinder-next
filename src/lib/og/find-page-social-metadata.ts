@@ -1,11 +1,18 @@
-// Open Graph / Twitter text for find pages; the image itself comes from opengraph-image.tsx.
-// Added: 2026-10-11
+// Open Graph / Twitter metadata for find pages; the image comes from resolveFindOgImage.
+// Updated: 2026-10-11 - Carries the per-page image so filtered URLs no longer share one image.
 
 import type { Metadata } from "next";
+import { LOCATION_OG_SIZE } from "@/lib/og/location-og-size";
+
+export interface FindPageOgImage {
+  url: string;
+  alt: string;
+}
 
 export function buildFindPageSocialMetadata(
   title: string,
-  description: string
+  description: string,
+  image: FindPageOgImage
 ): Pick<Metadata, "openGraph" | "twitter"> {
   return {
     openGraph: {
@@ -14,11 +21,13 @@ export function buildFindPageSocialMetadata(
       type: "website",
       locale: "da_DK",
       siteName: "Fysfinder",
+      images: [{ ...image, ...LOCATION_OG_SIZE }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
+      images: [image],
     },
   };
 }

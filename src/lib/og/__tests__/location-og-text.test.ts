@@ -29,11 +29,15 @@ describe("buildLocationOgText", () => {
     );
   });
 
-  it("uses the city's own preposition", () => {
+  it("uses the city's own i/på preposition", () => {
     expect(
-      buildLocationOgText({ locationName: "Fanø", clinicCount: 2, locationPreposition: "på" })
+      buildLocationOgText({ locationName: "Samsø", clinicCount: 2, locationPreposition: "på" })
         .headline
-    ).toBe("Sammenlign 2 fysioterapiklinikker på Fanø");
+    ).toBe("Sammenlign 2 fysioterapiklinikker på Samsø");
+    expect(
+      buildLocationOgText({ locationName: "Odense", clinicCount: 40, locationPreposition: "i" })
+        .headline
+    ).toBe("Sammenlign 40 fysioterapiklinikker i Odense");
   });
 
   it("shows 1000+ when the Danmark listing hits the row cap", () => {
@@ -64,6 +68,30 @@ describe("buildLocationOgText", () => {
     });
     expect(text.headline).toBe("Find fysioterapi nær Kirke Eskilstrup");
     expect(text.specialtyLine).toBe("med speciale i knæ");
+  });
+});
+
+describe("buildLocationOgText with filters", () => {
+  it("names the ydernummer filter on the Danmark page", () => {
+    expect(
+      buildLocationOgText({
+        locationName: "Danmark",
+        clinicCount: 243,
+        isDanmark: true,
+        filters: { ydernummer: true },
+      }).headline
+    ).toBe("Sammenlign 243 fysioterapiklinikker med ydernummer i Danmark");
+  });
+
+  it("names online treatment without a place on the Danmark online page", () => {
+    expect(
+      buildLocationOgText({
+        locationName: "Danmark",
+        clinicCount: 152,
+        isDanmark: true,
+        filters: { online: true },
+      }).headline
+    ).toBe("Sammenlign 152 fysioterapiklinikker med online behandling");
   });
 });
 

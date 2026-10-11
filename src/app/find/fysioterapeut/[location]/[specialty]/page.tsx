@@ -8,6 +8,7 @@ import { SpecialtyWithSeo } from "@/app/types";
 import { generateMetaTitle } from "@/lib/headers-and-metatitles";
 import { parseFilters } from "@/app/find/fysioterapeut/filter-utils";
 import { buildFindPageSocialMetadata } from "@/lib/og/find-page-social-metadata";
+import { resolveFindOgImage } from "@/lib/og/location-og-content";
 
 export async function generateMetadata({
   params,
@@ -61,7 +62,11 @@ export async function generateMetadata({
   return {
     title,
     description,
-    ...buildFindPageSocialMetadata(title, description),
+    ...buildFindPageSocialMetadata(
+      title,
+      description,
+      resolveFindOgImage(data, resolvedParams.location, resolvedParams.specialty, filters)
+    ),
   };
 }
 

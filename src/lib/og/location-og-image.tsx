@@ -5,8 +5,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import type { LocationOgText } from "@/lib/og/location-og-text";
-
-export const LOCATION_OG_SIZE = { width: 1200, height: 630 };
+import { LOCATION_OG_SIZE } from "@/lib/og/location-og-size";
 
 const BRAND_PRIMARY = "#104534";
 const BRAND_CREAM = "#f8f7f2";
@@ -170,7 +169,8 @@ function PortraitCard({
 }
 
 export async function renderLocationOgImage(
-  text: LocationOgText
+  text: LocationOgText,
+  headers?: HeadersInit
 ): Promise<ImageResponse> {
   const { fontMedium, fontExtraBold, portraits } = await loadAssets();
 
@@ -246,6 +246,7 @@ export async function renderLocationOgImage(
     ),
     {
       ...LOCATION_OG_SIZE,
+      headers,
       fonts: [
         { name: "Manrope", data: fontMedium, weight: 500, style: "normal" },
         { name: "Manrope", data: fontExtraBold, weight: 800, style: "normal" },

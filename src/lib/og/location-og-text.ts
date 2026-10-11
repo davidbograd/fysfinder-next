@@ -1,6 +1,7 @@
 // Copy for the per-location Open Graph images on /find/fysioterapeut/[location]/[specialty].
-// Added: 2026-10-11
+// Updated: 2026-10-11 - Danmark ?ydernummer and ?online pages name their filter in the headline.
 
+import type { LocationFilters } from "@/app/find/fysioterapeut/filter-utils";
 import type { LocationPreposition } from "@/lib/headers-and-metatitles";
 
 /** Supabase caps the Danmark listing at 1000 rows, so a full page means "at least". */
@@ -12,6 +13,7 @@ export interface LocationOgTextInput {
   specialtyName?: string;
   locationPreposition?: LocationPreposition;
   isDanmark?: boolean;
+  filters?: LocationFilters;
 }
 
 export interface LocationOgText {
@@ -37,14 +39,26 @@ export function specialtyInSentence(specialtyName: string): string {
   return specialtyName;
 }
 
+/** Only the Danmark ?ydernummer and ?online pages get a generated image with a filter. */
+function filterPhrase(filters?: LocationFilters): string {
+  if (filters?.online) return " med online behandling";
+  if (filters?.ydernummer) return " med ydernummer";
+  return "";
+}
+
 export function buildLocationOgText({
   locationName,
   clinicCount,
   specialtyName,
   locationPreposition,
   isDanmark = false,
+  filters,
 }: LocationOgTextInput): LocationOgText {
-  const place = locationPhrase(locationName, isDanmark ? "i" : locationPreposition);
+  // Online treatment is not tied to a place, so the headline drops "i Danmark".
+  const place = filters?.online
+    ? ""
+    : ` ${locationPhrase(locationName, isDanmark ? "i" : locationPreposition)}`;
+  const withFilters = filterPhrase(filters);
   const specialtyLine = specialtyName
     ? `med speciale i ${specialtyInSentence(specialtyName)}`
     : null;
@@ -52,17 +66,16 @@ export function buildLocationOgText({
   let headline: string;
 
   if (clinicCount === 0) {
-    headline = isDanmark
-      ? "Find fysioterapi i Danmark"
-      : `Find fysioterapi nær ${locationName}`;
+    const near = isDanmark ? place : ` nær ${locationName}`;
+    headline = `Find fysioterapi${withFilters}${near}`;
   } else if (clinicCount === 1) {
-    headline = `Find din fysioterapeut ${place}`;
+    headline = `Find din fysioterapeut${withFilters}${place}`;
   } else {
     const count =
       isDanmark && clinicCount >= DANMARK_ROW_CAP
         ? `${DANMARK_ROW_CAP}+`
         : String(clinicCount);
-    headline = `Sammenlign ${count} fysioterapiklinikker ${place}`;
+    headline = `Sammenlign ${count} fysioterapiklinikker${withFilters}${place}`;
   }
 
   return {
