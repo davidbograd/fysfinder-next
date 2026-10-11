@@ -1,4 +1,4 @@
-// Updated: 2026-10-10 - Also covers the provider filter.
+// Updated: 2026-10-11 - Also covers qualified attendance formats and the neuroaffective topic fix.
 import {
   Course,
   EMPTY_COURSE_FILTERS,
@@ -188,6 +188,14 @@ describe("getCourseTopics", () => {
       ),
     ).toEqual(["Akupunktur og dry needling", "Hovedpine og nakke", "Smerte"]);
   });
+
+  it("does not file neuroaffective courses under neurology", () => {
+    expect(
+      getCourseTopics(
+        makeCourse({ title: "Den neuroaffektive analyse", provider: "X" }),
+      ),
+    ).toEqual(["Krop og psyke"]);
+  });
 });
 
 describe("filterCourses", () => {
@@ -288,5 +296,21 @@ describe("course structured data", () => {
       url: "https://www.fysfinder.dk/for-klinikker/kurser#ffk-001",
       organizer: { name: "Dansk Selskab for Sportsfysioterapi" },
     });
+  });
+
+  it.each([
+    ["Hybrid / se udbyder", "https://schema.org/MixedEventAttendanceMode"],
+    [
+      "Online med live-sessioner",
+      "https://schema.org/OnlineEventAttendanceMode",
+    ],
+  ])("maps the %s format to %s", (format, attendanceMode) => {
+    const schema = buildCourseEventSchema(
+      makeCourse({ format }),
+      "https://www.fysfinder.dk/for-klinikker/kurser",
+      {},
+    );
+
+    expect(schema.eventAttendanceMode).toBe(attendanceMode);
   });
 });

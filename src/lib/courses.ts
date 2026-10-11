@@ -1,4 +1,4 @@
-// Updated: 2026-10-10 - Added provider (Udbyder) filter.
+// Updated: 2026-10-11 - Regions/topics for the expanded dataset; qualified Online/Hybrid formats in JSON-LD.
 import courseData from "@/content/kurser/kurser.json";
 import { getCopenhagenDateParts } from "@/lib/calendar-month";
 import { slugify } from "@/app/utils/slugify";
@@ -53,7 +53,11 @@ export type CourseRegion = keyof typeof COURSE_REGIONS;
 
 const LOCATION_REGIONS: Record<string, CourseRegion> = {
   københavn: "hovedstaden",
+  "københavn nv": "hovedstaden",
   "københavn/rødovre": "hovedstaden",
+  "københavn eller online": "hovedstaden",
+  "herlev + online": "hovedstaden",
+  "kgs. lyngby": "hovedstaden",
   "hillerød eller kbh": "hovedstaden",
   gentofte: "hovedstaden",
   brøndby: "hovedstaden",
@@ -70,6 +74,7 @@ const LOCATION_REGIONS: Record<string, CourseRegion> = {
   næstved: "sjaelland",
   odense: "syddanmark",
   "odense, hollufgård": "syddanmark",
+  "odense + online": "syddanmark",
   middelfart: "syddanmark",
   kerteminde: "syddanmark",
   varde: "syddanmark",
@@ -82,6 +87,8 @@ const LOCATION_REGIONS: Record<string, CourseRegion> = {
   horsens: "midtjylland",
   skanderborg: "midtjylland",
   aarhus: "midtjylland",
+  "aarhus n": "midtjylland",
+  risskov: "midtjylland",
   viborg: "midtjylland",
   silkeborg: "midtjylland",
   herning: "midtjylland",
@@ -205,7 +212,7 @@ export function groupCoursesByMonth(
 }
 
 export function getCourseRegion(course: Course): CourseRegion | null {
-  if (course.format === "Online") return "online";
+  if (course.format.startsWith("Online")) return "online";
   if (!course.location) return null;
   return LOCATION_REGIONS[course.location.trim().toLowerCase()] ?? null;
 }
@@ -240,25 +247,27 @@ export function formatCheckedOnDate(isoDate: string): string {
   return `${day}. ${MONTH_LABELS[month - 1].toLowerCase()} ${year}`;
 }
 
-const ATTENDANCE_MODES: Record<string, string> = {
-  Online: "https://schema.org/OnlineEventAttendanceMode",
-  Hybrid: "https://schema.org/MixedEventAttendanceMode",
-  Fysisk: "https://schema.org/OfflineEventAttendanceMode",
-};
+// Formats carry qualifiers like "Hybrid / se udbyder" or "Online med live-sessioner".
+function getAttendanceMode(format: string): string {
+  if (format.startsWith("Online"))
+    return "https://schema.org/OnlineEventAttendanceMode";
+  if (format.startsWith("Hybrid"))
+    return "https://schema.org/MixedEventAttendanceMode";
+  return "https://schema.org/OfflineEventAttendanceMode";
+}
 
 export function buildCourseEventSchema(
   course: Course,
   pageUrl: string,
   abbreviations: Record<string, string>,
 ) {
-  const isOnline = course.format === "Online";
+  const isOnline = course.format.startsWith("Online");
   return {
     "@type": "Event",
     name: course.title,
     startDate: course.start_date,
     eventStatus: "https://schema.org/EventScheduled",
-    eventAttendanceMode:
-      ATTENDANCE_MODES[course.format] ?? ATTENDANCE_MODES.Fysisk,
+    eventAttendanceMode: getAttendanceMode(course.format),
     url: `${pageUrl}#${getCourseAnchorId(course)}`,
     location: isOnline
       ? { "@type": "VirtualLocation", url: course.source_url }
@@ -291,17 +300,23 @@ const TOPIC_RULES: { topic: string; title?: RegExp; providers?: string[] }[] = [
     title: /bækken|underliv|rectus|sexolog/i,
     providers: ["DUGOF", "Elin Solheim"],
   },
-  { topic: "Børn", title: /børn|mindste|castillo/i, providers: ["DSPF"] },
+  {
+    topic: "Børn",
+    title: /børn|mindste|castillo/i,
+    providers: ["DSPF", "Center for Børn & Unges Søvn"],
+  },
   { topic: "Hjerte og lunge", title: /hjerte|lunge/i },
   { topic: "Hovedpine og nakke", title: /hovedpine|nakke|cervikal/i },
   {
     topic: "Kommunikation og samarbejde",
     title:
-      /kommunikation|samtale|beslutningstagning|borgerinddragelse|lærested|supervision|tamtam/i,
+      /kommunikation|samtale|motiverende|beslutningstagning|borgerinddragelse|lærested|supervision|tamtam/i,
+    providers: ["VaneCoach"],
   },
   {
     topic: "Krop og psyke",
-    title: /bbat|psykosocial|kognitiv/i,
+    title:
+      /bbat|psykosocial|kognitiv|neuroaffektiv|traume|compassion|\bACT\b|\bCFT\b|mindfulness|stress|åndedræt|søvn/i,
     providers: ["Dansk Institut for BBAT"],
   },
   { topic: "Lymfødem", title: /lymfødem|földi/i, providers: ["DSFL"] },
@@ -323,7 +338,7 @@ const TOPIC_RULES: { topic: string; title?: RegExp; providers?: string[] }[] = [
   },
   {
     topic: "Neurologi",
-    title: /neuro|f\.o\.t\.t|hjernerystelse|vestibulær|parkinson|dysautonomi/i,
+    title: /neuro(?!affektiv)|f\.o\.t\.t|hjernerystelse|vestibulær|parkinson|dysautonomi/i,
     providers: [
       "Dansk Selskab for Neurologisk Fysioterapi",
       "Forenede Care Neuro",
@@ -527,6 +542,6 @@ export function getStructuredDataCourses(courses: Course[]): Course[] {
   return courses.filter(
     (course) =>
       !course.requires_review &&
-      (course.format === "Online" || Boolean(course.location)),
+      (course.format.startsWith("Online") || Boolean(course.location)),
   );
 }
