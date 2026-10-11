@@ -64,7 +64,6 @@ describe("buildLocationOgText", () => {
     });
     expect(text.headline).toBe("Find fysioterapi nær Kirke Eskilstrup");
     expect(text.specialtyLine).toBe("med speciale i knæ");
-    expect(text.tagline).toMatch(/i nærheden/);
   });
 });
 

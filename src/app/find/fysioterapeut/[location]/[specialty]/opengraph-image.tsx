@@ -15,6 +15,6 @@ export default async function Image({
   params: Promise<{ location: string; specialty: string }>;
 }) {
   const { location, specialty } = await params;
-  const { text, specialtyName } = await getLocationOgContent(location, specialty);
-  return renderLocationOgImage(text, specialtyName);
+  const { text } = await getLocationOgContent(location, specialty);
+  return renderLocationOgImage(text);
 }

@@ -12,6 +12,11 @@ const BRAND_PRIMARY = "#104534";
 const BRAND_CREAM = "#f8f7f2";
 const INK = "#222126";
 
+/** Inline <svg> gets clipped inside rotated cards; an <img> data URI renders intact. */
+const STAR_ICON = `data:image/svg+xml;base64,${Buffer.from(
+  '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z" fill="#f59e0b"/></svg>'
+).toString("base64")}`;
+
 interface OgAssets {
   fontMedium: Buffer;
   fontExtraBold: Buffer;
@@ -42,14 +47,6 @@ function loadAssets(): Promise<OgAssets> {
   return assetsPromise;
 }
 
-/** A single specialty word fits the card badge; longer names fall back to the defaults. */
-function centerBadgeLabel(specialtyName?: string): string {
-  if (specialtyName && specialtyName.length <= 12 && !specialtyName.includes(" ")) {
-    return `${specialtyName} ekspert`;
-  }
-  return "Knæ ekspert";
-}
-
 function Logo() {
   return (
     <svg width="280" height="57" viewBox="0 0 699 143" fill="none">
@@ -65,7 +62,7 @@ function Logo() {
   );
 }
 
-function Badge({ children, star = false }: { children: string; star?: boolean }) {
+function RatingBadge({ rating }: { rating: string }) {
   return (
     <div
       style={{
@@ -81,15 +78,9 @@ function Badge({ children, star = false }: { children: string; star?: boolean })
         fontWeight: 500,
       }}
     >
-      {star ? (
-        <svg width="18" height="18" viewBox="0 0 24 24">
-          <path
-            d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"
-            fill="#f59e0b"
-          />
-        </svg>
-      ) : null}
-      {children}
+      {/* eslint-disable-next-line @next/next/no-img-element -- rendered by Satori, not the browser */}
+      <img src={STAR_ICON} alt="" width={18} height={18} />
+      {rating}
     </div>
   );
 }
@@ -102,8 +93,6 @@ interface CardProps {
   bottom: number;
   rotate: number;
   rating: string;
-  /** Only the centre card is wide enough to show a label without it being covered. */
-  label?: string;
   alignRight?: boolean;
 }
 
@@ -115,7 +104,6 @@ function PortraitCard({
   bottom,
   rotate,
   rating,
-  label,
   alignRight = false,
 }: CardProps) {
   return (
@@ -129,7 +117,6 @@ function PortraitCard({
         display: "flex",
         borderRadius: 24,
         border: "6px solid white",
-        overflow: "hidden",
         transform: `rotate(${rotate}deg)`,
         boxShadow: "0 18px 40px rgba(16,69,52,0.22)",
         background: "#d7d2ca",
@@ -139,9 +126,15 @@ function PortraitCard({
       <img
         src={src}
         alt=""
-        width={width}
-        height={height}
-        style={{ position: "absolute", top: 0, left: 0, objectFit: "cover" }}
+        width={width - 12}
+        height={height - 12}
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          objectFit: "cover",
+          borderRadius: 18,
+        }}
       />
       <div
         style={{
@@ -150,6 +143,7 @@ function PortraitCard({
           left: 0,
           width: "100%",
           height: "100%",
+          borderRadius: 18,
           background: "linear-gradient(to top, rgba(0,0,0,0.35), rgba(0,0,0,0) 45%)",
         }}
       />
@@ -159,21 +153,16 @@ function PortraitCard({
           bottom: 14,
           ...(alignRight ? { right: 14 } : { left: 14 }),
           display: "flex",
-          flexDirection: "column",
-          alignItems: alignRight ? "flex-end" : "flex-start",
-          gap: 8,
         }}
       >
-        <Badge star>{rating}</Badge>
-        {label ? <Badge>{label}</Badge> : null}
+        <RatingBadge rating={rating} />
       </div>
     </div>
   );
 }
 
 export async function renderLocationOgImage(
-  text: LocationOgText,
-  specialtyName?: string
+  text: LocationOgText
 ): Promise<ImageResponse> {
   const { fontMedium, fontExtraBold, portraits } = await loadAssets();
 
@@ -194,13 +183,20 @@ export async function renderLocationOgImage(
           style={{
             display: "flex",
             flexDirection: "column",
-            justifyContent: "space-between",
             width: 690,
             padding: "64px 0 64px 72px",
           }}
         >
           <Logo />
-          <div style={{ display: "flex", flexDirection: "column" }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              flex: 1,
+              paddingBottom: 40,
+            }}
+          >
             <div
               style={{
                 fontSize: 56,
@@ -226,24 +222,6 @@ export async function renderLocationOgImage(
                 {text.specialtyLine}
               </div>
             ) : null}
-            <div style={{ marginTop: 22, fontSize: 26, fontWeight: 500, color: "#55545a" }}>
-              {text.tagline}
-            </div>
-          </div>
-          <div style={{ display: "flex" }}>
-            <div
-              style={{
-                display: "flex",
-                padding: "12px 26px",
-                borderRadius: 999,
-                background: BRAND_PRIMARY,
-                color: BRAND_CREAM,
-                fontSize: 22,
-                fontWeight: 800,
-              }}
-            >
-              fysfinder.dk
-            </div>
           </div>
         </div>
 
@@ -275,7 +253,6 @@ export async function renderLocationOgImage(
             bottom={145}
             rotate={0}
             rating="5,0"
-            label={centerBadgeLabel(specialtyName)}
           />
         </div>
       </div>

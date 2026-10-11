@@ -17,7 +17,6 @@ export interface LocationOgTextInput {
 export interface LocationOgText {
   headline: string;
   specialtyLine: string | null;
-  tagline: string;
   /** Headline and specialty as one sentence, for the image alt text. */
   alt: string;
 }
@@ -51,29 +50,24 @@ export function buildLocationOgText({
     : null;
 
   let headline: string;
-  let tagline: string;
 
   if (clinicCount === 0) {
     headline = isDanmark
       ? "Find fysioterapi i Danmark"
       : `Find fysioterapi nær ${locationName}`;
-    tagline = "Se klinikker i nærheden med anmeldelser og priser";
   } else if (clinicCount === 1) {
     headline = `Find din fysioterapeut ${place}`;
-    tagline = "Se klinikkens anmeldelser, priser og åbningstider";
   } else {
     const count =
       isDanmark && clinicCount >= DANMARK_ROW_CAP
         ? `${DANMARK_ROW_CAP}+`
         : String(clinicCount);
     headline = `Sammenlign ${count} fysioterapiklinikker ${place}`;
-    tagline = "Se anmeldelser, priser og åbningstider";
   }
 
   return {
     headline,
     specialtyLine,
-    tagline,
     alt: specialtyLine ? `${headline} ${specialtyLine}` : headline,
   };
 }
