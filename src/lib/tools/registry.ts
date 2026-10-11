@@ -150,7 +150,7 @@ export const tools: Tool[] = [
     description:
       "Beregn dit barns forventede sluthøjde ud fra forældrenes højde med midtforældre-metoden.",
     href: "/vaerktoejer/hoejdeberegner",
-    imageUrl: "/images/vaerktoejer/hoejdeberegner-forventet-voksenhoejde-barn.jpg",
+    imageUrl: "/images/vaerktoejer/hoejdeberegner-foraeldre-barn-hoejdemaaler.jpg",
     imageAlt: "Forældre og barn ved en højdemåler på væggen – beregn barnets forventede voksenhøjde ud fra forældrenes højde",
     type: "Sundhed & velvære værktøjer",
     relatedTools: [],

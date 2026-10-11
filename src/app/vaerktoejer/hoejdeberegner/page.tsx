@@ -9,7 +9,7 @@ const title = "Højdeberegner | Hvor høj bliver mit barn? →";
 const description =
   "Beregn dit barns forventede sluthøjde ud fra mors og fars højde. Fysfinders gratis højdeberegner viser både det forventede tal og det interval, de fleste børn ender i.";
 const image = {
-  url: "/images/vaerktoejer/hoejdeberegner-forventet-voksenhoejde-barn.jpg",
+  url: "/images/vaerktoejer/hoejdeberegner-foraeldre-barn-hoejdemaaler.jpg",
   alt: "Forældre og barn ved en højdemåler på væggen – beregn barnets forventede voksenhøjde ud fra forældrenes højde",
 };
 
