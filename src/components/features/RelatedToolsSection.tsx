@@ -1,42 +1,19 @@
 import Link from "next/link";
 import Image from "next/image";
-import { releasedTools as allTools } from "@/lib/tools/registry";
+import { getRelatedTools, type ToolSlug } from "@/lib/tools/registry";
 
 interface RelatedToolsSectionProps {
-  currentToolHref: string;
+  currentToolSlug: ToolSlug;
   title?: string;
   description?: string;
 }
 
 const RelatedToolsSection = ({ 
-  currentToolHref, 
+  currentToolSlug, 
   title = "Andre nyttige værktøjer", 
   description = "Udforsk vores andre gratis værktøjer og beregnere til at forbedre din sundhed og træning."
 }: RelatedToolsSectionProps) => {
-  // Define related tool pairs
-  const relatedPairs: { [key: string]: string } = {
-    "/vaerktoejer/bmi-beregner": "/vaerktoejer/fedtprocent-beregner",
-    "/vaerktoejer/kalorieberegner": "/vaerktoejer/bmi-beregner",
-    "/vaerktoejer/fedtprocent-beregner": "/vaerktoejer/bmi-beregner",
-    "/vaerktoejer/mr-scanning": "/vaerktoejer/dexa-scanning",
-    "/vaerktoejer/dexa-scanning": "/vaerktoejer/mr-scanning",
-  };
-
-  // Filter out the current tool and sort to prioritize related tools
-  const relatedTools = allTools
-    .filter(tool => tool.href !== currentToolHref)
-    .sort((a, b) => {
-      const relatedTool = relatedPairs[currentToolHref];
-      
-      // If there's a related tool, prioritize it
-      if (relatedTool) {
-        if (a.href === relatedTool) return -1;
-        if (b.href === relatedTool) return 1;
-      }
-      
-      // Otherwise maintain original order
-      return 0;
-    });
+  const relatedTools = getRelatedTools(currentToolSlug);
 
   return (
     <div className="mt-16 pt-8 border-t border-gray-200">

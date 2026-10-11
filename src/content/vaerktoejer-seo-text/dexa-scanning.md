@@ -111,7 +111,7 @@ Når du ankommer til klinikken, vil personalet guide dig. Du skal blot lægge di
 
 ## Kan en DEXA scanning måle fedtprocent?
 
-Udover at måle knogletæthed bruges en DEXA-scanning også til at analysere kroppens sammensætning, herunder fedtprocenten. En DEXA-scanning fedtprocent måling anses for at være en af de mest præcise metoder til at vurdere, hvor meget af kroppens vægt der består af fedt, muskler og knogler.
+Udover at måle knogletæthed bruges en DEXA-scanning også til at analysere kroppens sammensætning, herunder [fedtprocenten](/vaerktoejer/fedtprocent-beregner). En DEXA-scanning fedtprocent måling anses for at være en af de mest præcise metoder til at vurdere, hvor meget af kroppens vægt der består af fedt, muskler og knogler.
 
 Under scanningen opdeles kroppen i forskellige segmenter, og scanneren registrerer præcist, hvor fedtvævet er placeret. Dette giver en detaljeret oversigt over både den samlede fedtprocent og fordelingen mellem fx arme, ben, mave og overkrop.
 

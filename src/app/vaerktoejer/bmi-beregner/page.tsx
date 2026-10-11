@@ -156,7 +156,7 @@ export default async function BMICalculatorPage() {
             />
           </div>
         </div>
-            <RelatedToolsSection currentToolHref="/vaerktoejer/bmi-beregner" />
+            <RelatedToolsSection currentToolSlug="bmi-beregner" />
           </div>
         </div>
       </div>

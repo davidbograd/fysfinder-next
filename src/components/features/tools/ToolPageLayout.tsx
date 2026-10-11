@@ -182,7 +182,7 @@ export async function ToolPageLayout({
               )}
             </div>
 
-            <RelatedToolsSection currentToolHref={`/vaerktoejer/${slug}`} />
+            <RelatedToolsSection currentToolSlug={slug} />
           </div>
         </div>
       </div>

@@ -173,7 +173,7 @@ export default async function MRScanPage() {
           </div>
         </div>
         
-            <RelatedToolsSection currentToolHref="/vaerktoejer/mr-scanning" />
+            <RelatedToolsSection currentToolSlug="mr-scanning" />
           </div>
         </div>
       </div>

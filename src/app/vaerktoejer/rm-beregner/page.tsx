@@ -146,7 +146,7 @@ export default async function RmBeregnerPage() {
               </div>
             </div>
 
-            <RelatedToolsSection currentToolHref="/vaerktoejer/rm-beregner" />
+            <RelatedToolsSection currentToolSlug="rm-beregner" />
           </div>
         </div>
       </div>

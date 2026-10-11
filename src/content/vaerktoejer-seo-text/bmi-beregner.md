@@ -7,7 +7,7 @@ description: "Komplet guide til BMI-beregning og dit Body Mass Index"
 
 BMI står for Body Mass Index og bruges til at vurdere, om en person har en sund vægt i forhold til sin højde. Det beregnes ved at dividere vægten (i kg) med højden (i meter) i anden potens. BMI giver en indikation af, om du er under-, normalvægtig, overvægtig eller svært overvægtig.
 
-Husk at dit BMI-tal kun er et vejledende redskab til at give dig en indikation af din generelle sundhedstilstand. BMI tager for eksempel ikke højde for din muskelmasse og fedtfordeling, og dit BMI-tal giver derfor ikke altid et retvisende billede af din overordnede sundhedstilstand.
+Husk at dit BMI-tal kun er et vejledende redskab til at give dig en indikation af din generelle sundhedstilstand. BMI tager for eksempel ikke højde for din [muskelmasse](/vaerktoejer/muskelmasse-beregner) og fedtfordeling, og dit BMI-tal giver derfor ikke altid et retvisende billede af din overordnede sundhedstilstand.
 
 ## Hvordan beregner man BMI?
 
@@ -82,7 +82,7 @@ Selvom BMI er et nyttigt værktøj, har det sine begrænsninger:
 
 ## Er der forskel på BMI for kvinder og mænd?
 
-Der er forskelle på mænds og kvinders kroppe, hvilket også kan påvirke BMI. Mænd har generelt en højere muskelmasse og lavere fedtprocent end kvinder, hvilket kan betyde, at mænd med et højere BMI ikke nødvendigvis er i risiko for helbredsproblemer. Kvinder har ofte en højere fedtprocent, og derfor kan et lavere BMI være nødvendigt for kvinder for at opretholde en sund vægt.
+Der er forskelle på mænds og kvinders kroppe, hvilket også kan påvirke BMI. Mænd har generelt en højere muskelmasse og lavere [fedtprocent](/vaerktoejer/fedtprocent-beregner) end kvinder, hvilket kan betyde, at mænd med et højere BMI ikke nødvendigvis er i risiko for helbredsproblemer. Kvinder har ofte en højere fedtprocent, og derfor kan et lavere BMI være nødvendigt for kvinder for at opretholde en sund vægt.
 
 ## Må ældre have et højere BMI?
 

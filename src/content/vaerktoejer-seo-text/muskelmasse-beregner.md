@@ -9,7 +9,7 @@ Vægten alene fortæller ikke, hvor meget af kroppen der består af muskler. Et 
 Du kan vælge mellem to beregningsmetoder:
 
 1. **Uden målebånd:** Indtast højde, vægt, alder og køn. Beregneren bruger en antropometrisk ligning, der giver et hurtigt estimat ud fra kropsmål og demografiske oplysninger.
-2. **Med målebånd:** Indtast også de relevante mål omkring hals og talje samt hofte for kvinder. Beregneren bruger målene til først at estimere fedtprocenten med Navy-metoden og beregner derefter fedtfri masse og muskelmasse.
+2. **Med målebånd:** Indtast også de relevante mål omkring hals og talje samt hofte for kvinder. Beregneren bruger målene til først at estimere [fedtprocenten](/vaerktoejer/fedtprocent-beregner) med Navy-metoden og beregner derefter fedtfri masse og muskelmasse.
 
 Metoden med målebånd kræver flere oplysninger, men inddrager også mål for din kropssammensætning. For at kunne følge ændringer over tid bør du måle de samme steder og under nogenlunde ens forhold.
 

@@ -7,7 +7,7 @@ Navy-metoden anvender simple målinger af din krop – højde, taljemål, hoftem
 - Velegnet til at følge udvikling over tid  
  
 ### Ulemper ved navy-metoden
-- Er et estimat og kan afvige fra avanceret udstyr som DEXA-scanninger  
+- Er et estimat og kan afvige fra avanceret udstyr som [DEXA-scanninger](/vaerktoejer/dexa-scanning)  
 - Små målefejl kan påvirke resultatet  
 - Resultatet kan variere afhængigt af kropsbygning  
  
@@ -18,7 +18,7 @@ Vores beregner er gratis og tilgængelig online. Du indtaster blot dine kropsmå
 Det eneste, du behøver, er et målebånd og et par minutters tid. Vores fedtprocent-beregner giver dig et godt billede af din kropssammensætning, som du kan bruge til at sætte mål for sundhed, træning og vægttab.
  
 ## Hvordan virker fedtprocent-beregneren?
-Beregneren fungerer ved at anvende en specifik matematisk formel til at estimere forholdet mellem fedt og muskelmasse i kroppen. Den tager udgangspunkt i forskellen på kropsmål, køn og højde.  
+Beregneren fungerer ved at anvende en specifik matematisk formel til at estimere forholdet mellem fedt og [muskelmasse](/vaerktoejer/muskelmasse-beregner) i kroppen. Den tager udgangspunkt i forskellen på kropsmål, køn og højde.  
  
 ## Tips til at finde dine kropsmål mest præcist til fedtprocent-beregneren
 Her er et par gode råd, som du kan bruge, når du skal finde dine kropsmål mest præcist til fedtprocent beregneren.
@@ -66,7 +66,7 @@ For mænd bruges højde, taljemål og halsmål. Kombinationen giver en hurtig in
 Fedtprocenten giver et bedre billede af din sundhed end vægten alene. To personer kan veje det samme, men have vidt forskellig fedtprocent – og dermed forskellig sundhedsrisiko.  
  
 ### Hvad er forskellen på BMI og fedtprocent?  
-BMI beregner forholdet mellem vægt og højde, men tager ikke højde for kropssammensætning. Fedtprocenten viser, hvor stor en del af kroppen der består af fedt, og er derfor et mere præcist mål for sundhed.  
+[BMI](/vaerktoejer/bmi-beregner) beregner forholdet mellem vægt og højde, men tager ikke højde for kropssammensætning. Fedtprocenten viser, hvor stor en del af kroppen der består af fedt, og er derfor et mere præcist mål for sundhed.  
  
 ### Er der forskel på fedtprocent hos kvinder og mænd?
 Ja, kvinder har naturligt en højere fedtprocent end mænd på grund af biologiske og hormonelle forskelle. Dette er blandt andet vigtigt for fertilitet, hormonbalance og kropsfunktioner.

@@ -155,7 +155,7 @@ export default async function CalorieCalculatorPage() {
             />
           </div>
         </div>
-            <RelatedToolsSection currentToolHref="/vaerktoejer/kalorieberegner" />
+            <RelatedToolsSection currentToolSlug="kalorieberegner" />
           </div>
         </div>
       </div>

@@ -150,7 +150,7 @@ export default async function BodyFatCalculatorPage() {
               </div>
             </div>
 
-            <RelatedToolsSection currentToolHref="/vaerktoejer/fedtprocent-beregner" />
+            <RelatedToolsSection currentToolSlug="fedtprocent-beregner" />
           </div>
         </div>
       </div>

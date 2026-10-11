@@ -1,5 +1,5 @@
 // Single source of truth for the Fysfinder tools (værktøjer).
-// Updated: 2026-10-11 - Release højde-, hvilestofskifte- and muskelmasseberegner with final images and categories.
+// Updated: 2026-10-11 - Per-tool related tools for "Andre nyttige værktøjer".
 // Previously duplicated between src/app/vaerktoejer/page.tsx and RelatedToolsSection.
 
 export const TOOL_SLUGS = [
@@ -38,6 +38,12 @@ export interface Tool {
   imageUrl: string;
   imageAlt: string;
   type: ToolCategory;
+  /**
+   * Tools shown under "Andre nyttige værktøjer", most relevant first. Only
+   * list tools that are a natural next step from this page; leave empty if
+   * none are, and random tools are shown instead.
+   */
+  relatedTools: readonly ToolSlug[];
 }
 
 export const tools: Tool[] = [
@@ -51,6 +57,7 @@ export const tools: Tool[] = [
     imageUrl: "/images/mr-scanning/mr-scanning.png",
     imageAlt: "MR-scanning maskine i et hospital miljø",
     type: "Forstå din MR og DEXA scanning",
+    relatedTools: [],
   },
   {
     slug: "dexa-scanning",
@@ -62,6 +69,7 @@ export const tools: Tool[] = [
     imageUrl: "/images/dexa-scanning/dexa-scanning.jpeg",
     imageAlt: "DEXA-scanning illustration",
     type: "Forstå din MR og DEXA scanning",
+    relatedTools: ["fedtprocent-beregner", "muskelmasse-beregner"],
   },
   {
     slug: "kalorieberegner",
@@ -73,6 +81,7 @@ export const tools: Tool[] = [
     imageUrl: "/images/vaerktoejer/kalorieberegner.png",
     imageAlt: "Sunde fødevarer og målebånd der illustrerer kalorieopmåling",
     type: "Kost & ernæring værktøjer",
+    relatedTools: ["hvilestofskifte-beregner", "proteinberegner", "bmi-beregner"],
   },
   {
     slug: "bmi-beregner",
@@ -84,6 +93,7 @@ export const tools: Tool[] = [
     imageUrl: "/images/vaerktoejer/bmi-beregner.png",
     imageAlt: "BMI-beregner illustration med vægt og målebånd",
     type: "Sundhed & velvære værktøjer",
+    relatedTools: ["fedtprocent-beregner", "muskelmasse-beregner", "kalorieberegner"],
   },
   {
     slug: "fedtprocent-beregner",
@@ -95,6 +105,7 @@ export const tools: Tool[] = [
     imageUrl: "/images/vaerktoejer/fedtprocent-beregner.jpg",
     imageAlt: "Fedtprocent beregner illustration med målebånd og sundhedsudstyr",
     type: "Sundhed & velvære værktøjer",
+    relatedTools: ["bmi-beregner", "muskelmasse-beregner", "dexa-scanning"],
   },
   {
     slug: "pace-beregner",
@@ -106,6 +117,7 @@ export const tools: Tool[] = [
     imageUrl: "/images/vaerktoejer/pace-beregner.png",
     imageAlt: "Pace beregner illustration med løber og stopur",
     type: "Træning & bevægelse værktøjer",
+    relatedTools: ["kondital-beregner"],
   },
   {
     slug: "rm-beregner",
@@ -117,6 +129,7 @@ export const tools: Tool[] = [
     imageUrl: "/images/vaerktoejer/1rm-beregner.jpg",
     imageAlt: "RM beregner illustration med vægtstang og løfter",
     type: "Træning & bevægelse værktøjer",
+    relatedTools: ["muskelmasse-beregner", "proteinberegner"],
   },
   {
     slug: "kondital-beregner",
@@ -128,6 +141,7 @@ export const tools: Tool[] = [
     imageUrl: "/images/vaerktoejer/kondital-beregner.jpg",
     imageAlt: "Løber på en atletikbane i solnedgang",
     type: "Træning & bevægelse værktøjer",
+    relatedTools: ["pace-beregner"],
   },
   {
     slug: "hoejdeberegner",
@@ -139,6 +153,7 @@ export const tools: Tool[] = [
     imageUrl: "/images/vaerktoejer/hoejdeberegner-forventet-voksenhoejde-barn.jpg",
     imageAlt: "Forældre og barn ved en højdemåler på væggen – beregn barnets forventede voksenhøjde ud fra forældrenes højde",
     type: "Sundhed & velvære værktøjer",
+    relatedTools: [],
   },
   {
     slug: "hvilestofskifte-beregner",
@@ -150,6 +165,7 @@ export const tools: Tool[] = [
     imageUrl: "/images/vaerktoejer/hvilestofskifte-beregner-kvinde-hviler-sofa.jpg",
     imageAlt: "Kvinde der hviler på sofaen – hvilestofskiftet er den energi, kroppen forbrænder i hvile",
     type: "Kost & ernæring værktøjer",
+    relatedTools: ["kalorieberegner", "muskelmasse-beregner", "proteinberegner"],
   },
   {
     slug: "muskelmasse-beregner",
@@ -161,6 +177,7 @@ export const tools: Tool[] = [
     imageUrl: "/images/vaerktoejer/muskelmasse-beregner-styrketraening-biceps-curl.jpg",
     imageAlt: "Mand laver biceps curl med håndvægt i fitnesscenter – beregn din muskelmasse",
     type: "Træning & bevægelse værktøjer",
+    relatedTools: ["fedtprocent-beregner", "proteinberegner", "rm-beregner"],
   },
   {
     slug: "proteinberegner",
@@ -172,6 +189,7 @@ export const tools: Tool[] = [
     imageUrl: "/images/vaerktoejer/proteinberegner-proteinrig-mad.jpg",
     imageAlt: "Tallerken med proteinrig mad: kylling, laks, oksekød, æg, tofu, kikærter og quinoa",
     type: "Kost & ernæring værktøjer",
+    relatedTools: ["muskelmasse-beregner", "kalorieberegner", "rm-beregner"],
   },
 ];
 
@@ -214,4 +232,39 @@ export function groupToolsByCategory(): Record<string, Tool[]> {
     acc[tool.type].push(tool);
     return acc;
   }, {});
+}
+
+export const MAX_RELATED_TOOLS = 3;
+
+function hashString(value: string): number {
+  let hash = 0;
+  for (const char of value) {
+    hash = (hash * 31 + char.charCodeAt(0)) >>> 0;
+  }
+  return hash;
+}
+
+// Seeded by slug so a page keeps the same "random" tools across ISR renders.
+function seededShuffle<T>(items: readonly T[], seed: string): T[] {
+  const result = [...items];
+  let state = hashString(seed) || 1;
+  for (let i = result.length - 1; i > 0; i--) {
+    state = (state * 1664525 + 1013904223) >>> 0;
+    const j = state % (i + 1);
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+
+export function getRelatedTools(slug: ToolSlug): Tool[] {
+  const candidates = releasedTools.filter((tool) => tool.slug !== slug);
+  const related = getToolBySlug(slug)
+    .relatedTools.map((relatedSlug) =>
+      candidates.find((tool) => tool.slug === relatedSlug)
+    )
+    .filter((tool): tool is Tool => tool !== undefined)
+    .slice(0, MAX_RELATED_TOOLS);
+
+  if (related.length > 0) return related;
+  return seededShuffle(candidates, slug).slice(0, MAX_RELATED_TOOLS);
 }

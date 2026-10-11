@@ -178,7 +178,7 @@ export default async function DEXAScanPage() {
           </div>
         </div>
         
-            <RelatedToolsSection currentToolHref="/vaerktoejer/dexa-scanning" />
+            <RelatedToolsSection currentToolSlug="dexa-scanning" />
           </div>
         </div>
       </div>

@@ -93,7 +93,7 @@ En kvinde på 65 kg vil eksempelvis have følgende proteinindtag:
 | 1,6 g/kg | 104 g |
 | 2,0 g/kg | 130 g |
 
-Hvis målet er at opbygge muskler eller bevare muskelmasse under et vægttab, kan proteinbehovet være højere end ved almindelig vægtvedligeholdelse.
+Hvis målet er at opbygge muskler eller bevare [muskelmasse](/vaerktoejer/muskelmasse-beregner) under et vægttab, kan proteinbehovet være højere end ved almindelig vægtvedligeholdelse.
 
 Gravide og ammende kvinder har desuden særlige ernæringsmæssige behov, som det er vigtigt at tage højde for.
 
@@ -169,7 +169,7 @@ Der er heller ikke nødvendigvis nogen ekstra fordel ved at spise meget store m�
 
 Ved vægttab kan et højere proteinindtag være relevant, især hvis du samtidig ønsker at bevare din muskelmasse.
 
-Når kroppen er i kalorieunderskud, kan man miste både fedtmasse og muskelmasse. Tilstrækkeligt protein kombineret med styrketræning kan være med til at begrænse tabet af muskelmasse.
+Når kroppen er i [kalorieunderskud](/vaerktoejer/kalorieberegner), kan man miste både fedtmasse og muskelmasse. Tilstrækkeligt protein kombineret med styrketræning kan være med til at begrænse tabet af muskelmasse.
 
 Protein kan desuden bidrage til mæthed, hvilket for nogle gør det lettere at følge en kostplan med færre kalorier.
 

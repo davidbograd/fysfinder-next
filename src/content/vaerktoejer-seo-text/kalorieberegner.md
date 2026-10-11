@@ -1,6 +1,6 @@
 ## Hvad betyder ligevægtsindtag?
 
-Ligevægtsindtag (dit samlede daglige energiforbrug) er den mængde kalorier, du skal indtage dagligt for at opretholde din vægt, uden at gå op eller ned. Ligevægtsindtag tager højde for både dit basalstofskifte (BMR), som er den energi, din krop bruger på at opretholde vitale funktioner som vejrtrækning og blodcirkulation, samt dit aktivitetsniveau.
+Ligevægtsindtag (dit samlede daglige energiforbrug) er den mængde kalorier, du skal indtage dagligt for at opretholde din vægt, uden at gå op eller ned. Ligevægtsindtag tager højde for både dit [basalstofskifte (BMR)](/vaerktoejer/hvilestofskifte-beregner), som er den energi, din krop bruger på at opretholde vitale funktioner som vejrtrækning og blodcirkulation, samt dit aktivitetsniveau.
 
 Ved at kende dit ligevægtsindtag kan du finde ud af, havd dit daglige kaloriebehov er.
 
@@ -50,7 +50,7 @@ Ja, dit kaloriebehov kan falde, når du er på kur, da din vægt og muskelmasse 
 
 ## Kan man selv påvirke sit stofskifte og kaloriebehov?
 
-Ja, du kan påvirke dit stofskifte gennem kost og motion. For eksempel kan øget fysisk aktivitet, især styrketræning, hjælpe med at opbygge muskelmasse, hvilket kan øge dit kalorieforbrug. En proteinrig kost kan også fremme et højere stofskifte, da protein kræver mere energi at fordøje.
+Ja, du kan påvirke dit stofskifte gennem kost og motion. For eksempel kan øget fysisk aktivitet, især styrketræning, hjælpe med at opbygge muskelmasse, hvilket kan øge dit kalorieforbrug. En [proteinrig kost](/vaerktoejer/proteinberegner) kan også fremme et højere stofskifte, da protein kræver mere energi at fordøje.
 
 ### Faktorer, der påvirker stofskiftet:
 

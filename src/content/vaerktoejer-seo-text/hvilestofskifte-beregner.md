@@ -44,7 +44,7 @@ Mifflin-St Jeor-ligningen bruger fire oplysninger:
 3. **Alder:** indtastes i hele år.
 4. **Køn:** bruges til at vælge den relevante konstant i ligningen.
 
-Vægt, højde og alder påvirker resultatet på forskellige måder. Køn indgår som en del af den oprindelige ligningsmodel. Resultatet er et generelt estimat og tager ikke direkte højde for din målte muskelmasse eller individuelle helbredsforhold.
+Vægt, højde og alder påvirker resultatet på forskellige måder. Køn indgår som en del af den oprindelige ligningsmodel. Resultatet er et generelt estimat og tager ikke direkte højde for din målte [muskelmasse](/vaerktoejer/muskelmasse-beregner) eller individuelle helbredsforhold.
 
 ## Mifflin-St Jeor-formlen forklaret
 

@@ -106,7 +106,7 @@ Teknik, stabilitet og mobilitet er nøglefaktorer for en høj RM – især i bas
 Søvn, kost og pauser mellem tunge træningsdage har stor betydning for din 1RM.
 
 - Sov 7–9 timer pr. nat
-- Spis nok protein og kalorier i forhold til dit mål
+- Spis nok [protein](/vaerktoejer/proteinberegner) og kalorier i forhold til dit mål
 - Planlæg hviledage og deload-uger
 
 ### 5. Variér tempo og greb

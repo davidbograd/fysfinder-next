@@ -150,7 +150,7 @@ export default async function PaceBeregnerPage() {
               </div>
             </div>
 
-            <RelatedToolsSection currentToolHref="/vaerktoejer/pace-beregner" />
+            <RelatedToolsSection currentToolSlug="pace-beregner" />
           </div>
         </div>
       </div>
