@@ -12,6 +12,14 @@ const BRAND_PRIMARY = "#104534";
 const BRAND_CREAM = "#f8f7f2";
 const INK = "#222126";
 
+const HEADLINE_STYLE = {
+  fontSize: 56,
+  fontWeight: 800,
+  lineHeight: 1.12,
+  letterSpacing: -1.5,
+  color: INK,
+} as const;
+
 /** Inline <svg> gets clipped inside rotated cards; an <img> data URI renders intact. */
 const STAR_ICON = `data:image/svg+xml;base64,${Buffer.from(
   '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z" fill="#f59e0b"/></svg>'
@@ -197,30 +205,9 @@ export async function renderLocationOgImage(
               paddingBottom: 40,
             }}
           >
-            <div
-              style={{
-                fontSize: 56,
-                fontWeight: 800,
-                lineHeight: 1.12,
-                letterSpacing: -1.5,
-                color: BRAND_PRIMARY,
-              }}
-            >
-              {text.headline}
-            </div>
+            <div style={HEADLINE_STYLE}>{text.headline}</div>
             {text.specialtyLine ? (
-              <div
-                style={{
-                  marginTop: 10,
-                  fontSize: 40,
-                  fontWeight: 800,
-                  lineHeight: 1.15,
-                  letterSpacing: -1,
-                  color: INK,
-                }}
-              >
-                {text.specialtyLine}
-              </div>
+              <div style={HEADLINE_STYLE}>{text.specialtyLine}</div>
             ) : null}
           </div>
         </div>
