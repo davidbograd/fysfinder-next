@@ -34,6 +34,7 @@ import {
 } from "@/lib/location-listing";
 import { getFindSeoText } from "@/lib/find-seo-text";
 import { buildSearchUrl } from "@/utils/parameter-normalization";
+import { buildFindPageSocialMetadata } from "@/lib/og/find-page-social-metadata";
 
 export const revalidate = 86400; // 24 hours ISR (must be a literal for Next.js segment config)
 export { fetchLocationData };
@@ -103,11 +104,14 @@ export async function generateMetadata({
     data.city?.location_preposition,
   );
 
+  const description = filters.online
+    ? `Find og sammenlign online fysioterapeuter${isDanmark ? "" : ` ${data.city?.location_preposition ?? "i"} ${cityName}`}. Få behandling hjemmefra via video. Se anbefalinger, specialer og priser. Start her →`
+    : `Find og sammenlign ${cityName} fysioterapeuter. Se anbefalinger, fysioterapi specialer, priser, åbningstider og mere. Start her →`;
+
   return {
     title,
-    description: filters.online
-      ? `Find og sammenlign online fysioterapeuter${isDanmark ? "" : ` ${data.city?.location_preposition ?? "i"} ${cityName}`}. Få behandling hjemmefra via video. Se anbefalinger, specialer og priser. Start her →`
-      : `Find og sammenlign ${cityName} fysioterapeuter. Se anbefalinger, fysioterapi specialer, priser, åbningstider og mere. Start her →`,
+    description,
+    ...buildFindPageSocialMetadata(title, description),
   };
 }
 

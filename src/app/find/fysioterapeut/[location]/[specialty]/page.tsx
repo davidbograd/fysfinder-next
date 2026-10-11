@@ -7,6 +7,7 @@ import LocationPage, { fetchLocationData } from "../page";
 import { SpecialtyWithSeo } from "@/app/types";
 import { generateMetaTitle } from "@/lib/headers-and-metatitles";
 import { parseFilters } from "@/app/find/fysioterapeut/filter-utils";
+import { buildFindPageSocialMetadata } from "@/lib/og/find-page-social-metadata";
 
 export async function generateMetadata({
   params,
@@ -55,9 +56,12 @@ export async function generateMetadata({
   const locationPreposition = data.city?.location_preposition ?? "i";
   const locationPhrase = `${locationPreposition} ${locationName}`;
 
+  const description = `Find ${specialty.specialty_name.toLowerCase()} fysioterapeuter ${locationPhrase}${filterSuffix.toLowerCase()}. Se anmeldelser, priser og book tid online. Start her →`;
+
   return {
     title,
-    description: `Find ${specialty.specialty_name.toLowerCase()} fysioterapeuter ${locationPhrase}${filterSuffix.toLowerCase()}. Se anmeldelser, priser og book tid online. Start her →`,
+    description,
+    ...buildFindPageSocialMetadata(title, description),
   };
 }
 
