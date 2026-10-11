@@ -1,6 +1,6 @@
-// Updated: 2026-10-10 - Also covers the past-courses section and the organiser contact links.
+// Updated: 2026-10-10 - Also covers the page-specific Open Graph metadata.
 import { render, screen } from "@testing-library/react";
-import CoursesPage from "../page";
+import CoursesPage, { metadata } from "../page";
 
 describe("/for-klinikker/kurser page", () => {
   afterEach(() => {
@@ -18,7 +18,9 @@ describe("/for-klinikker/kurser page", () => {
         name: /Kurser for fysioterapeuter/,
       }),
     ).toBeInTheDocument();
-    expect(screen.getByText(/Sidst opdateret 10\. oktober 2026/)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Sidst opdateret 10\. oktober 2026/),
+    ).toBeInTheDocument();
     expect(
       screen.queryByRole("heading", { level: 2, name: /^Oktober 2026/ }),
     ).not.toBeInTheDocument();
@@ -45,5 +47,15 @@ describe("/for-klinikker/kurser page", () => {
         /Mangler dit kursus på listen, eller vil du give det ekstra synlighed\?/,
       ),
     ).toBeInTheDocument();
+  });
+
+  it("sets page-specific Open Graph metadata", () => {
+    expect(metadata.openGraph).toMatchObject({
+      title: "Alle kurser for fysioterapeuter 2026–2027, samlet ét sted",
+      description: expect.stringContaining("Find dit næste kursus"),
+      url: "https://www.fysfinder.dk/for-klinikker/kurser",
+      locale: "da_DK",
+    });
+    expect(metadata.twitter).toMatchObject({ card: "summary_large_image" });
   });
 });

@@ -1,4 +1,4 @@
-// Updated: 2026-10-10 - Reworded bottom note and surfaced the "add your course" contact near the top below xl (the desktop rail carries it on xl+).
+// Updated: 2026-10-10 - Page-specific Open Graph and Twitter title/description for sharing.
 import { Metadata } from "next";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { CourseOverview } from "@/components/features/kurser/CourseOverview";
@@ -21,10 +21,36 @@ const PAGE_TITLE = "Kurser for fysioterapeuter 2026–2027";
 const PAGE_DESCRIPTION =
   "Overblik over kommende kurser, efteruddannelse og faglige arrangementer for fysioterapeuter i Danmark – samlet ét sted og sorteret efter dato.";
 
+const OG_TITLE = "Alle kurser for fysioterapeuter 2026–2027, samlet ét sted";
+const OG_DESCRIPTION =
+  "Find dit næste kursus, efteruddannelse eller faglige arrangement. Alle kommende kurser fra danske udbydere. Filtrer på lokation, dato, emne og udbyder.";
+
 export const metadata: Metadata = {
   title: `${PAGE_TITLE} | Fysfinder`,
   description: PAGE_DESCRIPTION,
   alternates: { canonical: PAGE_PATH },
+  openGraph: {
+    title: OG_TITLE,
+    description: OG_DESCRIPTION,
+    url: PAGE_URL,
+    type: "website",
+    locale: "da_DK",
+    siteName: "Fysfinder",
+    images: [
+      {
+        url: "/opengraph-fysfinder.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Fysfinder – kurser for fysioterapeuter",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: OG_TITLE,
+    description: OG_DESCRIPTION,
+    images: ["/opengraph-fysfinder.jpg"],
+  },
 };
 
 const breadcrumbItems = [
@@ -93,8 +119,8 @@ export default function CoursesPage() {
           fysioterapeuter i Danmark – samlet ét sted.
         </p>
         <p className="mt-2 text-sm tabular-nums text-gray-500">
-          {upcomingCourses.length} kurser · {providerCount} udbydere · Sidst opdateret{" "}
-          {formatCheckedOnDate(checked_on)}
+          {upcomingCourses.length} kurser · {providerCount} udbydere · Sidst
+          opdateret {formatCheckedOnDate(checked_on)}
         </p>
         <p className="mt-2 text-sm text-gray-600 xl:hidden">
           Mangler dit kursus, eller vil du give det ekstra synlighed?{" "}
