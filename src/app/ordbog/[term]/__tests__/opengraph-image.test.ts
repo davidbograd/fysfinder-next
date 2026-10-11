@@ -31,11 +31,21 @@ describe("ordbog opengraph-image", () => {
     await render("achillessene");
 
     expect(mockGetTerm).toHaveBeenCalledWith("achillessene");
-    expect(mockRender).toHaveBeenCalledWith({
-      label: "Ordbog",
-      lines: ["Achillessene"],
-      fontSize: 72,
-    });
+    expect(mockRender).toHaveBeenCalledWith(
+      { label: "Ordbog", lines: ["Achillessene"], fontSize: 72 },
+      expect.anything()
+    );
+  });
+
+  it("lets the CDN cache the image instead of re-rendering per request", async () => {
+    mockGetTerm.mockResolvedValue({ title: "Achillessene" });
+
+    await render("achillessene");
+
+    expect(mockRender).toHaveBeenCalledWith(
+      expect.anything(),
+      expect.objectContaining({ "Cache-Control": expect.stringContaining("s-maxage") })
+    );
   });
 
   it("drops a size for long titles", async () => {
@@ -45,7 +55,10 @@ describe("ordbog opengraph-image", () => {
 
     await render("forstuvet-fod");
 
-    expect(mockRender).toHaveBeenCalledWith(expect.objectContaining({ fontSize: 60 }));
+    expect(mockRender).toHaveBeenCalledWith(
+      expect.objectContaining({ fontSize: 60 }),
+      expect.anything()
+    );
   });
 
   it("never reads a file path outside the ordbog folder", async () => {
