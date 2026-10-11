@@ -9,11 +9,13 @@ import { City, SearchResult } from "@/app/types";
 interface LocationSearchProps {
   placeholder?: string;
   className?: string;
+  navigateOnSelect?: boolean;
 }
 
 export const LocationSearch: React.FC<LocationSearchProps> = ({
   placeholder = "By eller postnummer",
   className = "",
+  navigateOnSelect = false,
 }) => {
   const { state, dispatch, navigateToSearch } = useSearch();
   const [inputValue, setInputValue] = useState("");
@@ -106,6 +108,15 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
     setShowDropdown(false);
     setSuggestions(null);
     setSelectedIndex(-1);
+
+    return locationQuery;
+  };
+
+  const handleLocationClick = (city: City) => {
+    const locationQuery = handleLocationSelect(city);
+    if (navigateOnSelect) {
+      void navigateToSearch({ location: locationQuery });
+    }
   };
 
   // Handle keyboard navigation
@@ -122,14 +133,7 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
           selectedIndex >= 0 && allSuggestions[selectedIndex]
             ? allSuggestions[selectedIndex]
             : allSuggestions[0];
-        handleLocationSelect(city);
-        void navigateToSearch({
-          location: {
-            name: city.bynavn,
-            slug: city.bynavn_slug,
-            postalCodes: city.postal_codes,
-          },
-        });
+        void navigateToSearch({ location: handleLocationSelect(city) });
         return;
       }
       void navigateToSearch();
@@ -297,7 +301,7 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
           {suggestions.exact_match && (
             <button
               type="button"
-              onClick={() => handleLocationSelect(suggestions.exact_match!)}
+              onClick={() => handleLocationClick(suggestions.exact_match!)}
               className={`w-full px-4 py-3 text-left hover:bg-gray-50 border-b border-gray-100 focus:bg-gray-50 focus:outline-none ${
                 selectedIndex === 0 ? "bg-blue-50" : ""
               }`}
@@ -316,7 +320,7 @@ export const LocationSearch: React.FC<LocationSearchProps> = ({
               <button
                 key={city.id}
                 type="button"
-                onClick={() => handleLocationSelect(city)}
+                onClick={() => handleLocationClick(city)}
                 className={`w-full px-4 py-3 text-left hover:bg-gray-50 focus:bg-gray-50 focus:outline-none ${
                   selectedIndex === adjustedIndex ? "bg-blue-50" : ""
                 }`}

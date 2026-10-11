@@ -196,6 +196,7 @@ function MigrationContent({
               </svg>
             </div>
             <LocationSearch
+              navigateOnSelect={!isHomeVariant}
               className={`flex-1 border-0 bg-transparent focus:ring-0 focus:border-0 h-14 ${
                 isHomeVariant
                     ? "text-[18px] placeholder:text-[18px]"
@@ -220,6 +221,7 @@ function MigrationContent({
             </div>
             <SpecialtySearch
               specialties={specialties}
+              navigateOnSelect={!isHomeVariant}
               className={`flex-1 border-0 bg-transparent focus:ring-0 focus:border-0 h-14 ${
                 isHomeVariant
                     ? "text-[18px] placeholder:text-[18px]"

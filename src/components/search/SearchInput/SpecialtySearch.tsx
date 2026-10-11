@@ -16,6 +16,7 @@ interface SpecialtySearchProps {
   placeholder?: string;
   className?: string;
   specialties?: Specialty[];
+  navigateOnSelect?: boolean;
 }
 
 let specialtiesCache: Specialty[] | null = null;
@@ -59,6 +60,7 @@ export const SpecialtySearch: React.FC<SpecialtySearchProps> = ({
   placeholder = "Alle specialer",
   className = "",
   specialties: initialSpecialties,
+  navigateOnSelect = false,
 }) => {
   const { state, dispatch, navigateToSearch } = useSearch();
   const [specialties, setSpecialties] = useState<Specialty[]>([]);
@@ -172,6 +174,20 @@ export const SpecialtySearch: React.FC<SpecialtySearchProps> = ({
 
     setShowDropdown(false);
     setSelectedIndex(-1);
+  };
+
+  const handleSpecialtyClick = (specialty: Specialty | null) => {
+    handleSpecialtySelect(specialty);
+    if (!navigateOnSelect) return;
+    void navigateToSearch({
+      specialty: specialty
+        ? {
+            name: specialty.specialty_name,
+            slug: specialty.specialty_name_slug,
+            id: specialty.specialty_id,
+          }
+        : null,
+    });
   };
 
   // Handle keyboard navigation
@@ -378,7 +394,7 @@ export const SpecialtySearch: React.FC<SpecialtySearchProps> = ({
           {/* "All specialties" option */}
           <button
             type="button"
-            onClick={() => handleSpecialtySelect(null)}
+            onClick={() => handleSpecialtyClick(null)}
             className={`w-full px-4 py-3 text-left hover:bg-gray-50 border-b border-gray-100 focus:bg-gray-50 focus:outline-none ${
               selectedIndex === 0 ? "bg-blue-50" : ""
             }`}
@@ -400,7 +416,7 @@ export const SpecialtySearch: React.FC<SpecialtySearchProps> = ({
               <button
                 key={specialty.specialty_id}
                 type="button"
-                onClick={() => handleSpecialtySelect(specialty)}
+                onClick={() => handleSpecialtyClick(specialty)}
                 className={`w-full px-4 py-3 text-left hover:bg-gray-50 focus:bg-gray-50 focus:outline-none ${
                   selectedIndex === adjustedIndex ? "bg-blue-50" : ""
                 }`}

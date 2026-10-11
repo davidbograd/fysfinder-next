@@ -120,17 +120,17 @@ export function SearchProvider({
       specialty?: SpecialtyQuery | null;
       filters?: SearchFilters;
     }) => {
+      const hasLocationOverride = !!overrides && "location" in overrides;
+      const hasSpecialtyOverride = !!overrides && "specialty" in overrides;
       const resolved = await resolveSearchTarget({
-        location:
-          overrides && "location" in overrides
-            ? overrides.location ?? null
-            : state.location,
-        locationDraft: state.locationDraft,
-        specialty:
-          overrides && "specialty" in overrides
-            ? overrides.specialty ?? null
-            : state.specialty,
-        specialtyDraft: state.specialtyDraft,
+        location: hasLocationOverride
+          ? overrides.location ?? null
+          : state.location,
+        locationDraft: hasLocationOverride ? "" : state.locationDraft,
+        specialty: hasSpecialtyOverride
+          ? overrides.specialty ?? null
+          : state.specialty,
+        specialtyDraft: hasSpecialtyOverride ? "" : state.specialtyDraft,
         filters:
           overrides && "filters" in overrides
             ? overrides.filters ?? {}
