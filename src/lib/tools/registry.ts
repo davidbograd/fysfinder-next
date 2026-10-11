@@ -1,5 +1,5 @@
 // Single source of truth for the Fysfinder tools (værktøjer).
-// Updated: 2026-10-09 - Keep højde-, hvilestofskifte- and muskelmasseberegner unreleased.
+// Updated: 2026-10-11 - Release højde-, hvilestofskifte- and muskelmasseberegner with final images and categories.
 // Previously duplicated between src/app/vaerktoejer/page.tsx and RelatedToolsSection.
 
 export const TOOL_SLUGS = [
@@ -136,9 +136,9 @@ export const tools: Tool[] = [
     description:
       "Beregn dit barns forventede sluthøjde ud fra forældrenes højde med midtforældre-metoden.",
     href: "/vaerktoejer/hoejdeberegner",
-    imageUrl: "/images/vaerktoejer/hoejdeberegner-placeholder.png",
-    imageAlt: "Højdeberegner illustration",
-    type: "Kost & ernæring værktøjer",
+    imageUrl: "/images/vaerktoejer/hoejdeberegner-forventet-voksenhoejde-barn.jpg",
+    imageAlt: "Forældre og barn ved en højdemåler på væggen – beregn barnets forventede voksenhøjde ud fra forældrenes højde",
+    type: "Sundhed & velvære værktøjer",
   },
   {
     slug: "hvilestofskifte-beregner",
@@ -147,8 +147,8 @@ export const tools: Tool[] = [
     description:
       "Udregn dit hvilestofskifte – det antal kalorier din krop bruger i hvile, før du lægger aktivitet oveni.",
     href: "/vaerktoejer/hvilestofskifte-beregner",
-    imageUrl: "/images/vaerktoejer/hvilestofskifte-beregner-placeholder.png",
-    imageAlt: "Hvilestofskifte beregner illustration",
+    imageUrl: "/images/vaerktoejer/hvilestofskifte-beregner-kvinde-hviler-sofa.jpg",
+    imageAlt: "Kvinde der hviler på sofaen – hvilestofskiftet er den energi, kroppen forbrænder i hvile",
     type: "Kost & ernæring værktøjer",
   },
   {
@@ -158,9 +158,9 @@ export const tools: Tool[] = [
     description:
       "Estimer din muskelmasse – enten med målebånd eller ud fra højde, vægt, alder og køn.",
     href: "/vaerktoejer/muskelmasse-beregner",
-    imageUrl: "/images/vaerktoejer/muskelmasse-beregner-placeholder.png",
-    imageAlt: "Muskelmasse beregner illustration",
-    type: "Kost & ernæring værktøjer",
+    imageUrl: "/images/vaerktoejer/muskelmasse-beregner-styrketraening-biceps-curl.jpg",
+    imageAlt: "Mand laver biceps curl med håndvægt i fitnesscenter – beregn din muskelmasse",
+    type: "Træning & bevægelse værktøjer",
   },
   {
     slug: "proteinberegner",
@@ -177,11 +177,7 @@ export const tools: Tool[] = [
 
 // Built but not launched yet: hidden from listings and the sitemap, and the
 // pages 404 in production. Remove a slug from here to launch the tool.
-export const UNRELEASED_TOOL_SLUGS: readonly ToolSlug[] = [
-  "hoejdeberegner",
-  "hvilestofskifte-beregner",
-  "muskelmasse-beregner",
-];
+export const UNRELEASED_TOOL_SLUGS: readonly ToolSlug[] = [];
 
 export function isToolReleased(slug: ToolSlug): boolean {
   return !UNRELEASED_TOOL_SLUGS.includes(slug);

@@ -57,13 +57,51 @@ describe("tool routes", () => {
     expect(releasedTools.map((tool) => tool.slug)).toContain("proteinberegner");
   });
 
-  it("lists BMI and fedtprocent under Sundhed & velvære as the second section", () => {
+  it("lists the højde-, hvilestofskifte- and muskelmasseberegner and includes them in the sitemap", () => {
+    const sitemap = fs.readFileSync(
+      path.join(process.cwd(), "public/sitemap-vaerktoejer.xml"),
+      "utf8"
+    );
+
+    for (const slug of [
+      "hoejdeberegner",
+      "hvilestofskifte-beregner",
+      "muskelmasse-beregner",
+    ] as const) {
+      expect(isToolReleased(slug)).toBe(true);
+      expect(releasedTools.map((tool) => tool.slug)).toContain(slug);
+      expect(sitemap).toContain(`/vaerktoejer/${slug}<`);
+    }
+  });
+
+  it("lists BMI, fedtprocent and højde under Sundhed & velvære as the second section", () => {
     expect(TOOL_CATEGORY_ORDER[1]).toBe("Sundhed & velvære værktøjer");
     expect(
       groupToolsByCategory()["Sundhed & velvære værktøjer"].map(
         (tool) => tool.slug
       )
-    ).toEqual(["bmi-beregner", "fedtprocent-beregner"]);
+    ).toEqual(["bmi-beregner", "fedtprocent-beregner", "hoejdeberegner"]);
+  });
+
+  it("lists the muskelmasseberegner under Træning & bevægelse", () => {
+    expect(
+      groupToolsByCategory()["Træning & bevægelse værktøjer"].map(
+        (tool) => tool.slug
+      )
+    ).toContain("muskelmasse-beregner");
+    expect(
+      groupToolsByCategory()["Kost & ernæring værktøjer"].map(
+        (tool) => tool.slug
+      )
+    ).not.toContain("muskelmasse-beregner");
+  });
+
+  it("uses an existing image file for every tool", () => {
+    for (const tool of tools) {
+      expect(
+        fs.existsSync(path.join(process.cwd(), "public", tool.imageUrl))
+      ).toBe(true);
+    }
   });
 
   it("permanently redirects the legacy scan URLs to their new paths", async () => {

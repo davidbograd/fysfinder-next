@@ -22,6 +22,16 @@
     <priority>0.70</priority>
   </url>
   <url>
+    <loc>https://www.fysfinder.dk/vaerktoejer/hoejdeberegner</loc>
+    <lastmod>2026-10-11T08:01:10.255Z</lastmod>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.fysfinder.dk/vaerktoejer/hvilestofskifte-beregner</loc>
+    <lastmod>2026-10-11T08:01:10.255Z</lastmod>
+    <priority>0.70</priority>
+  </url>
+  <url>
     <loc>https://www.fysfinder.dk/vaerktoejer/kalorieberegner</loc>
     <lastmod>2026-10-11T08:01:10.255Z</lastmod>
     <priority>0.70</priority>
@@ -33,6 +43,11 @@
   </url>
   <url>
     <loc>https://www.fysfinder.dk/vaerktoejer/mr-scanning</loc>
+    <lastmod>2026-10-11T08:01:10.255Z</lastmod>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.fysfinder.dk/vaerktoejer/muskelmasse-beregner</loc>
     <lastmod>2026-10-11T08:01:10.255Z</lastmod>
     <priority>0.70</priority>
   </url>

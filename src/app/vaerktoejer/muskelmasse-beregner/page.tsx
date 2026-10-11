@@ -1,16 +1,16 @@
-// Updated: 2026-09-29 - Use the page image as the Open Graph image, same as the older calculators.
+// Updated: 2026-10-11 - Final SEO title, H1 and page image.
 import { Metadata } from "next";
 import { ToolPageLayout } from "@/components/features/tools/ToolPageLayout";
 import { MuscleMassCalculator } from "./components/MuscleMassCalculator";
 
 export const revalidate = 86400; // 24 hours ISR (must be a literal for Next.js segment config)
 
-const title = "Muskelmasse beregner → Beregn din muskelmasse i kg ✅";
+const title = "Muskelmasse beregner | Beregn din muskelmasse i kg →";
 const description =
   "Beregn din muskelmasse med Fysfinders gratis beregner. Brug målebånd for det mest præcise estimat – eller bare højde, vægt, alder og køn.";
 const image = {
-  url: "/images/vaerktoejer/muskelmasse-beregner-placeholder.png",
-  alt: "Muskelmasse beregner illustration",
+  url: "/images/vaerktoejer/muskelmasse-beregner-styrketraening-biceps-curl.jpg",
+  alt: "Mand laver biceps curl med håndvægt i fitnesscenter – beregn din muskelmasse",
 };
 
 export const metadata: Metadata = {
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     title,
     description,
-    images: [{ url: image.url, width: 1200, height: 630, alt: image.alt }],
+    images: [{ url: image.url, width: 2752, height: 1536, alt: image.alt }],
     type: "website",
   },
 };
@@ -28,7 +28,7 @@ export default function MuskelmasseBeregnerPage() {
   return (
     <ToolPageLayout
       slug="muskelmasse-beregner"
-      heading="Muskelmasse beregner – beregn din muskelmasse"
+      heading="Muskelmasse beregner: Beregn din muskelmasse"
       structuredDataDescription="Estimer din muskelmasse ud fra målebånd eller højde, vægt, alder og køn"
       image={{ src: image.url, alt: image.alt }}
       intro={

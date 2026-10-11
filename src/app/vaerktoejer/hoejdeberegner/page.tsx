@@ -1,16 +1,16 @@
-// Updated: 2026-09-29 - Use the page image as the Open Graph image, same as the older calculators.
+// Updated: 2026-10-11 - Final SEO title, H1 and page image.
 import { Metadata } from "next";
 import { ToolPageLayout } from "@/components/features/tools/ToolPageLayout";
 import { AdultHeightCalculator } from "./components/AdultHeightCalculator";
 
 export const revalidate = 86400; // 24 hours ISR (must be a literal for Next.js segment config)
 
-const title = "Højdeberegner → Beregn sluthøjde ud fra forældrenes højde ✅";
+const title = "Højdeberegner | Hvor høj bliver mit barn? →";
 const description =
   "Beregn dit barns forventede sluthøjde ud fra mors og fars højde. Fysfinders gratis højdeberegner viser både det forventede tal og det interval, de fleste børn ender i.";
 const image = {
-  url: "/images/vaerktoejer/hoejdeberegner-placeholder.png",
-  alt: "Højdeberegner illustration",
+  url: "/images/vaerktoejer/hoejdeberegner-forventet-voksenhoejde-barn.jpg",
+  alt: "Forældre og barn ved en højdemåler på væggen – beregn barnets forventede voksenhøjde ud fra forældrenes højde",
 };
 
 export const metadata: Metadata = {
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     title,
     description,
-    images: [{ url: image.url, width: 1200, height: 630, alt: image.alt }],
+    images: [{ url: image.url, width: 2752, height: 1536, alt: image.alt }],
     type: "website",
   },
 };
@@ -28,7 +28,7 @@ export default function HoejdeberegnerPage() {
   return (
     <ToolPageLayout
       slug="hoejdeberegner"
-      heading="Højdeberegner – beregn sluthøjde ud fra forældrenes højde"
+      heading="Højdeberegner: Hvor høj bliver mit barn?"
       structuredDataDescription="Beregn et barns forventede sluthøjde ud fra forældrenes højde"
       image={{ src: image.url, alt: image.alt }}
       intro={

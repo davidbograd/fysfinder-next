@@ -1,16 +1,16 @@
-// Updated: 2026-09-29 - Use the page image as the Open Graph image, same as the older calculators.
+// Updated: 2026-10-11 - Final SEO title, H1 and page image.
 import { Metadata } from "next";
 import { ToolPageLayout } from "@/components/features/tools/ToolPageLayout";
 import { RestingMetabolicRateCalculator } from "./components/RestingMetabolicRateCalculator";
 
 export const revalidate = 86400; // 24 hours ISR (must be a literal for Next.js segment config)
 
-const title = "Hvilestofskifte beregner → Udregn dit hvile-stofskifte ✅";
+const title = "Hvilestofskifte beregner | Beregn dit hvilestofskifte →";
 const description =
   "Udregn dit hvilestofskifte med Fysfinders gratis beregner. Se hvor mange kalorier din krop bruger i hvile – beregnet med Mifflin-St Jeor-ligningen.";
 const image = {
-  url: "/images/vaerktoejer/hvilestofskifte-beregner-placeholder.png",
-  alt: "Hvilestofskifte beregner illustration",
+  url: "/images/vaerktoejer/hvilestofskifte-beregner-kvinde-hviler-sofa.jpg",
+  alt: "Kvinde der hviler på sofaen – hvilestofskiftet er den energi, kroppen forbrænder i hvile",
 };
 
 export const metadata: Metadata = {
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     title,
     description,
-    images: [{ url: image.url, width: 1200, height: 630, alt: image.alt }],
+    images: [{ url: image.url, width: 2752, height: 1536, alt: image.alt }],
     type: "website",
   },
 };
@@ -28,7 +28,7 @@ export default function HvilestofskifteBeregnerPage() {
   return (
     <ToolPageLayout
       slug="hvilestofskifte-beregner"
-      heading="Hvilestofskifte beregner – udregn dit hvile-stofskifte"
+      heading="Hvilestofskifte beregner: Beregn dit hvilestofskifte"
       structuredDataDescription="Udregn dit hvilestofskifte – antallet af kalorier kroppen bruger i hvile"
       image={{ src: image.url, alt: image.alt }}
       intro={
