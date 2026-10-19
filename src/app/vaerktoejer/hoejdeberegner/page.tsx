@@ -5,7 +5,7 @@ import { AdultHeightCalculator } from "./components/AdultHeightCalculator";
 
 export const revalidate = 86400; // 24 hours ISR (must be a literal for Next.js segment config)
 
-const title = "Højdeberegner | Hvor høj bliver mit barn? →";
+const title = "Højdeberegner | Hvor høj bliver mit barn? Beregn her →";
 const description =
   "Beregn dit barns forventede sluthøjde ud fra mors og fars højde. Fysfinders gratis højdeberegner viser både det forventede tal og det interval, de fleste børn ender i.";
 const image = {
@@ -28,7 +28,7 @@ export default function HoejdeberegnerPage() {
   return (
     <ToolPageLayout
       slug="hoejdeberegner"
-      heading="Højdeberegner: Hvor høj bliver mit barn?"
+      heading="Højdeberegner: Beregn hvor høj dit barn bliver som voksen"
       structuredDataDescription="Beregn et barns forventede sluthøjde ud fra forældrenes højde"
       image={{ src: image.url, alt: image.alt }}
       intro={

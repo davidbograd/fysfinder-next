@@ -5,7 +5,7 @@ import { RestingMetabolicRateCalculator } from "./components/RestingMetabolicRat
 
 export const revalidate = 86400; // 24 hours ISR (must be a literal for Next.js segment config)
 
-const title = "Hvilestofskifte beregner | Beregn dit hvilestofskifte →";
+const title = "Hvilestofskifte beregner | Beregn dit hvilestofskifte (BMR) →";
 const description =
   "Udregn dit hvilestofskifte med Fysfinders gratis beregner. Se hvor mange kalorier din krop bruger i hvile – beregnet med Mifflin-St Jeor-ligningen.";
 const image = {
@@ -28,7 +28,7 @@ export default function HvilestofskifteBeregnerPage() {
   return (
     <ToolPageLayout
       slug="hvilestofskifte-beregner"
-      heading="Hvilestofskifte beregner: Beregn dit hvilestofskifte"
+      heading="Hvilestofskifte beregner: Beregn nemt hvor mange kalorier du forbrænder i hvile"
       structuredDataDescription="Udregn dit hvilestofskifte – antallet af kalorier kroppen bruger i hvile"
       image={{ src: image.url, alt: image.alt }}
       intro={

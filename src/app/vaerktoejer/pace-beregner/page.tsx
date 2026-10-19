@@ -18,11 +18,11 @@ import { resolvePublishedToolRating } from "@/lib/tools/tool-ratings";
 export const revalidate = 86400; // 24 hours ISR (must be a literal for Next.js segment config)
 
 export const metadata: Metadata = {
-  title: "Pace beregner → Beregn din løbehastighed i min/km ✅",
+  title: "Pace beregner | Beregn pace (min/km) og hastighed (km/t) →",
   description:
     "Med Fysfinder&apos;s online pace beregner kan du nemt beregne din løbehastighed i min/km. Uanset om du træner til 5 km, halvmarathon eller et helt marathon.",
   openGraph: {
-    title: "Pace beregner → Beregn din løbehastighed i min/km ✅",
+    title: "Pace beregner | Beregn pace (min/km) og hastighed (km/t) →",
     description:
       "Med Fysfinder&apos;s online pace beregner kan du nemt beregne din løbehastighed i min/km. Uanset om du træner til 5 km, halvmarathon eller et helt marathon.",
     images: [
@@ -88,7 +88,7 @@ export default async function PaceBeregnerPage() {
             <Breadcrumbs items={breadcrumbItems} />
             <div className="space-y-4">
               <h1 className="text-2xl sm:text-3xl font-bold">
-                Pace beregner – Beregn nemt din løbehastighed (min/km)
+                Pace beregner – Beregn nemt din pace (min/km) og løbehastighed (km/t)
               </h1>
               <p className="text-gray-600 text-sm sm:text-base">
                 Med Fysfinder&apos;s pace beregner kan du nemt beregne din løbehastighed i

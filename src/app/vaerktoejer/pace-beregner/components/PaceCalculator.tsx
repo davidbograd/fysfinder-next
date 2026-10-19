@@ -258,7 +258,7 @@ export function PaceCalculator({ rating }: PaceCalculatorProps) {
           id="mode1-title"
           className="text-lg md:text-xl font-semibold text-gray-900"
         >
-          Beregn pace ud fra distance og tid
+          Beregn pace og hastighed (km/t) ud fra distance og tid
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Distance */}
@@ -380,7 +380,7 @@ export function PaceCalculator({ rating }: PaceCalculatorProps) {
           id="mode2-title"
           className="text-lg md:text-xl font-semibold text-gray-900"
         >
-          Beregn sluttid ud fra pace
+          Beregn hastighed (km/t) og sluttid ud fra pace
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Pace */}
@@ -482,7 +482,7 @@ export function PaceCalculator({ rating }: PaceCalculatorProps) {
           id="table-title"
           className="text-lg md:text-xl font-semibold text-gray-900"
         >
-          Tempo beregner: Sluttider for populære distancer
+          Løbetempo beregner - Sluttider for populære distancer
         </h3>
 
         {/* Uafhængig pace-input for tabellen */}

@@ -5,7 +5,7 @@ import { MuscleMassCalculator } from "./components/MuscleMassCalculator";
 
 export const revalidate = 86400; // 24 hours ISR (must be a literal for Next.js segment config)
 
-const title = "Muskelmasse beregner | Beregn din muskelmasse i kg →";
+const title = "Muskelmasse beregner | Beregn din muskelmasse i kg og % →";
 const description =
   "Beregn din muskelmasse med Fysfinders gratis beregner. Brug målebånd for det mest præcise estimat – eller bare højde, vægt, alder og køn.";
 const image = {
@@ -28,7 +28,7 @@ export default function MuskelmasseBeregnerPage() {
   return (
     <ToolPageLayout
       slug="muskelmasse-beregner"
-      heading="Muskelmasse beregner: Beregn din muskelmasse"
+      heading="Muskelmasse beregner: Beregn hvor meget muskelmasse du har i kroppen"
       structuredDataDescription="Estimer din muskelmasse ud fra målebånd eller højde, vægt, alder og køn"
       image={{ src: image.url, alt: image.alt }}
       intro={
