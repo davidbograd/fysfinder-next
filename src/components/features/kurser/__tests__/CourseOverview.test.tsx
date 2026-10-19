@@ -1,4 +1,4 @@
-// Updated: 2026-10-10 - Adds coverage for the clinic upsell card after the fifth course.
+// Updated: 2026-10-19 - Month headings hold only the month; the count is the toggle's description.
 import { act, fireEvent, screen, within } from "@testing-library/react";
 import { renderWithProviders } from "@/test/test-utils";
 import { CourseOverview } from "../CourseOverview";
@@ -139,7 +139,12 @@ describe("CourseOverview", () => {
   it("groups courses by month with counts, anchors, duration and status", () => {
     renderOverview();
 
-    expect(monthHeading("November 2026")).toHaveTextContent("1 kursus");
+    expect(monthHeading("November 2026")).toHaveTextContent(/^November 2026$/);
+    expect(
+      within(monthHeading("November 2026")).getByRole("button", {
+        description: "1 kursus",
+      }),
+    ).toBeInTheDocument();
     expect(monthHeading("Januar 2027")).toBeInTheDocument();
     expect(courseRow("Smerte 1")).toHaveAttribute("id", "ffk-001");
     expect(
@@ -392,7 +397,7 @@ describe("CourseOverview", () => {
     ]);
     const toggle = within(monthHeading("Afholdte kurser")).getByRole("button");
 
-    expect(monthHeading("Afholdte kurser")).toHaveTextContent("1 kursus");
+    expect(toggle).toHaveAccessibleDescription("1 kursus");
     expect(toggle).toHaveAttribute("aria-expanded", "false");
     expect(visibleCourseTitles()).not.toContain("Afholdt skulderkursus");
 

@@ -1,4 +1,4 @@
-// Updated: 2026-10-10 - Page-specific Open Graph and Twitter title/description for sharing.
+// Updated: 2026-10-19 - Evergreen meta title; H1 carries the 2026-2027 period; breadcrumbs start at For klinikker.
 import { Metadata } from "next";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { CourseOverview } from "@/components/features/kurser/CourseOverview";
@@ -17,7 +17,11 @@ export const revalidate = 86400; // 24 hours ISR so past courses drop off daily 
 
 const PAGE_PATH = "/for-klinikker/kurser";
 const PAGE_URL = `https://www.fysfinder.dk${PAGE_PATH}`;
-const PAGE_TITLE = "Kurser for fysioterapeuter 2026–2027";
+const META_TITLE =
+  "Find kurser, arrangementer & uddannelser for fysioterapeuter →";
+const PAGE_HEADING =
+  "Kurser, uddannelse og arrangementer for fysioterapeuter (2026-2027)";
+const COLLECTION_NAME = "Kurser for fysioterapeuter 2026–2027";
 const PAGE_DESCRIPTION =
   "Overblik over kommende kurser, efteruddannelse og faglige arrangementer for fysioterapeuter i Danmark – samlet ét sted og sorteret efter dato.";
 
@@ -26,7 +30,7 @@ const OG_DESCRIPTION =
   "Find dit næste kursus, efteruddannelse eller faglige arrangement. Alle kommende kurser fra danske udbydere. Filtrer på lokation, dato, emne og udbyder.";
 
 export const metadata: Metadata = {
-  title: `${PAGE_TITLE} | Fysfinder`,
+  title: META_TITLE,
   description: PAGE_DESCRIPTION,
   alternates: { canonical: PAGE_PATH },
   openGraph: {
@@ -54,7 +58,6 @@ export const metadata: Metadata = {
 };
 
 const breadcrumbItems = [
-  { text: "Forside", link: "/" },
   { text: "For klinikker", link: "/for-klinikker" },
   { text: "Kurser" },
 ];
@@ -82,7 +85,7 @@ export default function CoursesPage() {
     {
       "@context": "https://schema.org",
       "@type": "CollectionPage",
-      name: PAGE_TITLE,
+      name: COLLECTION_NAME,
       description: PAGE_DESCRIPTION,
       url: PAGE_URL,
       mainEntity: {
@@ -112,7 +115,7 @@ export default function CoursesPage() {
 
       <header className="mb-6">
         <h1 className="text-3xl font-bold text-[#1f2b28] md:text-4xl">
-          {PAGE_TITLE}
+          {PAGE_HEADING}
         </h1>
         <p className="mt-3 max-w-2xl text-lg text-gray-600">
           Kommende kurser, efteruddannelse og faglige arrangementer for

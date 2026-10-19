@@ -1,4 +1,4 @@
-// Updated: 2026-10-10 - Clinic sign-up upsell card inserted after the fifth visible course.
+// Updated: 2026-10-19 - Month h2 contains only the month label; the course count sits beside it.
 "use client";
 
 import {
@@ -306,20 +306,17 @@ function CourseGroupSection({
       // html already has scroll-pt-20 (80px) for the site header; this adds the condensed search bar.
       className={cn("scroll-mt-8 sm:scroll-mt-10", className)}
     >
-      <h2
-        id={`${id}-heading`}
-        className="sticky top-28 z-10 mb-3 border-b border-gray-200 bg-brand-cream/95 backdrop-blur-sm sm:top-[7.5rem]"
-      >
-        <button
-          type="button"
-          aria-expanded={!isCollapsed}
-          aria-controls={listId}
-          onClick={onToggle}
-          className="flex w-full items-center gap-3 pb-2 pt-3 text-left"
-        >
-          <span
+      {/* Count stays outside the h2 so the heading is only the month; the button's ::after keeps the whole row clickable. */}
+      <div className="sticky top-28 z-10 mb-3 flex items-center gap-3 border-b border-gray-200 bg-brand-cream/95 pb-2 pt-3 backdrop-blur-sm sm:top-[7.5rem]">
+        <h2 id={`${id}-heading`}>
+          <button
+            type="button"
+            aria-expanded={!isCollapsed}
+            aria-controls={listId}
+            aria-describedby={`${id}-count`}
+            onClick={onToggle}
             className={cn(
-              "flex items-center gap-2 text-xl font-semibold",
+              "flex items-center gap-2 text-left text-xl font-semibold after:absolute after:inset-0",
               isPast ? "text-gray-500" : "text-[#1f2b28]",
             )}
           >
@@ -331,12 +328,15 @@ function CourseGroupSection({
               )}
             />
             {label}
-          </span>
-          <span className="mt-0.5 text-sm font-normal tabular-nums text-gray-500">
-            {courses.length} {courses.length === 1 ? "kursus" : "kurser"}
-          </span>
-        </button>
-      </h2>
+          </button>
+        </h2>
+        <span
+          id={`${id}-count`}
+          className="mt-0.5 text-sm font-normal tabular-nums text-gray-500"
+        >
+          {courses.length} {courses.length === 1 ? "kursus" : "kurser"}
+        </span>
+      </div>
       <ul id={listId} hidden={isCollapsed} className="space-y-2">
         {courses.map((course) => (
           <Fragment key={course.id}>
