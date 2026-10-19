@@ -10,6 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { ToolBandTable } from "@/components/features/tools/ToolBandTable";
 import { ToolGenderSelector } from "@/components/features/tools/ToolGenderSelector";
 import {
   ToolMethodOption,
@@ -25,7 +26,6 @@ import {
 import type { Gender } from "@/lib/bodyFat";
 import {
   computeKondital,
-  KonditalBand,
   KonditalMethod,
   KonditalResult,
 } from "@/lib/calculators/kondital";
@@ -87,12 +87,6 @@ function describeProfile(
   }
 
   return parts.join(" · ");
-}
-
-function describeBand(band: KonditalBand): string {
-  if (band.min === null) return `Under ${formatDecimal(band.max ?? 0)}`;
-  if (band.max === null) return `${formatDecimal(band.min)} og derover`;
-  return `${formatDecimal(band.min)} – ${formatDecimal(band.max)}`;
 }
 
 interface KonditalCalculatorProps {
@@ -310,50 +304,13 @@ export function KonditalCalculator({ rating }: KonditalCalculatorProps) {
                   ]}
                 />
 
-                <div>
-                  <h3 className="mb-3 text-lg font-semibold text-gray-900">
-                    Sådan ligger dit kondital ({result.ageGroupLabel})
-                  </h3>
-                  <div className="overflow-x-auto">
-                    <table className="w-full border-collapse text-left">
-                      <thead>
-                        <tr className="border-b border-gray-200">
-                          <th className="bg-gray-50 p-3 text-sm font-medium text-gray-700">
-                            Niveau
-                          </th>
-                          <th className="bg-gray-50 p-3 text-sm font-medium text-gray-700">
-                            Kondital
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {result.bands.map((band) => {
-                          const isCurrent = band.label === result.category;
-                          return (
-                            <tr
-                              key={band.label}
-                              className={`border-b border-gray-100 last:border-0 ${
-                                isCurrent
-                                  ? "bg-brand-primary/10 font-semibold text-brand-primary"
-                                  : ""
-                              }`}
-                            >
-                              <td className="p-3 text-sm">{band.label}</td>
-                              <td className="p-3 text-sm tabular-nums">
-                                {describeBand(band)}
-                              </td>
-                            </tr>
-                          );
-                        })}
-                      </tbody>
-                    </table>
-                  </div>
-                  <p className="mt-3 text-xs text-gray-500 text-pretty">
-                    Tabellen viser almindeligt brugte referenceværdier for din
-                    aldersgruppe. Et kondital er et estimat – det siger noget om
-                    din kondition, men ikke alt om dit helbred.
-                  </p>
-                </div>
+                <ToolBandTable
+                  title={`Sådan ligger dit kondital (${result.ageGroupLabel})`}
+                  valueHeader="Kondital"
+                  bands={result.bands}
+                  currentLabel={result.category}
+                  footnote="Tabellen viser almindeligt brugte referenceværdier for din aldersgruppe. Et kondital er et estimat – det siger noget om din kondition, men ikke alt om dit helbred."
+                />
               </>
             ) : (
               <ToolErrorNote message={result.message} />

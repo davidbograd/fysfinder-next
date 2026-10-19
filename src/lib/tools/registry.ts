@@ -15,6 +15,11 @@ export const TOOL_SLUGS = [
   "hvilestofskifte-beregner",
   "muskelmasse-beregner",
   "proteinberegner",
+  "makroberegner",
+  "bodyage-beregner",
+  "watt-pr-kg-beregner",
+  "terminsberegner",
+  "aegloesningsberegner",
 ] as const;
 
 export type ToolSlug = (typeof TOOL_SLUGS)[number];
@@ -23,6 +28,7 @@ export type ToolCategory =
   | "Kost & ernæring værktøjer"
   | "Sundhed & velvære værktøjer"
   | "Træning & bevægelse værktøjer"
+  | "Graviditet & fertilitet værktøjer"
   | "Forstå din MR og DEXA scanning";
 
 export interface Tool {
@@ -81,7 +87,7 @@ export const tools: Tool[] = [
     imageUrl: "/images/vaerktoejer/kalorieberegner.png",
     imageAlt: "Sunde fødevarer og målebånd der illustrerer kalorieopmåling",
     type: "Kost & ernæring værktøjer",
-    relatedTools: ["hvilestofskifte-beregner", "proteinberegner", "bmi-beregner"],
+    relatedTools: ["makroberegner", "hvilestofskifte-beregner", "proteinberegner", "bmi-beregner"],
   },
   {
     slug: "bmi-beregner",
@@ -117,7 +123,7 @@ export const tools: Tool[] = [
     imageUrl: "/images/vaerktoejer/pace-beregner.png",
     imageAlt: "Pace beregner illustration med løber og stopur",
     type: "Træning & bevægelse værktøjer",
-    relatedTools: ["kondital-beregner"],
+    relatedTools: ["kondital-beregner", "watt-pr-kg-beregner"],
   },
   {
     slug: "rm-beregner",
@@ -141,7 +147,7 @@ export const tools: Tool[] = [
     imageUrl: "/images/vaerktoejer/kondital-beregner.jpg",
     imageAlt: "Løber på en atletikbane i solnedgang",
     type: "Træning & bevægelse værktøjer",
-    relatedTools: ["pace-beregner"],
+    relatedTools: ["bodyage-beregner", "pace-beregner", "watt-pr-kg-beregner"],
   },
   {
     slug: "hoejdeberegner",
@@ -189,13 +195,79 @@ export const tools: Tool[] = [
     imageUrl: "/images/vaerktoejer/proteinberegner-proteinrig-mad.jpg",
     imageAlt: "Tallerken med proteinrig mad: kylling, laks, oksekød, æg, tofu, kikærter og quinoa",
     type: "Kost & ernæring værktøjer",
-    relatedTools: ["muskelmasse-beregner", "kalorieberegner", "rm-beregner"],
+    relatedTools: ["muskelmasse-beregner", "makroberegner", "kalorieberegner", "rm-beregner"],
+  },
+  {
+    slug: "makroberegner",
+    title: "Makroberegner",
+    feedbackName: "makroberegneren",
+    description:
+      "Fordel dine daglige kalorier på protein, kulhydrat og fedt – og se dine makroer i gram, både pr. dag og pr. måltid.",
+    href: "/vaerktoejer/makroberegner",
+    imageUrl: "/images/vaerktoejer/makroberegner-placeholder.png",
+    imageAlt: "Makroberegner – fordeling af protein, kulhydrat og fedt",
+    type: "Kost & ernæring værktøjer",
+    relatedTools: ["kalorieberegner", "proteinberegner", "hvilestofskifte-beregner"],
+  },
+  {
+    slug: "bodyage-beregner",
+    title: "Bodyage beregner",
+    feedbackName: "bodyage-beregneren",
+    description:
+      "Find din biologiske alder ud fra din kondition – beregnet med NTNU's fitnessalder-model ud fra taljemål, hvilepuls og træningsvaner.",
+    href: "/vaerktoejer/bodyage-beregner",
+    imageUrl: "/images/vaerktoejer/bodyage-beregner-placeholder.png",
+    imageAlt: "Bodyage beregner – find din biologiske alder",
+    type: "Sundhed & velvære værktøjer",
+    relatedTools: ["kondital-beregner", "fedtprocent-beregner", "bmi-beregner"],
+  },
+  {
+    slug: "watt-pr-kg-beregner",
+    title: "Watt pr. kg beregner",
+    feedbackName: "watt pr. kg-beregneren",
+    description:
+      "Beregn din watt pr. kg ud fra din FTP og vægt, og se hvilket niveau du ligger på som cykelrytter.",
+    href: "/vaerktoejer/watt-pr-kg-beregner",
+    imageUrl: "/images/vaerktoejer/watt-pr-kg-beregner-placeholder.png",
+    imageAlt: "Watt pr. kg beregner til cykelryttere",
+    type: "Træning & bevægelse værktøjer",
+    relatedTools: ["kondital-beregner", "pace-beregner"],
+  },
+  {
+    slug: "terminsberegner",
+    title: "Terminsberegner",
+    feedbackName: "terminsberegneren",
+    description:
+      "Beregn din terminsdato ud fra sidste menstruation eller undfangelse, og se hvilken graviditetsuge du er i.",
+    href: "/vaerktoejer/terminsberegner",
+    imageUrl: "/images/vaerktoejer/terminsberegner-placeholder.png",
+    imageAlt: "Terminsberegner – beregn din terminsdato",
+    type: "Graviditet & fertilitet værktøjer",
+    relatedTools: ["aegloesningsberegner", "proteinberegner"],
+  },
+  {
+    slug: "aegloesningsberegner",
+    title: "Ægløsningsberegner",
+    feedbackName: "ægløsningsberegneren",
+    description:
+      "Find din ægløsning og dine mest frugtbare dage ud fra din cyklus – og se hvornår du nemmest kan blive gravid.",
+    href: "/vaerktoejer/aegloesningsberegner",
+    imageUrl: "/images/vaerktoejer/aegloesningsberegner-placeholder.png",
+    imageAlt: "Ægløsningsberegner – find dine frugtbare dage",
+    type: "Graviditet & fertilitet værktøjer",
+    relatedTools: ["terminsberegner"],
   },
 ];
 
 // Built but not launched yet: hidden from listings and the sitemap, and the
 // pages 404 in production. Remove a slug from here to launch the tool.
-export const UNRELEASED_TOOL_SLUGS: readonly ToolSlug[] = [];
+export const UNRELEASED_TOOL_SLUGS: readonly ToolSlug[] = [
+  "makroberegner",
+  "bodyage-beregner",
+  "watt-pr-kg-beregner",
+  "terminsberegner",
+  "aegloesningsberegner",
+];
 
 export function isToolReleased(slug: ToolSlug): boolean {
   return !UNRELEASED_TOOL_SLUGS.includes(slug);
@@ -209,6 +281,7 @@ export const TOOL_CATEGORY_ORDER: ToolCategory[] = [
   "Kost & ernæring værktøjer",
   "Sundhed & velvære værktøjer",
   "Træning & bevægelse værktøjer",
+  "Graviditet & fertilitet værktøjer",
   "Forstå din MR og DEXA scanning",
 ];
 

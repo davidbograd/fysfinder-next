@@ -83,6 +83,29 @@ describe("tool routes", () => {
     ).toEqual(["bmi-beregner", "fedtprocent-beregner", "hoejdeberegner"]);
   });
 
+  it("keeps the makro-, bodyage-, watt-, termins- and ægløsningsberegner hidden until launch", () => {
+    for (const slug of [
+      "makroberegner",
+      "bodyage-beregner",
+      "watt-pr-kg-beregner",
+      "terminsberegner",
+      "aegloesningsberegner",
+    ] as const) {
+      expect(isToolReleased(slug)).toBe(false);
+    }
+  });
+
+  it("puts the pregnancy tools in their own category before the scans", () => {
+    expect(
+      tools
+        .filter((tool) => tool.type === "Graviditet & fertilitet værktøjer")
+        .map((tool) => tool.slug)
+    ).toEqual(["terminsberegner", "aegloesningsberegner"]);
+    expect(TOOL_CATEGORY_ORDER.indexOf("Graviditet & fertilitet værktøjer")).toBe(
+      TOOL_CATEGORY_ORDER.indexOf("Forstå din MR og DEXA scanning") - 1
+    );
+  });
+
   it("lists the muskelmasseberegner under Træning & bevægelse", () => {
     expect(
       groupToolsByCategory()["Træning & bevægelse værktøjer"].map(

@@ -102,6 +102,13 @@ export default function ToolsPage() {
                     nybegynder eller erfaren.
                   </p>
                 )}
+                {type === "Graviditet & fertilitet værktøjer" && (
+                  <p className="text-gray-600 mb-6">
+                    Prøver du at blive gravid, eller er du allerede gravid? Find
+                    dine frugtbare dage, beregn din terminsdato og følg med i,
+                    hvilken graviditetsuge du er i.
+                  </p>
+                )}
                 <div className="grid md:grid-cols-2 gap-8">
                   {toolsInSection.map((tool) => (
                     <ToolCard key={tool.href + tool.title} tool={tool} />
