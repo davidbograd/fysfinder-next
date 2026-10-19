@@ -35,7 +35,15 @@ export interface DueDateInput {
   today: string;
 }
 
+export type DueDateMilestoneKind =
+  | "scan"
+  | "trimester"
+  | "fullTerm"
+  | "dueDate"
+  | "termEnd";
+
 export interface DueDateMilestone {
+  kind: DueDateMilestoneKind;
   label: string;
   /** Graviditetsalder som tekst, fx "11+2 – 13+6". */
   weeksLabel: string;
@@ -43,6 +51,8 @@ export interface DueDateMilestone {
   /** null for milepæle på én bestemt dag. */
   end: Date | null;
   isPassed: boolean;
+  /** I dag ligger inden for milepælen (eller er dagen for den). */
+  isCurrent: boolean;
 }
 
 export interface DueDateError {
@@ -53,6 +63,9 @@ export interface DueDateError {
 export interface DueDateSuccess {
   ok: true;
   dueDate: Date;
+  /** Uge 0+0: første dag i sidste menstruation, justeret for cyklus. */
+  gestationStart: Date;
+  elapsedDays: number;
   /** Hele uger og dage i jordemoderens notation, fx 12+3. */
   gestationalWeeks: number;
   gestationalDays: number;
@@ -82,22 +95,33 @@ function weeksToDays(weeks: number, days = 0): number {
   return weeks * 7 + days;
 }
 
-const MILESTONES: { label: string; startDays: number; endDays?: number }[] = [
+const MILESTONES: {
+  kind: DueDateMilestoneKind;
+  label: string;
+  startDays: number;
+  endDays?: number;
+}[] = [
   {
+    kind: "scan",
     label: "Nakkefoldsscanning (1. trimester-scanning)",
     startDays: weeksToDays(11, 2),
     endDays: weeksToDays(13, 6),
   },
-  { label: "2. trimester begynder", startDays: weeksToDays(14) },
+  { kind: "trimester", label: "2. trimester begynder", startDays: weeksToDays(14) },
   {
+    kind: "scan",
     label: "Misdannelsesscanning (2. trimester-scanning)",
     startDays: weeksToDays(18),
     endDays: weeksToDays(20, 6),
   },
-  { label: "3. trimester begynder", startDays: weeksToDays(28) },
-  { label: "Du er fuldbåren – terminsperioden begynder", startDays: weeksToDays(37) },
-  { label: "Termin", startDays: weeksToDays(40) },
-  { label: "Terminsperioden slutter", startDays: weeksToDays(41, 6) },
+  { kind: "trimester", label: "3. trimester begynder", startDays: weeksToDays(28) },
+  {
+    kind: "fullTerm",
+    label: "Du er fuldbåren – terminsperioden begynder",
+    startDays: weeksToDays(37),
+  },
+  { kind: "dueDate", label: "Termin", startDays: weeksToDays(40) },
+  { kind: "termEnd", label: "Terminsperioden slutter", startDays: weeksToDays(41, 6) },
 ];
 
 function trimesterFor(gestationalDays: number): 1 | 2 | 3 {
@@ -161,6 +185,7 @@ export function computeDueDate(input: DueDateInput): DueDateResult {
   }
 
   const milestones = MILESTONES.map((milestone) => ({
+    kind: milestone.kind,
     label: milestone.label,
     weeksLabel:
       milestone.endDays === undefined
@@ -172,11 +197,16 @@ export function computeDueDate(input: DueDateInput): DueDateResult {
         ? null
         : addDays(gestationStart, milestone.endDays),
     isPassed: elapsedDays > (milestone.endDays ?? milestone.startDays),
+    isCurrent:
+      elapsedDays >= milestone.startDays &&
+      elapsedDays <= (milestone.endDays ?? milestone.startDays),
   }));
 
   return {
     ok: true,
     dueDate,
+    gestationStart,
+    elapsedDays,
     gestationalWeeks: Math.floor(elapsedDays / 7),
     gestationalDays: elapsedDays % 7,
     currentWeek: Math.floor(elapsedDays / 7) + 1,

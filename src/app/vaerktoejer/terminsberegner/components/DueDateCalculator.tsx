@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { Baby, Check } from "lucide-react";
+import { Baby } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,7 +10,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
 import { ToolDateField } from "@/components/features/tools/ToolDateField";
 import {
   ToolMethodOption,
@@ -25,7 +24,6 @@ import {
 } from "@/components/features/tools/ToolResult";
 import {
   formatDanishDate,
-  formatDanishDateRange,
   formatDanishWeekday,
   todayIsoDate,
 } from "@/lib/calculators/dates";
@@ -45,7 +43,7 @@ import {
 } from "@/lib/calculators/required-fields";
 import { notifyToolCompleted } from "@/lib/tools/tool-completion";
 import { PublishedToolRating } from "@/lib/tools/tool-ratings";
-import { cn } from "@/lib/utils";
+import { PregnancyTimeline, TrimesterProgress } from "./PregnancyTimeline";
 
 type FieldKey = "date";
 
@@ -224,11 +222,7 @@ export function DueDateCalculator({ rating }: DueDateCalculatorProps) {
                   ]}
                 />
 
-                <Progress
-                  value={result.progressPct}
-                  aria-label="Hvor langt du er i graviditeten"
-                  className="h-2.5 [&>div]:bg-brand-primary"
-                />
+                <TrimesterProgress result={result} />
 
                 {result.cycleAdjustmentDays !== 0 && (
                   <div className="rounded-xl bg-brand-beige p-4">
@@ -248,35 +242,8 @@ export function DueDateCalculator({ rating }: DueDateCalculatorProps) {
                   <h3 className="mb-3 text-lg font-semibold text-gray-900">
                     Vigtige datoer i din graviditet
                   </h3>
-                  <ol className="space-y-2">
-                    {result.milestones.map((milestone) => (
-                      <li
-                        key={milestone.label}
-                        className={cn(
-                          "flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 rounded-xl border p-3",
-                          milestone.isPassed
-                            ? "border-gray-100 text-gray-500"
-                            : "border-gray-200"
-                        )}
-                      >
-                        <span className="flex items-center gap-2 text-sm font-medium">
-                          {milestone.isPassed && (
-                            <Check className="h-4 w-4 text-brand-primary" aria-label="Passeret" />
-                          )}
-                          {milestone.label}
-                        </span>
-                        <span className="text-sm tabular-nums text-gray-600">
-                          {milestone.end
-                            ? formatDanishDateRange(milestone.start, milestone.end)
-                            : formatDanishDate(milestone.start)}{" "}
-                          <span className="text-gray-400">
-                            (uge {milestone.weeksLabel})
-                          </span>
-                        </span>
-                      </li>
-                    ))}
-                  </ol>
-                  <p className="mt-3 text-xs text-gray-500 text-pretty">
+                  <PregnancyTimeline result={result} />
+                  <p className="mt-4 text-xs text-gray-500 text-pretty">
                     Scanningerne er omtrentlige tidspunkter – du får den
                     præcise tid af din region. Ved nakkefoldsscanningen
                     fastsættes din endelige termin ud fra barnets størrelse.

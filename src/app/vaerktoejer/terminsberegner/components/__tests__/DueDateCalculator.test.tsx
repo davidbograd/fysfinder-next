@@ -35,7 +35,28 @@ describe("DueDateCalculator", () => {
     ).toBeInTheDocument();
     expect(screen.getByText("12+3")).toBeInTheDocument();
     expect(screen.getByText("Du er i 13. uge")).toBeInTheDocument();
-    expect(screen.getByText(/Nakkefoldsscanning/)).toBeInTheDocument();
+    const nuchalScan = screen.getByText(/Nakkefoldsscanning/).closest("li")!;
+    expect(within(nuchalScan).getByText("Nu")).toBeInTheDocument();
+  });
+
+  it("marks today on the timeline between the milestones", async () => {
+    const user = userEvent.setup();
+    render(<DueDateCalculator />);
+
+    fireEvent.change(
+      screen.getByLabelText("Første dag i din sidste menstruation"),
+      { target: { value: daysAgo(150) } }
+    );
+    await user.click(screen.getByRole("button", { name: "Beregn termin" }));
+
+    const todayRow = screen.getByText("I dag · uge 21+3").closest("li")!;
+    expect(todayRow).toHaveAttribute("aria-current", "date");
+    expect(todayRow.previousElementSibling).toHaveTextContent(/Misdannelsesscanning.*\(passeret\)/);
+    expect(todayRow.nextElementSibling).toHaveTextContent("3. trimester");
+    expect(screen.getByRole("progressbar")).toHaveAttribute(
+      "aria-valuetext",
+      "Uge 21+3, 2. trimester"
+    );
   });
 
   it("adjusts for a long cycle and says so", async () => {

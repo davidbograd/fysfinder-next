@@ -60,6 +60,9 @@ describe("computeDueDate", () => {
     expect(nuchal.weeksLabel).toBe("11+2 – 13+6");
     expect(formatDanishDate(nuchal.start)).toBe("19. juni 2026");
     expect(nuchal.isPassed).toBe(false);
+    expect(nuchal.isCurrent).toBe(true);
+    expect(result.milestones[2]).toMatchObject({ kind: "scan", isCurrent: false });
+    expect(formatDanishDate(result.gestationStart)).toBe("1. april 2026");
     expect(result.milestones.find((m) => m.label === "Termin")?.weeksLabel).toBe("40+0");
   });
 
