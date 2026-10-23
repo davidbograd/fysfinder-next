@@ -164,13 +164,13 @@ export function ToolFeedback({
       style={{ transitionTimingFunction: EASE }}
     >
       {step === "done" ? (
-        <p className="text-center text-sm font-medium text-brand-primary text-pretty">
+        <p className="text-center text-sm font-medium text-gray-900 text-pretty">
           Tak for din vurdering — det hjælper os med at gøre værktøjet bedre.
         </p>
       ) : (
         <div className="flex flex-col gap-4">
           <div className="flex items-start justify-between gap-3">
-            <p className="text-base font-semibold text-brand-primary text-balance">
+            <p className="text-base font-semibold text-gray-900 text-balance">
               {step === "ask" && `Hjalp ${getToolBySlug(toolSlug).feedbackName} dig?`}
               {step === "stars" && "Dejligt! Hvor mange stjerner vil du give?"}
               {step === "improve" && "Hvad kunne være bedre?"}
@@ -179,7 +179,7 @@ export function ToolFeedback({
               type="button"
               onClick={handleDismiss}
               aria-label="Luk"
-              className="-m-2 shrink-0 rounded-full p-2 text-brand-primary/50 transition-colors hover:text-brand-primary motion-reduce:transition-none"
+              className="-m-2 shrink-0 rounded-full p-2 text-gray-400 transition-colors hover:text-gray-900 motion-reduce:transition-none"
             >
               <X className="h-4 w-4" />
             </button>
@@ -232,7 +232,7 @@ export function ToolFeedback({
                       "h-7 w-7 transition-colors motion-reduce:transition-none",
                       value <= hoveredStar
                         ? "fill-amber-400 text-amber-400"
-                        : "fill-transparent text-brand-primary/35"
+                        : "fill-transparent text-gray-300"
                     )}
                   />
                 </button>
@@ -249,7 +249,7 @@ export function ToolFeedback({
                 rows={3}
                 placeholder="Fortæl os kort, hvad der manglede eller var forvirrende."
                 aria-label="Hvad kunne være bedre?"
-                className="resize-none rounded-xl border-brand-primary/15 bg-white"
+                className="resize-none rounded-xl bg-white"
               />
               <div className="flex justify-end">
                 <Button

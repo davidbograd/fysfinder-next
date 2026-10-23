@@ -74,24 +74,32 @@ describe("tool routes", () => {
     }
   });
 
-  it("lists BMI, fedtprocent and højde under Sundhed & velvære as the second section", () => {
+  it("lists BMI, fedtprocent, højde and kropsalder under Sundhed & velvære as the second section", () => {
     expect(TOOL_CATEGORY_ORDER[1]).toBe("Sundhed & velvære værktøjer");
     expect(
       groupToolsByCategory()["Sundhed & velvære værktøjer"].map(
         (tool) => tool.slug
       )
-    ).toEqual(["bmi-beregner", "fedtprocent-beregner", "hoejdeberegner"]);
+    ).toEqual(["bmi-beregner", "fedtprocent-beregner", "hoejdeberegner", "bodyage-beregner"]);
   });
 
-  it("keeps the makro-, bodyage-, watt-, termins- and ægløsningsberegner hidden until launch", () => {
+  it("lists the makro-, bodyage-, watt-, FTP-, termins- and ægløsningsberegner and includes them in the sitemap", () => {
+    const sitemap = fs.readFileSync(
+      path.join(process.cwd(), "public/sitemap-vaerktoejer.xml"),
+      "utf8"
+    );
+
     for (const slug of [
       "makroberegner",
       "bodyage-beregner",
       "watt-pr-kg-beregner",
+      "ftp-beregner",
       "terminsberegner",
       "aegloesningsberegner",
     ] as const) {
-      expect(isToolReleased(slug)).toBe(false);
+      expect(isToolReleased(slug)).toBe(true);
+      expect(releasedTools.map((tool) => tool.slug)).toContain(slug);
+      expect(sitemap).toContain(`/vaerktoejer/${slug}<`);
     }
   });
 

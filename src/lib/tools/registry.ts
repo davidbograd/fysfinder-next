@@ -18,6 +18,7 @@ export const TOOL_SLUGS = [
   "makroberegner",
   "bodyage-beregner",
   "watt-pr-kg-beregner",
+  "ftp-beregner",
   "terminsberegner",
   "aegloesningsberegner",
 ] as const;
@@ -204,8 +205,8 @@ export const tools: Tool[] = [
     description:
       "Fordel dine daglige kalorier på protein, kulhydrat og fedt – og se dine makroer i gram, både pr. dag og pr. måltid.",
     href: "/vaerktoejer/makroberegner",
-    imageUrl: "/images/vaerktoejer/makroberegner-placeholder.png",
-    imageAlt: "Makroberegner – fordeling af protein, kulhydrat og fedt",
+    imageUrl: "/images/vaerktoejer/makroberegner-tallerken-laks-groentsager.jpg",
+    imageAlt: "Tallerken med laks, grønne bønner og cherrytomater – fordel dine makroer på protein, kulhydrat og fedt",
     type: "Kost & ernæring værktøjer",
     relatedTools: ["kalorieberegner", "proteinberegner", "hvilestofskifte-beregner"],
   },
@@ -216,8 +217,8 @@ export const tools: Tool[] = [
     description:
       "Find din biologiske alder ud fra din kondition – beregnet med NTNU's fitnessalder-model ud fra taljemål, hvilepuls og træningsvaner.",
     href: "/vaerktoejer/bodyage-beregner",
-    imageUrl: "/images/vaerktoejer/bodyage-beregner-placeholder.png",
-    imageAlt: "Bodyage beregner – find din biologiske alder",
+    imageUrl: "/images/vaerktoejer/bodyage-beregner-person-paa-sportsbane.jpg",
+    imageAlt: "Person ligger på en sportsbane mellem tallene 20, 30 og 40 – beregn din krops alder",
     type: "Sundhed & velvære værktøjer",
     relatedTools: ["kondital-beregner", "fedtprocent-beregner", "bmi-beregner"],
   },
@@ -228,10 +229,22 @@ export const tools: Tool[] = [
     description:
       "Beregn din watt pr. kg ud fra din FTP og vægt, og se hvilket niveau du ligger på som cykelrytter.",
     href: "/vaerktoejer/watt-pr-kg-beregner",
-    imageUrl: "/images/vaerktoejer/watt-pr-kg-beregner-placeholder.png",
-    imageAlt: "Watt pr. kg beregner til cykelryttere",
+    imageUrl: "/images/vaerktoejer/watt-pr-kg-beregner-cykelryttere-ved-kysten.jpg",
+    imageAlt: "To cykelryttere på landevejscykler ved kysten – beregn din watt pr. kg",
     type: "Træning & bevægelse værktøjer",
-    relatedTools: ["kondital-beregner", "pace-beregner"],
+    relatedTools: ["ftp-beregner", "kondital-beregner", "pace-beregner"],
+  },
+  {
+    slug: "ftp-beregner",
+    title: "FTP beregner",
+    feedbackName: "FTP-beregneren",
+    description:
+      "Beregn din FTP ud fra en 20-minutterstest eller en ramptest, og få dine syv wattzoner til cykeltræning.",
+    href: "/vaerktoejer/ftp-beregner",
+    imageUrl: "/images/vaerktoejer/ftp-beregner-landevejsrytter-i-fart.jpg",
+    imageAlt: "Landevejsrytter i fart på cyklen – beregn din FTP og dine wattzoner",
+    type: "Træning & bevægelse værktøjer",
+    relatedTools: ["watt-pr-kg-beregner", "kondital-beregner", "pace-beregner"],
   },
   {
     slug: "terminsberegner",
@@ -240,8 +253,8 @@ export const tools: Tool[] = [
     description:
       "Beregn din terminsdato ud fra sidste menstruation eller undfangelse, og se hvilken graviditetsuge du er i.",
     href: "/vaerktoejer/terminsberegner",
-    imageUrl: "/images/vaerktoejer/terminsberegner-placeholder.png",
-    imageAlt: "Terminsberegner – beregn din terminsdato",
+    imageUrl: "/images/vaerktoejer/terminsberegner-mor-holder-nyfoedt-baby.jpg",
+    imageAlt: "Mor holder sin nyfødte baby – beregn din terminsdato",
     type: "Graviditet & fertilitet værktøjer",
     relatedTools: ["aegloesningsberegner", "proteinberegner"],
   },
@@ -252,8 +265,8 @@ export const tools: Tool[] = [
     description:
       "Find din ægløsning og dine mest frugtbare dage ud fra din cyklus – og se hvornår du nemmest kan blive gravid.",
     href: "/vaerktoejer/aegloesningsberegner",
-    imageUrl: "/images/vaerktoejer/aegloesningsberegner-placeholder.png",
-    imageAlt: "Ægløsningsberegner – find dine frugtbare dage",
+    imageUrl: "/images/vaerktoejer/aegloesningsberegner-illustration-livmoder.jpg",
+    imageAlt: "Illustration af livmoder og æggestokke med sædceller – beregn din ægløsning",
     type: "Graviditet & fertilitet værktøjer",
     relatedTools: ["terminsberegner"],
   },
@@ -261,13 +274,7 @@ export const tools: Tool[] = [
 
 // Built but not launched yet: hidden from listings and the sitemap, and the
 // pages 404 in production. Remove a slug from here to launch the tool.
-export const UNRELEASED_TOOL_SLUGS: readonly ToolSlug[] = [
-  "makroberegner",
-  "bodyage-beregner",
-  "watt-pr-kg-beregner",
-  "terminsberegner",
-  "aegloesningsberegner",
-];
+export const UNRELEASED_TOOL_SLUGS: readonly ToolSlug[] = [];
 
 export function isToolReleased(slug: ToolSlug): boolean {
   return !UNRELEASED_TOOL_SLUGS.includes(slug);

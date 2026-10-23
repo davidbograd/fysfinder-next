@@ -4,12 +4,12 @@ import { DueDateCalculator } from "./components/DueDateCalculator";
 
 export const revalidate = 86400; // 24 hours ISR (must be a literal for Next.js segment config)
 
-const title = "Terminsberegner | Tjek hvornår du har termin →";
+const title = "Terminsberegner | Beregn din terminsdato og graviditetsuge →";
 const description =
   "Beregn din terminsdato med Fysfinders gratis terminsberegner. Se hvornår du har termin, hvilken graviditetsuge du er i, og hvornår dine scanninger ligger.";
 const image = {
-  url: "/images/vaerktoejer/terminsberegner-placeholder.png",
-  alt: "Terminsberegner – beregn din terminsdato",
+  url: "/images/vaerktoejer/terminsberegner-mor-holder-nyfoedt-baby.jpg",
+  alt: "Mor holder sin nyfødte baby – beregn din terminsdato",
 };
 
 export const metadata: Metadata = {
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     title,
     description,
-    images: [{ url: image.url, width: 1200, height: 630, alt: image.alt }],
+    images: [{ url: image.url, width: 1400, height: 933, alt: image.alt }],
     type: "website",
   },
 };
@@ -27,7 +27,7 @@ export default function TerminsberegnerPage() {
   return (
     <ToolPageLayout
       slug="terminsberegner"
-      heading="Terminsberegner: Tjek hvornår du har termin"
+      heading="Terminsberegner: Beregn din termin og se hvor langt du er henne"
       structuredDataDescription="Beregn din terminsdato og se hvilken graviditetsuge du er i"
       image={{ src: image.url, alt: image.alt }}
       intro={

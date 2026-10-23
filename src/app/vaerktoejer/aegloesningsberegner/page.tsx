@@ -4,12 +4,12 @@ import { OvulationCalculator } from "./components/OvulationCalculator";
 
 export const revalidate = 86400; // 24 hours ISR (must be a literal for Next.js segment config)
 
-const title = "Ægløsningsberegner | Tjek hvornår du nemmest bliver gravid →";
+const title = "Ægløsningsberegner | Beregn nemt din næste ægløsning →";
 const description =
   "Find din ægløsning og dine frugtbare dage med Fysfinders gratis ægløsningsberegner. Se hvornår du nemmest kan blive gravid – for de næste tre cyklusser.";
 const image = {
-  url: "/images/vaerktoejer/aegloesningsberegner-placeholder.png",
-  alt: "Ægløsningsberegner – find dine frugtbare dage",
+  url: "/images/vaerktoejer/aegloesningsberegner-illustration-livmoder.jpg",
+  alt: "Illustration af livmoder og æggestokke med sædceller – beregn din ægløsning",
 };
 
 export const metadata: Metadata = {
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     title,
     description,
-    images: [{ url: image.url, width: 1200, height: 630, alt: image.alt }],
+    images: [{ url: image.url, width: 1400, height: 791, alt: image.alt }],
     type: "website",
   },
 };
@@ -27,7 +27,7 @@ export default function AegloesningsberegnerPage() {
   return (
     <ToolPageLayout
       slug="aegloesningsberegner"
-      heading="Ægløsningsberegner: Tjek hvornår du nemmest kan blive gravid"
+      heading="Ægløsningsberegner: Beregn din ægløsning og se hvornår du er mest frugtbar"
       structuredDataDescription="Find din ægløsning og dine mest frugtbare dage ud fra din cyklus"
       image={{ src: image.url, alt: image.alt }}
       intro={

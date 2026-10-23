@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calculator } from "lucide-react";
 import {
+  BODY_FAT_BANDS,
   computeBodyFatFromStrings,
   type Gender,
   type BodyFatResult,
@@ -20,6 +21,12 @@ import {
   findMissingFields,
   hasFieldErrors,
 } from "@/lib/calculators/required-fields";
+import { useScrollToResult } from "@/components/features/tools/useScrollToResult";
+import { ToolShareImageButton } from "@/components/features/tools/ToolShareImageButton";
+import { buildBodyFatShareUrl } from "@/lib/og/tool-share";
+import { ToolBandTable } from "@/components/features/tools/ToolBandTable";
+import { ToolPrimaryResult, ToolStatGrid } from "@/components/features/tools/ToolResult";
+import { formatDecimal } from "@/lib/calculators/format";
 
 type FieldKey = "gender" | "height" | "neck" | "waist" | "hip" | "weightKg";
 
@@ -59,6 +66,8 @@ interface BodyFatCalculatorProps {
 export const BodyFatCalculator = ({ rating }: BodyFatCalculatorProps) => {
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [result, setResult] = useState<BodyFatResult | null>(null);
+  const [resultGender, setResultGender] = useState<Gender>("male");
+  const resultRef = useScrollToResult(result);
   const [hasCalculated, setHasCalculated] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors<FieldKey>>({});
 
@@ -110,6 +119,7 @@ export const BodyFatCalculator = ({ rating }: BodyFatCalculatorProps) => {
     });
 
     setResult(calculationResult);
+    setResultGender(formData.gender);
     setHasCalculated(true);
 
     if (calculationResult.ok) {
@@ -122,23 +132,6 @@ export const BodyFatCalculator = ({ rating }: BodyFatCalculatorProps) => {
     setResult(null);
     setHasCalculated(false);
     setFieldErrors({});
-  };
-
-  const getCategoryColor = (category: string) => {
-    switch (category) {
-      case "Essentielt fedt":
-        return "text-blue-600";
-      case "Atletisk":
-        return "text-green-600";
-      case "Fitness":
-        return "text-emerald-600";
-      case "Gennemsnit":
-        return "text-yellow-600";
-      case "Høj (overvægt)":
-        return "text-red-600";
-      default:
-        return "text-gray-600";
-    }
   };
 
   const getCategoryDescription = (category: string) => {
@@ -276,61 +269,42 @@ export const BodyFatCalculator = ({ rating }: BodyFatCalculatorProps) => {
 
       {/* Results */}
       {result && (
-        <Card>
+        <Card ref={resultRef} className="scroll-mt-24">
           <CardHeader>
             <CardTitle>Resultat</CardTitle>
           </CardHeader>
           <CardContent>
             {result.ok ? (
               <div className="space-y-4">
-                <div className="text-center p-6 bg-gray-50 rounded-lg">
-                  <div className="text-sm text-gray-600 mb-2">
-                    Fedtprocent
-                  </div>
-                  <div className="text-3xl font-bold text-gray-900 mb-3">
-                    {result.bfp}%
-                  </div>
-                  <div className={`text-lg font-semibold mb-1 ${getCategoryColor(result.category)}`}>
-                    {result.category}
-                  </div>
-                  <div className="text-sm text-gray-600">
-                    {getCategoryDescription(result.category)}
-                  </div>
-                </div>
+                <ToolPrimaryResult
+                  label="Din fedtprocent"
+                  value={`${formatDecimal(result.bfp)} %`}
+                  badge={result.category}
+                  caption={getCategoryDescription(result.category)}
+                />
 
-                {(result.fatMassKg !== null || result.leanMassKg !== null) && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
-                    {result.fatMassKg !== null && (
-                      <div className="text-center p-4 bg-gray-50 rounded-lg">
-                        <div className="text-xl font-semibold text-gray-900">
-                          {result.fatMassKg} kg
-                        </div>
-                        <div className="text-sm text-gray-600">Fedtmasse</div>
-                      </div>
-                    )}
-                    {result.leanMassKg !== null && (
-                      <div className="text-center p-4 bg-gray-50 rounded-lg">
-                        <div className="text-xl font-semibold text-gray-900">
-                          {result.leanMassKg} kg
-                        </div>
-                        <div className="text-sm text-gray-600">Mager masse</div>
-                      </div>
-                    )}
-                  </div>
+                {result.fatMassKg !== null && result.leanMassKg !== null && (
+                  <ToolStatGrid
+                    items={[
+                      { label: "Fedtmasse", value: `${formatDecimal(result.fatMassKg)} kg` },
+                      { label: "Mager masse", value: `${formatDecimal(result.leanMassKg)} kg` },
+                    ]}
+                  />
                 )}
 
-                <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-                  <h4 className="font-semibold mb-2">
-                    Om fedtprocent kategorier
-                  </h4>
-                  <div className="text-sm space-y-1">
-                    <p><strong>Essentielt fedt:</strong> Minimum fedt nødvendigt for overlevelse</p>
-                    <p><strong>Atletisk:</strong> Typisk for konkurrenceidrætsudøvere</p>
-                    <p><strong>Fitness:</strong> Godt fitnessniveau</p>
-                    <p><strong>Gennemsnit:</strong> Normalt sundt niveau</p>
-                    <p><strong>Høj (overvægt):</strong> Kan indikere sundhedsrisici</p>
-                  </div>
-                </div>
+                <ToolBandTable
+                  title={`Kategorier for ${resultGender === "male" ? "mænd" : "kvinder"}`}
+                  valueHeader="Fedtprocent"
+                  bands={BODY_FAT_BANDS[resultGender]}
+                  currentLabel={result.category}
+                />
+
+                <ToolShareImageButton
+                  toolSlug="fedtprocent-beregner"
+                  href={buildBodyFatShareUrl(result.bfp, resultGender)}
+                  fileName={`fedtprocent-${result.bfp}.png`}
+                  label="Gem din fedtprocent - Download"
+                />
 
               </div>
             ) : (

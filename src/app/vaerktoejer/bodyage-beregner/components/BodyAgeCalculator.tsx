@@ -42,6 +42,9 @@ import {
 } from "@/lib/calculators/required-fields";
 import { notifyToolCompleted } from "@/lib/tools/tool-completion";
 import { PublishedToolRating } from "@/lib/tools/tool-ratings";
+import { useScrollToResult } from "@/components/features/tools/useScrollToResult";
+import { ToolShareImageButton } from "@/components/features/tools/ToolShareImageButton";
+import { buildBodyAgeShareUrl } from "@/lib/og/tool-share";
 
 type FieldKey = "gender" | "age" | "waistCm" | "restingPulse";
 
@@ -99,6 +102,7 @@ export function BodyAgeCalculator({ rating }: BodyAgeCalculatorProps) {
   const [intensity, setIntensity] = useState<ExerciseIntensity>("moderat");
   const [duration, setDuration] = useState<ExerciseDuration>("lang");
   const [result, setResult] = useState<FitnessAgeResult | null>(null);
+  const resultRef = useScrollToResult(result);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors<FieldKey>>({});
 
   const clearError = (field: FieldKey) =>
@@ -248,7 +252,7 @@ export function BodyAgeCalculator({ rating }: BodyAgeCalculatorProps) {
       </Card>
 
       {result && (
-        <Card className="rounded-2xl">
+        <Card ref={resultRef} className="rounded-2xl scroll-mt-24">
           <CardHeader>
             <CardTitle className="text-xl sm:text-2xl">Dit resultat</CardTitle>
             {result.ok && (
@@ -294,10 +298,10 @@ export function BodyAgeCalculator({ rating }: BodyAgeCalculatorProps) {
                           className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 rounded-xl border border-gray-200 p-3"
                         >
                           <span className="flex items-center gap-2 text-sm font-medium text-gray-900">
-                            <TrendingDown className="h-4 w-4 shrink-0 text-brand-primary" aria-hidden />
+                            <TrendingDown className="h-4 w-4 shrink-0 text-gray-500" aria-hidden />
                             {lever.label}
                           </span>
-                          <span className="text-sm tabular-nums text-brand-primary">
+                          <span className="text-sm tabular-nums text-gray-900">
                             <strong>−{lever.yearsYounger} år</strong>{" "}
                             <span className="text-gray-500">
                               (kropsalder {lever.bodyAge})
@@ -322,6 +326,13 @@ export function BodyAgeCalculator({ rating }: BodyAgeCalculatorProps) {
                   </Link>
                   .
                 </p>
+
+                <ToolShareImageButton
+                  toolSlug="bodyage-beregner"
+                  href={buildBodyAgeShareUrl(result)}
+                  fileName={`kropsalder-${result.bodyAge}-aar.png`}
+                  label="Del din kropsalder - Download"
+                />
               </>
             ) : (
               <ToolErrorNote message={result.message} />

@@ -36,6 +36,9 @@ import {
 } from "@/lib/calculators/required-fields";
 import { notifyToolCompleted } from "@/lib/tools/tool-completion";
 import { PublishedToolRating } from "@/lib/tools/tool-ratings";
+import { useScrollToResult } from "@/components/features/tools/useScrollToResult";
+import { ToolShareImageButton } from "@/components/features/tools/ToolShareImageButton";
+import { buildMuscleMassShareUrl } from "@/lib/og/tool-share";
 
 type FieldKey = "gender" | keyof typeof initialForm;
 
@@ -87,6 +90,7 @@ export function MuscleMassCalculator({ rating }: MuscleMassCalculatorProps) {
   const [gender, setGender] = useState<Gender | "">("");
   const [form, setForm] = useState(initialForm);
   const [result, setResult] = useState<MuscleMassResult | null>(null);
+  const resultRef = useScrollToResult(result);
 
   const [fieldErrors, setFieldErrors] = useState<FieldErrors<FieldKey>>({});
 
@@ -250,7 +254,7 @@ export function MuscleMassCalculator({ rating }: MuscleMassCalculatorProps) {
       </Card>
 
       {result && (
-        <Card className="rounded-2xl">
+        <Card ref={resultRef} className="rounded-2xl scroll-mt-24">
           <CardHeader>
             <CardTitle className="text-xl sm:text-2xl">Dit resultat</CardTitle>
             {result.ok && (
@@ -320,6 +324,13 @@ export function MuscleMassCalculator({ rating }: MuscleMassCalculatorProps) {
                     præcis måling, er en DEXA-scanning vejen frem.
                   </p>
                 </div>
+
+                <ToolShareImageButton
+                  toolSlug="muskelmasse-beregner"
+                  href={buildMuscleMassShareUrl(result)}
+                  fileName={`muskelmasse-${result.muscleMassKg}-kg.png`}
+                  label="Gem din muskelmasse - Download"
+                />
               </>
             ) : (
               <ToolErrorNote message={result.message} />

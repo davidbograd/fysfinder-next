@@ -85,13 +85,14 @@ export interface MacroSuccess {
   /** Kun når kalorierne er beregnet. */
   maintenanceKcal: number | null;
   macros: Record<Macro, MacroAmount>;
-  proteinPerKg: number;
+  /** Kun når vægten er brugt til at beregne proteinet. */
+  proteinPerKg: number | null;
   /** Makroer uden for NNR's interval, så resultatet kan forklare hvorfor. */
   outsideNnr: Macro[];
   profile: {
     calorieSource: CalorieSource;
-    weightKg: number;
-    age: number;
+    weightKg: number | null;
+    age: number | null;
     goal: ProteinGoal;
     activity: ProteinActivity;
     split: MacroSplit;
@@ -106,6 +107,17 @@ function amount(macro: Macro, kcal: number, totalKcal: number): MacroAmount {
     kcal: Math.round(kcal),
     pct: Math.round((kcal / totalKcal) * 100),
   };
+}
+
+/**
+ * Vægt, alder, aktivitet og mål bruges kun til kalorieestimatet og til protein
+ * i g/kg. Med eget kalorietal og NNR-fordelingen er alt i procent af energien.
+ */
+export function needsBodyProfile(
+  calorieSource: CalorieSource,
+  split: MacroSplit
+): boolean {
+  return calorieSource === "estimate" || split !== "nnr";
 }
 
 function resolveCalories(
@@ -144,13 +156,18 @@ function resolveCalories(
 }
 
 export function computeMacros(input: MacroInput): MacroResult {
+  const usesBody = needsBodyProfile(input.calorieSource, input.split);
+
   const weightKg = parseDecimal(input.weightKg);
-  if (!Number.isFinite(weightKg) || weightKg < 30 || weightKg > 300) {
+  if (
+    usesBody &&
+    (!Number.isFinite(weightKg) || weightKg < 30 || weightKg > 300)
+  ) {
     return { ok: false, message: "Indtast en vægt mellem 30 og 300 kg." };
   }
 
   const age = parseDecimal(input.age);
-  if (!Number.isFinite(age) || age < 15 || age > 120) {
+  if (usesBody && (!Number.isFinite(age) || age < 15 || age > 120)) {
     return { ok: false, message: "Indtast en alder mellem 15 og 120 år." };
   }
 
@@ -211,12 +228,14 @@ export function computeMacros(input: MacroInput): MacroResult {
     kcalPerDay,
     maintenanceKcal,
     macros,
-    proteinPerKg: Math.round((macros.protein.grams / weightKg) * 10) / 10,
+    proteinPerKg: usesBody
+      ? Math.round((macros.protein.grams / weightKg) * 10) / 10
+      : null,
     outsideNnr,
     profile: {
       calorieSource: input.calorieSource,
-      weightKg,
-      age,
+      weightKg: usesBody ? weightKg : null,
+      age: usesBody ? age : null,
       goal: input.goal,
       activity: input.activity,
       split: input.split,

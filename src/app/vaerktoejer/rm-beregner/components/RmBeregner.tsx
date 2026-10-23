@@ -5,6 +5,8 @@ import { Weight } from "lucide-react";
 import { notifyToolCompleted } from "@/lib/tools/tool-completion";
 import { ToolRatingSummary } from "@/components/features/tools/ToolRatingSummary";
 import { PublishedToolRating } from "@/lib/tools/tool-ratings";
+import { ToolShareImageButton } from "@/components/features/tools/ToolShareImageButton";
+import { buildRmShareUrl } from "@/lib/og/tool-share";
 
 // Percentage table for 1–10 RM (approximate values)
 const PERCENT_TABLE: Record<number, number> = {
@@ -271,6 +273,17 @@ export function RmBeregner({ rating }: RmBeregnerProps) {
           person afhængigt af erfaring, teknik og dagsform. Løft altid med
           kontrol og tilpas vægten efter, hvordan kroppen føles.
         </p>
+
+        {hasResult && (
+          <div className="mt-6">
+            <ToolShareImageButton
+              toolSlug="rm-beregner"
+              href={buildRmShareUrl(oneRm)}
+              fileName={`1rm-${oneRm}-kg.png`}
+              label="Del din 1RM - Download"
+            />
+          </div>
+        )}
       </section>
     </div>
   );

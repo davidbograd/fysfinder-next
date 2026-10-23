@@ -1,3 +1,4 @@
+import { computeBodyFatFromStrings } from "@/lib/bodyFat";
 // Added: 2026-10-09 - The body-fat button stays enabled and names the missing fields.
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -19,6 +20,33 @@ describe("BodyFatCalculator", () => {
     expect(screen.getByText("Udfyld taljeomkreds")).toBeInTheDocument();
     expect(screen.getByText("Udfyld vægt")).toBeInTheDocument();
     expect(screen.queryByText("Resultat")).not.toBeInTheDocument();
+  });
+
+  it("shows the category table for the sex and offers the result as an image without the measurements", async () => {
+    const user = userEvent.setup();
+    render(<BodyFatCalculator />);
+
+    await user.click(screen.getByRole("button", { name: "Mand" }));
+    await user.type(screen.getByLabelText("Højde (cm)"), "180");
+    await user.type(screen.getByLabelText("Halsomkreds (cm)"), "38");
+    await user.type(screen.getByLabelText("Taljeomkreds (cm)"), "85");
+    await user.type(screen.getByLabelText("Vægt (kg)"), "80");
+    await user.click(screen.getByRole("button", { name: "Beregn fedtprocent" }));
+
+    expect(screen.getByRole("heading", { name: "Kategorier for mænd" })).toBeInTheDocument();
+    const expected = computeBodyFatFromStrings({
+      gender: "male",
+      unit: "cm",
+      height: "180",
+      neck: "38",
+      waist: "85",
+      weightKg: "80",
+    });
+    if (!expected.ok) throw new Error(expected.message);
+    expect(screen.getByRole("row", { name: new RegExp(expected.category) })).toHaveClass("bg-gray-100");
+    expect(
+      screen.getByRole("link", { name: "Gem din fedtprocent - Download" }).getAttribute("href")
+    ).toMatch(/^\/api\/og\/resultat\/fedtprocent\?fedt=[\d.]+&koen=male$/);
   });
 
   it("asks women for the hip measurement too", async () => {

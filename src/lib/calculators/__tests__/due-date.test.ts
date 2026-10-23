@@ -66,14 +66,27 @@ describe("computeDueDate", () => {
     expect(result.milestones.find((m) => m.label === "Termin")?.weeksLabel).toBe("40+0");
   });
 
-  it("refuses future dates, dates long ago and impossible cycles", () => {
+  it("calculates a due date for future and long-past dates", () => {
     const today = "2026-06-24";
+
+    const planned = computeDueDate({ method: "lastPeriod", date: "2026-07-01", today });
+    expect(planned).toMatchObject({ ok: true, status: "planned", elapsedDays: 0 });
+    if (!planned.ok) throw new Error(planned.message);
+    expect(planned.dueDate).toEqual(new Date(Date.UTC(2027, 3, 7)));
+    expect(planned.milestones.every((milestone) => !milestone.isPassed)).toBe(true);
+
+    const ended = computeDueDate({ method: "lastPeriod", date: "2025-06-01", today });
+    expect(ended).toMatchObject({ ok: true, status: "ended" });
+    if (!ended.ok) throw new Error(ended.message);
+    expect(ended.dueDate).toEqual(new Date(Date.UTC(2026, 2, 8)));
+
     expect(
-      computeDueDate({ method: "lastPeriod", date: "2026-07-01", today })
-    ).toMatchObject({ ok: false, message: expect.stringContaining("fremtiden") });
-    expect(
-      computeDueDate({ method: "lastPeriod", date: "2025-06-01", today })
-    ).toMatchObject({ ok: false, message: expect.stringContaining("44 uger") });
+      computeDueDate({ method: "lastPeriod", date: "2026-05-01", today })
+    ).toMatchObject({ ok: true, status: "ongoing" });
+  });
+
+  it("refuses impossible cycles", () => {
+    const today = "2026-06-24";
     expect(
       computeDueDate({ method: "lastPeriod", date: "2026-04-01", cycleLength: "60", today })
     ).toMatchObject({ ok: false, message: expect.stringContaining("cykluslængde") });

@@ -32,6 +32,9 @@ import {
 import { notifyToolCompleted } from "@/lib/tools/tool-completion";
 import { PublishedToolRating } from "@/lib/tools/tool-ratings";
 import { HeightComparison } from "./HeightComparison";
+import { useScrollToResult } from "@/components/features/tools/useScrollToResult";
+import { ToolShareImageButton } from "@/components/features/tools/ToolShareImageButton";
+import { buildAdultHeightShareUrl } from "@/lib/og/tool-share";
 
 type FieldKey = "sex" | "motherHeightCm" | "fatherHeightCm";
 
@@ -59,6 +62,7 @@ export function AdultHeightCalculator({ rating }: AdultHeightCalculatorProps) {
   const [motherHeightCm, setMotherHeightCm] = useState("");
   const [fatherHeightCm, setFatherHeightCm] = useState("");
   const [result, setResult] = useState<AdultHeightResult | null>(null);
+  const resultRef = useScrollToResult(result);
 
   const [fieldErrors, setFieldErrors] = useState<FieldErrors<FieldKey>>({});
 
@@ -161,7 +165,7 @@ export function AdultHeightCalculator({ rating }: AdultHeightCalculatorProps) {
       </Card>
 
       {result && (
-        <Card className="rounded-2xl">
+        <Card ref={resultRef} className="rounded-2xl scroll-mt-24">
           <CardHeader>
             <CardTitle className="text-xl sm:text-2xl">Dit resultat</CardTitle>
             {result.ok && (
@@ -220,6 +224,13 @@ export function AdultHeightCalculator({ rating }: AdultHeightCalculatorProps) {
                     inden for – og nogle gange uden for – intervallet.
                   </p>
                 </div>
+
+                <ToolShareImageButton
+                  toolSlug="hoejdeberegner"
+                  href={buildAdultHeightShareUrl(result)}
+                  fileName={`sluthoejde-${Math.round(result.predictedHeightCm)}-cm.png`}
+                  label="Del den forventede højde - Download"
+                />
               </>
             ) : (
               <ToolErrorNote message={result.message} />

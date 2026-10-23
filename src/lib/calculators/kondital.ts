@@ -128,11 +128,25 @@ function findAgeGroup(age: number): AgeGroup {
   );
 }
 
+/** Delelinks peger på en aldersgruppe frem for en præcis alder. */
+export function konditalAgeGroupIndex(age: number): number {
+  return AGE_GROUPS.indexOf(findAgeGroup(age));
+}
+
+export const KONDITAL_AGE_GROUP_COUNT = AGE_GROUPS.length;
+
 export function buildKonditalBands(
   gender: Gender,
   age: number
 ): { ageGroupLabel: string; bands: KonditalBand[] } {
-  const group = findAgeGroup(age);
+  return buildKonditalBandsForGroup(gender, konditalAgeGroupIndex(age));
+}
+
+export function buildKonditalBandsForGroup(
+  gender: Gender,
+  groupIndex: number
+): { ageGroupLabel: string; bands: KonditalBand[] } {
+  const group = AGE_GROUPS[groupIndex];
   const thresholds = group.thresholds[gender];
 
   const bands = KONDITAL_CATEGORIES.map((label, index) => ({

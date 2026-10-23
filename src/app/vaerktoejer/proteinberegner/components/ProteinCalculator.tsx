@@ -39,6 +39,9 @@ import {
 } from "@/lib/calculators/required-fields";
 import { notifyToolCompleted } from "@/lib/tools/tool-completion";
 import { PublishedToolRating } from "@/lib/tools/tool-ratings";
+import { useScrollToResult } from "@/components/features/tools/useScrollToResult";
+import { ToolShareImageButton } from "@/components/features/tools/ToolShareImageButton";
+import { buildProteinShareUrl } from "@/lib/og/tool-share";
 
 type FieldKey = "weightKg" | "age";
 
@@ -159,6 +162,7 @@ export function ProteinCalculator({ rating }: ProteinCalculatorProps) {
   const [pregnancy, setPregnancy] = useState<PregnancyStatus>("nej");
   const [lactation, setLactation] = useState<LactationStatus>("nej");
   const [result, setResult] = useState<ProteinResult | null>(null);
+  const resultRef = useScrollToResult(result);
 
   const [fieldErrors, setFieldErrors] = useState<FieldErrors<FieldKey>>({});
 
@@ -343,7 +347,7 @@ export function ProteinCalculator({ rating }: ProteinCalculatorProps) {
       </Card>
 
       {result && (
-        <Card className="rounded-2xl">
+        <Card ref={resultRef} className="rounded-2xl scroll-mt-24">
           <CardHeader>
             <CardTitle className="text-xl sm:text-2xl">Dit resultat</CardTitle>
             {result.ok && (
@@ -412,7 +416,7 @@ export function ProteinCalculator({ rating }: ProteinCalculatorProps) {
 
                 {result.isSeniorAdjusted && (
                   <div className="rounded-xl bg-brand-beige p-4">
-                    <p className="text-sm text-brand-primary text-pretty">
+                    <p className="text-sm text-gray-700 text-pretty">
                       <strong>Justeret for alder:</strong> fra 65 år skal der
                       mere protein til at sætte den samme muskelopbygning i
                       gang. Derfor er anbefalingen hævet i forhold til en yngre
@@ -424,7 +428,7 @@ export function ProteinCalculator({ rating }: ProteinCalculatorProps) {
                 {result.pregnancyExtraGrams + result.lactationExtraGrams >
                   0 && (
                   <div className="rounded-xl bg-brand-beige p-4">
-                    <p className="text-sm text-brand-primary text-pretty">
+                    <p className="text-sm text-gray-700 text-pretty">
                       <strong>Justeret for graviditet og amning:</strong>{" "}
                       Resultatet indeholder {describeExtraProtein(result)} om
                       dagen ud over dit almindelige behov, som anbefalet i de
@@ -480,6 +484,13 @@ export function ProteinCalculator({ rating }: ProteinCalculatorProps) {
                     målet ved at have protein med i hvert måltid.
                   </p>
                 </div>
+
+                <ToolShareImageButton
+                  toolSlug="proteinberegner"
+                  href={buildProteinShareUrl(result)}
+                  fileName={`proteinbehov-${result.gramsPerDayTarget}-g.png`}
+                  label="Gem dit proteinbehov - Download"
+                />
               </>
             ) : (
               <ToolErrorNote message={result.message} />

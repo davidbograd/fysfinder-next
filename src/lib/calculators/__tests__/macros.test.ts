@@ -30,6 +30,20 @@ describe("computeMacros", () => {
     });
   });
 
+  it("needs no weight or age for a known calorie target with the NNR split", () => {
+    const result = computeMacros({ ...base, split: "nnr", weightKg: "", age: "" });
+
+    expect(result).toMatchObject({
+      ok: true,
+      proteinPerKg: null,
+      profile: { weightKg: null, age: null },
+      macros: { protein: { grams: 94, pct: 15 } },
+    });
+    expect(
+      computeMacros({ ...base, split: "proteinfokus", weightKg: "", age: "" })
+    ).toMatchObject({ ok: false });
+  });
+
   it("follows NNR 2023's 15/33/52 split", () => {
     const result = computeMacros({ ...base, split: "nnr" });
 

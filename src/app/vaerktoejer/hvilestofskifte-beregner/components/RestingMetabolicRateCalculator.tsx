@@ -38,6 +38,9 @@ import {
 } from "@/lib/calculators/required-fields";
 import { notifyToolCompleted } from "@/lib/tools/tool-completion";
 import { PublishedToolRating } from "@/lib/tools/tool-ratings";
+import { useScrollToResult } from "@/components/features/tools/useScrollToResult";
+import { ToolShareImageButton } from "@/components/features/tools/ToolShareImageButton";
+import { buildRestingMetabolicRateShareUrl } from "@/lib/og/tool-share";
 
 type FieldKey = "gender" | keyof typeof initialForm;
 
@@ -67,6 +70,7 @@ export function RestingMetabolicRateCalculator({
   const [gender, setGender] = useState<Gender | "">("");
   const [form, setForm] = useState(initialForm);
   const [result, setResult] = useState<RestingMetabolicRateResult | null>(null);
+  const resultRef = useScrollToResult(result);
 
   const [fieldErrors, setFieldErrors] = useState<FieldErrors<FieldKey>>({});
 
@@ -171,7 +175,7 @@ export function RestingMetabolicRateCalculator({
       </Card>
 
       {result && (
-        <Card className="rounded-2xl">
+        <Card ref={resultRef} className="rounded-2xl scroll-mt-24">
           <CardHeader>
             <CardTitle className="text-xl sm:text-2xl">Dit resultat</CardTitle>
             {result.ok && (
@@ -229,6 +233,13 @@ export function RestingMetabolicRateCalculator({
                     .
                   </p>
                 </div>
+
+                <ToolShareImageButton
+                  toolSlug="hvilestofskifte-beregner"
+                  href={buildRestingMetabolicRateShareUrl(result)}
+                  fileName={`hvilestofskifte-${result.kcalPerDay}-kcal.png`}
+                  label="Gem dit hvilestofskifte - Download"
+                />
               </>
             ) : (
               <ToolErrorNote message={result.message} />

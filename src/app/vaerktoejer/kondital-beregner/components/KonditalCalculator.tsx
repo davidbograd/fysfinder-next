@@ -41,6 +41,9 @@ import {
 } from "@/lib/calculators/required-fields";
 import { notifyToolCompleted } from "@/lib/tools/tool-completion";
 import { PublishedToolRating } from "@/lib/tools/tool-ratings";
+import { useScrollToResult } from "@/components/features/tools/useScrollToResult";
+import { ToolShareImageButton } from "@/components/features/tools/ToolShareImageButton";
+import { buildKonditalShareUrl } from "@/lib/og/tool-share";
 
 type FieldKey = "gender" | keyof typeof initialForm;
 
@@ -98,6 +101,7 @@ export function KonditalCalculator({ rating }: KonditalCalculatorProps) {
   const [gender, setGender] = useState<Gender | "">("");
   const [form, setForm] = useState(initialForm);
   const [result, setResult] = useState<KonditalResult | null>(null);
+  const resultRef = useScrollToResult(result);
 
   const [fieldErrors, setFieldErrors] = useState<FieldErrors<FieldKey>>({});
 
@@ -262,7 +266,7 @@ export function KonditalCalculator({ rating }: KonditalCalculatorProps) {
       </Card>
 
       {result && (
-        <Card className="rounded-2xl">
+        <Card ref={resultRef} className="rounded-2xl scroll-mt-24">
           <CardHeader>
             <CardTitle className="text-xl sm:text-2xl">Dit resultat</CardTitle>
             {result.ok && (
@@ -310,6 +314,13 @@ export function KonditalCalculator({ rating }: KonditalCalculatorProps) {
                   bands={result.bands}
                   currentLabel={result.category}
                   footnote="Tabellen viser almindeligt brugte referenceværdier for din aldersgruppe. Et kondital er et estimat – det siger noget om din kondition, men ikke alt om dit helbred."
+                />
+
+                <ToolShareImageButton
+                  toolSlug="kondital-beregner"
+                  href={buildKonditalShareUrl(result)}
+                  fileName={`kondital-${result.kondital}.png`}
+                  label="Del dit kondital - Download"
                 />
               </>
             ) : (

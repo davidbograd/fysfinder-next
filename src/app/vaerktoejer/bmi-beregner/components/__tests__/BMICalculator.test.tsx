@@ -34,7 +34,11 @@ describe("BMICalculator", () => {
       jest.advanceTimersByTime(550);
     });
 
-    expect(screen.getByText("Dit BMI: 22.9")).toBeInTheDocument();
+    expect(screen.getByText("22,9")).toBeInTheDocument();
+    expect(screen.getByRole("row", { name: /Normal vægt/ })).toHaveClass("bg-gray-100");
+    expect(
+      screen.getByRole("link", { name: "Gem dit BMI - Download" }).getAttribute("href")
+    ).toBe("/api/og/resultat/bmi?bmi=22.9");
     jest.useRealTimers();
   });
 });

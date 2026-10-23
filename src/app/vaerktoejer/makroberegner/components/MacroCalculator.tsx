@@ -19,6 +19,7 @@ import {
 } from "@/components/features/tools/ToolMethodSelector";
 import { ToolNumberField } from "@/components/features/tools/ToolNumberField";
 import { ToolRatingSummary } from "@/components/features/tools/ToolRatingSummary";
+import { ToolShareImageButton } from "@/components/features/tools/ToolShareImageButton";
 import {
   ToolErrorNote,
   ToolPrimaryResult,
@@ -35,6 +36,7 @@ import {
   MacroResult,
   MacroSplit,
   MacroSuccess,
+  needsBodyProfile,
   NNR_RANGES,
 } from "@/lib/calculators/macros";
 import type { ProteinActivity, ProteinGoal } from "@/lib/calculators/protein";
@@ -49,9 +51,11 @@ import {
   hasFieldErrors,
   RequiredField,
 } from "@/lib/calculators/required-fields";
+import { buildMacroShareUrl } from "@/lib/og/macro-share";
 import { notifyToolCompleted } from "@/lib/tools/tool-completion";
 import { PublishedToolRating } from "@/lib/tools/tool-ratings";
 import { cn } from "@/lib/utils";
+import { useScrollToResult } from "@/components/features/tools/useScrollToResult";
 
 type FieldKey = "kcal" | "gender" | "heightCm" | "weightKg" | "age";
 
@@ -123,6 +127,9 @@ const MACRO_ORDER: Macro[] = ["protein", "carbs", "fat"];
 const MEAL_COUNTS = [2, 3, 4, 5, 6];
 
 function describeProfile(profile: MacroSuccess["profile"]): string {
+  if (profile.age === null || profile.weightKg === null) {
+    return SPLIT_SUMMARY[profile.split];
+  }
   return [
     `${formatCompact(profile.age, 0)} år`,
     `${formatCompact(profile.weightKg)} kg`,
@@ -164,6 +171,8 @@ export function MacroCalculator({ rating }: MacroCalculatorProps) {
   const [split, setSplit] = useState<MacroSplit>("proteinfokus");
   const [mealsPerDay, setMealsPerDay] = useState("3");
   const [result, setResult] = useState<MacroResult | null>(null);
+  const resultRef = useScrollToResult(result);
+  const usesBody = needsBodyProfile(calorieSource, split);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors<FieldKey>>({});
 
   const clearError = (field: FieldKey) =>
@@ -182,8 +191,12 @@ export function MacroCalculator({ rating }: MacroCalculatorProps) {
 
     const missing = findMissingFields<FieldKey>([
       ...calorieFields,
-      { key: "weightKg", label: "Vægt", value: weightKg },
-      { key: "age", label: "Alder", value: age },
+      ...(usesBody
+        ? [
+            { key: "weightKg" as const, label: "Vægt", value: weightKg },
+            { key: "age" as const, label: "Alder", value: age },
+          ]
+        : []),
     ]);
 
     if (hasFieldErrors(missing)) {
@@ -238,7 +251,7 @@ export function MacroCalculator({ rating }: MacroCalculatorProps) {
               }}
             />
 
-            {calorieSource === "known" ? (
+            {calorieSource === "known" && (
               <ToolNumberField
                 id="makro-kcal"
                 label="Kalorier om dagen"
@@ -266,87 +279,95 @@ export function MacroCalculator({ rating }: MacroCalculatorProps) {
                   clearError("kcal");
                 }}
               />
-            ) : (
-              <ToolGenderSelector
-                value={gender}
-                error={fieldErrors.gender}
-                onChange={(value) => {
-                  setGender(value);
-                  clearError("gender");
-                }}
-              />
             )}
 
-            <div className="grid gap-4 sm:grid-cols-2">
-              <ToolNumberField
-                id="makro-weight"
-                label="Vægt"
-                unit="kg"
-                placeholder="f.eks. 75"
-                value={weightKg}
-                error={fieldErrors.weightKg}
-                onChange={(value) => {
-                  setWeightKg(value);
-                  clearError("weightKg");
-                }}
-              />
-              <ToolNumberField
-                id="makro-age"
-                label="Alder"
-                unit="år"
-                placeholder="f.eks. 35"
-                allowDecimal={false}
-                value={age}
-                error={fieldErrors.age}
-                onChange={(value) => {
-                  setAge(value);
-                  clearError("age");
-                }}
-              />
-              {calorieSource === "estimate" && (
-                <ToolNumberField
-                  id="makro-height"
-                  label="Højde"
-                  unit="cm"
-                  placeholder="f.eks. 175"
-                  value={heightCm}
-                  error={fieldErrors.heightCm}
-                  onChange={(value) => {
-                    setHeightCm(value);
-                    clearError("heightCm");
-                  }}
+            <ToolMethodSelector
+              label="Fordeling"
+              options={SPLITS}
+              value={split}
+              onChange={(value) => {
+                setSplit(value);
+                setResult(null);
+                setFieldErrors({});
+              }}
+            />
+
+            {usesBody && (
+              <div className="space-y-6 border-t border-gray-100 pt-6">
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {calorieSource === "estimate" && (
+                    <ToolGenderSelector
+                      value={gender}
+                      error={fieldErrors.gender}
+                      className="max-w-none"
+                      onChange={(value) => {
+                        setGender(value);
+                        clearError("gender");
+                      }}
+                    />
+                  )}
+                  <ToolNumberField
+                    id="makro-weight"
+                    label="Vægt"
+                    unit="kg"
+                    placeholder="f.eks. 75"
+                    value={weightKg}
+                    error={fieldErrors.weightKg}
+                    onChange={(value) => {
+                      setWeightKg(value);
+                      clearError("weightKg");
+                    }}
+                  />
+                  <ToolNumberField
+                    id="makro-age"
+                    label="Alder"
+                    unit="år"
+                    placeholder="f.eks. 35"
+                    allowDecimal={false}
+                    value={age}
+                    error={fieldErrors.age}
+                    onChange={(value) => {
+                      setAge(value);
+                      clearError("age");
+                    }}
+                  />
+                  {calorieSource === "estimate" && (
+                    <ToolNumberField
+                      id="makro-height"
+                      label="Højde"
+                      unit="cm"
+                      placeholder="f.eks. 175"
+                      value={heightCm}
+                      error={fieldErrors.heightCm}
+                      onChange={(value) => {
+                        setHeightCm(value);
+                        clearError("heightCm");
+                      }}
+                    />
+                  )}
+                </div>
+
+                <ToolSelectField
+                  id="makro-activity"
+                  label="Aktivitetsniveau"
+                  options={ACTIVITIES}
+                  value={activity}
+                  onChange={setActivity}
                 />
-              )}
-            </div>
-
-            <ToolSelectField
-              id="makro-activity"
-              label="Aktivitetsniveau"
-              options={ACTIVITIES}
-              value={activity}
-              onChange={setActivity}
-            />
-            <ToolSelectField
-              id="makro-goal"
-              label="Mål"
-              options={GOALS}
-              value={goal}
-              onChange={setGoal}
-              hint={
-                calorieSource === "estimate"
-                  ? "Ved vægttab trækkes 500 kcal fra, ved muskelopbygning lægges 300 kcal til."
-                  : undefined
-              }
-            />
-
-            <div className="border-t border-gray-100 pt-6">
-              <ToolMethodSelector
-                label="Fordeling"
-                options={SPLITS}
-                value={split}
-                onChange={setSplit}
-              />
-            </div>
+                <ToolSelectField
+                  id="makro-goal"
+                  label="Mål"
+                  options={GOALS}
+                  value={goal}
+                  onChange={setGoal}
+                  hint={
+                    calorieSource === "estimate"
+                      ? "Ved vægttab trækkes 500 kcal fra, ved muskelopbygning lægges 300 kcal til."
+                      : undefined
+                  }
+                />
+              </div>
+            )}
 
             <div className="pt-2">
               <Button
@@ -361,7 +382,7 @@ export function MacroCalculator({ rating }: MacroCalculatorProps) {
       </Card>
 
       {result && (
-        <Card className="rounded-2xl">
+        <Card ref={resultRef} className="rounded-2xl scroll-mt-24">
           <CardHeader>
             <CardTitle className="text-xl sm:text-2xl">Dine makroer</CardTitle>
             {result.ok && (
@@ -376,6 +397,14 @@ export function MacroCalculator({ rating }: MacroCalculatorProps) {
                 <ToolPrimaryResult
                   label="Dit daglige kaloriemål"
                   value={`${formatInteger(result.kcalPerDay)} kcal`}
+                  icon={
+                    <span
+                      aria-hidden
+                      className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white"
+                    >
+                      <PieChart className="h-7 w-7 text-brand-primary" />
+                    </span>
+                  }
                   caption={
                     result.maintenanceKcal !== null &&
                     result.maintenanceKcal !== result.kcalPerDay
@@ -414,10 +443,12 @@ export function MacroCalculator({ rating }: MacroCalculatorProps) {
                       );
                     })}
                   </div>
-                  <p className="text-xs text-gray-500 text-pretty tabular-nums">
-                    Protein svarer til {formatDecimal(result.proteinPerKg)} g pr.
-                    kg kropsvægt.
-                  </p>
+                  {result.proteinPerKg !== null && (
+                    <p className="text-xs text-gray-500 text-pretty tabular-nums">
+                      Protein svarer til {formatDecimal(result.proteinPerKg)} g
+                      pr. kg kropsvægt.
+                    </p>
+                  )}
                 </div>
 
                 <div>
@@ -456,7 +487,7 @@ export function MacroCalculator({ rating }: MacroCalculatorProps) {
 
                 {result.outsideNnr.length > 0 && (
                   <div className="rounded-xl bg-brand-beige p-4">
-                    <p className="text-sm text-brand-primary text-pretty">
+                    <p className="text-sm text-gray-700 text-pretty">
                       <strong>Uden for de nordiske anbefalinger:</strong>{" "}
                       {result.outsideNnr
                         .map(
@@ -471,6 +502,13 @@ export function MacroCalculator({ rating }: MacroCalculatorProps) {
                     </p>
                   </div>
                 )}
+
+                <ToolShareImageButton
+                  toolSlug="makroberegner"
+                  href={buildMacroShareUrl(result)}
+                  fileName={`makroer-${result.kcalPerDay}-kcal.png`}
+                  label="Gem dine makroer - Download"
+                />
               </>
             ) : (
               <ToolErrorNote message={result.message} />

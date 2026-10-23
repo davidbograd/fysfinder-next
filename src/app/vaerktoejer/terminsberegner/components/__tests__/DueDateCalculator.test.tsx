@@ -30,13 +30,17 @@ describe("DueDateCalculator", () => {
     );
     await user.click(screen.getByRole("button", { name: "Beregn termin" }));
 
-    expect(
-      primaryResult().getByText(formatDanishDate(addDays(today, 193)))
-    ).toBeInTheDocument();
+    const dueDate = primaryResult().getByText(formatDanishDate(addDays(today, 193)));
+    expect(dueDate).toBeInTheDocument();
+    expect(dueDate.querySelector("svg.lucide-baby")).toBeInTheDocument();
     expect(screen.getByText("12+3")).toBeInTheDocument();
     expect(screen.getByText("Du er i 13. uge")).toBeInTheDocument();
     const nuchalScan = screen.getByText(/Nakkefoldsscanning/).closest("li")!;
     expect(within(nuchalScan).getByText("Nu")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Del din termin - Download" })).toHaveAttribute(
+      "download",
+      `termin-${toIsoDate(addDays(today, 193))}.png`
+    );
   });
 
   it("marks today on the timeline between the milestones", async () => {
@@ -95,18 +99,41 @@ describe("DueDateCalculator", () => {
     ).toBeInTheDocument();
   });
 
-  it("asks for the date and refuses one in the future", async () => {
+  it("asks for the date", async () => {
     const user = userEvent.setup();
     render(<DueDateCalculator />);
 
     await user.click(screen.getByRole("button", { name: "Beregn termin" }));
     expect(screen.getByText("Vælg datoen")).toBeInTheDocument();
+  });
+
+  it("calculates the due date for a future date without a current week", async () => {
+    const user = userEvent.setup();
+    render(<DueDateCalculator />);
 
     fireEvent.change(
       screen.getByLabelText("Første dag i din sidste menstruation"),
       { target: { value: daysAgo(-3) } }
     );
     await user.click(screen.getByRole("button", { name: "Beregn termin" }));
-    expect(screen.getByRole("alert")).toHaveTextContent("fremtiden");
+
+    expect(screen.getByText("Din forventede terminsdato")).toBeInTheDocument();
+    expect(screen.getByText(/Datoen ligger i fremtiden/)).toBeInTheDocument();
+    expect(screen.queryByText("Graviditetsuge")).not.toBeInTheDocument();
+    expect(screen.getByText("Vigtige datoer i din graviditet")).toBeInTheDocument();
+  });
+
+  it("calculates the due date for a pregnancy that has ended", async () => {
+    const user = userEvent.setup();
+    render(<DueDateCalculator />);
+
+    fireEvent.change(
+      screen.getByLabelText("Første dag i din sidste menstruation"),
+      { target: { value: daysAgo(400) } }
+    );
+    await user.click(screen.getByRole("button", { name: "Beregn termin" }));
+
+    expect(screen.getByText("Terminsperioden for denne dato er passeret.")).toBeInTheDocument();
+    expect(screen.queryByText("Graviditetsuge")).not.toBeInTheDocument();
   });
 });

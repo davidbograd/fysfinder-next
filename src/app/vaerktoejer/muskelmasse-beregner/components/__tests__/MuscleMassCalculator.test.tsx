@@ -34,6 +34,9 @@ describe("MuscleMassCalculator", () => {
     expect(
       screen.getByText("35-årig mand · 180 cm · 80 kg")
     ).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: "Gem din muskelmasse - Download" }).getAttribute("href")
+    ).toMatch(/^\/api\/og\/resultat\/muskelmasse\?kg=35\.5&andel=44\.4&indeks=[\d.]+&fedt=16\.2$/);
   });
 
   it("asks women for a hip measurement as well", async () => {

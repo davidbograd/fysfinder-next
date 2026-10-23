@@ -24,10 +24,10 @@ import {
   formatDanishDateRange,
   formatDanishDayMonth,
   todayIsoDate,
+  toIsoDate,
 } from "@/lib/calculators/dates";
 import {
   computeOvulation,
-  DEFAULT_LUTEAL_PHASE_DAYS,
   OvulationResult,
   OvulationSuccess,
 } from "@/lib/calculators/ovulation";
@@ -39,6 +39,9 @@ import {
 import { notifyToolCompleted } from "@/lib/tools/tool-completion";
 import { PublishedToolRating } from "@/lib/tools/tool-ratings";
 import { CycleCalendar } from "./CycleCalendar";
+import { useScrollToResult } from "@/components/features/tools/useScrollToResult";
+import { ToolShareImageButton } from "@/components/features/tools/ToolShareImageButton";
+import { buildOvulationShareUrl } from "@/lib/og/tool-share";
 
 type FieldKey = "lastPeriodStart" | "cycleLength";
 
@@ -46,7 +49,6 @@ function describeProfile(profile: OvulationSuccess["profile"]): string {
   return [
     `Sidste menstruation ${formatDanishDate(profile.lastPeriodStart)}`,
     `${profile.cycleLength} dages cyklus`,
-    `lutealfase ${profile.lutealPhase} dage`,
   ].join(" · ");
 }
 
@@ -65,9 +67,8 @@ interface OvulationCalculatorProps {
 export function OvulationCalculator({ rating }: OvulationCalculatorProps) {
   const [lastPeriodStart, setLastPeriodStart] = useState("");
   const [cycleLength, setCycleLength] = useState("28");
-  const [lutealPhase, setLutealPhase] = useState("");
   const [result, setResult] = useState<OvulationResult | null>(null);
-  const [today, setToday] = useState("");
+  const resultRef = useScrollToResult(result);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors<FieldKey>>({});
 
   const clearError = (field: FieldKey) =>
@@ -96,10 +97,8 @@ export function OvulationCalculator({ rating }: OvulationCalculatorProps) {
     const calculation = computeOvulation({
       lastPeriodStart,
       cycleLength,
-      lutealPhase,
       today: currentDay,
     });
-    setToday(currentDay);
     setResult(calculation);
     if (calculation.ok) {
       notifyToolCompleted("aegloesningsberegner");
@@ -146,17 +145,6 @@ export function OvulationCalculator({ rating }: OvulationCalculatorProps) {
                   clearError("cycleLength");
                 }}
               />
-              <ToolNumberField
-                id="aegloesning-luteal"
-                label="Lutealfase"
-                unit="dage"
-                placeholder={String(DEFAULT_LUTEAL_PHASE_DAYS)}
-                allowDecimal={false}
-                optional
-                value={lutealPhase}
-                onChange={setLutealPhase}
-                hint="Dagene fra ægløsning til menstruation. Lad feltet stå tomt, hvis du ikke kender den – så regner vi med 14."
-              />
             </div>
 
             <div className="pt-2">
@@ -172,7 +160,7 @@ export function OvulationCalculator({ rating }: OvulationCalculatorProps) {
       </Card>
 
       {result && (
-        <Card className="rounded-2xl">
+        <Card ref={resultRef} className="rounded-2xl scroll-mt-24">
           <CardHeader>
             <CardTitle className="text-xl sm:text-2xl">Dine frugtbare dage</CardTitle>
             {result.ok && (
@@ -216,10 +204,13 @@ export function OvulationCalculator({ rating }: OvulationCalculatorProps) {
                   ]}
                 />
 
-                <CycleCalendar cycle={result.upcoming} today={today} />
+                <CycleCalendar
+                  cycle={result.upcoming}
+                  lastPeriodStart={result.profile.lastPeriodStart}
+                />
 
                 <div className="rounded-xl bg-brand-beige p-4">
-                  <p className="text-sm text-brand-primary text-pretty">
+                  <p className="text-sm text-gray-700 text-pretty">
                     <strong>Bliver du gravid i denne cyklus,</strong> er din
                     forventede termin omkring{" "}
                     {formatDanishDate(result.upcoming.dueDateIfConceived)}.{" "}
@@ -279,6 +270,13 @@ export function OvulationCalculator({ rating }: OvulationCalculatorProps) {
                     prævention.
                   </p>
                 </div>
+
+                <ToolShareImageButton
+                  toolSlug="aegloesningsberegner"
+                  href={buildOvulationShareUrl(result)}
+                  fileName={`aegloesning-${toIsoDate(result.upcoming.ovulation)}.png`}
+                  label="Gem din oversigt - Download"
+                />
               </>
             ) : (
               <ToolErrorNote message={result.message} />

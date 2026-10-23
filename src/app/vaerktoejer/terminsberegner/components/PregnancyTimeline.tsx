@@ -93,7 +93,7 @@ export function TrimesterProgress({ result }: { result: DueDateSuccess }) {
             className={cn(
               "flex-1 text-xs",
               number === result.trimester
-                ? "font-semibold text-brand-primary"
+                ? "font-semibold text-gray-900"
                 : "text-gray-500"
             )}
           >
@@ -124,7 +124,7 @@ function buildRows(result: DueDateSuccess): TimelineRow[] {
       number: 1,
       start: result.gestationStart,
       weeksLabel: formatGestationalAge(0),
-      reached: true,
+      reached: result.status !== "planned",
     },
   ];
 
@@ -148,7 +148,7 @@ function buildRows(result: DueDateSuccess): TimelineRow[] {
   const hasCurrentMilestone = result.milestones.some(
     (milestone) => milestone.isCurrent && milestone.kind !== "trimester"
   );
-  if (!hasCurrentMilestone) {
+  if (result.status === "ongoing" && !hasCurrentMilestone) {
     const firstUpcoming = rows.findIndex((row) => !row.reached);
     rows.splice(firstUpcoming === -1 ? rows.length : firstUpcoming, 0, {
       type: "today",
@@ -163,7 +163,7 @@ function Node({ row }: { row: TimelineRow }) {
   if (row.type === "today") {
     return (
       <span className="flex size-8 items-center justify-center">
-        <span className="size-3 rounded-full bg-brand-primary ring-4 ring-brand-primary/20" />
+        <span className="size-3 rounded-full bg-gray-900 ring-4 ring-gray-900/15" />
       </span>
     );
   }
@@ -174,7 +174,7 @@ function Node({ row }: { row: TimelineRow }) {
         className={cn(
           "flex size-8 items-center justify-center rounded-full text-sm font-semibold tabular-nums",
           row.reached
-            ? "bg-brand-primary text-white"
+            ? "bg-gray-900 text-white"
             : "border-2 border-gray-200 bg-white text-gray-500"
         )}
       >
@@ -193,9 +193,9 @@ function Node({ row }: { row: TimelineRow }) {
       className={cn(
         "flex size-8 items-center justify-center rounded-full",
         milestone.kind === "dueDate" && !milestone.isPassed
-          ? "bg-brand-primary text-white"
+          ? "bg-gray-900 text-white"
           : row.reached
-            ? "bg-brand-primary/10 text-brand-primary"
+            ? "bg-gray-100 text-gray-700"
             : "border border-gray-200 bg-white text-gray-400"
       )}
     >
@@ -215,7 +215,7 @@ function RowContent({
 }) {
   if (row.type === "today") {
     return (
-      <span className="inline-flex rounded-full bg-brand-primary px-3 py-1 text-xs font-semibold text-white tabular-nums">
+      <span className="inline-flex rounded-full bg-gray-900 px-3 py-1 text-xs font-semibold text-white tabular-nums">
         I dag · uge {result.gestationalWeeks}+{result.gestationalDays}
       </span>
     );
@@ -259,7 +259,7 @@ function RowContent({
         {milestone.label}
         {milestone.isPassed && <span className="sr-only">(passeret)</span>}
         {milestone.isCurrent && (
-          <span className="rounded-full bg-brand-primary px-2 py-0.5 text-xs font-semibold text-white">
+          <span className="rounded-full bg-gray-900 px-2 py-0.5 text-xs font-semibold text-white">
             {milestone.end ? "Nu" : "I dag"}
           </span>
         )}
@@ -295,7 +295,7 @@ export function PregnancyTimeline({ result }: { result: DueDateSuccess }) {
               <span
                 className={cn(
                   "h-2 w-0.5",
-                  isFirst ? "bg-transparent" : row.reached ? "bg-brand-primary" : "bg-gray-200"
+                  isFirst ? "bg-transparent" : row.reached ? "bg-gray-400" : "bg-gray-200"
                 )}
               />
               <span aria-hidden>
@@ -304,7 +304,7 @@ export function PregnancyTimeline({ result }: { result: DueDateSuccess }) {
               <span
                 className={cn(
                   "min-h-3 w-0.5 flex-1",
-                  isLast ? "bg-transparent" : nextReached ? "bg-brand-primary" : "bg-gray-200"
+                  isLast ? "bg-transparent" : nextReached ? "bg-gray-400" : "bg-gray-200"
                 )}
               />
             </div>

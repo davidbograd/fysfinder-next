@@ -21,6 +21,13 @@ function setLastPeriod(daysAgo: number) {
 }
 
 describe("OvulationCalculator", () => {
+  it("only asks for the last period and the cycle length", () => {
+    render(<OvulationCalculator />);
+
+    expect(screen.getByLabelText("Cykluslængde")).toBeInTheDocument();
+    expect(screen.queryByLabelText(/Lutealfase/)).not.toBeInTheDocument();
+  });
+
   it("shows the next ovulation, the fertile window and a due-date preview", async () => {
     const user = userEvent.setup();
     render(<OvulationCalculator />);
@@ -48,6 +55,64 @@ describe("OvulationCalculator", () => {
       "/vaerktoejer/terminsberegner"
     );
     expect(screen.getByText("Dine næste cyklusser")).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: "Gem din oversigt - Download" }).getAttribute("href")
+    ).toBe(
+      `/api/og/resultat/aegloesning?aeg=${toIsoDate(ovulation)}&menst=${toIsoDate(addDays(today, 26))}`
+    );
+  });
+
+  it("marks the five period days and the day after ovulation in the calendar", async () => {
+    const user = userEvent.setup();
+    render(<OvulationCalculator />);
+
+    setLastPeriod(2);
+    await user.click(screen.getByRole("button", { name: "Beregn ægløsning" }));
+
+    const lastPeriod = addDays(today, -2);
+    const dayAfterOvulation = addDays(today, 13);
+    for (let day = 0; day < 5; day++) {
+      expect(
+        screen.getByText(
+          `${formatDanishDayMonth(addDays(lastPeriod, day))}: din seneste menstruation`,
+          { exact: false }
+        )
+      ).toBeInTheDocument();
+    }
+    expect(
+      screen.queryByText(
+        `${formatDanishDayMonth(addDays(lastPeriod, 5))}: din seneste menstruation`,
+        { exact: false }
+      )
+    ).not.toBeInTheDocument();
+
+    const nextPeriod = addDays(lastPeriod, 28);
+    for (let day = 0; day < 5; day++) {
+      expect(
+        screen.getByText(
+          `${formatDanishDayMonth(addDays(nextPeriod, day))}: forventet menstruation`,
+          { exact: false }
+        )
+      ).toBeInTheDocument();
+    }
+
+    const selectedDay = screen.getByText(
+      `${formatDanishDayMonth(lastPeriod)}: din seneste menstruation`,
+      { exact: false }
+    ).parentElement!;
+    expect(selectedDay).toHaveClass("ring-rose-500");
+    const secondDay = screen.getByText(
+      `${formatDanishDayMonth(addDays(lastPeriod, 1))}: din seneste menstruation`,
+      { exact: false }
+    ).parentElement!;
+    expect(secondDay).not.toHaveClass("ring-rose-500");
+    expect(
+      screen.getByText(`${formatDanishDayMonth(dayAfterOvulation)}: dagen efter ægløsning`, {
+        exact: false,
+      })
+    ).toBeInTheDocument();
+    expect(screen.getByText("Menstruation")).toBeInTheDocument();
+    expect(screen.getByText("Dagen efter ægløsning")).toBeInTheDocument();
   });
 
   it("tells the visitor when she is fertile today", async () => {

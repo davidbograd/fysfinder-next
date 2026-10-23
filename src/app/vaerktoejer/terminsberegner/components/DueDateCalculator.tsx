@@ -25,6 +25,7 @@ import {
 import {
   formatDanishDate,
   formatDanishWeekday,
+  toIsoDate,
   todayIsoDate,
 } from "@/lib/calculators/dates";
 import {
@@ -43,7 +44,10 @@ import {
 } from "@/lib/calculators/required-fields";
 import { notifyToolCompleted } from "@/lib/tools/tool-completion";
 import { PublishedToolRating } from "@/lib/tools/tool-ratings";
+import { ToolShareImageButton } from "@/components/features/tools/ToolShareImageButton";
+import { buildDueDateShareUrl, canShareDueDate } from "@/lib/og/due-date-share";
 import { PregnancyTimeline, TrimesterProgress } from "./PregnancyTimeline";
+import { useScrollToResult } from "@/components/features/tools/useScrollToResult";
 
 type FieldKey = "date";
 
@@ -78,6 +82,12 @@ function describeProfile(profile: DueDateSuccess["profile"]): string {
   return `Sidste menstruation ${formatDanishDate(profile.date)} · ${profile.cycleLength} dages cyklus`;
 }
 
+const STATUS_NOTE: Partial<Record<DueDateSuccess["status"], string>> = {
+  planned:
+    "Datoen ligger i fremtiden. Når graviditeten er begyndt, kan du se, hvilken uge du er i.",
+  ended: "Terminsperioden for denne dato er passeret.",
+};
+
 function describeDaysUntilDue(days: number): string {
   if (days === 0) return "Termin i dag";
   if (days < 0) return `${formatInteger(-days)} dage over termin`;
@@ -93,6 +103,7 @@ export function DueDateCalculator({ rating }: DueDateCalculatorProps) {
   const [date, setDate] = useState("");
   const [cycleLength, setCycleLength] = useState(String(STANDARD_CYCLE_DAYS));
   const [result, setResult] = useState<DueDateResult | null>(null);
+  const resultRef = useScrollToResult(result);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors<FieldKey>>({});
 
   const handleSubmit = (event: FormEvent) => {
@@ -185,7 +196,7 @@ export function DueDateCalculator({ rating }: DueDateCalculatorProps) {
       </Card>
 
       {result && (
-        <Card className="rounded-2xl">
+        <Card ref={resultRef} className="rounded-2xl scroll-mt-24">
           <CardHeader>
             <CardTitle className="text-xl sm:text-2xl">Din termin</CardTitle>
             {result.ok && (
@@ -200,33 +211,64 @@ export function DueDateCalculator({ rating }: DueDateCalculatorProps) {
                 <ToolPrimaryResult
                   label="Din forventede terminsdato"
                   value={formatDanishDate(result.dueDate)}
-                  caption={`En ${formatDanishWeekday(result.dueDate)} · ${describeDaysUntilDue(result.daysUntilDue)}`}
+                  icon={
+                    <span
+                      aria-hidden
+                      className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white"
+                    >
+                      <Baby className="h-7 w-7 text-brand-primary" />
+                    </span>
+                  }
+                  caption={
+                    result.status === "ended"
+                      ? `En ${formatDanishWeekday(result.dueDate)}`
+                      : `En ${formatDanishWeekday(result.dueDate)} · ${describeDaysUntilDue(result.daysUntilDue)}`
+                  }
                 />
 
-                <ToolStatGrid
-                  items={[
-                    {
-                      label: "Graviditetsuge",
-                      value: `${result.gestationalWeeks}+${result.gestationalDays}`,
-                      caption: `Du er i ${result.currentWeek}. uge`,
-                    },
-                    {
-                      label: "Trimester",
-                      value: `${result.trimester}. trimester`,
-                    },
-                    {
-                      label: "Gennemført",
-                      value: `${result.progressPct} %`,
-                      caption: "af en graviditet på 40 uger",
-                    },
-                  ]}
-                />
+                {result.status !== "ongoing" && (
+                  <p className="rounded-xl bg-gray-50 p-4 text-sm text-gray-700 text-pretty">
+                    {STATUS_NOTE[result.status]}
+                  </p>
+                )}
 
-                <TrimesterProgress result={result} />
+                {result.status === "ongoing" && (
+                  <>
+                    <ToolStatGrid
+                      items={[
+                        {
+                          label: "Graviditetsuge",
+                          value: `${result.gestationalWeeks}+${result.gestationalDays}`,
+                          caption: `Du er i ${result.currentWeek}. uge`,
+                        },
+                        {
+                          label: "Trimester",
+                          value: `${result.trimester}. trimester`,
+                        },
+                        {
+                          label: "Gennemført",
+                          value: `${result.progressPct} %`,
+                          caption: "af en graviditet på 40 uger",
+                        },
+                      ]}
+                    />
+
+                    <TrimesterProgress result={result} />
+                  </>
+                )}
+
+                {canShareDueDate(result) && (
+                  <ToolShareImageButton
+                    toolSlug="terminsberegner"
+                    href={buildDueDateShareUrl(result)}
+                    fileName={`termin-${toIsoDate(result.dueDate)}.png`}
+                    label="Del din termin - Download"
+                  />
+                )}
 
                 {result.cycleAdjustmentDays !== 0 && (
                   <div className="rounded-xl bg-brand-beige p-4">
-                    <p className="text-sm text-brand-primary text-pretty">
+                    <p className="text-sm text-gray-700 text-pretty">
                       <strong>Justeret for din cyklus:</strong> terminen er
                       flyttet {Math.abs(result.cycleAdjustmentDays)} dage{" "}
                       {result.cycleAdjustmentDays > 0 ? "senere" : "tidligere"},

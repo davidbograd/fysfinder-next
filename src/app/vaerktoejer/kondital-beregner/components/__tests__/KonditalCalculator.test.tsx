@@ -57,6 +57,9 @@ describe("KonditalCalculator", () => {
     // The max pulse was not measured, so the visitor is told it is an estimate.
     expect(screen.getByText("184 slag/min")).toBeInTheDocument();
     expect(screen.getByText("Estimeret ud fra din alder")).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: "Del dit kondital - Download" }).getAttribute("href")
+    ).toBe("/api/og/resultat/kondital?vo2=48.5&koen=male&gruppe=1");
   });
 
   it("repeats the numbers it calculated on, including the method's own field", async () => {

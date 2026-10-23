@@ -36,7 +36,7 @@ function MethodTag({
       className={cn(
         "inline-flex items-center gap-1 rounded-full bg-white px-2.5 py-1 text-xs font-medium ring-1",
         isSelected
-          ? "text-brand-primary ring-brand-primary/20"
+          ? "text-gray-900 ring-gray-300"
           : "text-gray-600 ring-gray-200"
       )}
     >
@@ -70,7 +70,7 @@ export function ToolMethodSelector<TValue extends string>({
                 "flex cursor-pointer flex-col gap-2 rounded-xl border-2 p-4 transition-colors motion-reduce:transition-none",
                 "has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-ring has-[:focus-visible]:ring-offset-2",
                 isSelected
-                  ? "border-brand-primary bg-brand-beige"
+                  ? "border-gray-800 bg-gray-50"
                   : "border-gray-200 bg-white hover:border-gray-300"
               )}
             >
@@ -87,21 +87,18 @@ export function ToolMethodSelector<TValue extends string>({
                   aria-hidden
                   className={cn(
                     "flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors motion-reduce:transition-none",
-                    isSelected ? "border-brand-primary" : "border-gray-300"
+                    isSelected ? "border-gray-800" : "border-gray-300"
                   )}
                 >
                   <span
                     className={cn(
-                      "h-2.5 w-2.5 rounded-full bg-brand-primary transition-transform motion-reduce:transition-none",
+                      "h-2.5 w-2.5 rounded-full bg-gray-800 transition-transform motion-reduce:transition-none",
                       isSelected ? "scale-100" : "scale-0"
                     )}
                   />
                 </span>
                 <span
-                  className={cn(
-                    "font-semibold",
-                    isSelected ? "text-brand-primary" : "text-gray-900"
-                  )}
+                  className="font-semibold text-gray-900"
                 >
                   {option.title}
                 </span>

@@ -26,6 +26,9 @@ describe("RestingMetabolicRateCalculator", () => {
     expect(screen.getByText("1.755 kcal/dag")).toBeInTheDocument();
     expect(screen.getByText("73,1 kcal")).toBeInTheDocument();
     expect(screen.getByText("7.343 kJ/dag")).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: "Gem dit hvilestofskifte - Download" }).getAttribute("href")
+    ).toBe("/api/og/resultat/hvilestofskifte?kcal=1755&kj=7343&time=73");
   });
 
   it("repeats the entered profile above the result", async () => {

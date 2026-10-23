@@ -6,6 +6,8 @@ import { notifyToolCompleted } from "@/lib/tools/tool-completion";
 import { Calculator, Rabbit, Gauge, Clock } from "lucide-react";
 import { ToolRatingSummary } from "@/components/features/tools/ToolRatingSummary";
 import { PublishedToolRating } from "@/lib/tools/tool-ratings";
+import { ToolShareImageButton } from "@/components/features/tools/ToolShareImageButton";
+import { buildPaceShareUrl } from "@/lib/og/tool-share";
 
 const presetDistances = [
   { label: "1 km", value: 1 },
@@ -369,6 +371,16 @@ export function PaceCalculator({ rating }: PaceCalculatorProps) {
             value={formatHMS(hhNum, mmNum, ssNum)}
           />
         </div>
+
+        {secPerKm > 0 && isFinite(secPerKm) && (
+          <ToolShareImageButton
+            toolSlug="pace-beregner"
+            variant="loeb"
+            href={buildPaceShareUrl("loeb", distanceKmNum, totalTimeSec)}
+            fileName={`loeb-${distanceKmNum}-km.png`}
+            label="Del dit løb - Download"
+          />
+        )}
       </section>
 
       {/* Divider */}
@@ -471,6 +483,16 @@ export function PaceCalculator({ rating }: PaceCalculatorProps) {
             }
           />
         </div>
+
+        {expectedFinishSec > 0 && isFinite(expectedFinishSec) && (
+          <ToolShareImageButton
+            toolSlug="pace-beregner"
+            variant="plan"
+            href={buildPaceShareUrl("plan", paceDistanceNum, expectedFinishSec)}
+            fileName={`loebeplan-${paceDistanceNum}-km.png`}
+            label="Gem din løbeplan - Download"
+          />
+        )}
       </section>
 
       {/* Divider */}

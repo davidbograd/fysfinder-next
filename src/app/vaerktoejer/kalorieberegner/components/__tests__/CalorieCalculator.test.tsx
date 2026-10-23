@@ -58,6 +58,9 @@ describe("CalorieCalculator", () => {
     await user.selectOptions(weeklyLoss, "1");
     expect(weeklyLoss).toHaveDisplayValue("1 kg");
     expect(screen.getByText("1042 kcal/dag")).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: "Gem dit kaloriebehov - Download" }).getAttribute("href")
+    ).toMatch(/^\/api\/og\/resultat\/kalorie\?tdee=\d+&bmr=\d+&tab=1&tabkcal=1042&op=\d+$/);
 
     jest.useRealTimers();
   });

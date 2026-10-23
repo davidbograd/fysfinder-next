@@ -43,6 +43,12 @@ interface ToolFeedbackNotificationData {
   feedback_text: string;
 }
 
+interface ToolDownloadNotificationData {
+  tool_title: string;
+  tool_href: string;
+  variant_label?: string;
+}
+
 interface ClinicRejectionEmailData {
   clinic_name: string;
   recipient_email: string;
@@ -338,6 +344,63 @@ export async function sendToolFeedbackNotificationToAdmins(
     return { success: true };
   } catch (error) {
     console.error("Error sending tool feedback notification:", error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Unknown error",
+    };
+  }
+}
+
+/**
+ * Send email notification to admins when a visitor downloads the result image
+ * from a tool.
+ */
+export async function sendToolDownloadNotificationToAdmins(
+  data: ToolDownloadNotificationData
+): Promise<{ success: boolean; error?: string }> {
+  const adminEmails = getAdminEmails();
+
+  if (adminEmails.length === 0) {
+    console.warn("No admin emails configured - skipping tool download notification");
+    return { success: true };
+  }
+
+  const toolName = data.variant_label
+    ? `${data.tool_title} (${data.variant_label})`
+    : data.tool_title;
+
+  try {
+    const { error } = await resend.emails.send({
+      from: "Fysfinder <noreply@fysfinder.dk>",
+      to: adminEmails,
+      subject: `Billede downloadet: ${toolName}`,
+      html: `
+        <h2>En bruger har downloadet sit resultat som billede</h2>
+        <p>Værktøj: <strong>${escapeHtml(toolName)}</strong></p>
+
+        <p style="margin-top: 24px;">
+          <a href="https://www.fysfinder.dk${escapeHtml(
+            data.tool_href
+          )}" style="background-color: #104534; color: white; padding: 12px 24px; text-decoration: none; border-radius: 9999px; display: inline-block;">
+            Åbn værktøjet
+          </a>
+        </p>
+
+        <hr style="margin-top: 32px; border: none; border-top: 1px solid #e5e7eb;" />
+        <p style="color: #6b7280; font-size: 12px;">
+          Denne email er sendt automatisk fra Fysfinder.
+        </p>
+      `,
+    });
+
+    if (error) {
+      console.error("Failed to send tool download notification email:", error);
+      return { success: false, error: error.message };
+    }
+
+    return { success: true };
+  } catch (error) {
+    console.error("Error sending tool download notification:", error);
     return {
       success: false,
       error: error instanceof Error ? error.message : "Unknown error",

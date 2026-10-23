@@ -4,12 +4,12 @@ import { BodyAgeCalculator } from "./components/BodyAgeCalculator";
 
 export const revalidate = 86400; // 24 hours ISR (must be a literal for Next.js segment config)
 
-const title = "Bodyage beregner | Find din biologiske alder →";
+const title = "Bodyage beregner | Beregn nemt din krops biologiske alder →";
 const description =
   "Hvor gammel er din krop? Find din biologiske alder med Fysfinders gratis bodyage beregner – ud fra din kondition, dit taljemål og din hvilepuls.";
 const image = {
-  url: "/images/vaerktoejer/bodyage-beregner-placeholder.png",
-  alt: "Bodyage beregner – find din biologiske alder",
+  url: "/images/vaerktoejer/bodyage-beregner-person-paa-sportsbane.jpg",
+  alt: "Person ligger på en sportsbane mellem tallene 20, 30 og 40 – beregn din krops alder",
 };
 
 export const metadata: Metadata = {
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     title,
     description,
-    images: [{ url: image.url, width: 1200, height: 630, alt: image.alt }],
+    images: [{ url: image.url, width: 1400, height: 1050, alt: image.alt }],
     type: "website",
   },
 };
@@ -27,7 +27,7 @@ export default function BodyageBeregnerPage() {
   return (
     <ToolPageLayout
       slug="bodyage-beregner"
-      heading="Bodyage beregner: Find din biologiske alder"
+      heading="Bodyage beregner: Beregn din biologiske alder og se hvor gammel din krop er"
       structuredDataDescription="Find din biologiske alder ud fra din kondition, dit taljemål og din hvilepuls"
       image={{ src: image.url, alt: image.alt }}
       intro={

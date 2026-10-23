@@ -16,6 +16,9 @@ import {
   findMissingFields,
   hasFieldErrors,
 } from "@/lib/calculators/required-fields";
+import { useScrollToResult } from "@/components/features/tools/useScrollToResult";
+import { ToolShareImageButton } from "@/components/features/tools/ToolShareImageButton";
+import { buildCalorieShareUrl } from "@/lib/og/tool-share";
 
 type FieldKey = "weight" | "height" | "age" | "gender";
 
@@ -64,6 +67,7 @@ export function CalorieCalculator({ rating }: CalorieCalculatorProps) {
   const [activityLevel, setActivityLevel] = useState("1.2");
   const [weeklyLossKg, setWeeklyLossKg] = useState("0.5");
   const [result, setResult] = useState<CalorieResult | null>(null);
+  const resultRef = useScrollToResult(result);
   const [isCalculating, setIsCalculating] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors<FieldKey>>({});
 
@@ -271,7 +275,7 @@ export function CalorieCalculator({ rating }: CalorieCalculatorProps) {
       </form>
 
       {result && (
-        <div className="mt-8 space-y-4">
+        <div ref={resultRef} className="mt-8 scroll-mt-24 space-y-4">
           <h3 className="text-xl font-semibold text-gray-900 mb-4">
             Dine resultater
           </h3>
@@ -356,6 +360,17 @@ export function CalorieCalculator({ rating }: CalorieCalculatorProps) {
               <li>• Juster gradvist og følg din krops reaktion</li>
             </ul>
           </div>
+
+          <ToolShareImageButton
+            toolSlug="kalorieberegner"
+            href={buildCalorieShareUrl(
+              result,
+              weeklyLossKg,
+              caloriesForWeeklyLoss(result.tdee, weeklyLossKg)
+            )}
+            fileName={`kaloriebehov-${result.tdee}-kcal.png`}
+            label="Gem dit kaloriebehov - Download"
+          />
         </div>
       )}
     </div>

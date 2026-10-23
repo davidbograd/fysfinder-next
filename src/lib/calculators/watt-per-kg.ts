@@ -5,20 +5,19 @@
 // for FTP. Kilderne trækker grænserne lidt forskelligt, så niveauet er en
 // pejling, ikke en licensklasse.
 //
-// Kendes FTP ikke direkte, estimeres den fra en test:
-//   - 20-minutterstest: gennemsnitlig effekt x 0,95 (Allen & Coggan)
-//   - Ramptest: bedste minut x 0,75 (som Zwift og TrainerRoad bruger)
+// Kendes FTP ikke direkte, estimeres den fra en test på samme måde som i
+// FTP-beregneren (./ftp), så de to værktøjer altid giver samme FTP.
 
 import type { Gender } from "@/lib/bodyFat";
 import { parseDecimal } from "./parse";
+import {
+  estimateFtp,
+  INPUT_WATTS_ERROR,
+  parseInputWatts,
+  type PowerSource,
+} from "./ftp";
 
-export type PowerSource = "ftp" | "test20" | "ramp";
-
-export const FTP_FACTORS: Record<PowerSource, number> = {
-  ftp: 1,
-  test20: 0.95,
-  ramp: 0.75,
-};
+export type { PowerSource } from "./ftp";
 
 export const WATT_LEVELS = [
   "Utrænet",
@@ -96,6 +95,10 @@ function levelIndex(gender: Gender, wattsPerKg: number): number {
   return index === -1 ? WATT_LEVELS.length - 1 : index;
 }
 
+export function wattLevelFor(gender: Gender, wattsPerKg: number): string {
+  return WATT_LEVELS[levelIndex(gender, wattsPerKg)];
+}
+
 export function computeWattPerKg(input: WattPerKgInput): WattPerKgResult {
   if (input.gender !== "male" && input.gender !== "female") {
     return {
@@ -104,9 +107,9 @@ export function computeWattPerKg(input: WattPerKgInput): WattPerKgResult {
     };
   }
 
-  const watts = parseDecimal(input.watts);
-  if (!Number.isFinite(watts) || watts < 30 || watts > 2000) {
-    return { ok: false, message: "Indtast en effekt mellem 30 og 2.000 watt." };
+  const watts = parseInputWatts(input.watts);
+  if (watts === null) {
+    return { ok: false, message: INPUT_WATTS_ERROR };
   }
 
   const weightKg = parseDecimal(input.weightKg);
@@ -114,7 +117,7 @@ export function computeWattPerKg(input: WattPerKgInput): WattPerKgResult {
     return { ok: false, message: "Indtast en vægt mellem 30 og 200 kg." };
   }
 
-  const ftpWatts = Math.round(watts * FTP_FACTORS[input.source]);
+  const ftpWatts = estimateFtp(input.source, watts);
   const wattsPerKg = Math.round((ftpWatts / weightKg) * 100) / 100;
   const index = levelIndex(input.gender, wattsPerKg);
   const nextLimit = THRESHOLDS[input.gender][index];

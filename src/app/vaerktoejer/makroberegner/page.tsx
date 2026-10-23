@@ -4,12 +4,12 @@ import { MacroCalculator } from "./components/MacroCalculator";
 
 export const revalidate = 86400; // 24 hours ISR (must be a literal for Next.js segment config)
 
-const title = "Makroberegner | Sådan udregner du dine makroer →";
+const title = "Makroberegner | Beregn dine makroer og daglige behov →";
 const description =
   "Udregn dine makroer med Fysfinders gratis makroberegner. Få dit dagsbehov for protein, kulhydrat og fedt i gram – ud fra dit mål og dit kaloriebehov.";
 const image = {
-  url: "/images/vaerktoejer/makroberegner-placeholder.png",
-  alt: "Makroberegner – fordeling af protein, kulhydrat og fedt",
+  url: "/images/vaerktoejer/makroberegner-tallerken-laks-groentsager.jpg",
+  alt: "Tallerken med laks, grønne bønner og cherrytomater – fordel dine makroer på protein, kulhydrat og fedt",
 };
 
 export const metadata: Metadata = {
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     title,
     description,
-    images: [{ url: image.url, width: 1200, height: 630, alt: image.alt }],
+    images: [{ url: image.url, width: 1400, height: 933, alt: image.alt }],
     type: "website",
   },
 };
@@ -27,7 +27,7 @@ export default function MakroberegnerPage() {
   return (
     <ToolPageLayout
       slug="makroberegner"
-      heading="Makroberegner: Sådan udregner du dine makroer"
+      heading="Makroberegner: Beregn dit daglige behov for protein, kulhydrat og fedt"
       structuredDataDescription="Udregn dit daglige behov for protein, kulhydrat og fedt i gram"
       image={{ src: image.url, alt: image.alt }}
       intro={

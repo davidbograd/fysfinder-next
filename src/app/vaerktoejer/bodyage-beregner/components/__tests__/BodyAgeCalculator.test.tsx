@@ -25,6 +25,9 @@ describe("BodyAgeCalculator", () => {
     expect(screen.getByText("35 år")).toBeInTheDocument();
     expect(screen.getByText("5 år yngre end din alder")).toBeInTheDocument();
     expect(screen.getByText("48,5")).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: "Del din kropsalder - Download" }).getAttribute("href")
+    ).toMatch(/^\/api\/og\/resultat\/kropsalder\?alder=35&forskel=-5&vo2=48\.5&snit=[\d.]+$/);
   });
 
   it("hides intensity and duration for someone who rarely exercises and suggests starting", async () => {

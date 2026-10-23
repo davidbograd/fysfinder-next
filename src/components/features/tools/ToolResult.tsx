@@ -6,6 +6,8 @@ interface ToolPrimaryResultProps {
   value: string;
   caption?: ReactNode;
   badge?: string;
+  /** Vises ved siden af tallet, fx et ikon. */
+  icon?: ReactNode;
   className?: string;
 }
 
@@ -14,21 +16,18 @@ export function ToolPrimaryResult({
   value,
   caption,
   badge,
+  icon,
   className,
 }: ToolPrimaryResultProps) {
   return (
-    <div
-      className={cn(
-        "rounded-xl bg-brand-beige p-6 text-center",
-        className
-      )}
-    >
-      <p className="text-sm font-medium text-brand-primary/70">{label}</p>
-      <p className="mt-1 text-4xl font-semibold tabular-nums text-brand-primary">
+    <div className={cn("rounded-xl bg-brand-beige p-6 text-center", className)}>
+      <p className="text-sm font-medium text-gray-600">{label}</p>
+      <p className="mt-1 flex items-center justify-center gap-3 text-4xl font-semibold tabular-nums text-gray-900">
+        {icon}
         {value}
       </p>
       {badge && (
-        <p className="mt-3 inline-flex rounded-full bg-white px-3 py-1 text-sm font-semibold text-brand-primary">
+        <p className="mt-3 inline-flex rounded-full bg-white px-3 py-1 text-sm font-semibold text-gray-900">
           {badge}
         </p>
       )}

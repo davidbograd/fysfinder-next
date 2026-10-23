@@ -18,6 +18,7 @@ import {
 } from "@/components/features/tools/ToolMethodSelector";
 import { ToolNumberField } from "@/components/features/tools/ToolNumberField";
 import { ToolRatingSummary } from "@/components/features/tools/ToolRatingSummary";
+import { ToolShareImageButton } from "@/components/features/tools/ToolShareImageButton";
 import {
   ToolErrorNote,
   ToolPrimaryResult,
@@ -40,8 +41,10 @@ import {
   findMissingFields,
   hasFieldErrors,
 } from "@/lib/calculators/required-fields";
+import { buildWattPerKgShareUrl } from "@/lib/og/cycling-share";
 import { notifyToolCompleted } from "@/lib/tools/tool-completion";
 import { PublishedToolRating } from "@/lib/tools/tool-ratings";
+import { useScrollToResult } from "@/components/features/tools/useScrollToResult";
 
 type FieldKey = "gender" | "watts" | "weightKg";
 
@@ -102,6 +105,7 @@ export function WattPerKgCalculator({ rating }: WattPerKgCalculatorProps) {
   const [watts, setWatts] = useState("");
   const [weightKg, setWeightKg] = useState("");
   const [result, setResult] = useState<WattPerKgResult | null>(null);
+  const resultRef = useScrollToResult(result);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors<FieldKey>>({});
 
   const clearError = (field: FieldKey) =>
@@ -208,7 +212,7 @@ export function WattPerKgCalculator({ rating }: WattPerKgCalculatorProps) {
       </Card>
 
       {result && (
-        <Card className="rounded-2xl">
+        <Card ref={resultRef} className="rounded-2xl scroll-mt-24">
           <CardHeader>
             <CardTitle className="text-xl sm:text-2xl">Dit resultat</CardTitle>
             {result.ok && (
@@ -223,6 +227,14 @@ export function WattPerKgCalculator({ rating }: WattPerKgCalculatorProps) {
                 <ToolPrimaryResult
                   label="Din watt pr. kg"
                   value={`${formatDecimal(result.wattsPerKg, 2)} W/kg`}
+                  icon={
+                    <span
+                      aria-hidden
+                      className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white"
+                    >
+                      <Bike className="h-7 w-7 text-brand-primary" />
+                    </span>
+                  }
                   badge={result.level}
                   caption="FTP delt med din kropsvægt"
                 />
@@ -255,6 +267,13 @@ export function WattPerKgCalculator({ rating }: WattPerKgCalculatorProps) {
                   bands={result.bands}
                   currentLabel={result.level}
                   footnote="Niveauerne bygger på Andrew Coggans power-profil. Watt pr. kg afgør, hvor hurtigt du kører op ad bakke – på flad vej betyder dine samlede watt og din aerodynamik mere."
+                />
+
+                <ToolShareImageButton
+                  toolSlug="watt-pr-kg-beregner"
+                  href={buildWattPerKgShareUrl(result)}
+                  fileName={`watt-pr-kg-${result.wattsPerKg.toFixed(2)}.png`}
+                  label="Del din watt pr. kg - Download"
                 />
               </>
             ) : (

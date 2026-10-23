@@ -17,8 +17,6 @@ export const PREGNANCY_LENGTH_DAYS = 280;
 export const STANDARD_CYCLE_DAYS = 28;
 /** Undfangelse regnes som graviditetsuge 2+0. */
 const CONCEPTION_GESTATIONAL_DAYS = 14;
-/** Ældre datoer end dette er ikke en igangværende graviditet. */
-const MAX_GESTATIONAL_DAYS = 44 * 7;
 
 export const MIN_CYCLE_DAYS = 21;
 export const MAX_CYCLE_DAYS = 45;
@@ -60,8 +58,16 @@ export interface DueDateError {
   message: string;
 }
 
+/**
+ * planned: datoen ligger i fremtiden, så graviditeten er ikke begyndt.
+ * ongoing: i dag ligger i graviditeten.
+ * ended: terminsperioden (41+6) er passeret.
+ */
+export type DueDateStatus = "planned" | "ongoing" | "ended";
+
 export interface DueDateSuccess {
   ok: true;
+  status: DueDateStatus;
   dueDate: Date;
   /** Uge 0+0: første dag i sidste menstruation, justeret for cyklus. */
   gestationStart: Date;
@@ -124,7 +130,9 @@ const MILESTONES: {
   { kind: "termEnd", label: "Terminsperioden slutter", startDays: weeksToDays(41, 6) },
 ];
 
-function trimesterFor(gestationalDays: number): 1 | 2 | 3 {
+const TERM_END_DAYS = weeksToDays(41, 6);
+
+export function trimesterFor(gestationalDays: number): 1 | 2 | 3 {
   if (gestationalDays < weeksToDays(14)) return 1;
   if (gestationalDays < weeksToDays(28)) return 2;
   return 3;
@@ -139,13 +147,6 @@ export function computeDueDate(input: DueDateInput): DueDateResult {
   const date = parseIsoDate(input.date);
   if (!date) {
     return { ok: false, message: "Vælg en gyldig dato." };
-  }
-
-  if (date.getTime() > today.getTime()) {
-    return {
-      ok: false,
-      message: "Datoen ligger i fremtiden. Vælg en dato, der er passeret.",
-    };
   }
 
   let cycleLength: number | null = null;
@@ -176,13 +177,12 @@ export function computeDueDate(input: DueDateInput): DueDateResult {
   // En lang cyklus kan lægge graviditetens start efter i dag; så er man i uge 0.
   const elapsedDays = Math.max(0, daysBetween(gestationStart, today));
 
-  if (elapsedDays > MAX_GESTATIONAL_DAYS) {
-    return {
-      ok: false,
-      message:
-        "Datoen ligger mere end 44 uger tilbage. Tjek, at du har valgt det rigtige år.",
-    };
-  }
+  const status: DueDateStatus =
+    date.getTime() > today.getTime()
+      ? "planned"
+      : elapsedDays > TERM_END_DAYS
+        ? "ended"
+        : "ongoing";
 
   const milestones = MILESTONES.map((milestone) => ({
     kind: milestone.kind,
@@ -204,6 +204,7 @@ export function computeDueDate(input: DueDateInput): DueDateResult {
 
   return {
     ok: true,
+    status,
     dueDate,
     gestationStart,
     elapsedDays,

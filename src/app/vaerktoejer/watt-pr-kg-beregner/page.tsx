@@ -4,12 +4,12 @@ import { WattPerKgCalculator } from "./components/WattPerKgCalculator";
 
 export const revalidate = 86400; // 24 hours ISR (must be a literal for Next.js segment config)
 
-const title = "Watt pr. kg beregner | Beregn din W/kg og dit niveau →";
+const title = "Watt pr. kg beregner | Beregn nemt din W/kg på cykel →";
 const description =
   "Beregn din watt pr. kg med Fysfinders gratis beregner. Indtast din FTP eller et testresultat og din vægt, og se hvilket niveau du ligger på som cykelrytter.";
 const image = {
-  url: "/images/vaerktoejer/watt-pr-kg-beregner-placeholder.png",
-  alt: "Watt pr. kg beregner til cykelryttere",
+  url: "/images/vaerktoejer/watt-pr-kg-beregner-cykelryttere-ved-kysten.jpg",
+  alt: "To cykelryttere på landevejscykler ved kysten – beregn din watt pr. kg",
 };
 
 export const metadata: Metadata = {
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     title,
     description,
-    images: [{ url: image.url, width: 1200, height: 630, alt: image.alt }],
+    images: [{ url: image.url, width: 1400, height: 933, alt: image.alt }],
     type: "website",
   },
 };
@@ -27,7 +27,7 @@ export default function WattPrKgBeregnerPage() {
   return (
     <ToolPageLayout
       slug="watt-pr-kg-beregner"
-      heading="Watt pr. kg beregner: Beregn din W/kg"
+      heading="Watt pr. kg beregner - Beregn din W/kg og se dit niveau"
       structuredDataDescription="Beregn din watt pr. kg ud fra FTP og vægt, og se dit niveau som cykelrytter"
       image={{ src: image.url, alt: image.alt }}
       intro={

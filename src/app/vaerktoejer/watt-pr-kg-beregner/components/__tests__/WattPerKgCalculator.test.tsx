@@ -17,6 +17,10 @@ describe("WattPerKgCalculator", () => {
     expect(within(primary).getByText("Godt trænet")).toBeInTheDocument();
     expect(screen.getByText("+35 W")).toBeInTheDocument();
     expect(screen.getByText("Niveauer for mænd")).toBeInTheDocument();
+    expect(primary.querySelector("svg.lucide-bike")).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: "Del din watt pr. kg - Download" })
+    ).toHaveAttribute("href", "/api/og/watt-pr-kg?wkg=3.33&koen=male");
   });
 
   it("estimates FTP from a 20-minute test", async () => {

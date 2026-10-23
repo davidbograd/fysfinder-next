@@ -29,6 +29,9 @@ describe("AdultHeightCalculator", () => {
       )
     ).toBeInTheDocument();
     expect(screen.getByText("176,0 cm")).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: "Del den forventede højde - Download" }).getAttribute("href")
+    ).toBe("/api/og/resultat/hoejde?cm=182.5&lav=174&hoej=191&barn=dreng&mor=170&far=182");
   });
 
   it("predicts a lower height for a girl with the same parents", async () => {

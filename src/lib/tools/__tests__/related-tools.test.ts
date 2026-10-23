@@ -45,11 +45,12 @@ describe("related tools (Andre nyttige værktøjer)", () => {
   it("shows only the relevant tools, in order, when there are fewer than 3", () => {
     expect(getRelatedTools("pace-beregner").map((t) => t.slug)).toEqual([
       "kondital-beregner",
+      "watt-pr-kg-beregner",
     ]);
     expect(getRelatedTools("kalorieberegner").map((t) => t.slug)).toEqual([
+      "makroberegner",
       "hvilestofskifte-beregner",
       "proteinberegner",
-      "bmi-beregner",
     ]);
   });
 

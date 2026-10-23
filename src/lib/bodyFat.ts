@@ -1,4 +1,5 @@
 // Fysfinder – Navy body fat calculator logic
+import { findBand, ToolBand } from "@/lib/calculators/bands";
 
 export type Gender = "male" | "female";
 export type Unit = "cm" | "in";
@@ -53,21 +54,25 @@ export const toInches = (val: number, unit: Unit): number => {
 };
 
 /** Classification bands in Danish. */
-export const classifyCategory = (gender: Gender, v: number): string => {
-  if (gender === "male") {
-    if (v < 6) return "Essentielt fedt";
-    if (v < 14) return "Atletisk";
-    if (v < 18) return "Fitness";
-    if (v < 25) return "Gennemsnit";
-    return "Høj (overvægt)";
-  } else {
-    if (v < 14) return "Essentielt fedt";
-    if (v < 21) return "Atletisk";
-    if (v < 25) return "Fitness";
-    if (v < 32) return "Gennemsnit";
-    return "Høj (overvægt)";
-  }
+export const BODY_FAT_BANDS: Record<Gender, ToolBand[]> = {
+  male: [
+    { label: "Essentielt fedt", min: null, max: 6 },
+    { label: "Atletisk", min: 6, max: 14 },
+    { label: "Fitness", min: 14, max: 18 },
+    { label: "Gennemsnit", min: 18, max: 25 },
+    { label: "Høj (overvægt)", min: 25, max: null },
+  ],
+  female: [
+    { label: "Essentielt fedt", min: null, max: 14 },
+    { label: "Atletisk", min: 14, max: 21 },
+    { label: "Fitness", min: 21, max: 25 },
+    { label: "Gennemsnit", min: 25, max: 32 },
+    { label: "Høj (overvægt)", min: 32, max: null },
+  ],
 };
+
+export const classifyCategory = (gender: Gender, v: number): string =>
+  findBand(BODY_FAT_BANDS[gender], v).label;
 
 /** Raw Navy formula, in inches. */
 export const navyBodyFatPercentageInches = (

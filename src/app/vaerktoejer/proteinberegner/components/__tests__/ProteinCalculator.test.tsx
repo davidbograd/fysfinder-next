@@ -36,6 +36,9 @@ describe("ProteinCalculator", () => {
     expect(
       screen.getByText("35 år · 80 kg · muskelopbygning · hård træning")
     ).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: "Gem dit proteinbehov - Download" }).getAttribute("href")
+    ).toMatch(/^\/api\/og\/resultat\/protein\?g=160&lav=144&hoej=176&maaltider=\d+&pr=\d+$/);
   });
 
   it("lets the visitor change the number of meals in the result", async () => {

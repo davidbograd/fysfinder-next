@@ -15,12 +15,10 @@ export const MIN_LUTEAL_PHASE_DAYS = 10;
 export const MAX_LUTEAL_PHASE_DAYS = 16;
 export const MIN_CYCLE_DAYS = 21;
 export const MAX_CYCLE_DAYS = 45;
-const FERTILE_DAYS_BEFORE_OVULATION = 5;
-const PEAK_DAYS_BEFORE_OVULATION = 2;
+export const FERTILE_DAYS_BEFORE_OVULATION = 5;
+export const PEAK_DAYS_BEFORE_OVULATION = 2;
 /** Ægløsning tidligere end det i cyklus er ikke et realistisk estimat. */
 const MIN_DAYS_BEFORE_OVULATION = 7;
-/** Ældre end det er sidste menstruation for usikker at regne videre på. */
-const MAX_DAYS_SINCE_LAST_PERIOD = 90;
 export const CYCLES_SHOWN = 3;
 
 export interface OvulationInput {
@@ -109,19 +107,6 @@ export function computeOvulation(input: OvulationInput): OvulationResult {
   }
 
   const daysSincePeriod = daysBetween(lastPeriodStart, today);
-  if (daysSincePeriod < 0) {
-    return {
-      ok: false,
-      message: "Datoen ligger i fremtiden. Vælg første dag i din seneste menstruation.",
-    };
-  }
-  if (daysSincePeriod > MAX_DAYS_SINCE_LAST_PERIOD) {
-    return {
-      ok: false,
-      message:
-        "Datoen ligger mere end 3 måneder tilbage. Vælg første dag i din seneste menstruation.",
-    };
-  }
 
   const cycleLength = parseWholeDays(input.cycleLength);
   if (
@@ -157,8 +142,9 @@ export function computeOvulation(input: OvulationInput): OvulationResult {
     };
   }
 
-  // Er menstruationen udeblevet, rulles der videre til den cyklus, vi er i nu.
-  const elapsedCycles = Math.floor(daysSincePeriod / cycleLength);
+  // Ligger datoen længere tilbage, rulles der videre til den cyklus, vi er i nu.
+  // Ligger den i fremtiden, regnes der fra den cyklus, datoen starter.
+  const elapsedCycles = Math.max(0, Math.floor(daysSincePeriod / cycleLength));
   const cycles = Array.from({ length: CYCLES_SHOWN + 1 }, (_, index) =>
     buildCycle(
       addDays(lastPeriodStart, (elapsedCycles + index) * cycleLength),

@@ -67,14 +67,36 @@ describe("computeOvulation", () => {
     expect(result.isFertileToday).toBe(true);
   });
 
-  it("refuses dates in the future, stale dates and impossible cycles", () => {
+  it("plans from a future period date without rolling back", () => {
+    const result = computeOvulation({
+      lastPeriodStart: "2026-11-10",
+      cycleLength: "28",
+      today: "2026-10-03",
+    });
+
+    if (!result.ok) throw new Error(result.message);
+    expect(result.upcoming.periodStart).toEqual(new Date(Date.UTC(2026, 10, 10)));
+    expect(result.upcoming.ovulation).toEqual(new Date(Date.UTC(2026, 10, 24)));
+    expect(result.isFertileToday).toBe(false);
+  });
+
+  it("rolls a period date far in the past on to the current cycle", () => {
+    const result = computeOvulation({
+      lastPeriodStart: "2026-01-01",
+      cycleLength: "28",
+      today: "2026-10-03",
+    });
+
+    if (!result.ok) throw new Error(result.message);
+    const today = Date.UTC(2026, 9, 3);
+    const cycleMs = 28 * 24 * 60 * 60 * 1000;
+    // Den næste ægløsning, der ikke er passeret – ikke en senere.
+    expect(result.upcoming.ovulation.getTime()).toBeGreaterThanOrEqual(today);
+    expect(result.upcoming.ovulation.getTime() - cycleMs).toBeLessThan(today);
+  });
+
+  it("refuses impossible cycles", () => {
     const today = "2026-10-03";
-    expect(
-      computeOvulation({ lastPeriodStart: "2026-10-05", cycleLength: "28", today })
-    ).toMatchObject({ ok: false, message: expect.stringContaining("fremtiden") });
-    expect(
-      computeOvulation({ lastPeriodStart: "2026-05-01", cycleLength: "28", today })
-    ).toMatchObject({ ok: false, message: expect.stringContaining("3 måneder") });
     expect(
       computeOvulation({ lastPeriodStart: "2026-10-01", cycleLength: "15", today })
     ).toMatchObject({ ok: false, message: expect.stringContaining("cykluslængde") });

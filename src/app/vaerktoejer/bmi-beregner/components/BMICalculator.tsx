@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Calculator, Info } from "lucide-react";
+import { Calculator } from "lucide-react";
 import { notifyToolCompleted } from "@/lib/tools/tool-completion";
 import { ToolRatingSummary } from "@/components/features/tools/ToolRatingSummary";
 import { PublishedToolRating } from "@/lib/tools/tool-ratings";
@@ -10,8 +10,26 @@ import {
   findMissingFields,
   hasFieldErrors,
 } from "@/lib/calculators/required-fields";
+import { useScrollToResult } from "@/components/features/tools/useScrollToResult";
+import { ToolShareImageButton } from "@/components/features/tools/ToolShareImageButton";
+import { buildBmiShareUrl } from "@/lib/og/tool-share";
+import { BMI_BANDS, BmiCategory, bmiCategory } from "@/lib/calculators/bmi";
+import { formatDecimal } from "@/lib/calculators/format";
+import { ToolBandTable } from "@/components/features/tools/ToolBandTable";
+import { ToolPrimaryResult } from "@/components/features/tools/ToolResult";
 
 type FieldKey = "weight" | "height";
+
+const BMI_DESCRIPTIONS: Record<BmiCategory, string> = {
+  Undervægtig:
+    "Dit BMI er under normalområdet. Konsulter en sundhedsprofessionel for rådgivning.",
+  "Normal vægt":
+    "Dit BMI er inden for det sunde normalområde. Fortsæt med at opretholde en sund livsstil.",
+  Overvægtig:
+    "Dit BMI er over normalområdet. Overvej en sundere kost og mere motion.",
+  "Svært overvægtig":
+    "Dit BMI er betydeligt over normalområdet. Søg professionel hjælp til vægttab.",
+};
 
 const INPUT_CLASSES =
   "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-logo-blue focus:border-transparent";
@@ -21,7 +39,6 @@ interface BMIResult {
   bmi: number;
   category: string;
   description: string;
-  color: string;
 }
 
 interface BMICalculatorProps {
@@ -32,6 +49,7 @@ export function BMICalculator({ rating }: BMICalculatorProps) {
   const [weight, setWeight] = useState("");
   const [height, setHeight] = useState("");
   const [result, setResult] = useState<BMIResult | null>(null);
+  const resultRef = useScrollToResult(result);
   const [isCalculating, setIsCalculating] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors<FieldKey>>({});
 
@@ -40,36 +58,9 @@ export function BMICalculator({ rating }: BMICalculatorProps) {
 
   const getBMICategory = (
     bmi: number
-  ): { category: string; description: string; color: string } => {
-    if (bmi < 18.5) {
-      return {
-        category: "Undervægtig",
-        description:
-          "Dit BMI er under normalområdet. Konsulter en sundhedsprofessionel for rådgivning.",
-        color: "blue",
-      };
-    } else if (bmi >= 18.5 && bmi < 24.9) {
-      return {
-        category: "Normal vægt",
-        description:
-          "Dit BMI er inden for det sunde normalområde. Fortsæt med at opretholde en sund livsstil.",
-        color: "green",
-      };
-    } else if (bmi >= 25 && bmi < 29.9) {
-      return {
-        category: "Overvægtig",
-        description:
-          "Dit BMI er over normalområdet. Overvej en sundere kost og mere motion.",
-        color: "orange",
-      };
-    } else {
-      return {
-        category: "Svært overvægtig",
-        description:
-          "Dit BMI er betydeligt over normalområdet. Søg professionel hjælp til vægttab.",
-        color: "red",
-      };
-    }
+  ): { category: string; description: string } => {
+    const category = bmiCategory(bmi);
+    return { category, description: BMI_DESCRIPTIONS[category] };
   };
 
   const calculateBMI = () => {
@@ -84,14 +75,14 @@ export function BMICalculator({ rating }: BMICalculatorProps) {
       const heightInMeters = h / 100;
       // Beregn BMI
       const calculatedBmi = w / (heightInMeters * heightInMeters);
+      const roundedBmi = Math.round(calculatedBmi * 10) / 10;
 
-      const categoryInfo = getBMICategory(calculatedBmi);
+      const categoryInfo = getBMICategory(roundedBmi);
 
       setResult({
-        bmi: Math.round(calculatedBmi * 10) / 10, // Round to 1 decimal
+        bmi: roundedBmi,
         category: categoryInfo.category,
         description: categoryInfo.description,
-        color: categoryInfo.color,
       });
       setIsCalculating(false);
       notifyToolCompleted("bmi-beregner");
@@ -111,21 +102,6 @@ export function BMICalculator({ rating }: BMICalculatorProps) {
     }
     setFieldErrors({});
     calculateBMI();
-  };
-
-  const getColorClasses = (color: string) => {
-    switch (color) {
-      case "blue":
-        return "bg-blue-50 border-blue-200 text-blue-700";
-      case "green":
-        return "bg-green-50 border-green-200 text-green-700";
-      case "orange":
-        return "bg-orange-50 border-orange-200 text-orange-700";
-      case "red":
-        return "bg-red-50 border-red-200 text-red-700";
-      default:
-        return "bg-gray-50 border-gray-200 text-gray-700";
-    }
   };
 
   return (
@@ -211,43 +187,24 @@ export function BMICalculator({ rating }: BMICalculatorProps) {
       </form>
 
       {result && (
-        <div className="mt-8 space-y-4">
+        <div ref={resultRef} className="mt-8 scroll-mt-24 space-y-4">
           <h3 className="text-xl font-semibold text-gray-900 mb-4">
             Dit resultat
           </h3>
 
-          <div
-            className={`p-6 rounded-lg border ${getColorClasses(result.color)}`}
-          >
-            <div className="flex items-center gap-2 mb-3">
-              <Info className="w-5 h-5" />
-              <h4 className="font-semibold text-lg">Dit BMI: {result.bmi}</h4>
-            </div>
-            <p className="text-xl font-bold mb-2">{result.category}</p>
-            <p className="text-sm leading-relaxed">{result.description}</p>
-          </div>
+          <ToolPrimaryResult
+            label="Dit BMI"
+            value={formatDecimal(result.bmi)}
+            badge={result.category}
+            caption={result.description}
+          />
 
-          <div className="bg-gray-50 p-4 rounded-lg">
-            <h4 className="font-semibold text-gray-900 mb-2">BMI kategorier</h4>
-            <div className="space-y-2 text-sm text-gray-700">
-              <div className="flex justify-between">
-                <span>Undervægtig:</span>
-                <span className="font-medium">Under 18,5</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Normal vægt:</span>
-                <span className="font-medium">18,5 - 24,9</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Overvægtig:</span>
-                <span className="font-medium">25,0 - 29,9</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Svært overvægtig:</span>
-                <span className="font-medium">30,0 og derover</span>
-              </div>
-            </div>
-          </div>
+          <ToolBandTable
+            title="BMI-kategorier"
+            valueHeader="BMI"
+            bands={BMI_BANDS}
+            currentLabel={result.category}
+          />
 
           <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
             <h4 className="font-semibold text-gray-900 mb-2">Vigtige noter</h4>
@@ -263,6 +220,13 @@ export function BMICalculator({ rating }: BMICalculatorProps) {
               <li>• Fokuser på en sund livsstil frem for kun BMI-tallet</li>
             </ul>
           </div>
+
+          <ToolShareImageButton
+            toolSlug="bmi-beregner"
+            href={buildBmiShareUrl(result.bmi)}
+            fileName={`bmi-${result.bmi}.png`}
+            label="Gem dit BMI - Download"
+          />
         </div>
       )}
     </div>

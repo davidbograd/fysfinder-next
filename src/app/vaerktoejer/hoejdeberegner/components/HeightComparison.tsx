@@ -42,8 +42,8 @@ export function HeightComparison({
 
   const figures: Figure[] = [
     { label: "Mor", heightCm: motherHeightCm },
-    { label: "Far", heightCm: fatherHeightCm },
     { label: childLabel, heightCm: childHeightCm, isChild: true },
+    { label: "Far", heightCm: fatherHeightCm },
   ];
 
   // Lidt luft over den højeste figur, så hovedet og linjen ikke rammer kanten.
@@ -76,7 +76,7 @@ export function HeightComparison({
               <div
                 className={cn(
                   "relative flex flex-col items-center transition-[height] duration-700 ease-[cubic-bezier(0.2,0,0,1)] motion-reduce:transition-none",
-                  figure.isChild ? "text-brand-primary" : "text-brand-primary/30"
+                  figure.isChild ? "text-brand-primary" : "text-gray-300"
                 )}
                 style={{
                   height: hasGrown ? toPx(figure.heightCm) : 0,
@@ -99,7 +99,7 @@ export function HeightComparison({
         {/* Barnets højde ført hen over forældrene, så de kan sammenlignes. */}
         <span
           className={cn(
-            "pointer-events-none absolute inset-x-0 z-10 border-t-2 border-dashed border-brand-primary/50 transition-opacity duration-500 ease-[cubic-bezier(0.2,0,0,1)] motion-reduce:transition-none",
+            "pointer-events-none absolute inset-x-0 z-10 border-t-2 border-dashed border-gray-400 transition-opacity duration-500 ease-[cubic-bezier(0.2,0,0,1)] motion-reduce:transition-none",
             hasGrown ? "opacity-100" : "opacity-0"
           )}
           style={{
@@ -115,7 +115,7 @@ export function HeightComparison({
             <p
               className={cn(
                 "text-sm font-medium",
-                figure.isChild ? "text-brand-primary" : "text-gray-600"
+                figure.isChild ? "text-gray-900" : "text-gray-600"
               )}
             >
               {figure.label}
@@ -124,7 +124,7 @@ export function HeightComparison({
               className={cn(
                 "whitespace-nowrap text-sm tabular-nums",
                 figure.isChild
-                  ? "font-semibold text-brand-primary"
+                  ? "font-semibold text-gray-900"
                   : "text-gray-500"
               )}
             >
