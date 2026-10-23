@@ -57,9 +57,8 @@ describe("FtpCalculator", () => {
     expect(screen.queryByText("270 watt")).not.toBeInTheDocument();
   });
 
-  it("copies the FTP and zones and confirms it", async () => {
+  it("offers only the image download, not a copy action", async () => {
     const user = userEvent.setup();
-    const writeText = jest.spyOn(navigator.clipboard, "writeText").mockResolvedValue();
     render(<FtpCalculator />);
 
     await user.type(
@@ -67,14 +66,9 @@ describe("FtpCalculator", () => {
       "280"
     );
     await user.click(screen.getByRole("button", { name: "Beregn min FTP" }));
-    await user.click(screen.getByRole("button", { name: "Kopiér FTP og wattzoner" }));
 
-    expect(writeText).toHaveBeenCalledWith(
-      expect.stringContaining("Din estimerede FTP (20-minutterstest): 266 watt")
-    );
-    expect(
-      screen.getByRole("button", { name: "FTP og wattzoner kopieret" })
-    ).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Del din FTP - Download" })).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /Kopiér/ })).not.toBeInTheDocument();
   });
 
   it("asks for the missing watt instead of calculating", async () => {

@@ -1,5 +1,4 @@
 import {
-  buildFtpCopyText,
   buildFtpZones,
   computeFtp,
   formatZoneRange,
@@ -56,20 +55,5 @@ describe("buildFtpZones", () => {
       }
     }
     expect(zones.at(-1)).toMatchObject({ id: "Z7", min: null, max: null });
-  });
-});
-
-describe("buildFtpCopyText", () => {
-  it("copies the FTP and all seven zones as shown", () => {
-    const result = computeFtp({ source: "test20", watts: "280" });
-    if (!result.ok) throw new Error("expected a result");
-
-    const text = buildFtpCopyText(result);
-    expect(text).toContain("Din estimerede FTP (20-minutterstest): 266 watt");
-    expect(text).toContain("Z1 Aktiv restitution: 0–146 W – Meget let cykling og restitution.");
-    expect(text).toContain(
-      "Z7 Neuromuskulær effekt: Maksimal sprintindsats – individuelt – Meget korte sprint ved maksimal indsats."
-    );
-    expect(text.split("\n").filter((line) => /^Z\d/.test(line))).toHaveLength(7);
   });
 });

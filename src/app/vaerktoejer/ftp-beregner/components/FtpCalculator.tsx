@@ -2,7 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import Link from "next/link";
-import { Bike, Check, Copy, Zap } from "lucide-react";
+import { Bike, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -23,7 +23,6 @@ import {
   ToolPrimaryResult,
 } from "@/components/features/tools/ToolResult";
 import {
-  buildFtpCopyText,
   computeFtp,
   formatZoneRange,
   FtpResult,
@@ -41,7 +40,6 @@ import { PublishedToolRating } from "@/lib/tools/tool-ratings";
 import { useScrollToResult } from "@/components/features/tools/useScrollToResult";
 
 type FieldKey = "watts";
-type CopyStatus = "idle" | "copied" | "failed";
 type TestSource = Exclude<PowerSource, "ftp">;
 
 const SOURCES: ToolMethodOption<TestSource>[] = [
@@ -95,11 +93,9 @@ export function FtpCalculator({ rating }: FtpCalculatorProps) {
   const [result, setResult] = useState<FtpResult | null>(null);
   const resultRef = useScrollToResult(result);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors<FieldKey>>({});
-  const [copyStatus, setCopyStatus] = useState<CopyStatus>("idle");
 
   const resetResult = () => {
     setResult(null);
-    setCopyStatus("idle");
   };
 
   const handleSubmit = (event: FormEvent) => {
@@ -116,21 +112,10 @@ export function FtpCalculator({ rating }: FtpCalculatorProps) {
     }
 
     setFieldErrors({});
-    setCopyStatus("idle");
     const calculation = computeFtp({ source, watts });
     setResult(calculation);
     if (calculation.ok) {
       notifyToolCompleted("ftp-beregner");
-    }
-  };
-
-  const handleCopy = async () => {
-    if (!result?.ok) return;
-    try {
-      await navigator.clipboard.writeText(buildFtpCopyText(result));
-      setCopyStatus("copied");
-    } catch {
-      setCopyStatus("failed");
     }
   };
 
@@ -247,28 +232,6 @@ export function FtpCalculator({ rating }: FtpCalculatorProps) {
                   <p className="text-xs text-gray-500 text-pretty">
                     Zonerne bygger på Andrew Coggans syv effektzoner. Z7 er
                     maksimal sprint og kan ikke fastlægges ud fra FTP alene.
-                  </p>
-                </div>
-
-                <div className="space-y-2">
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={handleCopy}
-                    className="w-full sm:w-auto"
-                  >
-                    {copyStatus === "copied" ? (
-                      <Check aria-hidden className="mr-2 h-4 w-4" />
-                    ) : (
-                      <Copy aria-hidden className="mr-2 h-4 w-4" />
-                    )}
-                    {copyStatus === "copied"
-                      ? "FTP og wattzoner kopieret"
-                      : "Kopiér FTP og wattzoner"}
-                  </Button>
-                  <p role="status" className="text-xs text-gray-500">
-                    {copyStatus === "failed" &&
-                      "Det lykkedes ikke at kopiere. Markér teksten og kopiér den manuelt."}
                   </p>
                 </div>
 

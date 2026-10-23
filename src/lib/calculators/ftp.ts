@@ -131,21 +131,3 @@ export function computeFtp(input: FtpInput): FtpResult {
     zones: buildFtpZones(ftp),
   };
 }
-
-const COPY_HEADING: Record<PowerSource, string> = {
-  ftp: "Din FTP",
-  test20: "Din estimerede FTP (20-minutterstest)",
-  ramp: "Din estimerede FTP (ramptest)",
-};
-
-export function buildFtpCopyText(result: FtpSuccess): string {
-  return [
-    `${COPY_HEADING[result.source]}: ${formatInteger(result.ftp)} watt`,
-    "",
-    "Dine wattzoner til cykeltræning:",
-    ...result.zones.map(
-      (zone) =>
-        `${zone.id} ${zone.name}: ${formatZoneRange(zone)} – ${zone.description}`
-    ),
-  ].join("\n");
-}
