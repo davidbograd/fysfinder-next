@@ -10,6 +10,10 @@ export default {
     '^@supabase/supabase-js$': '<rootDir>/src/test/mocks/supabase-js.ts',
     '\\.(css|less|sass|scss)$': 'identity-obj-proxy',
   },
+  // unified/hast ecosystem packages are ESM-only and must be transpiled.
+  transformIgnorePatterns: [
+    '/node_modules/(?!(unist-[^/]+|hast-[^/]+|hastscript|property-information|comma-separated-tokens|space-separated-tokens|devlop)/)',
+  ],
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }],
   },

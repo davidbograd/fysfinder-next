@@ -20,6 +20,28 @@ function isText(node: any): node is Text {
   return node && node.type === "text";
 }
 
+// Reduces an href to a comparable path so "/a", "/a/", "/a#x" and
+// "https://www.fysfinder.dk/a" are treated as the same destination.
+export function normalizeHref(href: string): string {
+  let path = href.trim();
+  path = path.replace(/^https?:\/\/(www\.)?fysfinder\.dk/i, "");
+  path = path.split(/[?#]/)[0];
+  if (path.length > 1) path = path.replace(/\/+$/, "");
+  return path.toLowerCase();
+}
+
+function collectExistingLinkDestinations(tree: Root): Set<string> {
+  const destinations = new Set<string>();
+  visit(tree, "element", (node: Element) => {
+    if (node.tagName !== "a") return;
+    const href = node.properties?.href;
+    if (typeof href === "string" && href.length > 0) {
+      destinations.add(normalizeHref(href));
+    }
+  });
+  return destinations;
+}
+
 const rehypeInternalLinks: Plugin<[RehypeInternalLinksOptions], Root> = (
   options
 ) => {
@@ -57,13 +79,15 @@ const rehypeInternalLinks: Plugin<[RehypeInternalLinksOptions], Root> = (
     (a, b) => b.length - a.length
   );
 
-  // Keep track of keywords linked on this page (per Rehype instance)
-  const linkedKeywordsSet = new Set<string>();
-  const linkedDestinationsSet = new Set<string>();
-  let linksAddedCount = 0;
   const MAX_LINKS_PER_PAGE = 15;
 
   return (tree: Root) => {
+    const linkedKeywordsSet = new Set<string>();
+    // Seeded with links already written in the content, so we never add a
+    // second link to a page the author has already linked to.
+    const linkedDestinationsSet = collectExistingLinkDestinations(tree);
+    let linksAddedCount = 0;
+
     // Visit potential text container elements
     visit(tree, "element", (containerNode: Element) => {
       // Target <p>, <li>, <td> and <th> elements
@@ -135,7 +159,7 @@ const rehypeInternalLinks: Plugin<[RehypeInternalLinksOptions], Root> = (
               linksAddedCount < MAX_LINKS_PER_PAGE &&
               mapping &&
               mapping.destination !== currentPagePath &&
-              !linkedDestinationsSet.has(mapping.destination) &&
+              !linkedDestinationsSet.has(normalizeHref(mapping.destination)) &&
               !linkedKeywordsSet.has(keyword)
             ) {
               // Create the link element using hastscript
@@ -146,7 +170,7 @@ const rehypeInternalLinks: Plugin<[RehypeInternalLinksOptions], Root> = (
               );
               processedNodes.push(linkNode);
               linkedKeywordsSet.add(keyword);
-              linkedDestinationsSet.add(mapping.destination);
+              linkedDestinationsSet.add(normalizeHref(mapping.destination));
               linksAddedCount++;
             } else {
               // Add the matched text as plain text (max links reached, already linked destination, self-link, or no mapping)
