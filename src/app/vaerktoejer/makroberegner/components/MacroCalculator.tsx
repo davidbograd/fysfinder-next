@@ -60,8 +60,8 @@ import { useScrollToResult } from "@/components/features/tools/useScrollToResult
 type FieldKey = "kcal" | "gender" | "heightCm" | "weightKg" | "age";
 
 const CALORIE_SOURCES = [
-  { value: "estimate" as CalorieSource, label: "Beregn det for mig" },
-  { value: "known" as CalorieSource, label: "Jeg kender mit kalorietal" },
+  { value: "estimate" as CalorieSource, label: "Beregn kalorietal" },
+  { value: "known" as CalorieSource, label: "Indtast kalorietal" },
 ];
 
 const ACTIVITIES: ToolSelectOption<ProteinActivity>[] = [

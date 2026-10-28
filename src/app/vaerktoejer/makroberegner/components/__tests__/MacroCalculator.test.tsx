@@ -8,7 +8,7 @@ describe("MacroCalculator", () => {
     render(<MacroCalculator />);
 
     await user.click(
-      screen.getByRole("button", { name: "Jeg kender mit kalorietal" })
+      screen.getByRole("button", { name: "Indtast kalorietal" })
     );
     await user.type(screen.getByLabelText("Kalorier om dagen"), "2500");
     await user.type(screen.getByLabelText("Vægt"), "80");
@@ -33,7 +33,7 @@ describe("MacroCalculator", () => {
     render(<MacroCalculator />);
 
     await user.click(
-      screen.getByRole("button", { name: "Jeg kender mit kalorietal" })
+      screen.getByRole("button", { name: "Indtast kalorietal" })
     );
     await user.click(screen.getByLabelText(/Nordiske anbefalinger/));
 
@@ -55,7 +55,7 @@ describe("MacroCalculator", () => {
     render(<MacroCalculator />);
 
     await user.click(
-      screen.getByRole("button", { name: "Jeg kender mit kalorietal" })
+      screen.getByRole("button", { name: "Indtast kalorietal" })
     );
     await user.type(screen.getByLabelText("Kalorier om dagen"), "2500");
     await user.type(screen.getByLabelText("Vægt"), "80");
