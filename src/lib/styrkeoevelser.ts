@@ -573,6 +573,10 @@ export const bodyPartPhraseInSentence = (title: string): string => {
   return t.charAt(0).toLocaleLowerCase("da-DK") + t.slice(1);
 };
 
+/** H2 above the exercise grid on body-part pages (e.g. «Træningsøvelser til arm»). */
+export const bodyPartExercisesHeading = (title: string): string =>
+  `Træningsøvelser til ${bodyPartPhraseInSentence(title)}`;
+
 /** Absolute URL for assets under `public/` or already-absolute URLs. */
 export const toAbsoluteSiteUrl = (pathOrUrl: string): string => {
   const t = pathOrUrl.trim();

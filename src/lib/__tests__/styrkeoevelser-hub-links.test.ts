@@ -1,4 +1,5 @@
 import {
+  bodyPartExercisesHeading,
   bodyPartPhraseInSentence,
   getStyrkeoevelserLinkMappings,
 } from "@/lib/styrkeoevelser";
@@ -18,6 +19,11 @@ describe("styrkeøvelser hub body-part links", () => {
   it("bodyPartPhraseInSentence lowercases first character for Danish mid-sentence copy", () => {
     expect(bodyPartPhraseInSentence("Arme")).toBe("arme");
     expect(bodyPartPhraseInSentence("")).toBe("");
+  });
+
+  it("bodyPartExercisesHeading builds the contextual H2 for body-part pages", () => {
+    expect(bodyPartExercisesHeading("Arm")).toBe("Træningsøvelser til arm");
+    expect(bodyPartExercisesHeading("Knæ")).toBe("Træningsøvelser til knæ");
   });
 
   it("maps plural 'arme' to the arm body-part page (not ordbog)", () => {

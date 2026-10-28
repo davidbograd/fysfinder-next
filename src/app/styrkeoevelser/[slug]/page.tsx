@@ -23,6 +23,7 @@ import {
   STYRKEOEVELSER_PATH,
   STYRKEOEVELSER_SITE_URL,
   BODY_PART_HERO_IMAGES,
+  bodyPartExercisesHeading,
   getBodyPart,
   getBodyPartSlugs,
   getBodyPartTitleBySlug,
@@ -214,7 +215,7 @@ export default async function StyrkeoevelserSlugPage({
             id="bp-exercises-heading"
             className="mb-6 border-b-2 border-gray-200 pb-2 text-2xl font-semibold text-gray-800"
           >
-            Øvelser
+            {bodyPartExercisesHeading(bp.title)}
           </h2>
           <ExerciseCardsForBodyPart
             exercises={exercises}
