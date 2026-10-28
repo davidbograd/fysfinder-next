@@ -646,6 +646,11 @@ const clinicDuplicateRedirects = [
     "source": "/klinik/aaloekkens-fysioterapi-fysioterapi-massage-idraetsklinik",
     "destination": "/klinik/aaloekken-fysioterapi",
     "permanent": true
+  },
+  {
+    "source": "/klinik/klinik-for-fysioterapi-v-tonni-carlsen",
+    "destination": "/klinik/klinik-for-fysioterapi-ved-tonni-carlsen",
+    "permanent": true
   }
 ];
 
