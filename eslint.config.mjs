@@ -82,11 +82,6 @@ const eslintConfig = [
       ...hooksPlugin.configs.recommended.rules,
       'react/react-in-jsx-scope': 'off',
       'react/prop-types': 'off',
-      // Skullet's skeleton hints are plain attributes, not data-*.
-      'react/no-unknown-property': [
-        'error',
-        { ignore: ['skullet-block', 'skullet-ignore', 'skullet-debug', 'skullet-xray'] },
-      ],
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
       // Heading id / URL fragment slugs must go through `slugify` in src/app/utils/slugify.ts

@@ -1,47 +1,24 @@
 "use client";
 
-// Sample "Udforsk … med speciale i" row for the location loading skeleton; hidden on specialty pages, which don't show it.
+// Placeholder for the "Udforsk … med speciale i" row in the location loading skeleton; hidden on specialty pages, which don't show it.
 
 import { useParams } from "next/navigation";
-import { SpecialtiesList } from "@/components/features/specialty/SpecialtiesList";
-import type { City, SpecialtyWithSeo } from "@/app/types";
-
-const SAMPLE_CITY: City = {
-  id: "sample",
-  bynavn: "Aarhus",
-  bynavn_slug: "aarhus",
-  postal_codes: [],
-  latitude: 0,
-  longitude: 0,
-  betegnelse: "",
-};
-
-const SAMPLE_SPECIALTIES: SpecialtyWithSeo[] = [
-  "Sportsskader",
-  "Ryg",
-  "Skulder",
-  "Knæ",
-  "Nakke",
-  "Genoptræning",
-].map((name, i) => ({
-  specialty_id: `sample-${i}`,
-  specialty_name: name,
-  specialty_name_slug: `sample-${i}`,
-}));
-
-const SAMPLE_COUNTS = Object.fromEntries(
-  SAMPLE_SPECIALTIES.map((s, i) => [s.specialty_id, 6 - i])
-);
+import { Skeleton } from "@/components/ui/skeleton";
 
 export function LoadingSpecialtiesList() {
   const params = useParams<{ specialty?: string }>();
   if (params?.specialty) return null;
 
   return (
-    <SpecialtiesList
-      city={SAMPLE_CITY}
-      specialties={SAMPLE_SPECIALTIES}
-      specialtyMatchCounts={SAMPLE_COUNTS}
-    />
+    <div data-testid="specialties-skeleton" className="mt-6 mb-8 hidden md:block">
+      <div className="mb-2 flex h-7 items-center">
+        <Skeleton className="h-5 w-80" />
+      </div>
+      <div className="flex h-7 gap-2">
+        {[1, 2, 3, 4, 5].map((i) => (
+          <Skeleton key={i} className="h-7 w-24 rounded-full" />
+        ))}
+      </div>
+    </div>
   );
 }
