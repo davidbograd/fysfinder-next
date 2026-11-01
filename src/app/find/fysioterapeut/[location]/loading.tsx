@@ -1,48 +1,76 @@
 // Location-page loading skeleton.
-// Updated: 2026-09-17 - Match the live header + list/map layout so the skeleton is not stuck in a narrow centered column on desktop.
+// Updated: 2026-11-01 - Skullet traces the page's own markup (breadcrumbs, headings, clinic cards) rendered from sample data.
 
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "skullet/react";
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
+import ClinicListingCard from "@/components/features/clinic/ClinicListingCard";
+
+const SAMPLE_CLINICS = [1, 2, 3].map((i) => ({
+  klinikNavn: "Fysioterapi og Træning Centrum",
+  klinikNavnSlug: `eksempel-${i}`,
+  ydernummer: true,
+  avgRating: 4.8,
+  ratingCount: 124,
+  adresse: "Vestergade 12",
+  postnummer: 8000,
+  lokation: "Aarhus C",
+  website: "www.fysioterapi-eksempel.dk",
+  tlf: "12345678",
+  specialties: [
+    { specialty_id: `${i}-1`, specialty_name: "Sportsskader" },
+    { specialty_id: `${i}-2`, specialty_name: "Ryg og nakke" },
+    { specialty_id: `${i}-3`, specialty_name: "Genoptræning" },
+  ],
+}));
 
 export default function Loading() {
   return (
-    <div className="w-full">
-      <div className="max-w-[800px] mx-auto">
-        {/* Breadcrumbs */}
-        <div className="flex items-center gap-2 mb-6">
-          <Skeleton className="h-4 w-16" />
-          <Skeleton className="h-4 w-4" />
-          <Skeleton className="h-4 w-24" />
-        </div>
+    <Skeleton loading label="Indlæser fysioterapeuter">
+      <div className="w-full">
+        <div className="max-w-[800px] mx-auto">
+          <Breadcrumbs
+            items={[{ text: "Forside", link: "/" }, { text: "Aarhus" }]}
+          />
 
-        {/* Title and intro */}
-        <Skeleton className="mb-2 h-8 w-3/4 md:h-9" />
-        <Skeleton className="mb-4 h-5 w-2/3" />
-        <Skeleton className="mb-2 h-4 w-full" />
-        <Skeleton className="mb-8 h-4 w-5/6" />
+          <h1 className="text-2xl md:text-3xl font-bold mb-2">
+            Fysioterapeuter i Aarhus - Find den bedste fysioterapeut
+          </h1>
+          <h2 className="text-base md:text-lg text-gray-600 mb-4">
+            Sammenlign klinikker, anmeldelser og specialer
+          </h2>
+          <p className="text-gray-600 mb-8">
+            124 fysioterapi klinikker i Aarhus.
+            <span className="hidden md:inline">
+              {" "}
+              Sammenlign anmeldelser, specialer og mere.
+            </span>
+          </p>
 
-        {/* Search bar and filters */}
-        <Skeleton className="mb-4 h-14 w-full rounded-xl md:rounded-full" />
-        <div className="flex gap-6">
-          <Skeleton className="h-4 w-24" />
-          <Skeleton className="h-4 w-32" />
-        </div>
-      </div>
-
-      {/* Results + map — same grid template as the loaded location page */}
-      <div className="mt-6 grid gap-6 xl:grid-cols-[minmax(0,1fr)_420px]">
-        <div>
-          <Skeleton className="mb-4 h-4 w-48" />
-          <div className="space-y-4">
-            {[1, 2, 3].map((i) => (
-              <Skeleton key={i} className="h-36 w-full rounded-lg" />
-            ))}
+          <div
+            skullet-block=""
+            className="mb-4 h-14 w-full rounded-xl md:rounded-full"
+          />
+          <div className="flex gap-6 text-sm">
+            <span>Har ydernummer</span>
+            <span>Handicapadgang</span>
           </div>
         </div>
 
-        <div className="self-start xl:sticky xl:top-24">
-          <Skeleton className="h-[380px] w-full rounded-xl md:h-[520px]" />
+        <div className="mt-6 grid gap-6 xl:grid-cols-[minmax(0,1fr)_420px]">
+          <div className="space-y-4">
+            {SAMPLE_CLINICS.map((clinic) => (
+              <ClinicListingCard key={clinic.klinikNavnSlug} {...clinic} />
+            ))}
+          </div>
+
+          <div className="self-start xl:sticky xl:top-24">
+            <div
+              skullet-block=""
+              className="h-[380px] w-full rounded-xl md:h-[520px]"
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </Skeleton>
   );
 }
