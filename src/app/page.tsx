@@ -1,5 +1,5 @@
 // Homepage component with graceful error handling
-// Updated: 2026-11-11 - Hero background is #0D503B; portrait labels are English specialties.
+// Updated: 2026-11-11 - Hero background is #0D503B; specialty pills wrap on small screens.
 
 import React from "react";
 import { Metadata } from "next";
@@ -28,6 +28,20 @@ const regions: { [key: string]: { name: string; range: [number, number] } } = {
   midtjylland: { name: "Midtjylland", range: [7000, 8999] },
   nordjylland: { name: "Nordjylland", range: [9000, 9999] },
 };
+
+const heroSpecialtyPillClassName =
+  "inline-block max-w-[4.5rem] rounded-[16px] bg-[rgba(0,0,0,0.36)] border border-[rgba(255,255,255,0.22)] px-1.5 py-1 text-center text-[10px] leading-tight text-white shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[7.6px] sm:max-w-none sm:whitespace-nowrap sm:px-2 sm:text-xs sm:leading-none";
+
+function HeroSpecialtyLabel({ name }: { name: string }) {
+  return (
+    <span className={heroSpecialtyPillClassName}>
+      {name}
+      <br className="sm:hidden" />
+      <span className="hidden sm:inline"> </span>
+      specialist
+    </span>
+  );
+}
 
 function HeroSection({
   totalClinics,
@@ -86,9 +100,7 @@ function HeroSection({
                   <StarIcon className="size-3.5 text-amber-500" />
                   4.5
                 </span>
-                <span className="rounded-[16px] bg-[rgba(0,0,0,0.36)] border border-[rgba(255,255,255,0.22)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[7.6px] text-white text-xs px-2 py-1 leading-none">
-                  Back specialist
-                </span>
+                <HeroSpecialtyLabel name="Back" />
               </div>
             </div>
 
@@ -109,9 +121,7 @@ function HeroSection({
                   <StarIcon className="size-3.5 text-amber-500" />
                   5.0
                 </span>
-                <span className="rounded-[16px] bg-[rgba(0,0,0,0.36)] border border-[rgba(255,255,255,0.22)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[7.6px] text-white text-xs px-2 py-1 leading-none">
-                  Knee specialist
-                </span>
+                <HeroSpecialtyLabel name="Knee" />
               </div>
             </div>
 
@@ -132,9 +142,7 @@ function HeroSection({
                   <StarIcon className="size-3.5 text-amber-500" />
                   4.8
                 </span>
-                <span className="rounded-[16px] bg-[rgba(0,0,0,0.36)] border border-[rgba(255,255,255,0.22)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[7.6px] text-white text-xs px-2 py-1 leading-none">
-                  Run specialist
-                </span>
+                <HeroSpecialtyLabel name="Run" />
               </div>
             </div>
           </div>
