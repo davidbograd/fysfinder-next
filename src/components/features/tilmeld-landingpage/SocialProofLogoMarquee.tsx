@@ -1,6 +1,6 @@
 "use client";
 
-// Updated: 2026-09-06 - Optimize logo.dev images and lazy-load logos outside the first few chips.
+// Updated: 2026-11-11 - Embedded logo fades can match a custom hero surface color.
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { buildLogoDevUrl, getWebsiteDomainForLogo } from "@/lib/clinic-logo";
@@ -14,6 +14,8 @@ interface ClinicLogoItem {
 interface SocialProofLogoMarqueeProps {
   embedded?: boolean;
   heading?: string;
+  /** Edge fade for an embedded strip. Defaults to the beige hero surface. */
+  fadeClassName?: string;
 }
 
 const clinicLogos: ClinicLogoItem[] = [
@@ -38,9 +40,13 @@ const clinicLogos: ClinicLogoItem[] = [
   { name: "Værløse Hareskov Fysioterapi", website: "http://www.fys-bassin.dk/" },
 ];
 
+const embeddedFadeClassName =
+  "from-brand-beige/95 via-brand-beige/70 to-transparent";
+
 export function SocialProofLogoMarquee({
   embedded = false,
   heading = "De bruger allerede Fysfinder",
+  fadeClassName = embeddedFadeClassName,
 }: SocialProofLogoMarqueeProps) {
   const [logoLoadFailed, setLogoLoadFailed] = useState<Record<string, boolean>>({});
   const [logoReady, setLogoReady] = useState<Record<string, boolean>>({});
@@ -165,7 +171,7 @@ export function SocialProofLogoMarquee({
           <div
             className={`pointer-events-none absolute inset-y-0 left-0 z-10 w-12 rounded-l-full bg-gradient-to-r md:w-28 ${
               embedded
-                ? "from-brand-beige/95 via-brand-beige/70 to-transparent"
+                ? fadeClassName
                 : "from-white/95 via-white/70 to-transparent"
             }`}
             aria-hidden="true"
@@ -173,7 +179,7 @@ export function SocialProofLogoMarquee({
           <div
             className={`pointer-events-none absolute inset-y-0 right-0 z-10 w-12 rounded-r-full bg-gradient-to-l md:w-28 ${
               embedded
-                ? "from-brand-beige/95 via-brand-beige/70 to-transparent"
+                ? fadeClassName
                 : "from-white/95 via-white/70 to-transparent"
             }`}
             aria-hidden="true"

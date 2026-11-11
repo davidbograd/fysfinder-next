@@ -1,5 +1,5 @@
 // Homepage component with graceful error handling
-// Updated: 2026-09-06 - Keep hero and Spar tid images unoptimized; slim JSON-LD.
+// Updated: 2026-11-11 - Hero background is #0D503B; portrait labels are English specialties.
 
 import React from "react";
 import { Metadata } from "next";
@@ -41,7 +41,7 @@ function HeroSection({
       id="top-search"
       className="relative mt-0 left-1/2 -translate-x-1/2 w-dvw max-w-none overflow-x-clip"
     >
-      <div className="flex w-full min-h-[80vh] flex-col overflow-hidden rounded-b-[32px] bg-brand-beige">
+      <div className="flex w-full min-h-[80vh] flex-col overflow-hidden rounded-b-[32px] bg-[#0D503B]">
         <div className="flex flex-1 items-center">
         <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-6 lg:px-8 py-16 sm:py-20">
           <div className="grid gap-6 xl:gap-14 xl:grid-cols-[1fr_450px] items-center">
@@ -87,7 +87,7 @@ function HeroSection({
                   4.5
                 </span>
                 <span className="rounded-[16px] bg-[rgba(0,0,0,0.36)] border border-[rgba(255,255,255,0.22)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[7.6px] text-white text-xs px-2 py-1 leading-none">
-                  Ryg ekspert
+                  Back specialist
                 </span>
               </div>
             </div>
@@ -110,7 +110,7 @@ function HeroSection({
                   5.0
                 </span>
                 <span className="rounded-[16px] bg-[rgba(0,0,0,0.36)] border border-[rgba(255,255,255,0.22)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[7.6px] text-white text-xs px-2 py-1 leading-none">
-                  Knæ ekspert
+                  Knee specialist
                 </span>
               </div>
             </div>
@@ -133,7 +133,7 @@ function HeroSection({
                   4.8
                 </span>
                 <span className="rounded-[16px] bg-[rgba(0,0,0,0.36)] border border-[rgba(255,255,255,0.22)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[7.6px] text-white text-xs px-2 py-1 leading-none">
-                  Løbe ekspert
+                  Run specialist
                 </span>
               </div>
             </div>
@@ -144,6 +144,7 @@ function HeroSection({
         <SocialProofLogoMarquee
           embedded
           heading="Den nemme måde at finde en lokal fysioterapeut"
+          fadeClassName="from-[#0D503B]/95 via-[#0D503B]/70 to-transparent"
         />
       </div>
     </section>
