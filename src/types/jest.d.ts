@@ -7,6 +7,8 @@ declare global {
     prefetch: jest.Mock;
   };
 
+  var __TEST_PATHNAME__: string | undefined;
+
   namespace jest {
     interface Matchers<R> {
       toBeInTheDocument(): R;

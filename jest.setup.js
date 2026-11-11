@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 
-// Updated: 2026-03-30 - Added stable shared mocks for router and browser APIs.
+// Updated: 2026-11-11 - Pathname mock can be overridden with __TEST_PATHNAME__.
 const mockPush = jest.fn();
 const mockReplace = jest.fn();
 const mockPrefetch = jest.fn();
@@ -55,7 +55,7 @@ jest.mock('next/navigation', () => ({
     return new URLSearchParams();
   },
   usePathname() {
-    return "/";
+    return global.__TEST_PATHNAME__ ?? "/";
   },
 }));
 
