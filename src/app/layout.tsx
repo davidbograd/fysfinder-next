@@ -1,5 +1,5 @@
 // Root layout
-// Updated: 2026-11-11 - Fade the front page in as one piece, including the nav.
+// Updated: 2026-09-10 - Load used Manrope weights, load Analytics with Consent Mode, and pass specialties into the header.
 
 import type { Metadata } from "next";
 import "./globals.css";
@@ -13,7 +13,6 @@ import { Toaster } from "@/components/ui/toaster";
 import { EmailVerificationBanner } from "@/components/layout/EmailVerificationBanner";
 import { fetchCitiesWithCounts, fetchSpecialties } from "@/app/utils/cityUtils";
 import AgentationDevtools from "@/components/dev/AgentationDevtools";
-import { HomeEnterFade } from "@/components/layout/HomeEnterFade";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -85,20 +84,18 @@ export default async function RootLayout({
   return (
     <html lang="da" className={manrope.variable}>
       <body className="flex flex-col min-h-screen font-sans">
-        <HomeEnterFade>
-          <Header
-            totalClinics={totalClinics}
-            specialtyCount={specialtyCount}
-            specialties={specialties}
-          />
-          <EmailVerificationBanner />
-          <main className="flex-grow overflow-x-clip">
-            <div className="max-w-[1440px] mx-auto px-5 sm:px-6 lg:px-8">
-              {children}
-            </div>
-          </main>
-          <Footer />
-        </HomeEnterFade>
+        <Header
+          totalClinics={totalClinics}
+          specialtyCount={specialtyCount}
+          specialties={specialties}
+        />
+        <EmailVerificationBanner />
+        <main className="flex-grow overflow-x-clip">
+          <div className="max-w-[1440px] mx-auto px-5 sm:px-6 lg:px-8">
+            {children}
+          </div>
+        </main>
+        <Footer />
         <CookieConsentBanner />
         <Toaster />
         <GoogleAnalytics />
